@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import "./Footer.scss";
 
 import Logo from "../../assets/images/content/logo.svg";
-import { ReactComponent as Facebook } from "../../assets/images/icon/facebook.svg";
-import { ReactComponent as Twitter } from "../../assets/images/icon/twitter.svg";
-import { ReactComponent as Instagram } from "../../assets/images/icon/instagram.svg";
+import Networks from "../Networks/Networks";
 
 const Footer = () => (
   <footer className="footer">
@@ -38,17 +36,7 @@ const Footer = () => (
           <Link to="Contacts">Contacts</Link>
         </li>
       </ul>
-      <div className="footer__networks">
-        <a href="/#">
-          <Facebook />
-        </a>
-        <a href="/#">
-          <Twitter />
-        </a>
-        <a href="/#">
-          <Instagram />
-        </a>
-      </div>
+      <Networks />
     </nav>
   </footer>
 );
