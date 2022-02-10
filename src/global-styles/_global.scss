@@ -51,6 +51,14 @@ a {
   color: inherit;
 }
 
+button {
+  border: none;
+  outline: transparent;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+}
+
 .wrapper {
   max-width: 1047px;
   margin: 0 auto;

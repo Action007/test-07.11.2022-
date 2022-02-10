@@ -1,23 +1,33 @@
 $primary: #65c17e;
 $warning: #eb5757;
 $dark: #4f4f4f;
+$secondary: #f2f2f2;
+$light: #959595;
 
 $display-font-sizes: (
-  1: 5rem, // Can be changed
-  2: 4.5rem, // Can be changed
-  3: 4rem, // Can be changed
-  4: 2.8rem, //Can't be changed. Already in use
-  5: 2rem, // Can be changed
-  6: 1.5rem, //Can't be changed. Already in use
-  7: 1.25rem, //Can't be changed. Already in use
-  8: 1rem, //Can't be changed. Already in use
+  1: 5rem,
+  // Can be changed
+  2: 4.5rem,
+  // Can be changed
+  3: 4rem,
+  // Can be changed
+  4: 2.8rem,
+  //Can't be changed. Already in use
+  5: 2rem,
+  // Can be changed
+  6: 1.5rem,
+  //Can't be changed. Already in use
+  7: 1.25rem,
+  //Can't be changed. Already in use
+  8: 1rem,
+  //Can't be changed. Already in use
 );
 
 $spacer: 1rem;
 $spacers: (
   0: 0,
-  1: $spacer * .25,
-  2: $spacer * .5,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
   3: $spacer,
   4: $spacer * 1.5,
   5: $spacer * 3,
