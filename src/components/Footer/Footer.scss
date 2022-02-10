@@ -1,0 +1,69 @@
+@import "../../global-styles/_variables.scss";
+
+.footer {
+  max-width: 1580px;
+  width: 100%;
+  padding: 69px 16px 73px;
+  margin: 0 auto;
+
+  &__img {
+    max-width: 109px;
+    width: 100%;
+    height: 24px;
+    margin-bottom: 35px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    font-family: "SFPro-Medium", sans-serif;
+  }
+
+  &__items:first-child {
+    margin-right: 60px;
+  }
+
+  &__items:nth-child(2) {
+    margin-right: 87px;
+  }
+
+  &__networks {
+    display: flex;
+    align-items: center;
+    height: 30px;
+
+    a {
+      display: block;
+
+      &:hover svg {
+        fill: $primary;
+      }
+
+      &:not(:last-child) {
+        margin-right: 30px;
+      }
+    }
+
+    svg {
+      fill: $dark;
+    }
+  }
+
+  &__item {
+    a {
+      display: block;
+      color: $dark;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__item:hover {
+    a {
+      color: $primary;
+    }
+  }
+}

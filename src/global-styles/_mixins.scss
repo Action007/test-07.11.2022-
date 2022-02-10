@@ -1,0 +1,48 @@
+// /* Landscape tablets and medium desktops */
+// @mixin max-1200 {
+//   @media (max-width: 1200px) {
+//     @content;
+//   }
+// }
+
+// /* Portrait tablets and small desktops */
+// @mixin max-992 {
+//   @media (max-width: 992px) {
+//     @content;
+//   }
+// }
+
+// /* Landscape phones and portrait tablets */
+// @mixin max-768 {
+//   @media (max-width: 768px) {
+//     @content;
+//   }
+// }
+
+// /* Portrait phones and smaller */
+// @mixin max-480 {
+//   @media (max-width: 480px) {
+//     @content;
+//   }
+// }
+
+// /* Iphone 5 */
+// @mixin max-360 {
+//   @media (max-width: 360px) {
+//     @content;
+//   }
+// }
+
+// @mixin line-clamp {
+//   display: -webkit-box;
+//   -webkit-line-clamp: 1;
+//   -webkit-box-orient: vertical;
+//   overflow: hidden;
+// }
+
+// @mixin line-clamp2 {
+//   display: -webkit-box;
+//   -webkit-line-clamp: 2;
+//   -webkit-box-orient: vertical;
+//   overflow: hidden;
+// }

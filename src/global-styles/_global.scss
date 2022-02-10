@@ -1,0 +1,80 @@
+@import "./_fonts.scss";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  font-family: "SFPro-Regular", sans-serif;
+  color: $dark;
+  background-color: #f5f7fe;
+  font-size: 14px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.main {
+  flex-grow: 1;
+  max-width: 1580px;
+  width: 100%;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  outline: transparent;
+  display: inline-block;
+}
+
+.wrapper {
+  max-width: 1047px;
+  margin: 0 auto;
+}
+
+.br-8 {
+  border-radius: 8px;
+}
+
+.SFPro-300 {
+  font-family: "SFPro-Light", sans-serif;
+}
+
+.SFPro-400 {
+  font-family: "SFPro-Regular", sans-serif;
+}
+
+.SFPro-500 {
+  font-family: "SFPro-Medium", sans-serif;
+}
+
+.SFPro-600 {
+  font-family: "SFPro-SemiBold", sans-serif;
+}
+
+.SFPro-700 {
+  font-family: "SFPro-Bold", sans-serif;
+}
