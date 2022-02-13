@@ -1,36 +1,11 @@
-// /* Landscape tablets and medium desktops */
-// @mixin max-1200 {
-//   @media (max-width: 1200px) {
-//     @content;
-//   }
+// No media query necessary for xs breakpoint as it's effectively `@media (max-width: 0) { ... }`
+// @include media-breakpoint-down(sm) {
 // }
-
-// /* Portrait tablets and small desktops */
-// @mixin max-992 {
-//   @media (max-width: 992px) {
-//     @content;
-//   }
+// @include media-breakpoint-down(md) {
 // }
-
-// /* Landscape phones and portrait tablets */
-// @mixin max-768 {
-//   @media (max-width: 768px) {
-//     @content;
-//   }
+// @include media-breakpoint-down(lg) {
 // }
-
-// /* Portrait phones and smaller */
-// @mixin max-480 {
-//   @media (max-width: 480px) {
-//     @content;
-//   }
-// }
-
-// /* Iphone 5 */
-// @mixin max-360 {
-//   @media (max-width: 360px) {
-//     @content;
-//   }
+// @include media-breakpoint-down(xl) {
 // }
 
 // @mixin line-clamp {

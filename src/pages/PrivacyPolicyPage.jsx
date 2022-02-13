@@ -1,5 +1,5 @@
 import React from "react";
-import PrivacyPolicy from "../components/PrivacyPolicy/PrivacyPolicy";
+import PrivacyPolicy from "../components/components/PrivacyPolicy/PrivacyPolicy";
 
 const PrivacyPolicyPage = () => <PrivacyPolicy />;
 

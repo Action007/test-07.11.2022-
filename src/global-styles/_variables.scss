@@ -3,6 +3,16 @@ $warning: #eb5757;
 $dark: #4f4f4f;
 $secondary: #f2f2f2;
 $light: #959595;
+$body: #f5f7fe;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
 
 $display-font-sizes: (
   1: 5rem,

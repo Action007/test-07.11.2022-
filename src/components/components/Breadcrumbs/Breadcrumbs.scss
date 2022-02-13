@@ -1,0 +1,41 @@
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+
+.breadcrumbs {
+  display: flex;
+  margin-top: 42px;
+  margin-bottom: 14px;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 24px;
+  }
+
+  &__item {
+    margin-right: 20px;
+
+    &:last-child {
+      color: $primary;
+
+      svg {
+        stroke: $primary;
+      }
+    }
+
+    a {
+      color: $dark;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    svg {
+      margin-right: 20px;
+      stroke: $dark;
+    }
+
+    &:not(:first-child) {
+      position: relative;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
-import Layout from "./components/Layout/Layout";
+import Layout from "./components/UI/Layout/Layout";
 import routes from "./router";
 
 const App = () => (

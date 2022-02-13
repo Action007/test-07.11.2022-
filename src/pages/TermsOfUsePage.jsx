@@ -1,5 +1,5 @@
 import React from "react";
-import TermsOfUse from "../components/TermsOfUse/TermsOfUse";
+import TermsOfUse from "../components/components/TermsOfUse/TermsOfUse";
 
 const TermsOfUsePage = () => <TermsOfUse />;
 

@@ -1,5 +1,5 @@
 import React from "react";
-import OurMission from "../components/OurMission/OurMission";
+import OurMission from "../components/components/OurMission/OurMission";
 
 const OurMissionPage = () => <OurMission />;
 

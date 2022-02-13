@@ -1,0 +1,17 @@
+.policy {
+
+  &__img {
+    max-width: 251px;
+    width: 100%;
+    height: 251px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__text {
+    line-height: 1.3;
+  }
+}
