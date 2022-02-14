@@ -22,6 +22,7 @@ const Footer = () => {
           <li className="footer__item">
             <Link to="Support">{translate("supportPage.title")}</Link>
           </li>
+
           <li className="footer__item">
             <Link to="Popular-Checklist">
               {translate("popularChecklistPage.title")}
