@@ -1,11 +1,10 @@
 .term {
-
   &__img {
-    max-width: 253px;
     width: 100%;
     height: 253px;
+    max-width: 253px;
 
-    img {
+    svg {
       width: 100%;
       height: 100%;
     }

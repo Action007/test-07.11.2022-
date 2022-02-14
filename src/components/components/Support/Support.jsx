@@ -1,28 +1,33 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import "./Support.scss";
-import SupportImg from "../../../assets/images/content/support.svg";
 import SupportForm from "./SupportForm/SupportForm";
+import "./Support.scss";
 
-const breadcrumbs = [{ title: "Support" }];
+import { ReactComponent as SupportImg } from "../../../assets/images/content/support.svg";
 
 const Support = () => {
   const [support, setSupport] = useState(false);
+  const { t: translate } = useTranslation();
   const supportHandler = () => setSupport((prevState) => !prevState);
+
+  const breadcrumbs = [{ title: translate("supportPage.title") }];
 
   return (
     <div className="support pb-7">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="wrapper">
-        <h2 className="mb-6 display-4 text-center SFPro-600">Support</h2>
+        <h2 className="mb-6 display-4 text-center SFPro-600">
+          {translate("supportPage.title")}
+        </h2>
         {!support ? (
           <>
             <div className="support__img mb-5 mx-auto">
-              <img src={SupportImg} alt="The man put his hand on the safe" />
+              <SupportImg />
             </div>
             <h3 className="display-6 SFPro-600 text-center mb-5">
-              Do you want to complain?
+              {translate("supportPage.subtitle")}
             </h3>
             <div className="text-center mb-6">
               <Button

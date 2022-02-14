@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import "./Contacts.scss";
-import { ReactComponent as ContactsImg } from "../../../assets/images/content/contacts.svg";
 import Networks from "../Networks/Networks";
+import "./Contacts.scss";
 
-const breadcrumbs = [{ title: "Contacts" }];
+import { ReactComponent as ContactsImg } from "../../../assets/images/content/contacts.svg";
 
 const Contacts = () => {
   const [showTitleOnMobile, setShowTitleOnMobile] = useState(false);
+  const { t: translate } = useTranslation();
+
+  const breadcrumbs = [{ title: translate("contactsPage.title") }];
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -30,7 +33,9 @@ const Contacts = () => {
   }, []);
 
   const title = (
-    <h2 className="title SFPro-600 display-4 mb-5 text-center">Contacts</h2>
+    <h2 className="title SFPro-600 display-4 mb-5 text-center">
+      {translate("contactsPage.title")}
+    </h2>
   );
 
   return (
@@ -42,7 +47,10 @@ const Contacts = () => {
           {!showTitleOnMobile && title}
           <h3 className="SFPro-700 display-7 mb-4">LCC “PROXYONE”</h3>
           <address className="display-7 mb-0">
-            <h4 className="SFPro-700 display-8">Address:</h4>
+            <h4 className="SFPro-700 display-8">
+              {" "}
+              {translate("contactsPage.address")}
+            </h4>
             <a
               className="mb-4"
               target="_blank"
@@ -51,21 +59,29 @@ const Contacts = () => {
             >
               Minsk, Kalvariyskaya 33
             </a>
-            <h4 className="SFPro-700 display-8">Phone numbers:</h4>
+            <h4 className="SFPro-700 display-8">
+              {translate("contactsPage.numbers")}
+            </h4>
             <a className="mb-4" href="tel:(+375)0000000000">
               + 375 00 000 000 00
             </a>
-            <h4 className="SFPro-700 display-8">Email:</h4>
+            <h4 className="SFPro-700 display-8">
+              {translate("contactsPage.email")}
+            </h4>
             <a className="mb-4" href="mailto:go@info@example.com">
               info@example.com
             </a>
           </address>
-          <h4 className="SFPro-700 display-8">Working hours:</h4>
-          <span className="display-7 mb-5">Mon-Fri: 10:00-19:00</span>
+          <h4 className="SFPro-700 display-8">
+            {translate("contactsPage.hours")}
+          </h4>
+          <span className="display-7 mb-5">
+            {translate("contactsPage.days")} 10:00-19:00
+          </span>
           <Networks />
           <div className="text-center">
             <Button className="text-white px-5 py-2 br-8" variant="primary">
-              Write email
+              {translate("contactsPage.button")}
             </Button>
           </div>
         </div>

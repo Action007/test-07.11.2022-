@@ -9,12 +9,12 @@
   a {
     display: block;
 
-    &:hover svg {
-      fill: $primary;
-    }
-
     &:not(:last-child) {
       margin-right: 30px;
+    }
+
+    &:hover svg {
+      fill: $primary;
     }
   }
 
