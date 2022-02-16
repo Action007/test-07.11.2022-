@@ -1,0 +1,25 @@
+@import '../../../global-styles/_variables.scss';
+
+.my-checklists {
+  .pagination {
+    justify-content: center;
+  }
+
+  .page-item {
+    .page-link {
+      color: $dark;
+      border-radius: 4px;
+      padding: 0.3rem 0.69rem;
+    }
+
+    &.active .page-link {
+      color: $primary;
+      background-color: #fff;
+      border-radius: 4px;
+    }
+
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+  }
+}

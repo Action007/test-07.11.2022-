@@ -1,0 +1,167 @@
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+
+.checklist {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 34px;
+
+  @include media-breakpoint-down(sm) {
+    padding: 30px 19px;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 25px;
+  }
+
+  &__title {
+    margin-bottom: 18px;
+    font-size: 1.5rem;
+
+    @include media-breakpoint-down(md) {
+      font-size: 1.3rem;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 1rem;
+    }
+  }
+
+  &__items {
+    margin-bottom: 34px;
+  }
+
+  &__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media-breakpoint-down(ss) {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px 12px 22px;
+    border: 1px solid $dark;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    @include media-breakpoint-down(ss) {
+      margin-bottom: 25px;
+    }
+
+    &:hover {
+      color: #fff;
+      border-color: $primary;
+      background-color: $primary;
+
+      svg {
+        stroke: #fff;
+        transform: translateX(3px);
+      }
+    }
+
+    span {
+      margin-right: 16px;
+    }
+
+    svg {
+      stroke: $dark;
+      transition: all 0.3s ease;
+    }
+  }
+
+  &__tags {
+    margin-bottom: 28px;
+  }
+
+  &__tag {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+    background-color: $secondary;
+    border-radius: 4px;
+
+    @include media-breakpoint-down(ss) {
+      font-size: 10px;
+    }
+
+    &:not(:last-child) {
+      margin-right: 4px;
+    }
+  }
+
+  &__inner {
+    margin-right: 25px;
+
+    @include media-breakpoint-down(sm) {
+      margin-right: 0;
+    }
+  }
+
+  &__liked,
+  &__viewed {
+    padding: 6px 10px 6px 37px;
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: '';
+      top: 50%;
+      transform: translateY(-50%);
+      left: 11px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+
+  &__viewed {
+    color: #6d9aff;
+    background-color: #407bff1a;
+    border-radius: 8px;
+    margin-right: 8px;
+
+    &::before {
+      background-image: url('../../../assets/images/icon/view.svg');
+      width: 18px;
+      height: 14px;
+    }
+  }
+
+  &__liked {
+    padding: 6px 10px 6px 37px;
+    color: $primary;
+    border-radius: 8px;
+    background-color: #65c17e1a;
+
+    &::before {
+      background-image: url('../../../assets/images/icon/like.svg');
+      width: 18px;
+      height: 17px;
+    }
+  }
+
+  &__time {
+    display: block;
+    color: $light;
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 34px;
+    }
+  }
+
+  &__date {
+    margin-right: 12px;
+  }
+}

@@ -7,6 +7,7 @@ const PrivacyPolicyPage = React.lazy(() =>
 );
 const SupportPage = React.lazy(() => import("../pages/SupportPage"));
 const ContactsPage = React.lazy(() => import("../pages/ContactsPage"));
+const MyChecklistsPage = React.lazy(() => import("../pages/MyChecklistsPage"));
 
 const routes = [
   { id: 1, path: "/Our-Mission", element: <OurMissionPage /> },
@@ -14,6 +15,7 @@ const routes = [
   { id: 3, path: "/Privacy-Policy", element: <PrivacyPolicyPage /> },
   { id: 4, path: "/Support", element: <SupportPage /> },
   { id: 5, path: "/Contacts", element: <ContactsPage /> },
+  { id: 6, path: "/My-Checklists", element: <MyChecklistsPage /> },
 ];
 
 export default routes;

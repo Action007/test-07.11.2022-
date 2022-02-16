@@ -7,6 +7,7 @@ import {
   Navbar,
   ProgressBar,
 } from "react-bootstrap";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./Header.scss";
 
 import Logo from "../../../assets/images/content/logo.svg";
@@ -19,40 +20,18 @@ import { ReactComponent as Logout } from "../../../assets/images/icon/logout.svg
 import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerSvg.svg";
 
 const Header = () => {
-  const [showSearchOnMobile, setShowSearchOnMobile] = useState(false);
-  const [showAddButtonOnMobile, setShowAddButton] = useState(false);
+  const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
+  const showAddButtonOnMobile = useMediaQuery("(max-width:767px)");
   const [scroll, setScroll] = useState(false);
   const scrollClass = `header__navbar position-fixed ${scroll && "scroll"}`;
 
   useEffect(() => {
-    const resizeHandler = () => {
-      const { innerWidth } = window;
-
-      if (innerWidth < 1200) {
-        setShowSearchOnMobile(true);
-      } else {
-        setShowSearchOnMobile(false);
-      }
-
-      if (innerWidth < 768) {
-        setShowAddButton(true);
-      } else {
-        setShowAddButton(false);
-      }
-    };
-
     const scrollHandler = () => {
       setScroll(window.scrollY > 50);
     };
 
-    resizeHandler();
-
-    window.addEventListener("resize", resizeHandler);
     window.addEventListener("scroll", scrollHandler);
-    return () => {
-      window.removeEventListener("scroll", scrollHandler);
-      window.removeEventListener("resize", resizeHandler);
-    };
+    return () => window.removeEventListener("scroll", scrollHandler);
   }, []);
 
   const searchInput = (
