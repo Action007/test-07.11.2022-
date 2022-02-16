@@ -1,0 +1,51 @@
+.support-form {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 460px;
+
+  &__wrap {
+    padding: 16px 23px;
+  }
+
+  &__form {
+    padding: 0 23px 35px;
+  }
+
+  &__textarea {
+    border: 1px solid #b9b9b980;
+    border-radius: 8px;
+    width: 100%;
+    height: 106px;
+    resize: none;
+
+    &::placeholder {
+      font-size: 14px;
+    }
+  }
+
+  .form-check-input {
+    margin-top: 1px;
+    margin-right: 13px;
+    width: 1.2em;
+    height: 1.2em;
+  }
+
+  &__link {
+    text-decoration: underline;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__button {
+    width: 100%;
+    height: 40px;
+    max-width: 183px;
+
+    &:first-child {
+      margin-right: 8px;
+    }
+  }
+}
