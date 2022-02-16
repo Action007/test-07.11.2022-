@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import "./SupportForm.scss";
-import { ReactComponent as CloseSvg } from "../../../../assets/svg/close.svg";
+import { ReactComponent as CloseSvg } from "../../../../assets/images/icon/close.svg";
 
 const SupportForm = ({ onSupportHandler }) => {
   const field = useRef();

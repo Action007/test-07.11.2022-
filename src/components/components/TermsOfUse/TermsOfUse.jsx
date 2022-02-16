@@ -13,7 +13,7 @@ const TermOfUse = () => {
   return (
     <div className="term pb-7">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <div className="wrapper">
+      <div className="container-wrapper">
         <h2 className="mb-5 display-4 text-center SFPro-600">
           {translate("termOfUsePage.title")}
         </h2>

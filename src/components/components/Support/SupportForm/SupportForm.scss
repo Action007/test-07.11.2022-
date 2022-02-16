@@ -1,3 +1,6 @@
+@import '../../../../global-styles/_variables.scss';
+@import '../../../../../node_modules/bootstrap/scss/_mixins.scss';
+
 .support-form {
   margin: 0 auto;
   width: 100%;
@@ -5,10 +8,18 @@
 
   &__wrap {
     padding: 16px 23px;
+
+    @include media-breakpoint-down(md) {
+      padding: 16px;
+    }
   }
 
   &__form {
     padding: 0 23px 35px;
+
+    @include media-breakpoint-down(md) {
+      padding: 0 16px 16px;
+    }
   }
 
   &__textarea {
@@ -37,6 +48,10 @@
   &__buttons {
     display: flex;
     justify-content: center;
+
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+    }
   }
 
   &__button {
@@ -44,8 +59,16 @@
     height: 40px;
     max-width: 183px;
 
+    @include media-breakpoint-down(md) {
+      max-width: 100%;
+    }
+    
     &:first-child {
       margin-right: 8px;
+      
+      @include media-breakpoint-down(md) {
+        margin: 0 0 11px;
+      }
     }
   }
 }

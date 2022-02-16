@@ -49,6 +49,10 @@ ul {
   padding: 0;
 }
 
+ol {
+  padding-left: 21px;
+}
+
 a {
   display: inline-block;
   outline: transparent;
@@ -62,9 +66,10 @@ button {
   padding: 0;
   background: none;
   cursor: pointer;
+  color: inherit;
 }
 
-.wrapper {
+.container-wrapper {
   margin: 0 auto;
   max-width: 1047px;
 }

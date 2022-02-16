@@ -62,14 +62,19 @@
   },
   "contactsPage": {
     "title": "Contacts",
+    "companyName": "LCC “PROXYONE”",
     "address": "Address:",
+    "addressText": "Minsk, Kalvariyskaya 33",
     "numbers": "Phone numbers:",
     "email": "Email:",
     "hours": "Working hours:",
-    "days": "Mon-Fri:",
-    "button": "Write email:"
+    "days": "Mon-Fri: 10:00-19:00",
+    "button": "Write email"
   },
   "popularChecklistPage": {
     "title": "Popular checklist"
+  },
+  "myChecklistsPage": {
+    "title": "My checklists"
   }
 }

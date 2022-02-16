@@ -1,7 +1,7 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../global-styles/_fonts.scss";
-@import "../../../global-styles/_fonts.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../global-styles/_fonts.scss';
+@import '../../../global-styles/_fonts.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .header {
   padding: 0 16px;
@@ -98,13 +98,13 @@
     background-color: #fff;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 24px;
       bottom: 50%;
       width: 24px;
       height: 24px;
-      background-image: url("../../../assets/images/icon/search.svg");
+      background-image: url('../../../assets/images/icon/search.svg');
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
@@ -139,7 +139,7 @@
     background-color: #c8d4ff !important;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 9px;
       top: 50%;
@@ -197,7 +197,7 @@
     top: 5px;
     border-radius: 50%;
     padding: 2px 3px;
-    font-family: "SFPro-SemiBold", sans-serif;
+    font-family: 'SFPro-SemiBold', sans-serif;
     font-size: 10px;
     color: #fff;
     background-color: $warning;
@@ -207,7 +207,7 @@
     display: flex;
     align-items: center;
     margin-right: 24px;
-    font-family: "SFPro-Medium", sans-serif;
+    font-family: 'SFPro-Medium', sans-serif;
     color: $primary;
 
     .dropdown-toggle::after {
@@ -215,7 +215,7 @@
       border: none;
       width: 14px;
       height: 8px;
-      background-image: url("../../../assets/svg/dropdown.svg");
+      background-image: url('../../../assets/images/icon/dropdown.svg');
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
@@ -302,7 +302,7 @@
   &__btn {
     padding: 12px 27px 12px 19px;
     height: 52px;
-    font-family: "SFPro-SemiBold", sans-serif;
+    font-family: 'SFPro-SemiBold', sans-serif;
     font-size: 16px;
 
     svg {
