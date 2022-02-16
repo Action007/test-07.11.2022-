@@ -1,0 +1,24 @@
+@import "../../../global-styles/_variables.scss";
+
+.networks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+
+  a {
+    display: block;
+
+    &:not(:last-child) {
+      margin-right: 30px;
+    }
+
+    &:hover svg {
+      fill: $primary;
+    }
+  }
+
+  svg {
+    fill: $dark;
+  }
+}

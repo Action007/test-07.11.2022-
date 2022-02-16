@@ -1,0 +1,16 @@
+.term {
+  &__img {
+    width: 100%;
+    height: 253px;
+    max-width: 253px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__text {
+    line-height: 1.3;
+  }
+}

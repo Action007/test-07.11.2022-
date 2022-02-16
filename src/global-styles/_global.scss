@@ -1,0 +1,94 @@
+@import "./_fonts.scss";
+@import "../../node_modules/bootstrap/scss/_mixins.scss";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: "SFPro-Regular", sans-serif;
+  font-size: 14px;
+  color: $dark;
+  -webkit-tap-highlight-color: transparent;
+  background-color: $body;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.main {
+  flex-grow: 1;
+  margin: 0 auto;
+  padding: 0 16px;
+  width: 100%;
+  max-width: 1580px;
+
+  @include media-breakpoint-up(xl) {
+    margin-top: 116px;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  clip: rect(0, 0, 0, 0);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  display: inline-block;
+  outline: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  outline: transparent;
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1047px;
+}
+
+.br-8 {
+  border-radius: 8px;
+}
+
+.SFPro-300 {
+  font-family: "SFPro-Light", sans-serif;
+}
+
+.SFPro-400 {
+  font-family: "SFPro-Regular", sans-serif;
+}
+
+.SFPro-500 {
+  font-family: "SFPro-Medium", sans-serif;
+}
+
+.SFPro-600 {
+  font-family: "SFPro-SemiBold", sans-serif;
+}
+
+.SFPro-700 {
+  font-family: "SFPro-Bold", sans-serif;
+}
