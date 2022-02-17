@@ -1,0 +1,143 @@
+@import '../../../global-styles/_variables.scss';
+
+.checklist-review {
+  max-width: 834px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+
+  &__review {
+    display: block;
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+
+  &__form {
+    margin-bottom: 25px;
+  }
+
+  &__label {
+    width: 100%;
+  }
+
+  &__input {
+    border: none;
+    border-bottom: 2px solid #4f4f4f38;
+    width: 100%;
+    padding: 10px 0;
+    outline: transparent;
+
+    &:focus {
+      border-color: $primary;
+    }
+
+    &::placeholder {
+      color: $dark;
+    }
+  }
+
+  &__items {
+    margin-bottom: 0;
+  }
+
+  &__item {
+    max-width: 500px;
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__heading {
+    margin-bottom: 4px;
+  }
+
+  &__heading {
+    margin-right: 7px;
+  }
+
+  &__time {
+    font-size: 12px;
+    color: #4f4f4f80;
+  }
+
+  &__text {
+    line-height: 1.3;
+    margin-bottom: 19px;
+  }
+
+  &__likes,
+  &__dislikes {
+    background-color: $secondary;
+    padding: 6px 11px 6px 11px;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 0 10px 0 #00000042;
+    }
+
+    svg {
+      margin-right: 10px;
+      stroke: $dark;
+    }
+  }
+
+  &__likes {
+    border-radius: 8px;
+    margin-right: 8px;
+
+    &.active {
+      color: $primary;
+      background-color: #65c17e1a;
+
+      svg {
+        stroke: $primary;
+      }
+    }
+  }
+
+  &__dislikes {
+    border-radius: 8px;
+    margin-right: 8px;
+
+    svg {
+      transform: rotate(180deg);
+    }
+
+    &.active {
+      color: $warning;
+      background-color: #eb57571a;
+
+      svg {
+        stroke: $warning;
+      }
+    }
+  }
+
+  &__button {
+    background-color: #ecf2ff;
+    padding: 12px 30px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-top: 30px;
+
+    &:hover {
+      background-color: $primary;
+      color: #fff;
+
+      svg {
+        stroke: #fff;
+      }
+    }
+
+    svg {
+      transform: rotate(90deg);
+      margin-right: 13px;
+      stroke: $dark;
+      transition: stroke 0.3s ease;
+    }
+  }
+}

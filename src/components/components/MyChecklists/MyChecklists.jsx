@@ -5,7 +5,6 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
 import PaginationChecklist from "../Pagination/Pagination";
 import Tabs from "../Tabs/Tabs";
-import "./MyChecklists.scss";
 
 const items = {
   type: "created",
@@ -35,6 +34,16 @@ const items = {
         },
         {
           type: "Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+          description: "Letsgo to VK KOM",
+          value: "https://vk.com/",
+        },
+        {
+          type: "Pellentesque eu, pretium.",
+          description: "Letsgo to VK KOM",
+          value: "https://vk.com/",
+        },
+        {
+          type: "Pellentesque eu, pretium.",
           description: "Letsgo to VK KOM",
           value: "https://vk.com/",
         },
@@ -122,33 +131,40 @@ const items = {
 };
 
 const MyChecklists = () => {
-  const [checkLists, setCheckLists] = useState(items);
+  const [checklists, setCheckLists] = useState(items);
+  const [category, setCategory] = useState(true);
   const { t: translate } = useTranslation();
 
   const breadcrumbs = [{ title: translate("myChecklistsPage.title") }];
   const tabs = [
-    { id: 1, name: "Created" },
-    { id: 2, name: "Liked" },
-    { id: 3, name: "Saved" },
+    { id: 1, name: translate("myChecklistsPage.created") },
+    { id: 2, name: translate("myChecklistsPage.liked") },
+    { id: 3, name: translate("myChecklistsPage.saved") },
   ];
 
-  const changeChecklistsHandler = () => {
+  const changeChecklistsHandler = (c) => {
     setCheckLists(items);
+    setCategory(c === "Created");
   };
 
+  const lists = checklists.items.map((checklist) => (
+    <Checklist
+      key={uniqueID()}
+      checklists={checklist}
+      translate={translate("myChecklistsPage.showMore")}
+      created={category}
+    />
+  ));
+
   return (
-    <div className="my-checklists pb-7">
+    <div className="pb-7">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrap">
         <h2 className="mb-5 display-4 text-center SFPro-600">
           {translate("myChecklistsPage.title")}
         </h2>
         <Tabs changeHandler={changeChecklistsHandler} tabs={tabs} />
-        <ul className="my-checklists__checklists">
-          {checkLists.items.map((checklist) => (
-            <Checklist key={uniqueID()} checklists={checklist} />
-          ))}
-        </ul>
+        <div className="checklist">{lists}</div>
       </div>
       <PaginationChecklist />
     </div>

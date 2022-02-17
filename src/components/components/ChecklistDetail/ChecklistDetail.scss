@@ -1,0 +1,55 @@
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+
+.checklist-detail {
+  .checklist {
+    margin-bottom: 0;
+  }
+
+  .checklist__wrapper {
+    margin-bottom: 16px;
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 30px;
+    }
+  }
+
+  .checklist__wrap {
+    @include media-breakpoint-down(sm) {
+      align-items: flex-start;
+      flex-direction: column-reverse;
+    }
+  }
+
+  .checklist__tags {
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 18px;
+    }
+  }
+
+  .checklist__button {
+    font-size: 16px;
+    padding: 8px 30px;
+    border: 1px solid transparent;
+    background-color: $primary;
+    color: #fff;
+
+    @include media-breakpoint-down(sm) {
+      margin: 25px 0 0 0;
+    }
+
+    &:hover {
+      color: $primary;
+      border-color: $primary;
+      background-color: #fff;
+
+      svg {
+        stroke: $primary;
+      }
+    }
+
+    svg {
+      stroke: #fff;
+    }
+  }
+}

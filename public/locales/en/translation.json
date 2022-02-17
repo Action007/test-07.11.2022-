@@ -75,6 +75,14 @@
     "title": "Popular checklist"
   },
   "myChecklistsPage": {
-    "title": "My checklists"
+    "title": "My checklists",
+    "showMore": "Show more",
+    "created": "Created",
+    "liked": "Liked",
+    "saved": "Saved"
+  },
+  "checklistDetailPage": {
+    "button": "Start to pass",
+    "moreComments": "Show more comments"
   }
 }
