@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .tabs {
   display: flex;
@@ -8,9 +8,9 @@
 
   &__wrapper {
     display: inline-block;
-    background-color: #fff;
     border-radius: 8px;
     padding: 6px 7px;
+    background-color: #fff;
 
     @include media-breakpoint-down(sm) {
       max-width: 295px;
@@ -18,14 +18,9 @@
   }
 
   &__button {
-    padding: 11px 45px;
     border-radius: 6px;
+    padding: 11px 45px;
     font-size: 1.125rem;
-
-    @include media-breakpoint-down(sm) {
-      padding: 11px 20px;
-      font-size: 1rem;
-    }
 
     &:not(:last-child) {
       margin-right: 6px;
@@ -36,8 +31,13 @@
     }
 
     &.active {
-      background-color: $primary;
       color: #fff;
+      background-color: $primary;
+    }
+
+    @include media-breakpoint-down(sm) {
+      padding: 11px 20px;
+      font-size: 1rem;
     }
   }
 }

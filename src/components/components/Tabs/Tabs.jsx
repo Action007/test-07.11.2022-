@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "./Tabs.scss";
 
 const Tabs = ({ tabs, changeHandler }) => {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState("Created");
 
-  const handleClick = (id) => {
-    setActive(id);
-    changeHandler();
+  const handleClick = (name) => {
+    setActive(name);
+    changeHandler(name);
   };
 
   return (
@@ -15,8 +15,8 @@ const Tabs = ({ tabs, changeHandler }) => {
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => handleClick(tab.id)}
-            className={`tabs__button${active === tab.id ? " active" : ""}`}
+            onClick={() => handleClick(tab.name)}
+            className={`tabs__button${active === tab.name ? " active" : ""}`}
             type="button"
           >
             {tab.name}

@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  Container,
-  Dropdown,
-  Navbar,
-  ProgressBar,
-} from "react-bootstrap";
+import { Button, Container, Navbar } from "react-bootstrap";
 import useMediaQuery from "../../../hooks/useMediaQuery";
+import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import "./Header.scss";
 
 import Logo from "../../../assets/images/content/logo.svg";
-import Profile from "../../../assets/images/content/profile.png";
 import { ReactComponent as Plus } from "../../../assets/images/icon/plus.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
-import { ReactComponent as Account } from "../../../assets/images/icon/account.svg";
-import { ReactComponent as Setting } from "../../../assets/images/icon/setting.svg";
-import { ReactComponent as Logout } from "../../../assets/images/icon/logout.svg";
 import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerSvg.svg";
+import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
+import SearchInput from "../SearchInput/SearchInput";
 
 const Header = () => {
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
@@ -33,18 +26,6 @@ const Header = () => {
     window.addEventListener("scroll", scrollHandler);
     return () => window.removeEventListener("scroll", scrollHandler);
   }, []);
-
-  const searchInput = (
-    <form className="header__form">
-      <label className="header__label" htmlFor="search-input">
-        <input
-          className="header__input border-0"
-          placeholder="How to set up a company in the USA"
-          type="email"
-        />
-      </label>
-    </form>
-  );
 
   return (
     <header className="header">
@@ -77,56 +58,19 @@ const Header = () => {
             </Button>
           )}
           <Navbar.Collapse className="order-4" id="navbarScroll">
-            {!showSearchOnMobile && searchInput}
-            <ProgressBar
-              className="header__progress h-25"
-              now={60}
-              label="Active checklist"
-            />
+            {!showSearchOnMobile && <SearchInput />}
             {!showAddButtonOnMobile && (
-              <Button className="header__bookmark">
-                <Bookmark />
-                <span className="header__span">22</span>
-              </Button>
-            )}
-            <Dropdown className="header__dropdown">
-              <Dropdown.Toggle
-                className="header__dropdown-button d-flex align-items-center bg-white border-0 text-dark br-8"
-                variant="success"
-                id="dropdown-basic"
-              >
-                <div className="header__img">
-                  <img src={Profile} alt="account" />
+              <>
+                <div className="header__progress">
+                  <ProgressBarHeader done={29} />
                 </div>
-                Alex64
-              </Dropdown.Toggle>
-              <Dropdown.Menu className="header__items p-0 mt-3 border-0 r-0">
-                <Dropdown.Item className="header__item" href="#/action-1">
-                  <span className="header__percent">60%</span>
-                  <ProgressBar
-                    className="header__progress"
-                    now={60}
-                    label="Active checklist"
-                  />
-                </Dropdown.Item>
-                <Dropdown.Item className="header__item" href="#/action-2">
+                <Button className="header__bookmark">
                   <Bookmark />
-                  My Checklists
-                </Dropdown.Item>
-                <Dropdown.Item className="header__item" href="#/action-3">
-                  <Account />
-                  Profile settings
-                </Dropdown.Item>
-                <Dropdown.Item className="header__item" href="#/action-4">
-                  <Setting />
-                  Account settings
-                </Dropdown.Item>
-                <Dropdown.Item className="header__item" href="#/action-5">
-                  <Logout />
-                  Log Out
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+                  <span className="header__span">22</span>
+                </Button>
+              </>
+            )}
+            <HeaderDropdown />
             {!showAddButtonOnMobile && (
               <Button
                 className="header__btn text-white d-flex align-items-center br-8"
@@ -139,7 +83,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {showSearchOnMobile && searchInput}
+      {showSearchOnMobile && <SearchInput />}
     </header>
   );
 };

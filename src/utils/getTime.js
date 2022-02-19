@@ -1,6 +1,6 @@
 const getTime = (createdTime) => {
   const time = new Date(createdTime);
-  const date = time.toISOString().slice(0, 10).split("-").reverse().join("-");
+  const date = time.toISOString().slice(0, 10).split("-").reverse().join(".");
   let getHours = time.getHours();
   let getMinutes = time.getMinutes();
   const amPM = getHours >= 12 ? "PM" : "AM";

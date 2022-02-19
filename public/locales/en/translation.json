@@ -1,5 +1,13 @@
 {
   "home": "Home",
+  "header": {
+    "activeChecklist": "Active checklist",
+    "create": "Create",
+    "allChecklists": "All Checklists",
+    "profileSettings": "Profile settings",
+    "accountSettings": "Account settings",
+    "logOut": "Log Out"
+  },
   "supportPage": {
     "title": "Support",
     "subtitle": "Do you want to complain?",
@@ -74,7 +82,15 @@
   "popularChecklistPage": {
     "title": "Popular checklist"
   },
-  "myChecklistsPage": {
-    "title": "My checklists"
+  "AllChecklistsPage": {
+    "title": "My checklists",
+    "showMore": "Show more",
+    "created": "Created",
+    "liked": "Liked",
+    "saved": "Saved"
+  },
+  "checklistDetailPage": {
+    "button": "Start to pass",
+    "moreComments": "Show more comments"
   }
 }

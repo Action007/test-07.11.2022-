@@ -2,13 +2,48 @@
 @import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .checklist {
+  margin: 0 auto 43px;
   width: 100%;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 34px;
+  max-width: 834px;
 
-  @include media-breakpoint-down(sm) {
-    padding: 30px 19px;
+  &__wrapper {
+    position: relative;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    padding: 34px 34px 32px;
+    width: 100%;
+    background-color: #fff;
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 12px;
+      padding: 30px 19px 30px;
+    }
+  }
+
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__created {
+    @include media-breakpoint-down(sm) {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  &__saved {
+    @include media-breakpoint-down(sm) {
+      display: block;
+    }
+  }
+
+  &__head {
+    @include media-breakpoint-down(sm) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   &:not(:last-child) {
@@ -18,13 +53,49 @@
   &__title {
     margin-bottom: 18px;
     font-size: 1.5rem;
+    padding-right: 25px;
 
     @include media-breakpoint-down(md) {
       font-size: 1.3rem;
     }
 
     @include media-breakpoint-down(sm) {
+      margin: 21px 0 18px;
       font-size: 1rem;
+      padding-right: 0;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include media-breakpoint-down(sm) {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__bookmark {
+    margin-bottom: 28px;
+    border-radius: 8px;
+    width: 39px;
+    height: 39px;
+    background-color: $secondary;
+    transition: box-shadow 0.3s ease;
+
+    svg {
+      width: 16px;
+      height: 18px;
+      stroke: $dark;
+    }
+
+    &:hover {
+      box-shadow: 0 0 8px 0 #00000032;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin: 0 0 0 21px;
     }
   }
 
@@ -32,43 +103,66 @@
     margin-bottom: 34px;
   }
 
+  &__item {
+    line-height: 1.2;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__show {
+    position: relative;
+    margin-left: 3px;
+    color: $primary;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $primary;
+      transform: translateX(-50%);
+    }
+  }
+
   &__wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    @include media-breakpoint-down(ss) {
+    @include media-breakpoint-down(md) {
+      flex-wrap: wrap-reverse;
       align-items: flex-start;
-      flex-direction: column;
     }
   }
 
-  &__wrapper {
+  &__box {
     display: flex;
     align-items: center;
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: 10px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 0;
+    }
   }
 
   &__button {
     display: flex;
     align-items: center;
-    padding: 12px 20px 12px 22px;
     border: 1px solid $dark;
     border-radius: 8px;
+    padding: 12px 20px 12px 22px;
     transition: all 0.3s ease;
+    margin-right: 10px;
 
-    @include media-breakpoint-down(ss) {
-      margin-bottom: 25px;
-    }
-
-    &:hover {
-      color: #fff;
-      border-color: $primary;
-      background-color: $primary;
-
-      svg {
-        stroke: #fff;
-        transform: translateX(3px);
-      }
+    @include media-breakpoint-down(sm) {
+      margin: 25px 10px 0 0;
     }
 
     span {
@@ -79,22 +173,33 @@
       stroke: $dark;
       transition: all 0.3s ease;
     }
+
+    &:hover {
+      border-color: $primary;
+      color: #fff;
+      background-color: $primary;
+
+      svg {
+        stroke: #fff;
+        transform: translateX(3px);
+      }
+    }
   }
 
   &__tags {
     margin-bottom: 28px;
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 15px;
+    }
   }
 
   &__tag {
     display: inline-block;
-    padding: 4px 8px;
     margin-bottom: 4px;
-    background-color: $secondary;
     border-radius: 4px;
-
-    @include media-breakpoint-down(ss) {
-      font-size: 10px;
-    }
+    padding: 4px 8px;
+    background-color: $secondary;
 
     &:not(:last-child) {
       margin-right: 4px;
@@ -102,66 +207,76 @@
   }
 
   &__inner {
+    display: flex;
     margin-right: 25px;
 
     @include media-breakpoint-down(sm) {
       margin-right: 0;
-    }
-  }
-
-  &__liked,
-  &__viewed {
-    padding: 6px 10px 6px 37px;
-    position: relative;
-
-    &::before {
-      position: absolute;
-      content: '';
-      top: 50%;
-      transform: translateY(-50%);
-      left: 11px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
+      margin-bottom: 7px;
     }
   }
 
   &__viewed {
-    color: #6d9aff;
-    background-color: #407bff1a;
-    border-radius: 8px;
     margin-right: 8px;
+    border-radius: 8px;
+    color: $dark;
+    background-color: $secondary;
 
-    &::before {
-      background-image: url('../../../assets/images/icon/view.svg');
-      width: 18px;
-      height: 14px;
+    svg {
+      stroke: $dark;
+    }
+
+    &.active {
+      color: #6d9aff;
+      background-color: #407bff1a;
+
+      svg {
+        stroke: #6d9aff;
+      }
     }
   }
 
   &__liked {
-    padding: 6px 10px 6px 37px;
-    color: $primary;
     border-radius: 8px;
-    background-color: #65c17e1a;
+    color: $dark;
+    background-color: $secondary;
+    transition: box-shadow 0.3s ease;
 
-    &::before {
-      background-image: url('../../../assets/images/icon/like.svg');
-      width: 18px;
-      height: 17px;
+    svg {
+      stroke: $dark;
+    }
+
+    &:hover {
+      box-shadow: 0 0 10px 0 #00000042;
+    }
+
+    &.active {
+      color: $primary;
+      background-color: #65c17e1a;
+
+      svg {
+        stroke: $primary;
+      }
     }
   }
 
   &__time {
     display: block;
     color: $light;
-
-    @include media-breakpoint-down(sm) {
-      margin-bottom: 34px;
-    }
   }
 
   &__date {
     margin-right: 12px;
+  }
+
+  &__liked,
+  &__viewed {
+    display: flex;
+    align-items: center;
+    padding: 6px 11px;
+
+    svg {
+      margin-right: 10px;
+    }
   }
 }

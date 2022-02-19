@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./OurMission.scss";
 
-import { ReactComponent as RocketImg } from "../../../assets/images/content/rocket.svg";
+import { ReactComponent as OurMissionSvg } from "../../../assets/images/content/ourMission.svg";
 
 const OurMission = () => {
   const { t: translate } = useTranslation();
@@ -18,7 +18,7 @@ const OurMission = () => {
           {translate("ourMissionPage.title")}
         </h2>
         <div className="about__img mb-5 mx-auto">
-          <RocketImg />
+          <OurMissionSvg />
         </div>
         <h3 className="display-6 SFPro-600">
           {translate("ourMissionPage.section1.title")}
