@@ -1,5 +1,5 @@
 @import './_fonts.scss';
-@import '../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../node_modules/bootstrap/scss/_mixins.scss";
 
 html,
 body,
@@ -23,13 +23,17 @@ body {
 
 .main {
   flex-grow: 1;
-  margin: 0 auto;
-  padding: 0 16px;
+  margin: 116px auto 0;
+  padding: 0 34px;
   width: 100%;
   max-width: 1580px;
 
-  @include media-breakpoint-up(xl) {
-    margin-top: 116px;
+  @include media-breakpoint-down(xl) {
+    margin-top: 0;
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 0 16px;
   }
 }
 
@@ -64,9 +68,9 @@ button {
   outline: transparent;
   border: none;
   padding: 0;
+  color: inherit;
   background: none;
   cursor: pointer;
-  color: inherit;
 }
 
 .container-wrapper {

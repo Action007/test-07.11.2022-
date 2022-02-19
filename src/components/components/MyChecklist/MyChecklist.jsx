@@ -130,16 +130,16 @@ const items = {
   page: 1,
 };
 
-const MyChecklists = () => {
+const MyChecklist = () => {
   const [checklists, setCheckLists] = useState(items);
   const [category, setCategory] = useState(true);
   const { t: translate } = useTranslation();
 
-  const breadcrumbs = [{ title: translate("myChecklistsPage.title") }];
+  const breadcrumbs = [{ title: translate("AllChecklistsPage.title") }];
   const tabs = [
-    { id: 1, name: translate("myChecklistsPage.created") },
-    { id: 2, name: translate("myChecklistsPage.liked") },
-    { id: 3, name: translate("myChecklistsPage.saved") },
+    { id: 1, name: translate("AllChecklistsPage.created") },
+    { id: 2, name: translate("AllChecklistsPage.liked") },
+    { id: 3, name: translate("AllChecklistsPage.saved") },
   ];
 
   const changeChecklistsHandler = (c) => {
@@ -151,7 +151,7 @@ const MyChecklists = () => {
     <Checklist
       key={uniqueID()}
       checklists={checklist}
-      translate={translate("myChecklistsPage.showMore")}
+      translate={translate("AllChecklistsPage.showMore")}
       created={category}
     />
   ));
@@ -161,7 +161,7 @@ const MyChecklists = () => {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrap">
         <h2 className="mb-5 display-4 text-center SFPro-600">
-          {translate("myChecklistsPage.title")}
+          {translate("AllChecklistsPage.title")}
         </h2>
         <Tabs changeHandler={changeChecklistsHandler} tabs={tabs} />
         <div className="checklist">{lists}</div>
@@ -171,4 +171,4 @@ const MyChecklists = () => {
   );
 };
 
-export default MyChecklists;
+export default MyChecklist;

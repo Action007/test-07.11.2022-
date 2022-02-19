@@ -9,6 +9,7 @@ import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg"
 import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
+import EditDropdown from "../EditDropdown/EditDropdown";
 
 const Checklist = ({
   checklists,
@@ -29,7 +30,7 @@ const Checklist = ({
   );
 
   const timeButtons = (
-    <div className="checklist__heading">
+    <div className="checklist__head">
       <time className="checklist__time" dateTime={date}>
         <span className="checklist__date">{date}</span>
         <span className="checklist__hours">{hours}</span>
@@ -46,7 +47,7 @@ const Checklist = ({
   );
 
   const head = (
-    <div className="checklist__heading">
+    <>
       <h3 className="checklist__title SFPro-700">{title}</h3>
       <div className="checklist__buttons">
         <button className="checklist__bookmark" type="button">
@@ -56,18 +57,25 @@ const Checklist = ({
           <InfoSvg />
         </button>
       </div>
-    </div>
+    </>
   );
 
   return (
     <div className="checklist__wrapper">
-      {showOnMobile && !created && timeButtons}
-      {showOnMobile && created && time}
-      {!showOnMobile && !created ? (
-        head
-      ) : (
-        <h3 className="checklist__title SFPro-700">{title}</h3>
-      )}
+      <div
+        className={`${`checklist__heading`}${
+          created ? " checklist__created" : " checklist__saved"
+        }`}
+      >
+        {showOnMobile && !created && timeButtons}
+        {showOnMobile && created && time}
+        {!showOnMobile && !created ? (
+          head
+        ) : (
+          <h3 className="checklist__title SFPro-700">{title}</h3>
+        )}
+        {created && <EditDropdown />}
+      </div>
       <ol className="checklist__items">
         {moreThanFive ? (
           <li className="checklist__item" key={uniqueID()}>

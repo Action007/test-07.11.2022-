@@ -1,5 +1,13 @@
 {
   "home": "Home",
+  "header": {
+    "activeChecklist": "Active checklist",
+    "create": "Create",
+    "allChecklists": "All Checklists",
+    "profileSettings": "Profile settings",
+    "accountSettings": "Account settings",
+    "logOut": "Log Out"
+  },
   "supportPage": {
     "title": "Support",
     "subtitle": "Do you want to complain?",
@@ -74,7 +82,7 @@
   "popularChecklistPage": {
     "title": "Popular checklist"
   },
-  "myChecklistsPage": {
+  "AllChecklistsPage": {
     "title": "My checklists",
     "showMore": "Show more",
     "created": "Created",

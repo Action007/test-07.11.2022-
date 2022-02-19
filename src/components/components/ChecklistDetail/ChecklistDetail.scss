@@ -9,15 +9,19 @@
   .checklist__wrapper {
     margin-bottom: 16px;
 
+    @include media-breakpoint-down(md) {
+      padding-bottom: 0;
+    }
+
     @include media-breakpoint-down(sm) {
       margin-bottom: 30px;
+      padding-bottom: 28px;
     }
   }
 
   .checklist__wrap {
     @include media-breakpoint-down(sm) {
       align-items: flex-start;
-      flex-direction: column-reverse;
     }
   }
 
@@ -28,28 +32,44 @@
   }
 
   .checklist__button {
-    font-size: 16px;
-    padding: 8px 30px;
     border: 1px solid transparent;
-    background-color: $primary;
+    padding: 8px 30px;
+    font-size: 16px;
     color: #fff;
+    background-color: $primary;
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: 25px;
+    }
 
     @include media-breakpoint-down(sm) {
-      margin: 25px 0 0 0;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    svg {
+      stroke: #fff;
     }
 
     &:hover {
-      color: $primary;
       border-color: $primary;
+      color: $primary;
       background-color: #fff;
 
       svg {
         stroke: $primary;
       }
     }
+  }
 
-    svg {
-      stroke: #fff;
+  .checklist__box {
+    @include media-breakpoint-down(md) {
+      margin-bottom: 30px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 0;
     }
   }
 }
