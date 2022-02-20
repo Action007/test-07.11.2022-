@@ -1,6 +1,6 @@
 @import '../../../global-styles/_variables.scss';
 @import '../../../global-styles/_fonts.scss';
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .header {
   padding: 0 34px;
@@ -67,9 +67,8 @@
 
   &__burger {
     .header__span {
-      right: 0;
-      top: -6px;
-      padding: 5px 4px;
+      top: -4px;
+      padding: 4px 3px;
     }
 
     @include media-breakpoint-down(md) {
@@ -124,7 +123,7 @@
     left: 28px;
     top: 6px;
     border-radius: 50%;
-    padding: 2px 5px;
+    padding: 2px 3px;
     min-width: 18px;
     min-height: 10px;
     font-family: 'SFPro-SemiBold', sans-serif;

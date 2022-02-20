@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import uniqueID from "../../../utils/uniqueId";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
@@ -18,9 +18,17 @@ const Checklist = ({
   details = false,
 }) => {
   const { title, checklist, viewed, liked, created_at, tags } = checklists;
+  const [like, setLike] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:575px)");
   const { date, hours } = getTime(created_at);
   const moreThanFive = !details && checklist.length > 5;
+  const likeClass = `checklist__liked SFPro-700${liked ? " active" : ""}${
+    like ? " liked" : ""
+  }`;
+
+  const setLikeHandler = () => {
+    setLike((prevState) => !prevState);
+  };
 
   const time = (
     <time className="checklist__time" dateTime={date}>
@@ -115,9 +123,8 @@ const Checklist = ({
               <span>{viewed}</span>
             </span>
             <button
-              className={`${`checklist__liked SFPro-700`} ${
-                liked ? "active" : ""
-              }`}
+              onClick={setLikeHandler}
+              className={likeClass}
               type="button"
             >
               <LikeSvg />

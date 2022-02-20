@@ -1,4 +1,4 @@
-@import "../../../global-styles/_variables.scss";
+@import '../../../global-styles/_variables.scss';
 
 .checklist-review {
   margin: 0 auto;
@@ -81,6 +81,15 @@
         stroke: $primary;
       }
     }
+
+    &.liked {
+      color: #fff;
+      background-color: $primary;
+
+      svg {
+        stroke: #fff;
+      }
+    }
   }
 
   &__dislikes {
@@ -97,6 +106,15 @@
 
       svg {
         stroke: $warning;
+      }
+    }
+
+    &.disliked {
+      color: #fff;
+      background-color: $warning;
+
+      svg {
+        stroke: #fff;
       }
     }
   }
@@ -129,7 +147,7 @@
   &__dislikes {
     padding: 6px 11px;
     background-color: $secondary;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.2s ease;
 
     svg {
       margin-right: 10px;
@@ -137,7 +155,7 @@
     }
 
     &:hover {
-      box-shadow: 0 0 10px 0 #00000042;
+      box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
     }
   }
 }
