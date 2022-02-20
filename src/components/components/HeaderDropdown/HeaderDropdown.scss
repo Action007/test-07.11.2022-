@@ -13,6 +13,10 @@
     margin-right: 0;
   }
 
+  &.mobile {
+    flex-direction: column;
+  }
+
   &__button {
     display: flex;
     background-color: #fff;
@@ -27,6 +31,15 @@
       width: 100%;
       background-color: $body;
       margin: 20px 0 10px;
+    }
+
+    &.mobile {
+      margin-bottom: 0;
+      background-color: #fff;
+
+      &::after {
+        display: none;
+      }
     }
 
     &.show::after {
@@ -74,9 +87,22 @@
     overflow: hidden;
     border-radius: 8px;
     min-width: 244px;
-    box-shadow: 0 5px 5px 0 #0000001d;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
     transition: max-height 0.3s ease;
     z-index: 10;
+
+    &.mobile {
+      position: relative;
+      top: 0;
+      width: 100%;
+      border-top: 2px solid #4f4f4f1a;
+      box-shadow: none;
+      border-radius: 0;
+
+      .header-dropdown__inner {
+        padding: 10px 19px 10px 26px;
+      }
+    }
 
     svg {
       margin-right: 20px;
@@ -88,6 +114,12 @@
     align-items: center;
     padding: 18px 19px 10px 26px;
     border-bottom: 2px solid #4f4f4f1a;
+    width: 100%;
+
+    &:hover {
+      color: $primary;
+      background-color: #4f4f4f1a;
+    }
   }
 
   &__percent {
@@ -112,7 +144,7 @@
   }
 
   &__item {
-    text-align-last: left;
+    text-align: left;
     width: 100%;
     padding: 10px 19px 10px 26px;
     color: $dark;
