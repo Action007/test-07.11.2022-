@@ -20,29 +20,29 @@ const Footer = () => {
             <Link to="/">{translate("home")}</Link>
           </li>
           <li className="footer__item">
-            <Link to="Support">{translate("supportPage.title")}</Link>
+            <Link to="support">{translate("supportPage.title")}</Link>
           </li>
 
           <li className="footer__item">
-            <Link to="Popular-Checklist">
+            <Link to="popular-checklist">
               {translate("popularChecklistPage.title")}
             </Link>
           </li>
           <li className="footer__item">
-            <Link to="Privacy-Policy">
+            <Link to="privacy-policy">
               {translate("privacyPolicyPage.title")}
             </Link>
           </li>
         </ul>
         <ul className="footer__items">
           <li className="footer__item">
-            <Link to="Our-Mission">{translate("ourMissionPage.title")}</Link>
+            <Link to="our-mission">{translate("ourMissionPage.title")}</Link>
           </li>
           <li className="footer__item">
-            <Link to="Terms-Of-Use">{translate("termOfUsePage.title")}</Link>
+            <Link to="terms-of-use">{translate("termOfUsePage.title")}</Link>
           </li>
           <li className="footer__item">
-            <Link to="Contacts">{translate("contactsPage.title")}</Link>
+            <Link to="contacts">{translate("contactsPage.title")}</Link>
           </li>
         </ul>
         <Networks />

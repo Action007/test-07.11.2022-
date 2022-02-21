@@ -16,14 +16,14 @@ const ChecklistDetailPage = React.lazy(() =>
 const MyChecklistPage = React.lazy(() => import("../pages/MyChecklistPage"));
 
 const routes = [
-  { id: 1, path: "/Our-Mission", element: <OurMissionPage /> },
-  { id: 2, path: "/Terms-Of-Use", element: <TermsOfUsePage /> },
-  { id: 3, path: "/Privacy-Policy", element: <PrivacyPolicyPage /> },
-  { id: 4, path: "/Support", element: <SupportPage /> },
-  { id: 5, path: "/Contacts", element: <ContactsPage /> },
-  { id: 6, path: "/All-Checklists", element: <AllChecklistsPage /> },
-  { id: 7, path: "/Checklist-Detail", element: <ChecklistDetailPage /> },
-  { id: 8, path: "/My-Checklist", element: <MyChecklistPage /> },
+  { id: 1, path: "/our-mission", element: <OurMissionPage /> },
+  { id: 2, path: "/terms-of-use", element: <TermsOfUsePage /> },
+  { id: 3, path: "/privacy-policy", element: <PrivacyPolicyPage /> },
+  { id: 4, path: "/support", element: <SupportPage /> },
+  { id: 5, path: "/contacts", element: <ContactsPage /> },
+  { id: 6, path: "/all-checklists", element: <AllChecklistsPage /> },
+  { id: 7, path: "/checklist-detail", element: <ChecklistDetailPage /> },
+  { id: 8, path: "/my-checklist", element: <MyChecklistPage /> },
 ];
 
 export default routes;

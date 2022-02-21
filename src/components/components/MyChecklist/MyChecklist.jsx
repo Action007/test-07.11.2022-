@@ -14,7 +14,7 @@ const items = {
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
       viewed: 100,
       liked: 5,
-      created_at: "2020-10-22T00:00:00",
+      created_at: "2020-10-12T00:00:00",
       tags: ["tag1", "tag2", "tag3", "tag4", "tag5"],
       checklist: [
         {
@@ -59,7 +59,7 @@ const items = {
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
       viewed: 100,
       liked: 5,
-      created_at: "2020-10-22T00:00:00",
+      created_at: "2020-10-20T00:00:00",
       tags: ["tag1", "tag2", "tag3", "tag4", "tag5"],
       checklist: [
         {

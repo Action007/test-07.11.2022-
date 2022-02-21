@@ -20,7 +20,7 @@ const Checklist = ({
   const { title, checklist, viewed, liked, created_at, tags } = checklists;
   const [like, setLike] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:575px)");
-  const { date, hours } = getTime(created_at);
+  const { date } = getTime(created_at);
   const moreThanFive = !details && checklist.length > 5;
   const likeClass = `checklist__liked SFPro-700${liked ? " active" : ""}${
     like ? " liked" : ""
@@ -33,7 +33,6 @@ const Checklist = ({
   const time = (
     <time className="checklist__time" dateTime={date}>
       <span className="checklist__date">{date}</span>
-      <span className="checklist__hours">{hours}</span>
     </time>
   );
 
@@ -41,7 +40,6 @@ const Checklist = ({
     <div className="checklist__head">
       <time className="checklist__time" dateTime={date}>
         <span className="checklist__date">{date}</span>
-        <span className="checklist__hours">{hours}</span>
       </time>
       <div className="checklist__buttons">
         <button className="checklist__bookmark" type="button">
