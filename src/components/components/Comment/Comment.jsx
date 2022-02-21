@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Comment.scss";
 
 import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg";
 
@@ -17,15 +18,15 @@ const Comment = ({ date, nickname, message, likes, dislikes }) => {
   };
 
   return (
-    <li className="checklist-review__item">
-      <div className="checklist-review__heading">
-        <span className="checklist-review__heading SFPro-600">{nickname}</span>
-        <span className="checklist-review__time">{date}</span>
+    <li className="checklist-comment">
+      <div className="checklist-comment__heading">
+        <span className="checklist-comment__heading SFPro-600">{nickname}</span>
+        <span className="checklist-comment__time">{date}</span>
       </div>
-      <p className="checklist-review__text">{message}</p>
+      <p className="checklist-comment__text">{message}</p>
       <button
         onClick={setLikeHandler}
-        className={`${`checklist-review__likes SFPro-700`}${
+        className={`${`checklist-comment__likes SFPro-700`}${
           likes ? " active" : ""
         }${like ? " liked" : ""}`}
         type="button"
@@ -35,7 +36,7 @@ const Comment = ({ date, nickname, message, likes, dislikes }) => {
       </button>
       <button
         onClick={setDislikeHandler}
-        className={`${`checklist-review__dislikes SFPro-700`}${
+        className={`${`checklist-comment__dislikes SFPro-700`}${
           dislikes ? " active" : ""
         }${dislike ? " disliked" : ""}`}
         type="button"

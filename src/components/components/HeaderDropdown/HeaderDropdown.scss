@@ -31,6 +31,7 @@
       width: 100%;
       background-color: $body;
       margin: 20px 0 10px;
+      padding: 6px 0;
     }
 
     &.mobile {
@@ -101,6 +102,10 @@
 
       .header-dropdown__inner {
         padding: 10px 19px 10px 26px;
+
+        @include media-breakpoint-down(md) {
+          padding: 10px 0;
+        }
       }
     }
 
@@ -149,6 +154,10 @@
     padding: 10px 19px 10px 26px;
     color: $dark;
 
+    @include media-breakpoint-down(md) {
+      padding: 10px 0;
+    }
+
     &:hover {
       color: $dark;
       background-color: #4f4f4f1a;
@@ -178,11 +187,16 @@
       content: '';
       position: absolute;
       left: 37px;
-      top: 13px;
+      top: 11px;
       border-radius: 50%;
       width: 8px;
       height: 8px;
       background-color: $warning;
+
+      @include media-breakpoint-down(md) {
+        left: 11px;
+        top: 11px;
+      }
     }
 
     svg {

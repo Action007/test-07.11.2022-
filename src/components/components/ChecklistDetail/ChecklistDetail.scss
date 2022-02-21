@@ -2,54 +2,175 @@
 @import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .checklist-detail {
-  .checklist {
-    margin-bottom: 0;
+  margin: 0 auto 16px;
+  width: 100%;
+  max-width: 834px;
+  position: relative;
+  border-radius: 8px;
+  padding: 34px 34px 32px;
+  width: 100%;
+  background-color: #fff;
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 12px;
+    padding: 30px 19px 30px;
   }
 
-  .checklist__wrapper {
-    margin-bottom: 16px;
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+
+    @include media-breakpoint-down(sm) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__created {
+    @include media-breakpoint-down(sm) {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  &__saved {
+    @include media-breakpoint-down(sm) {
+      display: block;
+    }
+  }
+
+  &__head {
+    @include media-breakpoint-down(sm) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__title {
+    margin-bottom: 18px;
+    font-size: 1.5rem;
+    padding-right: 25px;
 
     @include media-breakpoint-down(md) {
-      padding-bottom: 0;
+      font-size: 1.3rem;
     }
 
     @include media-breakpoint-down(sm) {
-      margin-bottom: 30px;
-      padding-bottom: 28px;
+      margin: 21px 0;
+      font-size: 1rem;
+      padding-right: 0;
     }
   }
 
-  .checklist__wrap {
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include media-breakpoint-down(sm) {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &__bookmark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 28px;
+    border-radius: 8px;
+    width: 39px;
+    height: 39px;
+    background-color: $secondary;
+    transition: box-shadow 0.2s ease;
+
+    svg {
+      width: 16px;
+      height: 18px;
+      stroke: $primary;
+    }
+
+    &:hover {
+      box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin: 0 0 0 21px;
+    }
+  }
+
+  &__items {
+    margin-bottom: 34px;
+  }
+
+  &__item {
+    line-height: 1.2;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__show {
+    position: relative;
+    margin-left: 3px;
+    color: $primary;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: $primary;
+      transform: translateX(-50%);
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media-breakpoint-down(md) {
+      flex-wrap: wrap-reverse;
+      align-items: flex-start;
+    }
+
     @include media-breakpoint-down(sm) {
       align-items: flex-start;
     }
   }
 
-  .checklist__tags {
-    @include media-breakpoint-down(sm) {
-      margin-bottom: 18px;
-    }
+  &__box {
+    display: flex;
+    align-items: center;
   }
 
-  .checklist__button {
+  &__button {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-right: 10px;
     border: 1px solid transparent;
     padding: 8px 30px;
     font-size: 16px;
     color: #fff;
     background-color: $primary;
 
-    @include media-breakpoint-down(md) {
-      margin-bottom: 25px;
-    }
-
     @include media-breakpoint-down(sm) {
       justify-content: center;
       width: 100%;
-      margin-bottom: 0;
+    }
+
+    span {
+      margin-right: 9px;
     }
 
     svg {
       stroke: #fff;
+      transition: transform 0.3s ease;
     }
 
     &:hover {
@@ -58,18 +179,112 @@
       background-color: #fff;
 
       svg {
+        transform: translateX(3px);
         stroke: $primary;
       }
     }
   }
 
-  .checklist__box {
-    @include media-breakpoint-down(md) {
-      margin-bottom: 30px;
-    }
+  &__tags {
+    margin-bottom: 28px;
 
     @include media-breakpoint-down(sm) {
-      margin-bottom: 0;
+      margin-bottom: 15px;
+    }
+  }
+
+  &__tag {
+    display: inline-block;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    padding: 4px 8px;
+    background-color: $secondary;
+
+    @include media-breakpoint-down(sm) {
+      padding: 2px 6px;
+    }
+
+    &:not(:last-child) {
+      margin-right: 4px;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    margin-right: 25px;
+
+    @include media-breakpoint-down(sm) {
+      margin-right: 0;
+      margin-bottom: 25px;
+    }
+  }
+
+  &__viewed {
+    margin-right: 8px;
+    border-radius: 8px;
+    color: $dark;
+    background-color: $secondary;
+
+    svg {
+      stroke: $dark;
+    }
+
+    &.active {
+      color: #6d9aff;
+      background-color: #407bff1a;
+
+      svg {
+        stroke: #6d9aff;
+      }
+    }
+  }
+
+  &__liked {
+    border-radius: 8px;
+    color: $dark;
+    background-color: $secondary;
+    transition: box-shadow 0.2s ease;
+
+    svg {
+      stroke: $dark;
+    }
+
+    &:hover {
+      box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+    }
+
+    &.active {
+      color: $primary;
+      background-color: #65c17e1a;
+
+      svg {
+        stroke: $primary;
+      }
+    }
+
+    &.liked {
+      color: #fff;
+      background-color: $primary;
+
+      svg {
+        stroke: #fff;
+      }
+    }
+  }
+
+  &__time {
+    display: block;
+    color: $light;
+  }
+
+  &__liked,
+  &__viewed {
+    display: flex;
+    align-items: center;
+    padding: 6px 11px;
+
+    svg {
+      margin-right: 10px;
     }
   }
 }

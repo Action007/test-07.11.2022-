@@ -61,7 +61,7 @@ const Header = () => {
             {!showSearchOnMobile && <SearchInput />}
             {!showAddButtonOnMobile && (
               <>
-                <Link className="header__progress" to="/Active-Checklists">
+                <Link className="header__progress" to="/my-active-checklists">
                   <ProgressBarHeader done={29} />
                 </Link>
                 <Button className="header__bookmark">

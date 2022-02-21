@@ -1,62 +1,174 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import getTime from "../../../utils/getTime";
-import uniqueID from "../../../utils/uniqueId";
-import "./ChecklistReview.scss";
+import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import ChecklistComments from "../ChecklistComments/ChecklistComments";
+import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
 
-import { ReactComponent as ArrowSvg } from "../../../assets/images/icon/rightArrow.svg";
-import Comment from "../Comment/Comment";
+const items = {
+  title:
+    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
+  viewed: 100,
+  liked: 5,
+  created_at: "2020-10-22T00:00:00",
+  tags: ["tag1", "tag2", "tag3", "tag4", "tag5"],
+  checklist: [
+    {
+      type: "Aenean massa.",
+      description: "text 1",
+      value: "",
+    },
+    {
+      type: "Cum sociis natoque penatibus et magnis.",
+      description: "text 2",
+      value: "",
+    },
+    {
+      type: "Dis parturient montes, nascetur ridiculus mus.",
+      description: "text 3",
+      value: "",
+    },
+    {
+      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium.",
+      description: "text 4",
+      value: "",
+    },
+    {
+      type: "Dis parturient montes, nascetur ridiculus mus.",
+      description: "text 5",
+      value: "",
+    },
+    {
+      type: "Pellentesque eu, pretium.",
+      description: "text 6",
+      value: "",
+    },
+    {
+      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium",
+      description: "text 7",
+      value: "",
+    },
+    {
+      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium",
+      description: "text 8",
+      value: "",
+    },
+    {
+      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium",
+      description: "text 9",
+      value: "",
+    },
+    {
+      type: "Pellentesque eu, pretium",
+      description: "text 10",
+      value: "",
+    },
+  ],
+  comments: [
+    {
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+      likes: 2,
+      dislikes: 10,
+      user: {
+        id: 5,
+        nickname: "Alex67",
+        created_at: "2020-10-22T00:00:00",
+      },
+    },
+    {
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      likes: 2,
+      dislikes: 10,
+      user: {
+        id: 5,
+        nickname: "Alex67",
+        created_at: "2020-10-22T00:00:00",
+      },
+    },
+    {
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      likes: 2,
+      dislikes: 10,
+      user: {
+        id: 5,
+        nickname: "Alex67",
+        created_at: "2020-10-22T00:00:00",
+      },
+    },
+    {
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      likes: 2,
+      dislikes: 10,
+      user: {
+        id: 5,
+        nickname: "Alex67",
+        created_at: "2020-10-22T00:00:00",
+      },
+    },
+    {
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      likes: 2,
+      dislikes: 10,
+      user: {
+        id: 5,
+        nickname: "Alex67",
+        created_at: "2020-10-22T00:00:00",
+      },
+    },
+    {
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      likes: 2,
+      dislikes: 10,
+      user: {
+        id: 5,
+        nickname: "Alex67",
+        created_at: "2020-10-22T00:00:00",
+      },
+    },
+    {
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      likes: 2,
+      dislikes: 10,
+      user: {
+        id: 5,
+        nickname: "Alex67",
+        created_at: "2020-10-22T00:00:00",
+      },
+    },
+    {
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      likes: 0,
+      dislikes: 0,
+      user: {
+        id: 5,
+        nickname: "Alex67",
+        created_at: "2020-10-22T00:00:00",
+      },
+    },
+  ],
+};
 
-const ChecklistReview = ({ comments }) => {
-  const [showComments, setShowComments] = useState(false);
-  const [data, setData] = useState(comments.slice(0, 3));
+const ChecklistReview = () => {
+  const [data] = useState(items);
   const { t: translate } = useTranslation();
 
-  const showCommentHandler = () => {
-    setShowComments(true);
-    setData(comments);
-  };
+  const breadcrumbs = [{ title: translate("checklistReviewPage.title") }];
 
   return (
-    <div className="checklist-review">
-      <span className="checklist-review__review SFPro-600">
-        {comments.length} Reviews
-      </span>
-      <form className="checklist-review__form">
-        <label className="checklist-review__label" htmlFor="checklistReview">
-          <input
-            className="checklist-review__input"
-            id="checklistReview"
-            type="text"
-            placeholder="Leave a comment..."
-          />
-        </label>
-      </form>
-      <ul className="checklist-review__items">
-        {data.map((comment) => {
-          const { date } = getTime(comment.user.created_at);
-          return (
-            <Comment
-              key={uniqueID()}
-              date={date}
-              nickname={comment.user.nickname}
-              message={comment.message}
-              likes={comment.likes}
-              dislikes={comment.dislikes}
-            />
-          );
-        })}
-      </ul>
-      {!showComments && (
-        <button
-          onClick={showCommentHandler}
-          className="checklist-review__button SFPro-500"
-          type="button"
-        >
-          <ArrowSvg />
-          {translate("checklistDetailPage.moreComments")}
-        </button>
-      )}
+    <div className="pb-7">
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <ChecklistDetail
+        checklists={data}
+        translate={translate("checklistReviewPage.button")}
+      />
+      <ChecklistComments comments={data.comments} />
     </div>
   );
 };

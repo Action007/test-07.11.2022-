@@ -10,10 +10,15 @@ const ContactsPage = React.lazy(() => import("../pages/ContactsPage"));
 const AllChecklistsPage = React.lazy(() =>
   import("../pages/AllChecklistsPage")
 );
-const ChecklistDetailPage = React.lazy(() =>
-  import("../pages/ChecklistDetailPage")
+const ChecklistReviewPage = React.lazy(() =>
+  import("../pages/ChecklistReviewPage")
 );
-const MyChecklistPage = React.lazy(() => import("../pages/MyChecklistPage"));
+const MyActiveChecklistsPage = React.lazy(() =>
+  import("../pages/MyActiveChecklistsPage")
+);
+const ActiveChecklistPage = React.lazy(() =>
+  import("../pages/ActiveChecklistPage")
+);
 
 const routes = [
   { id: 1, path: "/our-mission", element: <OurMissionPage /> },
@@ -22,8 +27,9 @@ const routes = [
   { id: 4, path: "/support", element: <SupportPage /> },
   { id: 5, path: "/contacts", element: <ContactsPage /> },
   { id: 6, path: "/all-checklists", element: <AllChecklistsPage /> },
-  { id: 7, path: "/checklist-detail", element: <ChecklistDetailPage /> },
-  { id: 8, path: "/my-checklist", element: <MyChecklistPage /> },
+  { id: 7, path: "/checklist-review", element: <ChecklistReviewPage /> },
+  { id: 8, path: "/my-active-checklists", element: <MyActiveChecklistsPage /> },
+  { id: 9, path: "/active-checklist", element: <ActiveChecklistPage /> },
 ];
 
 export default routes;

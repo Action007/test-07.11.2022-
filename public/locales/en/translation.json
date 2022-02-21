@@ -1,5 +1,9 @@
 {
+  "checklists": "Active checklist",
   "home": "Home",
+  "progress": "Your checklist is",
+  "complete": "complete",
+  "finish": "Finish",
   "header": {
     "activeChecklist": "Active checklist",
     "create": "Create",
@@ -82,15 +86,22 @@
   "popularChecklistPage": {
     "title": "Popular checklist"
   },
-  "AllChecklistsPage": {
+  "allChecklistsPage": {
     "title": "All checklists",
     "showMore": "Show more",
     "created": "Created",
     "liked": "Liked",
     "saved": "Saved"
   },
-  "checklistDetailPage": {
+  "checklistReviewPage": {
+    "title": "Checklist Detail",
     "button": "Start to pass",
     "moreComments": "Show more comments"
+  },
+  "myActiveChecklists": {
+    "title": "My active checklists",
+    "active": "Active",
+    "passed": "Passed",
+    "showMore": "Show more"
   }
 }

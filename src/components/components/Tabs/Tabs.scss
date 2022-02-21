@@ -21,13 +21,14 @@
     border-radius: 6px;
     padding: 11px 45px;
     font-size: 1.125rem;
+    background-color: #65c17e1a;
 
     &:not(:last-child) {
       margin-right: 6px;
     }
 
     &:hover {
-      background-color: #65c17e1a;
+      color: $primary;
     }
 
     &.active {

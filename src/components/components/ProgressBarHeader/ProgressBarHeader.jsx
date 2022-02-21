@@ -1,17 +1,17 @@
 import React from "react";
 import "./ProgressBarHeader.scss";
 
-const ProgressBarHeader = ({ done = 0 }) => {
+const ProgressBarHeader = ({ done }) => {
   return (
-    <div className="progressBar">
+    <div className="progressBar-header">
       <div
-        className="progressBar__done"
+        className="progressBar-header__done"
         style={{
           opacity: 1,
           width: `${done}%`,
         }}
       >
-        <span className="progressBar__text">Active checklist</span>
+        <span className="progressBar-header__text">Active checklist</span>
       </div>
     </div>
   );

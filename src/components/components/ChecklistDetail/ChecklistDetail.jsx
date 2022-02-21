@@ -1,178 +1,91 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import Checklist from "../Checklist/Checklist";
-import ChecklistReview from "../ChecklistReview/ChecklistReview";
+import uniqueID from "../../../utils/uniqueId";
+import getTime from "../../../utils/getTime";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./ChecklistDetail.scss";
 
-const items = {
-  title:
-    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
-  viewed: 100,
-  liked: 5,
-  created_at: "2020-10-22T00:00:00",
-  tags: ["tag1", "tag2", "tag3", "tag4", "tag5"],
-  checklist: [
-    {
-      type: "Aenean massa.",
-      description: "text 1",
-      value: "",
-    },
-    {
-      type: "Cum sociis natoque penatibus et magnis.",
-      description: "text 2",
-      value: "",
-    },
-    {
-      type: "Dis parturient montes, nascetur ridiculus mus.",
-      description: "text 3",
-      value: "",
-    },
-    {
-      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium.",
-      description: "text 4",
-      value: "",
-    },
-    {
-      type: "Dis parturient montes, nascetur ridiculus mus.",
-      description: "text 5",
-      value: "",
-    },
-    {
-      type: "Pellentesque eu, pretium.",
-      description: "text 6",
-      value: "",
-    },
-    {
-      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium",
-      description: "text 7",
-      value: "",
-    },
-    {
-      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium",
-      description: "text 8",
-      value: "",
-    },
-    {
-      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium",
-      description: "text 9",
-      value: "",
-    },
-    {
-      type: "Pellentesque eu, pretium",
-      description: "text 10",
-      value: "",
-    },
-  ],
-  comments: [
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 0,
-      dislikes: 0,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-  ],
-};
+import { ReactComponent as RightArrow } from "../../../assets/images/icon/arrow.svg";
+import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg";
+import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg";
+import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
+import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
-const ChecklistDetail = () => {
-  const [data] = useState(items);
-  const { t: translate } = useTranslation();
+const ChecklistDetail = ({ checklists, translate }) => {
+  const { title, checklist, viewed, liked, created_at, tags } = checklists;
+  const [like, setLike] = useState(false);
+  const showOnMobile = useMediaQuery("(max-width:575px)");
+  const { date } = getTime(created_at);
+  const likeClass = `checklist-detail__liked SFPro-700${
+    liked ? " active" : ""
+  }${like ? " liked" : ""}`;
 
-  const breadcrumbs = [{ title: "Checklist-Detail" }];
+  const setLikeHandler = () => {
+    setLike((prevState) => !prevState);
+  };
+
+  const time = (
+    <time className="checklist-detail__time" dateTime={date}>
+      <span className="checklist-detail__date">{date}</span>
+    </time>
+  );
 
   return (
-    <div className="checklist-detail pb-7">
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <div className="checklist">
-        <Checklist
-          checklists={data}
-          translate={translate("checklistDetailPage.button")}
-          details
-        />
+    <div className="checklist-detail">
+      <div className="checklist-detail__heading">
+        <h3 className="checklist-detail__title SFPro-700">{title}</h3>
+        <div className="checklist-detail__head">
+          {showOnMobile && time}
+          <div className="checklist-detail__buttons">
+            <button className="checklist-detail__bookmark" type="button">
+              <Bookmark />
+            </button>
+            <button className="checklist-detail__info" type="button">
+              <InfoSvg />
+            </button>
+          </div>
+        </div>
       </div>
-      <ChecklistReview comments={data.comments} />
+      <ol className="checklist-detail__items">
+        {checklist.map(({ type }) => (
+          <li className="checklist-detail__item" key={uniqueID()}>
+            {type}
+          </li>
+        ))}
+      </ol>
+      <div className="checklist-detail__tags">
+        {tags.map((tag) => (
+          <span className="checklist-detail__tag" key={uniqueID()}>
+            {tag}
+          </span>
+        ))}
+      </div>
+      <div className="checklist-detail__wrap">
+        <button className="checklist-detail__button SFPro-600" type="button">
+          <span>{translate}</span>
+          <RightArrow />
+        </button>
+        <div className="checklist-detail__box">
+          <div className="checklist-detail__inner">
+            <span
+              className={`${`checklist-detail__viewed SFPro-700`} ${
+                viewed ? "active" : ""
+              }`}
+            >
+              <ViewSvg />
+              <span>{viewed}</span>
+            </span>
+            <button
+              onClick={setLikeHandler}
+              className={likeClass}
+              type="button"
+            >
+              <LikeSvg />
+              <span>{liked}</span>
+            </button>
+          </div>
+          {!showOnMobile && time}
+        </div>
+      </div>
     </div>
   );
 };
