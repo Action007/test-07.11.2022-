@@ -4,7 +4,7 @@
   position: absolute;
   right: 15px;
   top: 20px;
-  
+
   &__button {
     display: flex;
     align-items: center;
@@ -62,9 +62,8 @@
   }
 
   &__edit {
-    padding: 15px 30px 15px 50px;
+    padding: 10px 30px 10px 50px;
     border-bottom: 2px solid #4f4f4f1a;
-
     &::before {
       background-image: url('../../../assets/images/icon/edit.svg');
       transform: translateY(-50%);
@@ -72,7 +71,7 @@
   }
 
   &__delete {
-    padding: 15px 30px 18px 50px;
+    padding: 10px 30px 10px 50px;
 
     &::before {
       background-image: url('../../../assets/images/icon/delete.svg');
