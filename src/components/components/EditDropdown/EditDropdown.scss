@@ -47,18 +47,6 @@
       width: 100%;
       text-align: left;
 
-      &::before {
-        position: absolute;
-        content: '';
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        width: 15px;
-        height: 15px;
-        left: 18px;
-        top: 50%;
-      }
-
       &:hover {
         background-color: #4f4f4f1a;
         border-color: transparent;
@@ -67,20 +55,28 @@
   }
 
   &__edit {
-    padding: 10px 30px 10px 50px;
+    display: flex;
+    align-items: center;
+    padding: 10px 30px 10px 25px;
     border-bottom: 2px solid #4f4f4f1a;
-    &::before {
-      background-image: url('../../../assets/images/icon/edit.svg');
-      transform: translateY(-50%);
+
+    svg {
+      margin-right: 15px;
+      width: 18px;
+      height: 18px;
+      fill: $dark;
     }
   }
 
   &__delete {
-    padding: 10px 30px 10px 50px;
+    display: flex;
+    padding: 10px 30px 10px 25px;
 
-    &::before {
-      background-image: url('../../../assets/images/icon/delete.svg');
-      transform: translateY(-60%);
+    svg {
+      margin-right: 15px;
+      width: 18px;
+      height: 18px;
+      stroke: $dark;
     }
   }
 }
