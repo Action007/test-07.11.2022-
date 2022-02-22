@@ -1,5 +1,6 @@
 {
   "checklists": "Active checklist",
+  "share": "Share",
   "home": "Home",
   "progress": "Your checklist is",
   "complete": "complete",
@@ -11,6 +12,11 @@
     "profileSettings": "Profile settings",
     "accountSettings": "Account settings",
     "logOut": "Log Out"
+  },
+  "popupDone": {
+    "title": "Your checklist completed successfully!",
+    "text": "Browse more checklists and receive awards for this.",
+    "button": "Сontinue"
   },
   "supportPage": {
     "title": "Support",
