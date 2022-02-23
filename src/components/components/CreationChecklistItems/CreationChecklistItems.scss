@@ -1,0 +1,48 @@
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+
+.creation-item {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 15px;
+  
+  &__name {
+    max-width: 650px;
+    width: 100%;
+    height: 54px;
+
+    @include media-breakpoint-down(xl) {
+      max-width: 100%;
+    }
+    
+    input {
+      color: $dark;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      width: 100%;
+      height: 100%;
+      outline: transparent;
+      padding: 0 15px;
+      
+      &:focus {
+        border-color: $primary;
+        color: #000;
+        font-family: 'SFPro-Medium', sans-serif;
+      }
+    }
+  }
+
+  &__number {
+    display: flex;
+    align-items: center;
+    margin-right: 13px;
+    font-size: 22px;
+    
+    svg {
+      margin-right: 15px;
+      width: 16px;
+      height: 23px;
+    }
+  }
+}

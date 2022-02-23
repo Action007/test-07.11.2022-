@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import CreationChecklistItems from "../CreationChecklistItems/CreationChecklistItems";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import uniqueID from "../../../utils/uniqueId";
 import "./CreationOfChecklist.scss";
 
 import { ReactComponent as CreationImg } from "../../../assets/images/content/creationChecklist.svg";
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
 import { ReactComponent as PlusSvg } from "../../../assets/images/icon/plusTags.svg";
-import uniqueID from "../../../utils/uniqueId";
 
 const CreationOfChecklist = () => {
+  const [checklistItems, setChecklistItems] = useState([]);
   const [tags, setTags] = useState([]);
   const [addTags, setAddTags] = useState(false);
   const inputTag = useRef();
@@ -30,6 +32,28 @@ const CreationOfChecklist = () => {
 
   const setAddTagsHandler = () => {
     setAddTags((prevState) => !prevState);
+  };
+
+  const addChecklistHandler = () => {
+    setChecklistItems([...checklistItems, { id: uniqueID(), description: "" }]);
+  };
+
+  const changeChecklistDescHandler = (value, id) => {
+    setChecklistItems(
+      checklistItems.map((item) =>
+        item.id === id ? { ...item, description: value } : item
+      )
+    );
+  };
+
+  const onDragEndHandler = (result) => {
+    if (!result.destination) return;
+
+    const items = [...checklistItems];
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setChecklistItems(items);
   };
 
   useEffect(() => {
@@ -92,11 +116,20 @@ const CreationOfChecklist = () => {
                 </h3>
                 {translate("creationOfChecklist.text")}
               </div>
-              <button className="creation__add SFPro-600" type="button">
+              <button
+                onClick={addChecklistHandler}
+                className="creation__add SFPro-600"
+                type="button"
+              >
                 <AddItemSvg />
                 {translate("creationOfChecklist.addBtn")}
               </button>
             </div>
+            <CreationChecklistItems
+              checklistItems={checklistItems}
+              changeChecklistDescHandler={changeChecklistDescHandler}
+              onDragEndHandler={onDragEndHandler}
+            />
             <h3 className="creation__head SFPro-700">
               {translate("creationOfChecklist.tags")}
             </h3>
