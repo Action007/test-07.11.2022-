@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
   const breadcrumbs = [{ title: translate("privacyPolicyPage.title") }];
 
   return (
-    <div className="policy pb-7">
+    <div className="policy pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrapper">
         <h2 className="mb-5 display-4 text-center SFPro-600">

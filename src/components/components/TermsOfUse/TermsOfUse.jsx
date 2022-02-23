@@ -11,7 +11,7 @@ const TermOfUse = () => {
   const breadcrumbs = [{ title: translate("termOfUsePage.title") }];
 
   return (
-    <div className="term pb-7">
+    <div className="term pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrapper">
         <h2 className="mb-5 display-4 text-center SFPro-600">

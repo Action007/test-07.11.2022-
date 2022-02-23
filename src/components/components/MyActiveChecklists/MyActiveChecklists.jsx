@@ -29,13 +29,14 @@ const MyActiveChecklists = () => {
       const responseData = await response.json();
 
       setCheckLists(responseData.entities);
+      console.log(responseData.entities);
     };
 
     getProducts();
   }, []);
 
   return (
-    <div className="pb-7">
+    <div className="pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrap">
         <h2 className="mb-5 display-4 text-center SFPro-600">

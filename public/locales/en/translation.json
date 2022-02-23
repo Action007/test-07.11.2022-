@@ -109,5 +109,19 @@
     "active": "Active",
     "passed": "Passed",
     "showMore": "Show more"
+  },
+  "creationOfChecklist": {
+    "title": "Сreation of checklisit",
+    "name": "Name checklist",
+    "max": "Maximum 150 characters",
+    "passed": "Passed",
+    "points": "Сhecklist points",
+    "text": "Include all the information someone might need to make your checklist popular.",
+    "addBtn": "Add item",
+    "tags": "Tags",
+    "desc": "Add up to 3-5 tags to describe what your checlist is about",
+    "addTags": "Add tag",
+    "preview": "Preview",
+    "publish": "Publish"
   }
 }

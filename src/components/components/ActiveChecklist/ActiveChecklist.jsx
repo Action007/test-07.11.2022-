@@ -26,7 +26,7 @@ const ActiveChecklist = () => {
   const doneChecklistsHandler = () => setModalShow(true);
 
   return (
-    <div className="pb-7">
+    <div className="pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <h2 className="mb-5 display-4 text-center SFPro-600">
         {translate("checklists")}

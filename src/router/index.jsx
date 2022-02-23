@@ -19,6 +19,9 @@ const MyActiveChecklistsPage = React.lazy(() =>
 const ActiveChecklistPage = React.lazy(() =>
   import("../pages/ActiveChecklistPage")
 );
+const CreationOfChecklistPage = React.lazy(() =>
+  import("../pages/CreationOfChecklistPage")
+);
 
 const routes = [
   { id: 1, path: "/our-mission", element: <OurMissionPage /> },
@@ -30,6 +33,11 @@ const routes = [
   { id: 7, path: "/checklist-review", element: <ChecklistReviewPage /> },
   { id: 8, path: "/my-active-checklists", element: <MyActiveChecklistsPage /> },
   { id: 9, path: "/active-checklist", element: <ActiveChecklistPage /> },
+  {
+    id: 10,
+    path: "/creation-of-checklist",
+    element: <CreationOfChecklistPage />,
+  },
 ];
 
 export default routes;
