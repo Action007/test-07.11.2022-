@@ -1,59 +1,38 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import CreationChecklistItems from "../CreationChecklistItems/CreationChecklistItems";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import uniqueID from "../../../utils/uniqueId";
 import "./CreationOfChecklist.scss";
 
 import { ReactComponent as CreationImg } from "../../../assets/images/content/creationChecklist.svg";
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
 import { ReactComponent as PlusSvg } from "../../../assets/images/icon/plusTags.svg";
+import { createChecklistActions } from "../../../store/createChecklistSlice";
 
 const CreationOfChecklist = () => {
-  const [checklistItems, setChecklistItems] = useState([]);
-  const [tags, setTags] = useState([]);
+  const dispatch = useDispatch();
+  const checklists = useSelector((state) => state.createChecklist.checklists);
+  const tags = useSelector((state) => state.createChecklist.tags);
   const [addTags, setAddTags] = useState(false);
   const inputTag = useRef();
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("creationOfChecklist.title") }];
 
-  const addTagHandler = () => {
-    const elem = inputTag.current.value;
-    const addOrNot = tags.find((tag) => tag.name === elem);
-    if (!addOrNot) {
-      setTags([...tags, { id: uniqueID(), name: inputTag.current.value }]);
-      setAddTags(false);
-    }
-  };
-
-  const removeTagHandler = (id) => {
-    setTags(tags.filter((tag) => tag.id !== id));
-  };
-
   const setAddTagsHandler = () => {
     setAddTags((prevState) => !prevState);
   };
 
-  const addChecklistHandler = () => {
-    setChecklistItems([...checklistItems, { id: uniqueID(), description: "" }]);
-  };
+  const addTagHandler = (e) => {
+    if (e.key !== "Enter") return;
 
-  const changeChecklistDescHandler = (value, id) => {
-    setChecklistItems(
-      checklistItems.map((item) =>
-        item.id === id ? { ...item, description: value } : item
-      )
-    );
-  };
+    const name = inputTag.current.value;
+    const addOrNot = tags.find((tag) => tag.name === name);
 
-  const onDragEndHandler = (result) => {
-    if (!result.destination) return;
+    if (addOrNot) return;
 
-    const items = [...checklistItems];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    setChecklistItems(items);
+    dispatch(createChecklistActions.addTag(name));
+    setAddTags(false);
   };
 
   useEffect(() => {
@@ -66,7 +45,7 @@ const CreationOfChecklist = () => {
     (addTags ? (
       <label className="creation__create" htmlFor="creationAdd">
         <input
-          onKeyPress={(e) => e.key === "Enter" && addTagHandler()}
+          onKeyPress={(e) => addTagHandler(e)}
           className="creation__create input"
           ref={inputTag}
           id="creationAdd"
@@ -117,7 +96,7 @@ const CreationOfChecklist = () => {
                 {translate("creationOfChecklist.text")}
               </div>
               <button
-                onClick={addChecklistHandler}
+                onClick={() => dispatch(createChecklistActions.addChecklist())}
                 className="creation__add SFPro-600"
                 type="button"
               >
@@ -125,11 +104,7 @@ const CreationOfChecklist = () => {
                 {translate("creationOfChecklist.addBtn")}
               </button>
             </div>
-            <CreationChecklistItems
-              checklistItems={checklistItems}
-              changeChecklistDescHandler={changeChecklistDescHandler}
-              onDragEndHandler={onDragEndHandler}
-            />
+            <CreationChecklistItems checklistItems={checklists} />
             <h3 className="creation__head SFPro-700">
               {translate("creationOfChecklist.tags")}
             </h3>
@@ -140,7 +115,9 @@ const CreationOfChecklist = () => {
               {tags.map((tag) => (
                 <button
                   key={tag.id}
-                  onClick={() => removeTagHandler(tag.id)}
+                  onClick={() =>
+                    dispatch(createChecklistActions.removeTag(tag.id))
+                  }
                   className="creation__create tag"
                   type="button"
                 >

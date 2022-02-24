@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .checklist-checkbox {
   line-height: 1.2;
@@ -13,8 +13,8 @@
   }
 
   &__label {
-    display: flex;
     position: relative;
+    display: flex;
     padding-left: 2px;
     cursor: pointer;
     -webkit-user-select: none;
@@ -24,31 +24,36 @@
 
     input {
       position: absolute;
+      width: 0;
+      height: 0;
       opacity: 0;
       cursor: pointer;
-      height: 0;
-      width: 0;
     }
   }
 
   &__checkmark {
     position: absolute;
-    top: -2px;
     left: -30px;
-    height: 20px;
-    width: 20px;
+    top: -2px;
     margin-right: 5px;
-    background-color: transparent;
-    background-image: url('../../../assets/images/icon/checkbox.svg');
-    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    background-image: url("../../../assets/images/icon/checkbox.svg");
     background-position: center;
     background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
 
-    &:after {
-      content: '';
+    &::after {
+      content: "";
       position: absolute;
       display: none;
     }
+  }
+
+  &__label input:checked ~ p {
+    text-decoration: line-through;
+    color: $primary;
   }
 
   &__label:hover input ~ &__checkmark {
@@ -56,30 +61,25 @@
   }
 
   &__label input:checked ~ &__checkmark {
-    background-image: url('../../../assets/images/icon/checkboxActive.svg');
+    background-image: url("../../../assets/images/icon/checkboxActive.svg");
   }
 
-  &__label input:checked ~ &__checkmark:after {
+  &__label input:checked ~ &__checkmark::after {
     display: block;
-  }
-
-  &__label input:checked ~ p {
-    color: $primary;
-    text-decoration: line-through;
   }
 
   &__label input:checked ~ &__number {
     color: $primary;
   }
 
-  &__label &__checkmark:after {
+  &__label &__checkmark::after {
     right: 4px;
     top: 4px;
     width: 12px;
     height: 12px;
-    background-image: url('../../../assets/images/icon/tick.svg');
-    background-repeat: no-repeat;
+    background-image: url("../../../assets/images/icon/tick.svg");
     background-position: center;
     background-size: contain;
+    background-repeat: no-repeat;
   }
 }

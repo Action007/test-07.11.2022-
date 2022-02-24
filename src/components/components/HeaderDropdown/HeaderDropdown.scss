@@ -1,6 +1,6 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../global-styles/_fonts.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../global-styles/_fonts.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .header-dropdown {
   position: relative;
@@ -9,29 +9,29 @@
   margin-right: 24px;
   color: $primary;
 
-  @include media-breakpoint-down(md) {
-    margin-right: 0;
-  }
-
-  &.mobile {
-    flex-direction: column;
-  }
-
   &__button {
-    display: flex;
-    background-color: #fff;
-    align-items: center;
-    color: $dark;
-    border-radius: 8px;
     position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
     padding: 6px 42px 6px 14px;
     height: 52px;
+    color: $dark;
+    background-color: #fff;
 
-    @include media-breakpoint-down(md) {
-      width: 100%;
-      background-color: $body;
-      margin: 20px 0 10px;
-      padding: 6px 0;
+    &::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      border: none;
+      width: 14px;
+      height: 8px;
+      background-image: url("../../../assets/images/icon/dropdown.svg");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      transform: rotate(180deg);
+      transition: transform 0.3s ease;
     }
 
     &.mobile {
@@ -47,19 +47,11 @@
       transform: rotate(0deg);
     }
 
-    &::after {
-      position: absolute;
-      content: '';
-      right: 16px;
-      border: none;
-      width: 14px;
-      height: 8px;
-      background-image: url('../../../assets/images/icon/dropdown.svg');
-      background-position: center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      transition: transform 0.3s ease;
-      transform: rotate(180deg);
+    @include media-breakpoint-down(md) {
+      margin: 20px 0 10px;
+      padding: 6px 0;
+      width: 100%;
+      background-color: $body;
     }
   }
 
@@ -79,26 +71,30 @@
   }
 
   &__menu {
-    max-height: 255px;
-    font-size: 16px;
     position: absolute;
-    top: 65px;
-    background-color: #fff;
     right: 0;
+    top: 65px;
+    z-index: 10;
     overflow: hidden;
     border-radius: 8px;
     min-width: 244px;
+    max-height: 255px;
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+    font-size: 16px;
+    background-color: #fff;
     transition: max-height 0.3s ease;
-    z-index: 10;
+
+    svg {
+      margin-right: 20px;
+    }
 
     &.mobile {
       position: relative;
       top: 0;
-      width: 100%;
       border-top: 2px solid #4f4f4f1a;
-      box-shadow: none;
       border-radius: 0;
+      width: 100%;
+      box-shadow: none;
 
       .header-dropdown__inner {
         padding: 10px 19px 10px 26px;
@@ -108,17 +104,13 @@
         }
       }
     }
-
-    svg {
-      margin-right: 20px;
-    }
   }
 
   &__inner {
     display: flex;
     align-items: center;
-    padding: 18px 19px 10px 26px;
     border-bottom: 2px solid #4f4f4f1a;
+    padding: 18px 19px 10px 26px;
     width: 100%;
 
     &:hover {
@@ -133,35 +125,26 @@
 
   &__progress {
     width: 100%;
-    font-size: 14px;
-    max-width: 156px;
     height: 26px;
+    max-width: 156px;
+    font-size: 14px;
 
-    @include media-breakpoint-down(md) {
-      max-width: 100%;
-    }
-
-    span:before {
+    span::before {
       left: 10px;
       width: 9px;
       height: 9px;
     }
+
+    @include media-breakpoint-down(md) {
+      max-width: 100%;
+    }
   }
 
   &__item {
-    text-align: left;
-    width: 100%;
     padding: 10px 19px 10px 26px;
+    width: 100%;
+    text-align: left;
     color: $dark;
-
-    @include media-breakpoint-down(md) {
-      padding: 10px 0;
-    }
-
-    &:hover {
-      color: $dark;
-      background-color: #4f4f4f1a;
-    }
 
     &:not(:last-child) {
       border-bottom: 2px solid #4f4f4f1a;
@@ -171,12 +154,21 @@
       }
     }
 
+    svg {
+      fill: $dark;
+    }
+
+    &:hover {
+      color: $dark;
+      background-color: #4f4f4f1a;
+    }
+
     &:last-child {
       padding-bottom: 18px;
     }
 
-    svg {
-      fill: $dark;
+    @include media-breakpoint-down(md) {
+      padding: 10px 0;
     }
   }
 
@@ -184,7 +176,7 @@
     position: relative;
 
     span {
-      content: '';
+      content: "";
       position: absolute;
       left: 37px;
       top: 11px;
@@ -203,14 +195,22 @@
       margin-right: 26px;
       width: 16px;
       height: 19px;
-      stroke: $primary;
       fill: transparent;
+      stroke: $primary;
     }
+  }
+
+  &.mobile {
+    flex-direction: column;
+  }
+
+  @include media-breakpoint-down(md) {
+    margin-right: 0;
   }
 }
 
 .headerDropdown-enter {
-  max-height: 0px;
+  max-height: 0;
   transition: max-height 0.4s ease;
 }
 
@@ -225,6 +225,6 @@
 
 .headerDropdown-exit-active {
   opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
   transform: translateY(-5px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }

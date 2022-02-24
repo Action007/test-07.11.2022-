@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .creation {
   .breadcrumbs {
@@ -7,8 +7,8 @@
   }
 
   &__title {
-    font-size: 28px;
     margin-bottom: 16px;
+    font-size: 28px;
   }
 
   &__wrapper {
@@ -22,9 +22,9 @@
   }
 
   &__wrap {
-    max-width: 706px;
-    width: 100%;
     margin-right: 15px;
+    width: 100%;
+    max-width: 706px;
 
     @include media-breakpoint-down(xl) {
       margin-right: 0;
@@ -34,42 +34,42 @@
 
   &__img {
     margin-right: 70px;
-    max-width: 460px;
     width: 100%;
     height: 460px;
+    max-width: 460px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
 
     @include media-breakpoint-down(xl) {
       margin: 0 0 40px;
     }
 
     @include media-breakpoint-down(sm) {
-      max-width: 300px;
       height: 300px;
-    }
-
-    svg {
-      width: 100%;
-      height: 100%;
+      max-width: 300px;
     }
   }
 
   &__head {
-    font-size: 18px;
     margin-bottom: 6px;
+    font-size: 18px;
   }
 
   &__name {
+    margin: 7px 0 42px;
     width: 100%;
     height: 54px;
-    margin: 7px 0 42px;
 
     input {
-      border-radius: 8px;
+      outline: transparent;
       border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 0 15px;
       width: 100%;
       height: 100%;
-      outline: transparent;
-      padding: 0 15px;
 
       &:focus {
         border-color: $primary;
@@ -79,9 +79,9 @@
 
   &__inner {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    flex-wrap: wrap;
     margin-bottom: 28px;
   }
 
@@ -96,28 +96,28 @@
   &__add {
     display: flex;
     align-items: center;
-    padding: 9px 32px 9px 18px;
-    background-color: $primary;
-    border-radius: 8px;
-    color: #fff;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
     margin-bottom: 15px;
-
-    &:hover {
-      color: $primary;
-      background-color: #fff;
-      border-color: $primary;
-
-      svg {
-        stroke: $primary;
-      }
-    }
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 9px 32px 9px 18px;
+    color: #fff;
+    background-color: $primary;
+    transition: all 0.3s ease;
 
     svg {
       margin-right: 15px;
       stroke: #fff;
       transition: stroke 0.3s ease;
+    }
+
+    &:hover {
+      border-color: $primary;
+      color: $primary;
+      background-color: #fff;
+
+      svg {
+        stroke: $primary;
+      }
     }
   }
 
@@ -127,13 +127,13 @@
   }
 
   &__field {
-    width: 100%;
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 9px 15px;
-    margin-bottom: 70px;
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 70px;
+    border-radius: 8px;
+    padding: 9px 15px;
+    width: 100%;
+    background-color: #fff;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 25px;
@@ -143,32 +143,32 @@
   &__create {
     display: flex;
     align-items: center;
-    border-radius: 5px;
-    border: 1px solid $dark;
-    padding: 2px 8px;
     margin: 3px;
+    border: 1px solid $dark;
+    border-radius: 5px;
+    padding: 2px 8px;
+
+    svg {
+      margin-left: 7px;
+    }
 
     &.input {
-      border: none;
-      outline: transparent;
-      padding: 0;
-      width: 60px;
       margin: 0;
+      outline: transparent;
+      border: none;
+      padding: 0;
+      width: 100px;
     }
 
     &.tag {
-      background-color: $primary;
-      color: #fff;
       border-color: transparent;
+      color: #fff;
+      background-color: $primary;
 
       svg {
         stroke: #fff;
         transform: rotate(45deg);
       }
-    }
-
-    svg {
-      margin-left: 7px;
     }
   }
 
@@ -188,17 +188,13 @@
   }
 
   &__button {
-    padding: 12px 68px;
     border-radius: 8px;
-
-    @include media-breakpoint-down(sm) {
-      width: 100%;
-    }
+    padding: 12px 68px;
 
     &:first-child {
-      background-color: #dedede;
       margin-right: 8px;
       color: #4f4f4f9b;
+      background-color: #dedede;
 
       @include media-breakpoint-down(sm) {
         margin: 0 0 12px;
@@ -206,8 +202,12 @@
     }
 
     &:last-child {
-      background-color: #4f4f4f9b;
       color: #fff;
+      background-color: #4f4f4f9b;
+    }
+
+    @include media-breakpoint-down(sm) {
+      width: 100%;
     }
   }
 }

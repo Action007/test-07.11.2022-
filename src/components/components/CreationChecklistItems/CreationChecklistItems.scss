@@ -1,44 +1,80 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
-.creation-item {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-bottom: 15px;
-  
+.creation-items {
+  &__wrapper {
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  &__wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
   &__name {
-    max-width: 650px;
     width: 100%;
     height: 54px;
+    max-width: 650px;
+
+    input {
+      outline: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 0 15px;
+      width: 100%;
+      height: 100%;
+      color: $dark;
+
+      &:focus {
+        border-color: $primary;
+        font-family: "SFPro-Medium", sans-serif;
+        color: #000;
+      }
+    }
 
     @include media-breakpoint-down(xl) {
       max-width: 100%;
     }
-    
+  }
+
+  &__img {
+    max-width: 458px;
+    height: 230px;
+    width: 100%;
+    margin-top: 8px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    svg {
+      stroke: $dark;
+      margin-bottom: 16px;
+    }
+
     input {
-      color: $dark;
-      border-radius: 8px;
-      border: 1px solid transparent;
-      width: 100%;
-      height: 100%;
-      outline: transparent;
-      padding: 0 15px;
-      
-      &:focus {
-        border-color: $primary;
-        color: #000;
-        font-family: 'SFPro-Medium', sans-serif;
-      }
+      border: none;
+      background-color: #fff;
     }
   }
 
   &__number {
     display: flex;
     align-items: center;
-    margin-right: 13px;
+    margin: 10px 13px 0 0;
     font-size: 22px;
-    
+
     svg {
       margin-right: 15px;
       width: 16px;

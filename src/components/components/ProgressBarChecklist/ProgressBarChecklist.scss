@@ -1,22 +1,18 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .progressBar-checklist {
   margin: 0 auto 12px;
   border-radius: 8px;
-  max-width: 834px;
   padding: 17px 34px 12px;
+  max-width: 834px;
   background-color: #fff;
 
-  @include media-breakpoint-down(sm) {
-    padding: 17px 19px 12px;
-  }
-
   &__wrap {
-    font-size: 16px;
-    margin-bottom: 9px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 9px;
+    font-size: 16px;
 
     @include media-breakpoint-down(sm) {
       font-size: 12px;
@@ -25,14 +21,14 @@
 
   &__flag {
     svg {
+      margin-left: 13px;
       width: 24px;
       height: 24px;
-      margin-left: 13px;
 
       @include media-breakpoint-down(sm) {
+        margin-left: 5px;
         width: 18px;
         height: 18px;
-        margin-left: 5px;
       }
     }
   }
@@ -40,19 +36,23 @@
   &__wrapper {
     position: relative;
     overflow: hidden;
-    background-color: #c8d4ff;
     border-radius: 5px;
-    height: 8px;
     width: 100%;
+    height: 8px;
+    background-color: #c8d4ff;
   }
 
   &__done {
-    background-color: $primary;
-    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
     width: 0;
+    height: 100%;
+    color: #fff;
+    background-color: $primary;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 17px 19px 12px;
   }
 }

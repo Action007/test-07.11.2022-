@@ -1,4 +1,4 @@
-@import '../../../global-styles/_variables.scss';
+@import "../../../global-styles/_variables.scss";
 @import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .footer {
@@ -6,10 +6,6 @@
   padding: 69px 34px 73px;
   width: 100%;
   max-width: 1580px;
-
-  @include media-breakpoint-down(md) {
-    padding: 30px 16px 50px;
-  }
 
   &__img {
     margin-bottom: 35px;
@@ -25,7 +21,7 @@
 
   &__nav {
     display: flex;
-    font-family: 'SFPro-Medium', sans-serif;
+    font-family: "SFPro-Medium", sans-serif;
 
     .networks {
       @include media-breakpoint-down(sm) {
@@ -58,5 +54,9 @@
     a {
       color: $primary;
     }
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 30px 16px 50px;
   }
 }

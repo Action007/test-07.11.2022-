@@ -30,6 +30,7 @@ const AllChecklists = () => {
       const responseData = await response.json();
 
       setCheckLists(responseData.entities);
+      console.log(responseData.entities);
     };
 
     getProducts();

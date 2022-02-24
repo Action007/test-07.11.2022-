@@ -1,20 +1,16 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .checklist {
-  margin: 0 auto 43px;
-  width: 100%;
-  max-width: 834px;
   position: relative;
+  margin: 0 auto 43px;
   margin-bottom: 25px;
   border-radius: 8px;
   padding: 34px 34px 32px;
   width: 100%;
+  width: 100%;
+  max-width: 834px;
   background-color: #fff;
-
-  @include media-breakpoint-down(sm) {
-    padding: 30px 19px 30px;
-  }
 
   &:not(:last-child) {
     margin-bottom: 25px;
@@ -24,14 +20,10 @@
     }
   }
 
-  &:last-child {
-    margin-bottom: 42px;
-  }
-
   &__heading {
     display: flex;
     justify-content: space-between;
-    
+
     @include media-breakpoint-down(sm) {
       flex-direction: column-reverse;
     }
@@ -40,15 +32,15 @@
   &__head {
     @include media-breakpoint-down(sm) {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
   }
 
   &__title {
     margin-bottom: 18px;
-    font-size: 1.5rem;
     padding-right: 25px;
+    font-size: 1.5rem;
 
     @include media-breakpoint-down(md) {
       font-size: 1.3rem;
@@ -56,8 +48,8 @@
 
     @include media-breakpoint-down(sm) {
       margin: 21px 0 18px;
-      font-size: 1rem;
       padding-right: 0;
+      font-size: 1rem;
     }
   }
 
@@ -73,8 +65,8 @@
 
   &__bookmark {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     margin-bottom: 28px;
     border-radius: 8px;
     width: 39px;
@@ -115,7 +107,7 @@
     color: $primary;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 50%;
       bottom: 0;
@@ -153,15 +145,11 @@
   &__button {
     display: flex;
     align-items: center;
+    margin-right: 10px;
     border: 1px solid $dark;
     border-radius: 8px;
     padding: 12px 20px 12px 22px;
     transition: all 0.3s ease;
-    margin-right: 10px;
-
-    @include media-breakpoint-down(sm) {
-      margin: 25px 10px 0 0;
-    }
 
     span {
       margin-right: 16px;
@@ -181,6 +169,10 @@
         stroke: #fff;
         transform: translateX(3px);
       }
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin: 25px 10px 0 0;
     }
   }
 
@@ -272,6 +264,10 @@
     color: $light;
   }
 
+  &:last-child {
+    margin-bottom: 42px;
+  }
+
   &__liked,
   &__viewed {
     display: flex;
@@ -281,5 +277,9 @@
     svg {
       margin-right: 10px;
     }
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 30px 19px;
   }
 }

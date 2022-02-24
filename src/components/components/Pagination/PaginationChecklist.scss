@@ -1,4 +1,4 @@
-@import '../../../global-styles/_variables.scss';
+@import "../../../global-styles/_variables.scss";
 
 body {
   .pagination {
@@ -7,19 +7,19 @@ body {
 
   .page-item {
     .page-link {
-      color: $dark;
       border-radius: 4px;
       padding: 0.3rem 0.69rem;
-    }
-
-    &.active .page-link {
-      color: $primary;
-      background-color: #fff;
-      border-radius: 4px;
+      color: $dark;
     }
 
     &:not(:last-child) {
       margin-right: 8px;
+    }
+
+    &.active .page-link {
+      border-radius: 4px;
+      color: $primary;
+      background-color: #fff;
     }
   }
 }

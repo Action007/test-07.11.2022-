@@ -1,32 +1,32 @@
-@import '../../../global-styles/_variables.scss';
+@import "../../../global-styles/_variables.scss";
 
 .progressBar-header {
   position: relative;
   overflow: hidden;
-  background-color: #c8d4ff;
   border-radius: 4px;
-  height: 100%;
   width: 100%;
+  height: 100%;
+  background-color: #c8d4ff;
 
   &__done {
-    background-color: $primary;
-    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
     width: 0;
+    height: 100%;
+    color: #fff;
+    background-color: $primary;
   }
 
   &__text {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
     width: 100%;
     text-align: center;
+    transform: translateX(-50%);
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 50%;
       border-radius: 50%;

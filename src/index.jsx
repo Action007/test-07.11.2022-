@@ -5,7 +5,9 @@ import ReactDOM from "react-dom";
 import { initReactI18next } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
 import HttpApi from "i18next-http-backend";
+import { Provider } from "react-redux";
 import App from "./App";
+import store from "./store";
 
 // Localization
 i18next
@@ -26,7 +28,9 @@ i18next
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>,
   document.getElementById("root")
 );
