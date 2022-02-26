@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "./CreationChecklistItemEdit.scss";
 
 import { ReactComponent as TextIcon } from "../../../assets/images/icon/text.svg";
@@ -7,7 +8,9 @@ import { ReactComponent as MapIcon } from "../../../assets/images/icon/map.svg";
 import { ReactComponent as TrashIcon } from "../../../assets/images/icon/trash.svg";
 
 const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
-  const [isActive, setIsActive] = useState("text");
+  const checklists = useSelector((state) => state.createChecklist.checklists);
+  const type = checklists.find((item) => item.id === id).list_type;
+  const [isActive, setIsActive] = useState(type);
   const activeText = `checklist-edit__item ${
     isActive === "text" ? " active" : ""
   }`;

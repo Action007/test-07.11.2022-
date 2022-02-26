@@ -1,9 +1,10 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.scss";
 import Layout from "./components/UI/Layout/Layout";
 import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 import routes from "./router";
+import "./App.scss";
+import "leaflet/dist/leaflet.css";
 
 const App = () => (
   <Suspense fallback={<LoadingSpinner />}>

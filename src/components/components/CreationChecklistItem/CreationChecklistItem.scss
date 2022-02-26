@@ -1,11 +1,9 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
-.creation-items {
-  &__wrapper {
-    position: relative;
-    margin-bottom: 15px;
-  }
+.creation-item {
+  position: relative;
+  margin-bottom: 15px;
 
   &__wrap {
     display: flex;
@@ -35,7 +33,7 @@
 
       &:focus {
         border-color: $primary;
-        font-family: "SFPro-Medium", sans-serif;
+        font-family: 'SFPro-Medium', sans-serif;
         color: #000;
       }
     }
@@ -46,8 +44,9 @@
   }
 
   &__img {
+    position: relative;
     max-width: 458px;
-    height: 230px;
+    height: 231px;
     width: 100%;
     margin-top: 8px;
     background-color: #fff;
@@ -57,6 +56,12 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    cursor: pointer;
+
+    &.active {
+      display: table;
+      height: auto;
+    }
 
     svg {
       stroke: $dark;
@@ -64,8 +69,20 @@
     }
 
     input {
-      border: none;
       background-color: #fff;
+      width: 0;
+      height: 0;
+      opacity: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    span {
+      text-decoration: underline;
     }
   }
 
@@ -80,5 +97,37 @@
       width: 16px;
       height: 23px;
     }
+  }
+
+  &__remove {
+    position: absolute;
+    background-color: $primary;
+    border-radius: 8px;
+    width: 35px;
+    height: 35px;
+    right: 15px;
+    top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: $warning;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 0;
+      stroke: #fff;
+    }
+  }
+
+  &__map {
+    max-width: 458px;
+    width: 100%;
+    height: 231px;
+    margin-top: 8px;
   }
 }
