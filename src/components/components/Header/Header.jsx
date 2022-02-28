@@ -43,7 +43,7 @@ const Header = () => {
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle
-            className="header__burger position-relative border-0"
+            className="header__burger position-relative border-0 p-0"
             aria-controls="navbarScroll"
           >
             <BurgerSvg />

@@ -2,15 +2,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import uniqueID from "../utils/uniqueId";
 
-const checklists = localStorage.getItem("appData")
-  ? JSON.parse(localStorage.getItem("appData"))
-  : [];
-
 const createChecklistSlice = createSlice({
   name: "createChecklist",
   initialState: {
-    checklists,
+    checklists: [],
     tags: [],
+    markers: [],
   },
   reducers: {
     addChecklist(state) {
@@ -71,6 +68,12 @@ const createChecklistSlice = createSlice({
     removeTag(state, action) {
       const id = action.payload;
       state.tags = state.tags.filter((tag) => tag.id !== id);
+    },
+    addCoordinate(state, action) {
+      state.markers = [action.payload];
+    },
+    removeCoordinate(state) {
+      state.markers = [];
     },
   },
 });

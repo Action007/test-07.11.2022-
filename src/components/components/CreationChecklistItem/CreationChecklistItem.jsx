@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
-import Leaflet, { map } from "leaflet";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import CreationChecklistItemEdit from "../CreationChecklistItemEdit/CreationChecklistItemEdit";
 import "./CreationChecklistItem.scss";
@@ -9,26 +7,12 @@ import "./CreationChecklistItem.scss";
 import { ReactComponent as ChecklistDots } from "../../../assets/images/icon/checklistDots.svg";
 import { ReactComponent as ImgIcon } from "../../../assets/images/icon/img.svg";
 import { ReactComponent as TrashIcon } from "../../../assets/images/icon/trash.svg";
-import MapImg from "../../../assets/images/icon/map-pin.png";
+import CreationChecklistMap from "../CreationChecklistMap/CreationChecklistMap";
 
 const CreationChecklistItem = ({ provide, description, type, number, id }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [blur, setBlur] = useState(false);
   const dispatch = useDispatch();
-
-  const position = {
-    lat: 35.787449,
-    lng: -78.6438197,
-    zoom: 13,
-  };
-
-  const myIcon = Leaflet.icon({
-    iconUrl: MapImg,
-    iconSize: [21, 37], // size of the icon
-    iconAnchor: [9, 36], // point of the icon which will correspond to marker's location
-  });
-
-  const positionIcon = [position.lat, position.lng];
 
   const onChangeHandler = (e) => {
     const { value } = e.target;
@@ -71,20 +55,6 @@ const CreationChecklistItem = ({ provide, description, type, number, id }) => {
     </div>
   );
 
-  const renderMap = (
-    <button className="creation-item__map" type="button">
-      <MapContainer center={positionIcon} zoom={position.zoom}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={positionIcon} icon={myIcon} />
-      </MapContainer>
-    </button>
-  );
-
-  console.log(map);
-
   return (
     <li
       onFocus={() => setBlur(id)}
@@ -111,7 +81,7 @@ const CreationChecklistItem = ({ provide, description, type, number, id }) => {
             />
           </label>
           {type === "image" && !selectedImage && selectImg}
-          {type === "map" && renderMap}
+          {type === "map" && <CreationChecklistMap />}
           {ImgSelected}
         </div>
       </div>
