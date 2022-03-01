@@ -4,8 +4,9 @@ import { useTranslation } from "react-i18next";
 import "./PopupDone.scss";
 
 import PopupImg from "../../../assets/images/content/popupDone.png";
+import PostedImg from "../../../assets/images/content/posted.png";
 
-const PopupDone = ({ show, onHide }) => {
+const PopupDone = ({ show, onHide, posted = false }) => {
   const { t: translate } = useTranslation();
 
   return (
@@ -23,19 +24,31 @@ const PopupDone = ({ show, onHide }) => {
         <div className="popup-done__wrapper">
           <div className="popup-done__wrap">
             <h4 className="popup-done__title SFPro-600">
-              {translate("popupDone.title")}
+              {posted
+                ? translate("creationOfChecklist.popupTitle")
+                : translate("popupDone.title")}
             </h4>
-            <p className="popup-done__text">{translate("popupDone.text")}</p>
+            <p className="popup-done__text">
+              {posted
+                ? translate("creationOfChecklist.popupText")
+                : translate("popupDone.text")}
+            </p>
             <button
               className="popup-done__btn SFPro-500"
               onClick={onHide}
               type="button"
             >
-              {translate("popupDone.button")}
+              {posted
+                ? translate("creationOfChecklist.popupButton")
+                : translate("popupDone.button")}
             </button>
           </div>
           <div className="popup-done__img">
-            <img src={PopupImg} alt="winner's Cup" />
+            {posted ? (
+              <img src={PostedImg} alt="checklist posted" />
+            ) : (
+              <img src={PopupImg} alt="winner's Cup" />
+            )}
           </div>
         </div>
       </Modal.Body>

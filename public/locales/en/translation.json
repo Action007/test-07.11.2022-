@@ -122,6 +122,9 @@
     "desc": "Add up to 3-5 tags to describe what your checlist is about",
     "addTags": "Add tag",
     "preview": "Preview",
-    "publish": "Publish"
+    "publish": "Publish",
+    "popupTitle": "Your checklist has been posted successfully!",
+    "popupDesc": "Сreate more checklists and get rewards for it.",
+    "popupButton": "Continue search"
   }
 }
