@@ -43,13 +43,12 @@ deploy:
     - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - echo $SSH_HOST
-    - echo "ssh $SSH_HOST 'cd ~/;
+    - echo "ssh $SSH_HOST 'cd ~/checklist;
         docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com;
         docker pull "$CI_REGISTRY_IMAGE:latest";
-        docker stop dev_checklist;
-        docker rm dev_checklist;
-        docker image rmi $CLEAR_COMMAND;
-        docker run --restart always -d --name=dev_checklist -p 3000:3000 registry.gitlab.com/proxyone/checklist_frontend'
+        docker-compose stop frontend;
+        docker-compose rm frontend;
+        docker-compose up -d frontend;'
         " > docker
     - eval $(cat docker)
   when: on_success
