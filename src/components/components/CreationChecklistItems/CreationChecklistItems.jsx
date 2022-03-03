@@ -20,19 +20,23 @@ const CreationChecklistItems = ({ checklistItems }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {checklistItems.map(({ list_type, description, id }, index) => (
-              <Draggable key={id} draggableId={id} index={index}>
-                {(provide) => (
-                  <CreationChecklistItem
-                    provide={provide}
-                    type={list_type}
-                    description={description}
-                    number={index + 1}
-                    id={id}
-                  />
-                )}
-              </Draggable>
-            ))}
+            {checklistItems.map(
+              ({ list_type, description, value, inValid, id }, index) => (
+                <Draggable key={id} draggableId={id} index={index}>
+                  {(provide) => (
+                    <CreationChecklistItem
+                      provide={provide}
+                      list_type={list_type}
+                      description={description}
+                      number={index + 1}
+                      value={value}
+                      inValid={inValid}
+                      id={id}
+                    />
+                  )}
+                </Draggable>
+              )
+            )}
             {provided.placeholder}
           </ul>
         )}

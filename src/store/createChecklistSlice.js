@@ -5,39 +5,42 @@ import uniqueID from "../utils/uniqueId";
 const createChecklistSlice = createSlice({
   name: "createChecklist",
   initialState: {
+    title: "",
     checklists: [],
     tags: [],
-    markers: [],
   },
   reducers: {
+    addTitle(state, action) {
+      const value = action.payload;
+
+      state.title = value;
+    },
     addChecklist(state) {
       state.checklists = [
         ...state.checklists,
         { id: uniqueID(), list_type: "text", description: "" },
       ];
-
-      localStorage.setItem("appData", JSON.stringify(state.checklists));
     },
     defineChecklist(state, action) {
       const { str, id } = action.payload;
 
       if (str === "text") {
         state.checklists = state.checklists.map((item) =>
-          item.id === id ? { ...item, list_type: "text" } : item
+          item.id === id ? { ...item, list_type: "text", value: {} } : item
         );
       } else if (str === "image") {
         state.checklists = state.checklists.map((item) =>
-          item.id === id ? { ...item, list_type: "image" } : item
+          item.id === id ? { ...item, list_type: "image", value: {} } : item
         );
-      } else if (str === "map") {
+      } else if (str === "coordinates") {
         state.checklists = state.checklists.map((item) =>
-          item.id === id ? { ...item, list_type: "map" } : item
+          item.id === id
+            ? { ...item, list_type: "coordinates", value: {} }
+            : item
         );
       } else if (str === "delete") {
         state.checklists = state.checklists.filter((item) => item.id !== id);
       }
-
-      localStorage.setItem("appData", JSON.stringify(state.checklists));
     },
     changeChecklistValue(state, action) {
       const { value, id } = action.payload;
@@ -45,8 +48,6 @@ const createChecklistSlice = createSlice({
       state.checklists = state.checklists.map((item) =>
         item.id === id ? { ...item, description: value } : item
       );
-
-      localStorage.setItem("appData", JSON.stringify(state.checklists));
     },
     dropAndDownChecklists(state, action) {
       const result = action.payload;
@@ -58,8 +59,6 @@ const createChecklistSlice = createSlice({
       items.splice(result.destination.index, 0, reorderedItem);
 
       state.checklists = items;
-
-      localStorage.setItem("appData", JSON.stringify(state.checklists));
     },
     addTag(state, action) {
       const name = action.payload;
@@ -69,11 +68,37 @@ const createChecklistSlice = createSlice({
       const id = action.payload;
       state.tags = state.tags.filter((tag) => tag.id !== id);
     },
-    addCoordinate(state, action) {
-      state.markers = [action.payload];
+    addImage(state, action) {
+      const { id, image } = action.payload;
+      state.checklists = state.checklists.map((item) =>
+        item.id === id ? { ...item, value: { image } } : item
+      );
     },
-    removeCoordinate(state) {
-      state.markers = [];
+    removeImage(state, action) {
+      const id = action.payload;
+      state.checklists = state.checklists.map((item) =>
+        item.id === id ? { ...item, value: {} } : item
+      );
+    },
+    addCoordinate(state, action) {
+      const { id, latLng } = action.payload;
+      state.checklists = state.checklists.map((item) =>
+        item.id === id ? { ...item, value: { coordinates: latLng } } : item
+      );
+    },
+    removeCoordinate(state, action) {
+      const id = action.payload;
+      state.checklists = state.checklists.map((item) =>
+        item.id === id ? { ...item, value: {} } : item
+      );
+    },
+    isValid(state) {
+      state.checklists = state.checklists.map((item) =>
+        item.description.trim().length < 151 &&
+        item.description.trim().length > 9
+          ? { ...item, inValid: false }
+          : { ...item, inValid: true }
+      );
     },
   },
 });

@@ -18,7 +18,7 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
     isActive === "image" ? " active" : ""
   }`;
   const activeMap = `checklist-edit__item ${
-    isActive === "map" ? " active" : ""
+    isActive === "coordinates" ? " active" : ""
   }`;
 
   const setIsActiveHandler = (str) => {
@@ -43,7 +43,7 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
         <ImgIcon />
       </button>
       <button
-        onClick={() => setIsActiveHandler("map")}
+        onClick={() => setIsActiveHandler("coordinates")}
         className={activeMap}
         type="button"
       >

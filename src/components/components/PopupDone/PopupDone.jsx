@@ -6,7 +6,7 @@ import "./PopupDone.scss";
 import PopupImg from "../../../assets/images/content/popupDone.png";
 import PostedImg from "../../../assets/images/content/posted.png";
 
-const PopupDone = ({ show, onHide, posted = false }) => {
+const PopupDone = ({ show, onHide, preview = false }) => {
   const { t: translate } = useTranslation();
 
   return (
@@ -24,13 +24,13 @@ const PopupDone = ({ show, onHide, posted = false }) => {
         <div className="popup-done__wrapper">
           <div className="popup-done__wrap">
             <h4 className="popup-done__title SFPro-600">
-              {posted
+              {preview
                 ? translate("creationOfChecklist.popupTitle")
                 : translate("popupDone.title")}
             </h4>
             <p className="popup-done__text">
-              {posted
-                ? translate("creationOfChecklist.popupText")
+              {preview
+                ? translate("creationOfChecklist.popupDesc")
                 : translate("popupDone.text")}
             </p>
             <button
@@ -38,13 +38,13 @@ const PopupDone = ({ show, onHide, posted = false }) => {
               onClick={onHide}
               type="button"
             >
-              {posted
+              {preview
                 ? translate("creationOfChecklist.popupButton")
                 : translate("popupDone.button")}
             </button>
           </div>
           <div className="popup-done__img">
-            {posted ? (
+            {preview ? (
               <img src={PostedImg} alt="checklist posted" />
             ) : (
               <img src={PopupImg} alt="winner's Cup" />

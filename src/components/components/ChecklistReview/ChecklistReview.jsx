@@ -164,10 +164,7 @@ const ChecklistReview = () => {
   return (
     <div className="pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <ChecklistDetail
-        checklists={data}
-        translate={translate("checklistReviewPage.button")}
-      />
+      <ChecklistDetail checklists={data} />
       <ChecklistComments comments={data.comments} />
     </div>
   );

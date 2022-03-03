@@ -1,9 +1,8 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import GeneralMap from "../GeneralMap/GeneralMap";
 import "./PopupMap.scss";
 
-const PopupMap = ({ show, onHide }) => {
+const PopupMap = ({ show, onHide, children }) => {
   return (
     <Modal
       className="popup-map"
@@ -15,9 +14,7 @@ const PopupMap = ({ show, onHide }) => {
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" />
       </Modal.Header>
-      <Modal.Body>
-        <GeneralMap popup />
-      </Modal.Body>
+      <Modal.Body>{children}</Modal.Body>
     </Modal>
   );
 };

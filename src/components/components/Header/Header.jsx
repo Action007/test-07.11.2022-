@@ -50,12 +50,11 @@ const Header = () => {
             <span className="header__span">22</span>
           </Navbar.Toggle>
           {showAddButtonOnMobile && (
-            <Button
-              className="header__btn text-white d-flex align-items-center br-8"
-              variant="primary"
-            >
-              <Plus />
-            </Button>
+            <Link className="header__btn-link" to="/creation-of-checklist">
+              <Button className="header__btn text-white br-8" variant="primary">
+                <Plus />
+              </Button>
+            </Link>
           )}
           <Navbar.Collapse className="order-4" id="navbarScroll">
             {!showSearchOnMobile && <SearchInput />}
@@ -72,13 +71,15 @@ const Header = () => {
             )}
             <HeaderDropdown />
             {!showAddButtonOnMobile && (
-              <Button
-                className="header__btn text-white d-flex align-items-center br-8"
-                variant="primary"
-              >
-                <Plus />
-                Create
-              </Button>
+              <Link to="/creation-of-checklist">
+                <Button
+                  className="header__btn text-white br-8"
+                  variant="primary"
+                >
+                  <Plus />
+                  Create
+                </Button>
+              </Link>
             )}
           </Navbar.Collapse>
         </Container>

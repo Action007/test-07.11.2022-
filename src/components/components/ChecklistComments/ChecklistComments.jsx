@@ -54,7 +54,7 @@ const ChecklistComments = ({ comments }) => {
           type="button"
         >
           <ArrowSvg />
-          {translate("checklistDetailPage.moreComments")}
+          {translate("checklistReviewPage.moreComments")}
         </button>
       )}
     </div>

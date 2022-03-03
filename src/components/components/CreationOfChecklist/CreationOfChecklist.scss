@@ -1,5 +1,5 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .creation {
   .breadcrumbs {
@@ -58,10 +58,20 @@
     font-size: 18px;
   }
 
+  &__span.invalid {
+    color: $warning;
+  }
+
   &__name {
     margin: 7px 0 42px;
     width: 100%;
     height: 54px;
+
+    &.invalid {
+      input {
+        border-color: $warning;
+      }
+    }
 
     input {
       outline: transparent;
@@ -124,6 +134,10 @@
   &__desc {
     display: block;
     margin-bottom: 10px;
+
+    &.invalid {
+      color: $warning;
+    }
   }
 
   &__field {
@@ -134,9 +148,14 @@
     padding: 9px 15px;
     width: 100%;
     background-color: #fff;
+    border: 1px solid transparent;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 25px;
+    }
+
+    &.invalid {
+      border-color: $warning;
     }
   }
 
@@ -193,8 +212,8 @@
 
     &:first-child {
       margin-right: 8px;
-      color: #4f4f4f9b;
-      background-color: #dedede;
+      color: #fff;
+      background-color: $dark;
 
       @include media-breakpoint-down(sm) {
         margin: 0 0 12px;
@@ -203,7 +222,7 @@
 
     &:last-child {
       color: #fff;
-      background-color: #4f4f4f9b;
+      background-color: $primary;
     }
 
     @include media-breakpoint-down(sm) {
