@@ -38,15 +38,25 @@ const CreationOfChecklist = () => {
   };
 
   const addTagHandler = (e) => {
-    if (e.key !== "Enter") return;
+    if (e === "blur") {
+      const name = inputTag.current.value;
+      const addOrNot = tags.find((tag) => tag.name === name);
 
-    const name = inputTag.current.value;
-    const addOrNot = tags.find((tag) => tag.name === name);
+      if (addOrNot) return;
+      setAddTags(false);
 
-    if (addOrNot) return;
+      if (!name) return;
+      dispatch(createChecklistActions.addTag(name));
+    } else if (e.key === "Enter") {
+      const name = inputTag.current.value;
+      const addOrNot = tags.find((tag) => tag.name === name);
 
-    dispatch(createChecklistActions.addTag(name));
-    setAddTags(false);
+      if (addOrNot) return;
+      setAddTags(false);
+
+      if (!name) return;
+      dispatch(createChecklistActions.addTag(name));
+    }
   };
 
   const changeTitleHandler = (e) => {
@@ -83,6 +93,7 @@ const CreationOfChecklist = () => {
       <label className="creation__create" htmlFor="creationAdd">
         <input
           onKeyPress={(e) => addTagHandler(e)}
+          onBlur={() => addTagHandler("blur")}
           className="creation__create input"
           ref={inputTag}
           id="creationAdd"

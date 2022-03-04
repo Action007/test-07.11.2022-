@@ -1,4 +1,4 @@
-@import "../../../global-styles/_variables.scss";
+@import '../../../global-styles/_variables.scss';
 
 .checklist-edit {
   margin: 9px 0 0 60px;
@@ -25,8 +25,13 @@
       stroke: $primary;
     }
 
-    &:last-child:hover svg {
-      stroke: $warning;
+    &:last-child {
+      svg {
+        width: 26px;
+      }
+      &:hover svg {
+        stroke: $warning;
+      }
     }
 
     &.active {

@@ -5,7 +5,7 @@ import "./CreationChecklistItemEdit.scss";
 import { ReactComponent as TextIcon } from "../../../assets/images/icon/text.svg";
 import { ReactComponent as ImgIcon } from "../../../assets/images/icon/img.svg";
 import { ReactComponent as MapIcon } from "../../../assets/images/icon/map.svg";
-import { ReactComponent as TrashIcon } from "../../../assets/images/icon/trash.svg";
+import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel.svg";
 
 const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
   const checklists = useSelector((state) => state.createChecklist.checklists);
@@ -54,7 +54,7 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
         className="checklist-edit__item"
         type="button"
       >
-        <TrashIcon />
+        <CancelIcon />
       </button>
     </div>
   );

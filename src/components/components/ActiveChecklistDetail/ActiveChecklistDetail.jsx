@@ -12,13 +12,14 @@ const ActiveChecklistDetail = ({ checklist, checklistsHandler }) => {
     <div className="active-checklist">
       <h3 className="active-checklist__title SFPro-700">{checklist.name}</h3>
       <ul className="active-checklist__items">
-        {checklist.checklist_items?.map(({ description }, id) => {
-          const idFor = uniqueID();
+        {checklist.checklist_items?.map(({ description }, index) => {
+          const id = uniqueID();
           return (
             <ChecklistCheckbox
+              key={id}
               description={description}
-              id={id}
-              idFor={idFor}
+              num={index + 1}
+              idFor={id}
               checklistsHandler={checklistsHandler}
             />
           );
