@@ -51,12 +51,11 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
           </div>
         </div>
       </div>
-      <ul className="checklist-detail__items">
-        {checklist.map(({ description, list_type, value, id }, index) => {
+      <ol className="checklist-detail__items">
+        {checklist.map(({ description, list_type, value, id }) => {
           return (
             <li className="checklist-detail__item" key={uniqueID()}>
               <div className="checklist-detail__list">
-                <span className="checklist-detail__num">{index + 1}.</span>
                 <p>{description.length && description}</p>
               </div>
               {list_type === "coordinates" && (
@@ -85,7 +84,7 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
             </li>
           );
         })}
-      </ul>
+      </ol>
       <div className="checklist-detail__tags">
         {preview
           ? tags.map(({ name, id }) => (

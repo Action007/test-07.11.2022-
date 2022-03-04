@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import useDropdown from "../../../hooks/useDropdown";
+import useClickOutside from "../../../hooks/useClickOutside";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./HeaderDropdown.scss";
 
@@ -13,7 +13,7 @@ import { ReactComponent as Logout } from "../../../assets/images/icon/logout.svg
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 
 const HeaderDropdown = () => {
-  const { ref, show, setShowHandler } = useDropdown();
+  const { ref, show, setShowHandler } = useClickOutside();
   const showOnMobile = useMediaQuery("(max-width:767px)");
   const mobileClass = showOnMobile ? " mobile" : "";
 

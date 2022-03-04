@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-const useDropdown = () => {
+const useClickOutside = () => {
   const ref = useRef();
   const [show, setShow] = useState(false);
 
@@ -22,4 +22,4 @@ const useDropdown = () => {
   return { ref, show, setShowHandler };
 };
 
-export default useDropdown;
+export default useClickOutside;

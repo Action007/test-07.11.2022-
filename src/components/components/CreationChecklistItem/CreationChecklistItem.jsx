@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
@@ -10,10 +10,11 @@ import "./CreationChecklistItem.scss";
 
 import { ReactComponent as ChecklistDots } from "../../../assets/images/icon/checklistDots.svg";
 import { ReactComponent as ImgIcon } from "../../../assets/images/icon/img.svg";
-import { ReactComponent as TrashIcon } from "../../../assets/images/icon/trash.svg";
+import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel.svg";
 
 const CreationChecklistItem = ({
   provide,
+  checklists,
   description,
   list_type,
   number,
@@ -24,8 +25,15 @@ const CreationChecklistItem = ({
   const [blur, setBlur] = useState(false);
   const [state, setState] = useState("text");
   const [showMap, setShowMap] = useState(false);
+  const focusOnCreate = useRef();
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
+
+  useEffect(() => {
+    if (!focusOnCreate.current) return;
+    if (checklists.length === 1) return;
+    focusOnCreate.current.focus();
+  }, []);
 
   const onChangeHandler = (e) => {
     // eslint-disable-next-line no-shadow
@@ -38,6 +46,11 @@ const CreationChecklistItem = ({
     dispatch(createChecklistActions.defineChecklist({ str, id }));
     setState(str);
     dispatch(createChecklistActions.removeImage());
+  };
+
+  const addItemOnEnter = (e) => {
+    if (e.key !== "Enter") return;
+    dispatch(createChecklistActions.addChecklist());
   };
 
   const selectImg = (
@@ -68,7 +81,7 @@ const CreationChecklistItem = ({
         className="creation-item__remove"
         type="button"
       >
-        <TrashIcon />
+        <CancelIcon />
       </button>
     </div>
   );
@@ -100,11 +113,18 @@ const CreationChecklistItem = ({
           >
             <input
               onChange={(e) => onChangeHandler(e)}
+              onKeyPress={(e) => addItemOnEnter(e)}
               value={description}
+              ref={focusOnCreate}
               type="text"
               id={id}
             />
           </label>
+          {inValid && (
+            <span className="creation-item__invalid">
+              {translate("creationOfChecklist.max")}
+            </span>
+          )}
           {list_type === "image" && !value.image && selectImg}
           {ImgSelected}
           {list_type === "coordinates" && (
@@ -117,14 +137,9 @@ const CreationChecklistItem = ({
               </CSSTransition>
             </>
           )}
-          {inValid && (
-            <span className="creation-item__invalid">
-              {translate("creationOfChecklist.max")}
-            </span>
-          )}
         </div>
       </div>
-      {blur === id && (
+      {blur && (
         <CreationChecklistItemEdit
           typeChecklistHandler={checklistTypeHandler}
           id={id}

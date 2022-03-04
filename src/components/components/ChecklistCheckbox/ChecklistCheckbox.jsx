@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ChecklistCheckbox.scss";
 
-const ChecklistCheckbox = ({ description, num, idFor, checklistsHandler }) => {
+const ChecklistCheckbox = ({ description, idFor, checklistsHandler }) => {
   const [checked, setChecked] = useState(false);
 
   const checkboxHandler = () => {
@@ -20,7 +20,6 @@ const ChecklistCheckbox = ({ description, num, idFor, checklistsHandler }) => {
             type="checkbox"
           />
           <span className="checklist-checkbox__checkmark" />
-          <span className="checklist-checkbox__number">{num}.</span>
           <p className="checklist-checkbox__todo m-0">{description}</p>
         </label>
       </form>

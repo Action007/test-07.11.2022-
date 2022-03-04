@@ -31,7 +31,7 @@
   }
 
   &__del {
-    top: 10px;
+    top: 55px;
     right: 10px;
 
     svg {
@@ -85,5 +85,44 @@
   .leaflet-container .leaflet-control-attribution,
   .leaflet-container .leaflet-control-scale {
     font-size: 10px;
+  }
+
+  .leaflet-control-geocoder-alternatives li {
+    text-align: left;
+  }
+
+  .leaflet-control-geocoder-form input {
+    display: flex;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .leaflet-control-geocoder-alternatives {
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .leaflet-touch .leaflet-control-geocoder {
+    min-width: 35px;
+    min-height: 35px;
+  }
+
+  .leaflet-touch .leaflet-control-geocoder-icon {
+    width: 18px;
+    height: 18px;
+    margin: 3px;
+  }
+
+  .leaflet-touch .leaflet-control-geocoder {
+    cursor: pointer;
+    padding: 5px;
+    border: none;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+    border-radius: 8px;
+  }
+
+  .leaflet-control-geocoder-icon {
+    background-image: url('../../../assets/images/icon/search.svg');
+    background-size: contain;
   }
 }

@@ -113,7 +113,7 @@
   "creationOfChecklist": {
     "title": "Сreation of checklisit",
     "name": "Name checklist",
-    "max": "Minimum 10 Maximum 150 characters",
+    "max": "Maximum 150 characters",
     "passed": "Passed",
     "points": "Сhecklist points",
     "text": "Include all the information someone might need to make your checklist popular.",
@@ -125,6 +125,7 @@
     "publish": "Publish",
     "popupTitle": "Your checklist has been posted successfully!",
     "popupDesc": "Сreate more checklists and get rewards for it.",
-    "popupButton": "Continue search"
+    "popupButton": "Continue search",
+    "checklistPreview": "Checklist preview"
   }
 }

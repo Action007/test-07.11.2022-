@@ -3,4 +3,16 @@
     max-width: 834px;
     padding: 15px 15px;
   }
+
+  .modal-header {
+    padding: 16px 22px;
+  }
+  
+  .checklist-detail {
+    padding: 17px 36px 36px 28px;
+  }
+
+  .checklist-detail__buttons { 
+    display: none;
+  }
 }

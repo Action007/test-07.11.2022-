@@ -1,6 +1,6 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
-import useDropdown from "../../../hooks/useDropdown";
+import useClickOutside from "../../../hooks/useClickOutside";
 import "./EditDropdown.scss";
 
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
@@ -8,7 +8,7 @@ import { ReactComponent as EditSvg } from "../../../assets/images/icon/edit.svg"
 import { ReactComponent as DeleteSvg } from "../../../assets/images/icon/delete.svg";
 
 const EditDropdown = () => {
-  const { ref, show, setShowHandler } = useDropdown();
+  const { ref, show, setShowHandler } = useClickOutside();
 
   return (
     <div className="edit-dropdown SFPro-500" ref={ref}>

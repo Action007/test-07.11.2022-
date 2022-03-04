@@ -26,6 +26,7 @@ const CreationChecklistItems = ({ checklistItems }) => {
                   {(provide) => (
                     <CreationChecklistItem
                       provide={provide}
+                      checklists={checklistItems}
                       list_type={list_type}
                       description={description}
                       number={index + 1}

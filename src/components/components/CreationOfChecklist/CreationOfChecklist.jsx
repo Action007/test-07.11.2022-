@@ -5,13 +5,13 @@ import { CSSTransition } from "react-transition-group";
 import CreationChecklistItems from "../CreationChecklistItems/CreationChecklistItems";
 import CreationChecklistPreview from "../CreationChecklistPreview/CreationChecklistPreview";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import PopupDone from "../PopupDone/PopupDone";
 import "./CreationOfChecklist.scss";
 
 import { ReactComponent as CreationImg } from "../../../assets/images/content/creationChecklist.svg";
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
 import { ReactComponent as PlusSvg } from "../../../assets/images/icon/plusTags.svg";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
-import PopupDone from "../PopupDone/PopupDone";
 
 const CreationOfChecklist = () => {
   const [preview, setPreview] = useState(false);
@@ -38,21 +38,17 @@ const CreationOfChecklist = () => {
   };
 
   const addTagHandler = (e) => {
+    const name = inputTag.current.value;
+    const addOrNot = tags.find((tag) => tag.name === name);
     if (e === "blur") {
-      const name = inputTag.current.value;
-      const addOrNot = tags.find((tag) => tag.name === name);
-
-      if (addOrNot) return;
       setAddTags(false);
+      if (addOrNot) return;
 
       if (!name) return;
       dispatch(createChecklistActions.addTag(name));
     } else if (e.key === "Enter") {
-      const name = inputTag.current.value;
-      const addOrNot = tags.find((tag) => tag.name === name);
-
-      if (addOrNot) return;
       setAddTags(false);
+      if (addOrNot) return;
 
       if (!name) return;
       dispatch(createChecklistActions.addTag(name));
@@ -66,19 +62,26 @@ const CreationOfChecklist = () => {
 
   const checkValidHandler = (e, type) => {
     if (e.target) e.preventDefault();
+    const titleIsValid = title.trim().length < 151 && title.trim().length > 0;
+    const tagsIsValid = tags.length > 2;
     const checklistIsEmpty = checklists.find(
       (item) => item.description.trim().length === 0
     );
     const checklistIsValid = checklists.find(
       (item) => item.description.trim().length > 150
     );
-    const titleIsValid = title.trim().length < 151 && title.trim().length > 9;
-    const tagsIsValid = tags.length > 2;
     setTitleValid(titleIsValid);
     setTagsValid(tagsIsValid);
+    if (!checklists.length) dispatch(createChecklistActions.addChecklist());
     dispatch(createChecklistActions.isValid());
 
-    if (!checklistIsValid && !checklistIsEmpty && titleIsValid && tagsIsValid) {
+    if (
+      checklists.length &&
+      !checklistIsValid &&
+      !checklistIsEmpty &&
+      titleIsValid &&
+      tagsIsValid
+    ) {
       if (type === "preview") {
         setPreview(true);
       } else if (type === "submit") {
@@ -133,10 +136,7 @@ const CreationOfChecklist = () => {
             <span className={`creation__span${!titleValid ? " invalid" : ""}`}>
               {translate("creationOfChecklist.max")}
             </span>
-            <form
-              onSubmit={(e) => checkValidHandler(e, "submit")}
-              className="creation__form"
-            >
+            <form className="creation__form">
               <label
                 className={`creation__name${!titleValid ? " invalid" : ""}`}
                 htmlFor="creationID"
@@ -197,7 +197,11 @@ const CreationOfChecklist = () => {
                 >
                   {translate("creationOfChecklist.preview")}
                 </button>
-                <button className="creation__button" type="submit">
+                <button
+                  onClick={(e) => checkValidHandler(e, "submit")}
+                  className="creation__button"
+                  type="button"
+                >
                   {translate("creationOfChecklist.publish")}
                 </button>
               </div>
