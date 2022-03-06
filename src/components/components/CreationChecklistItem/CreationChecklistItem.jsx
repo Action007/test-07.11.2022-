@@ -89,7 +89,7 @@ const CreationChecklistItem = ({
   return (
     <li
       onFocus={() => setBlur(id)}
-      onBlur={() => setBlur(id)}
+      onBlur={() => setBlur(false)}
       className="creation-item"
       ref={provide.innerRef}
       // eslint-disable-next-line react/jsx-props-no-spreading
