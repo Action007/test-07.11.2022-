@@ -11,56 +11,36 @@ const items = {
   liked: 5,
   created_at: "2020-10-22T00:00:00",
   tags: ["tag1", "tag2", "tag3", "tag4", "tag5"],
-  checklist: [
+  checklist_items: [
     {
-      type: "Aenean massa.",
-      description: "text 1",
-      value: "",
+      list_type: "text",
+      description: "Need add text1 1",
+      value: {},
     },
     {
-      type: "Cum sociis natoque penatibus et magnis.",
-      description: "text 2",
-      value: "",
+      list_type: "link",
+      description: "Need add link 1",
+      value: {
+        link: "https://translate.google.by/",
+      },
     },
     {
-      type: "Dis parturient montes, nascetur ridiculus mus.",
-      description: "text 3",
-      value: "",
+      list_type: "image",
+      description: "Need add image 1",
+      value: {
+        image:
+          "https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/HPMOR_Yudkowsky.jpg/220px-HPMOR_Yudkowsky.jpg",
+      },
     },
     {
-      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium.",
-      description: "text 4",
-      value: "",
-    },
-    {
-      type: "Dis parturient montes, nascetur ridiculus mus.",
-      description: "text 5",
-      value: "",
-    },
-    {
-      type: "Pellentesque eu, pretium.",
-      description: "text 6",
-      value: "",
-    },
-    {
-      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium",
-      description: "text 7",
-      value: "",
-    },
-    {
-      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium",
-      description: "text 8",
-      value: "",
-    },
-    {
-      type: "Donec quam felis, ultricies nec, pellentesque eu, pretium",
-      description: "text 9",
-      value: "",
-    },
-    {
-      type: "Pellentesque eu, pretium",
-      description: "text 10",
-      value: "",
+      list_type: "coordinates",
+      description: "Need add coordinates 1",
+      value: {
+        coordinates: {
+          lat: 52.4134686,
+          lon: 16.9604093,
+        },
+      },
     },
   ],
   comments: [

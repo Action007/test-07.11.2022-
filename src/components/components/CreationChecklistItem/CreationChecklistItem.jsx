@@ -89,7 +89,7 @@ const CreationChecklistItem = ({
   return (
     <li
       onFocus={() => setBlur(id)}
-      onBlur={() => setBlur(false)}
+      onBlur={() => setBlur(id)}
       className="creation-item"
       ref={provide.innerRef}
       // eslint-disable-next-line react/jsx-props-no-spreading
@@ -129,7 +129,9 @@ const CreationChecklistItem = ({
           {ImgSelected}
           {list_type === "coordinates" && (
             <>
-              <GeneralMap setShowMap={setShowMap} creation id={id} />
+              <div className="creation-item__wrapper">
+                <GeneralMap setShowMap={setShowMap} creation id={id} />
+              </div>
               <CSSTransition in={showMap} timeout={300} unmountOnExit>
                 <PopupMap show={showMap} onHide={() => setShowMap(false)}>
                   <GeneralMap popup creation id={id} />

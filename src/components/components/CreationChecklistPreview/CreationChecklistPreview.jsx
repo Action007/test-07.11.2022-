@@ -29,7 +29,10 @@ const CreationChecklistPreview = ({ show, onHide }) => {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Title
+          className="popup-preview__title SFPro-600"
+          id="contained-modal-title-vcenter"
+        >
           {translate("creationOfChecklist.checklistPreview")}
         </Modal.Title>
       </Modal.Header>

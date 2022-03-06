@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import uniqueID from "../../../utils/uniqueId";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
 import PaginationChecklist from "../Pagination/Pagination";
@@ -10,6 +9,7 @@ const AllChecklists = () => {
   const [checklists, setCheckLists] = useState([]);
   const [category, setCategory] = useState(true);
   const { t: translate } = useTranslation();
+  const API_KEY = process.env.REACT_APP_HOSTNAME;
 
   const breadcrumbs = [{ title: translate("allChecklistsPage.title") }];
   const tabs = [
@@ -18,14 +18,10 @@ const AllChecklists = () => {
     { id: 2, name: translate("allChecklistsPage.saved") },
   ];
 
-  const changeChecklistsHandler = (number) => {
-    setCategory(number === 0);
-  };
-
   useEffect(() => {
     const getProducts = async () => {
       const response = await fetch(
-        "http://151.115.40.72:5000/api/v1/checklists_auth?page=1&per_page=10"
+        `${API_KEY}/api/v1/checklists_auth?page=1&per_page=10`
       );
       const responseData = await response.json();
 
@@ -34,6 +30,10 @@ const AllChecklists = () => {
 
     getProducts();
   }, []);
+
+  const changeChecklistsHandler = (number) => {
+    setCategory(number === 0);
+  };
 
   return (
     <div className="pb-8">
@@ -45,7 +45,7 @@ const AllChecklists = () => {
         <Tabs changeHandler={changeChecklistsHandler} tabs={tabs} />
         {checklists.map((checklist) => (
           <Checklist
-            key={uniqueID()}
+            key={checklist.id}
             checklist={checklist}
             translate={translate("allChecklistsPage.showMore")}
             created={category}

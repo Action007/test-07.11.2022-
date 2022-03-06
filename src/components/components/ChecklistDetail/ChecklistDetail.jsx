@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { CSSTransition } from "react-transition-group";
-import GeneralMap from "../GeneralMap/GeneralMap";
-import PopupMap from "../PopupMap/PopupMap";
+import ChecklistItem from "../ChecklistItem/ChecklistItem";
 import uniqueID from "../../../utils/uniqueId";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
@@ -15,9 +13,9 @@ import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark
 import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
 const ChecklistDetail = ({ checklists, preview = false }) => {
-  const { title, checklist, viewed, liked, created_at, tags } = checklists;
+  const { title, checklist_items, viewed, liked, created_at, tags } =
+    checklists;
   const [like, setLike] = useState(false);
-  const [showMap, setShowMap] = useState(false);
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:575px)");
   const { date } = getTime(created_at);
@@ -52,38 +50,13 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
         </div>
       </div>
       <ol className="checklist-detail__items">
-        {checklist.map(({ description, list_type, value, id }) => {
-          return (
-            <li className="checklist-detail__item" key={uniqueID()}>
-              <div className="checklist-detail__list">
-                <p>{description.length && description}</p>
-              </div>
-              {list_type === "coordinates" && (
-                <>
-                  <GeneralMap
-                    setShowMap={setShowMap}
-                    coordinates={value.coordinates}
-                    id={id}
-                  />
-                  <CSSTransition in={showMap} timeout={300} unmountOnExit>
-                    <PopupMap show={showMap} onHide={() => setShowMap(false)}>
-                      <GeneralMap
-                        coordinates={value.coordinates}
-                        id={id}
-                        popup
-                      />
-                    </PopupMap>
-                  </CSSTransition>
-                </>
-              )}
-              {list_type === "image" && (
-                <div className="checklist-detail__image">
-                  <img src={value.image} alt="" />
-                </div>
-              )}
-            </li>
-          );
-        })}
+        {checklist_items.map(({ description, list_type, value }) => (
+          <ChecklistItem
+            description={description}
+            list_type={list_type}
+            value={value}
+          />
+        ))}
       </ol>
       <div className="checklist-detail__tags">
         {preview

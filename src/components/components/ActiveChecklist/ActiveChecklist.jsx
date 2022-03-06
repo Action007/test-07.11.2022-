@@ -10,20 +10,16 @@ const ActiveChecklist = () => {
   const [modalShow, setModalShow] = useState(false);
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklists") }];
+  const API_KEY = process.env.REACT_APP_HOSTNAME;
 
   useEffect(() => {
     const getProducts = async () => {
-      const response = await fetch(
-        "http://151.115.40.72:5000/api/v1/checklists_auth/7"
-      );
+      const response = await fetch(`${API_KEY}/api/v1/checklists_auth/1`);
       const responseData = await response.json();
-
       setChecklist(responseData);
     };
     getProducts();
   }, []);
-
-  const doneChecklistsHandler = () => setModalShow(true);
 
   return (
     <div className="pb-8">
@@ -34,7 +30,7 @@ const ActiveChecklist = () => {
       <ProgressBarChecklist done={50} />
       <ActiveChecklistDetail
         checklist={checklist}
-        checklistsHandler={doneChecklistsHandler}
+        checklistsHandler={() => setModalShow(true)}
       />
       <PopupDone show={modalShow} onHide={() => setModalShow(false)} />
     </div>

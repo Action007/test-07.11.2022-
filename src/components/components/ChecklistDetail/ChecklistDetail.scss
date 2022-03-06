@@ -119,30 +119,6 @@
     margin-bottom: 34px;
   }
 
-  &__item {
-    font-size: 16px;
-    line-height: 1.2;
-
-    &:not(:last-child) {
-      margin-bottom: 16px;
-    }
-  }
-
-  &__image {
-    max-width: 458px;
-    width: 100%;
-    margin-top: 8px;
-    border-radius: 8px;
-    overflow: hidden;
-    display: table;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
   &__show {
     position: relative;
     margin-left: 3px;

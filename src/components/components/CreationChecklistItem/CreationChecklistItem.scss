@@ -11,6 +11,10 @@
     justify-content: flex-end;
   }
 
+  &__wrapper {
+    margin-top: 8px;
+  }
+
   &__inner {
     display: flex;
     flex-direction: column;

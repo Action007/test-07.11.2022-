@@ -15,7 +15,7 @@ const GeneralMap = ({
   setShowMap,
   coordinates = { lat: 51.505, lng: -0.09 },
   popup = false,
-  creation,
+  creation = false,
   id,
 }) => {
   const [showLocation, setShowLocation] = useState(false);
@@ -34,11 +34,15 @@ const GeneralMap = ({
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationMarker show={showLocation} />
-        <AddMarkerToMap
-          coordinates={checklist.value.coordinates}
-          id={id}
-          creation={creation}
-        />
+        {creation ? (
+          <AddMarkerToMap
+            coordinates={checklist.value.coordinates}
+            id={id}
+            creation={creation}
+          />
+        ) : (
+          <AddMarkerToMap coordinates={coordinates} creation={creation} />
+        )}
         <CreationChecklistMapSearch />
       </MapContainer>
       {creation && checklist.value.coordinates ? (

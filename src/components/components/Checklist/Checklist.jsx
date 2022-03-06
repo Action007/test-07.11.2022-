@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
+import ChecklistItem from "../ChecklistItem/ChecklistItem";
+import EditDropdown from "../EditDropdown/EditDropdown";
+import uniqueID from "../../../utils/uniqueId";
+import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 import "./Checklist.scss";
 
 import { ReactComponent as RightArrow } from "../../../assets/images/icon/rightArrow.svg";
@@ -8,9 +12,6 @@ import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg"
 import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
-import EditDropdown from "../EditDropdown/EditDropdown";
-import uniqueID from "../../../utils/uniqueId";
-import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 
 const Checklist = ({
   checklist,
@@ -67,14 +68,16 @@ const Checklist = ({
             <li className="checklist__item" key={uniqueID()}>
               {checklist_items[0].description}
               <button className="checklist__show" type="button">
-                Show more...
+                {translate}...
               </button>
             </li>
           ) : (
-            checklist_items.map(({ description }) => (
-              <li className="checklist__item" key={uniqueID()}>
-                {description}
-              </li>
+            checklist_items.map(({ description, list_type, value }) => (
+              <ChecklistItem
+                description={description}
+                list_type={list_type}
+                value={value}
+              />
             ))
           )}
         </ol>

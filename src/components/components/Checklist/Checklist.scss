@@ -93,14 +93,6 @@
     margin-bottom: 34px;
   }
 
-  &__item {
-    line-height: 1.2;
-
-    &:not(:last-child) {
-      margin-bottom: 10px;
-    }
-  }
-
   &__show {
     position: relative;
     margin-left: 3px;
