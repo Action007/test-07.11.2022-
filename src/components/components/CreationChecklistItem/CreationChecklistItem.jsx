@@ -78,7 +78,7 @@ const CreationChecklistItem = ({
 
   const ImgSelected = value?.image && (
     <>
-      <div className={`${`creation-item__img`}${value.image ? " active" : ""}`}>
+      <div className="creation-item__img">
         <img src={value.image} alt="" />
         <button
           onClick={() => dispatch(createChecklistActions.removeImage(id))}
@@ -96,7 +96,7 @@ const CreationChecklistItem = ({
         </button>
       </div>
       <Modal
-        className="popup-image"
+        className="creation-item__popup"
         show={showImage}
         onHide={setShowImage}
         aria-labelledby="contained-modal-title-vcenter"

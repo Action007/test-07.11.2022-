@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import ChecklistImage from "../ChecklistImage/ChecklistImage";
 import GeneralMap from "../GeneralMap/GeneralMap";
 import PopupMap from "../PopupMap/PopupMap";
 import "./ChecklistCheckbox.scss";
@@ -42,11 +43,7 @@ const ChecklistCheckbox = ({
           </CSSTransition>
         </>
       )}
-      {list_type === "image" && (
-        <div className="checklist-checkbox__image">
-          <img src={value.image} alt="" />
-        </div>
-      )}
+      {list_type === "image" && <ChecklistImage image={value.image} />}
     </li>
   );
 };
