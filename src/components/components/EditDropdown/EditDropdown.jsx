@@ -15,7 +15,6 @@ const EditDropdown = () => {
       <button
         onClick={setShowHandler}
         className="edit-dropdown__button"
-        variant="success"
         type="button"
       >
         <DotsSvg />

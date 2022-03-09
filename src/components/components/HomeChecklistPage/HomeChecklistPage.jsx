@@ -53,17 +53,19 @@ const HomeChecklistPage = () => {
           </div>
         </div>
         <div className="main-content__inner">
-          <div className="main-content__img">
-            <img src={Logo} alt="logotype" />
+          <div className="main-content__container">
+            <div className="main-content__img">
+              <img src={Logo} alt="logotype" />
+            </div>
+            <h3 className="main-content__heading SFPro-600">
+              {translate("mainPage.heading")}
+            </h3>
+            <p className="main-content__desc">{translate("mainPage.desc")}</p>
+            <button className="main-content__button SFPro-600" type="button">
+              <Plus />
+              {translate("mainPage.button")}
+            </button>
           </div>
-          <h3 className="main-content__heading SFPro-600">
-            {translate("mainPage.heading")}
-          </h3>
-          <p className="main-content__desc">{translate("mainPage.desc")}</p>
-          <button className="main-content__button SFPro-600" type="button">
-            <Plus />
-            {translate("mainPage.button")}
-          </button>
         </div>
       </div>
       <PopupLogin show={modalShow} onHide={() => setModalShow(false)} />

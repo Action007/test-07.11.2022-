@@ -2,7 +2,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import "./PopupMap.scss";
 
-const PopupMap = ({ show, onHide, children }) => {
+const PopupOverall = ({ show, onHide, children }) => {
   return (
     <Modal
       className="popup-map"
@@ -19,4 +19,4 @@ const PopupMap = ({ show, onHide, children }) => {
   );
 };
 
-export default PopupMap;
+export default PopupOverall;

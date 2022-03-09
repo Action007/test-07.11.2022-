@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
-import "./SupportForm.scss";
-import { ReactComponent as CloseSvg } from "../../../../assets/images/icon/close.svg";
+import "./Complain.scss";
 
-const SupportForm = ({ onSupportHandler }) => {
+import { ReactComponent as CloseSvg } from "../../../assets/images/icon/close.svg";
+
+const Complain = ({ closeHandler }) => {
   const field = useRef();
   const [empty, setEmpty] = useState(false);
 
@@ -15,17 +16,17 @@ const SupportForm = ({ onSupportHandler }) => {
   };
 
   return (
-    <div className="support-form bg-white br-8">
-      <div className="support-form__wrap d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+    <div className="complain bg-white br-8">
+      <div className="complain__wrap d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
         <span className="SFPro-600">Complain</span>
-        <button onClick={onSupportHandler} type="button">
+        <button onClick={closeHandler} type="button">
           <CloseSvg />
         </button>
       </div>
-      <form className="support-form__form" onSubmit={(e) => submitHandler(e)}>
+      <form className="complain__form" onSubmit={(e) => submitHandler(e)}>
         <label htmlFor="exampleInputText" className="w-100">
           <textarea
-            className={`support-form__textarea form-control ${
+            className={`complain__textarea form-control ${
               empty && "border-danger"
             }`}
             type="text"
@@ -101,22 +102,22 @@ const SupportForm = ({ onSupportHandler }) => {
           </label>
         </div>
         <span className="mb-4 d-block text-light">
-          <a className="support-form__link text-primary" href="/#">
+          <a className="complain__link text-primary" href="/#">
             Learn more&nbsp;
           </a>
           about the rules of Chekclist
         </span>
-        <div className="support-form__buttons">
+        <div className="complain__buttons">
           <Button
-            className="support-form__button py-2 text-dark br-8"
-            onClick={onSupportHandler}
+            className="complain__button py-2 text-dark br-8"
+            onClick={closeHandler}
             variant="secondary"
-            type="submit"
+            type="button"
           >
             Cancel
           </Button>
           <Button
-            className="support-form__button py-2 text-white br-8"
+            className="complain__button py-2 text-white br-8"
             variant="primary"
             type="submit"
           >
@@ -128,4 +129,4 @@ const SupportForm = ({ onSupportHandler }) => {
   );
 };
 
-export default SupportForm;
+export default Complain;

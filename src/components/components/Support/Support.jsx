@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import SupportForm from "./SupportForm/SupportForm";
+import Complain from "../Complain/Complain";
 import "./Support.scss";
 
 import { ReactComponent as SupportImg } from "../../../assets/images/content/support.svg";
@@ -51,7 +51,7 @@ const Support = () => {
             </p>
           </>
         ) : (
-          <SupportForm onSupportHandler={supportHandler} />
+          <Complain closeHandler={supportHandler} />
         )}
       </div>
     </div>

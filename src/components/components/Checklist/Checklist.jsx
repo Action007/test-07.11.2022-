@@ -1,17 +1,20 @@
 import React, { useState } from "react";
+import { CSSTransition } from "react-transition-group";
+import Modal from "react-bootstrap/Modal";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
 import EditDropdown from "../EditDropdown/EditDropdown";
 import uniqueID from "../../../utils/uniqueId";
 import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
+import ComplainDropdown from "../ComplainDropdown/ComplainDropdown";
+import Complain from "../Complain/Complain";
 import "./Checklist.scss";
 
 import { ReactComponent as RightArrow } from "../../../assets/images/icon/rightArrow.svg";
 import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg";
 import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
-import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
 const Checklist = ({
   checklist,
@@ -21,6 +24,7 @@ const Checklist = ({
 }) => {
   const { checklist_items, created_at, liked, name, tags, viewed } = checklist;
   const [like, setLike] = useState(false);
+  const [showComplain, setShowComplain] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:575px)");
   const { date } = getTime(created_at);
   const moreThanFive =
@@ -52,9 +56,7 @@ const Checklist = ({
             <button className="checklist__bookmark" type="button">
               <Bookmark />
             </button>
-            <button className="checklist__info" type="button">
-              <InfoSvg />
-            </button>
+            <ComplainDropdown setShowComplain={setShowComplain} />
           </div>
         )}
       </div>
@@ -121,6 +123,22 @@ const Checklist = ({
           </div>
         </div>
       </div>
+      <CSSTransition in={showComplain} timeout={300} unmountOnExit>
+        <Modal
+          className="popup-complain"
+          show={showComplain}
+          onHide={setShowComplain}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter" />
+          </Modal.Header>
+          <Modal.Body>
+            <Complain closeHandler={() => setShowComplain(false)} />
+          </Modal.Body>
+        </Modal>
+      </CSSTransition>
     </>
   );
 };

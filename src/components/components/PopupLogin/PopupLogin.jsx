@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
@@ -12,6 +12,12 @@ const PopupLogin = ({ show, onHide }) => {
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
   const [state, setState] = useState("signIn");
+
+  useEffect(() => {
+    setNameIsValid(true);
+    setEmailIsValid(true);
+    setPasswordIsValid(true);
+  }, [state]);
 
   const validateEmail = (value) => {
     return String(value)

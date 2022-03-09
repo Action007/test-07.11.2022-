@@ -1,0 +1,45 @@
+@import '../../../global-styles/_variables.scss';
+
+.complain-dropdown {
+  position: relative;
+
+  &__info {
+    border-radius: 8px;
+
+    &:active {
+      background-color: #e6e6e6;
+    }
+  }
+
+  &__button {
+    position: absolute;
+    right: 13px;
+    top: 20px;
+    z-index: 10;
+    overflow: hidden;
+    border-radius: 8px;
+    color: $dark;
+    background-color: #f2f2f2;
+    padding: 5px 36px;
+  }
+}
+
+.complainDropdown-enter {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.complainDropdown-enter-active {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.complainDropdown-exit {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.complainDropdown-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}

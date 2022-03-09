@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
@@ -11,6 +12,7 @@ import "./CreationChecklistItem.scss";
 import { ReactComponent as ChecklistDots } from "../../../assets/images/icon/checklistDots.svg";
 import { ReactComponent as ImgIcon } from "../../../assets/images/icon/img.svg";
 import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel.svg";
+import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-map.svg";
 
 const CreationChecklistItem = ({
   provide,
@@ -25,6 +27,7 @@ const CreationChecklistItem = ({
   const [blur, setBlur] = useState(false);
   const [state, setState] = useState("text");
   const [showMap, setShowMap] = useState(false);
+  const [showImage, setShowImage] = useState(false);
   const focusOnCreate = useRef();
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
@@ -74,16 +77,39 @@ const CreationChecklistItem = ({
   );
 
   const ImgSelected = value?.image && (
-    <div className={`${`creation-item__img`}${value.image ? " active" : ""}`}>
-      <img src={value.image} alt="" />
-      <button
-        onClick={() => dispatch(createChecklistActions.removeImage(id))}
-        className="creation-item__remove"
-        type="button"
+    <>
+      <div className={`${`creation-item__img`}${value.image ? " active" : ""}`}>
+        <img src={value.image} alt="" />
+        <button
+          onClick={() => dispatch(createChecklistActions.removeImage(id))}
+          className="creation-item__remove"
+          type="button"
+        >
+          <CancelIcon />
+        </button>
+        <button
+          onClick={() => setShowImage(true)}
+          className="creation-item__extend"
+          type="button"
+        >
+          <ExtendSvg />
+        </button>
+      </div>
+      <Modal
+        className="popup-image"
+        show={showImage}
+        onHide={setShowImage}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
       >
-        <CancelIcon />
-      </button>
-    </div>
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter" />
+        </Modal.Header>
+        <Modal.Body>
+          <img src={value.image} alt="" />
+        </Modal.Body>
+      </Modal>
+    </>
   );
 
   return (

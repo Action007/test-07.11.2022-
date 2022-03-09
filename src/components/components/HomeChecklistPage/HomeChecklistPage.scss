@@ -1,4 +1,5 @@
 @import '../../../global-styles/_variables.scss';
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .main-content {
   &__wrapper {
@@ -25,7 +26,7 @@
     max-width: 1920px;
     width: 100%;
     margin: 0 auto;
-    padding: 93px 170px 101px;
+    padding: 93px 0 101px;
     background-color: #fff;
 
     &::before {
@@ -56,6 +57,17 @@
       background-position: center;
       background-size: contain;
       z-index: 0;
+    }
+  }
+
+  &__container {
+    max-width: 1614px;
+    width: 100%;
+    padding: 0 34px;
+    margin: 0 auto;
+
+    @include media-breakpoint-down(md) {
+      padding: 0 16px;
     }
   }
 
