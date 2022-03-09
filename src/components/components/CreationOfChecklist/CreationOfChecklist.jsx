@@ -19,7 +19,9 @@ const CreationOfChecklist = () => {
   const [addTags, setAddTags] = useState(false);
   const [titleValid, setTitleValid] = useState(true);
   const [tagsValid, setTagsValid] = useState(true);
-  const checklists = useSelector((state) => state.createChecklist.checklists);
+  const checklist_items = useSelector(
+    (state) => state.createChecklist.checklist_items
+  );
   const tags = useSelector((state) => state.createChecklist.tags);
   const title = useSelector((state) => state.createChecklist.title);
   const inputTag = useRef();
@@ -64,19 +66,21 @@ const CreationOfChecklist = () => {
     if (e.target) e.preventDefault();
     const titleIsValid = title.trim().length < 151 && title.trim().length > 0;
     const tagsIsValid = tags.length > 2;
-    const checklistIsEmpty = checklists.find(
+    const checklistIsEmpty = checklist_items.find(
       (item) => item.description.trim().length === 0
     );
-    const checklistIsValid = checklists.find(
+    const checklistIsValid = checklist_items.find(
       (item) => item.description.trim().length > 150
     );
     setTitleValid(titleIsValid);
     setTagsValid(tagsIsValid);
-    if (!checklists.length) dispatch(createChecklistActions.addChecklist());
+    if (!checklist_items.length) {
+      dispatch(createChecklistActions.addChecklist());
+    }
     dispatch(createChecklistActions.isValid());
 
     if (
-      checklists.length &&
+      checklist_items.length &&
       !checklistIsValid &&
       !checklistIsEmpty &&
       titleIsValid &&
@@ -123,7 +127,7 @@ const CreationOfChecklist = () => {
 
   return (
     <>
-      <div className="creation pb-8">
+      <div className="container creation pb-8">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <h2 className="creation__title SFPro-600">
           {translate("creationOfChecklist.title")}
@@ -166,7 +170,7 @@ const CreationOfChecklist = () => {
                   {translate("creationOfChecklist.addBtn")}
                 </button>
               </div>
-              <CreationChecklistItems checklistItems={checklists} />
+              <CreationChecklistItems checklist_items={checklist_items} />
               <h3 className="creation__head SFPro-700">
                 {translate("creationOfChecklist.tags")}
               </h3>

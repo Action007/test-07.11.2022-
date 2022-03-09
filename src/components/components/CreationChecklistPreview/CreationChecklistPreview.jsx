@@ -6,13 +6,15 @@ import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
 import "./CreationChecklistPreview.scss";
 
 const CreationChecklistPreview = ({ show, onHide }) => {
-  const checklist = useSelector((state) => state.createChecklist.checklists);
+  const checklist_items = useSelector(
+    (state) => state.createChecklist.checklist_items
+  );
   const tags = useSelector((state) => state.createChecklist.tags);
   const title = useSelector((state) => state.createChecklist.title);
   const { t: translate } = useTranslation();
 
   const checklists = {
-    checklist,
+    checklist_items,
     tags,
     title,
     viewed: 0,

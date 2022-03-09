@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import uniqueID from "../../../utils/uniqueId";
 import GeneralMap from "../GeneralMap/GeneralMap";
 import PopupMap from "../PopupMap/PopupMap";
 import "./ChecklistItem.scss";
@@ -9,7 +8,7 @@ const ChecklistItem = ({ description, list_type, value }) => {
   const [showMap, setShowMap] = useState(false);
 
   return (
-    <li className="checklist-item" key={uniqueID()}>
+    <li className="checklist-item">
       <p>{description}</p>
       {list_type === "coordinates" && (
         <>

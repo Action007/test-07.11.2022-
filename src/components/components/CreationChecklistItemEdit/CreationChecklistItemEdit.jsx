@@ -8,7 +8,9 @@ import { ReactComponent as MapIcon } from "../../../assets/images/icon/map.svg";
 import { ReactComponent as TrashIcon } from "../../../assets/images/icon/trash.svg";
 
 const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
-  const checklists = useSelector((state) => state.createChecklist.checklists);
+  const checklists = useSelector(
+    (state) => state.createChecklist.checklist_items
+  );
   const type = checklists.find((item) => item.id === id).list_type;
   const [isActive, setIsActive] = useState(type);
   const activeText = `checklist-edit__item ${

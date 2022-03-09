@@ -72,11 +72,6 @@
     flex-direction: column;
     cursor: pointer;
 
-    &.active {
-      display: table;
-      height: auto;
-    }
-
     svg {
       stroke: $dark;
       margin-bottom: 16px;

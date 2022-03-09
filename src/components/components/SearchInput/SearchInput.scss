@@ -1,11 +1,10 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .search-input {
   margin-right: 24px;
   margin-left: auto;
   width: 100%;
-  max-width: 672px;
 
   &__label {
     position: relative;
@@ -19,13 +18,13 @@
     background-color: #fff;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 24px;
       bottom: 50%;
       width: 24px;
       height: 24px;
-      background-image: url("../../../assets/images/icon/search.svg");
+      background-image: url('../../../assets/images/icon/search.svg');
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
@@ -50,6 +49,10 @@
     padding: 0 20px 0 64px;
     width: 100%;
     height: 100%;
+
+    &::placeholder {
+      color: #bababa;
+    }
 
     @include media-breakpoint-down(sm) {
       padding: 0 15px 0 50px;

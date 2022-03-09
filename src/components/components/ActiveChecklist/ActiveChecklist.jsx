@@ -22,7 +22,7 @@ const ActiveChecklist = () => {
   }, []);
 
   return (
-    <div className="pb-8">
+    <div className="container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <h2 className="mb-5 display-4 text-center SFPro-600">
         {translate("checklists")}

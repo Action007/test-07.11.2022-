@@ -51,9 +51,9 @@ const Header = () => {
           </Navbar.Toggle>
           {showAddButtonOnMobile && (
             <Link className="header__btn-link" to="/creation-of-checklist">
-              <Button className="header__btn text-white br-8" variant="primary">
+              <button className="header__btn br-8" type="button">
                 <Plus />
-              </Button>
+              </button>
             </Link>
           )}
           <Navbar.Collapse className="order-4" id="navbarScroll">
@@ -72,13 +72,10 @@ const Header = () => {
             <HeaderDropdown />
             {!showAddButtonOnMobile && (
               <Link to="/creation-of-checklist">
-                <Button
-                  className="header__btn text-white br-8"
-                  variant="primary"
-                >
+                <button className="header__btn br-8" type="button">
                   <Plus />
                   Create
-                </Button>
+                </button>
               </Link>
             )}
           </Navbar.Collapse>

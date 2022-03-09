@@ -21,7 +21,7 @@ const Contacts = () => {
   );
 
   return (
-    <div className="contacts pb-8">
+    <div className="container contacts pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {showTitleOnMobile && title}
       <div className="contacts__wrapper d-flex justify-content-around align-items-center">

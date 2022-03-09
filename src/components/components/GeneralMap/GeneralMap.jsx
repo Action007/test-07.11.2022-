@@ -20,8 +20,10 @@ const GeneralMap = ({
 }) => {
   const [showLocation, setShowLocation] = useState(false);
   const dispatch = useDispatch();
-  const checklists = useSelector((state) => state.createChecklist.checklists);
-  const checklist = checklists.find((item) => item.id === id);
+  const checklist_items = useSelector(
+    (state) => state.createChecklist.checklist_items
+  );
+  const checklist = checklist_items.find((item) => item.id === id);
   const removeMarkerHandler = () => {
     dispatch(createChecklistActions.removeCoordinate(id));
   };

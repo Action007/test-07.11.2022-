@@ -1,0 +1,120 @@
+@import '../../../global-styles/_variables.scss';
+
+.main-content {
+  &__wrapper {
+    display: flex;
+    margin-bottom: 100px;
+  }
+
+  &__wrap {
+    max-width: 834px;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .search-input {
+    margin-bottom: 38px;
+  }
+
+  &__inner {
+    position: relative;
+    max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 93px 170px 101px;
+    background-color: #fff;
+
+    &::before {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      max-width: 414px;
+      width: 100%;
+      height: 331px;
+      background-image: url('../../../assets/images/content/main-bgc1.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      z-index: 0;
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      right: 24px;
+      bottom: 0;
+      max-width: 939px;
+      width: 100%;
+      height: 608px;
+      background-image: url('../../../assets/images/content/main-bgc2.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      z-index: 0;
+    }
+  }
+
+  &__img {
+    position: relative;
+    max-width: 150px;
+    width: 100%;
+    height: 36px;
+    margin-bottom: 29px;
+    z-index: 1;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__heading {
+    position: relative;
+    max-width: 547px;
+    font-size: 42px;
+    margin-bottom: 44px;
+    z-index: 1;
+  }
+
+  &__desc {
+    position: relative;
+    max-width: 491px;
+    margin-bottom: 69px;
+    z-index: 1;
+  }
+
+  &__button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #fff;
+    padding: 18px 56px 18px 60px;
+    background-color: $primary;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    z-index: 1;
+
+    &:hover {
+      background-color: transparent;
+      border-color: $primary;
+      color: $primary;
+
+      svg {
+        stroke: $primary;
+      }
+    }
+
+    svg {
+      margin-right: 11px;
+      stroke: #fff;
+      transition: stroke 0.3s ease;
+    }
+  }
+}

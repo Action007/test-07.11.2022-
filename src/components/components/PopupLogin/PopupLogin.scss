@@ -1,0 +1,52 @@
+.popup-login {
+  .modal-dialog {
+    max-width: 1235px;
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .modal-header {
+    padding: 0;
+    height: 0;
+    border: none;
+  }
+
+  .modal-body {
+    padding: 0;
+  }
+
+  .modal-content {
+    position: relative;
+    border: none;
+  }
+
+  .btn-close {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    z-index: 1;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  &__img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 611px;
+    width: 100%;
+    min-height: 100%;
+    background-color: #f0f5fe;
+
+    svg {
+      max-width: 465px;
+      width: 100%;
+    }
+  }
+}

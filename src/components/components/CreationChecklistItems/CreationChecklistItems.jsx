@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import CreationChecklistItem from "../CreationChecklistItem/CreationChecklistItem";
 
-const CreationChecklistItems = ({ checklistItems }) => {
+const CreationChecklistItems = ({ checklist_items }) => {
   const dispatch = useDispatch();
 
   return (
@@ -20,13 +20,13 @@ const CreationChecklistItems = ({ checklistItems }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {checklistItems.map(
+            {checklist_items.map(
               ({ list_type, description, value, inValid, id }, index) => (
                 <Draggable key={id} draggableId={id} index={index}>
                   {(provide) => (
                     <CreationChecklistItem
                       provide={provide}
-                      checklists={checklistItems}
+                      checklist_items={checklist_items}
                       list_type={list_type}
                       description={description}
                       number={index + 1}

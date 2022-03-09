@@ -14,7 +14,7 @@ import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel
 
 const CreationChecklistItem = ({
   provide,
-  checklists,
+  checklist_items,
   description,
   list_type,
   number,
@@ -31,7 +31,7 @@ const CreationChecklistItem = ({
 
   useEffect(() => {
     if (!focusOnCreate.current) return;
-    if (checklists.length === 1) return;
+    if (checklist_items.length === 1) return;
     focusOnCreate.current.focus();
   }, []);
 

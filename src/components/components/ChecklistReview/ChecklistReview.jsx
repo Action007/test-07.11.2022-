@@ -142,7 +142,7 @@ const ChecklistReview = () => {
   const breadcrumbs = [{ title: translate("checklistReviewPage.title") }];
 
   return (
-    <div className="pb-8">
+    <div className="container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <ChecklistDetail checklists={data} />
       <ChecklistComments comments={data.comments} />

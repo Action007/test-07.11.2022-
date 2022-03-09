@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
-import PaginationChecklist from "../Pagination/Pagination";
+import PaginationChecklist from "../PaginationChecklist/PaginationChecklist";
 import Tabs from "../Tabs/Tabs";
 
 const AllChecklists = () => {
@@ -36,7 +36,7 @@ const AllChecklists = () => {
   };
 
   return (
-    <div className="pb-8">
+    <div className="container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrap">
         <h2 className="mb-5 display-4 text-center SFPro-600">

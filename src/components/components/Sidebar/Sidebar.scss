@@ -1,0 +1,161 @@
+@import '../../../global-styles/_variables.scss';
+
+.sidebar {
+  max-width: 326px;
+  width: 100%;
+  margin-right: 45px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__head {
+    padding: 18px 28px;
+    background-color: #646464;
+    font-size: 20px;
+    color: #fff;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    width: 100%;
+    padding: 7px 12px 22px;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 12px 22px;
+    width: 100%;
+    text-align: left;
+    border-radius: 8px;
+
+    &.active {
+      background-color: $primary;
+      color: #fff;
+
+      svg {
+        stroke: #fff;
+      }
+    }
+
+    svg {
+      margin-right: 25px;
+      width: 25px;
+      height: 25px;
+      stroke: $dark;
+    }
+  }
+
+  &__label {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 12px 22px;
+    margin-left: 48px;
+    font-size: 16px;
+
+    input {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+  &__checkmark {
+    position: absolute;
+    left: -26px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+    background-image: url('../../../assets/images/icon/checkbox.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: none;
+    }
+  }
+
+  &__label:hover input ~ &__checkmark {
+    background-color: #65c17e1a;
+  }
+
+  &__label input:checked ~ &__checkmark {
+    background-image: url('../../../assets/images/icon/checkboxActive.svg');
+  }
+
+  &__label input:checked ~ &__checkmark::after {
+    display: block;
+  }
+
+  &__label input:checked ~ &__number {
+    color: $primary;
+  }
+
+  &__label &__checkmark::after {
+    right: 5px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    background-image: url('../../../assets/images/icon/tick.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &__active {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 12px 22px;
+    width: 100%;
+    text-align: left;
+    border-radius: 8px;
+    color: #fc5757;
+    background-color: #eb565617;
+
+    svg {
+      margin-right: 25px;
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+
+  &__more {
+    font-size: 16px;
+    padding: 4px 8px;
+    color: #2b74c6;
+  }
+
+  &__tag {
+    display: inline-block;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    padding: 4px 8px;
+    background: #407bff1a;
+    color: #467399;
+
+    &:not(:last-child) {
+      margin-right: 4px;
+    }
+  }
+}

@@ -23,10 +23,13 @@ body {
 
 .main {
   flex-grow: 1;
-  margin: 116px auto 0;
-  padding: 0 34px;
+}
+
+.container {
+  max-width: 1614px;
   width: 100%;
-  max-width: 1580px;
+  padding: 0 34px;
+  margin: 116px auto 0;
 
   @include media-breakpoint-down(xl) {
     margin-top: 0;
@@ -35,6 +38,11 @@ body {
   @include media-breakpoint-down(md) {
     padding: 0 16px;
   }
+}
+
+.container-wrapper {
+  margin: 0 auto;
+  max-width: 1047px;
 }
 
 .sr-only {
@@ -54,7 +62,7 @@ ul {
 }
 
 ol {
-  padding-left: 21px;
+  padding-left: 14px;
 }
 
 a {
@@ -71,11 +79,6 @@ button {
   color: inherit;
   background: none;
   cursor: pointer;
-}
-
-.container-wrapper {
-  margin: 0 auto;
-  max-width: 1047px;
 }
 
 .br-8 {

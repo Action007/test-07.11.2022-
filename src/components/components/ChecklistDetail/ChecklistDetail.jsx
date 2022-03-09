@@ -52,6 +52,7 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
       <ol className="checklist-detail__items">
         {checklist_items.map(({ description, list_type, value }) => (
           <ChecklistItem
+            key={uniqueID()}
             description={description}
             list_type={list_type}
             value={value}
@@ -60,13 +61,13 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
       </ol>
       <div className="checklist-detail__tags">
         {preview
-          ? tags.map(({ name, id }) => (
-              <span className="checklist-detail__tag" key={id}>
+          ? tags.map(({ name }) => (
+              <span key={uniqueID()} className="checklist-detail__tag">
                 {name}
               </span>
             ))
           : tags.map((tag) => (
-              <span className="checklist-detail__tag" key={uniqueID()}>
+              <span key={uniqueID()} className="checklist-detail__tag">
                 {tag}
               </span>
             ))}

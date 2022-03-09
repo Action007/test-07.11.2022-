@@ -6,18 +6,20 @@
   }
 
   &:not(:last-child) {
-    margin-bottom: 11px;
+    margin-bottom: 16px;
   }
 
   &__image {
-    display: table;
     max-width: 460px;
     width: 100%;
     height: 230px;
+    border-radius: 8px;
+    overflow: hidden;
 
     img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
   }
 }
