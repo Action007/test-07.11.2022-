@@ -1,5 +1,5 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .checklist {
   position: relative;
@@ -41,6 +41,7 @@
     margin-bottom: 18px;
     padding-right: 25px;
     font-size: 1.5rem;
+    word-break: break-word;
 
     @include media-breakpoint-down(md) {
       font-size: 1.3rem;
@@ -81,7 +82,7 @@
     }
 
     &:hover {
-      box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+      box-shadow: 0 0 6px 0 #0000005e;
     }
 
     @include media-breakpoint-down(sm) {
@@ -91,6 +92,7 @@
 
   &__items {
     margin-bottom: 34px;
+    word-break: break-word;
   }
 
   &__show {
@@ -99,7 +101,7 @@
     color: $primary;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 50%;
       bottom: 0;
@@ -229,7 +231,7 @@
     }
 
     &:hover {
-      box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+      box-shadow: 0 0 6px 0 #0000005e;
     }
 
     &.active {

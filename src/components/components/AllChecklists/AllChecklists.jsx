@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
@@ -7,15 +8,16 @@ import Tabs from "../Tabs/Tabs";
 
 const AllChecklists = () => {
   const [checklists, setCheckLists] = useState([]);
-  const [category, setCategory] = useState(true);
+  const [category, setCategory] = useState("created");
+  const { pathname } = useLocation();
   const { t: translate } = useTranslation();
   const API_KEY = process.env.REACT_APP_HOSTNAME;
 
   const breadcrumbs = [{ title: translate("allChecklistsPage.title") }];
   const tabs = [
-    { id: 0, name: translate("allChecklistsPage.created") },
-    { id: 1, name: translate("allChecklistsPage.liked") },
-    { id: 2, name: translate("allChecklistsPage.saved") },
+    { id: 0, key: "created", title: translate("allChecklistsPage.created") },
+    { id: 1, key: "liked", title: translate("allChecklistsPage.liked") },
+    { id: 2, key: "saved", title: translate("allChecklistsPage.saved") },
   ];
 
   useEffect(() => {
@@ -27,12 +29,16 @@ const AllChecklists = () => {
 
       setCheckLists(responseData.entities);
     };
-
     getProducts();
   }, []);
 
-  const changeChecklistsHandler = (number) => {
-    setCategory(number === 0);
+  useEffect(() => {
+    if (pathname === "/saved-checklists") setCategory(false);
+    if (pathname === "/all-checklists") setCategory(true);
+  }, [pathname]);
+
+  const changeChecklistsHandler = (key) => {
+    setCategory(key === "created");
   };
 
   return (
@@ -42,7 +48,11 @@ const AllChecklists = () => {
         <h2 className="mb-5 display-4 text-center SFPro-600">
           {translate("allChecklistsPage.title")}
         </h2>
-        <Tabs changeHandler={changeChecklistsHandler} tabs={tabs} />
+        <Tabs
+          changeHandler={changeChecklistsHandler}
+          tabs={tabs}
+          category={category}
+        />
         {checklists.map((checklist) => (
           <Checklist
             key={checklist.id}

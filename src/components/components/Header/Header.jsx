@@ -32,7 +32,7 @@ const Header = () => {
       <Navbar className={scrollClass} expand="md">
         <Container className="p-0" fluid>
           <Navbar.Brand className="header__logo">
-            <Link to="/">
+            <Link to="/home">
               <img
                 src={Logo}
                 width="161"
@@ -63,10 +63,12 @@ const Header = () => {
                 <Link className="header__progress" to="/my-active-checklists">
                   <ProgressBarHeader done={29} />
                 </Link>
-                <Button className="header__bookmark">
-                  <Bookmark />
-                  <span className="header__span">22</span>
-                </Button>
+                <Link to="/saved-checklists">
+                  <Button className="header__bookmark">
+                    <Bookmark />
+                    <span className="header__span">22</span>
+                  </Button>
+                </Link>
               </>
             )}
             <HeaderDropdown />

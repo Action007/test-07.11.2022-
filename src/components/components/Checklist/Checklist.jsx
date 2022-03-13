@@ -27,11 +27,7 @@ const Checklist = ({
   const [showComplain, setShowComplain] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:575px)");
   const { date } = getTime(created_at);
-  const moreThanFive =
-    checklist_items.length > 5 ||
-    checklist_items.find(
-      (item) => item.list_type === "image" || item.list_type !== "coordinates"
-    );
+  const moreThanFive = checklist_items.length > 5;
   const likeClass = `checklist__liked SFPro-700${liked ? " active" : ""}${
     like ? " liked" : ""
   }`;
@@ -116,7 +112,7 @@ const Checklist = ({
                 type="button"
               >
                 <LikeSvg />
-                <span>{liked}</span>
+                <span>{like ? liked + 1 : liked}</span>
               </button>
             </div>
             {!showOnMobile && time}

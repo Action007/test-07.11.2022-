@@ -45,7 +45,7 @@ const GeneralMap = ({
         ) : (
           <AddMarkerToMap coordinates={coordinates} creation={creation} />
         )}
-        <CreationChecklistMapSearch />
+        <CreationChecklistMapSearch id={id} />
       </MapContainer>
       {creation && checklist.value.coordinates ? (
         <button

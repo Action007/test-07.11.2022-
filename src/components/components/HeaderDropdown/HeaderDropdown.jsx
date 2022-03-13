@@ -42,7 +42,7 @@ const HeaderDropdown = () => {
           <Link
             onClick={setShowHandler}
             className="header-dropdown__inner"
-            to="/Active-Checklists"
+            to="/my-active-checklists"
           >
             <span className="header-dropdown__percent">60%</span>
             <div className="header-dropdown__progress">

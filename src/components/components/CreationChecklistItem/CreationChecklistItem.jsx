@@ -38,17 +38,16 @@ const CreationChecklistItem = ({
     focusOnCreate.current.focus();
   }, []);
 
-  const onChangeHandler = (e) => {
+  const onChangeValueHandler = (e) => {
     // eslint-disable-next-line no-shadow
     const { value } = e.target;
-    dispatch(createChecklistActions.changeChecklistValue({ value, id }));
+    dispatch(createChecklistActions.changeChecklistInputValue({ value, id }));
   };
 
   const checklistTypeHandler = (str) => {
     if (state === str) return;
     dispatch(createChecklistActions.defineChecklist({ str, id }));
     setState(str);
-    dispatch(createChecklistActions.removeImage());
   };
 
   const addItemOnEnter = (e) => {
@@ -76,7 +75,7 @@ const CreationChecklistItem = ({
     </label>
   );
 
-  const ImgSelected = value?.image && (
+  const ImgSelected = list_type === "image" && value?.image && (
     <>
       <div className="creation-item__img">
         <img src={value.image} alt="" />
@@ -123,7 +122,7 @@ const CreationChecklistItem = ({
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...provide.dragHandleProps}
     >
-      <div className="creation-item__wrap">
+      <div className={`creation-item__wrap${inValid ? " invalid" : ""}`}>
         <div
           className={`creation-item__number SFPro-600${
             inValid ? " invalid" : ""
@@ -133,12 +132,17 @@ const CreationChecklistItem = ({
           {number}.
         </div>
         <div className="creation-item__inner">
+          {inValid && (
+            <span className="creation-item__invalid">
+              {translate("creationOfChecklist.max")}
+            </span>
+          )}
           <label
             className={`creation-item__name${inValid ? " invalid" : ""}`}
             htmlFor={id}
           >
             <input
-              onChange={(e) => onChangeHandler(e)}
+              onChange={(e) => onChangeValueHandler(e)}
               onKeyPress={(e) => addItemOnEnter(e)}
               value={description}
               ref={focusOnCreate}
@@ -146,11 +150,6 @@ const CreationChecklistItem = ({
               id={id}
             />
           </label>
-          {inValid && (
-            <span className="creation-item__invalid">
-              {translate("creationOfChecklist.max")}
-            </span>
-          )}
           {list_type === "image" && !value.image && selectImg}
           {ImgSelected}
           {list_type === "coordinates" && (

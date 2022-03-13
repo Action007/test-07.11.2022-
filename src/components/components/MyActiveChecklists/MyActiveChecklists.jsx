@@ -13,8 +13,8 @@ const MyActiveChecklists = () => {
 
   const breadcrumbs = [{ title: translate("myActiveChecklists.title") }];
   const tabs = [
-    { id: 0, name: translate("myActiveChecklists.active") },
-    { id: 1, name: translate("myActiveChecklists.passed") },
+    { id: 0, key: "active", title: translate("myActiveChecklists.active") },
+    { id: 1, key: "passed", title: translate("myActiveChecklists.passed") },
   ];
 
   const changeChecklistsHandler = (number) => {
@@ -41,7 +41,11 @@ const MyActiveChecklists = () => {
         <h2 className="mb-5 display-4 text-center SFPro-600">
           {translate("myActiveChecklists.title")}
         </h2>
-        <Tabs changeHandler={changeChecklistsHandler} tabs={tabs} />
+        <Tabs
+          changeHandler={changeChecklistsHandler}
+          tabs={tabs}
+          category="active"
+        />
         {checklists.map((checklist) => (
           <Checklist
             key={uniqueID()}

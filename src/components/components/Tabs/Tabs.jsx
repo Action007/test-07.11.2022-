@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "./Tabs.scss";
 
-const Tabs = ({ tabs, changeHandler }) => {
-  const [active, setActive] = useState(0);
+const Tabs = ({ tabs, changeHandler, category }) => {
+  const [key, setKey] = useState(category);
+  const { pathname } = useLocation();
 
-  const handleClick = (id) => {
-    setActive(id);
-    changeHandler(id);
+  useEffect(() => {
+    if (pathname === "/saved-checklists") setKey("saved");
+    if (pathname === "/all-checklists") setKey("created");
+  }, [pathname]);
+
+  // eslint-disable-next-line no-shadow
+  const handleClick = (key) => {
+    setKey(key);
+    changeHandler(key);
   };
 
   return (
@@ -15,11 +23,11 @@ const Tabs = ({ tabs, changeHandler }) => {
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => handleClick(tab.id)}
-            className={`tabs__button${active === tab.id ? " active" : ""}`}
+            onClick={() => handleClick(tab.key)}
+            className={`tabs__button${key === tab.key ? " active" : ""}`}
             type="button"
           >
-            {tab.name}
+            {tab.title}
           </button>
         ))}
       </div>

@@ -9,7 +9,6 @@ const ChecklistCheckbox = ({
   description,
   list_type,
   value,
-  num,
   idFor,
   checklistsHandler,
 }) => {
@@ -30,7 +29,6 @@ const ChecklistCheckbox = ({
           type="checkbox"
         />
         <span className="checklist-checkbox__checkmark" />
-        <span className="checklist-checkbox__number">{num}.</span>
         <p className="checklist-checkbox__todo">{description}</p>
       </label>
       {list_type === "coordinates" && (

@@ -32,7 +32,7 @@ const Comment = ({ date, nickname, message, likes, dislikes }) => {
         type="button"
       >
         <LikeSvg />
-        {likes}
+        {like ? likes + 1 : likes}
       </button>
       <button
         onClick={setDislikeHandler}
@@ -42,7 +42,7 @@ const Comment = ({ date, nickname, message, likes, dislikes }) => {
         type="button"
       >
         <LikeSvg />
-        {dislikes}
+        {dislike ? dislikes + 1 : dislikes}
       </button>
     </li>
   );

@@ -89,6 +89,7 @@ const CreationOfChecklist = () => {
       if (type === "preview") {
         setPreview(true);
       } else if (type === "submit") {
+        dispatch(createChecklistActions.onSubmitClear());
         setDone(true);
       }
     }

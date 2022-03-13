@@ -179,5 +179,9 @@
     "enterAPassword": "Enter a password",
     "newPassword": "New password",
     "confirmPassword": "Confirm password"
+  },
+  "pageNotFount": {
+    "title": "Oops..  Sorry, page not found",
+    "button": "Go back to the main page"
   }
 }

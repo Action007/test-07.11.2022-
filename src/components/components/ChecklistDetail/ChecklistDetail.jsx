@@ -93,7 +93,7 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
               type="button"
             >
               <LikeSvg />
-              <span>{liked}</span>
+              <span>{like ? liked + 1 : liked}</span>
             </button>
           </div>
           {!showOnMobile && time}

@@ -1,0 +1,36 @@
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+
+.error {
+  &__title {
+    @include media-breakpoint-down(sm) {
+      font-size: 24px;
+    }
+  }
+
+  &__img {
+    max-width: 571px;
+    width: 100%;
+
+    @include media-breakpoint-down(sm) {
+      max-width: 223px;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+
+    button {
+      background-color: $primary;
+      padding: 14px 37px;
+      border-radius: 8px;
+      color: #fff;
+    }
+  }
+}

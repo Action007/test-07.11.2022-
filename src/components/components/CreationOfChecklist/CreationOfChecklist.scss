@@ -59,6 +59,7 @@
   }
 
   &__span.invalid {
+    font-size: 14px;
     color: $warning;
   }
 
@@ -69,7 +70,7 @@
 
     &.invalid {
       input {
-        border-color: $warning;
+        border-color: $warning !important;
       }
     }
 
@@ -134,6 +135,7 @@
   &__desc {
     display: block;
     margin-bottom: 10px;
+    font-size: 14px;
 
     &.invalid {
       color: $warning;

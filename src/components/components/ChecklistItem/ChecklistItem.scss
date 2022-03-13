@@ -1,5 +1,6 @@
 .checklist-item {
   line-height: 1.2;
+  word-break: break-word;
 
   &:not(:last-child) {
     margin-bottom: 16px;

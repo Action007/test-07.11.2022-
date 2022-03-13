@@ -5,7 +5,8 @@
   max-width: 458px;
   width: 100%;
   height: 231px;
-  margin-top: 5px;
+  margin-top: 8px;
+  transform: translateX(-14px);
 
   &__location,
   &__del,
@@ -85,6 +86,7 @@
   .leaflet-container .leaflet-control-attribution,
   .leaflet-container .leaflet-control-scale {
     font-size: 10px;
+    color: $dark;
   }
 
   .leaflet-control-geocoder-alternatives li {
@@ -124,5 +126,9 @@
   .leaflet-control-geocoder-icon {
     background-image: url('../../../assets/images/icon/search.svg');
     background-size: contain;
+  }
+
+  .leaflet-control-attribution a {
+    color: $primary;
   }
 }

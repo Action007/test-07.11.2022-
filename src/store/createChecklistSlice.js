@@ -26,16 +26,20 @@ const createChecklistSlice = createSlice({
 
       if (str === "text") {
         state.checklist_items = state.checklist_items.map((item) =>
-          item.id === id ? { ...item, list_type: "text", value: {} } : item
+          item.id === id
+            ? { ...item, list_type: "text", value: { ...item.value } }
+            : item
         );
       } else if (str === "image") {
         state.checklist_items = state.checklist_items.map((item) =>
-          item.id === id ? { ...item, list_type: "image", value: {} } : item
+          item.id === id
+            ? { ...item, list_type: "image", value: { ...item.value } }
+            : item
         );
       } else if (str === "coordinates") {
         state.checklist_items = state.checklist_items.map((item) =>
           item.id === id
-            ? { ...item, list_type: "coordinates", value: {} }
+            ? { ...item, list_type: "coordinates", value: { ...item.value } }
             : item
         );
       } else if (str === "delete") {
@@ -44,7 +48,7 @@ const createChecklistSlice = createSlice({
         );
       }
     },
-    changeChecklistValue(state, action) {
+    changeChecklistInputValue(state, action) {
       const { value, id } = action.payload;
 
       state.checklist_items = state.checklist_items.map((item) =>
@@ -85,13 +89,17 @@ const createChecklistSlice = createSlice({
     addCoordinate(state, action) {
       const { id, latLng } = action.payload;
       state.checklist_items = state.checklist_items.map((item) =>
-        item.id === id ? { ...item, value: { coordinates: latLng } } : item
+        item.id === id
+          ? { ...item, value: { ...item.value, coordinates: latLng } }
+          : item
       );
     },
     removeCoordinate(state, action) {
       const id = action.payload;
       state.checklist_items = state.checklist_items.map((item) =>
-        item.id === id ? { ...item, value: {} } : item
+        item.id === id
+          ? { ...item, value: { ...item.value, coordinates: {} } }
+          : item
       );
     },
     isValid(state) {
@@ -101,6 +109,11 @@ const createChecklistSlice = createSlice({
           ? { ...item, inValid: false }
           : { ...item, inValid: true }
       );
+    },
+    onSubmitClear(state) {
+      state.title = "";
+      state.checklist_items = [];
+      state.tags = [];
     },
   },
 });
