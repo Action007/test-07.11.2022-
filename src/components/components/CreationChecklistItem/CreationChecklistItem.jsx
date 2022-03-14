@@ -117,16 +117,16 @@ const CreationChecklistItem = ({
   return (
     <li
       onFocus={() => setBlur(id)}
-      onBlur={() => setBlur(id)}
+      onBlur={() => setBlur(false)}
       className="creation-item"
       ref={provide.innerRef}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...provide.draggableProps}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...provide.dragHandleProps}
     >
       <div className={`creation-item__wrap${inValid ? " invalid" : ""}`}>
         <div
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          {...provide.dragHandleProps}
           className={`creation-item__number SFPro-600${
             inValid ? " invalid" : ""
           }`}
