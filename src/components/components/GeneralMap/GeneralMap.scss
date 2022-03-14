@@ -1,57 +1,45 @@
-@import '../../../global-styles/_variables.scss';
+@import "../../../global-styles/_variables.scss";
 
 .creation-map {
   position: relative;
-  max-width: 458px;
+  margin-top: 8px;
   width: 100%;
   height: 231px;
-  margin-top: 8px;
+  max-width: 458px;
   transform: translateX(-14px);
 
-  &__location,
-  &__del,
-  &__extend {
-    position: absolute;
-    width: 35px;
-    height: 35px;
-    background-color: #fff;
-    z-index: 800;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
-  }
-
   &__location {
-    bottom: 10px;
     right: 10px;
+    bottom: 10px;
 
     svg {
-      fill: $dark;
       width: 18px;
       height: 18px;
+      fill: $dark;
     }
   }
 
   &__del {
-    top: 55px;
     right: 10px;
+    top: 55px;
 
     svg {
-      stroke: $dark;
       width: 18px;
       height: 18px;
+      stroke: $dark;
     }
   }
 
   &__extend {
-    top: 10px;
     left: 10px;
+    top: 10px;
   }
 
   .leaflet-container {
-    max-width: 458px;
+    border-radius: 8px;
     width: 100%;
     height: 231px;
-    border-radius: 8px;
+    max-width: 458px;
   }
 
   .leaflet-left {
@@ -64,13 +52,13 @@
 
   .leaflet-control-geocoder-form input {
     display: flex;
-    max-width: 300px;
     width: 100%;
+    max-width: 300px;
   }
 
   .leaflet-control-geocoder-alternatives {
-    max-width: 300px;
     width: 100%;
+    max-width: 300px;
   }
 
   .leaflet-touch .leaflet-control-geocoder {
@@ -95,13 +83,13 @@
 
   .leaflet-control-geocoder-form input {
     display: flex;
-    max-width: 300px;
     width: 100%;
+    max-width: 300px;
   }
 
   .leaflet-control-geocoder-alternatives {
-    max-width: 300px;
     width: 100%;
+    max-width: 300px;
   }
 
   .leaflet-touch .leaflet-control-geocoder {
@@ -110,25 +98,37 @@
   }
 
   .leaflet-touch .leaflet-control-geocoder-icon {
+    margin: 3px;
     width: 18px;
     height: 18px;
-    margin: 3px;
   }
 
   .leaflet-touch .leaflet-control-geocoder {
-    cursor: pointer;
-    padding: 5px;
     border: none;
-    box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
     border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+    cursor: pointer;
   }
 
   .leaflet-control-geocoder-icon {
-    background-image: url('../../../assets/images/icon/search.svg');
+    background-image: url("../../../assets/images/icon/search.svg");
     background-size: contain;
   }
 
   .leaflet-control-attribution a {
     color: $primary;
+  }
+
+  &__location,
+  &__del,
+  &__extend {
+    position: absolute;
+    z-index: 800;
+    border-radius: 8px;
+    width: 35px;
+    height: 35px;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+    background-color: #fff;
   }
 }

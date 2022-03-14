@@ -1,44 +1,35 @@
-@import '../../../global-styles/_variables.scss';
+@import "../../../global-styles/_variables.scss";
 
 .sidebar {
-  max-width: 326px;
-  width: 100%;
+  overflow: hidden;
   margin-right: 45px;
   border-radius: 8px;
-  overflow: hidden;
+  width: 100%;
+  max-width: 326px;
 
   &__head {
     padding: 18px 28px;
-    background-color: #646464;
     font-size: 20px;
     color: #fff;
+    background-color: #646464;
   }
 
   &__list {
     display: flex;
     flex-direction: column;
-    background-color: #fff;
-    width: 100%;
     padding: 7px 12px 22px;
+    width: 100%;
+    background-color: #fff;
   }
 
   &__button {
     display: flex;
     align-items: center;
-    font-size: 16px;
+    border-radius: 8px;
     padding: 12px 22px;
     width: 100%;
+    font-size: 16px;
     text-align: left;
-    border-radius: 8px;
-
-    &.active {
-      background-color: $primary;
-      color: #fff;
-
-      svg {
-        stroke: #fff;
-      }
-    }
 
     svg {
       margin-right: 25px;
@@ -46,19 +37,28 @@
       height: 25px;
       stroke: $dark;
     }
+
+    &.active {
+      color: #fff;
+      background-color: $primary;
+
+      svg {
+        stroke: #fff;
+      }
+    }
   }
 
   &__label {
     position: relative;
     display: flex;
+    margin-left: 48px;
+    padding: 12px 22px;
+    font-size: 16px;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    padding: 12px 22px;
-    margin-left: 48px;
-    font-size: 16px;
 
     input {
       position: absolute;
@@ -73,57 +73,30 @@
     position: absolute;
     left: -26px;
     top: 50%;
-    transform: translateY(-50%);
     width: 25px;
     height: 25px;
-    background-image: url('../../../assets/images/icon/checkbox.svg');
+    background-image: url("../../../assets/images/icon/checkbox.svg");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     background-color: transparent;
+    transform: translateY(-50%);
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       display: none;
     }
   }
 
-  &__label:hover input ~ &__checkmark {
-    background-color: #65c17e1a;
-  }
-
-  &__label input:checked ~ &__checkmark {
-    background-image: url('../../../assets/images/icon/checkboxActive.svg');
-  }
-
-  &__label input:checked ~ &__checkmark::after {
-    display: block;
-  }
-
-  &__label input:checked ~ &__number {
-    color: $primary;
-  }
-
-  &__label &__checkmark::after {
-    right: 5px;
-    top: 5px;
-    width: 14px;
-    height: 14px;
-    background-image: url('../../../assets/images/icon/tick.svg');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
   &__active {
     display: flex;
     align-items: center;
-    font-size: 16px;
+    border-radius: 8px;
     padding: 12px 22px;
     width: 100%;
+    font-size: 16px;
     text-align: left;
-    border-radius: 8px;
     color: #fc5757;
     background-color: #eb565617;
 
@@ -141,8 +114,8 @@
   }
 
   &__more {
-    font-size: 16px;
     padding: 4px 8px;
+    font-size: 16px;
     color: #2b74c6;
   }
 
@@ -151,11 +124,38 @@
     margin-bottom: 4px;
     border-radius: 4px;
     padding: 4px 8px;
-    background: #407bff1a;
     color: #467399;
+    background: #407bff1a;
 
     &:not(:last-child) {
       margin-right: 4px;
     }
+  }
+
+  &__label:hover input ~ &__checkmark {
+    background-color: #65c17e1a;
+  }
+
+  &__label input:checked ~ &__checkmark {
+    background-image: url("../../../assets/images/icon/checkboxActive.svg");
+  }
+
+  &__label input:checked ~ &__checkmark::after {
+    display: block;
+  }
+
+  &__label input:checked ~ &__number {
+    color: $primary;
+  }
+
+  &__label &__checkmark::after {
+    right: 5px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    background-image: url("../../../assets/images/icon/tick.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 }

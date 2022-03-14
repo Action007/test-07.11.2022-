@@ -1,4 +1,4 @@
-@import '../../../global-styles/_variables.scss';
+@import "../../../global-styles/_variables.scss";
 
 .complain-dropdown {
   position: relative;
@@ -18,9 +18,9 @@
     z-index: 10;
     overflow: hidden;
     border-radius: 8px;
+    padding: 5px 36px;
     color: $dark;
     background-color: #f2f2f2;
-    padding: 5px 36px;
   }
 }
 

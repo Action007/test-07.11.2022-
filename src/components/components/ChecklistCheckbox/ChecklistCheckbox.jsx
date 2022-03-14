@@ -14,6 +14,9 @@ const ChecklistCheckbox = ({
 }) => {
   const [checked, setChecked] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const test = /^(http|https):\/\//i;
+  const link = test.test(value.link) ? value.link : `https://${value.link}`;
+
   const checkboxHandler = () => {
     setChecked((prevState) => !prevState);
     checklistsHandler(true);
@@ -31,6 +34,16 @@ const ChecklistCheckbox = ({
         <span className="checklist-checkbox__checkmark" />
         <p className="checklist-checkbox__todo">{description}</p>
       </label>
+      {list_type === "link" && (
+        <a
+          className="checklist-checkbox__link"
+          href={link}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {link}
+        </a>
+      )}
       {list_type === "coordinates" && (
         <>
           <GeneralMap setShowMap={setShowMap} coordinates={value.coordinates} />

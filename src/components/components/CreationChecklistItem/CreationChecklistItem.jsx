@@ -38,10 +38,13 @@ const CreationChecklistItem = ({
     focusOnCreate.current.focus();
   }, []);
 
-  const onChangeValueHandler = (e) => {
+  // eslint-disable-next-line no-shadow
+  const onChangeValueHandler = (e, type) => {
     // eslint-disable-next-line no-shadow
     const { value } = e.target;
-    dispatch(createChecklistActions.changeChecklistInputValue({ value, id }));
+    dispatch(
+      createChecklistActions.changeChecklistInputValue({ type, value, id })
+    );
   };
 
   const checklistTypeHandler = (str) => {
@@ -114,7 +117,7 @@ const CreationChecklistItem = ({
   return (
     <li
       onFocus={() => setBlur(id)}
-      onBlur={() => setBlur(false)}
+      onBlur={() => setBlur(id)}
       className="creation-item"
       ref={provide.innerRef}
       // eslint-disable-next-line react/jsx-props-no-spreading
@@ -142,7 +145,7 @@ const CreationChecklistItem = ({
             htmlFor={id}
           >
             <input
-              onChange={(e) => onChangeValueHandler(e)}
+              onChange={(e) => onChangeValueHandler(e, "text")}
               onKeyPress={(e) => addItemOnEnter(e)}
               value={description}
               ref={focusOnCreate}
@@ -150,6 +153,22 @@ const CreationChecklistItem = ({
               id={id}
             />
           </label>
+          {list_type === "link" && (
+            <label
+              className={`creation-item__link${inValid ? " invalid" : ""}`}
+              htmlFor={id + 1}
+            >
+              <input
+                onChange={(e) => onChangeValueHandler(e, "link")}
+                onKeyPress={(e) => addItemOnEnter(e)}
+                value={value.link}
+                ref={focusOnCreate}
+                placeholder="Insert link"
+                type="text"
+                id={id + 1}
+              />
+            </label>
+          )}
           {list_type === "image" && !value.image && selectImg}
           {ImgSelected}
           {list_type === "coordinates" && (

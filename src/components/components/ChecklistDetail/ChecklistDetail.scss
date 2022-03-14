@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .checklist-detail {
   position: relative;
@@ -10,11 +10,6 @@
   width: 100%;
   max-width: 834px;
   background-color: #fff;
-
-  @include media-breakpoint-down(sm) {
-    padding: 25px 19px;
-    margin-bottom: 12px;
-  }
 
   &__heading {
     display: flex;
@@ -48,9 +43,9 @@
   }
 
   &__title {
+    margin-bottom: 0;
     padding-right: 25px;
     font-size: 1.5rem;
-    margin-bottom: 0;
     word-break: break-word;
 
     @include media-breakpoint-down(md) {
@@ -67,9 +62,9 @@
   &__num {
     display: flex;
     justify-content: flex-end;
-    max-width: 40px;
-    width: 100%;
     margin-right: 5px;
+    width: 100%;
+    max-width: 40px;
   }
 
   &__list {
@@ -126,7 +121,7 @@
     color: $primary;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 50%;
       bottom: 0;
@@ -169,10 +164,6 @@
     background-color: $primary;
     transition: all 0.3s ease;
 
-    @include media-breakpoint-down(sm) {
-      margin-right: 0;
-    }
-
     span {
       margin-right: 9px;
     }
@@ -191,6 +182,10 @@
         stroke: $primary;
         transform: translateX(3px);
       }
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-right: 0;
     }
 
     @include media-breakpoint-down(sm) {
@@ -300,5 +295,10 @@
     svg {
       margin-right: 10px;
     }
+  }
+
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 12px;
+    padding: 25px 19px;
   }
 }

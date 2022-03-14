@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Marker, useMap } from "react-leaflet";
 import Leaflet from "leaflet";
 
-import MapImg from "../../../assets/images/icon/map-pin.png";
+import MapImg from "../../../assets/images/icon/location.png";
 
 const LocationMarker = ({ show }) => {
   const [location, setLocation] = useState(null);
@@ -10,8 +10,8 @@ const LocationMarker = ({ show }) => {
 
   const myIcon = Leaflet.icon({
     iconUrl: MapImg,
-    iconSize: [22, 35], // size of the icon
-    iconAnchor: [10, 34], // point of the icon which will correspond to marker's location
+    iconSize: [30, 30], // size of the icon
+    iconAnchor: [15, 20], // point of the icon which will correspond to marker's location
   });
 
   useEffect(() => {

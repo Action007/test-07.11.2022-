@@ -6,6 +6,7 @@ import { ReactComponent as TextIcon } from "../../../assets/images/icon/text.svg
 import { ReactComponent as ImgIcon } from "../../../assets/images/icon/img.svg";
 import { ReactComponent as MapIcon } from "../../../assets/images/icon/map.svg";
 import { ReactComponent as TrashIcon } from "../../../assets/images/icon/trash.svg";
+import { ReactComponent as LinkIcon } from "../../../assets/images/icon/link.svg";
 
 const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
   const checklists = useSelector(
@@ -15,6 +16,9 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
   const [isActive, setIsActive] = useState(type);
   const activeText = `checklist-edit__item ${
     isActive === "text" ? " active" : ""
+  }`;
+  const activeLink = `checklist-edit__item ${
+    isActive === "link" ? " active" : ""
   }`;
   const activeImg = `checklist-edit__item ${
     isActive === "image" ? " active" : ""
@@ -36,6 +40,13 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
         type="button"
       >
         <TextIcon />
+      </button>
+      <button
+        onClick={() => setIsActiveHandler("link")}
+        className={activeLink}
+        type="button"
+      >
+        <LinkIcon />
       </button>
       <button
         onClick={() => setIsActiveHandler("image")}

@@ -69,7 +69,8 @@ const CreationOfChecklist = () => {
     const checklistIsEmpty = checklist_items.find(
       (item) => item.description.trim().length === 0
     );
-    const checklistIsValid = checklist_items.find(
+
+    const isChecklistValid = checklist_items.find(
       (item) => item.description.trim().length > 150
     );
     setTitleValid(titleIsValid);
@@ -81,7 +82,7 @@ const CreationOfChecklist = () => {
 
     if (
       checklist_items.length &&
-      !checklistIsValid &&
+      !isChecklistValid &&
       !checklistIsEmpty &&
       titleIsValid &&
       tagsIsValid

@@ -1,11 +1,11 @@
 .checklist-image {
   position: relative;
-  max-width: 460px;
-  width: 100%;
-  height: 230px;
-  border-radius: 8px;
   overflow: hidden;
   margin-top: 5px;
+  border-radius: 8px;
+  width: 100%;
+  height: 230px;
+  max-width: 460px;
   transform: translateX(-14px);
 
   img {
@@ -16,20 +16,20 @@
 
   &__extend {
     position: absolute;
-    width: 35px;
-    height: 35px;
-    top: 10px;
     left: 10px;
-    background-color: #fff;
+    top: 10px;
     z-index: 800;
     border-radius: 8px;
+    width: 35px;
+    height: 35px;
     box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+    background-color: #fff;
   }
 
   &__popup {
     .modal-dialog {
-      max-width: 1235px;
       padding: 0 15px;
+      max-width: 1235px;
     }
 
     .modal-header {
@@ -37,14 +37,14 @@
     }
 
     .modal-body {
-      padding: 0;
-      max-height: 80vh;
-      min-width: 300px;
-      max-width: 1920px;
-      overflow-y: scroll;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow-y: scroll;
+      padding: 0;
+      min-width: 300px;
+      max-width: 1920px;
+      max-height: 80vh;
 
       img {
         width: 100%;

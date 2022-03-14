@@ -1,14 +1,14 @@
 .popup-login {
   .modal-dialog {
-    max-width: 1235px;
-    width: 100%;
     padding: 0 15px;
+    width: 100%;
+    max-width: 1235px;
   }
 
   .modal-header {
+    border: none;
     padding: 0;
     height: 0;
-    border: none;
   }
 
   .modal-body {
@@ -30,23 +30,23 @@
   &__wrapper {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    border-radius: 8px;
     overflow: hidden;
+    border-radius: 8px;
+    width: 100%;
   }
 
   &__img {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 611px;
     width: 100%;
     min-height: 100%;
+    max-width: 611px;
     background-color: #f0f5fe;
 
     svg {
-      max-width: 465px;
       width: 100%;
+      max-width: 465px;
     }
   }
 }

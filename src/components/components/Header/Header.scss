@@ -1,6 +1,6 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../global-styles/_fonts.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../global-styles/_fonts.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .header {
   padding: 0 34px;
@@ -133,46 +133,46 @@
     padding: 2px 3px;
     min-width: 18px;
     min-height: 10px;
-    font-family: 'SFPro-SemiBold', sans-serif;
+    font-family: "SFPro-SemiBold", sans-serif;
     font-size: 9px;
     color: #fff;
     background-color: $warning;
   }
 
   &__btn {
-    padding: 13px 27px 13px 19px;
-    color: #fff;
-    background-color: $primary;
-    font-family: 'SFPro-SemiBold', sans-serif;
-    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     border: 1px solid $primary;
+    padding: 13px 27px 13px 19px;
+    font-family: "SFPro-SemiBold", sans-serif;
+    font-size: 16px;
+    color: #fff;
+    background-color: $primary;
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 
-    @include media-breakpoint-down(md) {
-      padding: 7px;
+    svg {
+      margin-right: 11px;
+      stroke: #fff;
+      transition: stroke 0.3s ease;
+
+      @include media-breakpoint-down(md) {
+        margin-right: 0;
+      }
     }
 
     &:hover {
-      background-color: transparent;
       border-color: $primary;
       color: $primary;
+      background-color: transparent;
 
       svg {
         stroke: $primary;
       }
     }
 
-    svg {
-      stroke: #fff;
-      margin-right: 11px;
-      transition: stroke 0.3s ease;
-
-      @include media-breakpoint-down(md) {
-        margin-right: 0;
-      }
+    @include media-breakpoint-down(md) {
+      padding: 7px;
     }
   }
 
@@ -198,15 +198,15 @@
     }
   }
 
-  @include media-breakpoint-down(md) {
-    padding: 0 16px;
-  }
-
   .search-input {
     max-width: 672px;
 
     @include media-breakpoint-down(xl) {
       max-width: 100%;
     }
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 0 16px;
   }
 }

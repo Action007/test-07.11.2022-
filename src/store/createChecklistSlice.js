@@ -30,6 +30,12 @@ const createChecklistSlice = createSlice({
             ? { ...item, list_type: "text", value: { ...item.value } }
             : item
         );
+      } else if (str === "link") {
+        state.checklist_items = state.checklist_items.map((item) =>
+          item.id === id
+            ? { ...item, list_type: "link", value: { ...item.value, link: "" } }
+            : item
+        );
       } else if (str === "image") {
         state.checklist_items = state.checklist_items.map((item) =>
           item.id === id
@@ -49,11 +55,16 @@ const createChecklistSlice = createSlice({
       }
     },
     changeChecklistInputValue(state, action) {
-      const { value, id } = action.payload;
-
-      state.checklist_items = state.checklist_items.map((item) =>
-        item.id === id ? { ...item, description: value } : item
-      );
+      const { type, value, id } = action.payload;
+      if (type === "link") {
+        state.checklist_items = state.checklist_items.map((item) =>
+          item.id === id ? { ...item, value: { link: value } } : item
+        );
+      } else if (type === "text") {
+        state.checklist_items = state.checklist_items.map((item) =>
+          item.id === id ? { ...item, description: value } : item
+        );
+      }
     },
     dropAndDownChecklists(state, action) {
       const result = action.payload;
@@ -98,7 +109,7 @@ const createChecklistSlice = createSlice({
       const id = action.payload;
       state.checklist_items = state.checklist_items.map((item) =>
         item.id === id
-          ? { ...item, value: { ...item.value, coordinates: {} } }
+          ? { ...item, value: { ...item.value, coordinates: null } }
           : item
       );
     },

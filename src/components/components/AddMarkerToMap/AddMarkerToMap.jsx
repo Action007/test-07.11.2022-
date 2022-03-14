@@ -26,7 +26,7 @@ const AddMarkerToMap = ({ coordinates, id, creation }) => {
     },
   });
 
-  return coordinates ? <Marker position={coordinates} icon={myIcon} /> : "";
+  return coordinates ? <Marker position={coordinates} icon={myIcon} /> : null;
 };
 
 export default AddMarkerToMap;

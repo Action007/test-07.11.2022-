@@ -87,16 +87,16 @@
     color: #fff;
     background-color: $primary;
     transition: all 0.3s ease;
-    
+
     &:hover {
       border-color: $primary;
       color: $primary;
       background-color: #fff;
     }
-    
+
     @include media-breakpoint-down(md) {
-      height: 52px;
       margin: 0 auto;
+      height: 52px;
     }
   }
 

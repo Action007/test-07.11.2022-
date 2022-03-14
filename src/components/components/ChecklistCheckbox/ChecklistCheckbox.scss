@@ -15,7 +15,7 @@
   &__label {
     position: relative;
     display: flex;
-    padding-left: 2px;
+    margin-left: 2px;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -50,9 +50,19 @@
     }
   }
 
+  &__link {
+    margin: 5px 0 0 2px;
+    color: $primary;
+  }
+
   &__label input:checked ~ p {
     text-decoration: line-through;
     color: $primary;
+  }
+
+  &__todo {
+    margin-bottom: 0;
+    word-break: break-word;
   }
 
   &__label:hover input ~ &__checkmark {
@@ -80,10 +90,5 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-  }
-
-  &__todo {
-    margin-bottom: 0;
-    word-break: break-word;
   }
 }

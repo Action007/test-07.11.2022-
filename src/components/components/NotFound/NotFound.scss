@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .error {
   &__title {
@@ -9,16 +9,16 @@
   }
 
   &__img {
-    max-width: 571px;
     width: 100%;
-
-    @include media-breakpoint-down(sm) {
-      max-width: 223px;
-    }
+    max-width: 571px;
 
     svg {
       width: 100%;
       height: 100%;
+    }
+
+    @include media-breakpoint-down(sm) {
+      max-width: 223px;
     }
   }
 
@@ -27,10 +27,10 @@
     justify-content: center;
 
     button {
-      background-color: $primary;
-      padding: 14px 37px;
       border-radius: 8px;
+      padding: 14px 37px;
       color: #fff;
+      background-color: $primary;
     }
   }
 }
