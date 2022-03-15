@@ -8,7 +8,7 @@ import { ReactComponent as MapIcon } from "../../../assets/images/icon/map.svg";
 import { ReactComponent as TrashIcon } from "../../../assets/images/icon/trash.svg";
 import { ReactComponent as LinkIcon } from "../../../assets/images/icon/link.svg";
 
-const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
+const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
   const checklists = useSelector(
     (state) => state.createChecklist.checklist_items
   );
@@ -28,6 +28,14 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
   }`;
 
   const setIsActiveHandler = (str) => {
+    if (str === "delete") {
+      setFadeIn("");
+      setTimeout(() => {
+        setIsActive(str);
+        typeChecklistHandler(str, id);
+      }, 300);
+      return;
+    }
     setIsActive(str);
     typeChecklistHandler(str, id);
   };

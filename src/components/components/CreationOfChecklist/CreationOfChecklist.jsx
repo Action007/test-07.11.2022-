@@ -41,6 +41,7 @@ const CreationOfChecklist = () => {
 
   const addTagHandler = (e) => {
     const name = inputTag.current.value;
+    const tagsIsValid = tags.length > 1;
     const addOrNot = tags.find((tag) => tag.name === name);
     if (e === "blur") {
       setAddTags(false);
@@ -48,23 +49,33 @@ const CreationOfChecklist = () => {
 
       if (!name) return;
       dispatch(createChecklistActions.addTag(name));
+      if (tagsIsValid) setTagsValid(true);
     } else if (e.key === "Enter") {
       setAddTags(false);
       if (addOrNot) return;
 
       if (!name) return;
       dispatch(createChecklistActions.addTag(name));
+      if (tagsIsValid) setTagsValid(true);
     }
+  };
+
+  const checkTitle = () => {
+    const titleIsValid = title.trim().length !== 0;
+    setTitleValid(titleIsValid);
+
+    return titleIsValid;
   };
 
   const changeTitleHandler = (e) => {
     const { value } = e.target;
     dispatch(createChecklistActions.addTitle(value));
+    checkTitle();
   };
 
   const checkValidHandler = (e, type) => {
     if (e.target) e.preventDefault();
-    const titleIsValid = title.trim().length < 151 && title.trim().length > 0;
+    const isTitleValid = checkTitle();
     const tagsIsValid = tags.length > 2;
     const checklistIsEmpty = checklist_items.find(
       (item) => item.description.trim().length === 0
@@ -73,7 +84,6 @@ const CreationOfChecklist = () => {
     const isChecklistValid = checklist_items.find(
       (item) => item.description.trim().length > 150
     );
-    setTitleValid(titleIsValid);
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
       dispatch(createChecklistActions.addChecklist());
@@ -84,7 +94,7 @@ const CreationOfChecklist = () => {
       checklist_items.length &&
       !isChecklistValid &&
       !checklistIsEmpty &&
-      titleIsValid &&
+      isTitleValid &&
       tagsIsValid
     ) {
       if (type === "preview") {

@@ -28,10 +28,7 @@ const ActiveChecklist = () => {
         {translate("checklists")}
       </h2>
       <ProgressBarChecklist done={50} />
-      <ActiveChecklistDetail
-        checklist={checklist}
-        checklistsHandler={() => setModalShow(true)}
-      />
+      <ActiveChecklistDetail checklist={checklist} />
       <PopupDone show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );

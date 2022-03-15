@@ -4,6 +4,12 @@
 .checklist-checkbox {
   line-height: 1.2;
 
+  &.checked {
+    &::marker {
+      color: $primary;
+    }
+  }
+
   &:not(:last-child) {
     margin-bottom: 16px;
   }

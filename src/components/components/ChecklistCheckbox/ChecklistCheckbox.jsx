@@ -5,13 +5,7 @@ import GeneralMap from "../GeneralMap/GeneralMap";
 import PopupMap from "../PopupMap/PopupMap";
 import "./ChecklistCheckbox.scss";
 
-const ChecklistCheckbox = ({
-  description,
-  list_type,
-  value,
-  idFor,
-  checklistsHandler,
-}) => {
+const ChecklistCheckbox = ({ description, list_type, value, idFor }) => {
   const [checked, setChecked] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const test = /^(http|https):\/\//i;
@@ -19,11 +13,10 @@ const ChecklistCheckbox = ({
 
   const checkboxHandler = () => {
     setChecked((prevState) => !prevState);
-    checklistsHandler(true);
   };
 
   return (
-    <li className="checklist-checkbox">
+    <li className={`checklist-checkbox${checked ? " checked" : ""}`}>
       <label className="checklist-checkbox__label" htmlFor={idFor}>
         <input
           defaultChecked={checked}

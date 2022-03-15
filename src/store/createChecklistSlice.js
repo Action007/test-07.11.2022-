@@ -18,7 +18,7 @@ const createChecklistSlice = createSlice({
     addChecklist(state) {
       state.checklist_items = [
         ...state.checklist_items,
-        { id: uniqueID(), list_type: "text", description: "" },
+        { id: uniqueID(), list_type: "text", description: "", value: {} },
       ];
     },
     defineChecklist(state, action) {
@@ -56,6 +56,17 @@ const createChecklistSlice = createSlice({
     },
     changeChecklistInputValue(state, action) {
       const { type, value, id } = action.payload;
+
+      state.checklist_items = state.checklist_items.map((item) => {
+        if (item.id === id) {
+          return item.description.trim().length < 151 &&
+            item.description.trim().length >= 0
+            ? { ...item, inValid: false }
+            : item;
+        }
+        return item;
+      });
+
       if (type === "link") {
         state.checklist_items = state.checklist_items.map((item) =>
           item.id === id ? { ...item, value: { link: value } } : item

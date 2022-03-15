@@ -1,10 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 
-const useClickOutside = () => {
+const useClickOutside = (creation = false) => {
   const ref = useRef();
   const [show, setShow] = useState(false);
 
-  const setShowHandler = () => setShow((prevState) => !prevState);
+  const setShowHandler = () => {
+    if (creation) {
+      setShow(true);
+    } else {
+      setShow((prevState) => !prevState);
+    }
+  };
+
   const clickOutHandler = (event) => {
     if (ref && ref !== null) {
       const cur = ref.current;

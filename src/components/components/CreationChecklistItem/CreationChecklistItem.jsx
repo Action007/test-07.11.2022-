@@ -1,9 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
+import useClickOutside from "../../../hooks/useClickOutside";
 import CreationChecklistItemEdit from "../CreationChecklistItemEdit/CreationChecklistItemEdit";
 import GeneralMap from "../GeneralMap/GeneralMap";
 import PopupMap from "../PopupMap/PopupMap";
@@ -16,7 +19,6 @@ import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-
 
 const CreationChecklistItem = ({
   provide,
-  checklist_items,
   description,
   list_type,
   number,
@@ -24,18 +26,18 @@ const CreationChecklistItem = ({
   inValid,
   id,
 }) => {
-  const [blur, setBlur] = useState(false);
   const [state, setState] = useState("text");
   const [showMap, setShowMap] = useState(false);
   const [showImage, setShowImage] = useState(false);
-  const focusOnCreate = useRef();
+  const [fadeIn, setFadeIn] = useState("");
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
+  const { ref, show, setShowHandler } = useClickOutside(true);
 
   useEffect(() => {
-    if (!focusOnCreate.current) return;
-    if (checklist_items.length === 1) return;
-    focusOnCreate.current.focus();
+    const setClassFunc = setTimeout(() => setFadeIn(" show"), 0);
+    // eslint-disable-next-line consistent-return
+    return () => clearTimeout(setClassFunc);
   }, []);
 
   // eslint-disable-next-line no-shadow
@@ -116,81 +118,83 @@ const CreationChecklistItem = ({
 
   return (
     <li
-      onFocus={() => setBlur(id)}
-      onBlur={() => setBlur(false)}
-      className="creation-item"
+      className={`creation-item${fadeIn}`}
       ref={provide.innerRef}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...provide.draggableProps}
     >
-      <div className={`creation-item__wrap${inValid ? " invalid" : ""}`}>
+      <div ref={ref}>
         <div
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...provide.dragHandleProps}
-          className={`creation-item__number SFPro-600${
-            inValid ? " invalid" : ""
-          }`}
+          className={`creation-item__wrap${inValid ? " invalid" : ""}`}
+          onMouseDown={setShowHandler}
         >
-          <ChecklistDots />
-          {number}.
-        </div>
-        <div className="creation-item__inner">
-          {inValid && (
-            <span className="creation-item__invalid">
-              {translate("creationOfChecklist.max")}
-            </span>
-          )}
-          <label
-            className={`creation-item__name${inValid ? " invalid" : ""}`}
-            htmlFor={id}
+          <div
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...provide.dragHandleProps}
+            className={`creation-item__number SFPro-600${
+              inValid ? " invalid" : ""
+            }`}
           >
-            <input
-              onChange={(e) => onChangeValueHandler(e, "text")}
-              onKeyPress={(e) => addItemOnEnter(e)}
-              value={description}
-              ref={focusOnCreate}
-              type="text"
-              id={id}
-            />
-          </label>
-          {list_type === "link" && (
+            <ChecklistDots />
+            {number}.
+          </div>
+          <div className="creation-item__inner">
+            {inValid && (
+              <span className="creation-item__invalid">
+                {translate("creationOfChecklist.max")}
+              </span>
+            )}
             <label
-              className={`creation-item__link${inValid ? " invalid" : ""}`}
-              htmlFor={id + 1}
+              className={`creation-item__name${inValid ? " invalid" : ""}`}
+              htmlFor={id}
             >
               <input
-                onChange={(e) => onChangeValueHandler(e, "link")}
+                onChange={(e) => onChangeValueHandler(e, "text")}
                 onKeyPress={(e) => addItemOnEnter(e)}
-                value={value.link}
-                ref={focusOnCreate}
-                placeholder="Insert link"
+                value={description}
                 type="text"
-                id={id + 1}
+                id={id}
               />
             </label>
-          )}
-          {list_type === "image" && !value.image && selectImg}
-          {ImgSelected}
-          {list_type === "coordinates" && (
-            <>
-              <div className="creation-item__wrapper">
-                <GeneralMap setShowMap={setShowMap} creation id={id} />
-              </div>
-              <CSSTransition in={showMap} timeout={300} unmountOnExit>
-                <PopupMap show={showMap} onHide={() => setShowMap(false)}>
-                  <GeneralMap popup creation id={id} />
-                </PopupMap>
-              </CSSTransition>
-            </>
-          )}
+            {list_type === "link" && (
+              <label
+                className={`creation-item__link${inValid ? " invalid" : ""}`}
+                htmlFor={id + 1}
+              >
+                <input
+                  onChange={(e) => onChangeValueHandler(e, "link")}
+                  onKeyPress={(e) => addItemOnEnter(e)}
+                  value={value.link}
+                  placeholder="Insert link"
+                  type="text"
+                  id={id + 1}
+                />
+              </label>
+            )}
+            {list_type === "image" && !value.image && selectImg}
+            {ImgSelected}
+            {list_type === "coordinates" && (
+              <>
+                <div className="creation-item__wrapper">
+                  <GeneralMap setShowMap={setShowMap} creation id={id} />
+                </div>
+                <CSSTransition in={showMap} timeout={300} unmountOnExit>
+                  <PopupMap show={showMap} onHide={() => setShowMap(false)}>
+                    <GeneralMap popup creation id={id} />
+                  </PopupMap>
+                </CSSTransition>
+              </>
+            )}
+          </div>
         </div>
+        {show && (
+          <CreationChecklistItemEdit
+            typeChecklistHandler={checklistTypeHandler}
+            id={id}
+            setFadeIn={setFadeIn}
+          />
+        )}
       </div>
-      {blur && (
-        <CreationChecklistItemEdit
-          typeChecklistHandler={checklistTypeHandler}
-          id={id}
-        />
-      )}
     </li>
   );
 };

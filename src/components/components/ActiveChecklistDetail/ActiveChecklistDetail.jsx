@@ -7,7 +7,7 @@ import { ReactComponent as UploadSvg } from "../../../assets/images/icon/upload.
 import { ReactComponent as ShareSvg } from "../../../assets/images/icon/share.svg";
 import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
 
-const ActiveChecklistDetail = ({ checklist, checklistsHandler }) => {
+const ActiveChecklistDetail = ({ checklist }) => {
   return (
     <div className="active-checklist">
       <h3 className="active-checklist__title SFPro-700">{checklist.name}</h3>
@@ -21,7 +21,6 @@ const ActiveChecklistDetail = ({ checklist, checklistsHandler }) => {
               list_type={list_type}
               value={value}
               idFor={id}
-              checklistsHandler={checklistsHandler}
             />
           );
         })}

@@ -21,14 +21,13 @@ const CreationChecklistItems = ({ checklist_items }) => {
             ref={provided.innerRef}
           >
             {checklist_items.map(
-              ({ list_type, description, value, inValid, id }, index) => (
+              ({ description, list_type, value, inValid, id }, index) => (
                 <Draggable key={id} draggableId={id} index={index}>
                   {(provide) => (
                     <CreationChecklistItem
                       provide={provide}
-                      checklist_items={checklist_items}
-                      list_type={list_type}
                       description={description}
+                      list_type={list_type}
                       number={index + 1}
                       value={value}
                       inValid={inValid}
