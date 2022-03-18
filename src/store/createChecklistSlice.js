@@ -5,7 +5,7 @@ import uniqueID from "../utils/uniqueId";
 const createChecklistSlice = createSlice({
   name: "createChecklist",
   initialState: {
-    title: "",
+    title: { value: "", isValid: true },
     checklist_items: [],
     tags: [],
   },
@@ -13,7 +13,12 @@ const createChecklistSlice = createSlice({
     addTitle(state, action) {
       const value = action.payload;
 
-      state.title = value;
+      state.title.value = value;
+    },
+    isTitleValid(state) {
+      const titleIsValid = state.title.value.trim().length !== 0;
+
+      state.title.isValid = titleIsValid;
     },
     addChecklist(state) {
       state.checklist_items = [
@@ -141,5 +146,4 @@ const createChecklistSlice = createSlice({
 });
 
 export const createChecklistActions = createChecklistSlice.actions;
-
-export default createChecklistSlice;
+export const createChecklistReducer = createChecklistSlice.reducer;

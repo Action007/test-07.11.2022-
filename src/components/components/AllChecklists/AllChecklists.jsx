@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { checklistAPI } from "../../../services/checklistService";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
 import PaginationChecklist from "../PaginationChecklist/PaginationChecklist";
 import Tabs from "../Tabs/Tabs";
 
 const AllChecklists = () => {
-  const [checklists, setCheckLists] = useState([]);
+  const [limit] = useState([1, 100]);
+  const { data, error, isLoading } =
+    checklistAPI.useFetchAllChecklistsQuery(limit);
+  const [checklists, setChecklists] = useState(data?.entities);
   const [category, setCategory] = useState("created");
-  const { pathname } = useLocation();
   const { t: translate } = useTranslation();
-  const API_KEY = process.env.REACT_APP_HOSTNAME;
-
   const breadcrumbs = [{ title: translate("allChecklistsPage.title") }];
   const tabs = [
     { id: 0, key: "created", title: translate("allChecklistsPage.created") },
@@ -21,24 +21,17 @@ const AllChecklists = () => {
   ];
 
   useEffect(() => {
-    const getProducts = async () => {
-      const response = await fetch(
-        `${API_KEY}/api/v1/checklists_auth?page=1&per_page=10`
+    if (category === "saved") {
+      setChecklists(
+        data.entities.filter((checklist) => checklist.user_track?.saved)
       );
-      const responseData = await response.json();
-
-      setCheckLists(responseData.entities);
-    };
-    getProducts();
-  }, []);
-
-  useEffect(() => {
-    if (pathname === "/saved-checklists") setCategory(false);
-    if (pathname === "/all-checklists") setCategory(true);
-  }, [pathname]);
+    } else if (category === "created") {
+      setChecklists(data?.entities);
+    }
+  }, [category]);
 
   const changeChecklistsHandler = (key) => {
-    setCategory(key === "created");
+    setCategory(key);
   };
 
   return (
@@ -53,16 +46,19 @@ const AllChecklists = () => {
           tabs={tabs}
           category={category}
         />
-        {checklists.map((checklist) => (
-          <Checklist
-            key={checklist.id}
-            checklist={checklist}
-            translate={translate("allChecklistsPage.showMore")}
-            created={category}
-          />
-        ))}
+        {isLoading && <h1>Идет загрузка...</h1>}
+        {error && <h1>Произошла ошибка при загрузке</h1>}
+        {checklists &&
+          checklists.map((checklist) => (
+            <Checklist
+              key={checklist.id}
+              checklist={checklist}
+              translate={translate("allChecklistsPage.showMore")}
+              created={category}
+            />
+          ))}
       </div>
-      <PaginationChecklist />
+      <PaginationChecklist paginate={data?.paginate} />
     </div>
   );
 };

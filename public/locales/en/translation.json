@@ -183,5 +183,13 @@
   "pageNotFount": {
     "title": "Oops..  Sorry, page not found",
     "button": "Go back to the main page"
+  },
+  "profilePage": {
+    "myProfile": "My profile",
+    "editProfile": "Edit Profile",
+    "aboutMe": "About me",
+    "myAwards": "My awards",
+    "completedChecklists": "Completed checklists",
+    "createdChecklists": "Created checklists"
   }
 }

@@ -21,7 +21,7 @@ const GeneralMap = ({
   const [showLocation, setShowLocation] = useState(false);
   const dispatch = useDispatch();
   const checklist_items = useSelector(
-    (state) => state.createChecklist.checklist_items
+    (state) => state.createChecklistReducer.checklist_items
   );
   const checklist = checklist_items.find((item) => item.id === id);
   const removeMarkerHandler = () => {

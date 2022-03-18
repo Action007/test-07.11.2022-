@@ -7,10 +7,12 @@ import "./CreationChecklistPreview.scss";
 
 const CreationChecklistPreview = ({ show, onHide }) => {
   const checklist_items = useSelector(
-    (state) => state.createChecklist.checklist_items
+    (state) => state.createChecklistReducer.checklist_items
   );
-  const tags = useSelector((state) => state.createChecklist.tags);
-  const title = useSelector((state) => state.createChecklist.title);
+  const tags = useSelector((state) => state.createChecklistReducer.tags);
+  const title = useSelector(
+    (state) => state.createChecklistReducer.title.value
+  );
   const { t: translate } = useTranslation();
 
   const checklists = {

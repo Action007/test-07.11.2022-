@@ -1,8 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import createChecklist from "./createChecklistSlice";
+import { checklistAPI } from "../services/checklistService";
+import { createChecklistReducer } from "./createChecklistSlice";
 
 const store = configureStore({
-  reducer: { createChecklist: createChecklist.reducer },
+  reducer: {
+    createChecklistReducer,
+    [checklistAPI.reducerPath]: checklistAPI.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(checklistAPI.middleware),
 });
 
 export default store;

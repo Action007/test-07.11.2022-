@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
+import { createChecklistActions } from "../../../store/createChecklistSlice";
 import CreationChecklistItems from "../CreationChecklistItems/CreationChecklistItems";
 import CreationChecklistPreview from "../CreationChecklistPreview/CreationChecklistPreview";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -11,23 +12,25 @@ import "./CreationOfChecklist.scss";
 import { ReactComponent as CreationImg } from "../../../assets/images/content/creationChecklist.svg";
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
 import { ReactComponent as PlusSvg } from "../../../assets/images/icon/plusTags.svg";
-import { createChecklistActions } from "../../../store/createChecklistSlice";
 
 const CreationOfChecklist = () => {
   const [preview, setPreview] = useState(false);
   const [done, setDone] = useState(false);
   const [addTags, setAddTags] = useState(false);
-  const [titleValid, setTitleValid] = useState(true);
   const [tagsValid, setTagsValid] = useState(true);
   const checklist_items = useSelector(
-    (state) => state.createChecklist.checklist_items
+    (state) => state.createChecklistReducer.checklist_items
   );
-  const tags = useSelector((state) => state.createChecklist.tags);
-  const title = useSelector((state) => state.createChecklist.title);
+  const tags = useSelector((state) => state.createChecklistReducer.tags);
+  const title = useSelector(
+    (state) => state.createChecklistReducer.title.value
+  );
+  const titleIsValid = useSelector(
+    (state) => state.createChecklistReducer.title.isValid
+  );
   const inputTag = useRef();
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
-
   const breadcrumbs = [{ title: translate("creationOfChecklist.title") }];
 
   useEffect(() => {
@@ -60,22 +63,14 @@ const CreationOfChecklist = () => {
     }
   };
 
-  const checkTitle = () => {
-    const titleIsValid = title.trim().length !== 0;
-    setTitleValid(titleIsValid);
-
-    return titleIsValid;
-  };
-
   const changeTitleHandler = (e) => {
     const { value } = e.target;
     dispatch(createChecklistActions.addTitle(value));
-    checkTitle();
+    dispatch(createChecklistActions.isTitleValid());
   };
 
   const checkValidHandler = (e, type) => {
     if (e.target) e.preventDefault();
-    const isTitleValid = checkTitle();
     const tagsIsValid = tags.length > 2;
     const checklistIsEmpty = checklist_items.find(
       (item) => item.description.trim().length === 0
@@ -89,12 +84,13 @@ const CreationOfChecklist = () => {
       dispatch(createChecklistActions.addChecklist());
     }
     dispatch(createChecklistActions.isValid());
+    dispatch(createChecklistActions.isTitleValid());
 
     if (
       checklist_items.length &&
       !isChecklistValid &&
       !checklistIsEmpty &&
-      isTitleValid &&
+      titleIsValid &&
       tagsIsValid
     ) {
       if (type === "preview") {
@@ -149,12 +145,14 @@ const CreationOfChecklist = () => {
             <h3 className="creation__head SFPro-700">
               {translate("creationOfChecklist.name")}
             </h3>
-            <span className={`creation__span${!titleValid ? " invalid" : ""}`}>
+            <span
+              className={`creation__span${!titleIsValid ? " invalid" : ""}`}
+            >
               {translate("creationOfChecklist.max")}
             </span>
             <form className="creation__form">
               <label
-                className={`creation__name${!titleValid ? " invalid" : ""}`}
+                className={`creation__name${!titleIsValid ? " invalid" : ""}`}
                 htmlFor="creationID"
               >
                 <input

@@ -10,7 +10,7 @@ import { ReactComponent as LinkIcon } from "../../../assets/images/icon/link.svg
 
 const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
   const checklists = useSelector(
-    (state) => state.createChecklist.checklist_items
+    (state) => state.createChecklistReducer.checklist_items
   );
   const type = checklists.find((item) => item.id === id).list_type;
   const [isActive, setIsActive] = useState(type);
