@@ -34,8 +34,8 @@ const routes = [
   { id: 4, path: "/privacy-policy", element: <PrivacyPolicyPage /> },
   { id: 5, path: "/support", element: <SupportPage /> },
   { id: 6, path: "/contacts", element: <ContactsPage /> },
-  { id: 7, path: "/all-checklists", element: <AllChecklistsPage /> },
-  { id: 8, path: "/checklist-review", element: <ChecklistReviewPage /> },
+  { id: 7, path: "/checklist-review", element: <ChecklistReviewPage /> },
+  { id: 8, path: "/list/:id", element: <ChecklistReviewPage /> },
   { id: 9, path: "/my-active-checklists", element: <MyActiveChecklistsPage /> },
   { id: 10, path: "/active-checklist", element: <ActiveChecklistPage /> },
   {
@@ -44,9 +44,11 @@ const routes = [
     element: <CreationOfChecklistPage />,
   },
   { id: 12, path: "/saved-checklists", element: <AllChecklistsPage /> },
-  { id: 12, path: "/profile", element: <ProfilePage /> },
-  { id: 13, path: "/", element: <Navigate to="/home" /> },
-  { id: 14, path: "/*", element: <NotFoundPage /> },
+  { id: 13, path: "/liked-checklists", element: <AllChecklistsPage /> },
+  { id: 14, path: "/created-checklists", element: <AllChecklistsPage /> },
+  { id: 15, path: "/profile", element: <ProfilePage /> },
+  { id: 16, path: "/", element: <Navigate to="/home" /> },
+  { id: 17, path: "/*", element: <NotFoundPage /> },
 ];
 
 export default routes;

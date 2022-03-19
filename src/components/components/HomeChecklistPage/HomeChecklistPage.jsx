@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import MainBanner from "../MainBanner/MainBanner";
 import PopupLogin from "../PopupLogin/PopupLogin";
@@ -11,25 +11,18 @@ import "./HomeChecklistPage.scss";
 
 import Logo from "../../../assets/images/content/logo.svg";
 import { ReactComponent as Plus } from "../../../assets/images/icon/plus.svg";
+import { checklistAPI } from "../../../services/checklistService";
 
 const HomeChecklistPage = () => {
-  const [checklists, setCheckLists] = useState([]);
+  const [value] = useState([1, 3]);
+  const url = `/api/v1/checklists_auth?page=${value[0]}&per_page=${value[1]}`;
+  const {
+    data: checklists,
+    error,
+    isLoading,
+  } = checklistAPI.useFetchChecklistQuery(url);
   const [modalShow, setModalShow] = useState(true);
   const { t: translate } = useTranslation();
-  const API_KEY = process.env.REACT_APP_HOSTNAME;
-
-  useEffect(() => {
-    const getProducts = async () => {
-      const response = await fetch(
-        `${API_KEY}/api/v1/checklists_auth?page=1&per_page=3`
-      );
-      const responseData = await response.json();
-
-      setCheckLists(responseData.entities);
-    };
-
-    getProducts();
-  }, []);
 
   return (
     <>
@@ -42,13 +35,16 @@ const HomeChecklistPage = () => {
               {translate("mainPage.popularQuestion")}
             </h3>
             <SearchInput />
-            {checklists.map((checklist) => (
-              <Checklist
-                key={uniqueID()}
-                checklist={checklist}
-                translate={translate("allChecklistsPage.showMore")}
-              />
-            ))}
+            {isLoading && <h1>Идет загрузка...</h1>}
+            {error && <h1>Произошла ошибка при загрузке</h1>}
+            {checklists &&
+              checklists.entities.map((checklist) => (
+                <Checklist
+                  key={uniqueID()}
+                  checklist={checklist}
+                  translate={translate("allChecklistsPage.showMore")}
+                />
+              ))}
             <PaginationChecklist />
           </div>
         </div>

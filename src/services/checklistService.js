@@ -10,9 +10,8 @@ export const checklistAPI = createApi({
   }),
   tagTypes: ["Post"],
   endpoints: (build) => ({
-    fetchAllChecklists: build.query({
-      query: (limit) =>
-        `/api/v1/checklists_auth?page=${limit[0]}&per_page=${limit[1]}`,
+    fetchChecklist: build.query({
+      query: (url) => url,
       providesTags: () => ["Post"],
     }),
     createChecklists: build.mutation({
@@ -23,7 +22,15 @@ export const checklistAPI = createApi({
       }),
       invalidatesTags: ["Post"],
     }),
-    updateChecklists: build.mutation({
+    likeChecklist: build.mutation({
+      query: (post) => ({
+        url: `/api/v1/checklists_auth/${post.id}/like`,
+        method: "PUT",
+        body: post,
+      }),
+      invalidatesTags: ["Post"],
+    }),
+    dislikeChecklist: build.mutation({
       query: (post) => ({
         url: `/posts/${post.id}`,
         method: "PUT",

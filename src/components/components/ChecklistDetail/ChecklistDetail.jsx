@@ -13,8 +13,7 @@ import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark
 import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
 const ChecklistDetail = ({ checklists, preview = false }) => {
-  const { title, checklist_items, viewed, liked, created_at, tags } =
-    checklists;
+  const { name, checklist_items, viewed, liked, created_at, tags } = checklists;
   const [like, setLike] = useState(false);
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:575px)");
@@ -36,7 +35,7 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
   return (
     <div className="checklist-detail">
       <div className="checklist-detail__heading">
-        <h3 className="checklist-detail__title SFPro-700">{title}</h3>
+        <h3 className="checklist-detail__title SFPro-700">{name}</h3>
         <div className="checklist-detail__head">
           {showOnMobile && time}
           <div className="checklist-detail__buttons">
@@ -61,14 +60,15 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
       </ol>
       <div className="checklist-detail__tags">
         {preview
-          ? tags.map(({ name }) => (
+          ? // eslint-disable-next-line no-shadow
+            tags.map((tag) => (
               <span key={uniqueID()} className="checklist-detail__tag">
-                {name}
+                {tag.name}
               </span>
             ))
           : tags.map((tag) => (
               <span key={uniqueID()} className="checklist-detail__tag">
-                {tag}
+                {tag.name}
               </span>
             ))}
       </div>

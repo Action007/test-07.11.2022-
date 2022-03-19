@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import Modal from "react-bootstrap/Modal";
+import { useNavigate } from "react-router-dom";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
@@ -22,7 +23,8 @@ const Checklist = ({
   created = false,
   active = false,
 }) => {
-  const { checklist_items, created_at, liked, name, tags, viewed } = checklist;
+  const { id, checklist_items, created_at, liked, name, tags, viewed } =
+    checklist;
   const [like, setLike] = useState(false);
   const [showComplain, setShowComplain] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:575px)");
@@ -31,6 +33,7 @@ const Checklist = ({
   const likeClass = `checklist__liked SFPro-700${liked ? " active" : ""}${
     like ? " liked" : ""
   }`;
+  const navigate = useNavigate();
 
   const setLikeHandler = () => {
     setLike((prevState) => !prevState);
@@ -69,7 +72,11 @@ const Checklist = ({
           {moreThanFive ? (
             <li className="checklist__item" key={uniqueID()}>
               {checklist_items[0].description}
-              <button className="checklist__show" type="button">
+              <button
+                onClick={() => navigate(`/list/${id}`)}
+                className="checklist__show"
+                type="button"
+              >
                 {translate}...
               </button>
             </li>
@@ -92,7 +99,11 @@ const Checklist = ({
           ))}
         </div>
         <div className="checklist__wrap">
-          <button className="checklist__button SFPro-600" type="button">
+          <button
+            onClick={() => navigate(`/list/${id}`)}
+            className="checklist__button SFPro-600"
+            type="button"
+          >
             <span>{translate}</span>
             <RightArrow />
           </button>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+import { checklistAPI } from "../../../services/checklistService";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ChecklistComments from "../ChecklistComments/ChecklistComments";
 import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
@@ -137,14 +139,22 @@ const items = {
 
 const ChecklistReview = () => {
   const [data] = useState(items);
-  const { t: translate } = useTranslation();
+  const { id } = useParams();
+  const {
+    data: checklists,
+    error,
+    isLoading,
+  } = checklistAPI.useFetchChecklistQuery(`/api/v1/checklists_auth/${id}`);
 
+  const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklistReviewPage.title") }];
 
   return (
     <div className="container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <ChecklistDetail checklists={data} />
+      {isLoading && <h1>Идет загрузка...</h1>}
+      {error && <h1>Произошла ошибка при загрузке</h1>}
+      {checklists && <ChecklistDetail checklists={checklists} />}
       <ChecklistComments comments={data.comments} />
     </div>
   );

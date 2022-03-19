@@ -52,7 +52,7 @@ const HeaderDropdown = () => {
           <Link
             onClick={setShowHandler}
             className="header-dropdown__item header-dropdown__item--first"
-            to="/all-checklists"
+            to="/created-checklists"
           >
             <Bookmark />
             <span />

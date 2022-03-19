@@ -7,11 +7,14 @@ import PaginationChecklist from "../PaginationChecklist/PaginationChecklist";
 import Tabs from "../Tabs/Tabs";
 
 const AllChecklists = () => {
-  const [limit] = useState([1, 100]);
-  const { data, error, isLoading } =
-    checklistAPI.useFetchAllChecklistsQuery(limit);
-  const [checklists, setChecklists] = useState(data?.entities);
+  const [value, setValue] = useState([1, 10]);
   const [category, setCategory] = useState("created");
+  const url = `/api/v1/checklists_auth?search_type=${category}&page=${value[0]}&per_page=${value[1]}`;
+  const {
+    data: checklists,
+    error,
+    isLoading,
+  } = checklistAPI.useFetchChecklistQuery(url);
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("allChecklistsPage.title") }];
   const tabs = [
@@ -19,16 +22,7 @@ const AllChecklists = () => {
     { id: 1, key: "liked", title: translate("allChecklistsPage.liked") },
     { id: 2, key: "saved", title: translate("allChecklistsPage.saved") },
   ];
-
-  useEffect(() => {
-    if (category === "saved") {
-      setChecklists(
-        data.entities.filter((checklist) => checklist.user_track?.saved)
-      );
-    } else if (category === "created") {
-      setChecklists(data?.entities);
-    }
-  }, [category]);
+  useEffect(() => setValue([1, 10]), [category]);
 
   const changeChecklistsHandler = (key) => {
     setCategory(key);
@@ -49,7 +43,7 @@ const AllChecklists = () => {
         {isLoading && <h1>Идет загрузка...</h1>}
         {error && <h1>Произошла ошибка при загрузке</h1>}
         {checklists &&
-          checklists.map((checklist) => (
+          checklists.entities.map((checklist) => (
             <Checklist
               key={checklist.id}
               checklist={checklist}
@@ -58,7 +52,7 @@ const AllChecklists = () => {
             />
           ))}
       </div>
-      <PaginationChecklist paginate={data?.paginate} />
+      <PaginationChecklist paginate={checklists?.paginate} />
     </div>
   );
 };
