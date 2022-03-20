@@ -1,10 +1,10 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .breadcrumbs {
   display: flex;
-  margin-top: 42px;
-  margin-bottom: 14px;
+  padding: 42px 0 14px;
+  margin: 0;
 
   &__item {
     margin-right: 20px;
@@ -33,9 +33,5 @@
         stroke: $primary;
       }
     }
-  }
-
-  @include media-breakpoint-down(md) {
-    margin-bottom: 24px;
   }
 }

@@ -28,8 +28,8 @@
 
   &__popup {
     .modal-dialog {
-      padding: 0 15px;
       max-width: 1235px;
+      justify-content: center;
     }
 
     .modal-header {
@@ -51,10 +51,6 @@
         height: 100%;
         object-fit: contain;
       }
-    }
-
-    .modal-dialog {
-      justify-content: center;
     }
 
     .modal-content {

@@ -10,10 +10,10 @@
   width: 100%;
   max-width: 834px;
   background-color: #fff;
-  margin-top: 55px;
+  margin-top: 41px;
 
   @include media-breakpoint-down(sm) {
-    margin-top: 32px;
+    margin-top: 18px;
   }
 
   &__heading {

@@ -18,81 +18,97 @@ const Profile = () => {
   const breadcrumbs = [{ title: translate("profilePage.myProfile") }];
 
   return (
-    <>
+    <section className="profile container">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <section className="profile">
-        <div className="profile__wrapper">
-          <div className="profile__inner">
-            <div className="profile__box">
-              <div className="profile__img">
-                <img src={ProfileImg} alt="account" />
-              </div>
-              <h1 className="profile__title">Aleksandr Vtorov</h1>
-              <span className="profile__subtitle">Poznań, Poland</span>
-              <span className="profile__name">@alex64</span>
+      <div className="profile__wrapper">
+        <div className="profile__inner">
+          <div className="profile__box">
+            <div className="profile__img">
+              <img src={ProfileImg} alt="account" />
             </div>
-            <div className="profile__span">About me</div>
-            <p className="profile__text">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-              commodo ligula eget dolor. Lorem ipsum dolor sit amet,
-              consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-              Lorem ipsum dolor sit.
-            </p>
-            <ul>
-              <li>
-                <a href="/" target="_blank" rel="noreferrer">
-                  <Facebook />
-                </a>
-              </li>
-              <li>
-                <a href="/" target="_blank" rel="noreferrer">
-                  <Twitter />
-                </a>
-              </li>
-              <li>
-                <a href="/" target="_blank" rel="noreferrer">
-                  <Instagram />
-                </a>
-              </li>
-              <li>
-                <a href="/" target="_blank" rel="noreferrer">
-                  <World />
-                  proxyone.eu
-                </a>
-              </li>
-            </ul>
+            <div>
+              <h1 className="profile__title SFPro-700">Aleksandr Vtorov</h1>
+              <span className="profile__subtitle">Poznań, Poland</span>
+              <span className="profile__name SFPro-700">@alex64</span>
+            </div>
           </div>
-          <div className="profile__edit">
-            <button className="profile__button" type="button">
-              Edit Profile
-            </button>
-            <button className="profile__setting" type="button">
-              <Setting />
-            </button>
-          </div>
-        </div>
-        <div className="profile__wrap">
-          <span className="profile__head">My awards</span>
-          <ul className="profile__items">
-            <li className="profile__item">
-              <List />
-              <span className="profile__num">3</span>
-              {translate("profilePage.myAwards")}
+          <span className="profile__span">
+            {translate("profilePage.aboutMe")}
+          </span>
+          <p className="profile__text">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+            commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer
+            adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor
+            sit.
+          </p>
+          <ul className="profile__networks">
+            <li className="profile__network">
+              <a href="/" target="_blank" rel="noreferrer">
+                <Facebook />
+              </a>
             </li>
-            <li className="profile__item">
-              <Cup />
-              <span className="profile__num">30</span>
-              {translate("profilePage.completedChecklists")}
+            <li className="profile__network">
+              <a href="/" target="_blank" rel="noreferrer">
+                <Twitter />
+              </a>
             </li>
-            <li className="profile__item">
-              <Added />
-              <span className="profile__num">5</span>
-              {translate("profilePage.createdChecklists")}
+            <li className="profile__network">
+              <a href="/" target="_blank" rel="noreferrer">
+                <Instagram />
+              </a>
+            </li>
+            <li className="profile__network">
+              <a href="/" target="_blank" rel="noreferrer">
+                <World />
+                proxyone.eu
+              </a>
             </li>
           </ul>
         </div>
-      </section>
-    </>
+        <div className="profile__edit">
+          <button className="profile__button SFPro-600" type="button">
+            {translate("profilePage.editProfile")}
+          </button>
+          <button className="profile__setting" type="button">
+            <Setting />
+          </button>
+        </div>
+      </div>
+      <div className="profile__wrap">
+        <span className="profile__head">
+          {translate("profilePage.myAwards")}
+        </span>
+        <ul className="profile__items">
+          <li className="profile__item SFPro-600">
+            <List />
+            <div>
+              <span className="profile__num SFPro-700">3</span>
+              <div className="profile__desc">
+                {translate("profilePage.completedChecklists")}
+              </div>
+            </div>
+          </li>
+          <li className="profile__item SFPro-600">
+            <Cup />
+            <div>
+              <span className="profile__num SFPro-700">30</span>
+              <div className="profile__desc">
+                {translate("profilePage.myAwards")}
+              </div>
+            </div>
+          </li>
+          <li className="profile__item SFPro-600">
+            <Added />
+            <div>
+              <span className="profile__num SFPro-700">5</span>
+              <div className="profile__desc">
+                {translate("profilePage.createdChecklists")}
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
   );
 };
 

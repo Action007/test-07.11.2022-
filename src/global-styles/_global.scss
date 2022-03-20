@@ -26,13 +26,13 @@ body {
 }
 
 .container {
-  margin: 0 auto;
-  padding: 116px 34px 0;
+  margin: 116px auto 0;
+  padding: 0 34px;
   width: 100%;
   max-width: 1614px;
 
   @include media-breakpoint-down(xl) {
-    padding-top: 0;
+    margin-top: 0;
   }
 
   @include media-breakpoint-down(md) {
@@ -103,6 +103,12 @@ button {
 
 .SFPro-700 {
   font-family: 'SFPro-Bold', sans-serif;
+}
+
+.modal-dialog {
+  padding: 15px;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .modal-content {
