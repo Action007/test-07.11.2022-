@@ -1,0 +1,94 @@
+@import '../../../global-styles/_variables.scss';
+
+.paginate {
+  .pagination {
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: 'SFPro-Bold', sans-serif;
+  }
+
+  .page-item {
+    margin-bottom: 8px;
+
+    &.disabled {
+      a {
+        border-color: transparent !important;
+      }
+
+      svg {
+        fill: #dbdbdb;
+      }
+    }
+
+    svg {
+      fill: $dark;
+    }
+
+    .page-link {
+      border-radius: 4px;
+      padding: 0.3rem 0.69rem;
+      color: $dark;
+    }
+
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+
+    &.active .page-link {
+      border-radius: 4px;
+      color: $primary;
+      background-color: #fff;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background-color: #fff;
+      width: 40px;
+      height: 40px;
+      border: 1px solid #ebebeb;
+
+      &.disabled {
+        border-color: transparent;
+
+        svg {
+          fill: #dbdbdb;
+        }
+      }
+    }
+
+    svg {
+      fill: $dark;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+
+  &__first {
+    margin-right: 8px;
+    transform: rotate(180deg);
+  }
+
+  &__last {
+    margin-left: 8px;
+  }
+
+  &__desc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+  }
+}

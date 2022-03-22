@@ -191,5 +191,19 @@
     "myAwards": "My awards",
     "completedChecklists": "Completed checklists",
     "createdChecklists": "Created checklists"
+  },
+  "editProfilePage": {
+    "editProfile": "Edit profile",
+    "name": "Name",
+    "nickName": "Nick name",
+    "location": "Location",
+    "bio": "Bio",
+    "website": "Personal website",
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "twitter": "Twitter",
+    "max": "Maximum 150 characters",
+    "bioMax": "Brief description of you or your profile. Maximum 150 characters",
+    "button": "Save Change"
   }
 }

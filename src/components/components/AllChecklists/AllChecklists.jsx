@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../services/checklistService";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
-import PaginationChecklist from "../PaginationChecklist/PaginationChecklist";
+import Pagination from "../Pagination/Pagination";
 import Tabs from "../Tabs/Tabs";
 
 const AllChecklists = () => {
-  const [value, setValue] = useState([1, 10]);
+  const [value, setValue] = useState(1);
   const [category, setCategory] = useState("created");
-  const url = `/api/v1/checklists_auth?search_type=${category}&page=${value[0]}&per_page=${value[1]}`;
+  const url = `/api/v1/checklists_auth?search_type=${category}&page=${value}&per_page=10`;
   const {
     data: checklists,
     error,
@@ -22,7 +22,8 @@ const AllChecklists = () => {
     { id: 1, key: "liked", title: translate("allChecklistsPage.liked") },
     { id: 2, key: "saved", title: translate("allChecklistsPage.saved") },
   ];
-  useEffect(() => setValue([1, 10]), [category]);
+
+  useEffect(() => setValue(1), [category]);
 
   const changeChecklistsHandler = (key) => {
     setCategory(key);
@@ -48,11 +49,20 @@ const AllChecklists = () => {
               key={checklist.id}
               checklist={checklist}
               translate={translate("allChecklistsPage.showMore")}
-              created={category}
+              created={category === "created"}
             />
           ))}
       </div>
-      <PaginationChecklist paginate={checklists?.paginate} />
+      {checklists && (
+        <Pagination
+          count={checklists.paginate.total_pages}
+          setValue={setValue}
+          currentPage={checklists.paginate.current_page}
+          totalPage={checklists.paginate.total_pages}
+          prevPage={checklists.paginate.prev_page}
+          nextPage={checklists.paginate.next_page}
+        />
+      )}
     </div>
   );
 };

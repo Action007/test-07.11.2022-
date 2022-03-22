@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import "./Profile.scss";
+import "./MyProfile.scss";
 
 import ProfileImg from "../../../assets/images/content/profile.png";
 import { ReactComponent as Setting } from "../../../assets/images/icon/setting.svg";

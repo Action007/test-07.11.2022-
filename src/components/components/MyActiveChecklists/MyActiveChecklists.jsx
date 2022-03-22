@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { checklistAPI } from "../../../services/checklistService";
 import uniqueID from "../../../utils/uniqueId";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
-import PaginationChecklist from "../PaginationChecklist/PaginationChecklist";
 import Tabs from "../Tabs/Tabs";
 
+import Pagination from "../Pagination/Pagination";
+
 const MyActiveChecklists = () => {
-  const [checklists, setCheckLists] = useState([]);
+  const [value, setValue] = useState(1);
   const [, setCategory] = useState(true);
   const { t: translate } = useTranslation();
+  const url = `http://151.115.40.72:5000/api/v1/checklists_auth?page=${value}&per_page=10`;
+  const {
+    data: checklists,
+    error,
+    isLoading,
+  } = checklistAPI.useFetchChecklistQuery(url);
 
   const breadcrumbs = [{ title: translate("myActiveChecklists.title") }];
   const tabs = [
@@ -20,19 +28,6 @@ const MyActiveChecklists = () => {
   const changeChecklistsHandler = (number) => {
     setCategory(number === 0);
   };
-
-  useEffect(() => {
-    const getProducts = async () => {
-      const response = await fetch(
-        "http://151.115.40.72:5000/api/v1/checklists_auth?page=1&per_page=10"
-      );
-      const responseData = await response.json();
-
-      setCheckLists(responseData.entities);
-    };
-
-    getProducts();
-  }, []);
 
   return (
     <div className="container pb-8">
@@ -46,16 +41,28 @@ const MyActiveChecklists = () => {
           tabs={tabs}
           category="active"
         />
-        {checklists.map((checklist) => (
-          <Checklist
-            key={uniqueID()}
-            checklist={checklist}
-            translate={translate("myActiveChecklists.showMore")}
-            active
-          />
-        ))}
+        {isLoading && <h1>Идет загрузка...</h1>}
+        {error && <h1>Произошла ошибка при загрузке</h1>}
+        {checklists &&
+          checklists.entities.map((checklist) => (
+            <Checklist
+              key={uniqueID()}
+              checklist={checklist}
+              translate={translate("myActiveChecklists.showMore")}
+              active
+            />
+          ))}
       </div>
-      <PaginationChecklist />
+      {checklists && (
+        <Pagination
+          count={checklists.paginate.total_pages}
+          setValue={setValue}
+          currentPage={checklists.paginate.current_page}
+          totalPage={checklists.paginate.total_pages}
+          prevPage={checklists.paginate.prev_page}
+          nextPage={checklists.paginate.next_page}
+        />
+      )}
     </div>
   );
 };

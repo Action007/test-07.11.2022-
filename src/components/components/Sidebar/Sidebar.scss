@@ -1,4 +1,4 @@
-@import "../../../global-styles/_variables.scss";
+@import '../../../global-styles/_variables.scss';
 
 .sidebar {
   overflow: hidden;
@@ -17,9 +17,10 @@
   &__list {
     display: flex;
     flex-direction: column;
-    padding: 7px 12px 22px;
+    padding: 12px 12px 22px;
     width: 100%;
     background-color: #fff;
+    margin: 0;
   }
 
   &__button {
@@ -30,6 +31,11 @@
     width: 100%;
     font-size: 16px;
     text-align: left;
+    margin-bottom: 9px;
+    
+    &:hover {
+      background-color: #eeeeee;
+    }
 
     svg {
       margin-right: 25px;
@@ -48,47 +54,6 @@
     }
   }
 
-  &__label {
-    position: relative;
-    display: flex;
-    margin-left: 48px;
-    padding: 12px 22px;
-    font-size: 16px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-
-    input {
-      position: absolute;
-      width: 0;
-      height: 0;
-      opacity: 0;
-      cursor: pointer;
-    }
-  }
-
-  &__checkmark {
-    position: absolute;
-    left: -26px;
-    top: 50%;
-    width: 25px;
-    height: 25px;
-    background-image: url("../../../assets/images/icon/checkbox.svg");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: transparent;
-    transform: translateY(-50%);
-
-    &::after {
-      content: "";
-      position: absolute;
-      display: none;
-    }
-  }
-
   &__active {
     display: flex;
     align-items: center;
@@ -98,6 +63,7 @@
     font-size: 16px;
     text-align: left;
     color: #fc5757;
+    margin-bottom: 9px;
     background-color: #eb565617;
 
     svg {
@@ -105,57 +71,5 @@
       width: 25px;
       height: 25px;
     }
-  }
-
-  &__tags {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 20px 0;
-  }
-
-  &__more {
-    padding: 4px 8px;
-    font-size: 16px;
-    color: #2b74c6;
-  }
-
-  &__tag {
-    display: inline-block;
-    margin-bottom: 4px;
-    border-radius: 4px;
-    padding: 4px 8px;
-    color: #467399;
-    background: #407bff1a;
-
-    &:not(:last-child) {
-      margin-right: 4px;
-    }
-  }
-
-  &__label:hover input ~ &__checkmark {
-    background-color: #65c17e1a;
-  }
-
-  &__label input:checked ~ &__checkmark {
-    background-image: url("../../../assets/images/icon/checkboxActive.svg");
-  }
-
-  &__label input:checked ~ &__checkmark::after {
-    display: block;
-  }
-
-  &__label input:checked ~ &__number {
-    color: $primary;
-  }
-
-  &__label &__checkmark::after {
-    right: 5px;
-    top: 5px;
-    width: 14px;
-    height: 14px;
-    background-image: url("../../../assets/images/icon/tick.svg");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
   }
 }

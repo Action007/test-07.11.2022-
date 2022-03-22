@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Sidebar.scss";
 
+import { ReactComponent as UnChecked } from "../../../assets/images/icon/unChecked.svg";
+import { ReactComponent as Checked } from "../../../assets/images/icon/checked.svg";
 import { ReactComponent as PopularSvg } from "../../../assets/images/icon/popular.svg";
 import { ReactComponent as PrintingSvg } from "../../../assets/images/icon/printing.svg";
 import { ReactComponent as VocabularySvg } from "../../../assets/images/icon/vocabulary.svg";
@@ -15,51 +17,37 @@ import { ReactComponent as CinemaSvg } from "../../../assets/images/icon/cinema.
 import { ReactComponent as ScienceSvg } from "../../../assets/images/icon/science.svg";
 import { ReactComponent as InternetSvg } from "../../../assets/images/icon/internet.svg";
 import { ReactComponent as FoodSvg } from "../../../assets/images/icon/food.svg";
-import uniqueID from "../../../utils/uniqueId";
 
 const Sidebar = () => {
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
   const { t: translate } = useTranslation();
 
   const categories = [
-    { id: 0, name: translate("sidebar.selectAll"), type: "checkbox" },
+    {
+      id: 0,
+      name: translate("sidebar.selectAll"),
+      unChecked: <UnChecked />,
+      checked: <Checked />,
+      type: "checkbox",
+    },
     {
       id: 1,
       name: translate("sidebar.popular"),
       svg: <PopularSvg />,
       type: "active",
     },
-    {
-      id: 3,
-      name: translate("sidebar.moreTags"),
-      type: "tags",
-      tags: [
-        "javascript",
-        "react",
-        "ruby",
-        "php",
-        "python",
-        "java",
-        "c#",
-        "html",
-        "android",
-        "c++",
-        "css",
-        "jquery",
-      ],
-    },
-    { id: 4, name: translate("sidebar.printingHouse"), svg: <PrintingSvg /> },
-    { id: 5, name: translate("sidebar.vocabulary"), svg: <VocabularySvg /> },
-    { id: 6, name: translate("sidebar.space"), svg: <SpaceSvg /> },
-    { id: 7, name: translate("sidebar.sport"), svg: <SportSvg /> },
-    { id: 8, name: translate("sidebar.health"), svg: <HealthSvg /> },
-    { id: 9, name: translate("sidebar.plants"), svg: <PlantsSvg /> },
-    { id: 10, name: translate("sidebar.nature"), svg: <NatureSvg /> },
-    { id: 11, name: translate("sidebar.music"), svg: <MusicSvg /> },
-    { id: 12, name: translate("sidebar.cinema"), svg: <CinemaSvg /> },
-    { id: 13, name: translate("sidebar.science"), svg: <ScienceSvg /> },
-    { id: 14, name: translate("sidebar.internet"), svg: <InternetSvg /> },
-    { id: 15, name: translate("sidebar.food"), svg: <FoodSvg /> },
+    { id: 2, name: translate("sidebar.printingHouse"), svg: <PrintingSvg /> },
+    { id: 3, name: translate("sidebar.vocabulary"), svg: <VocabularySvg /> },
+    { id: 4, name: translate("sidebar.space"), svg: <SpaceSvg /> },
+    { id: 5, name: translate("sidebar.sport"), svg: <SportSvg /> },
+    { id: 6, name: translate("sidebar.health"), svg: <HealthSvg /> },
+    { id: 7, name: translate("sidebar.plants"), svg: <PlantsSvg /> },
+    { id: 8, name: translate("sidebar.nature"), svg: <NatureSvg /> },
+    { id: 9, name: translate("sidebar.music"), svg: <MusicSvg /> },
+    { id: 10, name: translate("sidebar.cinema"), svg: <CinemaSvg /> },
+    { id: 11, name: translate("sidebar.science"), svg: <ScienceSvg /> },
+    { id: 12, name: translate("sidebar.internet"), svg: <InternetSvg /> },
+    { id: 13, name: translate("sidebar.food"), svg: <FoodSvg /> },
   ];
 
   return (
@@ -71,27 +59,17 @@ const Sidebar = () => {
         {categories.map((item) => (
           <li className="sidebar__item SFPro-700" key={item.id}>
             {item.type === "checkbox" && (
-              <label className="sidebar__label" htmlFor={item.id}>
-                <input id={item.id} type="checkbox" />
-                <span className="sidebar__checkmark" />
-                <span className="sidebar__select">{item.name}</span>
-              </label>
-            )}
-            {item.type === "tags" && (
-              <div className="sidebar__tags SFPro-600">
-                {item.tags.map((tag) => (
-                  <button
-                    className="sidebar__tag"
-                    key={uniqueID()}
-                    type="button"
-                  >
-                    {tag}
-                  </button>
-                ))}
-                <button className="sidebar__more" type="button">
-                  {item.name}
-                </button>
-              </div>
+              <button
+                onClick={() => setActive(item.id)}
+                className={`sidebar__button${
+                  item.id === active ? " active SFPro-600" : ""
+                }`}
+                type="button"
+              >
+                {item.id === active && item.checked}
+                {item.id !== active && item.unChecked}
+                <span>{item.name}</span>
+              </button>
             )}
             {item.type === "active" && (
               <span className="sidebar__active">

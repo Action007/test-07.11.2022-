@@ -1,4 +1,5 @@
 @import './_fonts.scss';
+@import './_variables.scss';
 @import '../../node_modules/bootstrap/scss/_mixins.scss';
 
 html,
@@ -107,8 +108,7 @@ button {
 
 .modal-dialog {
   padding: 15px;
-  margin-right: 0;
-  margin-left: 0;
+  margin: auto;
 }
 
 .modal-content {
