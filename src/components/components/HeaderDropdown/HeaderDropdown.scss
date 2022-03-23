@@ -1,5 +1,6 @@
 @import "../../../global-styles/_variables.scss";
 @import "../../../global-styles/_fonts.scss";
+@import "../../../global-styles/_mixins.scss";
 @import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .header-dropdown {
@@ -68,6 +69,11 @@
       height: 100%;
       object-fit: cover;
     }
+  }
+
+  &__name {
+    max-width: 80px;
+    @include line-clamp
   }
 
   &__menu {

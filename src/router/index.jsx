@@ -27,6 +27,9 @@ const HomePage = React.lazy(() => import("../pages/HomePage"));
 const NotFoundPage = React.lazy(() => import("../pages/NotFoundPage"));
 const MyProfilePage = React.lazy(() => import("../pages/MyProfilePage"));
 const EditProfilePage = React.lazy(() => import("../pages/EditProfilePage"));
+const AccountSettingsPage = React.lazy(() =>
+  import("../pages/AccountSettingsPage")
+);
 
 const routes = [
   { id: 1, path: "/home", element: <HomePage /> },
@@ -49,8 +52,9 @@ const routes = [
   { id: 14, path: "/created-checklists", element: <AllChecklistsPage /> },
   { id: 15, path: "/my-profile", element: <MyProfilePage /> },
   { id: 15, path: "/edit-profile", element: <EditProfilePage /> },
-  { id: 16, path: "/", element: <Navigate to="/home" /> },
-  { id: 17, path: "/*", element: <NotFoundPage /> },
+  { id: 16, path: "/account-settings", element: <AccountSettingsPage /> },
+  { id: 17, path: "/", element: <Navigate to="/home" /> },
+  { id: 18, path: "/*", element: <NotFoundPage /> },
 ];
 
 export default routes;

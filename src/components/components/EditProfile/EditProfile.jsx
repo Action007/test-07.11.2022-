@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -18,31 +19,31 @@ const EditProfile = () => {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="edit-profile__wrapper">
         <form className="edit-profile__form">
-          <label className="edit-profile__label" htmlFor="edit-name">
-            <span className="edit-profile__title edit-profile__title--star SFPro-700">
+          <label className="edit-profile__label">
+            <span className="edit-profile__title edit-profile__title--one SFPro-700">
               {translate("editProfilePage.name")}
             </span>
             <span className="edit-profile__subtitle">
               {translate("editProfilePage.max")}
             </span>
-            <input type="text" id="edit-name" />
+            <input type="text" />
           </label>
-          <label className="edit-profile__label" htmlFor="edit-name">
-            <span className="edit-profile__title edit-profile__title--star SFPro-700">
+          <label className="edit-profile__label">
+            <span className="edit-profile__title edit-profile__title--two SFPro-700">
               {translate("editProfilePage.nickName")}
             </span>
             <span className="edit-profile__subtitle">
               {translate("editProfilePage.max")}
             </span>
-            <input type="text" id="edit-name" />
+            <input type="text" />
           </label>
-          <label className="edit-profile__label" htmlFor="edit-name">
+          <label className="edit-profile__label">
             <span className="edit-profile__title SFPro-700">
               {translate("editProfilePage.location")}
             </span>
-            <input type="text" id="edit-name" />
+            <input type="text" />
           </label>
-          <label className="edit-profile__label" htmlFor="edit-name">
+          <label className="edit-profile__label">
             <span className="edit-profile__title SFPro-700">
               {translate("editProfilePage.bio")}
             </span>
@@ -51,35 +52,37 @@ const EditProfile = () => {
             </span>
             <textarea />
           </label>
-          <label className="edit-profile__label" htmlFor="edit-name">
+          <label className="edit-profile__label">
             <span className="edit-profile__title SFPro-700">
               {translate("editProfilePage.website")}
             </span>
-            <input type="text" id="edit-name" />
+            <input type="text" />
           </label>
-          <label className="edit-profile__label" htmlFor="edit-name">
+          <label className="edit-profile__label">
             <span className="edit-profile__title SFPro-700">
               {translate("editProfilePage.facebook")}
             </span>
-            <input type="text" id="edit-name" />
+            <input type="text" />
           </label>
-          <label className="edit-profile__label" htmlFor="edit-name">
+          <label className="edit-profile__label">
             <span className="edit-profile__title SFPro-700">
               {translate("editProfilePage.instagram")}
             </span>
-            <input type="text" id="edit-name" />
+            <input type="text" />
           </label>
-          <label className="edit-profile__label" htmlFor="edit-name">
+          <label className="edit-profile__label">
             <span className="edit-profile__title SFPro-700">
               {translate("editProfilePage.twitter")}
             </span>
-            <input type="text" id="edit-name" />
+            <input type="text" />
           </label>
           <button className="edit-profile__submit SFPro-600" type="button">
             {translate("editProfilePage.button")}
           </button>
         </form>
-        <EditProfileSvg />
+        <div className="edit-profile__svg">
+          <EditProfileSvg />
+        </div>
       </div>
     </div>
   );

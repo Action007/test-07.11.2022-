@@ -205,5 +205,13 @@
     "max": "Maximum 150 characters",
     "bioMax": "Brief description of you or your profile. Maximum 150 characters",
     "button": "Save Change"
+  },
+  "accountSettings": {
+    "email": "Email",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "minimum": "Minimum 8 characters",
+    "submit": "Save Change"
   }
 }

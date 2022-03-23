@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./MyProfile.scss";
 
@@ -66,12 +67,20 @@ const Profile = () => {
           </ul>
         </div>
         <div className="profile__edit">
-          <button className="profile__button SFPro-600" type="button">
+          <Link
+            to="/edit-profile"
+            className="profile__button SFPro-600"
+            type="button"
+          >
             {translate("profilePage.editProfile")}
-          </button>
-          <button className="profile__setting" type="button">
+          </Link>
+          <Link
+            to="/account-settings"
+            className="profile__setting"
+            type="button"
+          >
             <Setting />
-          </button>
+          </Link>
         </div>
       </div>
       <div className="profile__wrap">
@@ -80,7 +89,9 @@ const Profile = () => {
         </span>
         <ul className="profile__items">
           <li className="profile__item SFPro-600">
-            <List />
+            <div className="profile__svg">
+              <List />
+            </div>
             <div>
               <span className="profile__num SFPro-700">3</span>
               <div className="profile__desc">
@@ -89,7 +100,9 @@ const Profile = () => {
             </div>
           </li>
           <li className="profile__item SFPro-600">
-            <Cup />
+            <div className="profile__svg">
+              <Cup />
+            </div>
             <div>
               <span className="profile__num SFPro-700">30</span>
               <div className="profile__desc">
@@ -98,7 +111,9 @@ const Profile = () => {
             </div>
           </li>
           <li className="profile__item SFPro-600">
-            <Added />
+            <div className="profile__svg">
+              <Added />
+            </div>
             <div>
               <span className="profile__num SFPro-700">5</span>
               <div className="profile__desc">
