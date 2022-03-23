@@ -23,7 +23,7 @@ const Checklist = ({
   created = false,
   active = false,
 }) => {
-  const { id, checklist_items, created_at, liked, name, tags, viewed } =
+  const { id, checklist_items, created_at, liked, name, slug, tags, viewed } =
     checklist;
   const [like, setLike] = useState(false);
   const [showComplain, setShowComplain] = useState(false);
@@ -100,7 +100,7 @@ const Checklist = ({
         </div>
         <div className="checklist__wrap">
           <button
-            onClick={() => navigate(`/list/${id}`)}
+            onClick={() => navigate(`/list/${id}/${slug}`)}
             className="checklist__button SFPro-600"
             type="button"
           >

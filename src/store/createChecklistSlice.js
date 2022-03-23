@@ -138,7 +138,7 @@ const createChecklistSlice = createSlice({
       );
     },
     onSubmitClear(state) {
-      state.title = "";
+      state.title = { value: "", isValid: true };
       state.checklist_items = [];
       state.tags = [];
     },

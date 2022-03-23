@@ -15,7 +15,7 @@ const SearchInput = () => {
           onFocus={onBlurHandler}
           onBlur={onBlurHandler}
           className="search-input__input border-0"
-          placeholder="How to set up a company in the USA"
+          placeholder="Enter a word or #tag"
           type="email"
         />
       </label>

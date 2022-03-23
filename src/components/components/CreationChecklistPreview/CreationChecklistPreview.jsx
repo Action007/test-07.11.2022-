@@ -18,7 +18,7 @@ const CreationChecklistPreview = ({ show, onHide }) => {
   const checklists = {
     checklist_items,
     tags,
-    title,
+    name: title,
     viewed: 0,
     liked: 0,
     created_at: new Date().toISOString(),

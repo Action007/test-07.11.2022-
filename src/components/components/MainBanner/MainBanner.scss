@@ -1,4 +1,5 @@
-@import "../../../global-styles/_variables.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .main-banner {
   display: flex;
@@ -6,17 +7,65 @@
   justify-content: space-between;
   margin-bottom: 160px;
   padding-top: 64px;
+  padding-right: 150px;
+
+  @include media-breakpoint-down(xl) {
+    padding-right: 0;
+  }
+
+  @include media-breakpoint-down(lg) {
+    margin-bottom: 120px;
+  }
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 90px;
+  }
 
   &__wrap {
-    margin-right: 30px;
     margin-bottom: 80px;
     width: 100%;
     max-width: 374px;
+
+    @include media-breakpoint-down(xl) {
+      margin-right: 15px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      max-width: 100%;
+      text-align: center;
+    }
   }
 
   &__title {
     margin-bottom: 50px;
-    font-size: 3rem;
+    font-size: 48px;
+
+    @include media-breakpoint-down(xl) {
+      margin-bottom: 46px;
+      font-size: 38px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      max-width: 800px;
+      font-size: 48px;
+      margin: 0 auto 30px;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 32px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin: 0 auto 26px;
+      font-size: 24px;
+    }
+  }
+
+  &__link {
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   &__button {
@@ -24,11 +73,16 @@
     align-items: center;
     border: 1px solid transparent;
     border-radius: 8px;
-    padding: 18px 56px 18px 60px;
+    padding: 18px 60px 18px 45px;
     font-size: 16px;
     color: #fff;
     background-color: $primary;
     transition: all 0.3s ease;
+
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+      justify-content: center;
+    }
 
     svg {
       margin-right: 11px;
@@ -51,6 +105,11 @@
     width: 100%;
     height: auto;
     max-width: 918px;
+
+    @include media-breakpoint-down(lg) {
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
 
     svg {
       width: 100%;

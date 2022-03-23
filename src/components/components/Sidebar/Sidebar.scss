@@ -1,4 +1,5 @@
 @import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .sidebar {
   overflow: hidden;
@@ -7,9 +8,36 @@
   width: 100%;
   max-width: 326px;
 
+  @include media-breakpoint-down(lg) {
+    margin-bottom: 34px;
+    max-width: 100%;
+  }
+
+  &.active {
+    .sidebar__head {
+      svg {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+
+  &__head--accordion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 20px;
+      height: 10px;
+      margin-left: 22px;
+      transition: transform 0.3s ease;
+    }
+  }
+
   &__head {
     padding: 18px 28px;
     font-size: 20px;
+    width: 100%;
     color: #fff;
     background-color: #646464;
   }
@@ -32,7 +60,7 @@
     font-size: 16px;
     text-align: left;
     margin-bottom: 9px;
-    
+
     &:hover {
       background-color: #eeeeee;
     }
@@ -72,4 +100,24 @@
       height: 25px;
     }
   }
+}
+
+.accordion-enter {
+  max-height: 0;
+  transition: max-height 0.4s ease;
+}
+
+.accordion-enter-active {
+  max-height: 1000px;
+  transition: max-height 0.4s ease;
+}
+
+.accordion-exit {
+  max-height: 750px;
+  transition: max-height 0.4s ease;
+}
+
+.accordion-exit-active {
+  max-height: 0;
+  transition: max-height 0.4s ease;
 }

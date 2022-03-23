@@ -39,7 +39,7 @@ const routes = [
   { id: 5, path: "/support", element: <SupportPage /> },
   { id: 6, path: "/contacts", element: <ContactsPage /> },
   { id: 7, path: "/checklist-review", element: <ChecklistReviewPage /> },
-  { id: 8, path: "/list/:id", element: <ChecklistReviewPage /> },
+  { id: 8, path: "/list/:id/:slug", element: <ChecklistReviewPage /> },
   { id: 9, path: "/my-active-checklists", element: <MyActiveChecklistsPage /> },
   { id: 10, path: "/active-checklist", element: <ActiveChecklistPage /> },
   {

@@ -7,6 +7,7 @@ import Sidebar from "../Sidebar/Sidebar";
 import SearchInput from "../SearchInput/SearchInput";
 import Checklist from "../Checklist/Checklist";
 import uniqueID from "../../../utils/uniqueId";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./HomeChecklistPage.scss";
 
 import Logo from "../../../assets/images/content/logo.svg";
@@ -23,18 +24,22 @@ const HomeChecklistPage = () => {
   } = checklistAPI.useFetchChecklistQuery(url);
   const [modalShow, setModalShow] = useState(true);
   const { t: translate } = useTranslation();
+  const showOnMobile = useMediaQuery("(max-width:991px)");
+  const onMobile = useMediaQuery("(max-width:1199px)");
 
   return (
     <>
       <MainBanner />
       <div className="main-content">
         <div className="container main-content__wrapper">
-          <Sidebar />
+          {!showOnMobile && <Sidebar />}
           <div className="main-content__wrap">
             <h3 className="main-content__title">
-              {translate("mainPage.popularQuestion")}
+              {!showOnMobile && translate("mainPage.popularQuestion")}
+              {showOnMobile && translate("mainPage.search")}
             </h3>
             <SearchInput />
+            {showOnMobile && <Sidebar />}
             {isLoading && <h1>Идет загрузка...</h1>}
             {error && <h1>Произошла ошибка при загрузке</h1>}
             {checklists &&
@@ -59,17 +64,35 @@ const HomeChecklistPage = () => {
         </div>
         <div className="main-content__inner">
           <div className="main-content__container">
-            <div className="main-content__img">
-              <img src={Logo} alt="logotype" />
+            <div className="main-content__box">
+              <div className="main-content__img">
+                <img src={Logo} alt="logotype" />
+              </div>
+              <h3 className="main-content__heading SFPro-600">
+                {translate("mainPage.heading")}
+              </h3>
+              <p className="main-content__desc">{translate("mainPage.desc")}</p>
+              {onMobile && (
+                <div className="main-content__images">
+                  <span className="main-content__image" />
+                  <span className="main-content__image" />
+                  <span className="main-content__image" />
+                  <span className="main-content__image" />
+                </div>
+              )}
+              <button className="main-content__button SFPro-600" type="button">
+                <Plus />
+                {translate("mainPage.button")}
+              </button>
             </div>
-            <h3 className="main-content__heading SFPro-600">
-              {translate("mainPage.heading")}
-            </h3>
-            <p className="main-content__desc">{translate("mainPage.desc")}</p>
-            <button className="main-content__button SFPro-600" type="button">
-              <Plus />
-              {translate("mainPage.button")}
-            </button>
+            {!onMobile && (
+              <div className="main-content__images">
+                <span className="main-content__image" />
+                <span className="main-content__image" />
+                <span className="main-content__image" />
+                <span className="main-content__image" />
+              </div>
+            )}
           </div>
         </div>
       </div>

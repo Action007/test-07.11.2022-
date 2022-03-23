@@ -11,7 +11,7 @@ const AccountSetting = () => {
 
   const breadcrumbs = [
     { title: translate("profilePage.myProfile"), link: "/my-profile" },
-    { title: translate("editProfilePage.editProfile") },
+    { title: translate("accountSettings.accountSettings") },
   ];
 
   return (

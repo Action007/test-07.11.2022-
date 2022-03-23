@@ -58,14 +58,22 @@ const HeaderDropdown = () => {
             <span />
             All Checklists
           </Link>
-          <button className="header-dropdown__item" type="button">
+          <Link
+            onClick={setShowHandler}
+            className="header-dropdown__item"
+            to="/my-profile"
+          >
             <Account />
             Profile settings
-          </button>
-          <button className="header-dropdown__item" type="button">
+          </Link>
+          <Link
+            onClick={setShowHandler}
+            className="header-dropdown__item"
+            to="/account-settings"
+          >
             <Setting />
             Account settings
-          </button>
+          </Link>
           <button className="header-dropdown__item" type="button">
             <Logout />
             Log Out
