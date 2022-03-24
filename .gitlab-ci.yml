@@ -6,10 +6,10 @@ stages:
   - build
   - deploy
 
-.runs-only: &run_only
-  only:
-    refs:
-      - main
+# .runs-only: &run_only
+#   only:
+#     refs:
+#       - main
 
 lint-test:
   stage: test
@@ -19,7 +19,6 @@ lint-test:
     - echo "No lint issues found."
 
 build-image:
-  # <<: *run_only
   image: docker:latest
   stage: build
   services:
@@ -31,7 +30,6 @@ build-image:
     - docker push "$CI_REGISTRY_IMAGE:latest"
 
 deploy:
-  # <<: *run_only
   stage: deploy
   variables:
     CLEAR_COMMAND: $(docker image ls -f 'dangling=true' -q)
