@@ -4,10 +4,8 @@
 .checklist {
   position: relative;
   margin: 0 auto 43px;
-  margin-bottom: 25px;
   border-radius: 8px;
   padding: 34px 75px 32px 34px;
-  width: 100%;
   width: 100%;
   max-width: 834px;
   background-color: #fff;
@@ -18,6 +16,10 @@
     @include media-breakpoint-down(sm) {
       margin-bottom: 12px;
     }
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 30px 19px;
   }
 
   &__heading {
@@ -274,9 +276,5 @@
     svg {
       margin-right: 10px;
     }
-  }
-
-  @include media-breakpoint-down(sm) {
-    padding: 30px 19px;
   }
 }

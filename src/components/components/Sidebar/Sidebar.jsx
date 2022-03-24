@@ -39,7 +39,7 @@ const Sidebar = () => {
       id: 1,
       name: translate("sidebar.popular"),
       svg: <PopularSvg />,
-      type: "active",
+      type: "popular",
     },
     { id: 2, name: translate("sidebar.printingHouse"), svg: <PrintingSvg /> },
     { id: 3, name: translate("sidebar.vocabulary"), svg: <VocabularySvg /> },
@@ -79,11 +79,17 @@ const Sidebar = () => {
                   <span>{item.name}</span>
                 </button>
               )}
-              {item.type === "active" && (
-                <span className="sidebar__active">
+              {item.type === "popular" && (
+                <button
+                  onClick={() => setActive(item.id)}
+                  className={`sidebar__popular${
+                    item.id === active ? " active" : ""
+                  }`}
+                  type="button"
+                >
                   {item.svg && item.svg}
                   <span>{item.name}</span>
-                </span>
+                </button>
               )}
               {!item.type && (
                 <button
@@ -133,11 +139,17 @@ const Sidebar = () => {
                   <span>{item.name}</span>
                 </button>
               )}
-              {item.type === "active" && (
-                <span className="sidebar__active">
+              {item.type === "popular" && (
+                <button
+                  onClick={() => setActive(item.id)}
+                  className={`sidebar__popular${
+                    item.id === active ? " active" : ""
+                  }`}
+                  type="button"
+                >
                   {item.svg && item.svg}
                   <span>{item.name}</span>
-                </span>
+                </button>
               )}
               {!item.type && (
                 <button

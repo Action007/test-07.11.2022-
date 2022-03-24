@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
+import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ChecklistComments from "../ChecklistComments/ChecklistComments";
 import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
@@ -149,9 +150,9 @@ const ChecklistReview = () => {
   const breadcrumbs = [{ title: translate("checklistReviewPage.title") }];
 
   return (
-    <div className="container pb-8">
+    <div className="checklist-detail container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      {isLoading && <h1>Идет загрузка...</h1>}
+      {isLoading && <LoadingSkeleton />}
       {error && <h1>Произошла ошибка при загрузке</h1>}
       {checklists && <ChecklistDetail checklists={checklists} />}
       <ChecklistComments comments={data.comments} />

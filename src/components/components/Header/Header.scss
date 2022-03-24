@@ -6,6 +6,10 @@
   padding: 0 34px;
   width: 100%;
 
+  @include media-breakpoint-down(md) {
+    padding: 0 16px;
+  }
+  
   .header__navbar {
     left: 50%;
     z-index: 1010;
@@ -204,9 +208,5 @@
     @include media-breakpoint-down(xl) {
       max-width: 100%;
     }
-  }
-
-  @include media-breakpoint-down(md) {
-    padding: 0 16px;
   }
 }

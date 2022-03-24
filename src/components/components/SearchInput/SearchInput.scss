@@ -64,7 +64,7 @@
     max-width: 100%;
   }
 
-  @include media-breakpoint-down(sm) {
-    margin-top: 78px;
+  @include media-breakpoint-down(md) {
+    margin-top: 85px;
   }
 }

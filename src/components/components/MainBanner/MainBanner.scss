@@ -10,7 +10,7 @@
   padding-right: 150px;
 
   @include media-breakpoint-down(xl) {
-    padding-right: 0;
+    padding: 64px 34px 0;
   }
 
   @include media-breakpoint-down(lg) {
@@ -18,7 +18,8 @@
   }
 
   @include media-breakpoint-down(md) {
-    margin-bottom: 90px;
+    margin-bottom: 71px;
+    padding: 56px 16px 0;
   }
 
   &__wrap {
@@ -33,6 +34,11 @@
     @include media-breakpoint-down(lg) {
       max-width: 100%;
       text-align: center;
+      margin-right: 0;
+    }
+    
+    @include media-breakpoint-down(lg) {
+      margin-bottom: 0;
     }
   }
 
@@ -62,7 +68,7 @@
   }
 
   &__link {
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       width: 100%;
       justify-content: center;
     }
@@ -79,9 +85,10 @@
     background-color: $primary;
     transition: all 0.3s ease;
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       width: 100%;
       justify-content: center;
+      padding: 13px 60px 13px 45px;
     }
 
     svg {

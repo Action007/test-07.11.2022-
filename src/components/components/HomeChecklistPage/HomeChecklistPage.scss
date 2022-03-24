@@ -118,6 +118,23 @@
     margin-bottom: 44px;
     max-width: 547px;
     font-size: 42px;
+
+    @include media-breakpoint-down(xl) {
+      font-size: 38px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      margin: 0 auto 30px;
+    }
+
+    @include media-breakpoint-down(md) {
+      font-size: 32px;
+      margin-bottom: 21px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 24px;
+    }
   }
 
   &__desc {
@@ -139,6 +156,10 @@
     color: #fff;
     background-color: $primary;
     transition: all 0.3s ease;
+
+    @include media-breakpoint-down(md) {
+      padding: 13px 60px 13px 45px;
+    }
 
     svg {
       margin-right: 11px;

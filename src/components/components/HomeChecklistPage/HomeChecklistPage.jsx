@@ -13,6 +13,7 @@ import "./HomeChecklistPage.scss";
 import Logo from "../../../assets/images/content/logo.svg";
 import { ReactComponent as Plus } from "../../../assets/images/icon/plus.svg";
 import Pagination from "../Pagination/Pagination";
+import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 
 const HomeChecklistPage = () => {
   const [value, setValue] = useState(1);
@@ -27,6 +28,14 @@ const HomeChecklistPage = () => {
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const onMobile = useMediaQuery("(max-width:1199px)");
 
+  const loader = (
+    <>
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+    </>
+  );
+
   return (
     <>
       <MainBanner />
@@ -40,7 +49,7 @@ const HomeChecklistPage = () => {
             </h3>
             <SearchInput />
             {showOnMobile && <Sidebar />}
-            {isLoading && <h1>Идет загрузка...</h1>}
+            {isLoading && loader}
             {error && <h1>Произошла ошибка при загрузке</h1>}
             {checklists &&
               checklists.entities.map((checklist) => (

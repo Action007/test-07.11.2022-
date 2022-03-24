@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../services/checklistService";
+import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
 import Pagination from "../Pagination/Pagination";
@@ -29,6 +30,21 @@ const AllChecklists = () => {
     setCategory(key);
   };
 
+  const loader = (
+    <>
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+    </>
+  );
+
   return (
     <div className="container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
@@ -41,7 +57,7 @@ const AllChecklists = () => {
           tabs={tabs}
           category={category}
         />
-        {isLoading && <h1>Идет загрузка...</h1>}
+        {isLoading && loader}
         {error && <h1>Произошла ошибка при загрузке</h1>}
         {checklists &&
           checklists.entities.map((checklist) => (

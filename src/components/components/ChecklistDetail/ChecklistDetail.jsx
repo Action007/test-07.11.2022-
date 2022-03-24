@@ -33,7 +33,7 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
   );
 
   return (
-    <div className="checklist-detail">
+    <div className="checklist-detail__wrapper">
       <div className="checklist-detail__heading">
         <h3 className="checklist-detail__title SFPro-700">{name}</h3>
         <div className="checklist-detail__head">
