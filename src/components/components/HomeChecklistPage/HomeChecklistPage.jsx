@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
-import PopupLogin from "../PopupLogin/PopupLogin";
+// import PopupLogin from "../PopupLogin/PopupLogin";
 import Sidebar from "../Sidebar/Sidebar";
 import SearchInput from "../SearchInput/SearchInput";
 import Checklist from "../Checklist/Checklist";
@@ -23,7 +23,7 @@ const HomeChecklistPage = () => {
     error,
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(url);
-  const [modalShow, setModalShow] = useState(true);
+  // const [modalShow, setModalShow] = useState(true);
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const onMobile = useMediaQuery("(max-width:1199px)");
@@ -105,7 +105,7 @@ const HomeChecklistPage = () => {
           </div>
         </div>
       </div>
-      <PopupLogin show={modalShow} onHide={() => setModalShow(false)} />
+      {/* <PopupLogin show={modalShow} onHide={() => setModalShow(false)} /> */}
     </>
   );
 };

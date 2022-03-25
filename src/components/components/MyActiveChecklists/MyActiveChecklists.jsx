@@ -7,6 +7,7 @@ import Checklist from "../Checklist/Checklist";
 import Tabs from "../Tabs/Tabs";
 
 import Pagination from "../Pagination/Pagination";
+import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 
 const MyActiveChecklists = () => {
   const [value, setValue] = useState(1);
@@ -29,6 +30,21 @@ const MyActiveChecklists = () => {
     setCategory(number === 0);
   };
 
+  const loader = (
+    <>
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+      <LoadingSkeleton />
+    </>
+  );
+
   return (
     <div className="container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
@@ -41,7 +57,7 @@ const MyActiveChecklists = () => {
           tabs={tabs}
           category="active"
         />
-        {isLoading && <h1>Идет загрузка...</h1>}
+        {isLoading && loader}
         {error && <h1>Произошла ошибка при загрузке</h1>}
         {checklists &&
           checklists.entities.map((checklist) => (

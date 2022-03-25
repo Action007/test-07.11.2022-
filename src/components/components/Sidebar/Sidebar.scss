@@ -101,6 +101,10 @@
     text-align: left;
     margin-bottom: 9px;
 
+    &:hover {
+      background-color: #eeeeee;
+    }
+
     &.active {
       color: #fc5757;
       background-color: #eb56562a;
@@ -115,7 +119,6 @@
       margin-right: 25px;
       width: 25px;
       height: 25px;
-      fill: $dark;
       stroke: $dark;
     }
   }

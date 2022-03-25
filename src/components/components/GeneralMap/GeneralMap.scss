@@ -1,4 +1,4 @@
-@import "../../../global-styles/_variables.scss";
+@import '../../../global-styles/_variables.scss';
 
 .creation-map {
   position: relative;
@@ -31,6 +31,9 @@
   }
 
   &__extend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     left: 10px;
     top: 10px;
   }
@@ -112,7 +115,7 @@
   }
 
   .leaflet-control-geocoder-icon {
-    background-image: url("../../../assets/images/icon/search.svg");
+    background-image: url('../../../assets/images/icon/search.svg');
     background-size: contain;
   }
 

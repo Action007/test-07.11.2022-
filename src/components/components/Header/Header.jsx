@@ -63,7 +63,7 @@ const Header = () => {
                 <Link className="header__progress" to="/my-active-checklists">
                   <ProgressBarHeader done={29} />
                 </Link>
-                <Link to="/saved-checklists">
+                <Link className="header__bookmark-link" to="/saved-checklists">
                   <Button className="header__bookmark">
                     <Bookmark />
                     <span className="header__span">22</span>
