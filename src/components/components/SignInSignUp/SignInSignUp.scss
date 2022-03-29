@@ -1,0 +1,41 @@
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+
+.sign {
+  margin-bottom: 60px;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 8px;
+    max-width: 1205px;
+    width: 100%;
+    margin: 170px auto 0;
+    background-color: #fff;
+
+    @include media-breakpoint-down(xl) {
+      margin-top: 30px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      justify-content: center;
+      margin-top: 0;
+      background-color: inherit;
+    }
+  }
+
+  &__img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 465px;
+
+    svg {
+      width: 100%;
+      max-width: 465px;
+    }
+  }
+}

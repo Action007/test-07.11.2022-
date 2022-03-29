@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
-import uniqueID from "../utils/uniqueId";
+import uniqueID from "../utils/uniqueID";
 
 const createChecklistSlice = createSlice({
   name: "createChecklist",

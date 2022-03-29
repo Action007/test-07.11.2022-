@@ -1,5 +1,5 @@
 import React from "react";
-import uniqueID from "../../../utils/uniqueId";
+import uniqueID from "../../../utils/uniqueID";
 import "./ActiveChecklistDetail.scss";
 
 import { ReactComponent as DeleteSvg } from "../../../assets/images/icon/delete.svg";

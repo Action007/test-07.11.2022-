@@ -1,21 +1,18 @@
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import useMediaQuery from "../../../../hooks/useMediaQuery";
 import "./SignUp.scss";
 
+import { ReactComponent as LoginSvg } from "../../../../assets/images/content/login.svg";
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 
-const SignUp = ({
-  nameIsValid,
-  emailIsValid,
-  passwordIsValid,
-  onSubmit,
-  change,
-}) => {
+const SignUp = ({ nameIsValid, emailIsValid, passwordIsValid, onSubmit }) => {
   const name = useRef();
   const email = useRef();
   const password = useRef();
   const { t: translate } = useTranslation();
+  const showOnMobile = useMediaQuery("(max-width:991px)");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -25,17 +22,18 @@ const SignUp = ({
   return (
     <div className="sign-up">
       <div className="sign-up__buttons">
-        <button
-          onClick={() => change("signIn")}
-          className="sign-up__button"
-          type="button"
-        >
+        <Link to="/sign-in" className="sign-up__button">
           {translate("login.signIn")}
-        </button>
+        </Link>
         <button className="sign-up__button active" type="button">
           {translate("login.signUp")}
         </button>
       </div>
+      {showOnMobile && (
+        <div className="sign-up__img">
+          <LoginSvg />
+        </div>
+      )}
       <h3 className="sign-up__title SFPro-600">{translate("login.title2")}</h3>
       <form onSubmit={submitHandler} className="sign-up__form">
         <label

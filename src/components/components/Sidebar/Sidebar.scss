@@ -64,11 +64,11 @@
     display: flex;
     align-items: center;
     border-radius: 8px;
-    padding: 12px 22px;
+    padding: 9px 22px;
     width: 100%;
     font-size: 16px;
     text-align: left;
-    margin-bottom: 9px;
+    margin-bottom: 3px;
 
     &:hover {
       background-color: #eeeeee;
@@ -76,18 +76,36 @@
 
     svg {
       margin-right: 25px;
-      width: 25px;
-      height: 25px;
-      stroke: $dark;
     }
 
     &.active {
       color: #fff;
       background-color: $primary;
+    }
+  }
 
-      svg {
-        stroke: #fff;
-      }
+  &__button--fill {
+    svg {
+      width: 25px;
+      height: 25px;
+      fill: $dark;
+    }
+
+    &.active svg {
+      fill: #fff;
+    }
+  }
+
+  &__button--stroke {
+    svg {
+      margin-right: 25px;
+      width: 25px;
+      height: 25px;
+      stroke: $dark;
+    }
+
+    &.active svg {
+      stroke: #fff;
     }
   }
 
@@ -95,11 +113,11 @@
     display: flex;
     align-items: center;
     border-radius: 8px;
-    padding: 12px 22px;
+    padding: 9px 22px;
     width: 100%;
     font-size: 16px;
     text-align: left;
-    margin-bottom: 9px;
+    margin-bottom: 3px;
 
     &:hover {
       background-color: #eeeeee;

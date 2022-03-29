@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
@@ -8,44 +8,6 @@ import ChecklistComments from "../ChecklistComments/ChecklistComments";
 import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
 
 const items = {
-  title:
-    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.",
-  viewed: 100,
-  liked: 5,
-  created_at: "2020-10-22T00:00:00",
-  tags: ["tag1", "tag2", "tag3", "tag4", "tag5"],
-  checklist_items: [
-    {
-      list_type: "text",
-      description: "Need add text1 1",
-      value: {},
-    },
-    {
-      list_type: "link",
-      description: "Need add link 1",
-      value: {
-        link: "https://translate.google.by/",
-      },
-    },
-    {
-      list_type: "image",
-      description: "Need add image 1",
-      value: {
-        image:
-          "https://upload.wikimedia.org/wikipedia/en/thumb/e/ec/HPMOR_Yudkowsky.jpg/220px-HPMOR_Yudkowsky.jpg",
-      },
-    },
-    {
-      list_type: "coordinates",
-      description: "Need add coordinates 1",
-      value: {
-        coordinates: {
-          lat: 52.4134686,
-          lon: 16.9604093,
-        },
-      },
-    },
-  ],
   comments: [
     {
       message:
@@ -139,7 +101,6 @@ const items = {
 };
 
 const ChecklistReview = () => {
-  const [data] = useState(items);
   const { id } = useParams();
   const {
     data: checklists,
@@ -155,7 +116,7 @@ const ChecklistReview = () => {
       {isLoading && <LoadingSkeleton />}
       {error && <h1>Произошла ошибка при загрузке</h1>}
       {checklists && <ChecklistDetail checklists={checklists} />}
-      <ChecklistComments comments={data.comments} />
+      <ChecklistComments comments={items.comments} />
     </div>
   );
 };

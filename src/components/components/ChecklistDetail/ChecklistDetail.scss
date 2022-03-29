@@ -24,25 +24,25 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    
+
     @include media-breakpoint-down(sm) {
       flex-direction: column-reverse;
     }
   }
-  
+
   &__created {
     @include media-breakpoint-down(sm) {
       flex-direction: column;
       align-items: flex-start;
     }
   }
-  
+
   &__saved {
     @include media-breakpoint-down(sm) {
       display: block;
     }
   }
-  
+
   &__head {
     @include media-breakpoint-down(sm) {
       display: flex;
@@ -56,7 +56,7 @@
     font-size: 1.5rem;
     word-break: break-word;
     margin-right: 55px;
-    
+
     @include media-breakpoint-down(md) {
       font-size: 1.3rem;
     }
@@ -66,7 +66,7 @@
       font-size: 1rem;
     }
   }
-  
+
   &__num {
     display: flex;
     justify-content: flex-end;
@@ -209,6 +209,7 @@
 
   &__tags {
     margin-bottom: 28px;
+    transition: box-shadow 0.2s ease;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 15px;
@@ -221,6 +222,10 @@
     border-radius: 4px;
     padding: 4px 8px;
     background-color: $secondary;
+
+    &:hover {
+      box-shadow: 0 0 6px 0 #0000005e;
+    }
 
     &:not(:last-child) {
       margin-right: 4px;

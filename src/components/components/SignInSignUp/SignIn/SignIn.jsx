@@ -1,14 +1,18 @@
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import useMediaQuery from "../../../../hooks/useMediaQuery";
 import "./SignIn.scss";
 
+import { ReactComponent as LoginSvg } from "../../../../assets/images/content/login.svg";
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 import { ReactComponent as GoogleSvg } from "../../../../assets/images/icon/google.svg";
 
-const SignIn = ({ emailIsValid, passwordIsValid, onSubmit, change }) => {
+const SignIn = ({ emailIsValid, passwordIsValid, onSubmit }) => {
   const email = useRef();
   const password = useRef();
   const { t: translate } = useTranslation();
+  const showOnMobile = useMediaQuery("(max-width:991px)");
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -21,14 +25,15 @@ const SignIn = ({ emailIsValid, passwordIsValid, onSubmit, change }) => {
         <button className="sign-in__button active" type="button">
           {translate("login.signIn")}
         </button>
-        <button
-          onClick={() => change("signUp")}
-          className="sign-in__button"
-          type="button"
-        >
+        <Link to="/sign-up" className="sign-in__button">
           {translate("login.signUp")}
-        </button>
+        </Link>
       </div>
+      {showOnMobile && (
+        <div className="sign-in__img">
+          <LoginSvg />
+        </div>
+      )}
       <h3 className="sign-in__title SFPro-600">{translate("login.title1")}</h3>
       <form onSubmit={submitHandler} className="sign-in__form">
         <label
@@ -78,13 +83,9 @@ const SignIn = ({ emailIsValid, passwordIsValid, onSubmit, change }) => {
         <GoogleSvg />
         {translate("login.google")}
       </button>
-      <button
-        onClick={() => change("reset")}
-        className="sign-in__btn SFPro-500"
-        type="button"
-      >
+      <Link to="reset" className="sign-in__btn SFPro-500">
         {translate("login.forgot")}
-      </button>
+      </Link>
     </div>
   );
 };

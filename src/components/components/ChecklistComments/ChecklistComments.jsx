@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import getTime from "../../../utils/getTime";
-import uniqueID from "../../../utils/uniqueId";
+import uniqueID from "../../../utils/uniqueID";
 import "./ChecklistComments.scss";
 
 import { ReactComponent as ArrowSvg } from "../../../assets/images/icon/rightArrow.svg";

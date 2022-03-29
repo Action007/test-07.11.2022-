@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+// import { useParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
-// import PopupLogin from "../PopupLogin/PopupLogin";
 import Sidebar from "../Sidebar/Sidebar";
 import SearchInput from "../SearchInput/SearchInput";
 import Checklist from "../Checklist/Checklist";
-import uniqueID from "../../../utils/uniqueId";
+import uniqueID from "../../../utils/uniqueID";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./HomeChecklistPage.scss";
 
@@ -16,17 +16,27 @@ import Pagination from "../Pagination/Pagination";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 
 const HomeChecklistPage = () => {
-  const [value, setValue] = useState(1);
-  const url = `/api/v1/checklists_auth?page=${value}&per_page=3`;
+  const [url, setUrl] = useState(`/api/v1/checklists_auth?page=1&per_page=3`);
   const {
     data: checklists,
     error,
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(url);
-  // const [modalShow, setModalShow] = useState(true);
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const onMobile = useMediaQuery("(max-width:1199px)");
+  // const { tag } = useParams();
+
+  // useEffect(() => {
+  //   if (!tag) return;
+  //   const value = tag.replace(" ", "%20");
+
+  //   setUrl(`/api/v1/tags/search?value=${value}`);
+  // }, [tag]);
+
+  const setValueHandler = (id) => {
+    setUrl(`/api/v1/checklists_auth?page=${id}&per_page=3`);
+  };
 
   const loader = (
     <>
@@ -62,7 +72,7 @@ const HomeChecklistPage = () => {
             {checklists && (
               <Pagination
                 count={checklists.paginate.total_pages}
-                setValue={setValue}
+                setValue={setValueHandler}
                 currentPage={checklists.paginate.current_page}
                 totalPage={checklists.paginate.total_pages}
                 prevPage={checklists.paginate.prev_page}
@@ -105,7 +115,6 @@ const HomeChecklistPage = () => {
           </div>
         </div>
       </div>
-      {/* <PopupLogin show={modalShow} onHide={() => setModalShow(false)} /> */}
     </>
   );
 };

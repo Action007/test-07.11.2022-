@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
-import uniqueID from "../../../utils/uniqueId";
+import uniqueID from "../../../utils/uniqueID";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./ChecklistDetail.scss";
@@ -12,7 +13,7 @@ import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg"
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
-const ChecklistDetail = ({ checklists, preview = false }) => {
+const ChecklistDetail = ({ checklists }) => {
   const { name, checklist_items, viewed, liked, created_at, tags } = checklists;
   const [like, setLike] = useState(false);
   const { t: translate } = useTranslation();
@@ -21,6 +22,7 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
   const likeClass = `checklist-detail__liked SFPro-700${
     liked ? " active" : ""
   }${like ? " liked" : ""}`;
+  const navigate = useNavigate();
 
   const setLikeHandler = () => {
     setLike((prevState) => !prevState);
@@ -59,18 +61,16 @@ const ChecklistDetail = ({ checklists, preview = false }) => {
         ))}
       </ol>
       <div className="checklist-detail__tags">
-        {preview
-          ? // eslint-disable-next-line no-shadow
-            tags.map((tag) => (
-              <span key={uniqueID()} className="checklist-detail__tag">
-                {tag.name}
-              </span>
-            ))
-          : tags.map((tag) => (
-              <span key={uniqueID()} className="checklist-detail__tag">
-                {tag.name}
-              </span>
-            ))}
+        {tags.map((tag) => (
+          <button
+            onClick={() => navigate(`/home/tags/${tag.name}`)}
+            className="checklist-detail__tag"
+            key={uniqueID()}
+            type="button"
+          >
+            {tag.name}
+          </button>
+        ))}
       </div>
       <div className="checklist-detail__wrap">
         <button className="checklist-detail__button SFPro-600" type="button">

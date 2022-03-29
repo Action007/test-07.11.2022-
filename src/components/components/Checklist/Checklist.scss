@@ -190,6 +190,11 @@
     border-radius: 4px;
     padding: 4px 8px;
     background-color: $secondary;
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 0 6px 0 #0000005e;
+    }
 
     &:not(:last-child) {
       margin-right: 4px;

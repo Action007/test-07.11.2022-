@@ -6,7 +6,7 @@ import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
 import EditDropdown from "../EditDropdown/EditDropdown";
-import uniqueID from "../../../utils/uniqueId";
+import uniqueID from "../../../utils/uniqueID";
 import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 import ComplainDropdown from "../ComplainDropdown/ComplainDropdown";
 import Complain from "../Complain/Complain";
@@ -93,9 +93,14 @@ const Checklist = ({
         </ol>
         <div className="checklist__tags">
           {tags.map((tag) => (
-            <span className="checklist__tag" key={uniqueID()}>
+            <button
+              onClick={() => navigate(`/home/tags/${tag.name}`)}
+              className="checklist__tag"
+              key={uniqueID()}
+              type="button"
+            >
               {tag.name}
-            </span>
+            </button>
           ))}
         </div>
         <div className="checklist__wrap">

@@ -1,25 +1,45 @@
-@import "../../../../global-styles/_variables.scss";
+@import '../../../../global-styles/_variables.scss';
+@import '../../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .sign-in {
-  padding: 38px 40px 57px;
+  height: 780px;
+  padding: 43px 37px 0 37px;
   width: 100%;
   max-width: 585px;
+
+  @include media-breakpoint-down(lg) {
+    height: inherit;
+    padding: 40px 0 40px;
+    max-width: 100%;
+  }
 
   &__buttons {
     display: flex;
     align-items: center;
     overflow: hidden;
-    margin-bottom: 45px;
+    margin-bottom: 40px;
     border-radius: 8px;
     font-size: 18px;
+
+    @include media-breakpoint-down(lg) {
+      justify-content: center;
+      margin-bottom: 0;
+    }
   }
 
   &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid #4f4f4f4d;
     width: 100%;
     height: 60px;
     max-width: 253px;
     background-color: #fff;
+
+    @include media-breakpoint-down(lg) {
+      max-width: 100%;
+    }
 
     &:first-child {
       border-right: none;
@@ -34,14 +54,29 @@
 
     &.active {
       border-color: transparent;
-      font-family: "SFPro-Medium", sans-serif;
+      font-family: 'SFPro-Medium', sans-serif;
       color: #fff;
       background-color: $primary;
     }
   }
 
+  &__img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include media-breakpoint-down(lg) {
+      margin: 40px 0;
+    }
+
+    svg {
+      width: 80%;
+      height: 80%;
+    }
+  }
+
   &__title {
-    margin-bottom: 55px;
+    margin-bottom: 45px;
     font-size: 24px;
   }
 
@@ -56,7 +91,7 @@
     span {
       display: block;
       margin-bottom: 9px;
-      font-family: "SFPro-Regular", sans-serif;
+      font-family: 'SFPro-Regular', sans-serif;
       font-size: 16px;
     }
 
@@ -122,7 +157,7 @@
     text-align: center;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       top: 50%;
@@ -133,7 +168,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       right: 0;
       top: 50%;
@@ -153,16 +188,18 @@
     font-size: 18px;
     background-color: #fff;
     transition: all 0.3s ease;
+    opacity: 0.5;
+    cursor: inherit !important;
 
     svg {
       margin-right: 19px;
     }
 
-    &:hover {
-      border-color: transparent;
-      color: #fff;
-      background-color: #65c17ed3;
-    }
+    // &:hover {
+    //   border-color: transparent;
+    //   color: #fff;
+    //   background-color: #65c17ed3;
+    // }
   }
 
   &__btn {

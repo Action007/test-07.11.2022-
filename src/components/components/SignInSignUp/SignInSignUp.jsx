@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Modal } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
 import ResetPassword from "./ResetPassword/ResetPassword";
-import "./PopupLogin.scss";
+import useMediaQuery from "../../../hooks/useMediaQuery";
+import "./SignInSignUp.scss";
 
-import { ReactComponent as LoginSvg } from "../../../assets/images/icon/login.svg";
+import { ReactComponent as LoginSvg } from "../../../assets/images/content/login.svg";
 
-const PopupLogin = ({ show, onHide }) => {
+const PopupLogin = () => {
   const [nameIsValid, setNameIsValid] = useState(true);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
-  const [state, setState] = useState("signIn");
+  const showOnMobile = useMediaQuery("(max-width:991px)");
+  const { pathname } = useLocation();
 
   useEffect(() => {
     setNameIsValid(true);
     setEmailIsValid(true);
     setPasswordIsValid(true);
-  }, [state]);
+  }, [pathname]);
 
   const validateEmail = (value) => {
     return String(value)
@@ -46,46 +48,36 @@ const PopupLogin = ({ show, onHide }) => {
   };
 
   return (
-    <Modal
-      className="popup-login"
-      show={show}
-      onHide={onHide}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter" />
-      </Modal.Header>
-      <Modal.Body className="popup-login__wrapper">
-        {state === "signIn" && (
+    <div className="sign container">
+      <div className="sign__wrapper">
+        {pathname === "/sign-in" && (
           <SignIn
             emailIsValid={emailIsValid}
             passwordIsValid={passwordIsValid}
             onSubmit={submitHandler}
-            change={setState}
           />
         )}
-        {state === "signUp" && (
+        {pathname === "/sign-up" && (
           <SignUp
             nameIsValid={nameIsValid}
             emailIsValid={emailIsValid}
             passwordIsValid={passwordIsValid}
             onSubmit={submitHandler}
-            change={setState}
           />
         )}
-        {state === "reset" && (
+        {pathname === "/sign-in/reset" && (
           <ResetPassword
             passwordIsValid={passwordIsValid}
             onSubmit={resetHandler}
-            change={setState}
           />
         )}
-        <div className="popup-login__img">
-          <LoginSvg />
-        </div>
-      </Modal.Body>
-    </Modal>
+        {!showOnMobile && (
+          <div className="sign__img">
+            <LoginSvg />
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 

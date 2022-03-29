@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import "./NotFound.scss";
 
+import { Link } from "react-router-dom";
 import { ReactComponent as Error } from "../../../assets/images/content/404.svg";
 
 const NotFound = () => {
@@ -16,9 +17,9 @@ const NotFound = () => {
         <div className="error__img mx-auto">
           <Error />
         </div>
-        <div className="error__button SFPro-600">
+        <Link className="error__button SFPro-600" to="/home">
           <button type="button">{translate("pageNotFount.button")}</button>
-        </div>
+        </Link>
       </div>
     </div>
   );

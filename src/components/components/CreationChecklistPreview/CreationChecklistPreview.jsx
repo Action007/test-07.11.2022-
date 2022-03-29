@@ -41,7 +41,7 @@ const CreationChecklistPreview = ({ show, onHide }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="p-0">
-        <ChecklistDetail checklists={checklists} preview />
+        <ChecklistDetail checklists={checklists} />
       </Modal.Body>
     </Modal>
   );
