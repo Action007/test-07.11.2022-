@@ -16,6 +16,7 @@ const CreationChecklistItems = ({ checklist_items }) => {
       <Droppable droppableId="characters">
         {(provided) => (
           <ul
+            style={{ overflow: "hidden" }}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
             ref={provided.innerRef}

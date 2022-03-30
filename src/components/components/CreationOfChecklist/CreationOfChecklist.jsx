@@ -6,12 +6,12 @@ import { createChecklistActions } from "../../../store/createChecklistSlice";
 import CreationChecklistItems from "../CreationChecklistItems/CreationChecklistItems";
 import CreationChecklistPreview from "../CreationChecklistPreview/CreationChecklistPreview";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import CreationTags from "../CreationTags/CreationTags";
 import PopupDone from "../PopupDone/PopupDone";
 import "./CreationOfChecklist.scss";
 
 import { ReactComponent as CreationImg } from "../../../assets/images/content/creationChecklist.svg";
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
-import CreationTags from "../CreationTags/CreationTags";
 
 const CreationOfChecklist = () => {
   const [preview, setPreview] = useState(false);

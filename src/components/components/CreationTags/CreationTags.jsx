@@ -8,8 +8,7 @@ import uniqueID from "../../../utils/uniqueID";
 import "./CreationTags.scss";
 
 import { ReactComponent as PlusSvg } from "../../../assets/images/icon/plusTags.svg";
-import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeBtn.svg";
-import { ReactComponent as DoneSvg } from "../../../assets/images/icon/doneBtn.svg";
+import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
 
 const CreationTags = ({ tagsValid, setTagsValid }) => {
   const [url, setUrl] = useState(null);
@@ -22,11 +21,6 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   const { ref, show, setShow } = useClickOutside();
   const { t: translate } = useTranslation();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!inputTag.current) return;
-    inputTag.current.focus();
-  }, [addTags]);
 
   const searchTagsHandler = (value) => {
     if (value.trim() === "") {
@@ -42,24 +36,37 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
     setUrl(uniqueID());
   };
 
-  const addTagHandler = (e, name) => {
-    if (e.key === "Enter" || e === "click") {
-      const tagsIsValid = tags.length > 1;
-      const addOrNot = tags.find((tag) => tag.name === name);
+  const addTagHandler = (name) => {
+    const tagsIsValid = tags.length > 1;
+    const addOrNot = tags.find((tag) => tag.name === name);
 
-      if (addOrNot) return;
-      if (!name.trim()) return;
+    if (addOrNot) return;
+    if (!name.trim()) return;
 
-      setAddTags(false);
-      setUrl(uniqueID());
-      setShow(false);
+    setAddTagsHandler();
+    setShow(false);
 
-      dispatch(createChecklistActions.addTag(name));
-      if (tagsIsValid) {
-        setTagsValid(true);
-      }
+    dispatch(createChecklistActions.addTag(name));
+    if (tagsIsValid) {
+      setTagsValid(true);
     }
   };
+
+  const findTypeHandler = (e, name) => {
+    if (e.key === "Enter" || e === "click") {
+      addTagHandler(name);
+    }
+  };
+
+  useEffect(() => {
+    if (!inputTag.current) return;
+    inputTag.current.focus();
+  }, [addTags]);
+
+  useEffect(() => {
+    if (!inputTag.current) return;
+    addTagHandler(inputTag.current.value);
+  }, [show]);
 
   return (
     <div className={`creation-tag${!tagsValid ? " invalid" : ""}`}>
@@ -83,7 +90,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
             >
               <input
                 onChange={() => searchTagsHandler(inputTag.current.value)}
-                onKeyPress={(e) => addTagHandler(e, inputTag.current.value)}
+                onKeyPress={(e) => findTypeHandler(e, inputTag.current.value)}
                 onFocus={() => setShow(true)}
                 className="creation-tag__create creation-tag__create--input"
                 ref={inputTag}
@@ -92,18 +99,8 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
                 autoComplete="off"
               />
               <button
-                onClick={() => addTagHandler("click", inputTag.current.value)}
-                className="creation-tag__add"
-                type="button"
-              >
-                <DoneSvg />
-              </button>
-              <button
-                onClick={() => {
-                  setAddTagsHandler();
-                  setShow(false);
-                }}
-                className="creation-tag__cancel"
+                onClick={() => setAddTagsHandler()}
+                className="creation-tag__close"
                 type="button"
               >
                 <CloseSvg />
@@ -116,7 +113,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
                   {tagItems.map((tag) => (
                     <li key={tag.id} className="creation-tag__item">
                       <button
-                        onClick={() => addTagHandler("click", tag.name)}
+                        onClick={() => findTypeHandler("click", tag.name)}
                         type="button"
                       >
                         {tag.name}

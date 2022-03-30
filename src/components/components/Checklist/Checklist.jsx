@@ -29,6 +29,10 @@ const Checklist = ({
   const [showComplain, setShowComplain] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:575px)");
   const { date } = getTime(created_at);
+  const checklistItem = checklist_items.map((item) =>
+    item.list_type !== "text" ? { ...item, list_type: "text" } : item
+  );
+  const fiveItems = checklistItem.slice(0, 5);
   const moreThanFive = checklist_items.length > 5;
   const likeClass = `checklist__liked SFPro-700${liked ? " active" : ""}${
     like ? " liked" : ""
@@ -69,27 +73,23 @@ const Checklist = ({
       <div className="checklist">
         <div className="checklist__heading">{head}</div>
         <ol className="checklist__items">
-          {moreThanFive ? (
-            <li className="checklist__item" key={uniqueID()}>
-              {checklist_items[0].description}
-              <button
-                onClick={() => navigate(`/list/${id}`)}
-                className="checklist__show"
-                type="button"
-              >
-                {translate}...
-              </button>
-            </li>
-          ) : (
-            checklist_items.map(({ description, list_type, value }) => (
-              <ChecklistItem
-                key={uniqueID()}
-                description={description}
-                list_type={list_type}
-                value={value}
-              />
-            ))
-          )}
+          {moreThanFive
+            ? fiveItems.map(({ description, list_type, value }) => (
+                <ChecklistItem
+                  key={uniqueID()}
+                  description={description}
+                  list_type={list_type}
+                  value={value}
+                />
+              ))
+            : checklistItem.map(({ description, list_type, value }) => (
+                <ChecklistItem
+                  key={uniqueID()}
+                  description={description}
+                  list_type={list_type}
+                  value={value}
+                />
+              ))}
         </ol>
         <div className="checklist__tags">
           {tags.map((tag) => (
