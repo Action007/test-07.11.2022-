@@ -26,7 +26,7 @@ const useClickOutside = (creation = false) => {
     return () => document.removeEventListener("mousedown", clickOutHandler);
   });
 
-  return { ref, show, setShowHandler };
+  return { ref, show, setShowHandler, setShow };
 };
 
 export default useClickOutside;
