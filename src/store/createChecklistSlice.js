@@ -16,7 +16,9 @@ const createChecklistSlice = createSlice({
       state.title.value = value;
     },
     isTitleValid(state) {
-      const titleIsValid = state.title.value.trim().length !== 0;
+      const titleIsValid =
+        state.title.value.trim().length !== 0 &&
+        state.title.value.trim().length < 151;
 
       state.title.isValid = titleIsValid;
     },
@@ -60,14 +62,13 @@ const createChecklistSlice = createSlice({
       }
     },
     changeChecklistInputValue(state, action) {
-      const { type, value, id } = action.payload;
+      const { type, value, id, inputValue } = action.payload;
 
       state.checklist_items = state.checklist_items.map((item) => {
         if (item.id === id) {
-          return item.description.trim().length < 151 &&
-            item.description.trim().length >= 0
+          return inputValue.trim().length < 150 && inputValue.trim().length > 0
             ? { ...item, inValid: false }
-            : item;
+            : { ...item, inValid: true };
         }
         return item;
       });

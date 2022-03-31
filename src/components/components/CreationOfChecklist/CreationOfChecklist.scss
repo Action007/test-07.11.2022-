@@ -2,10 +2,7 @@
 @import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .creation {
-  .breadcrumbs {
-    padding-bottom: 48px;
-  }
-
+  
   &__title {
     margin-bottom: 16px;
     font-size: 28px;
@@ -62,8 +59,11 @@
     font-size: 18px;
   }
 
-  &__span.invalid {
+  &__span {
     font-size: 14px;
+  }
+
+  &__span.invalid {
     color: $warning;
   }
 

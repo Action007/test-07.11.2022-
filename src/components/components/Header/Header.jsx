@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Container, Navbar } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { Container, Navbar } from "react-bootstrap";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import "./Header.scss";
@@ -16,7 +16,7 @@ const Header = () => {
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
   const showAddButtonOnMobile = useMediaQuery("(max-width:767px)");
   const [scroll, setScroll] = useState(false);
-  const scrollClass = `header__navbar position-fixed ${scroll && "scroll"}`;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -29,19 +29,20 @@ const Header = () => {
 
   return (
     <header className="header">
-      <Navbar className={scrollClass} expand="md">
-        <Container className="p-0" fluid>
-          <Navbar.Brand className="header__logo">
-            <Link to="/home">
-              <img
-                src={Logo}
-                width="161"
-                height="36"
-                className="d-inline-block align-top"
-                alt="Logotype"
-              />
-            </Link>
-          </Navbar.Brand>
+      <Navbar
+        className={`header__navbar position-fixed ${scroll && "scroll"}`}
+        expand="md"
+      >
+        <Container className={`header__container ${scroll && "scroll"}`} fluid>
+          <Link className="header__logo" to="/home">
+            <img
+              src={Logo}
+              width="161"
+              height="36"
+              className="d-inline-block align-top"
+              alt="Logotype"
+            />
+          </Link>
           <Navbar.Toggle
             className="header__burger position-relative border-0 p-0"
             aria-controls="navbarScroll"
@@ -50,35 +51,45 @@ const Header = () => {
             <span className="header__span">22</span>
           </Navbar.Toggle>
           {showAddButtonOnMobile && (
-            <Link className="header__btn-link" to="/creation-of-checklist">
-              <button className="header__btn br-8" type="button">
-                <Plus />
-              </button>
-            </Link>
+            <button
+              onClick={() => navigate("/creation-of-checklist")}
+              className="header__btn br-8"
+              type="button"
+            >
+              <Plus />
+            </button>
           )}
           <Navbar.Collapse className="order-4" id="navbarScroll">
             {!showSearchOnMobile && <SearchInput />}
             {!showAddButtonOnMobile && (
               <>
-                <Link className="header__progress" to="/my-active-checklists">
+                <button
+                  onClick={() => navigate("/my-active-checklists")}
+                  className="header__progress"
+                  type="button"
+                >
                   <ProgressBarHeader done={29} />
-                </Link>
-                <Link className="header__bookmark-link" to="/saved-checklists">
-                  <Button className="header__bookmark">
-                    <Bookmark />
-                    <span className="header__span">22</span>
-                  </Button>
-                </Link>
+                </button>
+                <button
+                  onClick={() => navigate("/saved-checklists")}
+                  className="header__bookmark"
+                  type="button"
+                >
+                  <Bookmark />
+                  <span className="header__span">22</span>
+                </button>
               </>
             )}
             <HeaderDropdown />
             {!showAddButtonOnMobile && (
-              <Link to="/creation-of-checklist">
-                <button className="header__btn br-8" type="button">
-                  <Plus />
-                  Create
-                </button>
-              </Link>
+              <button
+                onClick={() => navigate("/creation-of-checklist")}
+                className="header__btn br-8"
+                type="button"
+              >
+                <Plus />
+                Create
+              </button>
             )}
           </Navbar.Collapse>
         </Container>

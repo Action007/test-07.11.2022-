@@ -2,9 +2,6 @@
 @import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .checklist-detail {
-  .breadcrumbs {
-    margin-bottom: 41px;
-  }
 
   &__wrapper {
     position: relative;
@@ -16,7 +13,7 @@
     background-color: #fff;
 
     @include media-breakpoint-down(sm) {
-      margin-top: 18px;
+      padding: 30px 19px;
     }
   }
 
@@ -313,10 +310,5 @@
     svg {
       margin-right: 10px;
     }
-  }
-
-  @include media-breakpoint-down(sm) {
-    margin-bottom: 12px;
-    padding: 25px 19px;
   }
 }

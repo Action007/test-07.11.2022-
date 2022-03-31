@@ -6,6 +6,10 @@
   padding: 42px 0 24px;
   margin: 0;
 
+  @include media-breakpoint-down(sm) {
+    padding: 16px 0 26px;
+  }
+
   &__item {
     margin-right: 20px;
 

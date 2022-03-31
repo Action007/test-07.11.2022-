@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -33,19 +32,25 @@ const CreationChecklistItem = ({
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
   const { ref, show, setShowHandler } = useClickOutside(true);
+  const inputRef = useRef();
 
   useEffect(() => {
     const setClassFunc = setTimeout(() => setFadeIn(" show"), 0);
-    // eslint-disable-next-line consistent-return
     return () => clearTimeout(setClassFunc);
   }, []);
 
-  // eslint-disable-next-line no-shadow
   const onChangeValueHandler = (e, type) => {
     // eslint-disable-next-line no-shadow
     const { value } = e.target;
+    const inputValue = inputRef.current.value;
+
     dispatch(
-      createChecklistActions.changeChecklistInputValue({ type, value, id })
+      createChecklistActions.changeChecklistInputValue({
+        type,
+        value,
+        id,
+        inputValue,
+      })
     );
   };
 
@@ -139,10 +144,12 @@ const CreationChecklistItem = ({
             {number}.
           </div>
           <div className="creation-item__inner">
-            {inValid && (
+            {inValid ? (
               <span className="creation-item__invalid">
                 {translate("creationOfChecklist.max")}
               </span>
+            ) : (
+              ""
             )}
             <label
               className={`creation-item__name${inValid ? " invalid" : ""}`}
@@ -154,6 +161,7 @@ const CreationChecklistItem = ({
                 value={description}
                 type="text"
                 id={id}
+                ref={inputRef}
               />
             </label>
             {list_type === "link" && (

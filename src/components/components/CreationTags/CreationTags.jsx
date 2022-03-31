@@ -83,10 +83,11 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
       ))}
       {tags.length < 5 &&
         (addTags ? (
-          <div className="creation-tag__search" ref={ref}>
+          <div className="creation-tag__search">
             <label
               className="creation-tag__create creation-tag__create--width"
               htmlFor="creation-tagAdd"
+              ref={ref}
             >
               <input
                 onChange={() => searchTagsHandler(inputTag.current.value)}

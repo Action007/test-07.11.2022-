@@ -43,6 +43,20 @@
     width: 100%;
     margin-bottom: 16px;
 
+    &.invalid {
+      .edit-profile__subtitle {
+        color: $warning;
+      }
+
+      input {
+        border-color: $warning !important;
+      }
+
+      textarea {
+        border-color: $warning !important;
+      }
+    }
+
     input {
       width: 100%;
       border: 1px solid #c8d4ff;

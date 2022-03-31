@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 // import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
 import Sidebar from "../Sidebar/Sidebar";
@@ -25,6 +26,7 @@ const HomeChecklistPage = () => {
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const onMobile = useMediaQuery("(max-width:1199px)");
+  const navigate = useNavigate();
   // const { tag } = useParams();
 
   // useEffect(() => {
@@ -99,7 +101,11 @@ const HomeChecklistPage = () => {
                   <span className="main-content__image" />
                 </div>
               )}
-              <button className="main-content__button SFPro-600" type="button">
+              <button
+                onClick={() => navigate("/creation-of-checklist")}
+                className="main-content__button SFPro-600"
+                type="button"
+              >
                 <Plus />
                 {translate("mainPage.button")}
               </button>

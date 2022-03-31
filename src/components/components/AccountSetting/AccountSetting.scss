@@ -43,6 +43,16 @@
     width: 100%;
     margin-bottom: 24px;
 
+    &.invalid {
+      .account-setting__subtitle {
+        color: $warning;
+      }
+
+      input {
+        border-color: $warning !important;
+      }
+    }
+
     input {
       width: 100%;
       border: 1px solid #c8d4ff;

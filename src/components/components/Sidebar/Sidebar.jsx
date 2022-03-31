@@ -131,9 +131,7 @@ const Sidebar = () => {
               {item.type === "popular" && (
                 <button
                   onClick={() => setActive(item.id)}
-                  className={`sidebar__popular${
-                    item.id === active ? " active" : ""
-                  }`}
+                  className="sidebar__popular active"
                   type="button"
                 >
                   {item.svg && item.svg}
@@ -203,9 +201,7 @@ const Sidebar = () => {
               {item.type === "popular" && (
                 <button
                   onClick={() => setActive(item.id)}
-                  className={`sidebar__popular${
-                    item.id === active ? " active" : ""
-                  }`}
+                  className="sidebar__popular active"
                   type="button"
                 >
                   {item.svg && item.svg}

@@ -1,3 +1,6 @@
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+
 .popup-preview {
   .modal-dialog {
     max-width: 834px;
@@ -8,8 +11,12 @@
     padding: 16px 22px;
   }
 
-  .checklist-detail {
-    padding: 17px 36px 36px 28px;
+  .checklist-detail__wrapper {
+    margin: 0;
+    
+    @include media-breakpoint-down(sm) {
+      padding: 19px 19px 26px;
+    }
   }
 
   .checklist-detail__buttons {

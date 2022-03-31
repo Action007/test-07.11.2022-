@@ -8,14 +8,6 @@
     }
   }
 
-  .breadcrumbs {
-    padding-bottom: 54px;
-
-    @include media-breakpoint-down(md) {
-      padding-bottom: 26px;
-    }
-  }
-
   .networks {
     margin-bottom: 62px;
   }
