@@ -63,7 +63,7 @@ const Checklist = ({
           </div>
         )}
       </div>
-      {created && <EditDropdown />}
+      {created && <EditDropdown id={id} />}
     </>
   );
 

@@ -27,6 +27,7 @@
 
   &__create {
     display: flex;
+    text-align: left;
     align-items: center;
     margin: 3px;
     border: 1px solid $dark;
@@ -50,6 +51,7 @@
     border-color: transparent;
     color: #fff;
     background-color: $primary;
+    word-break: break-word;
 
     svg {
       stroke: #fff;

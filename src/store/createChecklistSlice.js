@@ -66,7 +66,7 @@ const createChecklistSlice = createSlice({
 
       state.checklist_items = state.checklist_items.map((item) => {
         if (item.id === id) {
-          return inputValue.trim().length < 150 && inputValue.trim().length > 0
+          return inputValue.trim().length < 151 && inputValue.trim().length > 0
             ? { ...item, inValid: false }
             : { ...item, inValid: true };
         }
@@ -142,6 +142,16 @@ const createChecklistSlice = createSlice({
       state.title = { value: "", isValid: true };
       state.checklist_items = [];
       state.tags = [];
+    },
+    editChecklist(state, action) {
+      const { checklist_items, name, tags } = action.payload;
+      const checklistItems = checklist_items.map((item) =>
+        item.id ? item : { ...item, id: uniqueID() }
+      );
+
+      state.title = { value: name, isValid: true };
+      state.checklist_items = checklistItems;
+      state.tags = tags;
     },
   },
 });

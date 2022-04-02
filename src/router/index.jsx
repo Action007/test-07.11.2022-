@@ -31,6 +31,9 @@ const AccountSettingsPage = React.lazy(() =>
   import("../pages/AccountSettingsPage")
 );
 const SignInSignUpPage = React.lazy(() => import("../pages/SignInSignUpPage"));
+const EditChecklistPage = React.lazy(() =>
+  import("../pages/EditChecklistPage")
+);
 
 const routes = [
   { id: 1, path: "/home", element: <HomePage /> },
@@ -53,17 +56,22 @@ const routes = [
     path: "/creation-of-checklist",
     element: <CreationOfChecklistPage />,
   },
-  { id: 14, path: "/saved-checklists", element: <AllChecklistsPage /> },
-  { id: 15, path: "/liked-checklists", element: <AllChecklistsPage /> },
-  { id: 16, path: "/created-checklists", element: <AllChecklistsPage /> },
-  { id: 17, path: "/my-profile", element: <MyProfilePage /> },
-  { id: 18, path: "/edit-profile", element: <EditProfilePage /> },
-  { id: 19, path: "/account-settings", element: <AccountSettingsPage /> },
-  { id: 20, path: "/sign-in", element: <SignInSignUpPage /> },
-  { id: 21, path: "/sign-up", element: <SignInSignUpPage /> },
-  { id: 22, path: "/sign-in/reset", element: <SignInSignUpPage /> },
-  { id: 23, path: "/", element: <Navigate to="/home" /> },
-  { id: 24, path: "/*", element: <NotFoundPage /> },
+  {
+    id: 14,
+    path: "/edit-checklist/:id",
+    element: <EditChecklistPage />,
+  },
+  { id: 15, path: "/saved-checklists", element: <AllChecklistsPage /> },
+  { id: 16, path: "/liked-checklists", element: <AllChecklistsPage /> },
+  { id: 17, path: "/created-checklists", element: <AllChecklistsPage /> },
+  { id: 18, path: "/my-profile", element: <MyProfilePage /> },
+  { id: 19, path: "/edit-profile", element: <EditProfilePage /> },
+  { id: 10, path: "/account-settings", element: <AccountSettingsPage /> },
+  { id: 21, path: "/sign-in", element: <SignInSignUpPage /> },
+  { id: 22, path: "/sign-up", element: <SignInSignUpPage /> },
+  { id: 23, path: "/sign-in/reset", element: <SignInSignUpPage /> },
+  { id: 24, path: "/", element: <Navigate to="/home" /> },
+  { id: 25, path: "/*", element: <NotFoundPage /> },
 ];
 
 export default routes;

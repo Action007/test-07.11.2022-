@@ -8,19 +8,19 @@ export const checklistAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: API_KEY,
   }),
-  tagTypes: ["Post"],
+  tagTypes: ["Checklist"],
   endpoints: (build) => ({
     fetchChecklist: build.query({
       query: (url) => url,
-      providesTags: () => ["Post"],
+      providesTags: () => ["Checklist"],
     }),
-    createChecklists: build.mutation({
-      query: (post) => ({
-        url: `/posts`,
+    createChecklist: build.mutation({
+      query: (checklist) => ({
+        url: "/api/v1/checklists_auth",
         method: "POST",
-        body: post,
+        body: checklist,
       }),
-      invalidatesTags: ["Post"],
+      invalidatesTags: ["Checklist"],
     }),
     likeChecklist: build.mutation({
       query: (post) => ({
@@ -28,7 +28,7 @@ export const checklistAPI = createApi({
         method: "PUT",
         body: post,
       }),
-      invalidatesTags: ["Post"],
+      invalidatesTags: ["Checklist"],
     }),
     dislikeChecklist: build.mutation({
       query: (post) => ({
@@ -36,14 +36,14 @@ export const checklistAPI = createApi({
         method: "PUT",
         body: post,
       }),
-      invalidatesTags: ["Post"],
+      invalidatesTags: ["Checklist"],
     }),
-    deleteChecklists: build.mutation({
-      query: (post) => ({
-        url: `/posts/${post.id}`,
+    deleteChecklist: build.mutation({
+      query: (id) => ({
+        url: `/api/v1/checklists_auth/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Post"],
+      invalidatesTags: ["Checklist"],
     }),
   }),
 });

@@ -29,7 +29,7 @@ const ChecklistComments = ({ comments }) => {
         likes: 0,
         dislikes: 0,
         user: {
-          created_at: new Date(),
+          created_at: new Date().toISOString(),
           id: 5,
           nickname: "Alex64",
         },

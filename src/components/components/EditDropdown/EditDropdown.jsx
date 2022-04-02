@@ -1,5 +1,7 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
+import { useNavigate } from "react-router-dom";
+import { checklistAPI } from "../../../services/checklistService";
 import useClickOutside from "../../../hooks/useClickOutside";
 import "./EditDropdown.scss";
 
@@ -7,8 +9,13 @@ import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg"
 import { ReactComponent as EditSvg } from "../../../assets/images/icon/edit.svg";
 import { ReactComponent as DeleteSvg } from "../../../assets/images/icon/delete.svg";
 
-const EditDropdown = () => {
+const EditDropdown = ({ id }) => {
   const { ref, show, setShowHandler } = useClickOutside();
+  const navigate = useNavigate();
+  // eslint-disable-next-line no-empty-pattern
+  const [deleteChecklist, {}] = checklistAPI.useDeleteChecklistMutation();
+
+  const onDeleteClickHandler = () => deleteChecklist(id);
 
   return (
     <div className="edit-dropdown SFPro-500" ref={ref}>
@@ -26,11 +33,19 @@ const EditDropdown = () => {
         unmountOnExit
       >
         <div className="edit-dropdown__menu">
-          <button className="edit-dropdown__edit" type="button">
+          <button
+            onClick={() => navigate(`/edit-checklist/${id}`)}
+            className="edit-dropdown__edit"
+            type="button"
+          >
             <EditSvg />
             Edit
           </button>
-          <button className="edit-dropdown__delete" type="button">
+          <button
+            onClick={onDeleteClickHandler}
+            className="edit-dropdown__delete"
+            type="button"
+          >
             <DeleteSvg />
             Delete
           </button>

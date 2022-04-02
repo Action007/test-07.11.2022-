@@ -8,7 +8,7 @@ import { ReactComponent as EditProfileSvg } from "../../../assets/images/content
 
 const AccountSetting = () => {
   const { t: translate } = useTranslation();
-  const emailRef = useRef();
+  const [emilValue, setEmailValue] = useState("Alex64@gmail.com");
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -23,7 +23,7 @@ const AccountSetting = () => {
   ];
 
   const isValidEmail = () => {
-    return String(emailRef.current.value)
+    return String(emilValue)
       .toLowerCase()
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -60,8 +60,11 @@ const AccountSetting = () => {
               {translate("accountSettings.email")}
             </span>
             <input
-              onChange={() => setEmailValid(true)}
-              ref={emailRef}
+              onChange={(e) => {
+                setEmailValid(true);
+                setEmailValue(e.target.value);
+              }}
+              value={emilValue}
               type="text"
             />
           </label>

@@ -13,7 +13,7 @@ const MyActiveChecklists = () => {
   const [value, setValue] = useState(1);
   const [, setCategory] = useState(true);
   const { t: translate } = useTranslation();
-  const url = `http://151.115.40.72:5000/api/v1/checklists_auth?page=${value}&per_page=10`;
+  const url = `/api/v1/checklists_auth?page=${value}&per_page=10`;
   const {
     data: checklists,
     error,

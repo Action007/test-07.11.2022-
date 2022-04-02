@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
+import { checklistAPI } from "../../../services/checklistService";
 import CreationChecklistItems from "../CreationChecklistItems/CreationChecklistItems";
 import CreationChecklistPreview from "../CreationChecklistPreview/CreationChecklistPreview";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -14,6 +15,8 @@ import { ReactComponent as CreationImg } from "../../../assets/images/content/cr
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
 
 const CreationOfChecklist = () => {
+  // eslint-disable-next-line no-empty-pattern
+  const [createChecklist, {}] = checklistAPI.useCreateChecklistMutation();
   const [preview, setPreview] = useState(false);
   const [done, setDone] = useState(false);
   const [tagsValid, setTagsValid] = useState(true);
@@ -31,13 +34,19 @@ const CreationOfChecklist = () => {
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("creationOfChecklist.title") }];
 
+  const checklistBody = {
+    checklist_items_attributes: checklist_items,
+    tags,
+    name: title,
+  };
+
   const changeTitleHandler = (e) => {
     const { value } = e.target;
     dispatch(createChecklistActions.addTitle(value));
     dispatch(createChecklistActions.isTitleValid());
   };
 
-  const checkValidHandler = (e, type) => {
+  const checkValidHandler = (e) => {
     if (e.target) e.preventDefault();
     const tagsIsValid = tags.length > 2;
     const checklistIsEmpty = checklist_items.find(
@@ -54,20 +63,26 @@ const CreationOfChecklist = () => {
     dispatch(createChecklistActions.isValid());
     dispatch(createChecklistActions.isTitleValid());
 
-    if (
+    const validOrNot =
       checklist_items.length &&
       !isChecklistValid &&
       !checklistIsEmpty &&
       titleIsValid &&
-      tagsIsValid
-    ) {
-      if (type === "preview") {
-        setPreview(true);
-      } else if (type === "submit") {
-        dispatch(createChecklistActions.onSubmitClear());
-        setDone(true);
-      }
-    }
+      tagsIsValid;
+
+    return !!validOrNot;
+  };
+
+  const onClickPreviewHandler = () => {
+    if (!checkValidHandler(false)) return;
+    setPreview(true);
+  };
+
+  const onSubmitHandler = async (e) => {
+    if (!checkValidHandler(e)) return;
+    await createChecklist({ body: checklistBody });
+    dispatch(createChecklistActions.onSubmitClear());
+    setDone(true);
   };
 
   return (
@@ -127,14 +142,14 @@ const CreationOfChecklist = () => {
               <CreationTags tagsValid={tagsValid} setTagsValid={setTagsValid} />
               <div className="creation__buttons SFPro-600">
                 <button
-                  onClick={() => checkValidHandler(false, "preview")}
+                  onClick={() => onClickPreviewHandler(false)}
                   className="creation__button"
                   type="button"
                 >
                   {translate("creationOfChecklist.preview")}
                 </button>
                 <button
-                  onClick={(e) => checkValidHandler(e, "submit")}
+                  onClick={(e) => onSubmitHandler(e)}
                   className="creation__button"
                   type="button"
                 >

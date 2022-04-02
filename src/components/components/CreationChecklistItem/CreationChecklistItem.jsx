@@ -184,7 +184,14 @@ const CreationChecklistItem = ({
             {list_type === "coordinates" && (
               <>
                 <div className="creation-item__wrapper">
-                  <GeneralMap setShowMap={setShowMap} creation id={id} />
+                  <GeneralMap
+                    setShowMap={setShowMap}
+                    coordinates={
+                      value.coordinates ? value.coordinates : undefined
+                    }
+                    creation
+                    id={id}
+                  />
                 </div>
                 <CSSTransition in={showMap} timeout={300} unmountOnExit>
                   <PopupMap show={showMap} onHide={() => setShowMap(false)}>
