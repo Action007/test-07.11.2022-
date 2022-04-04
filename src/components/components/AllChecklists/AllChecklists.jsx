@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -17,6 +18,7 @@ const AllChecklists = () => {
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(url);
   const { t: translate } = useTranslation();
+  const { pathname } = useLocation();
   const breadcrumbs = [{ title: translate("allChecklistsPage.title") }];
   const tabs = [
     { id: 0, key: "created", title: translate("allChecklistsPage.created") },
@@ -24,11 +26,20 @@ const AllChecklists = () => {
     { id: 2, key: "saved", title: translate("allChecklistsPage.saved") },
   ];
 
-  useEffect(() => setValue(1), [category]);
-
-  const changeChecklistsHandler = (key) => {
-    setCategory(key);
-  };
+  useEffect(() => {
+    if (pathname === "/saved-checklists") {
+      setCategory("saved");
+      setValue(2);
+    }
+    if (pathname === "/liked-checklists") {
+      setCategory("liked");
+      setValue(3);
+    }
+    if (pathname === "/created-checklists") {
+      setCategory("created");
+      setValue(4);
+    }
+  }, [pathname]);
 
   const loader = (
     <>
@@ -52,11 +63,7 @@ const AllChecklists = () => {
         <h2 className="mb-5 display-4 text-center SFPro-600">
           {translate("allChecklistsPage.title")}
         </h2>
-        <Tabs
-          changeHandler={changeChecklistsHandler}
-          tabs={tabs}
-          category={category}
-        />
+        <Tabs tabs={tabs} category={category} />
         {isLoading && loader}
         {error && <h1>Произошла ошибка при загрузке</h1>}
         {checklists &&

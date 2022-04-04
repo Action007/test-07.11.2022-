@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import useClickOutside from "../../../hooks/useClickOutside";
 import useMediaQuery from "../../../hooks/useMediaQuery";
+import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
+import Profile from "../../../assets/images/content/profile.png";
 import "./HeaderDropdown.scss";
 
-import Profile from "../../../assets/images/content/profile.png";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as Account } from "../../../assets/images/icon/account.svg";
 import { ReactComponent as Setting } from "../../../assets/images/icon/setting.svg";
 import { ReactComponent as Logout } from "../../../assets/images/icon/logout.svg";
-import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 
 const HeaderDropdown = () => {
   const { ref, show, setShowHandler } = useClickOutside();
@@ -42,7 +42,7 @@ const HeaderDropdown = () => {
           <Link
             onClick={setShowHandler}
             className="header-dropdown__inner"
-            to="/my-active-checklists"
+            to="/active-checklists"
           >
             <span className="header-dropdown__percent">60%</span>
             <div className="header-dropdown__progress">

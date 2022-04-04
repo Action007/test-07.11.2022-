@@ -208,6 +208,7 @@
 
   &.mobile {
     flex-direction: column;
+    width: 100%;
   }
 
   @include media-breakpoint-down(md) {

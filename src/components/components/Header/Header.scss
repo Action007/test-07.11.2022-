@@ -3,13 +3,13 @@
 @import '../../../global-styles/_fonts.scss';
 
 .header {
-  padding: 0 34px;
   width: 100%;
-
+  padding: 0 34px;
+  
   @include media-breakpoint-down(md) {
     padding: 0 16px;
   }
-
+  
   .header__navbar {
     left: 50%;
     z-index: 1010;
@@ -18,15 +18,15 @@
     background-color: $body;
     transform: translateX(-50%);
     transition: padding 0.3s ease;
-
+    
     &.scroll {
       padding: 9px 0;
-
+      
       @include media-breakpoint-down(md) {
         padding: 9px 0;
       }
     }
-
+    
     @include media-breakpoint-down(xl) {
       padding: 20px 0;
     }
@@ -34,6 +34,7 @@
     @include media-breakpoint-down(md) {
       padding: 15px 0;
       background-color: #fff;
+      border-bottom: 1px solid #b9b9b980;
     }
 
     @include media-breakpoint-down(sm) {
@@ -61,6 +62,13 @@
     @include media-breakpoint-down(sm) {
       padding: 0 16px !important;
     }
+  }
+
+  &__wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    order: 4;
   }
 
   .navbar-toggler:focus {
@@ -101,7 +109,6 @@
     .header__span {
       left: 18px;
       top: -6px;
-      padding: 4px 3px;
     }
 
     &:focus {
@@ -236,4 +243,30 @@
       max-width: 100%;
     }
   }
+}
+
+.headerMenu-enter {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.2s ease-out, opacity 0.2s ease;
+  overflow: hidden;
+}
+
+.headerMenu-enter-active {
+  opacity: 1;
+  max-height: 700px;
+  transition: max-height 0.3s ease-out;
+}
+
+.headerMenu-exit {
+  opacity: 1;
+  max-height: 700px;
+  transition: max-height 0.3s ease-out;
+}
+
+.headerMenu-exit-active {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.2s ease-out, opacity 0.2s ease;
+  overflow: hidden;
 }

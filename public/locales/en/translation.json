@@ -221,5 +221,9 @@
     "confirmPassword": "Confirm Password",
     "minimum": "Minimum 8 characters",
     "submit": "Save Change"
+  },
+  "supportDone": {
+    "title": "Your support message has been sent successfully!",
+    "subtitle": "We will process it very soon and send you a reply by email." 
   }
 }

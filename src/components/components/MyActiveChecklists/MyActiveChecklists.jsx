@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import uniqueID from "../../../utils/uniqueID";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -11,7 +12,7 @@ import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 
 const MyActiveChecklists = () => {
   const [value, setValue] = useState(1);
-  const [, setCategory] = useState(true);
+  const [category, setCategory] = useState("active");
   const { t: translate } = useTranslation();
   const url = `/api/v1/checklists_auth?page=${value}&per_page=10`;
   const {
@@ -19,6 +20,7 @@ const MyActiveChecklists = () => {
     error,
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(url);
+  const { pathname } = useLocation();
 
   const breadcrumbs = [{ title: translate("myActiveChecklists.title") }];
   const tabs = [
@@ -26,9 +28,14 @@ const MyActiveChecklists = () => {
     { id: 1, key: "passed", title: translate("myActiveChecklists.passed") },
   ];
 
-  const changeChecklistsHandler = (number) => {
-    setCategory(number === 0);
-  };
+  useEffect(() => {
+    if (pathname === "/active-checklists") {
+      setCategory("active");
+    }
+    if (pathname === "/passed-checklists") {
+      setCategory("passed");
+    }
+  }, [pathname]);
 
   const loader = (
     <>
@@ -52,11 +59,7 @@ const MyActiveChecklists = () => {
         <h2 className="mb-5 display-4 text-center SFPro-600">
           {translate("myActiveChecklists.title")}
         </h2>
-        <Tabs
-          changeHandler={changeChecklistsHandler}
-          tabs={tabs}
-          category="active"
-        />
+        <Tabs tabs={tabs} category={category} />
         {isLoading && loader}
         {error && <h1>Произошла ошибка при загрузке</h1>}
         {checklists &&

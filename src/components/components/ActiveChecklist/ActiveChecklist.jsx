@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { checklistAPI } from "../../../services/checklistService";
+import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import ActiveChecklistDetail from "../ActiveChecklistDetail/ActiveChecklistDetail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import PopupDone from "../PopupDone/PopupDone";
+import PopupCreateDone from "../PopupCreateDone/PopupCreateDone";
 import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 
 const ActiveChecklist = () => {
-  const [checklist, setChecklist] = useState([]);
-  const [modalShow, setModalShow] = useState(false);
+  const { data: checklist, isLoading } = checklistAPI.useFetchChecklistQuery(
+    "/api/v1/checklists_auth/4"
+  );
+  const [modalShow, setModalShow] = useState(true);
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklists") }];
-  const API_KEY = process.env.REACT_APP_HOSTNAME;
-
-  useEffect(() => {
-    const getProducts = async () => {
-      const response = await fetch(`${API_KEY}/api/v1/checklists_auth/1`);
-      const responseData = await response.json();
-      setChecklist(responseData);
-    };
-    getProducts();
-  }, []);
 
   return (
     <div className="container pb-8">
@@ -28,8 +22,9 @@ const ActiveChecklist = () => {
         {translate("checklists")}
       </h2>
       <ProgressBarChecklist done={50} />
-      <ActiveChecklistDetail checklist={checklist} />
-      <PopupDone show={modalShow} onHide={() => setModalShow(false)} />
+      {checklist && <ActiveChecklistDetail checklist={checklist} />}
+      {isLoading && <LoadingSkeleton />}
+      <PopupCreateDone show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 };

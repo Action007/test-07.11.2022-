@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
+import { CSSTransition } from "react-transition-group";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
+import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
+import SearchInput from "../SearchInput/SearchInput";
+import useClickOutside from "../../../hooks/useClickOutside";
 import "./Header.scss";
 
 import Logo from "../../../assets/images/content/logo.svg";
 import { ReactComponent as Plus } from "../../../assets/images/icon/plus.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerSvg.svg";
-import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
-import SearchInput from "../SearchInput/SearchInput";
 
 const Header = () => {
+  const { ref, show, setShowHandler } = useClickOutside();
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
   const showAddButtonOnMobile = useMediaQuery("(max-width:767px)");
   const [scroll, setScroll] = useState(false);
@@ -43,13 +46,17 @@ const Header = () => {
               alt="Logotype"
             />
           </Link>
-          <Navbar.Toggle
-            className="header__burger position-relative border-0 p-0"
-            aria-controls="navbarScroll"
-          >
-            <BurgerSvg />
-            <span className="header__span">22</span>
-          </Navbar.Toggle>
+          {showAddButtonOnMobile && (
+            <button
+              onClick={setShowHandler}
+              ref={ref}
+              className="header__burger position-relative border-0 p-0"
+              type="button"
+            >
+              <BurgerSvg />
+              <span className="header__span">22</span>
+            </button>
+          )}
           {showAddButtonOnMobile && (
             <button
               onClick={() => navigate("/creation-of-checklist")}
@@ -59,39 +66,46 @@ const Header = () => {
               <Plus />
             </button>
           )}
-          <Navbar.Collapse className="order-4" id="navbarScroll">
-            {!showSearchOnMobile && <SearchInput />}
-            {!showAddButtonOnMobile && (
-              <>
+          <CSSTransition
+            classNames="headerMenu"
+            in={!showAddButtonOnMobile ? true : show}
+            timeout={300}
+            unmountOnExit
+          >
+            <div className="header__wrap">
+              {!showSearchOnMobile && <SearchInput />}
+              {!showAddButtonOnMobile && (
+                <>
+                  <button
+                    onClick={() => navigate("/active-checklists")}
+                    className="header__progress"
+                    type="button"
+                  >
+                    <ProgressBarHeader done={29} />
+                  </button>
+                  <button
+                    onClick={() => navigate("/saved-checklists")}
+                    className="header__bookmark"
+                    type="button"
+                  >
+                    <Bookmark />
+                    <span className="header__span">22</span>
+                  </button>
+                </>
+              )}
+              <HeaderDropdown />
+              {!showAddButtonOnMobile && (
                 <button
-                  onClick={() => navigate("/my-active-checklists")}
-                  className="header__progress"
+                  onClick={() => navigate("/creation-of-checklist")}
+                  className="header__btn br-8"
                   type="button"
                 >
-                  <ProgressBarHeader done={29} />
+                  <Plus />
+                  Create
                 </button>
-                <button
-                  onClick={() => navigate("/saved-checklists")}
-                  className="header__bookmark"
-                  type="button"
-                >
-                  <Bookmark />
-                  <span className="header__span">22</span>
-                </button>
-              </>
-            )}
-            <HeaderDropdown />
-            {!showAddButtonOnMobile && (
-              <button
-                onClick={() => navigate("/creation-of-checklist")}
-                className="header__btn br-8"
-                type="button"
-              >
-                <Plus />
-                Create
-              </button>
-            )}
-          </Navbar.Collapse>
+              )}
+            </div>
+          </CSSTransition>
         </Container>
       </Navbar>
       {showSearchOnMobile && <SearchInput />}

@@ -1,5 +1,5 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .complain {
   margin: 0 auto;
@@ -68,6 +68,64 @@
     }
 
     @include media-breakpoint-down(md) {
+      max-width: 100%;
+    }
+  }
+}
+
+.complain-done {
+  position: relative;
+
+  &__btn {
+    position: absolute;
+    top: 16px;
+    right: 13px;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 70px 15px 70px;
+
+    @include media-breakpoint-down(lg) {
+      flex-direction: column-reverse;
+      padding: 24px 24px 50px;
+    }
+  }
+
+  &__wrap {
+    max-width: 327px;
+    margin-right: 66px;
+
+    @include media-breakpoint-down(lg) {
+      max-width: 352px;
+      margin-right: 0;
+      text-align: center;
+    }
+  }
+
+  &__title {
+    margin-bottom: 12px;
+    font-size: 1.75rem;
+
+    @include media-breakpoint-down(lg) {
+      font-size: 1.5rem;
+      margin-bottom: 22px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 1.3rem;
+      margin-bottom: 22px;
+    }
+  }
+
+  &__subtitle {
+    display: block;
+    max-width: 185px;
+    font-size: 14px;
+
+    @include media-breakpoint-down(lg) {
       max-width: 100%;
     }
   }

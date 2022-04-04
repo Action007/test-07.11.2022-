@@ -119,17 +119,20 @@ button {
 .popup-complain {
   display: none;
 
+  .modal-content {
+    width: inherit;
+  }
+
   .modal-header {
     display: none;
   }
 
   .modal-body {
     padding: 0;
-    max-width: 460px;
   }
 
-  .modal-content {
-    max-width: 460px;
+  .modal-dialog {
+    max-width: 100%;
   }
 
   .modal-dialog-centered {
