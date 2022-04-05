@@ -5,10 +5,9 @@ import { checklistAPI } from "../../../services/checklistService";
 import uniqueID from "../../../utils/uniqueID";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
-import Tabs from "../Tabs/Tabs";
-
 import Pagination from "../Pagination/Pagination";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
+import Tabs from "../Tabs/Tabs";
 
 const MyActiveChecklists = () => {
   const [value, setValue] = useState(1);
@@ -56,7 +55,7 @@ const MyActiveChecklists = () => {
     <div className="container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrap">
-        <h2 className="mb-5 display-4 text-center SFPro-600">
+        <h2 className="title--margin display-4 text-center SFPro-600">
           {translate("myActiveChecklists.title")}
         </h2>
         <Tabs tabs={tabs} category={category} />

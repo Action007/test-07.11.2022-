@@ -12,7 +12,7 @@ const MainBanner = () => {
   const { t: translate } = useTranslation();
 
   return (
-    <section className="container main-banner">
+    <div className="container main-banner">
       <div className="main-banner__wrap">
         <h2 className="main-banner__title SFPro-600">
           {translate("mainPage.title")}
@@ -34,7 +34,7 @@ const MainBanner = () => {
           <BannerImage />
         </div>
       )}
-    </section>
+    </div>
   );
 };
 

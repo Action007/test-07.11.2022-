@@ -60,7 +60,7 @@ const AllChecklists = () => {
     <div className="container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrap">
-        <h2 className="mb-5 display-4 text-center SFPro-600">
+        <h2 className="title--margin display-4 text-center SFPro-600">
           {translate("allChecklistsPage.title")}
         </h2>
         <Tabs tabs={tabs} category={category} />

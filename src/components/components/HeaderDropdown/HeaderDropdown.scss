@@ -1,7 +1,7 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../global-styles/_fonts.scss";
-@import "../../../global-styles/_mixins.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../global-styles/_fonts.scss';
+@import '../../../global-styles/_mixins.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .header-dropdown {
   position: relative;
@@ -21,13 +21,13 @@
     background-color: #fff;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       right: 16px;
       border: none;
       width: 14px;
       height: 8px;
-      background-image: url("../../../assets/images/icon/dropdown.svg");
+      background-image: url('../../../assets/images/icon/dropdown.svg');
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
@@ -73,7 +73,7 @@
 
   &__name {
     max-width: 80px;
-    @include line-clamp
+    @include line-clamp;
   }
 
   &__menu {
@@ -171,6 +171,10 @@
 
     &:last-child {
       padding-bottom: 18px;
+
+      @include media-breakpoint-down(md) {
+        padding-bottom: 10px;
+      }
     }
 
     @include media-breakpoint-down(md) {
@@ -182,7 +186,7 @@
     position: relative;
 
     span {
-      content: "";
+      content: '';
       position: absolute;
       left: 37px;
       top: 11px;

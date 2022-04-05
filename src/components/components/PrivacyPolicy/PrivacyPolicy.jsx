@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
     <div className="container policy pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrapper">
-        <h2 className="mb-5 display-4 text-center SFPro-600">
+        <h2 className="title--margin display-4 text-center SFPro-600">
           {translate("privacyPolicyPage.title")}
         </h2>
         <div className="policy__img mb-5 mx-auto">

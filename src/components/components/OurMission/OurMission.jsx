@@ -14,7 +14,7 @@ const OurMission = () => {
     <div className="container about pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrapper">
-        <h2 className="mb-5 display-4 text-center SFPro-600">
+        <h2 className="title--margin display-4 text-center SFPro-600">
           {translate("ourMissionPage.title")}
         </h2>
         <div className="about__img mb-5 mx-auto">

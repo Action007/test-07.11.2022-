@@ -143,3 +143,16 @@ button {
 .modal {
   padding: 0 !important;
 }
+
+ul,
+p {
+  margin: 0;
+}
+
+.title--margin {
+  margin-bottom: 46px;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 39px;
+  }
+}

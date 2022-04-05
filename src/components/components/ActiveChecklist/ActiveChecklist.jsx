@@ -18,7 +18,7 @@ const ActiveChecklist = () => {
   return (
     <div className="container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <h2 className="mb-5 display-4 text-center SFPro-600">
+      <h2 className="title--margin display-4 text-center SFPro-600">
         {translate("checklists")}
       </h2>
       <ProgressBarChecklist done={50} />

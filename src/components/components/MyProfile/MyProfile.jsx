@@ -19,7 +19,7 @@ const Profile = () => {
   const breadcrumbs = [{ title: translate("profilePage.myProfile") }];
 
   return (
-    <section className="profile container">
+    <div className="profile container">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="profile__wrapper">
         <div className="profile__inner">
@@ -123,7 +123,7 @@ const Profile = () => {
           </li>
         </ul>
       </div>
-    </section>
+    </div>
   );
 };
 
