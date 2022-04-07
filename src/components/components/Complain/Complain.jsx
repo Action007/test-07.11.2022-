@@ -1,12 +1,16 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
+import { checklistAPI } from "../../../services/checklistService";
 import "./Complain.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/close.svg";
 import { ReactComponent as DoneSvg } from "../../../assets/images/content/supportDone.svg";
 
-const Complain = ({ closeHandler }) => {
+const Complain = ({ closeHandler, id }) => {
+  const { data: checklists, isLoading } = checklistAPI.useFetchChecklistQuery(
+    `/api/v1/checklists_auth/${id}`
+  );
   const [done] = useState(false);
   const field = useRef();
   const [empty, setEmpty] = useState(false);
@@ -30,24 +34,42 @@ const Complain = ({ closeHandler }) => {
             </button>
           </div>
           <form className="complain__form" onSubmit={(e) => submitHandler(e)}>
-            <label htmlFor="exampleInputText" className="w-100">
-              <textarea
-                className={`complain__textarea form-control ${
-                  empty && "border-danger"
-                }`}
-                type="text"
-                id="exampleInputText"
-                aria-describedby="textHelp"
-                placeholder="Please insert the link of the page you want to complain about"
-                ref={field}
-              />
-            </label>
-            <small
-              className={`form-text mb-4 d-block ${empty && "text-danger"}`}
-              id="textHelp"
-            >
-              Required field*
-            </small>
+            {id ? (
+              <>
+                {checklists && (
+                  <div className="complain__title SFPro-600">
+                    {checklists.name}
+                  </div>
+                )}
+                {isLoading && (
+                  <>
+                    <div className="complain__load complain__load--first" />
+                    <div className="complain__load complain__load--second" />
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <label htmlFor="exampleInputText" className="w-100">
+                  <textarea
+                    className={`complain__textarea form-control ${
+                      empty && "border-danger"
+                    }`}
+                    type="text"
+                    id="exampleInputText"
+                    aria-describedby="textHelp"
+                    placeholder="Please insert the link of the page you want to complain about"
+                    ref={field}
+                  />
+                </label>
+                <small
+                  className={`form-text mb-4 d-block ${empty && "text-danger"}`}
+                  id="textHelp"
+                >
+                  Required field*
+                </small>
+              </>
+            )}
             <p className="SFPro-600 display-8 mb-4">
               What exactly do you think is unacceptable in this material?
             </p>

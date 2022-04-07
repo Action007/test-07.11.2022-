@@ -34,6 +34,7 @@ const SignInSignUpPage = React.lazy(() => import("../pages/SignInSignUpPage"));
 const EditChecklistPage = React.lazy(() =>
   import("../pages/EditChecklistPage")
 );
+const ServerErrorPage = React.lazy(() => import("../pages/ServerErrorPage"));
 
 const routes = [
   { id: 1, path: "/home", element: <HomePage /> },
@@ -78,6 +79,7 @@ const routes = [
   { id: 25, path: "/", element: <Navigate to="/home" /> },
   { id: 26, path: "/*", element: <NotFoundPage /> },
   { id: 27, path: "/not-found", element: <NotFoundPage /> },
+  { id: 27, path: "/error", element: <ServerErrorPage /> },
 ];
 
 export default routes;

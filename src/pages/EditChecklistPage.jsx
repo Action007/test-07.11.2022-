@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { checklistAPI } from "../services/checklistService";
 import { createChecklistActions } from "../store/createChecklistSlice";
 import CreationOfChecklist from "../components/components/CreationOfChecklist/CreationOfChecklist";
+import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
 
 const CreationOfChecklistPage = () => {
   const navigate = useNavigate();
@@ -18,14 +19,15 @@ const CreationOfChecklistPage = () => {
 
   useEffect(() => {
     if (!id) return;
-    if (isLoading) return;
+    // eslint-disable-next-line consistent-return
+    if (isLoading) return <LoadingSpinner />;
     // eslint-disable-next-line consistent-return
     if (error) return navigate("/not-found");
 
     dispatch(createChecklistActions.editChecklist(checklists));
   }, [isLoading]);
 
-  return checklists ? <CreationOfChecklist /> : null;
+  return checklists ? <CreationOfChecklist edit id={id} /> : null;
 };
 
 export default CreationOfChecklistPage;

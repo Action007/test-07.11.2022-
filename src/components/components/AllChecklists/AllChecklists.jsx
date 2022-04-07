@@ -26,18 +26,17 @@ const AllChecklists = () => {
     { id: 2, key: "saved", title: translate("allChecklistsPage.saved") },
   ];
 
+  useEffect(() => setValue(1), [category]);
+
   useEffect(() => {
     if (pathname === "/saved-checklists") {
       setCategory("saved");
-      setValue(2);
     }
     if (pathname === "/liked-checklists") {
       setCategory("liked");
-      setValue(3);
     }
     if (pathname === "/created-checklists") {
       setCategory("created");
-      setValue(4);
     }
   }, [pathname]);
 

@@ -1,0 +1,59 @@
+@import '../../../global-styles/_variables.scss';
+
+.logout {
+  .modal-dialog {
+    max-width: 852px;
+  }
+
+  .modal-body {
+    padding: 0;
+  }
+
+  .modal-header {
+    border: none;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 63px 28px 89px;
+  }
+
+  &__title {
+    font-size: 28px;
+    margin-bottom: 27px;
+  }
+
+  &__subtitle {
+    display: block;
+    margin-bottom: 51px;
+  }
+
+  &__svg {
+    margin-bottom: 16px;
+  }
+
+  &__buttons {
+    display: flex;
+  }
+
+  &__button {
+    border-radius: 8px;
+    width: 138px;
+    height: 46px;
+    border: 1px solid $dark;
+    font-size: 18px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+
+    &:first-child {
+      margin-right: 14px;
+    }
+
+    &:hover {
+      background-color: $primary;
+      border-color: transparent;
+      color: #fff;
+    }
+  }
+}

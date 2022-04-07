@@ -95,8 +95,8 @@ const createChecklistSlice = createSlice({
       state.checklist_items = items;
     },
     addTag(state, action) {
-      const name = action.payload;
-      state.tags = [...state.tags, { id: uniqueID(), name }];
+      const tag = action.payload;
+      state.tags = [...state.tags, tag];
     },
     removeTag(state, action) {
       const id = action.payload;

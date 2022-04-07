@@ -114,6 +114,7 @@ button {
 .modal-content {
   overflow: hidden;
   border-radius: 8px;
+  border: none;
 }
 
 .popup-complain {
@@ -154,5 +155,25 @@ p {
 
   @include media-breakpoint-down(md) {
     margin-bottom: 39px;
+  }
+}
+
+.checklist-button {
+  font-size: 16px;
+  color: #fff;
+  background-color: $primary;
+  padding: 12px 36px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+  }
+
+  &:hover {
+    background-color: #fff;
+    color: $primary;
+    border-color: $primary;
   }
 }

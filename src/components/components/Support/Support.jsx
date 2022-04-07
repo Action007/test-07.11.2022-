@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "react-bootstrap";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Complain from "../Complain/Complain";
 import "./Support.scss";
@@ -26,17 +25,17 @@ const Support = () => {
             <div className="support__img mb-5 mx-auto">
               <SupportImg />
             </div>
-            <h3 className="display-6 SFPro-600 text-center mb-5">
+            <h3 className="display-6 SFPro-600 text-center mb-4 mb-sm-5">
               {translate("supportPage.subtitle")}
             </h3>
             <div className="text-center mb-6">
-              <Button
-                className="text-white px-5 py-2 br-8"
+              <button
                 onClick={supportHandler}
-                variant="primary"
+                className="checklist-button"
+                type="button"
               >
                 Complain
-              </Button>
+              </button>
             </div>
             <p className="support__text SFPro-300 display-7">
               Exit of the printing and typesetting industry. Lorem Ipsum has

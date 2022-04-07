@@ -12,13 +12,15 @@ const NotFound = () => {
     <div className="container error py-8">
       <div className="container-wrapper">
         <h2 className="error__title display-4 text-center SFPro-600">
-          {translate("pageNotFount.title")}
+          {translate("error.title")}
         </h2>
         <div className="error__img mx-auto">
           <Error />
         </div>
         <Link className="error__button SFPro-600" to="/home">
-          <button type="button">{translate("pageNotFount.button")}</button>
+          <button className="checklist-button" type="button">
+            {translate("error.button")}
+          </button>
         </Link>
       </div>
     </div>

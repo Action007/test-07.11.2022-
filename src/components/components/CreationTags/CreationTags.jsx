@@ -12,11 +12,12 @@ import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag
 
 const CreationTags = ({ tagsValid, setTagsValid }) => {
   const [url, setUrl] = useState(null);
-  const { data: tagItems } = checklistAPI.useFetchChecklistQuery(
+  const { data: serverTags } = checklistAPI.useFetchChecklistQuery(
     `/api/v1/tags/search?value=${url}`
   );
+  const [tags, setTags] = useState(serverTags);
   const [addTags, setAddTags] = useState(false);
-  const tags = useSelector((state) => state.createChecklistReducer.tags);
+  const myTags = useSelector((state) => state.createChecklistReducer.tags);
   const inputTag = useRef();
   const { ref, show, setShow } = useClickOutside();
   const { t: translate } = useTranslation();
@@ -36,25 +37,31 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
     setUrl(uniqueID());
   };
 
-  const addTagHandler = (name) => {
-    const tagsIsValid = tags.length > 1;
-    const addOrNot = tags.find((tag) => tag.name === name);
+  const addTagHandler = (tag) => {
+    const tagsIsValid = myTags.length > 1;
+    const addOrNot = myTags.find((item) => item.name === tag.name);
 
     if (addOrNot) return;
-    if (!name.trim()) return;
+    if (!tag || !tag.name.trim()) return;
 
     setAddTagsHandler();
     setShow(false);
 
-    dispatch(createChecklistActions.addTag(name));
+    dispatch(createChecklistActions.addTag(tag));
     if (tagsIsValid) {
       setTagsValid(true);
     }
   };
 
-  const findTypeHandler = (e, name) => {
+  const removeTagHandler = (tag) => {
+    const tagsIsValid = myTags.length > 3;
+    dispatch(createChecklistActions.removeTag(tag.id));
+    setTagsValid(tagsIsValid);
+  };
+
+  const findTypeHandler = (e, tag) => {
     if (e.key === "Enter" || e === "click") {
-      addTagHandler(name);
+      addTagHandler(tag);
     }
   };
 
@@ -65,15 +72,27 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
 
   useEffect(() => {
     if (!inputTag.current) return;
-    addTagHandler(inputTag.current.value);
+    addTagHandler({
+      name: inputTag.current.value,
+      id: uniqueID(),
+      tags_new: true,
+    });
   }, [show]);
+
+  useEffect(() => {
+    if (!serverTags) return;
+
+    setTags(
+      serverTags.filter((item) => !myTags.find((tag) => tag.id === item.id))
+    );
+  }, [serverTags]);
 
   return (
     <div className={`creation-tag${!tagsValid ? " invalid" : ""}`}>
-      {tags.map((tag) => (
+      {myTags.map((tag) => (
         <button
           key={tag.id}
-          onClick={() => dispatch(createChecklistActions.removeTag(tag.id))}
+          onClick={() => removeTagHandler(tag)}
           className="creation-tag__create creation-tag__create--tag"
           type="button"
         >
@@ -81,7 +100,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
           <PlusSvg />
         </button>
       ))}
-      {tags.length < 5 &&
+      {myTags.length < 5 &&
         (addTags ? (
           <div className="creation-tag__search">
             <label
@@ -91,7 +110,13 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
             >
               <input
                 onChange={() => searchTagsHandler(inputTag.current.value)}
-                onKeyPress={(e) => findTypeHandler(e, inputTag.current.value)}
+                onKeyPress={(e) =>
+                  findTypeHandler(e, {
+                    name: inputTag.current.value,
+                    id: uniqueID(),
+                    tags_new: true,
+                  })
+                }
                 onFocus={() => setShow(true)}
                 className="creation-tag__create creation-tag__create--input"
                 ref={inputTag}
@@ -106,15 +131,20 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
               >
                 <CloseSvg />
               </button>
-              {tagItems.length && show ? (
+              {serverTags.length && show ? (
                 <ul
                   className="creation-tag__dropdown"
                   aria-labelledby="dropdownMenuButton"
                 >
-                  {tagItems.map((tag) => (
+                  {tags.map((tag) => (
                     <li key={tag.id} className="creation-tag__item">
                       <button
-                        onClick={() => findTypeHandler("click", tag.name)}
+                        onClick={() =>
+                          findTypeHandler("click", {
+                            name: tag.name,
+                            id: tag.id,
+                          })
+                        }
                         type="button"
                       >
                         {tag.name}

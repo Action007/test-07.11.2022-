@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
 import useMediaQuery from "../../../hooks/useMediaQuery";
@@ -13,9 +13,11 @@ import Logo from "../../../assets/images/content/logo.svg";
 import { ReactComponent as Plus } from "../../../assets/images/icon/plus.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerSvg.svg";
+import PopupLogout from "../PopupLogout/PopupLogout";
 
 const Header = () => {
-  const { ref, show, setShowHandler } = useClickOutside();
+  const [modalShow, setModalShow] = useState(true);
+  const { ref, show, setShowHandler, setShow } = useClickOutside();
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
   const showAddButtonOnMobile = useMediaQuery("(max-width:767px)");
   const [scroll, setScroll] = useState(false);
@@ -30,14 +32,27 @@ const Header = () => {
     return () => window.removeEventListener("scroll", scrollHandler);
   }, []);
 
+  const onClickHandler = (address) => {
+    navigate(address);
+    setShow(false);
+  };
+
   return (
     <header className="header">
       <Navbar
         className={`header__navbar position-fixed ${scroll && "scroll"}`}
         expand="md"
       >
-        <Container className={`header__container ${scroll && "scroll"}`} fluid>
-          <Link className="header__logo" to="/home">
+        <Container
+          ref={ref}
+          className={`header__container ${scroll && "scroll"}`}
+          fluid
+        >
+          <button
+            onClick={() => onClickHandler("/home")}
+            className="header__logo"
+            type="button"
+          >
             <img
               src={Logo}
               width="161"
@@ -45,11 +60,10 @@ const Header = () => {
               className="d-inline-block align-top"
               alt="Logotype"
             />
-          </Link>
+          </button>
           {showAddButtonOnMobile && (
             <button
               onClick={setShowHandler}
-              ref={ref}
               className="header__burger position-relative border-0 p-0"
               type="button"
             >
@@ -59,7 +73,7 @@ const Header = () => {
           )}
           {showAddButtonOnMobile && (
             <button
-              onClick={() => navigate("/creation-of-checklist")}
+              onClick={() => onClickHandler("/creation-of-checklist")}
               className="header__btn br-8"
               type="button"
             >
@@ -93,7 +107,7 @@ const Header = () => {
                   </button>
                 </>
               )}
-              <HeaderDropdown />
+              <HeaderDropdown setShow={setShow} />
               {!showAddButtonOnMobile && (
                 <button
                   onClick={() => navigate("/creation-of-checklist")}
@@ -109,6 +123,7 @@ const Header = () => {
         </Container>
       </Navbar>
       {showSearchOnMobile && <SearchInput />}
+      <PopupLogout show={modalShow} onHide={() => setModalShow(false)} />
     </header>
   );
 };

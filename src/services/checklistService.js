@@ -22,6 +22,22 @@ export const checklistAPI = createApi({
       }),
       invalidatesTags: ["Checklist"],
     }),
+    updateChecklist: build.mutation({
+      query: (checklist) => ({
+        url: `/api/v1/checklists_auth/${checklist.id}/update`,
+        method: "PUT",
+        body: checklist,
+      }),
+      invalidatesTags: ["Checklist"],
+    }),
+    supportChecklist: build.mutation({
+      query: (checklist) => ({
+        url: `/api/v1/support_issues/${checklist.id}`,
+        method: "POST",
+        body: checklist,
+      }),
+      invalidatesTags: ["Checklist"],
+    }),
     likeChecklist: build.mutation({
       query: (post) => ({
         url: `/api/v1/checklists_auth/${post.id}/like`,

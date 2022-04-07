@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import useClickOutside from "../../../hooks/useClickOutside";
 import useMediaQuery from "../../../hooks/useMediaQuery";
@@ -12,10 +12,17 @@ import { ReactComponent as Account } from "../../../assets/images/icon/account.s
 import { ReactComponent as Setting } from "../../../assets/images/icon/setting.svg";
 import { ReactComponent as Logout } from "../../../assets/images/icon/logout.svg";
 
-const HeaderDropdown = () => {
+const HeaderDropdown = ({ setShow }) => {
+  const navigate = useNavigate();
   const { ref, show, setShowHandler } = useClickOutside();
   const showOnMobile = useMediaQuery("(max-width:767px)");
   const mobileClass = showOnMobile ? " mobile" : "";
+
+  const onClickHandler = (address) => {
+    navigate(address);
+    setShow(false);
+    setShowHandler();
+  };
 
   return (
     <div className={`header-dropdown SFPro-500${mobileClass}`} ref={ref}>
@@ -39,41 +46,41 @@ const HeaderDropdown = () => {
         unmountOnExit
       >
         <div className={`header-dropdown__menu${mobileClass}`}>
-          <Link
-            onClick={setShowHandler}
+          <button
+            onClick={() => onClickHandler("/active-checklists")}
             className="header-dropdown__inner"
-            to="/active-checklists"
+            type="button"
           >
             <span className="header-dropdown__percent">60%</span>
             <div className="header-dropdown__progress">
               <ProgressBarHeader done={29} />
             </div>
-          </Link>
-          <Link
-            onClick={setShowHandler}
+          </button>
+          <button
+            onClick={() => onClickHandler("/created-checklists")}
             className="header-dropdown__item header-dropdown__item--first"
-            to="/created-checklists"
+            type="button"
           >
             <Bookmark />
             <span />
             All Checklists
-          </Link>
-          <Link
-            onClick={setShowHandler}
+          </button>
+          <button
+            onClick={() => onClickHandler("/my-profile")}
             className="header-dropdown__item"
-            to="/my-profile"
+            type="button"
           >
             <Account />
             Profile settings
-          </Link>
-          <Link
-            onClick={setShowHandler}
+          </button>
+          <button
+            onClick={() => onClickHandler("/account-settings")}
             className="header-dropdown__item"
-            to="/account-settings"
+            type="button"
           >
             <Setting />
             Account settings
-          </Link>
+          </button>
           <button className="header-dropdown__item" type="button">
             <Logout />
             Log Out

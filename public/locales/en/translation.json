@@ -187,8 +187,9 @@
     "newPassword": "New password",
     "confirmPassword": "Confirm password"
   },
-  "pageNotFount": {
+  "error": {
     "title": "Oops..  Sorry, page not found",
+    "subtitle": "That's an error. There was an error. Please try again later. That's all we know",
     "button": "Go back to the main page"
   },
   "profilePage": {
@@ -224,6 +225,12 @@
   },
   "supportDone": {
     "title": "Your support message has been sent successfully!",
-    "subtitle": "We will process it very soon and send you a reply by email." 
+    "subtitle": "We will process it very soon and send you a reply by email."
+  },
+  "logoutPopup": {
+    "title": "Log Out?",
+    "subtitle": "Are you really going out?",
+    "yes": "Yes",
+    "no": "No"
   }
 }

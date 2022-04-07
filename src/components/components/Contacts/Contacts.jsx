@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "react-bootstrap";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Networks from "../Networks/Networks";
@@ -63,9 +62,9 @@ const Contacts = () => {
           </span>
           <Networks />
           <div className="text-center">
-            <Button className="text-white px-5 py-2 br-8" variant="primary">
+            <button className="checklist-button" type="button">
               {translate("contactsPage.button")}
-            </Button>
+            </button>
           </div>
         </div>
         <div className="contacts__img">

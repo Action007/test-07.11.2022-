@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
@@ -14,10 +14,13 @@ import "./CreationOfChecklist.scss";
 import { ReactComponent as CreationImg } from "../../../assets/images/content/creationChecklist.svg";
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
 
-const CreationOfChecklist = () => {
+const CreationOfChecklist = ({ edit = false, id }) => {
   // eslint-disable-next-line no-empty-pattern
   const [createChecklist, {}] = checklistAPI.useCreateChecklistMutation();
+  // eslint-disable-next-line no-empty-pattern
+  const [updateChecklist, {}] = checklistAPI.useUpdateChecklistMutation();
   const [preview, setPreview] = useState(false);
+  const [validButton, setValidButton] = useState();
   const [done, setDone] = useState(false);
   const [tagsValid, setTagsValid] = useState(true);
   const checklist_items = useSelector(
@@ -34,17 +37,26 @@ const CreationOfChecklist = () => {
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("creationOfChecklist.title") }];
 
-  const checklistBody = {
-    checklist_items_attributes: checklist_items,
-    tags,
-    name: title,
-  };
+  useEffect(() => {
+    const tagsIsValid = tags.length > 2;
+    const checklistIsEmpty = checklist_items.find(
+      (item) => item.description.trim().length === 0
+    );
+    const isChecklistValid = checklist_items.find(
+      (item) => item.description.trim().length > 150
+    );
+    // eslint-disable-next-line no-shadow
+    const titleIsValid = title.trim().length !== 0 && title.trim().length < 150;
 
-  const changeTitleHandler = (e) => {
-    const { value } = e.target;
-    dispatch(createChecklistActions.addTitle(value));
-    dispatch(createChecklistActions.isTitleValid());
-  };
+    const validOrNot =
+      checklist_items.length &&
+      !isChecklistValid &&
+      !checklistIsEmpty &&
+      titleIsValid &&
+      tagsIsValid;
+
+    setValidButton(!!validOrNot);
+  }, [tags, title, checklist_items]);
 
   const checkValidHandler = (e) => {
     if (e.target) e.preventDefault();
@@ -56,6 +68,8 @@ const CreationOfChecklist = () => {
     const isChecklistValid = checklist_items.find(
       (item) => item.description.trim().length > 150
     );
+    // eslint-disable-next-line no-shadow
+    const titleIsValid = title.trim().length !== 0 && title.trim().length < 150;
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
       dispatch(createChecklistActions.addChecklist());
@@ -73,6 +87,12 @@ const CreationOfChecklist = () => {
     return !!validOrNot;
   };
 
+  const changeTitleHandler = (e) => {
+    const { value } = e.target;
+    dispatch(createChecklistActions.addTitle(value));
+    dispatch(createChecklistActions.isTitleValid());
+  };
+
   const onClickPreviewHandler = () => {
     if (!checkValidHandler(false)) return;
     setPreview(true);
@@ -80,7 +100,78 @@ const CreationOfChecklist = () => {
 
   const onSubmitHandler = async (e) => {
     if (!checkValidHandler(e)) return;
-    await createChecklist({ body: checklistBody });
+    let checklistBody = {};
+    const tags_new = [];
+    const tag_ids = [];
+    const checklist_items_attributes = [];
+
+    checklist_items.forEach(({ description, list_type, value }) => {
+      if (list_type === "text") {
+        checklist_items_attributes.push({
+          list_type,
+          description,
+        });
+      } else {
+        checklist_items_attributes.push({
+          list_type,
+          description,
+          value,
+        });
+      }
+    });
+    tags.forEach((item) =>
+      item.tags_new ? tags_new.push(item.name) : tag_ids.push(item.id)
+    );
+
+    if (id) {
+      if (tags_new.length && tag_ids.length) {
+        checklistBody = {
+          name: title,
+          tag_ids,
+          tags_new,
+          checklist_items_attributes,
+          id,
+        };
+      } else if (tags_new.length) {
+        checklistBody = {
+          name: title,
+          tags_new,
+          checklist_items_attributes,
+          id,
+        };
+      } else if (tag_ids.length) {
+        checklistBody = {
+          name: title,
+          tag_ids,
+          checklist_items_attributes,
+          id,
+        };
+      }
+    } else if (!id) {
+      if (!!tags_new.length && !!tag_ids.length) {
+        checklistBody = {
+          name: title,
+          tag_ids,
+          tags_new,
+          checklist_items_attributes,
+        };
+      } else if (tags_new.length) {
+        checklistBody = {
+          name: title,
+          tags_new,
+          checklist_items_attributes,
+        };
+      } else if (tag_ids.length) {
+        checklistBody = {
+          name: title,
+          tag_ids,
+          checklist_items_attributes,
+        };
+      }
+    }
+
+    if (!edit) createChecklist(checklistBody);
+    if (edit) updateChecklist(checklistBody);
     dispatch(createChecklistActions.onSubmitClear());
     setDone(true);
   };
@@ -143,14 +234,18 @@ const CreationOfChecklist = () => {
               <div className="creation__buttons SFPro-600">
                 <button
                   onClick={() => onClickPreviewHandler(false)}
-                  className="creation__button"
+                  className={`creation__button${
+                    !validButton ? " invalid" : ""
+                  }`}
                   type="button"
                 >
                   {translate("creationOfChecklist.preview")}
                 </button>
                 <button
                   onClick={(e) => onSubmitHandler(e)}
-                  className="creation__button"
+                  className={`creation__button${
+                    !validButton ? " invalid" : ""
+                  }`}
                   type="button"
                 >
                   {translate("creationOfChecklist.publish")}

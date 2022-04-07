@@ -1,22 +1,29 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./SearchInput.scss";
 
-const SearchInput = () => {
+const SearchInput = ({ searchHandler }) => {
   const [blur, setBlur] = useState(false);
-  const onBlurHandler = () => setBlur((prevState) => !prevState);
+  const searchRef = useRef();
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    const value = searchRef.current.value.trim();
+    searchHandler(value);
+  };
 
   return (
-    <form className="search-input">
+    <form onSubmit={(e) => onSubmitHandler(e)} className="search-input">
       <label
         className={`${`search-input__label`}${blur ? " active" : ""}`}
         htmlFor="search-input"
       >
         <input
-          onFocus={onBlurHandler}
-          onBlur={onBlurHandler}
+          onFocus={() => setBlur((prevState) => !prevState)}
+          onBlur={() => setBlur((prevState) => !prevState)}
+          ref={searchRef}
           className="search-input__input border-0"
           placeholder="Enter a word or #tag"
-          type="email"
+          type="text"
         />
       </label>
     </form>

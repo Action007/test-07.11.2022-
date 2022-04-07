@@ -17,11 +17,13 @@ import Pagination from "../Pagination/Pagination";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 
 const HomeChecklistPage = () => {
-  const [url, setUrl] = useState(`/api/v1/checklists_auth?page=1&per_page=3`);
+  const [pageValue, setPageValue] = useState(1);
+  const [searchValue, setSearchValue] = useState("");
+  const url = `/api/v1/checklists_auth?${searchValue}page=${pageValue}&per_page=3`;
   const {
     data: checklists,
     error,
-    isLoading,
+    isFetching,
   } = checklistAPI.useFetchChecklistQuery(url);
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
@@ -37,7 +39,11 @@ const HomeChecklistPage = () => {
   // }, [tag]);
 
   const setValueHandler = (id) => {
-    setUrl(`/api/v1/checklists_auth?page=${id}&per_page=3`);
+    setPageValue(id);
+  };
+
+  const onSearchHandler = (value) => {
+    setSearchValue(`search_value=${value}&`);
   };
 
   const loader = (
@@ -59,19 +65,20 @@ const HomeChecklistPage = () => {
               {!showOnMobile && translate("mainPage.popularQuestion")}
               {showOnMobile && translate("mainPage.search")}
             </h3>
-            <SearchInput />
+            <SearchInput searchHandler={onSearchHandler} />
             {showOnMobile && <Sidebar />}
-            {isLoading && loader}
+            {isFetching && loader}
             {error && <h1>Произошла ошибка при загрузке</h1>}
-            {checklists &&
-              checklists.entities.map((checklist) => (
-                <Checklist
-                  key={uniqueID()}
-                  checklist={checklist}
-                  translate={translate("allChecklistsPage.showMore")}
-                />
-              ))}
-            {checklists && (
+            {checklists && !isFetching
+              ? checklists.entities.map((checklist) => (
+                  <Checklist
+                    key={uniqueID()}
+                    checklist={checklist}
+                    translate={translate("allChecklistsPage.showMore")}
+                  />
+                ))
+              : ""}
+            {checklists && checklists.paginate.total_pages > 1 && (
               <Pagination
                 count={checklists.paginate.total_pages}
                 setValue={setValueHandler}

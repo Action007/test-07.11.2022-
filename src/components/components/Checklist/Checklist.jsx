@@ -147,7 +147,7 @@ const Checklist = ({
             <Modal.Title id="contained-modal-title-vcenter" />
           </Modal.Header>
           <Modal.Body>
-            <Complain closeHandler={() => setShowComplain(false)} />
+            <Complain closeHandler={() => setShowComplain(false)} id={id} />
           </Modal.Body>
         </Modal>
       </CSSTransition>
