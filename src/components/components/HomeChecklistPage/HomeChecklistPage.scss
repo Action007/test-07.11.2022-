@@ -167,6 +167,12 @@
     }
   }
 
+  &__text {
+    display: block;
+    text-align: center;
+    font-size: 28px;
+  }
+
   &__button {
     position: relative;
     z-index: 1;

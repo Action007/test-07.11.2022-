@@ -158,7 +158,8 @@
     "search": "Search by checklists:",
     "heading": "Share knowledge, create your own checklists and help people learn new things",
     "desc": "Already more than 1000 people a day have their own checklists and correspond to pressing questions. Create your own checklists",
-    "button": "Create checklist"
+    "button": "Create checklist",
+    "notFound": "Sorry, no checklists found for this query :("
   },
   "login": {
     "signIn": "Sign In",

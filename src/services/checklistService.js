@@ -14,6 +14,12 @@ export const checklistAPI = createApi({
       query: (url) => url,
       providesTags: () => ["Checklist"],
     }),
+    fetchSavesChecklists: build.query({
+      query: () => ({
+        url: "/api/v1/checklists_auth?search_type=saved&page=1&per_page=1000",
+      }),
+      providesTags: () => ["SaveChecklist"],
+    }),
     createChecklist: build.mutation({
       query: (checklist) => ({
         url: "/api/v1/checklists_auth",
@@ -31,28 +37,56 @@ export const checklistAPI = createApi({
       invalidatesTags: ["Checklist"],
     }),
     supportChecklist: build.mutation({
-      query: (checklist) => ({
-        url: `/api/v1/support_issues/${checklist.id}`,
+      query: (body) => ({
+        url: `/api/v1/support_issues`,
         method: "POST",
-        body: checklist,
+        body,
       }),
-      invalidatesTags: ["Checklist"],
+      invalidatesTags: ["Support"],
+    }),
+    saveChecklist: build.mutation({
+      query: (id) => ({
+        url: `/api/v1/checklists_auth/${id}/save`,
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: id,
+      }),
+      invalidatesTags: ["SaveChecklist"],
+    }),
+    unsaveChecklist: build.mutation({
+      query: (id) => ({
+        url: `/api/v1/checklists_auth/${id}/unsave`,
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: id,
+      }),
+      invalidatesTags: ["SaveChecklist"],
     }),
     likeChecklist: build.mutation({
-      query: (post) => ({
-        url: `/api/v1/checklists_auth/${post.id}/like`,
-        method: "PUT",
-        body: post,
+      query: (id) => ({
+        url: `/api/v1/checklists_auth/${id}/like`,
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: id,
       }),
-      invalidatesTags: ["Checklist"],
+      invalidatesTags: ["LikeChecklist"],
     }),
     dislikeChecklist: build.mutation({
-      query: (post) => ({
-        url: `/posts/${post.id}`,
-        method: "PUT",
-        body: post,
+      query: (id) => ({
+        url: `/api/v1/checklists_auth/${id}/dislike`,
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: id,
       }),
-      invalidatesTags: ["Checklist"],
+      invalidatesTags: ["DislikeChecklist"],
     }),
     deleteChecklist: build.mutation({
       query: (id) => ({

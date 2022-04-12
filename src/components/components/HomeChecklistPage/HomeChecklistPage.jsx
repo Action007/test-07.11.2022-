@@ -7,14 +7,14 @@ import MainBanner from "../MainBanner/MainBanner";
 import Sidebar from "../Sidebar/Sidebar";
 import SearchInput from "../SearchInput/SearchInput";
 import Checklist from "../Checklist/Checklist";
+import Pagination from "../Pagination/Pagination";
+import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import uniqueID from "../../../utils/uniqueID";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./HomeChecklistPage.scss";
 
 import Logo from "../../../assets/images/content/logo.svg";
 import { ReactComponent as Plus } from "../../../assets/images/icon/plus.svg";
-import Pagination from "../Pagination/Pagination";
-import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 
 const HomeChecklistPage = () => {
   const [pageValue, setPageValue] = useState(1);
@@ -78,6 +78,11 @@ const HomeChecklistPage = () => {
                   />
                 ))
               : ""}
+            {checklists?.entities.length === 0 && (
+              <span className="main-content__text">
+                {translate("mainPage.notFound")}
+              </span>
+            )}
             {checklists && checklists.paginate.total_pages > 1 && (
               <Pagination
                 count={checklists.paginate.total_pages}

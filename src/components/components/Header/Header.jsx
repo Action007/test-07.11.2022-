@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
+import { checklistAPI } from "../../../services/checklistService";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
@@ -16,13 +17,13 @@ import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerS
 import PopupLogout from "../PopupLogout/PopupLogout";
 
 const Header = () => {
+  const { data: savedChecklist } = checklistAPI.useFetchSavesChecklistsQuery();
   const [modalShow, setModalShow] = useState(true);
   const { ref, show, setShowHandler, setShow } = useClickOutside();
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
   const showAddButtonOnMobile = useMediaQuery("(max-width:767px)");
   const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
     const scrollHandler = () => {
       setScroll(window.scrollY > 50);
@@ -68,7 +69,13 @@ const Header = () => {
               type="button"
             >
               <BurgerSvg />
-              <span className="header__span">22</span>
+              {savedChecklist && savedChecklist.entities.length ? (
+                <span className="header__span">
+                  {savedChecklist.entities.length}
+                </span>
+              ) : (
+                ""
+              )}
             </button>
           )}
           {showAddButtonOnMobile && (
@@ -103,7 +110,13 @@ const Header = () => {
                     type="button"
                   >
                     <Bookmark />
-                    <span className="header__span">22</span>
+                    {savedChecklist && savedChecklist.entities.length ? (
+                      <span className="header__span">
+                        {savedChecklist.entities.length}
+                      </span>
+                    ) : (
+                      ""
+                    )}
                   </button>
                 </>
               )}

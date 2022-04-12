@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import { checklistAPI } from "../../../services/checklistService";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
@@ -23,24 +24,65 @@ const Checklist = ({
   created = false,
   active = false,
 }) => {
-  const { id, checklist_items, created_at, liked, name, slug, tags, viewed } =
-    checklist;
-  const [like, setLike] = useState(false);
+  const {
+    id,
+    checklist_items,
+    created_at,
+    liked,
+    name,
+    slug,
+    tags,
+    user_track,
+    viewed,
+  } = checklist;
+  const [iLiked, setILiked] = useState({
+    liked: user_track.liked,
+    mount: liked,
+  });
+  const [iSaved, setISaved] = useState(user_track.saved);
+  // eslint-disable-next-line no-empty-pattern
+  const [saveChecklist, {}] = checklistAPI.useSaveChecklistMutation();
+  // eslint-disable-next-line no-empty-pattern
+  const [unsaveChecklist, {}] = checklistAPI.useUnsaveChecklistMutation();
+  // eslint-disable-next-line no-empty-pattern
+  const [likeChecklist, {}] = checklistAPI.useLikeChecklistMutation();
+  // eslint-disable-next-line no-empty-pattern
+  const [dislikeChecklist, {}] = checklistAPI.useDislikeChecklistMutation();
   const [showComplain, setShowComplain] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:575px)");
+  const navigate = useNavigate();
   const { date } = getTime(created_at);
   const checklistItem = checklist_items.map((item) =>
     item.list_type !== "text" ? { ...item, list_type: "text" } : item
   );
   const fiveItems = checklistItem.slice(0, 5);
   const moreThanFive = checklist_items.length > 5;
-  const likeClass = `checklist__liked SFPro-700${liked ? " active" : ""}${
-    like ? " liked" : ""
-  }`;
-  const navigate = useNavigate();
+  const likeClass = `checklist__liked SFPro-700${
+    iLiked.mount ? " active" : ""
+  }${iLiked.liked ? " liked" : ""}`;
+  const savedClass = `checklist__bookmark${iSaved ? " saved" : ""}`;
 
-  const setLikeHandler = () => {
-    setLike((prevState) => !prevState);
+  const likeHandler = () => {
+    if (!iLiked.liked) likeChecklist(id);
+    if (iLiked.liked) dislikeChecklist(id);
+    // eslint-disable-next-line no-shadow
+    setILiked((prevState) => ({
+      liked: !prevState.liked,
+      // eslint-disable-next-line no-nested-ternary
+      mount: !prevState.liked
+        ? user_track.liked
+          ? liked
+          : liked + 1
+        : user_track.liked
+        ? liked - 1
+        : liked,
+    }));
+  };
+
+  const saveHandler = () => {
+    if (!iSaved) saveChecklist(id);
+    if (iSaved) unsaveChecklist(id);
+    setISaved((prevState) => !prevState);
   };
 
   const time = (
@@ -56,7 +98,7 @@ const Checklist = ({
         {showOnMobile && time}
         {!created && (
           <div className="checklist__buttons">
-            <button className="checklist__bookmark" type="button">
+            <button onClick={saveHandler} className={savedClass} type="button">
               <Bookmark />
             </button>
             <ComplainDropdown setShowComplain={setShowComplain} />
@@ -122,13 +164,9 @@ const Checklist = ({
                 <ViewSvg />
                 <span>{viewed}</span>
               </span>
-              <button
-                onClick={setLikeHandler}
-                className={likeClass}
-                type="button"
-              >
+              <button onClick={likeHandler} className={likeClass} type="button">
                 <LikeSvg />
-                <span>{like ? liked + 1 : liked}</span>
+                <span>{iLiked.mount}</span>
               </button>
             </div>
             {!showOnMobile && time}

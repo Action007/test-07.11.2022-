@@ -2,7 +2,6 @@
 @import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .checklist-detail {
-
   &__wrapper {
     position: relative;
     margin: 0 auto 16px;
@@ -106,18 +105,24 @@
     background-color: $secondary;
     transition: box-shadow 0.2s ease;
 
+    @include media-breakpoint-down(sm) {
+      margin: 0 0 0 21px;
+    }
+
+    &.saved {
+      svg {
+        stroke: $primary;
+      }
+    }
+
     svg {
       width: 16px;
       height: 18px;
-      stroke: $primary;
+      stroke: $dark;
     }
 
     &:hover {
       box-shadow: 0 0 6px 0 #0000005e;
-    }
-
-    @include media-breakpoint-down(sm) {
-      margin: 0 0 0 21px;
     }
   }
 

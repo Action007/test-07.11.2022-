@@ -15,7 +15,7 @@
   }
 
   &__form {
-    padding: 0 23px 35px;
+    padding: 0 23px 23px;
 
     @include media-breakpoint-down(md) {
       padding: 0 16px 16px;
@@ -55,20 +55,43 @@
   }
 
   &__button {
-    width: 100%;
-    height: 40px;
-    max-width: 183px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50%;
+    border-radius: 8px;
+    font-size: 16px;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
 
     &:first-child {
       margin-right: 8px;
+      background-color: #f2f2f2;
 
       @include media-breakpoint-down(md) {
         margin: 0 0 11px;
       }
+
+      &:hover {
+        border-color: $dark;
+        background-color: #fff;
+      }
     }
 
-    @include media-breakpoint-down(md) {
-      max-width: 100%;
+    &:last-child {
+      background-color: $primary;
+      color: #fff;
+
+      &:hover {
+        border-color: $primary;
+        background-color: #fff;
+        color: $primary;
+      }
     }
   }
 
@@ -140,7 +163,7 @@
     width: 70%;
     height: 24px;
     margin-bottom: 28px;
-    
+
     @include media-breakpoint-down(sm) {
       height: 22px;
       margin-bottom: 22px;

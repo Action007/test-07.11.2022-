@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import "./Complain.scss";
 
@@ -8,19 +8,36 @@ import { ReactComponent as CloseSvg } from "../../../assets/images/icon/close.sv
 import { ReactComponent as DoneSvg } from "../../../assets/images/content/supportDone.svg";
 
 const Complain = ({ closeHandler, id }) => {
+  const [category, setCategory] = useState("");
+  const [checklistId, setChecklistId] = useState(id);
   const { data: checklists, isLoading } = checklistAPI.useFetchChecklistQuery(
-    `/api/v1/checklists_auth/${id}`
+    checklistId ? `/api/v1/checklists_auth/${checklistId}` : ""
   );
+  // eslint-disable-next-line no-empty-pattern
+  const [supportChecklist, {}] = checklistAPI.useSupportChecklistMutation();
   const [done] = useState(false);
   const field = useRef();
   const [empty, setEmpty] = useState(false);
   const { t: translate } = useTranslation();
-
   const submitHandler = (e) => {
     e.preventDefault();
     setEmpty(false);
-    if (field.current.value.length) return;
-    setEmpty(true);
+    if (!checklistId) return;
+
+    const body = {
+      checklist_id: checklistId,
+      issue_type: category,
+    };
+
+    console.log(body);
+
+    supportChecklist(body);
+  };
+
+  const onChangeHandler = () => {
+    // eslint-disable-next-line no-shadow
+    const id = field.current.value.match(/\/list\/(\d+)/);
+    if (id) setChecklistId(id[1]);
   };
 
   return (
@@ -34,7 +51,7 @@ const Complain = ({ closeHandler, id }) => {
             </button>
           </div>
           <form className="complain__form" onSubmit={(e) => submitHandler(e)}>
-            {id ? (
+            {checklistId ? (
               <>
                 {checklists && (
                   <div className="complain__title SFPro-600">
@@ -52,12 +69,12 @@ const Complain = ({ closeHandler, id }) => {
               <>
                 <label htmlFor="exampleInputText" className="w-100">
                   <textarea
+                    onChange={onChangeHandler}
                     className={`complain__textarea form-control ${
                       empty && "border-danger"
                     }`}
                     type="text"
                     id="exampleInputText"
-                    aria-describedby="textHelp"
                     placeholder="Please insert the link of the page you want to complain about"
                     ref={field}
                   />
@@ -79,6 +96,7 @@ const Complain = ({ closeHandler, id }) => {
                 htmlFor="flexRadioDefault1"
               >
                 <input
+                  onChange={() => setCategory("spam")}
                   className="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
@@ -93,6 +111,7 @@ const Complain = ({ closeHandler, id }) => {
                 htmlFor="flexRadioDefault2"
               >
                 <input
+                  onChange={() => setCategory("prohibited")}
                   className="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
@@ -107,6 +126,7 @@ const Complain = ({ closeHandler, id }) => {
                 htmlFor="flexRadioDefault3"
               >
                 <input
+                  onChange={() => setCategory("violence")}
                   className="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
@@ -121,6 +141,7 @@ const Complain = ({ closeHandler, id }) => {
                 htmlFor="flexRadioDefault4"
               >
                 <input
+                  onChange={() => setCategory("adult")}
                   className="form-check-input"
                   type="radio"
                   name="flexRadioDefault"
@@ -130,27 +151,22 @@ const Complain = ({ closeHandler, id }) => {
               </label>
             </div>
             <span className="mb-4 d-block text-light">
-              <a className="complain__link text-primary" href="/#">
+              <Link className="complain__link text-primary" to="/terms-of-use">
                 Learn more&nbsp;
-              </a>
+              </Link>
               about the rules of Chekclist
             </span>
             <div className="complain__buttons">
-              <Button
-                className="complain__button py-2 text-dark br-8"
+              <button
                 onClick={closeHandler}
-                variant="secondary"
+                className="complain__button SFPro-600"
                 type="button"
               >
                 Cancel
-              </Button>
-              <Button
-                className="complain__button py-2 text-white br-8"
-                variant="primary"
-                type="submit"
-              >
+              </button>
+              <button className="complain__button SFPro-600" type="submit">
                 Submit a complaint
-              </Button>
+              </button>
             </div>
           </form>
         </div>

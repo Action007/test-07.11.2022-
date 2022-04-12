@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./MyProfile.scss";
 
@@ -15,6 +15,7 @@ import { ReactComponent as Cup } from "../../../assets/images/icon/cup.svg";
 import { ReactComponent as Added } from "../../../assets/images/icon/added.svg";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("profilePage.myProfile") }];
 
@@ -67,20 +68,20 @@ const Profile = () => {
           </ul>
         </div>
         <div className="profile__edit">
-          <Link
-            to="/edit-profile"
+          <button
+            onClick={() => navigate(`/edit-profile`)}
             className="profile__button SFPro-600"
             type="button"
           >
             {translate("profilePage.editProfile")}
-          </Link>
-          <Link
-            to="/account-settings"
+          </button>
+          <button
+            onClick={() => navigate(`/account-settings`)}
             className="profile__setting"
             type="button"
           >
             <Setting />
-          </Link>
+          </button>
         </div>
       </div>
       <div className="profile__wrap">

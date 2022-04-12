@@ -71,7 +71,7 @@ const MyActiveChecklists = () => {
             />
           ))}
       </div>
-      {checklists && (
+      {checklists && checklists.paginate.total_pages > 1 && (
         <Pagination
           count={checklists.paginate.total_pages}
           setValue={setValue}

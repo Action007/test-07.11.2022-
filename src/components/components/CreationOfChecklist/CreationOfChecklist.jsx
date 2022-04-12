@@ -13,12 +13,15 @@ import "./CreationOfChecklist.scss";
 
 import { ReactComponent as CreationImg } from "../../../assets/images/content/creationChecklist.svg";
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
+// import { Modal } from "react-bootstrap";
 
 const CreationOfChecklist = ({ edit = false, id }) => {
   // eslint-disable-next-line no-empty-pattern
-  const [createChecklist, {}] = checklistAPI.useCreateChecklistMutation();
+  const [createChecklist, { isSuccess: successCreate }] =
+    checklistAPI.useCreateChecklistMutation();
   // eslint-disable-next-line no-empty-pattern
-  const [updateChecklist, {}] = checklistAPI.useUpdateChecklistMutation();
+  const [updateChecklist, { isSuccess: successUpdate }] =
+    checklistAPI.useUpdateChecklistMutation();
   const [preview, setPreview] = useState(false);
   const [validButton, setValidButton] = useState();
   const [done, setDone] = useState(false);
@@ -57,6 +60,13 @@ const CreationOfChecklist = ({ edit = false, id }) => {
 
     setValidButton(!!validOrNot);
   }, [tags, title, checklist_items]);
+
+  useEffect(() => {
+    if (successCreate || successUpdate) {
+      dispatch(createChecklistActions.onSubmitClear());
+      setDone(true);
+    }
+  }, [successCreate, successUpdate]);
 
   const checkValidHandler = (e) => {
     if (e.target) e.preventDefault();
@@ -172,9 +182,23 @@ const CreationOfChecklist = ({ edit = false, id }) => {
 
     if (!edit) createChecklist(checklistBody);
     if (edit) updateChecklist(checklistBody);
-    dispatch(createChecklistActions.onSubmitClear());
-    setDone(true);
   };
+
+  // const loadingSpinner = (
+  //   <Modal
+  //     className="create-done"
+  //     show={show}
+  //     onHide={onHide}
+  //     aria-labelledby="contained-modal-title-vcenter"
+  //     centered
+  //   >
+  //     <Modal.Header closeButton>
+  //       <Modal.Title id="contained-modal-title-vcenter" />
+  //     </Modal.Header>
+  //     <Modal.Body>
+  //     </Modal.Body>
+  //     <Modal />
+  // );
 
   return (
     <>
@@ -265,6 +289,8 @@ const CreationOfChecklist = ({ edit = false, id }) => {
         />
       </CSSTransition>
       <PopupCreateDone show={done} onHide={() => setDone(false)} preview />
+      {/* {loadingCreate && loadingSpinner}
+      {loadingUpdate && loadingSpinner} */}
     </>
   );
 };

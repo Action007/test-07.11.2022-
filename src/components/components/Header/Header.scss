@@ -5,11 +5,11 @@
 .header {
   width: 100%;
   padding: 0 34px;
-  
+
   @include media-breakpoint-down(md) {
     padding: 0 16px;
   }
-  
+
   .header__navbar {
     left: 50%;
     z-index: 1010;
@@ -18,15 +18,15 @@
     background-color: $body;
     transform: translateX(-50%);
     transition: padding 0.3s ease;
-    
+
     &.scroll {
       padding: 9px 0;
-      
+
       @include media-breakpoint-down(md) {
         padding: 9px 0;
       }
     }
-    
+
     @include media-breakpoint-down(xl) {
       padding: 20px 0;
     }
@@ -104,11 +104,14 @@
   }
 
   &__burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0;
 
     .header__span {
       left: 18px;
-      top: -6px;
+      top: -10px;
     }
 
     &:focus {
@@ -143,6 +146,9 @@
   }
 
   .header__bookmark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     margin-right: 14px;
     border: none;
@@ -151,11 +157,7 @@
     height: 52px;
     max-width: 52px;
     background-color: #fff;
-
-    svg {
-      stroke: $primary;
-      transition: stroke 0.3s ease;
-    }
+    transition: background-color 0.3s ease;
 
     &:hover {
       background-color: $primary;
@@ -163,6 +165,11 @@
       svg {
         stroke: #fff;
       }
+    }
+
+    svg {
+      stroke: $primary;
+      transition: stroke 0.3s ease;
     }
   }
 

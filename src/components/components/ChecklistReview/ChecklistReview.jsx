@@ -115,7 +115,7 @@ const ChecklistReview = () => {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {isLoading && <LoadingSkeleton />}
       {error && <h1>Произошла ошибка при загрузке</h1>}
-      {checklists && <ChecklistDetail checklists={checklists} />}
+      {checklists && <ChecklistDetail checklists={checklists} detailPage />}
       <ChecklistComments comments={items.comments} />
     </div>
   );

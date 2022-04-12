@@ -222,16 +222,28 @@
 
   &__button {
     border-radius: 8px;
-    padding: 13px 68px;
+    padding: 10px;
+    max-width: 183px;
+    width: 100%;
+    height: 50px;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+
+    @include media-breakpoint-down(sm) {
+      max-width: 100%;
+    }
 
     &.invalid {
       &:first-child {
-        background-color: #dedede;
-        color: #4f4f4f80;
+        background-color: #dedede !important;
+        color: #4f4f4f80 !important;
+        border: 1px solid transparent !important;
       }
 
       &:last-child {
-        background-color: #4f4f4f80;
+        background-color: #4f4f4f80 !important;
+        color: #fff !important;
+        border: 1px solid transparent !important;
       }
     }
 
@@ -243,15 +255,23 @@
       @include media-breakpoint-down(sm) {
         margin: 0 0 12px;
       }
+
+      &:hover {
+        border-color: $dark;
+        background-color: #fff;
+        color: $dark;
+      }
     }
 
     &:last-child {
       color: #fff;
       background-color: $primary;
-    }
 
-    @include media-breakpoint-down(sm) {
-      width: 100%;
+      &:hover {
+        border-color: $primary;
+        background-color: #fff;
+        color: $primary;
+      }
     }
   }
 
