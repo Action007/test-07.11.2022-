@@ -1,9 +1,9 @@
 import React from "react";
-import scss from "./LoadingSpinner.module.scss";
+import "./LoadingSpinner.scss";
 
 const LoadingSpinner = () => (
-  <div className={scss.wrap}>
-    <div className={scss.spinner} />
+  <div className="spinner">
+    <div className="spinner__wrap" />
   </div>
 );
 

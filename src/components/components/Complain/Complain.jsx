@@ -1,24 +1,39 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
+import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import "./Complain.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/close.svg";
 import { ReactComponent as DoneSvg } from "../../../assets/images/content/supportDone.svg";
 
 const Complain = ({ closeHandler, id }) => {
+  const [changeChecklist, setChangeChecklist] = useState(false);
   const [category, setCategory] = useState("");
   const [checklistId, setChecklistId] = useState(id);
-  const { data: checklists, isLoading } = checklistAPI.useFetchChecklistQuery(
-    checklistId ? `/api/v1/checklists_auth/${checklistId}` : ""
-  );
+  const { data: checklist, isLoading: isFetchLoading } =
+    checklistAPI.useFetchChecklistQuery(
+      checklistId ? `/api/v1/checklists_auth/${checklistId}` : ""
+    );
   // eslint-disable-next-line no-empty-pattern
-  const [supportChecklist, {}] = checklistAPI.useSupportChecklistMutation();
-  const [done] = useState(false);
+  const [supportChecklist, { isSuccess, isError, isLoading: isSendLoading }] =
+    checklistAPI.useSupportChecklistMutation();
+  const [done, setDone] = useState(false);
   const field = useRef();
   const [empty, setEmpty] = useState(false);
   const { t: translate } = useTranslation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (field.current) field.current.focus();
+  }, [changeChecklist]);
+
+  useEffect(() => {
+    if (isSuccess) setDone(true);
+    if (isError) navigate("/error");
+  }, [isSuccess, isError]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     setEmpty(false);
@@ -29,20 +44,22 @@ const Complain = ({ closeHandler, id }) => {
       issue_type: category,
     };
 
-    console.log(body);
-
     supportChecklist(body);
   };
 
   const onChangeHandler = () => {
     // eslint-disable-next-line no-shadow
     const id = field.current.value.match(/\/list\/(\d+)/);
-    if (id) setChecklistId(id[1]);
+    if (id) {
+      setChecklistId(id[1]);
+      setChangeChecklist(false);
+    }
   };
 
   return (
     <>
-      {!done && (
+      <LoadingSpinnerPopup showSpinner={isSendLoading} />
+      {!done && !isSendLoading && (
         <div className="complain bg-white br-8">
           <div className="complain__wrap d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
             <span className="SFPro-600">Complain</span>
@@ -51,18 +68,27 @@ const Complain = ({ closeHandler, id }) => {
             </button>
           </div>
           <form className="complain__form" onSubmit={(e) => submitHandler(e)}>
-            {checklistId ? (
+            {checklistId && !changeChecklist ? (
               <>
-                {checklists && (
-                  <div className="complain__title SFPro-600">
-                    {checklists.name}
+                {checklist &&
+                  (id ? (
+                    <div className="complain__title SFPro-600">
+                      {checklist.name}
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setChangeChecklist(true)}
+                      className="complain__title SFPro-600"
+                      type="button"
+                    >
+                      {checklist.name}
+                    </button>
+                  ))}
+                {isFetchLoading && (
+                  <div className="complain__load">
+                    <div className="complain__load-item" />
+                    <div className="complain__load-item" />
                   </div>
-                )}
-                {isLoading && (
-                  <>
-                    <div className="complain__load complain__load--first" />
-                    <div className="complain__load complain__load--second" />
-                  </>
                 )}
               </>
             ) : (

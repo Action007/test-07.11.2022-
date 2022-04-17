@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import HomeButton from "../../UI/Buttons/HomeButton/HomeButton";
 import "./ServerError.scss";
 
 import Error from "../../../assets/images/content/server-error.png";
@@ -20,11 +20,7 @@ const ServerError = () => {
         <div className="server-error__img mx-auto">
           <img src={Error} alt="server error" />
         </div>
-        <Link className="server-error__button SFPro-600" to="/home">
-          <button className="checklist-button" type="button">
-            {translate("error.button")}
-          </button>
-        </Link>
+        <HomeButton />
       </div>
     </div>
   );

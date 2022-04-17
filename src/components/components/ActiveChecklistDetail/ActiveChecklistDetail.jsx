@@ -2,7 +2,7 @@ import React from "react";
 import uniqueID from "../../../utils/uniqueID";
 import "./ActiveChecklistDetail.scss";
 
-import { ReactComponent as DeleteSvg } from "../../../assets/images/icon/delete.svg";
+import { ReactComponent as DeleteSvg } from "../../../assets/images/icon/trash.svg";
 import { ReactComponent as UploadSvg } from "../../../assets/images/icon/upload.svg";
 import { ReactComponent as ShareSvg } from "../../../assets/images/icon/share.svg";
 import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";

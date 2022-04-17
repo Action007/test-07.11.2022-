@@ -141,23 +141,22 @@
 
   &__popup {
     .modal-dialog {
-      max-width: 1235px;
+      max-width: 990px;
       justify-content: center;
     }
 
     .modal-header {
-      padding: 10px;
+      background-color: transparent;
+      padding: 0;
+      border: none;
     }
 
     .modal-body {
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow-y: scroll;
       padding: 0;
-      min-width: 300px;
-      max-width: 1920px;
-      max-height: 80vh;
+      min-width: 290px;
 
       img {
         width: 100%;
@@ -170,6 +169,19 @@
       position: relative;
       border: none;
       width: auto;
+    }
+
+    .btn-close {
+      position: absolute;
+      background-color: #fff;
+      width: 15px;
+      height: 15px;
+      right: 15px;
+      border-radius: 8px;
+      top: 15px;
+      z-index: 1;
+      opacity: 1;
+      box-shadow: 0 0 6px 0 #0000005e !important;
     }
   }
 

@@ -1,7 +1,7 @@
 @import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 @import '../../../global-styles/_variables.scss';
 
-.logout {
+.delete-popup {
   .modal-dialog {
     max-width: 852px;
 
@@ -85,8 +85,8 @@
   }
 
   &__svg {
-    width: 37px;
-    height: 37px;
+    width: 24px;
+    height: 28px;
     margin-bottom: 16px;
 
     @include media-breakpoint-down(md) {
@@ -98,6 +98,7 @@
     svg {
       width: 100%;
       height: 100%;
+      stroke: $primary;
     }
   }
 

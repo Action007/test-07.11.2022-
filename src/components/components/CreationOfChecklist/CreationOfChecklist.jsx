@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
+import { useNavigate } from "react-router-dom";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import { checklistAPI } from "../../../services/checklistService";
 import CreationChecklistItems from "../CreationChecklistItems/CreationChecklistItems";
@@ -9,19 +10,26 @@ import CreationChecklistPreview from "../CreationChecklistPreview/CreationCheckl
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import CreationTags from "../CreationTags/CreationTags";
 import PopupCreateDone from "../PopupCreateDone/PopupCreateDone";
+import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
+import CreationCategory from "../CreationCategory/CreationCategory";
+import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import "./CreationOfChecklist.scss";
 
 import { ReactComponent as CreationImg } from "../../../assets/images/content/creationChecklist.svg";
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
 // import { Modal } from "react-bootstrap";
 
-const CreationOfChecklist = ({ edit = false, id }) => {
+const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
   // eslint-disable-next-line no-empty-pattern
-  const [createChecklist, { isSuccess: successCreate }] =
-    checklistAPI.useCreateChecklistMutation();
+  const [
+    createChecklist,
+    { isSuccess: successCreate, error: errorCreate, isLoading: loadingCreate },
+  ] = checklistAPI.useCreateChecklistMutation();
   // eslint-disable-next-line no-empty-pattern
-  const [updateChecklist, { isSuccess: successUpdate }] =
-    checklistAPI.useUpdateChecklistMutation();
+  const [
+    updateChecklist,
+    { isSuccess: successUpdate, error: errorUpdate, isLoading: loadingUpdate },
+  ] = checklistAPI.useUpdateChecklistMutation();
   const [preview, setPreview] = useState(false);
   const [validButton, setValidButton] = useState();
   const [done, setDone] = useState(false);
@@ -37,6 +45,7 @@ const CreationOfChecklist = ({ edit = false, id }) => {
   );
   const tags = useSelector((state) => state.createChecklistReducer.tags);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("creationOfChecklist.title") }];
 
@@ -65,8 +74,10 @@ const CreationOfChecklist = ({ edit = false, id }) => {
     if (successCreate || successUpdate) {
       dispatch(createChecklistActions.onSubmitClear());
       setDone(true);
+    } else if (errorCreate || errorUpdate) {
+      navigate("/error");
     }
-  }, [successCreate, successUpdate]);
+  }, [successCreate, successUpdate, errorCreate, errorUpdate]);
 
   const checkValidHandler = (e) => {
     if (e.target) e.preventDefault();
@@ -184,22 +195,6 @@ const CreationOfChecklist = ({ edit = false, id }) => {
     if (edit) updateChecklist(checklistBody);
   };
 
-  // const loadingSpinner = (
-  //   <Modal
-  //     className="create-done"
-  //     show={show}
-  //     onHide={onHide}
-  //     aria-labelledby="contained-modal-title-vcenter"
-  //     centered
-  //   >
-  //     <Modal.Header closeButton>
-  //       <Modal.Title id="contained-modal-title-vcenter" />
-  //     </Modal.Header>
-  //     <Modal.Body>
-  //     </Modal.Body>
-  //     <Modal />
-  // );
-
   return (
     <>
       <div className="container creation pb-8">
@@ -208,75 +203,91 @@ const CreationOfChecklist = ({ edit = false, id }) => {
           {translate("creationOfChecklist.title")}
         </h2>
         <div className="creation__wrapper">
-          <div className="creation__wrap">
-            <h3 className="creation__head SFPro-700">
-              {translate("creationOfChecklist.name")}
-            </h3>
-            <span
-              className={`creation__span${!titleIsValid ? " invalid" : ""}`}
-            >
-              {translate("creationOfChecklist.max")}
-            </span>
-            <form className="creation__form">
-              <label
-                className={`creation__name${!titleIsValid ? " invalid" : ""}`}
-                htmlFor="creationID"
-              >
-                <input
-                  onChange={(e) => changeTitleHandler(e)}
-                  value={title}
-                  type="text"
-                  id="creationID"
-                />
-              </label>
-              <div className="creation__inner">
-                <div className="creation__box">
-                  <h3 className="creation__head SFPro-700">
-                    {translate("creationOfChecklist.points")}
-                  </h3>
-                  {translate("creationOfChecklist.text")}
-                </div>
-                <button
-                  onClick={() =>
-                    dispatch(createChecklistActions.addChecklist())
-                  }
-                  className="creation__add SFPro-600"
-                  type="button"
-                >
-                  <AddItemSvg />
-                  {translate("creationOfChecklist.addBtn")}
-                </button>
-              </div>
-              <CreationChecklistItems checklist_items={checklist_items} />
+          {checklists ? (
+            <div className="creation__wrap">
               <h3 className="creation__head SFPro-700">
-                {translate("creationOfChecklist.tags")}
+                {translate("creationOfChecklist.name")}
               </h3>
-              <span className={`creation__desc${!tagsValid ? " invalid" : ""}`}>
-                {translate("creationOfChecklist.desc")}
+              <span
+                className={`creation__span${!titleIsValid ? " invalid" : ""}`}
+              >
+                {translate("creationOfChecklist.max")}
               </span>
-              <CreationTags tagsValid={tagsValid} setTagsValid={setTagsValid} />
-              <div className="creation__buttons SFPro-600">
-                <button
-                  onClick={() => onClickPreviewHandler(false)}
-                  className={`creation__button${
-                    !validButton ? " invalid" : ""
-                  }`}
-                  type="button"
+              <form className="creation__form">
+                <label
+                  className={`creation__name${!titleIsValid ? " invalid" : ""}`}
+                  htmlFor="creationID"
                 >
-                  {translate("creationOfChecklist.preview")}
-                </button>
-                <button
-                  onClick={(e) => onSubmitHandler(e)}
-                  className={`creation__button${
-                    !validButton ? " invalid" : ""
-                  }`}
-                  type="button"
+                  <input
+                    onChange={(e) => changeTitleHandler(e)}
+                    value={title}
+                    type="text"
+                    id="creationID"
+                  />
+                </label>
+                <div className="creation__inner">
+                  <div className="creation__box">
+                    <h3 className="creation__head SFPro-700">
+                      {translate("creationOfChecklist.points")}
+                    </h3>
+                    {translate("creationOfChecklist.text")}
+                  </div>
+                  <button
+                    onClick={() =>
+                      dispatch(createChecklistActions.addChecklist())
+                    }
+                    className="creation__add SFPro-600"
+                    type="button"
+                  >
+                    <AddItemSvg />
+                    {translate("creationOfChecklist.addBtn")}
+                  </button>
+                </div>
+                <CreationChecklistItems checklist_items={checklist_items} />
+                <h3 className="creation__head SFPro-700">
+                  {translate("creationOfChecklist.tags")}
+                </h3>
+                <span
+                  className={`creation__desc${!tagsValid ? " invalid" : ""}`}
                 >
-                  {translate("creationOfChecklist.publish")}
-                </button>
-              </div>
-            </form>
-          </div>
+                  {translate("creationOfChecklist.desc")}
+                </span>
+                <CreationTags
+                  tagsValid={tagsValid}
+                  setTagsValid={setTagsValid}
+                />
+                <h3 className="creation__head SFPro-700">
+                  {translate("creationOfChecklist.category")}
+                </h3>
+                <span className="creation__desc">
+                  {translate("creationOfChecklist.categoryDesc")}
+                </span>
+                <CreationCategory />
+                <div className="creation__buttons SFPro-600">
+                  <button
+                    onClick={() => onClickPreviewHandler(false)}
+                    className={`creation__button${
+                      !validButton ? " invalid" : ""
+                    }`}
+                    type="button"
+                  >
+                    {translate("creationOfChecklist.preview")}
+                  </button>
+                  <button
+                    onClick={(e) => onSubmitHandler(e)}
+                    className={`creation__button${
+                      !validButton ? " invalid" : ""
+                    }`}
+                    type="button"
+                  >
+                    {translate("creationOfChecklist.publish")}
+                  </button>
+                </div>
+              </form>
+            </div>
+          ) : (
+            <LoadingSpinner />
+          )}
           <div className="creation__img">
             <CreationImg />
           </div>
@@ -289,8 +300,7 @@ const CreationOfChecklist = ({ edit = false, id }) => {
         />
       </CSSTransition>
       <PopupCreateDone show={done} onHide={() => setDone(false)} preview />
-      {/* {loadingCreate && loadingSpinner}
-      {loadingUpdate && loadingSpinner} */}
+      <LoadingSpinnerPopup showSpinner={!!loadingCreate || !!loadingUpdate} />
     </>
   );
 };

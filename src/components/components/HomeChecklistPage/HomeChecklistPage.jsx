@@ -14,7 +14,7 @@ import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./HomeChecklistPage.scss";
 
 import Logo from "../../../assets/images/content/logo.svg";
-import { ReactComponent as Plus } from "../../../assets/images/icon/plus.svg";
+import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 
 const HomeChecklistPage = () => {
   const [pageValue, setPageValue] = useState(1);
@@ -68,7 +68,7 @@ const HomeChecklistPage = () => {
             <SearchInput searchHandler={onSearchHandler} />
             {showOnMobile && <Sidebar />}
             {isFetching && loader}
-            {error && <h1>Произошла ошибка при загрузке</h1>}
+            {error && navigate("/error")}
             {checklists && !isFetching
               ? checklists.entities.map((checklist) => (
                   <Checklist
@@ -113,14 +113,7 @@ const HomeChecklistPage = () => {
                   <span className="main-content__image" />
                 </div>
               )}
-              <button
-                onClick={() => navigate("/creation-of-checklist")}
-                className="main-content__button SFPro-600"
-                type="button"
-              >
-                <Plus />
-                {translate("mainPage.button")}
-              </button>
+              <CreateButton />
             </div>
             {!onMobile && (
               <div className="main-content__images">

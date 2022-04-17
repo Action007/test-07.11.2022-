@@ -9,7 +9,7 @@ import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 
 const ActiveChecklist = () => {
   const { data: checklist, isLoading } = checklistAPI.useFetchChecklistQuery(
-    "/api/v1/checklists_auth/4"
+    "/api/v1/checklists_auth/154"
   );
   const [modalShow, setModalShow] = useState(true);
   const { t: translate } = useTranslation();

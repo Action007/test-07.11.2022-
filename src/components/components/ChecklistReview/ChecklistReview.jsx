@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -101,6 +101,7 @@ const items = {
 };
 
 const ChecklistReview = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const {
     data: checklists,
@@ -114,7 +115,7 @@ const ChecklistReview = () => {
     <div className="checklist-detail container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {isLoading && <LoadingSkeleton />}
-      {error && <h1>Произошла ошибка при загрузке</h1>}
+      {error && navigate("/error")}
       {checklists && <ChecklistDetail checklists={checklists} detailPage />}
       <ChecklistComments comments={items.comments} />
     </div>

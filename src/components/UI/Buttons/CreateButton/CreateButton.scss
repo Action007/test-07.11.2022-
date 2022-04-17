@@ -1,0 +1,31 @@
+@import '../../../../global-styles/_variables.scss';
+@import '../../../../../node_modules/bootstrap/scss/_mixins.scss';
+
+.create-button {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 13px 60px 13px 45px;
+  font-size: 16px;
+  color: #fff;
+  background-color: $primary;
+  transition: all 0.3s ease;
+
+  svg {
+    margin-right: 11px;
+    stroke: #fff;
+    transition: stroke 0.3s ease;
+  }
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+    background-color: #fff;
+
+    svg {
+      stroke: $primary;
+    }
+  }
+}

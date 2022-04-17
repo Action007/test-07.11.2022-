@@ -13,29 +13,8 @@
   }
 
   @include media-breakpoint-down(lg) {
-    margin: 0 0 34px;
+    margin: 0 0 40px;
     max-width: 100%;
-  }
-
-  &.active {
-    .sidebar__head {
-      svg {
-        transform: rotate(-180deg);
-      }
-    }
-  }
-
-  &__head--accordion {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-      width: 20px;
-      height: 10px;
-      margin-left: 22px;
-      transition: transform 0.3s ease;
-    }
   }
 
   &__head {
@@ -43,11 +22,11 @@
     font-size: 20px;
     width: 100%;
     color: #fff;
-    background-color: #646464;
+    background-color: $dark;
 
-    @include media-breakpoint-down(md) {
-      font-size: 16px;
-      padding: 14px 28px;
+    @include media-breakpoint-down(lg) {
+      padding: 0;
+      background-color: $dark;
     }
   }
 
@@ -57,7 +36,13 @@
     padding: 12px 12px 22px;
     width: 100%;
     background-color: #fff;
+    border-radius: 0 0 8px 8px;
     margin: 0;
+
+    @include media-breakpoint-down(lg) {
+      border: 1px solid #b9b9b980;
+      border-top: none;
+    }
   }
 
   &__button {
@@ -69,6 +54,10 @@
     font-size: 16px;
     text-align: left;
     margin-bottom: 3px;
+
+    @include media-breakpoint-down(sm) {
+      padding: 9px 16px;
+    }
 
     &:hover {
       background-color: #eeeeee;
@@ -119,6 +108,10 @@
     text-align: left;
     margin-bottom: 3px;
 
+    @include media-breakpoint-down(sm) {
+      padding: 9px 16px;
+    }
+
     &:hover {
       background-color: #eeeeee;
     }
@@ -140,24 +133,28 @@
       stroke: $dark;
     }
   }
-}
 
-.accordion-enter {
-  max-height: 0;
-  transition: max-height 0.4s ease;
-}
+  .accordion-button {
+    justify-content: center;
+    background-color: $dark;
+    color: #fff;
+    font-size: 16px;
+    padding: 16px 28px;
 
-.accordion-enter-active {
-  max-height: 1000px;
-  transition: max-height 0.4s ease;
-}
+    &::after {
+      width: 14px;
+      height: 10px;
+      background-size: contain;
+      margin-left: 22px;
+      background-image: url('../../../assets/images/icon/accordion.svg');
+    }
 
-.accordion-exit {
-  max-height: 750px;
-  transition: max-height 0.4s ease;
-}
+    &:focus {
+      box-shadow: none;
+    }
+  }
 
-.accordion-exit-active {
-  max-height: 0;
-  transition: max-height 0.4s ease;
+  .accordion-body {
+    padding: 0;
+  }
 }

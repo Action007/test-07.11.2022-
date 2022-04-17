@@ -97,7 +97,12 @@
     "showMore": "Show more",
     "created": "Created",
     "liked": "Liked",
-    "saved": "Saved"
+    "saved": "Saved",
+    "createdEmpty": "Sorry, you don't have any checklists created yet :(",
+    "likedEmpty": "Sorry, you don't have your favorite checklists yet :(",
+    "savedEmpty": "Sorry, you don't have saved checklists yet :(",
+    "createButton": "Create checklist",
+    "homeButton": "Go back to the main page"
   },
   "checklistReviewPage": {
     "title": "Checklist Detail",
@@ -126,12 +131,16 @@
     "popupTitle": "Your checklist has been posted successfully!",
     "popupDesc": "Create more checklists and get rewards for it.",
     "popupButton": "Continue search",
-    "checklistPreview": "Checklist preview"
+    "checklistPreview": "Checklist preview",
+    "category": "Checklist category",
+    "categoryDesc": "Select a category from the list that applies to your checklist"
   },
   "sidebar": {
+    "select": "Select a category",
     "checklistCategories": "Checklist categories",
     "selectAll": "Select all",
     "popular": "Popular",
+    "latests": "Latest checklists ",
     "animals": "Animals",
     "art": "Art and science",
     "beauty": "Beauty",
@@ -150,7 +159,8 @@
     "nature": "Nature",
     "social": "Social",
     "sport": "Sport",
-    "travel": "Travel and countries"
+    "travel": "Travel and countries",
+    "other": "Other"
   },
   "mainPage": {
     "title": "Ask question and get a checklist for your question",
@@ -228,9 +238,15 @@
     "title": "Your support message has been sent successfully!",
     "subtitle": "We will process it very soon and send you a reply by email."
   },
-  "logoutPopup": {
+  "popupLogout": {
     "title": "Log Out?",
     "subtitle": "Are you really going out?",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "popupDelete": {
+    "title": "Delete checklist?",
+    "subtitle": "After deleting the checklist, recovery is not possible.",
     "yes": "Yes",
     "no": "No"
   }

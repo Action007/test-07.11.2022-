@@ -5,7 +5,7 @@ import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./MainBanner.scss";
 
 import { ReactComponent as BannerImage } from "../../../assets/images/content/main-banner.svg";
-import { ReactComponent as Plus } from "../../../assets/images/icon/plus.svg";
+import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 
 const MainBanner = () => {
   const showOnMobile = useMediaQuery("(max-width:991px)");
@@ -23,10 +23,7 @@ const MainBanner = () => {
           </div>
         )}
         <Link className="main-banner__link" to="/creation-of-checklist">
-          <button className="main-banner__button SFPro-600" type="button">
-            <Plus />
-            {translate("mainPage.button")}
-          </button>
+          <CreateButton />
         </Link>
       </div>
       {!showOnMobile && (

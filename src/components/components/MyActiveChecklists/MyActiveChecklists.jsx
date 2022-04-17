@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import uniqueID from "../../../utils/uniqueID";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -20,6 +20,7 @@ const MyActiveChecklists = () => {
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(url);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const breadcrumbs = [{ title: translate("myActiveChecklists.title") }];
   const tabs = [
@@ -60,7 +61,7 @@ const MyActiveChecklists = () => {
         </h2>
         <Tabs tabs={tabs} category={category} />
         {isLoading && loader}
-        {error && <h1>Произошла ошибка при загрузке</h1>}
+        {error && navigate("/error")}
         {checklists &&
           checklists.entities.map((checklist) => (
             <Checklist

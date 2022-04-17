@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
+import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
+import HomeButton from "../../UI/Buttons/HomeButton/HomeButton";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
@@ -15,10 +17,12 @@ const AllChecklists = () => {
   const {
     data: checklists,
     error,
-    isLoading,
+    isFetching,
   } = checklistAPI.useFetchChecklistQuery(url);
   const { t: translate } = useTranslation();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
   const breadcrumbs = [{ title: translate("allChecklistsPage.title") }];
   const tabs = [
     { id: 0, key: "created", title: translate("allChecklistsPage.created") },
@@ -63,9 +67,9 @@ const AllChecklists = () => {
           {translate("allChecklistsPage.title")}
         </h2>
         <Tabs tabs={tabs} category={category} />
-        {isLoading && loader}
-        {error && <h1>Произошла ошибка при загрузке</h1>}
-        {checklists &&
+        {isFetching && loader}
+        {error && navigate("/error")}
+        {!isFetching && checklists && checklists.entities.length ? (
           checklists.entities.map((checklist) => (
             <Checklist
               key={checklist.id}
@@ -73,7 +77,22 @@ const AllChecklists = () => {
               translate={translate("allChecklistsPage.showMore")}
               created={category === "created"}
             />
-          ))}
+          ))
+        ) : (
+          <div className="text-center mt-7">
+            <div className="display-6 mb-6">
+              {category === "saved" &&
+                translate("allChecklistsPage.savedEmpty")}
+              {category === "liked" &&
+                translate("allChecklistsPage.likedEmpty")}
+              {category === "created" &&
+                translate("allChecklistsPage.createdEmpty")}
+            </div>
+            {category === "saved" && <HomeButton />}
+            {category === "liked" && <HomeButton />}
+            {category === "created" && <CreateButton />}
+          </div>
+        )}
       </div>
       {checklists && checklists.paginate.total_pages > 1 && (
         <Pagination

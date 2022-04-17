@@ -1,5 +1,5 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .edit-dropdown {
   position: absolute;
@@ -33,6 +33,7 @@
   &__menu {
     position: absolute;
     right: 0;
+    top: 45px;
     z-index: 10;
     overflow: hidden;
     border-radius: 8px;
@@ -68,12 +69,13 @@
 
   &__delete {
     display: flex;
-    padding: 10px 30px 10px 25px;
+    align-items: center;
+    padding: 10px 30px 10px 23px;
 
     svg {
       margin-right: 15px;
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
       stroke: $dark;
     }
   }

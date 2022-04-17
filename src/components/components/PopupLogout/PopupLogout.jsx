@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import "./PopupLogout.scss";
 
-import { ReactComponent as LogoutSvg } from "../../../assets/images/content/logoutPopup.svg";
+import { ReactComponent as LogoutSvg } from "../../../assets/images/content/popupLogout.svg";
 import { ReactComponent as DoorSvg } from "../../../assets/images/icon/door.svg";
 
 const PopupLogout = ({ show, onHide }) => {
@@ -23,21 +23,23 @@ const PopupLogout = ({ show, onHide }) => {
       <Modal.Body>
         <div className="logout__wrapper">
           <div className="logout__wrap">
-            <div className="logout__svg">
-              <DoorSvg />
+            <div className="logout__inner">
+              <div className="logout__svg">
+                <DoorSvg />
+              </div>
+              <h3 className="logout__title SFPro-600">
+                {translate("popupLogout.title")}
+              </h3>
             </div>
-            <h3 className="logout__title SFPro-600">
-              {translate("logoutPopup.title")}
-            </h3>
             <span className="logout__subtitle">
-              {translate("logoutPopup.subtitle")}
+              {translate("popupLogout.subtitle")}
             </span>
             <div className="logout__buttons SFPro-500">
               <button className="logout__button" type="button">
-                {translate("logoutPopup.yes")}
+                {translate("popupLogout.yes")}
               </button>
               <button className="logout__button" type="button">
-                {translate("logoutPopup.no")}
+                {translate("popupLogout.no")}
               </button>
             </div>
           </div>

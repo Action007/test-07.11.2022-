@@ -20,6 +20,12 @@ export const checklistAPI = createApi({
       }),
       providesTags: () => ["SaveChecklist"],
     }),
+    fetchAccount: build.query({
+      query: () => ({
+        url: "/api/v1/account",
+      }),
+      providesTags: () => ["Account"],
+    }),
     createChecklist: build.mutation({
       query: (checklist) => ({
         url: "/api/v1/checklists_auth",

@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
 import { checklistAPI } from "../../../services/checklistService";
-import useMediaQuery from "../../../hooks/useMediaQuery";
+import PopupLogout from "../PopupLogout/PopupLogout";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
 import SearchInput from "../SearchInput/SearchInput";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 import useClickOutside from "../../../hooks/useClickOutside";
 import "./Header.scss";
 
@@ -14,7 +15,6 @@ import Logo from "../../../assets/images/content/logo.svg";
 import { ReactComponent as Plus } from "../../../assets/images/icon/plus.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerSvg.svg";
-import PopupLogout from "../PopupLogout/PopupLogout";
 
 const Header = () => {
   const { data: savedChecklist } = checklistAPI.useFetchSavesChecklistsQuery();
