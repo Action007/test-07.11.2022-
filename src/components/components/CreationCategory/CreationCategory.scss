@@ -45,6 +45,12 @@
     &.invalid {
       border-color: $warning;
     }
+
+    &.active {
+      svg {
+        transform: rotate(-90deg);
+      }
+    }
   }
 
   &__list {

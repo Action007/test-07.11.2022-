@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./Pagination.scss";
@@ -15,32 +16,26 @@ const Pagination = ({
   prevPage,
   nextPage,
 }) => {
+  const height = useSelector((state) => state.heightForScrollReducer.height);
   const showOnMobile = useMediaQuery("(max-width:480px)");
   const perPage = 1;
 
   const setPage = ({ selected }) => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, height + 200);
     setValue(selected * perPage + 1);
   };
 
   const onClickHandler = (type) => {
     if (type === "first") {
-      if (!prevPage) return;
-      setValue(1);
-      window.scrollTo(0, 0);
+      if (prevPage) setValue(1);
     } else if (type === "last") {
-      if (!nextPage) return;
-      setValue(totalPage);
-      window.scrollTo(0, 0);
+      if (nextPage) setValue(totalPage);
     } else if (type === "prev") {
-      if (!prevPage) return;
-      setValue(prevPage);
-      window.scrollTo(0, 0);
+      if (prevPage) setValue(prevPage);
     } else if (type === "next") {
-      if (!nextPage) return;
-      setValue(nextPage);
-      window.scrollTo(0, 0);
+      if (nextPage) setValue(nextPage);
     }
+    window.scrollTo(0, height + 200);
   };
 
   return (

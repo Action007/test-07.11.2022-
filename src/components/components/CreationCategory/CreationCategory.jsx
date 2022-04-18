@@ -124,7 +124,7 @@ const CreationCategory = () => {
           onClick={setShowHandler}
           className={`select-category__button SFPro-600${
             !isCategoryValid ? " invalid" : ""
-          }`}
+          }${show ? " active" : ""}`}
           type="button"
         >
           {selectCategory}

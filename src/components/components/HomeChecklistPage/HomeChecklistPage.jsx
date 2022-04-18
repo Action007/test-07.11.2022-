@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 // import { useParams } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
 import Sidebar from "../Sidebar/Sidebar";
@@ -19,7 +20,8 @@ import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 const HomeChecklistPage = () => {
   const [pageValue, setPageValue] = useState(1);
   const [searchValue, setSearchValue] = useState("");
-  const url = `/api/v1/checklists_auth?${searchValue}page=${pageValue}&per_page=3`;
+  const [tagValue, setTagValue] = useState("");
+  const url = `/api/v1/checklists_auth?${searchValue}page=${pageValue}&per_page=3${tagValue}`;
   const {
     data: checklists,
     error,
@@ -30,10 +32,16 @@ const HomeChecklistPage = () => {
   const onMobile = useMediaQuery("(max-width:1199px)");
   const navigate = useNavigate();
   const { tagID } = useParams();
+  const height = useSelector((state) => state.heightForScrollReducer.height);
 
   useEffect(() => {
-    // if (!tagID) return;
-    // setSearchValue(`search_tag_ids=${tagID}`);
+    if (!tagID) setTagValue("");
+    if (tagID) {
+      setTagValue(`&search_tag_ids[]=${tagID}`);
+      setPageValue("");
+      setSearchValue("");
+      window.scrollTo(0, height + 200);
+    }
   }, [tagID]);
 
   const setValueHandler = (id) => {
