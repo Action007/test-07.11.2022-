@@ -4,20 +4,22 @@ import "./ChecklistImage.scss";
 
 import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-map.svg";
 
-const ChecklistImage = ({ image }) => {
+const ChecklistImage = ({ image, preview = false }) => {
   const [showImage, setShowImage] = useState(false);
 
   return (
     <>
       <div className="checklist-image">
         <img src={image} alt="" />
-        <button
-          onClick={() => setShowImage(true)}
-          className="checklist-image__extend"
-          type="button"
-        >
-          <ExtendSvg />
-        </button>
+        {!preview && (
+          <button
+            onClick={() => setShowImage(true)}
+            className="checklist-image__extend"
+            type="button"
+          >
+            <ExtendSvg />
+          </button>
+        )}
       </div>
       <Modal
         className="checklist-image__popup"

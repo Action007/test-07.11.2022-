@@ -38,7 +38,7 @@ const ServerErrorPage = React.lazy(() => import("../pages/ServerErrorPage"));
 
 const routes = [
   { id: 1, path: "/home", element: <HomePage /> },
-  { id: 3, path: "/home/tags/:tag", element: <HomePage /> },
+  { id: 3, path: "/home/tags/:tagID", element: <HomePage /> },
   { id: 4, path: "/our-mission", element: <OurMissionPage /> },
   { id: 5, path: "/terms-of-use", element: <TermsOfUsePage /> },
   { id: 6, path: "/privacy-policy", element: <PrivacyPolicyPage /> },

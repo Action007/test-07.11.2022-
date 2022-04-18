@@ -151,13 +151,11 @@ const CreationChecklistItem = ({
             ) : (
               ""
             )}
-            <label
-              className={`creation-item__name${inValid ? " invalid" : ""}`}
-              htmlFor={id}
-            >
+            <label className="creation-item__name" htmlFor={id}>
               <input
                 onChange={(e) => onChangeValueHandler(e, "text")}
                 onKeyPress={(e) => addItemOnEnter(e)}
+                className="creation-item__input"
                 value={description}
                 type="text"
                 id={id}

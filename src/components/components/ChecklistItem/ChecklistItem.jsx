@@ -5,10 +5,10 @@ import GeneralMap from "../GeneralMap/GeneralMap";
 import PopupMap from "../PopupMap/PopupMap";
 import "./ChecklistItem.scss";
 
-const ChecklistItem = ({ description, list_type, value }) => {
+const ChecklistItem = ({ description, list_type, value, preview }) => {
   const [showMap, setShowMap] = useState(false);
   const test = /^(http|https):\/\//i;
-  const link = test.test(value.link) ? value.link : `https://${value.link}`;
+  const link = test.test(value?.link) ? value?.link : `https://${value?.link}`;
 
   return (
     <li className="checklist-item">
@@ -33,7 +33,9 @@ const ChecklistItem = ({ description, list_type, value }) => {
           </CSSTransition>
         </>
       )}
-      {list_type === "image" && <ChecklistImage image={value.image} />}
+      {list_type === "image" && (
+        <ChecklistImage image={value.image} preview={preview} />
+      )}
     </li>
   );
 };

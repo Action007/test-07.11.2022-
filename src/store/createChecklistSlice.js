@@ -8,6 +8,7 @@ const createChecklistSlice = createSlice({
     title: { value: "", isValid: true },
     checklist_items: [],
     tags: [],
+    category: "",
   },
   reducers: {
     addTitle(state, action) {
@@ -130,6 +131,10 @@ const createChecklistSlice = createSlice({
           : item
       );
     },
+    addCategory(state, action) {
+      const category = action.payload;
+      state.category = category;
+    },
     isValid(state) {
       state.checklist_items = state.checklist_items.map((item) =>
         item.description.trim().length < 151 &&
@@ -142,6 +147,7 @@ const createChecklistSlice = createSlice({
       state.title = { value: "", isValid: true };
       state.checklist_items = [];
       state.tags = [];
+      state.category = "";
     },
     editChecklist(state, action) {
       const { checklist_items, name, tags } = action.payload;

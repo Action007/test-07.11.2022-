@@ -15,8 +15,26 @@ const CreationChecklistPreview = ({ show, onHide }) => {
   );
   const { t: translate } = useTranslation();
 
+  const checklist_items_attributes = [];
+
+  checklist_items.forEach(({ description, list_type, value }) => {
+    const checkValid = value.image || value.link || value.coordinates;
+    if (checkValid) {
+      checklist_items_attributes.push({
+        list_type,
+        description,
+        value,
+      });
+    } else {
+      checklist_items_attributes.push({
+        list_type: "text",
+        description,
+      });
+    }
+  });
+
   const checklists = {
-    checklist_items,
+    checklist_items: checklist_items_attributes,
     tags,
     name: title,
     viewed: 0,
@@ -41,7 +59,7 @@ const CreationChecklistPreview = ({ show, onHide }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="p-0">
-        <ChecklistDetail checklists={checklists} />
+        <ChecklistDetail checklists={checklists} preview />
       </Modal.Body>
     </Modal>
   );

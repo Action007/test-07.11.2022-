@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 // import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
 import Sidebar from "../Sidebar/Sidebar";
@@ -29,14 +29,12 @@ const HomeChecklistPage = () => {
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const onMobile = useMediaQuery("(max-width:1199px)");
   const navigate = useNavigate();
-  // const { tag } = useParams();
+  const { tagID } = useParams();
 
-  // useEffect(() => {
-  //   if (!tag) return;
-  //   const value = tag.replace(" ", "%20");
-
-  //   setUrl(`/api/v1/tags/search?value=${value}`);
-  // }, [tag]);
+  useEffect(() => {
+    // if (!tagID) return;
+    // setSearchValue(`search_tag_ids=${tagID}`);
+  }, [tagID]);
 
   const setValueHandler = (id) => {
     setPageValue(id);

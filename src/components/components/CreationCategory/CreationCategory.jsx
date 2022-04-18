@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { createChecklistActions } from "../../../store/createChecklistSlice";
 import useClickOutside from "../../../hooks/useClickOutside";
 import "./CreationCategory.scss";
 
@@ -27,6 +29,14 @@ import { ReactComponent as TravelSvg } from "../../../assets/images/icon/travel.
 const CreationCategory = () => {
   const { ref, show, setShowHandler } = useClickOutside();
   const { t: translate } = useTranslation();
+  const [selectCategory, setSelectCategory] = useState(
+    translate("sidebar.select")
+  );
+  const dispatch = useDispatch();
+  const category = useSelector(
+    (state) => state.createChecklistReducer.category
+  );
+  const [isCategoryValid, setIsCategoryValid] = useState(true);
 
   const categories = [
     {
@@ -85,35 +95,62 @@ const CreationCategory = () => {
     { id: 20, name: translate("sidebar.travel"), svg: <TravelSvg /> },
   ];
 
+  useEffect(() => {
+    if (category === false) {
+      setIsCategoryValid(false);
+    } else if (category !== "") {
+      setIsCategoryValid(true);
+    }
+  }, [category]);
+
+  const onSelectCategoryHandler = (name) => {
+    dispatch(createChecklistActions.addCategory(name));
+    setSelectCategory(name);
+    setShowHandler();
+  };
+
   return (
-    <div className="select-category" ref={ref}>
-      <button
-        onClick={setShowHandler}
-        className="select-category__button SFPro-600"
-        type="button"
+    <div className="select-category">
+      <h3 className="select-category__head SFPro-700">
+        {translate("creationOfChecklist.category")}
+      </h3>
+      <span
+        className={`select-category__desc${!isCategoryValid ? " invalid" : ""}`}
       >
-        {translate("sidebar.select")}
-        <ArrowSvg />
-      </button>
-      {show && (
-        <ul className="select-category__list SFPro-700">
-          {categories.map((item) => (
-            <li key={item.id} className="select-category__item">
-              <button
-                className={`select-category__btn${
-                  item.fill
-                    ? " select-category__btn--fill"
-                    : " select-category__btn--stroke"
-                }`}
-                type="button"
-              >
-                {item.svg}
-                {item.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+        {translate("creationOfChecklist.categoryDesc")}
+      </span>
+      <div className="select-category__wrapper" ref={ref}>
+        <button
+          onClick={setShowHandler}
+          className={`select-category__button SFPro-600${
+            !isCategoryValid ? " invalid" : ""
+          }`}
+          type="button"
+        >
+          {selectCategory}
+          <ArrowSvg />
+        </button>
+        {show && (
+          <ul className="select-category__list SFPro-700">
+            {categories.map((item) => (
+              <li key={item.id} className="select-category__item">
+                <button
+                  onClick={() => onSelectCategoryHandler(item.name)}
+                  className={`select-category__btn${
+                    item.fill
+                      ? " select-category__btn--fill"
+                      : " select-category__btn--stroke"
+                  }`}
+                  type="button"
+                >
+                  {item.svg}
+                  {item.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

@@ -21,7 +21,7 @@
     &.invalid {
       padding-top: 22px;
 
-      input {
+      .creation-item__input {
         border-color: $warning !important;
       }
     }
@@ -219,18 +219,14 @@
     border-radius: 8px;
     width: 35px;
     height: 35px;
-    background-color: $primary;
+    background-color: #fff;
     transition: background-color 0.3s ease;
 
     svg {
       margin-bottom: 0;
       width: 20px;
       height: 20px;
-      stroke: #fff;
-    }
-
-    &:hover {
-      background-color: $warning;
+      stroke: $dark;
     }
   }
 

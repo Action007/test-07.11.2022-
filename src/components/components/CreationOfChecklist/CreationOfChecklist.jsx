@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { CSSTransition } from "react-transition-group";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import { checklistAPI } from "../../../services/checklistService";
 import CreationChecklistItems from "../CreationChecklistItems/CreationChecklistItems";
@@ -44,10 +43,18 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
     (state) => state.createChecklistReducer.title.isValid
   );
   const tags = useSelector((state) => state.createChecklistReducer.tags);
+  const category = useSelector(
+    (state) => state.createChecklistReducer.category
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("creationOfChecklist.title") }];
+
+  useEffect(() => {
+    dispatch(createChecklistActions.onSubmitClear());
+  }, [pathname]);
 
   useEffect(() => {
     const tagsIsValid = tags.length > 2;
@@ -65,10 +72,11 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
       !isChecklistValid &&
       !checklistIsEmpty &&
       titleIsValid &&
-      tagsIsValid;
+      tagsIsValid &&
+      category;
 
     setValidButton(!!validOrNot);
-  }, [tags, title, checklist_items]);
+  }, [tags, title, checklist_items, category]);
 
   useEffect(() => {
     if (successCreate || successUpdate) {
@@ -91,19 +99,22 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
     );
     // eslint-disable-next-line no-shadow
     const titleIsValid = title.trim().length !== 0 && title.trim().length < 150;
+    const categoryIsValid = category !== "" && category !== false;
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
       dispatch(createChecklistActions.addChecklist());
     }
     dispatch(createChecklistActions.isValid());
     dispatch(createChecklistActions.isTitleValid());
+    if (!categoryIsValid) dispatch(createChecklistActions.addCategory(false));
 
     const validOrNot =
       checklist_items.length &&
       !isChecklistValid &&
       !checklistIsEmpty &&
       titleIsValid &&
-      tagsIsValid;
+      tagsIsValid &&
+      categoryIsValid;
 
     return !!validOrNot;
   };
@@ -119,7 +130,7 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
     setPreview(true);
   };
 
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = (e) => {
     if (!checkValidHandler(e)) return;
     let checklistBody = {};
     const tags_new = [];
@@ -127,19 +138,21 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
     const checklist_items_attributes = [];
 
     checklist_items.forEach(({ description, list_type, value }) => {
-      if (list_type === "text") {
-        checklist_items_attributes.push({
-          list_type,
-          description,
-        });
-      } else {
+      const checkValid = value.image || value.link || value.coordinates;
+      if (checkValid) {
         checklist_items_attributes.push({
           list_type,
           description,
           value,
         });
+      } else {
+        checklist_items_attributes.push({
+          list_type: "text",
+          description,
+        });
       }
     });
+
     tags.forEach((item) =>
       item.tags_new ? tags_new.push(item.name) : tag_ids.push(item.id)
     );
@@ -256,12 +269,6 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
                   tagsValid={tagsValid}
                   setTagsValid={setTagsValid}
                 />
-                <h3 className="creation__head SFPro-700">
-                  {translate("creationOfChecklist.category")}
-                </h3>
-                <span className="creation__desc">
-                  {translate("creationOfChecklist.categoryDesc")}
-                </span>
                 <CreationCategory />
                 <div className="creation__buttons SFPro-600">
                   <button
@@ -293,12 +300,10 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
           </div>
         </div>
       </div>
-      <CSSTransition in={preview} timeout={300} unmountOnExit>
-        <CreationChecklistPreview
-          onHide={() => setPreview(false)}
-          show={preview}
-        />
-      </CSSTransition>
+      <CreationChecklistPreview
+        onHide={() => setPreview(false)}
+        show={preview}
+      />
       <PopupCreateDone show={done} onHide={() => setDone(false)} preview />
       <LoadingSpinnerPopup showSpinner={!!loadingCreate || !!loadingUpdate} />
     </>

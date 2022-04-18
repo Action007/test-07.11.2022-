@@ -136,7 +136,7 @@ const Checklist = ({
         <div className="checklist__tags">
           {tags.map((tag) => (
             <button
-              onClick={() => navigate(`/home/tags/${tag.name}`)}
+              onClick={() => navigate(`/home/tags/${tag.id}`)}
               className="checklist__tag"
               key={uniqueID()}
               type="button"

@@ -17,7 +17,7 @@ import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg"
 import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 
-const ChecklistDetail = ({ checklists, detailPage = false }) => {
+const ChecklistDetail = ({ checklists, detailPage = false, preview }) => {
   const {
     id,
     checklist_items,
@@ -107,14 +107,15 @@ const ChecklistDetail = ({ checklists, detailPage = false }) => {
               description={description}
               list_type={list_type}
               value={value}
+              preview={preview}
             />
           ))}
         </ol>
         <div className="checklist-detail__tags">
           {tags.map((tag) => (
             <button
-              onClick={() => navigate(`/home/tags/${tag.name}`)}
-              className="checklist-detail__tag"
+              onClick={() => navigate(`/home/tags/${tag.id}`)}
+              className="checklist__tag"
               key={uniqueID()}
               type="button"
             >
