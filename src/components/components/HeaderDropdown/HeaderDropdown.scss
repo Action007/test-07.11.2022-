@@ -89,6 +89,7 @@
     font-size: 16px;
     background-color: #fff;
     transition: max-height 0.3s ease;
+    padding: 8px 0;
 
     svg {
       margin-right: 20px;
@@ -116,7 +117,7 @@
     display: flex;
     align-items: center;
     border-bottom: 2px solid #4f4f4f1a;
-    padding: 18px 19px 10px 26px;
+    padding: 10px 19px 10px 26px;
     width: 100%;
 
     &:hover {
@@ -152,6 +153,10 @@
     text-align: left;
     color: $dark;
 
+    @include media-breakpoint-down(md) {
+      padding: 10px 0;
+    }
+
     &:not(:last-child) {
       border-bottom: 2px solid #4f4f4f1a;
 
@@ -166,19 +171,7 @@
 
     &:hover {
       color: $dark;
-      background-color: #4f4f4f1a;
-    }
-
-    &:last-child {
-      padding-bottom: 18px;
-
-      @include media-breakpoint-down(md) {
-        padding-bottom: 10px;
-      }
-    }
-
-    @include media-breakpoint-down(md) {
-      padding: 10px 0;
+      background-color: #efefef;
     }
   }
 
