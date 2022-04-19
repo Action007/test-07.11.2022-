@@ -44,6 +44,10 @@ const AllChecklists = () => {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    if (error) navigate("/error");
+  }, [error]);
+
   const loader = (
     <>
       <LoadingSkeleton />
@@ -68,7 +72,6 @@ const AllChecklists = () => {
         </h2>
         <Tabs tabs={tabs} category={category} />
         {isFetching && loader}
-        {error && navigate("/error")}
         {!isFetching && checklists && checklists.entities.length ? (
           checklists.entities.map((checklist) => (
             <Checklist

@@ -37,6 +37,10 @@ const MyActiveChecklists = () => {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    if (error) navigate("/error");
+  }, [error]);
+
   const loader = (
     <>
       <LoadingSkeleton />
@@ -61,7 +65,6 @@ const MyActiveChecklists = () => {
         </h2>
         <Tabs tabs={tabs} category={category} />
         {isLoading && loader}
-        {error && navigate("/error")}
         {checklists &&
           checklists.entities.map((checklist) => (
             <Checklist

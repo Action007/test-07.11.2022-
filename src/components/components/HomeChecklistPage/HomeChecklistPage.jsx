@@ -44,6 +44,10 @@ const HomeChecklistPage = () => {
     }
   }, [tagID]);
 
+  useEffect(() => {
+    if (error) navigate("/error");
+  }, [error]);
+
   const setValueHandler = (id) => {
     setPageValue(id);
   };
@@ -74,7 +78,6 @@ const HomeChecklistPage = () => {
             <SearchInput searchHandler={onSearchHandler} />
             {showOnMobile && <Sidebar />}
             {isFetching && loader}
-            {error && navigate("/error")}
             {checklists && !isFetching
               ? checklists.entities.map((checklist) => (
                   <Checklist

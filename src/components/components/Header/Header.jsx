@@ -24,6 +24,7 @@ const Header = () => {
   const showAddButtonOnMobile = useMediaQuery("(max-width:767px)");
   const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
     const scrollHandler = () => {
       setScroll(window.scrollY > 50);

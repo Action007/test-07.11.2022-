@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
@@ -111,11 +111,14 @@ const ChecklistReview = () => {
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklistReviewPage.title") }];
 
+  useEffect(() => {
+    if (error) navigate("/error");
+  }, [error]);
+
   return (
     <div className="checklist-detail container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {isLoading && <LoadingSkeleton />}
-      {error && navigate("/error")}
       {checklists && <ChecklistDetail checklists={checklists} detailPage />}
       <ChecklistComments comments={items.comments} />
     </div>

@@ -18,13 +18,13 @@ export const checklistAPI = createApi({
       query: () => ({
         url: "/api/v1/checklists_auth?search_type=saved&page=1&per_page=1000",
       }),
-      providesTags: () => ["SaveChecklist"],
+      invalidatesTags: ["SaveChecklist"],
     }),
     fetchAccount: build.query({
       query: () => ({
         url: "/api/v1/account",
       }),
-      providesTags: () => ["Account"],
+      invalidatesTags: ["Account"],
     }),
     createChecklist: build.mutation({
       query: (checklist) => ({
@@ -85,7 +85,7 @@ export const checklistAPI = createApi({
     }),
     dislikeChecklist: build.mutation({
       query: (id) => ({
-        url: `/api/v1/checklists_auth/${id}/dislike`,
+        url: `/api/v1/checklists_auth/${id}/unlike`,
         method: "POST",
         headers: {
           "content-type": "application/json",
