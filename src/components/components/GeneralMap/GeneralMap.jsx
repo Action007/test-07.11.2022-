@@ -18,7 +18,7 @@ const GeneralMap = ({
   creation = false,
   id,
 }) => {
-  const [showLocation, setShowLocation] = useState(false);
+  const [showLocation, setShowLocation] = useState(true);
   const dispatch = useDispatch();
   const checklist_items = useSelector(
     (state) => state.createChecklistReducer.checklist_items
@@ -30,7 +30,7 @@ const GeneralMap = ({
 
   return (
     <div className="creation-map">
-      <MapContainer center={coordinates} zoom={10}>
+      <MapContainer center={coordinates} zoom={12} scrollWheelZoom={1}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
