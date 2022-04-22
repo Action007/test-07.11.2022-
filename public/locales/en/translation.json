@@ -107,6 +107,7 @@
   "checklistReviewPage": {
     "title": "Checklist Detail",
     "button": "Start to pass",
+    "link": "Link",
     "moreComments": "Show more comments"
   },
   "myActiveChecklists": {
