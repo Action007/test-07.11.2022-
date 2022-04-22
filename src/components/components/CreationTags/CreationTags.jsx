@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import { checklistAPI } from "../../../services/checklistService";
+import TagListSearch from "../TagListSearch/TagListSearch";
 import useClickOutside from "../../../hooks/useClickOutside";
 import uniqueID from "../../../utils/uniqueID";
 import "./CreationTags.scss";
@@ -27,8 +28,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
     if (value.trim() === "") {
       setUrl(uniqueID());
     } else {
-      const searchUrl = value.replace(" ", "%20");
-      setUrl(searchUrl);
+      setUrl(value);
     }
   };
 
@@ -131,29 +131,8 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
               >
                 <CloseSvg />
               </button>
-              {serverTags.length && show ? (
-                <ul
-                  className="creation-tag__dropdown"
-                  aria-labelledby="dropdownMenuButton"
-                >
-                  {tags.map((tag) => (
-                    <li key={tag.id} className="creation-tag__item">
-                      <button
-                        onClick={() =>
-                          findTypeHandler("click", {
-                            name: tag.name,
-                            id: tag.id,
-                          })
-                        }
-                        type="button"
-                      >
-                        {tag.name}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                ""
+              {serverTags && serverTags.length !== 0 && show && (
+                <TagListSearch tags={tags} findTypeHandler={findTypeHandler} />
               )}
             </label>
           </div>

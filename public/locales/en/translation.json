@@ -164,7 +164,7 @@
   },
   "mainPage": {
     "title": "Ask question and get a checklist for your question",
-    "popularQuestion": "Popular questions in this category:",
+    "popularQuestion": "Search by checklists:",
     "search": "Search by checklists:",
     "heading": "Share knowledge, create your own checklists and help people learn new things",
     "desc": "Already more than 1000 people a day have their own checklists and correspond to pressing questions. Create your own checklists",
@@ -178,9 +178,10 @@
     "title2": "Sign Up with Email",
     "title3": "Check your mail",
     "title4": "Reset Password",
+    "title5" :"Forgot Password",
     "name": "Name",
     "namePlaceholder": "Enter a name",
-    "email": "Email",
+    "email": "Email address",
     "emailPlaceholder": "Enter your email address",
     "password": "Password",
     "passwordPlaceholder": "Enter your password",
@@ -196,7 +197,9 @@
     "enterPassword": "Enter a new password",
     "enterAPassword": "Enter a password",
     "newPassword": "New password",
-    "confirmPassword": "Confirm password"
+    "confirmPassword": "Confirm password",
+    "request": "Request password reset",
+    "done": "A password reset link has been sent to your email. Make sure the email didn't end up in the Spam folder"
   },
   "error": {
     "title": "Oops..  Sorry, page not found",

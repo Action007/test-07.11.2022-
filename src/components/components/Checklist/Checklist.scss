@@ -86,8 +86,11 @@
     }
 
     &.saved {
+      background-color: #f0f9f2;
+      
       svg {
         stroke: $primary;
+        fill: #fff;
       }
     }
 
@@ -98,7 +101,7 @@
     }
 
     &:hover {
-      box-shadow: 0 0 6px 0 #0000005e;
+      box-shadow: 0 0 3px 0 #0000005c;
     }
   }
 
@@ -199,7 +202,7 @@
     transition: box-shadow 0.2s ease;
 
     &:hover {
-      box-shadow: 0 0 6px 0 #0000005e;
+      box-shadow: 0 0 3px 0 #0000005c;
     }
 
     &:not(:last-child) {
@@ -248,7 +251,7 @@
     }
 
     &:hover {
-      box-shadow: 0 0 6px 0 #0000005e;
+      box-shadow: 0 0 3px 0 #0000005c;
     }
 
     &.active {

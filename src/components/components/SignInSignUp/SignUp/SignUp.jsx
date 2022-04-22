@@ -7,7 +7,12 @@ import "./SignUp.scss";
 import { ReactComponent as LoginSvg } from "../../../../assets/images/content/login.svg";
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 
-const SignUp = ({ nameIsValid, emailIsValid, passwordIsValid, onSubmit }) => {
+const SignUp = ({
+  nameIsValid,
+  emailIsValid,
+  passwordIsValid,
+  onSubmitHandler,
+}) => {
   const name = useRef();
   const email = useRef();
   const password = useRef();
@@ -16,7 +21,11 @@ const SignUp = ({ nameIsValid, emailIsValid, passwordIsValid, onSubmit }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    onSubmit(name.current.value, email.current.value, password.current.value);
+    onSubmitHandler(
+      name.current.value,
+      email.current.value,
+      password.current.value
+    );
   };
 
   return (
@@ -58,7 +67,7 @@ const SignUp = ({ nameIsValid, emailIsValid, passwordIsValid, onSubmit }) => {
           className={`sign-up__label${!emailIsValid ? " invalid" : ""}`}
           htmlFor="loginEmail"
         >
-          <span>Email</span>
+          <span>{translate("login.email")}</span>
           <input
             ref={email}
             id="loginEmail"

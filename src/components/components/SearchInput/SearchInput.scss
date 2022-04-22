@@ -2,6 +2,7 @@
 @import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .search-input {
+  position: relative;
   margin-right: 24px;
   margin-left: auto;
   width: 100%;
@@ -17,6 +18,16 @@
 
   @include media-breakpoint-down(sm) {
     margin-top: 73px;
+  }
+
+  .tag-list {
+    z-index: 10;
+    top: 68px;
+    left: 45px;
+
+    button {
+      padding: 10px 50px 10px 20px;
+    }
   }
 
   &__label {
@@ -69,6 +80,39 @@
 
     @include media-breakpoint-down(sm) {
       padding: 0 15px 0 50px;
+    }
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__tag {
+    position: relative;
+    display: flex;
+    margin-top: 9px;
+    margin-right: 9px;
+    align-items: center;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 4px 26px 4px 10px;
+    border: 1px solid transparent;
+
+    &:hover {
+      border-color: #65c17e;
+
+      svg {
+        display: block;
+      }
+    }
+
+    svg {
+      position: absolute;
+      right: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: none;
     }
   }
 }

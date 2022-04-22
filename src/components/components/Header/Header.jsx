@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
 import { checklistAPI } from "../../../services/checklistService";
-import PopupLogout from "../PopupLogout/PopupLogout";
+// import PopupLogout from "../PopupLogout/PopupLogout";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
 import SearchInput from "../SearchInput/SearchInput";
@@ -18,7 +18,7 @@ import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerS
 
 const Header = () => {
   const { data: savedChecklist } = checklistAPI.useFetchSavesChecklistsQuery();
-  const [modalShow, setModalShow] = useState(true);
+  // const [modalShow, setModalShow] = useState(true);
   const { ref, show, setShowHandler, setShow } = useClickOutside();
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
   const showAddButtonOnMobile = useMediaQuery("(max-width:767px)");
@@ -137,7 +137,7 @@ const Header = () => {
         </Container>
       </Navbar>
       {showSearchOnMobile && <SearchInput />}
-      <PopupLogout show={modalShow} onHide={() => setModalShow(false)} />
+      {/* <PopupLogout show={modalShow} onHide={() => setModalShow(false)} /> */}
     </header>
   );
 };

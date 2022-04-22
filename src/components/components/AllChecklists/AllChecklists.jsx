@@ -45,6 +45,15 @@ const AllChecklists = () => {
   }, [pathname]);
 
   useEffect(() => {
+    if (!checklists) return;
+    if (checklists.entities.length < 1) {
+      if (value) {
+        setValue((prevState) => prevState - 1);
+      }
+    }
+  }, [checklists]);
+
+  useEffect(() => {
     if (error) navigate("/error");
   }, [error]);
 
@@ -62,6 +71,8 @@ const AllChecklists = () => {
       <LoadingSkeleton />
     </>
   );
+
+  console.log(checklists?.paginate.next_page);
 
   return (
     <div className="container pb-8">

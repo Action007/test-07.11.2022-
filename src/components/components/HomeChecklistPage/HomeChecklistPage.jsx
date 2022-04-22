@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-// import { useParams } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
 import Sidebar from "../Sidebar/Sidebar";
@@ -10,12 +8,12 @@ import SearchInput from "../SearchInput/SearchInput";
 import Checklist from "../Checklist/Checklist";
 import Pagination from "../Pagination/Pagination";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
-import uniqueID from "../../../utils/uniqueID";
+import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 import useMediaQuery from "../../../hooks/useMediaQuery";
+import uniqueID from "../../../utils/uniqueID";
 import "./HomeChecklistPage.scss";
 
 import Logo from "../../../assets/images/content/logo.svg";
-import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 
 const HomeChecklistPage = () => {
   const [pageValue, setPageValue] = useState(1);
@@ -32,15 +30,14 @@ const HomeChecklistPage = () => {
   const onMobile = useMediaQuery("(max-width:1199px)");
   const navigate = useNavigate();
   const { tagID } = useParams();
-  const height = useSelector((state) => state.heightForScrollReducer.height);
 
   useEffect(() => {
     if (!tagID) setTagValue("");
     if (tagID) {
       setTagValue(`&search_tag_ids[]=${tagID}`);
-      setPageValue("");
+      setPageValue(1);
       setSearchValue("");
-      window.scrollTo(0, height + 200);
+      window.scrollTo(0, 0);
     }
   }, [tagID]);
 
@@ -54,6 +51,8 @@ const HomeChecklistPage = () => {
 
   const onSearchHandler = (value) => {
     setSearchValue(`search_value=${value}&`);
+    setPageValue(1);
+    setTagValue("");
   };
 
   const loader = (
@@ -75,7 +74,7 @@ const HomeChecklistPage = () => {
               {!showOnMobile && translate("mainPage.popularQuestion")}
               {showOnMobile && translate("mainPage.search")}
             </h3>
-            <SearchInput searchHandler={onSearchHandler} />
+            <SearchInput searchHandler={onSearchHandler} page="home" />
             {showOnMobile && <Sidebar />}
             {isFetching && loader}
             {checklists && !isFetching

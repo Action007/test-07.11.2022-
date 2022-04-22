@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import ForgotPassword from "./ForgotPassword/ForgotPassword";
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
 import ResetPassword from "./ResetPassword/ResetPassword";
@@ -7,6 +8,7 @@ import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./SignInSignUp.scss";
 
 import { ReactComponent as LoginSvg } from "../../../assets/images/content/login.svg";
+import { ReactComponent as EmailSvg } from "../../../assets/images/icon/sendEmail.svg";
 
 const PopupLogin = () => {
   const [nameIsValid, setNameIsValid] = useState(true);
@@ -39,12 +41,18 @@ const PopupLogin = () => {
     setPasswordIsValid(validPassword);
   };
 
-  const resetHandler = (password, passwordCopy) => {
+  const resetPasswordHandler = (password, passwordCopy) => {
     const isValid =
       password.trim() !== "" &&
       password === passwordCopy &&
       password.length > 7;
     setPasswordIsValid(isValid);
+  };
+
+  const sendEmailForResetPasswordHandler = (email) => {
+    const validEmail = !!validateEmail(email);
+
+    setEmailIsValid(validEmail);
   };
 
   return (
@@ -54,7 +62,7 @@ const PopupLogin = () => {
           <SignIn
             emailIsValid={emailIsValid}
             passwordIsValid={passwordIsValid}
-            onSubmit={submitHandler}
+            onSubmitHandler={submitHandler}
           />
         )}
         {pathname === "/sign-up" && (
@@ -62,18 +70,29 @@ const PopupLogin = () => {
             nameIsValid={nameIsValid}
             emailIsValid={emailIsValid}
             passwordIsValid={passwordIsValid}
-            onSubmit={submitHandler}
+            onSubmitHandler={submitHandler}
+          />
+        )}
+        {pathname === "/sign-in/reset-password" && (
+          <ResetPassword
+            passwordIsValid={passwordIsValid}
+            onSubmitHandler={resetPasswordHandler}
           />
         )}
         {pathname === "/sign-in/reset" && (
-          <ResetPassword
-            passwordIsValid={passwordIsValid}
-            onSubmit={resetHandler}
+          <ForgotPassword
+            onSubmitHandler={sendEmailForResetPasswordHandler}
+            emailIsValid={emailIsValid}
           />
         )}
-        {!showOnMobile && (
+        {!showOnMobile && pathname !== "/sign-in/reset" && (
           <div className="sign__img">
             <LoginSvg />
+          </div>
+        )}
+        {!showOnMobile && pathname === "/sign-in/reset" && (
+          <div className="sign__image">
+            <EmailSvg />
           </div>
         )}
       </div>

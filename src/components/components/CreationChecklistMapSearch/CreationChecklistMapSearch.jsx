@@ -32,7 +32,10 @@ const CreationChecklistMapSearch = ({ id }) => {
       .on("markgeocode", (e) => {
         const { lat, lng } = e.geocode.center;
         dispatch(
-          createChecklistActions.addCoordinate({ id, latLng: { lat, lng } })
+          createChecklistActions.addCoordinate({
+            id,
+            latLng: { lat, lon: lng },
+          })
         );
         map.flyTo({ lat, lng }, map.getZoom());
       })

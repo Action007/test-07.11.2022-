@@ -21,7 +21,7 @@ const AddMarkerToMap = ({ coordinates, id, creation }) => {
       const { lat, lng } = e.latlng;
       map.flyTo(e.latlng, map.getZoom());
       dispatch(
-        createChecklistActions.addCoordinate({ id, latLng: { lat, lng } })
+        createChecklistActions.addCoordinate({ id, latLng: { lat, lon: lng } })
       );
     },
   });

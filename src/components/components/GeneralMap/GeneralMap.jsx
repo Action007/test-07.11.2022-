@@ -13,7 +13,7 @@ import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-
 
 const GeneralMap = ({
   setShowMap,
-  coordinates = { lat: 51.505, lng: -0.09 },
+  coordinates = { lat: 51.505, lon: -0.09 },
   popup = false,
   creation = false,
   id,

@@ -76,10 +76,11 @@ const routes = [
   { id: 22, path: "/sign-in", element: <SignInSignUpPage /> },
   { id: 23, path: "/sign-up", element: <SignInSignUpPage /> },
   { id: 24, path: "/sign-in/reset", element: <SignInSignUpPage /> },
-  { id: 25, path: "/", element: <Navigate to="/home" /> },
-  { id: 26, path: "/*", element: <NotFoundPage /> },
-  { id: 27, path: "/not-found", element: <NotFoundPage /> },
-  { id: 27, path: "/error", element: <ServerErrorPage /> },
+  { id: 25, path: "/sign-in/reset-password", element: <SignInSignUpPage /> },
+  { id: 26, path: "/", element: <Navigate to="/home" /> },
+  { id: 27, path: "/*", element: <NotFoundPage /> },
+  { id: 28, path: "/not-found", element: <NotFoundPage /> },
+  { id: 29, path: "/error", element: <ServerErrorPage /> },
 ];
 
 export default routes;

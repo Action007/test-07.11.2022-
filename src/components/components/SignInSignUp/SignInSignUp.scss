@@ -31,11 +31,23 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 465px;
-
+    
     svg {
       width: 100%;
       max-width: 465px;
+    }
+  }
+
+  
+  &__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+    svg {
+      max-width: 258px;
+      width: 100%;
     }
   }
 }

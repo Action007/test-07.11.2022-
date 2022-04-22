@@ -8,7 +8,7 @@ import { ReactComponent as LoginSvg } from "../../../../assets/images/content/lo
 import { ReactComponent as ArrowSvg } from "../../../../assets/images/icon/rightArrow.svg";
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 
-const ResetPassword = ({ passwordIsValid, onSubmit }) => {
+const ResetPassword = ({ passwordIsValid, onSubmitHandler }) => {
   const password = useRef();
   const passwordCopy = useRef();
   const { t: translate } = useTranslation();
@@ -16,7 +16,7 @@ const ResetPassword = ({ passwordIsValid, onSubmit }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    onSubmit(password.current.value, passwordCopy.current.value);
+    onSubmitHandler(password.current.value, passwordCopy.current.value);
   };
 
   return (

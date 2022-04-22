@@ -8,7 +8,7 @@ import { ReactComponent as LoginSvg } from "../../../../assets/images/content/lo
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 import { ReactComponent as GoogleSvg } from "../../../../assets/images/icon/google.svg";
 
-const SignIn = ({ emailIsValid, passwordIsValid, onSubmit }) => {
+const SignIn = ({ emailIsValid, passwordIsValid, onSubmitHandler }) => {
   const email = useRef();
   const password = useRef();
   const { t: translate } = useTranslation();
@@ -16,7 +16,7 @@ const SignIn = ({ emailIsValid, passwordIsValid, onSubmit }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    onSubmit("", email.current.value, password.current.value);
+    onSubmitHandler("", email.current.value, password.current.value);
   };
 
   return (
@@ -40,7 +40,7 @@ const SignIn = ({ emailIsValid, passwordIsValid, onSubmit }) => {
           className={`sign-in__label${!emailIsValid ? " invalid" : ""}`}
           htmlFor="loginEmail"
         >
-          <span>Email</span>
+          <span>{translate("login.email")}</span>
           <input
             ref={email}
             id="loginEmail"
