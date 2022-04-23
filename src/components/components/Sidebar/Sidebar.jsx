@@ -130,7 +130,7 @@ const Sidebar = () => {
           {item.type === "popular" && (
             <button
               onClick={() => setActive(item.id)}
-              className="sidebar__popular active"
+              className="sidebar__popular hot"
               type="button"
             >
               {item.svg && item.svg}
