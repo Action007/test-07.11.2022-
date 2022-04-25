@@ -79,11 +79,7 @@ const HomeChecklistPage = () => {
             {isFetching && loader}
             {checklists && !isFetching
               ? checklists.entities.map((checklist) => (
-                  <Checklist
-                    key={uniqueID()}
-                    checklist={checklist}
-                    translate={translate("allChecklistsPage.showMore")}
-                  />
+                  <Checklist key={uniqueID()} checklist={checklist} />
                 ))
               : ""}
             {checklists?.entities.length === 0 && (

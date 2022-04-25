@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
-import { checklistAPI } from "../../../services/checklistService";
 // import PopupLogout from "../PopupLogout/PopupLogout";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
@@ -17,7 +16,6 @@ import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark
 import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerSvg.svg";
 
 const Header = () => {
-  const { data: savedChecklist } = checklistAPI.useFetchSavesChecklistsQuery();
   // const [modalShow, setModalShow] = useState(true);
   const { ref, show, setShowHandler, setShow } = useClickOutside();
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
@@ -70,13 +68,7 @@ const Header = () => {
               type="button"
             >
               <BurgerSvg />
-              {savedChecklist && savedChecklist.entities.length ? (
-                <span className="header__span">
-                  {savedChecklist.entities.length}
-                </span>
-              ) : (
-                ""
-              )}
+              <span className="header__span">17</span>
             </button>
           )}
           {showAddButtonOnMobile && (
@@ -111,13 +103,7 @@ const Header = () => {
                     type="button"
                   >
                     <Bookmark />
-                    {savedChecklist && savedChecklist.entities.length ? (
-                      <span className="header__span">
-                        {savedChecklist.entities.length}
-                      </span>
-                    ) : (
-                      ""
-                    )}
+                    <span className="header__span">17</span>
                   </button>
                 </>
               )}

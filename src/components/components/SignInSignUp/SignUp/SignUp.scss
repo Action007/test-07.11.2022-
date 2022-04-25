@@ -3,7 +3,7 @@
 
 .sign-up {
   height: 780px;
-  padding: 43px 37px 0 43px;
+  padding: 43px 37px 0 37px;
   width: 100%;
   max-width: 585px;
 
@@ -68,14 +68,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 465px;
+    width: 100%;
 
     @include media-breakpoint-down(lg) {
-      margin: 40px 0;
+      margin: 40px auto;
+    }
+
+    @include media-breakpoint-down(sm) {
+      max-width: 165px;
+      height: 168px;
+      margin: 45px auto;
     }
 
     svg {
-      width: 80%;
-      height: 80%;
+      width: 100%;
     }
   }
 

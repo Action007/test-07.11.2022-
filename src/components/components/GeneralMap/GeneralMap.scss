@@ -20,8 +20,11 @@
   }
 
   &__del {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     right: 10px;
-    top: 55px;
+    top: 90px;
 
     svg {
       width: 18px;
@@ -127,7 +130,7 @@
     color: $primary;
   }
 
-  .leaflet-pane.leaflet-map-pane  {
+  .leaflet-pane.leaflet-map-pane {
     .leaflet-tile-pane {
       filter: grayscale(100%) brightness(110%) opacity(50%);
     }

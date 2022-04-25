@@ -5,7 +5,6 @@ import { CSSTransition } from "react-transition-group";
 import Modal from "react-bootstrap/Modal";
 import { checklistAPI } from "../../../services/checklistService";
 import Complain from "../Complain/Complain";
-import ComplainDropdown from "../ComplainDropdown/ComplainDropdown";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
 import uniqueID from "../../../utils/uniqueID";
 import getTime from "../../../utils/getTime";
@@ -16,6 +15,7 @@ import { ReactComponent as RightArrow } from "../../../assets/images/icon/arrow.
 import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg";
 import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
+import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
 const ChecklistDetail = ({ checklists, detailPage = false, preview }) => {
   const {
@@ -95,7 +95,16 @@ const ChecklistDetail = ({ checklists, detailPage = false, preview }) => {
                 >
                   <Bookmark />
                 </button>
-                <ComplainDropdown setShowComplain={setShowComplain} />
+                <div className="complain-dropdown SFPro-500">
+                  <button
+                    onClick={() => setShowComplain(true)}
+                    className="complain-dropdown__info"
+                    type="button"
+                  >
+                    <InfoSvg />
+                  </button>
+                  <span className="complain-dropdown__desc">Complain</span>
+                </div>
               </div>
             )}
           </div>
@@ -119,7 +128,7 @@ const ChecklistDetail = ({ checklists, detailPage = false, preview }) => {
               key={uniqueID()}
               type="button"
             >
-              {tag.name}
+              #{tag.name}
             </button>
           ))}
         </div>

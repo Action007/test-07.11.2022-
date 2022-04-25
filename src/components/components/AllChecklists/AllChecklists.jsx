@@ -72,8 +72,6 @@ const AllChecklists = () => {
     </>
   );
 
-  console.log(checklists?.paginate.next_page);
-
   return (
     <div className="container pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
@@ -88,7 +86,6 @@ const AllChecklists = () => {
             <Checklist
               key={checklist.id}
               checklist={checklist}
-              translate={translate("allChecklistsPage.showMore")}
               created={category === "created"}
             />
           ))

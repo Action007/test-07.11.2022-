@@ -67,7 +67,7 @@ ul {
 }
 
 ol {
-  padding-left: 14px;
+  padding-left: 16px;
 }
 
 a {
@@ -179,5 +179,46 @@ p {
     background-color: #fff;
     color: $primary;
     border-color: $primary;
+  }
+}
+
+.complain-dropdown {
+  position: relative;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 8px;
+
+    &:active {
+      background-color: #e6e6e6;
+    }
+
+    &:hover + .complain-dropdown__desc {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &__desc {
+    position: absolute;
+    transform: translateX(28%);
+    right: -50%;
+    top: 35px;
+    z-index: 10;
+    overflow: hidden;
+    border-radius: 8px;
+    color: #4f4f4f;
+    background-color: #fff;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 4%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+    display: flex;
+    align-items: center;
+    padding: 4px 22px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 }

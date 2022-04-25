@@ -64,14 +64,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 465px;
+    width: 100%;
 
     @include media-breakpoint-down(lg) {
-      margin: 40px 0;
+      margin: 40px auto;
+    }
+
+    @include media-breakpoint-down(sm) {
+      max-width: 165px;
+      height: 168px;
+      margin: 45px auto;
     }
 
     svg {
-      width: 80%;
-      height: 80%;
+      width: 100%;
     }
   }
 
@@ -162,9 +169,10 @@
       left: 0;
       top: 50%;
       width: 43%;
-      height: 0.1px;
-      background-color: #4f4f4f8a;
+      height: 1px;
+      background-color: #000;
       transform: translateY(-50%);
+      opacity: 0.5;
     }
 
     &::after {
@@ -173,9 +181,10 @@
       right: 0;
       top: 50%;
       width: 43%;
-      height: 0.1px;
-      background-color: #4f4f4f8a;
+      height: 1px;
+      background-color: #000;
       transform: translateY(-50%);
+      opacity: 0.5;
     }
   }
 

@@ -9,21 +9,16 @@ import ChecklistItem from "../ChecklistItem/ChecklistItem";
 import EditDropdown from "../EditDropdown/EditDropdown";
 import uniqueID from "../../../utils/uniqueID";
 import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
-import ComplainDropdown from "../ComplainDropdown/ComplainDropdown";
 import Complain from "../Complain/Complain";
 import "./Checklist.scss";
 
-import { ReactComponent as RightArrow } from "../../../assets/images/icon/rightArrow.svg";
 import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg";
 import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
+import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
+import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
-const Checklist = ({
-  checklist,
-  translate,
-  created = false,
-  active = false,
-}) => {
+const Checklist = ({ checklist, created = false, active = false }) => {
   const {
     id,
     checklist_items,
@@ -93,7 +88,11 @@ const Checklist = ({
 
   const head = (
     <>
-      <h3 className="checklist__title SFPro-700">{name}</h3>
+      <h3 className="checklist__title SFPro-700">
+        <button onClick={() => navigate(`/list/${id}/${slug}`)} type="button">
+          {name}
+        </button>
+      </h3>
       <div className="checklist__head">
         {showOnMobile && time}
         {!created && (
@@ -101,7 +100,16 @@ const Checklist = ({
             <button onClick={saveHandler} className={savedClass} type="button">
               <Bookmark />
             </button>
-            <ComplainDropdown setShowComplain={setShowComplain} />
+            <div className="complain-dropdown SFPro-500">
+              <button
+                onClick={() => setShowComplain(true)}
+                className="complain-dropdown__info"
+                type="button"
+              >
+                <InfoSvg />
+              </button>
+              <span className="complain-dropdown__desc">Complain</span>
+            </div>
           </div>
         )}
       </div>
@@ -133,6 +141,13 @@ const Checklist = ({
                 />
               ))}
         </ol>
+        <button
+          onClick={() => navigate(`/list/${id}/${slug}`)}
+          className="checklist__dots SFPro-600"
+          type="button"
+        >
+          <DotsSvg />
+        </button>
         <div className="checklist__tags">
           {tags.map((tag) => (
             <button
@@ -141,36 +156,26 @@ const Checklist = ({
               key={uniqueID()}
               type="button"
             >
-              {tag.name}
+              #{tag.name}
             </button>
           ))}
         </div>
-        <div className="checklist__wrap">
-          <button
-            onClick={() => navigate(`/list/${id}/${slug}`)}
-            className="checklist__button SFPro-600"
-            type="button"
-          >
-            <span>{translate}</span>
-            <RightArrow />
-          </button>
-          <div className="checklist__box">
-            <div className="checklist__inner">
-              <span
-                className={`${`checklist__viewed SFPro-700`} ${
-                  viewed ? "active" : ""
-                }`}
-              >
-                <ViewSvg />
-                <span>{viewed}</span>
-              </span>
-              <button onClick={likeHandler} className={likeClass} type="button">
-                <LikeSvg />
-                <span>{iLiked.mount}</span>
-              </button>
-            </div>
-            {!showOnMobile && time}
+        <div className="checklist__box">
+          <div className="checklist__inner">
+            <span
+              className={`${`checklist__viewed SFPro-700`} ${
+                viewed ? "active" : ""
+              }`}
+            >
+              <ViewSvg />
+              <span>{viewed}</span>
+            </span>
+            <button onClick={likeHandler} className={likeClass} type="button">
+              <LikeSvg />
+              <span>{iLiked.mount}</span>
+            </button>
           </div>
+          {!showOnMobile && time}
         </div>
       </div>
       <CSSTransition in={showComplain} timeout={300} unmountOnExit>

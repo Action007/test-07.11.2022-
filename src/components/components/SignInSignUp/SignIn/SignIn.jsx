@@ -83,7 +83,7 @@ const SignIn = ({ emailIsValid, passwordIsValid, onSubmitHandler }) => {
         <GoogleSvg />
         {translate("login.google")}
       </button>
-      <Link to="reset" className="sign-in__btn SFPro-500">
+      <Link to="reset" className="sign-in__btn">
         {translate("login.forgot")}
       </Link>
     </div>
