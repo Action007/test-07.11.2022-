@@ -19,7 +19,8 @@ const HomeChecklistPage = () => {
   const [pageValue, setPageValue] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [tagValue, setTagValue] = useState("");
-  const url = `/api/v1/checklists_auth?${searchValue}page=${pageValue}&per_page=3${tagValue}`;
+  const [categoryValue, setCategoryValue] = useState("");
+  const url = `/checklists_auth?${searchValue}page=${pageValue}&per_page=3${tagValue}${categoryValue}`;
   const {
     data: checklists,
     error,
@@ -30,6 +31,17 @@ const HomeChecklistPage = () => {
   const onMobile = useMediaQuery("(max-width:1199px)");
   const navigate = useNavigate();
   const { tagID } = useParams();
+
+  // should be category ids
+  useEffect(() => {
+    if (!tagID) setTagValue("");
+    if (tagID) {
+      setCategoryValue(`&search_category_ids[]=${tagID}`);
+      setPageValue(1);
+      setSearchValue("");
+      window.scrollTo(0, 0);
+    }
+  }, [tagID]);
 
   useEffect(() => {
     if (!tagID) setTagValue("");

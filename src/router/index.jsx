@@ -1,5 +1,4 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 
 const TermsOfUsePage = React.lazy(() => import("../pages/TermsOfUsePage"));
 const OurMissionPage = React.lazy(() => import("../pages/OurMissionPage"));
@@ -37,8 +36,8 @@ const EditChecklistPage = React.lazy(() =>
 const ServerErrorPage = React.lazy(() => import("../pages/ServerErrorPage"));
 
 const routes = [
-  { id: 1, path: "/home", element: <HomePage /> },
-  { id: 3, path: "/home/tags/:tagID", element: <HomePage /> },
+  { id: 1, path: "/", element: <HomePage /> },
+  { id: 3, path: "/tags:tagID", element: <HomePage /> },
   { id: 4, path: "/our-mission", element: <OurMissionPage /> },
   { id: 5, path: "/terms-of-use", element: <TermsOfUsePage /> },
   { id: 6, path: "/privacy-policy", element: <PrivacyPolicyPage /> },
@@ -77,10 +76,10 @@ const routes = [
   { id: 23, path: "/sign-up", element: <SignInSignUpPage /> },
   { id: 24, path: "/sign-in/reset", element: <SignInSignUpPage /> },
   { id: 25, path: "/sign-in/reset-password", element: <SignInSignUpPage /> },
-  { id: 26, path: "/", element: <Navigate to="/home" /> },
-  { id: 27, path: "/*", element: <NotFoundPage /> },
-  { id: 28, path: "/not-found", element: <NotFoundPage /> },
-  { id: 29, path: "/error", element: <ServerErrorPage /> },
+  { id: 26, path: "/*", element: <NotFoundPage /> },
+  { id: 27, path: "/not-found", element: <NotFoundPage /> },
+  { id: 28, path: "/error", element: <ServerErrorPage /> },
+  { id: 29, path: "error", element: <ServerErrorPage /> },
 ];
 
 export default routes;

@@ -17,7 +17,11 @@ import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg"
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
-const ChecklistDetail = ({ checklists, detailPage = false, preview }) => {
+const ChecklistDetail = ({
+  checklists,
+  detailPage = false,
+  preview = false,
+}) => {
   const {
     id,
     checklist_items,
@@ -120,41 +124,56 @@ const ChecklistDetail = ({ checklists, detailPage = false, preview }) => {
             />
           ))}
         </ol>
-        <div className="checklist-detail__tags">
-          {tags.map((tag) => (
+        <div className={`checklist-detail__tags${preview ? " preview" : ""}`}>
+          {tags.map((tag) =>
+            !preview ? (
+              <button
+                onClick={() => navigate(`/tags/${tag.id}`)}
+                className="checklist-detail__tag"
+                key={uniqueID()}
+                type="button"
+              >
+                #{tag.name}
+              </button>
+            ) : (
+              <div className="checklist-detail__tag" key={uniqueID()}>
+                #{tag.name}
+              </div>
+            )
+          )}
+        </div>
+        {!preview && (
+          <div className="checklist-detail__wrap">
             <button
-              onClick={() => navigate(`/home/tags/${tag.id}`)}
-              className="checklist__tag"
-              key={uniqueID()}
+              className="checklist-detail__button SFPro-600"
               type="button"
             >
-              #{tag.name}
+              <span>{translate("checklistReviewPage.button")}</span>
+              <RightArrow />
             </button>
-          ))}
-        </div>
-        <div className="checklist-detail__wrap">
-          <button className="checklist-detail__button SFPro-600" type="button">
-            <span>{translate("checklistReviewPage.button")}</span>
-            <RightArrow />
-          </button>
-          <div className="checklist-detail__box">
-            <div className="checklist-detail__inner">
-              <span
-                className={`${`checklist-detail__viewed SFPro-700`} ${
-                  viewed ? "active" : ""
-                }`}
-              >
-                <ViewSvg />
-                <span>{viewed}</span>
-              </span>
-              <button onClick={likeHandler} className={likeClass} type="button">
-                <LikeSvg />
-                <span>{iLiked.mount}</span>
-              </button>
+            <div className="checklist-detail__box">
+              <div className="checklist-detail__inner">
+                <span
+                  className={`${`checklist-detail__viewed SFPro-700`} ${
+                    viewed ? "active" : ""
+                  }`}
+                >
+                  <ViewSvg />
+                  <span>{viewed}</span>
+                </span>
+                <button
+                  onClick={likeHandler}
+                  className={likeClass}
+                  type="button"
+                >
+                  <LikeSvg />
+                  <span>{iLiked.mount}</span>
+                </button>
+              </div>
+              {!showOnMobile && time}
             </div>
-            {!showOnMobile && time}
           </div>
-        </div>
+        )}
       </div>
       <CSSTransition in={showComplain} timeout={300} unmountOnExit>
         <Modal

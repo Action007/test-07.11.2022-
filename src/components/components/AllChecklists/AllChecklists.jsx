@@ -13,7 +13,7 @@ import Tabs from "../Tabs/Tabs";
 const AllChecklists = () => {
   const [value, setValue] = useState(1);
   const [category, setCategory] = useState("created");
-  const url = `/api/v1/checklists_auth?search_type=${category}&page=${value}&per_page=10`;
+  const url = `/checklists_auth?search_type=${category}&page=${value}&per_page=10`;
   const {
     data: checklists,
     error,
@@ -73,7 +73,7 @@ const AllChecklists = () => {
   );
 
   return (
-    <div className="container pb-8">
+    <div className="container container-breadcrumb pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrap">
         <h2 className="title--margin display-4 text-center SFPro-600">

@@ -13,8 +13,9 @@ import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag
 
 const CreationTags = ({ tagsValid, setTagsValid }) => {
   const [url, setUrl] = useState(null);
+  const [validTagValue, setValidTagValue] = useState("");
   const { data: serverTags } = checklistAPI.useFetchChecklistQuery(
-    `/api/v1/tags/search?value=${url}`
+    `/tags/search?value=${url}`
   );
   const [tags, setTags] = useState(serverTags);
   const [addTags, setAddTags] = useState(false);
@@ -26,15 +27,16 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
 
   const searchTagsHandler = (value) => {
     if (value.trim() === "") {
-      setUrl(uniqueID());
+      setUrl("");
     } else {
-      setUrl(value);
+      if (serverTags.length) setUrl(value);
+      if (validTagValue === value) setUrl(value);
     }
   };
 
   const setAddTagsHandler = () => {
     setAddTags((prevState) => !prevState);
-    setUrl(uniqueID());
+    setUrl("");
   };
 
   const addTagHandler = (tag) => {
@@ -80,6 +82,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   }, [show]);
 
   useEffect(() => {
+    if (serverTags && serverTags.length) setValidTagValue(url);
     if (!serverTags) return;
 
     setTags(

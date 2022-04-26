@@ -35,7 +35,7 @@ const PopupCreateDone = ({ show, onHide, preview = false }) => {
                 : translate("popupDone.text")}
             </p>
             {preview ? (
-              <Link className="create-done__btn SFPro-500" to="/home">
+              <Link className="create-done__btn SFPro-500" to="/">
                 {translate("creationOfChecklist.popupButton")}
               </Link>
             ) : (

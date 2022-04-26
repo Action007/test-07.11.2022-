@@ -14,7 +14,7 @@ const Contacts = () => {
   const breadcrumbs = [{ title: translate("contactsPage.title") }];
 
   const title = (
-    <h2 className="title SFPro-600 display-4 mb-5 text-center">
+    <h2 className="title SFPro-600 display-4 text-center mb-3 mb-md-5">
       {translate("contactsPage.title")}
     </h2>
   );

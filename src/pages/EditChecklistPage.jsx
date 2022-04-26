@@ -14,7 +14,7 @@ const CreationOfChecklistPage = () => {
     // eslint-disable-next-line no-unused-vars
     error,
     isLoading,
-  } = checklistAPI.useFetchChecklistQuery(`/api/v1/checklists_auth/${id}`);
+  } = checklistAPI.useFetchChecklistQuery(`/checklists_auth/${id}`);
 
   useEffect(() => {
     if (!id) return;

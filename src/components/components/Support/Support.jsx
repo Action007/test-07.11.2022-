@@ -15,8 +15,8 @@ const Support = () => {
 
   return (
     <div className="container support pb-8">
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrapper">
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
         <h2 className="mb-6 display-4 text-center SFPro-600">
           {translate("supportPage.title")}
         </h2>

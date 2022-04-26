@@ -11,8 +11,12 @@ export const checklistAPI = createApi({
   tagTypes: ["Checklist"],
   endpoints: (build) => ({
     fetchChecklist: build.query({
-      query: (url) => url,
+      query: (url) => `/api/v1${url}`,
       providesTags: () => ["Checklist"],
+    }),
+    fetchTagsChecklist: build.query({
+      query: (url) => `/api/v1/tags/search?value=${url}`,
+      providesTags: () => ["Tags"],
     }),
     fetchSavesChecklists: build.query({
       query: () => ({

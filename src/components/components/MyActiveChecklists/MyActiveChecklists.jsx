@@ -13,7 +13,7 @@ const MyActiveChecklists = () => {
   const [value, setValue] = useState(1);
   const [category, setCategory] = useState("active");
   const { t: translate } = useTranslation();
-  const url = `/api/v1/checklists_auth?page=${value}&per_page=10`;
+  const url = `/checklists_auth?page=${value}&per_page=10`;
   const {
     data: checklists,
     error,
@@ -57,7 +57,7 @@ const MyActiveChecklists = () => {
   );
 
   return (
-    <div className="container pb-8">
+    <div className="container container-breadcrumb pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="container-wrap">
         <h2 className="title--margin display-4 text-center SFPro-600">

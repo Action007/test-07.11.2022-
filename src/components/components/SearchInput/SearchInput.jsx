@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useClickOutside from "../../../hooks/useClickOutside";
 import { checklistAPI } from "../../../services/checklistService";
-import uniqueID from "../../../utils/uniqueID";
 import TagListSearch from "../TagListSearch/TagListSearch";
 import "./SearchInput.scss";
 
@@ -11,14 +10,15 @@ const SearchInput = ({ page = false, searchHandler }) => {
   const [blur, setBlur] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [myTags, setMyTags] = useState([]);
+  const [validTagValue, setValidTagValue] = useState("");
   const [url, setUrl] = useState(null);
-  const { data: serverTags } = checklistAPI.useFetchChecklistQuery(
-    `/api/v1/tags/search?value=${url}`
-  );
+  const { data: serverTags } = checklistAPI.useFetchTagsChecklistQuery(url);
+
   const { ref, show, setShow } = useClickOutside();
   const [tags, setTags] = useState(serverTags);
 
   useEffect(() => {
+    if (serverTags && serverTags.length) setValidTagValue(url);
     if (!serverTags) return;
 
     setTags(
@@ -33,16 +33,17 @@ const SearchInput = ({ page = false, searchHandler }) => {
     if (!tag || !tag.name.trim()) return;
 
     setMyTags([...myTags, tag]);
-    setUrl(uniqueID());
+    setUrl("");
     setShow(false);
     setSearchValue("");
   };
 
   const searchTagsHandler = (value) => {
     if (value.trim() === "") {
-      setUrl(uniqueID());
+      setUrl("");
     } else {
-      setUrl(value);
+      if (serverTags.length) setUrl(value);
+      if (validTagValue === value) setUrl(value);
     }
   };
 
@@ -62,6 +63,11 @@ const SearchInput = ({ page = false, searchHandler }) => {
     setMyTags(myTags.filter((tag) => tag.id !== id));
   };
 
+  const onFocusHandler = () => {
+    setShow(true);
+    setBlur((prevState) => !prevState);
+  };
+
   return (
     <form
       onSubmit={(e) => onSubmitHandler(e)}
@@ -77,10 +83,7 @@ const SearchInput = ({ page = false, searchHandler }) => {
             setSearchValue(e.target.value);
             searchTagsHandler(e.target.value);
           }}
-          onFocus={() => {
-            setShow(true);
-            setBlur((prevState) => !prevState);
-          }}
+          onFocus={onFocusHandler}
           onBlur={() => setBlur((prevState) => !prevState)}
           value={searchValue}
           className="search-input__input border-0"

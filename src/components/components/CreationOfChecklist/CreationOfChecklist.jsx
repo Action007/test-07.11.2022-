@@ -43,7 +43,7 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
     (state) => state.createChecklistReducer.title.isValid
   );
   const tags = useSelector((state) => state.createChecklistReducer.tags);
-  const category = useSelector(
+  const categoryID = useSelector(
     (state) => state.createChecklistReducer.category
   );
   const dispatch = useDispatch();
@@ -73,10 +73,10 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
       !checklistIsEmpty &&
       titleIsValid &&
       tagsIsValid &&
-      category;
+      categoryID;
 
     setValidButton(!!validOrNot);
-  }, [tags, title, checklist_items, category]);
+  }, [tags, title, checklist_items, categoryID]);
 
   useEffect(() => {
     if (successCreate || successUpdate) {
@@ -99,7 +99,7 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
     );
     // eslint-disable-next-line no-shadow
     const titleIsValid = title.trim().length !== 0 && title.trim().length < 150;
-    const categoryIsValid = category !== "" && category !== false;
+    const categoryIsValid = categoryID !== "" && categoryID !== false;
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
       dispatch(createChecklistActions.addChecklist());
@@ -130,7 +130,7 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
     setPreview(true);
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     if (!checkValidHandler(e)) return;
     let checklistBody = {};
     const tags_new = [];
@@ -164,6 +164,7 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
           tag_ids,
           tags_new,
           checklist_items_attributes,
+          category_ids: [categoryID],
           id,
         };
       } else if (tags_new.length) {
@@ -171,6 +172,7 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
           name: title,
           tags_new,
           checklist_items_attributes,
+          category_ids: [categoryID],
           id,
         };
       } else if (tag_ids.length) {
@@ -178,6 +180,7 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
           name: title,
           tag_ids,
           checklist_items_attributes,
+          category_ids: [categoryID],
           id,
         };
       }
@@ -188,24 +191,29 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
           tag_ids,
           tags_new,
           checklist_items_attributes,
+          category_ids: [categoryID],
         };
       } else if (tags_new.length) {
         checklistBody = {
           name: title,
           tags_new,
           checklist_items_attributes,
+          category_ids: [categoryID],
         };
       } else if (tag_ids.length) {
         checklistBody = {
           name: title,
           tag_ids,
           checklist_items_attributes,
+          category_ids: [categoryID],
         };
       }
     }
 
-    if (!edit) createChecklist(checklistBody);
-    if (edit) updateChecklist(checklistBody);
+    console.log(checklistBody);
+
+    if (!edit) await createChecklist(checklistBody);
+    if (edit) await updateChecklist(checklistBody);
   };
 
   return (

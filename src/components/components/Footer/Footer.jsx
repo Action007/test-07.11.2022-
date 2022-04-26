@@ -17,7 +17,7 @@ const Footer = () => {
       <nav className="footer__nav">
         <ul className="footer__items mb-0">
           <li className="footer__item">
-            <Link to="/home">{translate("home")}</Link>
+            <Link to="/">{translate("home")}</Link>
           </li>
           <li className="footer__item">
             <Link to="support">{translate("supportPage.title")}</Link>

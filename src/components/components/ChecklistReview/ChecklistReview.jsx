@@ -107,7 +107,7 @@ const ChecklistReview = () => {
     data: checklists,
     error,
     isLoading,
-  } = checklistAPI.useFetchChecklistQuery(`/api/v1/checklists_auth/${id}`);
+  } = checklistAPI.useFetchChecklistQuery(`/checklists_auth/${id}`);
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklistReviewPage.title") }];
 

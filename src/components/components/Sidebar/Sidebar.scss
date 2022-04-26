@@ -113,7 +113,7 @@
     text-align: left;
     margin-bottom: 3px;
     color: $warning;
-    transition: transform 0.09s ease, background-color 0.1s ease;
+    transition: transform 0.09s ease, background-color 0.15s ease;
 
     @include media-breakpoint-down(sm) {
       padding: 9px 16px;
@@ -138,7 +138,7 @@
     &.hot {
       color: #fff;
       background-color: $warning;
-      transition: transform 0.09s ease, background-color 0.1s ease;
+      transition: transform 0.09s ease, background-color 0.15s ease;
 
       svg {
         stroke: #fff;

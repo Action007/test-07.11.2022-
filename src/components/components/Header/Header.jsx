@@ -49,7 +49,7 @@ const Header = () => {
           fluid
         >
           <button
-            onClick={() => onClickHandler("/home")}
+            onClick={() => onClickHandler("/")}
             className="header__logo"
             type="button"
           >
