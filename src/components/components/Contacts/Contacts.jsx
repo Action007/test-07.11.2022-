@@ -23,7 +23,7 @@ const Contacts = () => {
     <div className="container contacts pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {showTitleOnMobile && title}
-      <div className="contacts__wrapper d-flex justify-content-around align-items-center">
+      <div className="contacts__wrapper d-flex justify-content-between align-items-center">
         <div className="d-flex flex-column text-center">
           {!showTitleOnMobile && title}
           <h3 className="SFPro-700 display-7 mb-4">

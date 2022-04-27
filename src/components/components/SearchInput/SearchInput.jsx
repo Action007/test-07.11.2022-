@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from "react";
-import useClickOutside from "../../../hooks/useClickOutside";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
+import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
+import useClickOutside from "../../../hooks/useClickOutside";
 import TagListSearch from "../TagListSearch/TagListSearch";
 import "./SearchInput.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
 
-const SearchInput = ({ page = false, searchHandler }) => {
+const SearchInput = ({ page = false }) => {
   const [blur, setBlur] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [myTags, setMyTags] = useState([]);
   const [validTagValue, setValidTagValue] = useState("");
   const [url, setUrl] = useState(null);
   const { data: serverTags } = checklistAPI.useFetchTagsChecklistQuery(url);
-
   const { ref, show, setShow } = useClickOutside();
   const [tags, setTags] = useState(serverTags);
+  const pageValue = useSelector(
+    (state) => state.navigationChecklistReducer.pageValue
+  );
+  const categoryValue = useSelector(
+    (state) => state.navigationChecklistReducer.categoryValue
+  );
+  const tagValue = useSelector(
+    (state) => state.navigationChecklistReducer.tagValue
+  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (serverTags && serverTags.length) setValidTagValue(url);
@@ -56,7 +69,11 @@ const SearchInput = ({ page = false, searchHandler }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const value = searchValue.trim();
-    searchHandler(value);
+
+    dispatch(navigationChecklistActions.setSearchValue(value));
+    navigate(
+      `/?search_value=${value}&page=${pageValue}&per_page=3${tagValue}${categoryValue}`
+    );
   };
 
   const removeTagHandler = (id) => {

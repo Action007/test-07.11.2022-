@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
-import Sidebar from "../Sidebar/Sidebar";
+import CategorySidebar from "../CategorySidebar/CategorySidebar";
 import SearchInput from "../SearchInput/SearchInput";
 import Checklist from "../Checklist/Checklist";
 import Pagination from "../Pagination/Pagination";
@@ -16,56 +16,27 @@ import "./HomeChecklistPage.scss";
 import Logo from "../../../assets/images/content/logo.svg";
 
 const HomeChecklistPage = () => {
-  const [pageValue, setPageValue] = useState(1);
-  const [searchValue, setSearchValue] = useState("");
-  const [tagValue, setTagValue] = useState("");
-  const [categoryValue, setCategoryValue] = useState("");
-  const url = `/checklists_auth?${searchValue}page=${pageValue}&per_page=3${tagValue}${categoryValue}`;
-  const {
-    data: checklists,
-    error,
-    isFetching,
-  } = checklistAPI.useFetchChecklistQuery(url);
+  const { search } = useLocation();
+  const [url, setUrl] = useState(search || "?page=1&per_page=3");
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const onMobile = useMediaQuery("(max-width:1199px)");
   const navigate = useNavigate();
-  const { tagID } = useParams();
-
-  // should be category ids
-  useEffect(() => {
-    if (!tagID) setTagValue("");
-    if (tagID) {
-      setCategoryValue(`&search_category_ids[]=${tagID}`);
-      setPageValue(1);
-      setSearchValue("");
-      window.scrollTo(0, 0);
-    }
-  }, [tagID]);
 
   useEffect(() => {
-    if (!tagID) setTagValue("");
-    if (tagID) {
-      setTagValue(`&search_tag_ids[]=${tagID}`);
-      setPageValue(1);
-      setSearchValue("");
-      window.scrollTo(0, 0);
-    }
-  }, [tagID]);
+    if (search) setUrl(search);
+    if (!search) setUrl("?page=1&per_page=3");
+  }, [search]);
+
+  const {
+    data: checklists,
+    error,
+    isFetching,
+  } = checklistAPI.useFetchChecklistQuery(`/checklists_auth${url}`);
 
   useEffect(() => {
     if (error) navigate("/error");
   }, [error]);
-
-  const setValueHandler = (id) => {
-    setPageValue(id);
-  };
-
-  const onSearchHandler = (value) => {
-    setSearchValue(`search_value=${value}&`);
-    setPageValue(1);
-    setTagValue("");
-  };
 
   const loader = (
     <>
@@ -80,14 +51,14 @@ const HomeChecklistPage = () => {
       <MainBanner />
       <div className="main-content">
         <div className="container main-content__wrapper">
-          {!showOnMobile && <Sidebar />}
+          {!showOnMobile && <CategorySidebar />}
           <div className="main-content__wrap">
             <h3 className="main-content__title">
               {!showOnMobile && translate("mainPage.popularQuestion")}
               {showOnMobile && translate("mainPage.search")}
             </h3>
-            <SearchInput searchHandler={onSearchHandler} page="home" />
-            {showOnMobile && <Sidebar />}
+            <SearchInput page="home" />
+            {showOnMobile && <CategorySidebar />}
             {isFetching && loader}
             {checklists && !isFetching
               ? checklists.entities.map((checklist) => (
@@ -102,7 +73,6 @@ const HomeChecklistPage = () => {
             {checklists && checklists.paginate.total_pages > 1 && (
               <Pagination
                 count={checklists.paginate.total_pages}
-                setValue={setValueHandler}
                 currentPage={checklists.paginate.current_page}
                 totalPage={checklists.paginate.total_pages}
                 prevPage={checklists.paginate.prev_page}

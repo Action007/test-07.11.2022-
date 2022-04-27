@@ -1,0 +1,172 @@
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+
+.sidebar {
+  overflow: hidden;
+  margin-right: 45px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 326px;
+
+  @include media-breakpoint-down(xl) {
+    margin-right: 20px;
+  }
+
+  @include media-breakpoint-down(lg) {
+    margin: 0 0 40px;
+    max-width: 100%;
+  }
+
+  &__head {
+    padding: 18px 28px;
+    font-size: 20px;
+    width: 100%;
+    color: #fff;
+    background-color: $dark;
+
+    @include media-breakpoint-down(lg) {
+      padding: 0;
+      background-color: $dark;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 12px 22px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0 0 8px 8px;
+    margin: 0;
+
+    @include media-breakpoint-down(lg) {
+      border: 1px solid #b9b9b980;
+      border-top: none;
+    }
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 16px 22px;
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 3px;
+    transition: transform 0.09s ease;
+
+    @include media-breakpoint-down(sm) {
+      padding: 9px 16px;
+    }
+
+    &:hover {
+      background-color: #eeeeee;
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+
+    svg {
+      margin-right: 25px;
+    }
+
+    &.active {
+      color: #fff;
+      background-color: $primary;
+    }
+  }
+
+  &__button--fill {
+    svg {
+      width: 25px;
+      height: 25px;
+      fill: $dark;
+    }
+
+    &.active svg {
+      fill: #fff;
+    }
+  }
+
+  &__button--stroke {
+    svg {
+      margin-right: 25px;
+      width: 25px;
+      height: 25px;
+      stroke: $dark;
+    }
+
+    &.active svg {
+      stroke: #fff;
+    }
+  }
+
+  &__popular {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 16px 22px;
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 3px;
+    color: $warning;
+    transition: transform 0.09s ease, background-color 0.15s ease;
+
+    @include media-breakpoint-down(sm) {
+      padding: 9px 16px;
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+
+    &:hover {
+      background-color: #eeeeee;
+    }
+
+    svg {
+      margin-right: 25px;
+      width: 25px;
+      height: 25px;
+      fill: $warning;
+      stroke: $warning;
+    }
+
+    &.hot {
+      color: #fff;
+      background-color: $warning;
+      transition: transform 0.09s ease, background-color 0.15s ease;
+
+      svg {
+        stroke: #fff;
+      }
+    }
+  }
+
+  .accordion-button {
+    justify-content: center;
+    background-color: $dark;
+    color: #fff;
+    font-size: 16px;
+    padding: 16px 28px;
+
+    &::after {
+      width: 14px;
+      height: 10px;
+      background-size: contain;
+      margin-left: 22px;
+      background-image: url('../../../assets/images/icon/accordion.svg');
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .accordion-body {
+    padding: 0;
+  }
+}

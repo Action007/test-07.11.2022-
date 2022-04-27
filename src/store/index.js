@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { checklistAPI } from "../services/checklistService";
 import { createChecklistReducer } from "./createChecklistSlice";
-import { heightForScrollReducer } from "./heightForScrollSlice";
+import { navigationChecklistReducer } from "./navigationChecklistSlice";
 
 const store = configureStore({
   reducer: {
-    heightForScrollReducer,
+    // heightForScrollReducer,
+    navigationChecklistReducer,
     createChecklistReducer,
     [checklistAPI.reducerPath]: checklistAPI.reducer,
   },

@@ -2,6 +2,8 @@
 @import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .contacts {
+  max-width: 1044px;
+  
   &__wrapper {
     @include media-breakpoint-down(md) {
       flex-direction: column-reverse;

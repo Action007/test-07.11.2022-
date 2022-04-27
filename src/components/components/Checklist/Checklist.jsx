@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
 import { checklistAPI } from "../../../services/checklistService";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
@@ -56,6 +58,16 @@ const Checklist = ({ checklist, created = false, active = false }) => {
     iLiked.mount ? " active" : ""
   }${iLiked.liked ? " liked" : ""}`;
   const savedClass = `checklist__bookmark${iSaved ? " saved" : ""}`;
+  const pageValue = useSelector(
+    (state) => state.navigationChecklistReducer.pageValue
+  );
+  const categoryValue = useSelector(
+    (state) => state.navigationChecklistReducer.categoryValue
+  );
+  const searchValue = useSelector(
+    (state) => state.navigationChecklistReducer.searchValue
+  );
+  const dispatch = useDispatch();
 
   const likeHandler = () => {
     if (!iLiked.liked) likeChecklist(id);
@@ -78,6 +90,13 @@ const Checklist = ({ checklist, created = false, active = false }) => {
     if (!iSaved) saveChecklist(id);
     if (iSaved) unsaveChecklist(id);
     setISaved((prevState) => !prevState);
+  };
+
+  const navigationHandler = (tagID) => {
+    dispatch(navigationChecklistActions.setTagID(tagID));
+    navigate(
+      `/?${searchValue}page=${pageValue}&per_page=3&search_tag_ids[]=${tagID}${categoryValue}`
+    );
   };
 
   const time = (
@@ -151,7 +170,7 @@ const Checklist = ({ checklist, created = false, active = false }) => {
         <div className="checklist__tags">
           {tags.map((tag) => (
             <button
-              onClick={() => navigate(`/tags/${tag.id}`)}
+              onClick={() => navigationHandler(tag.id)}
               className="checklist__tag"
               key={uniqueID()}
               type="button"

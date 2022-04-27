@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import Modal from "react-bootstrap/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
 import { checklistAPI } from "../../../services/checklistService";
 import Complain from "../Complain/Complain";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
@@ -52,6 +54,16 @@ const ChecklistDetail = ({
   }${iLiked.liked ? " liked" : ""}`;
   const savedClass = `checklist-detail__bookmark${iSaved ? " saved" : ""}`;
   const navigate = useNavigate();
+  const pageValue = useSelector(
+    (state) => state.navigationChecklistReducer.pageValue
+  );
+  const categoryValue = useSelector(
+    (state) => state.navigationChecklistReducer.categoryValue
+  );
+  const searchValue = useSelector(
+    (state) => state.navigationChecklistReducer.searchValue
+  );
+  const dispatch = useDispatch();
 
   const likeHandler = () => {
     if (detailPage) {
@@ -75,6 +87,13 @@ const ChecklistDetail = ({
   const saveHandler = () => {
     if (detailPage) saveChecklist(id);
     setISaved((prevState) => !prevState);
+  };
+
+  const navigationHandler = (tagID) => {
+    dispatch(navigationChecklistActions.setTagID(tagID));
+    navigate(
+      `/?${searchValue}page=${pageValue}&per_page=3&search_tag_ids[]=${tagID}${categoryValue}`
+    );
   };
 
   const time = (
@@ -128,7 +147,7 @@ const ChecklistDetail = ({
           {tags.map((tag) =>
             !preview ? (
               <button
-                onClick={() => navigate(`/tags/${tag.id}`)}
+                onClick={() => navigationHandler(tag.id)}
                 className="checklist-detail__tag"
                 key={uniqueID()}
                 type="button"

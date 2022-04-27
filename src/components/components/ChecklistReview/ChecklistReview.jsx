@@ -116,7 +116,7 @@ const ChecklistReview = () => {
   }, [error]);
 
   return (
-    <div className="checklist-detail container pb-8">
+    <div className="checklist-detail container container-breadcrumb pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {isLoading && <LoadingSkeleton />}
       {checklists && <ChecklistDetail checklists={checklists} detailPage />}

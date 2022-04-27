@@ -210,8 +210,6 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
       }
     }
 
-    console.log(checklistBody);
-
     if (!edit) await createChecklist(checklistBody);
     if (edit) await updateChecklist(checklistBody);
   };
