@@ -5,21 +5,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 160px;
-  padding-top: 64px;
-  padding-right: 150px;
+  padding: 180px 150px 160px 34px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1614px;
 
   @include media-breakpoint-down(xl) {
-    padding: 64px 34px 0;
-  }
-
-  @include media-breakpoint-down(lg) {
-    margin-bottom: 120px;
+    padding: 64px 34px 120px;
   }
 
   @include media-breakpoint-down(md) {
-    margin-bottom: 71px;
-    padding: 56px 16px 0;
+    padding: 56px 16px 71px;
   }
 
   &__wrap {

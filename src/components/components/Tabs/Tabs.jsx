@@ -11,7 +11,9 @@ const Tabs = ({ tabs, category }) => {
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => navigate(`/${tab.key}-checklists`)}
+            onClick={() =>
+              navigate(`/${tab.key}-checklists?page=1&per_page=10`)
+            }
             className={`tabs__button${category === tab.key ? " active" : ""}`}
             type="button"
           >

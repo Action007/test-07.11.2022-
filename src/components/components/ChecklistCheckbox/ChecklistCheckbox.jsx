@@ -1,15 +1,19 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
 import GeneralMap from "../GeneralMap/GeneralMap";
 import PopupMap from "../PopupMap/PopupMap";
 import "./ChecklistCheckbox.scss";
 
+import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg";
+
 const ChecklistCheckbox = ({ description, list_type, value, idFor }) => {
   const [checked, setChecked] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const test = /^(http|https):\/\//i;
   const link = test.test(value.link) ? value.link : `https://${value.link}`;
+  const { t: translate } = useTranslation();
 
   const checkboxHandler = () => {
     setChecked((prevState) => !prevState);
@@ -25,18 +29,21 @@ const ChecklistCheckbox = ({ description, list_type, value, idFor }) => {
           type="checkbox"
         />
         <span className="checklist-checkbox__checkmark" />
-        <p className="checklist-checkbox__todo">{description}</p>
+        <p className="checklist-checkbox__todo">
+          {description}
+          {list_type === "link" && (
+            <a
+              className="checklist-checkbox__link"
+              href={link}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {translate("checklistReviewPage.link")}
+              <LinkSvg />
+            </a>
+          )}
+        </p>
       </label>
-      {list_type === "link" && (
-        <a
-          className="checklist-checkbox__link"
-          href={link}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {link}
-        </a>
-      )}
       {list_type === "coordinates" && (
         <>
           <GeneralMap setShowMap={setShowMap} coordinates={value.coordinates} />

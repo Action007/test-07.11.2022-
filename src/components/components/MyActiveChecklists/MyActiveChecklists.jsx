@@ -10,17 +10,23 @@ import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import Tabs from "../Tabs/Tabs";
 
 const MyActiveChecklists = () => {
-  const [value, setValue] = useState(1);
   const [category, setCategory] = useState("active");
   const { t: translate } = useTranslation();
-  const url = `/checklists_auth?page=${value}&per_page=10`;
+  const { search } = useLocation();
+  const [url, setUrl] = useState(search || "?page=1&per_page=10");
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (search) setUrl(search);
+    if (!search) setUrl("?page=1&per_page=10");
+  }, [search]);
+
   const {
     data: checklists,
     error,
     isLoading,
-  } = checklistAPI.useFetchChecklistQuery(url);
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
+  } = checklistAPI.useFetchChecklistQuery(`/checklists_auth${url}`);
 
   const breadcrumbs = [{ title: translate("myActiveChecklists.title") }];
   const tabs = [
@@ -78,7 +84,6 @@ const MyActiveChecklists = () => {
       {checklists && checklists.paginate.total_pages > 1 && (
         <Pagination
           count={checklists.paginate.total_pages}
-          setValue={setValue}
           currentPage={checklists.paginate.current_page}
           totalPage={checklists.paginate.total_pages}
           prevPage={checklists.paginate.prev_page}

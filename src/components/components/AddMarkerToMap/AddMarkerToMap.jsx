@@ -10,8 +10,8 @@ const AddMarkerToMap = ({ coordinates, id, creation }) => {
   const dispatch = useDispatch();
   const myIcon = Leaflet.icon({
     iconUrl: MapImg,
-    iconSize: [23, 30], // size of the icon
-    iconAnchor: [11, 29], // point of the icon which will correspond to marker's location
+    iconSize: [21, 25], // size of the icon
+    iconAnchor: [10, 26], // point of the icon which will correspond to marker's location
   });
 
   // eslint-disable-next-line no-unused-vars

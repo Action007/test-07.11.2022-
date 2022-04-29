@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Accordion } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
 import useMediaQuery from "../../../hooks/useMediaQuery";
@@ -34,7 +34,7 @@ import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg"
 
 const CategorySidebar = () => {
   const showOnMobile = useMediaQuery("(max-width:991px)");
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState("all");
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
   const pageValue = useSelector(
@@ -47,10 +47,11 @@ const CategorySidebar = () => {
     (state) => state.navigationChecklistReducer.tagValue
   );
   const dispatch = useDispatch();
+  const { search } = useLocation();
 
   const categories = [
     {
-      id: -2,
+      id: "all",
       name: translate("sidebar.selectAll"),
       unChecked: <UnChecked />,
       checked: <Checked />,
@@ -124,13 +125,23 @@ const CategorySidebar = () => {
     { id: 20, name: translate("sidebar.other"), svg: <DotsSvg />, fill: true },
   ];
 
+  useEffect(() => {
+    const category = search.match(/&search_category_ids\[\]=(\d+)/g);
+    if (!category) return;
+    const [id] = category[0].match(/\d+/g);
+    setActive(+id);
+  }, []);
+
   const onClickHandler = (id) => {
     setActive(id);
-
-    dispatch(navigationChecklistActions.setCategoryID(id));
-    navigate(
-      `/?${searchValue}page=${pageValue}&per_page=3${tagValue}&search_category_ids[]=${id}`
-    );
+    if (id === "all") {
+      navigate(`/?${searchValue}page=${pageValue}&per_page=3${tagValue}`);
+    } else {
+      dispatch(navigationChecklistActions.setCategoryID(id));
+      navigate(
+        `/?${searchValue}page=${pageValue}&per_page=3${tagValue}&search_category_ids[]=${id}`
+      );
+    }
   };
 
   const sidebarBody = (

@@ -2,6 +2,10 @@
 @import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .main-content {
+  .container {
+    margin-top: 0;
+  }
+
   &__wrapper {
     display: flex;
     margin-bottom: 100px;
@@ -175,7 +179,7 @@
 
   .create-button {
     margin: inherit;
-    
+
     @include media-breakpoint-down(sm) {
       width: 100%;
       justify-content: center;

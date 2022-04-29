@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
 import CategorySidebar from "../CategorySidebar/CategorySidebar";
@@ -16,12 +16,12 @@ import "./HomeChecklistPage.scss";
 import Logo from "../../../assets/images/content/logo.svg";
 
 const HomeChecklistPage = () => {
-  const { search } = useLocation();
+  const { search } = useLocation("");
   const [url, setUrl] = useState(search || "?page=1&per_page=3");
-  const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const onMobile = useMediaQuery("(max-width:1199px)");
   const navigate = useNavigate();
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     if (search) setUrl(search);
@@ -45,6 +45,9 @@ const HomeChecklistPage = () => {
       <LoadingSkeleton />
     </>
   );
+  const [searchParams] = useSearchParams();
+
+  console.log(searchParams);
 
   return (
     <>
@@ -77,6 +80,7 @@ const HomeChecklistPage = () => {
                 totalPage={checklists.paginate.total_pages}
                 prevPage={checklists.paginate.prev_page}
                 nextPage={checklists.paginate.next_page}
+                page="home"
               />
             )}
           </div>

@@ -4,8 +4,9 @@ import { CSSTransition } from "react-transition-group";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
 import GeneralMap from "../GeneralMap/GeneralMap";
 import PopupMap from "../PopupMap/PopupMap";
-import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg";
 import "./ChecklistItem.scss";
+
+import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg";
 
 const ChecklistItem = ({ description, list_type, value, preview }) => {
   const [showMap, setShowMap] = useState(false);

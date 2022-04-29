@@ -195,7 +195,7 @@
 
     svg {
       stroke: #fff;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, stroke 0.3s ease;
     }
 
     &:hover {

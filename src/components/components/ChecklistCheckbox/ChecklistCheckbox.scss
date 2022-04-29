@@ -2,17 +2,22 @@
 @import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .checklist-checkbox {
+  font-size: 1.2rem;
   line-height: 1.2;
 
   &.checked {
     &::marker {
       color: $primary;
-      margin-right: 5px;
     }
   }
 
+  &::marker {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
   &:not(:last-child) {
-    margin-bottom: 16px;
+    margin-bottom: 4px;
   }
 
   &__number {
@@ -58,8 +63,14 @@
   }
 
   &__link {
-    margin: 5px 0 0 2px;
+    margin: 5px 8px;
     color: $primary;
+
+    svg {
+      margin-left: 2px;
+      margin-top: -4px;
+      fill: $primary;
+    }
   }
 
   &__label input:checked ~ p {

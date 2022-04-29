@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
+import { useDispatch } from "react-redux";
+import { heightForScrollActions } from "../../../store/heightForScrollSlice";
 // import PopupLogout from "../PopupLogout/PopupLogout";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
@@ -16,12 +18,14 @@ import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark
 import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerSvg.svg";
 
 const Header = () => {
+  const dispatch = useDispatch();
   // const [modalShow, setModalShow] = useState(true);
   const { ref, show, setShowHandler, setShow } = useClickOutside();
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
   const showAddButtonOnMobile = useMediaQuery("(max-width:767px)");
   const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
+  const headerRef = useRef();
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -32,13 +36,17 @@ const Header = () => {
     return () => window.removeEventListener("scroll", scrollHandler);
   }, []);
 
+  useEffect(() => {
+    dispatch(heightForScrollActions.setHeight(headerRef.current.clientHeight));
+  }, []);
+
   const onClickHandler = (address) => {
     navigate(address);
     setShow(false);
   };
 
   return (
-    <header className="header">
+    <header className="header" ref={headerRef}>
       <Navbar
         className={`header__navbar position-fixed ${scroll && "scroll"}`}
         expand="md"

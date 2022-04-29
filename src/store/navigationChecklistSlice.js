@@ -22,6 +22,10 @@ const navigationChecklistSlice = createSlice({
       const value = action.payload;
       state.searchValue = `search_value=${value}&`;
     },
+    setPageValue(state, action) {
+      const value = action.payload;
+      state.pageValue = value;
+    },
   },
 });
 

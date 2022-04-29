@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./Pagination.scss";
 
@@ -9,37 +12,58 @@ import { ReactComponent as LastPageSvg } from "../../../assets/images/icon/lastP
 
 const Pagination = ({
   count,
-  setValue,
   currentPage,
   totalPage,
   prevPage,
   nextPage,
+  page = false,
 }) => {
+  const height = useSelector((state) => state.heightForScrollReducer.height);
+  const headerHeight = useSelector(
+    (state) => state.heightForScrollReducer.headerHeight
+  );
+  const [activePage, setActivePage] = useState(currentPage);
   const showOnMobile = useMediaQuery("(max-width:550px)");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const perPage = 1;
 
+  useEffect(() => {
+    setActivePage(currentPage);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (page === "home") {
+      navigate(`/?page=${activePage}&per_page=3`);
+      dispatch(navigationChecklistActions.setPageValue(activePage));
+    }
+    if (!page) navigate(`?page=${activePage}&per_page=10`);
+  }, [activePage]);
+
   const setPage = ({ selected }) => {
-    window.scrollTo(0, 0);
-    setValue(selected * perPage + 1);
+    // console.log(height);
+    // console.log(headerHeight);
+    window.scrollTo(0, height + headerHeight);
+    setActivePage(selected * perPage + 1);
   };
 
   const onClickHandler = (type) => {
     if (type === "first") {
-      if (prevPage) setValue(1);
+      if (prevPage) setActivePage(1);
     } else if (type === "last") {
-      if (nextPage) setValue(totalPage);
+      if (nextPage) setActivePage(totalPage);
     } else if (type === "prev") {
-      if (prevPage) setValue(prevPage);
+      if (prevPage) setActivePage(prevPage);
     } else if (type === "next") {
-      if (nextPage) setValue(nextPage);
+      if (nextPage) setActivePage(nextPage);
     }
-    window.scrollTo(0, 0);
   };
 
   return (
     <div className="paginate">
       {!showOnMobile && (
         <ReactPaginate
+          initialPage={currentPage - 1}
           pageCount={count}
           pageRangeDisplayed={2}
           marginPagesDisplayed={2}
