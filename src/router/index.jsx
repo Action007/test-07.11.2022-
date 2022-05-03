@@ -42,7 +42,6 @@ const routes = [
   { id: 7, path: "/privacy-policy", element: <PrivacyPolicyPage /> },
   { id: 8, path: "/support", element: <SupportPage /> },
   { id: 9, path: "/contacts", element: <ContactsPage /> },
-  { id: 10, path: "/checklist-review", element: <ChecklistReviewPage /> },
   { id: 11, path: "/list/:id/:slug", element: <ChecklistReviewPage /> },
   {
     id: 12,
@@ -78,7 +77,6 @@ const routes = [
   { id: 27, path: "/*", element: <NotFoundPage /> },
   { id: 28, path: "/not-found", element: <NotFoundPage /> },
   { id: 29, path: "/error", element: <ServerErrorPage /> },
-  { id: 30, path: "error", element: <ServerErrorPage /> },
 ];
 
 export default routes;

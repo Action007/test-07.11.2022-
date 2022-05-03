@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
@@ -103,11 +104,14 @@ const items = {
 const ChecklistReview = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const token = useSelector((state) => state.isLoginSliceReducer.token);
   const {
     data: checklists,
     error,
     isLoading,
-  } = checklistAPI.useFetchChecklistQuery(`/checklists_auth/${id}`);
+  } = checklistAPI.useFetchChecklistQuery(
+    `/${token ? "checklists_auth" : "checklists"}/${id}`
+  );
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklistReviewPage.title") }];
 

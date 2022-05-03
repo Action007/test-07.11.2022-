@@ -5,6 +5,8 @@
   "progress": "Your checklist is",
   "complete": "complete",
   "finish": "Finish",
+  "loginButton": "Log In",
+  "signUpButton": "Sign Up",
   "header": {
     "activeChecklist": "Active checklist",
     "create": "Create",

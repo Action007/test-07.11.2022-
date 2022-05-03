@@ -33,10 +33,10 @@ const Checklist = ({ checklist, created = false, active = false }) => {
     viewed,
   } = checklist;
   const [iLiked, setILiked] = useState({
-    liked: user_track.liked,
+    liked: user_track?.liked,
     mount: liked,
   });
-  const [iSaved, setISaved] = useState(user_track.saved);
+  const [iSaved, setISaved] = useState(user_track?.saved);
   // eslint-disable-next-line no-empty-pattern
   const [saveChecklist, {}] = checklistAPI.useSaveChecklistMutation();
   // eslint-disable-next-line no-empty-pattern
@@ -56,7 +56,7 @@ const Checklist = ({ checklist, created = false, active = false }) => {
   const moreThanFive = checklist_items.length > 5;
   const likeClass = `checklist__liked SFPro-700${
     iLiked.mount ? " active" : ""
-  }${iLiked.liked ? " liked" : ""}`;
+  }${iLiked?.liked ? " liked" : ""}`;
   const savedClass = `checklist__bookmark${iSaved ? " saved" : ""}`;
   const pageValue = useSelector(
     (state) => state.navigationChecklistReducer.pageValue
@@ -68,6 +68,7 @@ const Checklist = ({ checklist, created = false, active = false }) => {
     (state) => state.navigationChecklistReducer.searchValue
   );
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.isLoginSliceReducer.token);
 
   const likeHandler = () => {
     if (!iLiked.liked) likeChecklist(id);
@@ -99,6 +100,10 @@ const Checklist = ({ checklist, created = false, active = false }) => {
     );
   };
 
+  const loginHandler = () => {
+    navigate(`/sign-in`);
+  };
+
   const time = (
     <time className="checklist__time" dateTime={date}>
       <span className="checklist__date">{date}</span>
@@ -116,9 +121,23 @@ const Checklist = ({ checklist, created = false, active = false }) => {
         {showOnMobile && time}
         {!created && (
           <div className="checklist__buttons">
-            <button onClick={saveHandler} className={savedClass} type="button">
-              <Bookmark />
-            </button>
+            {token ? (
+              <button
+                onClick={saveHandler}
+                className={savedClass}
+                type="button"
+              >
+                <Bookmark />
+              </button>
+            ) : (
+              <button
+                onClick={loginHandler}
+                className={savedClass}
+                type="button"
+              >
+                <Bookmark />
+              </button>
+            )}
             <div className="complain-dropdown SFPro-500">
               <button
                 onClick={() => setShowComplain(true)}
@@ -189,10 +208,21 @@ const Checklist = ({ checklist, created = false, active = false }) => {
               <ViewSvg />
               <span>{viewed}</span>
             </span>
-            <button onClick={likeHandler} className={likeClass} type="button">
-              <LikeSvg />
-              <span>{iLiked.mount}</span>
-            </button>
+            {token ? (
+              <button onClick={likeHandler} className={likeClass} type="button">
+                <LikeSvg />
+                <span>{iLiked.mount}</span>
+              </button>
+            ) : (
+              <button
+                onClick={loginHandler}
+                className={likeClass}
+                type="button"
+              >
+                <LikeSvg />
+                <span>{iLiked.mount}</span>
+              </button>
+            )}
           </div>
           {!showOnMobile && time}
         </div>

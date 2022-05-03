@@ -14,6 +14,18 @@ const navigationChecklistSlice = createSlice({
       const id = action.payload;
       state.tagValue = `&search_tag_ids[]=${id}`;
     },
+    setTagsID(state, action) {
+      const id = action.payload;
+      state.tagValue += `&search_tag_ids[]=${id}`;
+    },
+    removeTagsID(state) {
+      state.tagValue = "";
+    },
+    removeTagID(state, action) {
+      const id = action.payload;
+      const address = state.tagValue.replace(`&search_tag_ids[]=${id}`, "");
+      state.tagValue = address;
+    },
     setCategoryID(state, action) {
       const id = action.payload;
       state.categoryValue = `&search_category_ids[]=${id}`;

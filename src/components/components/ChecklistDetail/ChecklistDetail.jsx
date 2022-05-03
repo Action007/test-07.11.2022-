@@ -51,7 +51,7 @@ const ChecklistDetail = ({
   const { date } = getTime(created_at);
   const likeClass = `checklist-detail__liked SFPro-700${
     iLiked.mount ? " active" : ""
-  }${iLiked.liked ? " liked" : ""}`;
+  }${iLiked?.liked ? " liked" : ""}`;
   const savedClass = `checklist-detail__bookmark${iSaved ? " saved" : ""}`;
   const navigate = useNavigate();
   const pageValue = useSelector(
@@ -64,6 +64,7 @@ const ChecklistDetail = ({
     (state) => state.navigationChecklistReducer.searchValue
   );
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.isLoginSliceReducer.token);
 
   const likeHandler = () => {
     if (detailPage) {
@@ -96,6 +97,10 @@ const ChecklistDetail = ({
     );
   };
 
+  const loginHandler = () => {
+    navigate(`/sign-in`);
+  };
+
   const time = (
     <time className="checklist-detail__time" dateTime={date}>
       <span className="checklist-detail__date">{date}</span>
@@ -111,13 +116,23 @@ const ChecklistDetail = ({
             {showOnMobile && time}
             {detailPage && (
               <div className="checklist-detail__buttons">
-                <button
-                  onClick={saveHandler}
-                  className={savedClass}
-                  type="button"
-                >
-                  <Bookmark />
-                </button>
+                {token ? (
+                  <button
+                    onClick={saveHandler}
+                    className={savedClass}
+                    type="button"
+                  >
+                    <Bookmark />
+                  </button>
+                ) : (
+                  <button
+                    onClick={loginHandler}
+                    className={savedClass}
+                    type="button"
+                  >
+                    <Bookmark />
+                  </button>
+                )}
                 <div className="complain-dropdown SFPro-500">
                   <button
                     onClick={() => setShowComplain(true)}
@@ -180,14 +195,25 @@ const ChecklistDetail = ({
                   <ViewSvg />
                   <span>{viewed}</span>
                 </span>
-                <button
-                  onClick={likeHandler}
-                  className={likeClass}
-                  type="button"
-                >
-                  <LikeSvg />
-                  <span>{iLiked.mount}</span>
-                </button>
+                {token ? (
+                  <button
+                    onClick={likeHandler}
+                    className={likeClass}
+                    type="button"
+                  >
+                    <LikeSvg />
+                    <span>{iLiked.mount}</span>
+                  </button>
+                ) : (
+                  <button
+                    onClick={loginHandler}
+                    className={likeClass}
+                    type="button"
+                  >
+                    <LikeSvg />
+                    <span>{iLiked.mount}</span>
+                  </button>
+                )}
               </div>
               {!showOnMobile && time}
             </div>

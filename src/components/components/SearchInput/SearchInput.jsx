@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
 import useClickOutside from "../../../hooks/useClickOutside";
@@ -12,7 +12,7 @@ import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag
 const SearchInput = ({ page = false }) => {
   const [blur, setBlur] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [myTags, setMyTags] = useState([]);
+  const [myTags] = useState([]);
   const [validTagValue, setValidTagValue] = useState("");
   const [tagUrl, setTagUrl] = useState("");
   const [sendRequestTag, setSendRequestTag] = useState("");
@@ -31,6 +31,8 @@ const SearchInput = ({ page = false }) => {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const [searchParams] = useSearchParams();
+  const { search } = useLocation();
 
   useEffect(() => {
     const tagVal = tagUrl.replace(/^#/g, "");
@@ -50,29 +52,29 @@ const SearchInput = ({ page = false }) => {
     return () => clearTimeout(delayDebounceFn);
   }, [tagUrl]);
 
+  useEffect(() => {
+    const isTag = searchValue.trim().match(/^#/g);
+
+    if (searchValue.trim() === "" || !isTag) {
+      setTagUrl("");
+      setShow(false);
+    } else {
+      const tagVal = searchValue.replace(/^#/g, "");
+      if (serverTags.length || validTagValue === tagVal) setTagUrl(tagVal);
+      setShow(true);
+    }
+  }, [searchValue]);
+
   const addTagHandler = (tag) => {
     const addOrNot = myTags.find((item) => item.name === tag.name);
 
     if (addOrNot) return;
     if (!tag || !tag.name.trim()) return;
 
-    setMyTags([...myTags, tag]);
+    dispatch(navigationChecklistActions.setTagsID(tag.id));
     setTagUrl("");
     setShow(false);
     setSearchValue("");
-  };
-
-  const searchTagsHandler = (value) => {
-    const isTag = value.trim().match(/^#/g);
-
-    if (value.trim() === "" || !isTag) {
-      setTagUrl("");
-      setShow(false);
-    } else {
-      const tagVal = value.replace(/^#/g, "");
-      if (serverTags.length || validTagValue === tagVal) setTagUrl(tagVal);
-      setShow(true);
-    }
   };
 
   const findTypeHandler = (e, tag) => {
@@ -83,19 +85,20 @@ const SearchInput = ({ page = false }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const value = searchValue.trim();
-    const isTag = value.match(/^#/g);
 
-    if (!isTag) {
-      dispatch(navigationChecklistActions.setSearchValue(value));
-      navigate(
-        `/?search_value=${value}&page=${pageValue}&per_page=3${tagValue}${categoryValue}`
-      );
-    }
+    const isTag = searchValue.trim().match(/^#/g);
+    if (isTag) return;
+
+    dispatch(navigationChecklistActions.setSearchValue(searchValue));
+    navigate(
+      `/?search_value=${searchValue}&page=${pageValue}&per_page=3${tagValue}${categoryValue}`
+    );
   };
 
   const removeTagHandler = (id) => {
-    setMyTags(myTags.filter((tag) => tag.id !== id));
+    const address = search.replace(`&search_tag_ids[]=${id}`, "");
+    navigate(address);
+    dispatch(navigationChecklistActions.removeTagID(id));
   };
 
   return (
@@ -109,10 +112,7 @@ const SearchInput = ({ page = false }) => {
         htmlFor="search-input"
       >
         <input
-          onChange={(e) => {
-            setSearchValue(e.target.value);
-            searchTagsHandler(e.target.value);
-          }}
+          onChange={(e) => setSearchValue(e.target.value)}
           onFocus={() => setBlur((prevState) => !prevState)}
           onBlur={() => setBlur((prevState) => !prevState)}
           value={searchValue}

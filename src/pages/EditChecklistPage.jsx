@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { checklistAPI } from "../services/checklistService";
 import { createChecklistActions } from "../store/createChecklistSlice";
 import CreationOfChecklist from "../components/components/CreationOfChecklist/CreationOfChecklist";
@@ -15,6 +15,11 @@ const CreationOfChecklistPage = () => {
     error,
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(`/checklists_auth/${id}`);
+  const token = useSelector((state) => state.isLoginSliceReducer.token);
+
+  useEffect(() => {
+    if (!token) navigate("/not-found");
+  }, []);
 
   useEffect(() => {
     if (!id) return;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
 import CategorySidebar from "../CategorySidebar/CategorySidebar";
@@ -16,12 +17,13 @@ import "./HomeChecklistPage.scss";
 import Logo from "../../../assets/images/content/logo.svg";
 
 const HomeChecklistPage = () => {
-  const { search } = useLocation("");
+  const { search } = useLocation();
   const [url, setUrl] = useState(search || "?page=1&per_page=3");
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const onMobile = useMediaQuery("(max-width:1199px)");
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
+  const token = useSelector((state) => state.isLoginSliceReducer.token);
 
   useEffect(() => {
     if (search) setUrl(search);
@@ -32,7 +34,9 @@ const HomeChecklistPage = () => {
     data: checklists,
     error,
     isFetching,
-  } = checklistAPI.useFetchChecklistQuery(`/checklists_auth${url}`);
+  } = checklistAPI.useFetchChecklistQuery(
+    `/${token ? "checklists_auth" : "checklists"}${url}`
+  );
 
   useEffect(() => {
     if (error) navigate("/error");
@@ -45,9 +49,6 @@ const HomeChecklistPage = () => {
       <LoadingSkeleton />
     </>
   );
-  const [searchParams] = useSearchParams();
-
-  console.log(searchParams);
 
   return (
     <>

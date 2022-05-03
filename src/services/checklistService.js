@@ -13,6 +13,9 @@ export const checklistAPI = createApi({
     fetchChecklist: build.query({
       query: (url) => `/api/v1${url}`,
       providesTags: () => ["Checklist"],
+      // headers: {
+      //   authorization: "text/plain",
+      // },
     }),
     fetchTagsChecklist: build.query({
       query: (url) => `/api/v1/tags/search?value=${url}`,

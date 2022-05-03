@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { heightForScrollActions } from "../../../store/heightForScrollSlice";
 // import PopupLogout from "../PopupLogout/PopupLogout";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
@@ -26,6 +27,8 @@ const Header = () => {
   const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
   const headerRef = useRef();
+  const token = useSelector((state) => state.isLoginSliceReducer.token);
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -44,6 +47,41 @@ const Header = () => {
     navigate(address);
     setShow(false);
   };
+
+  const onLogin = (
+    <>
+      {!showAddButtonOnMobile && (
+        <>
+          <button
+            onClick={() => navigate("/active-checklists")}
+            className="header__progress"
+            type="button"
+          >
+            <ProgressBarHeader done={29} />
+          </button>
+          <button
+            onClick={() => navigate("/saved-checklists")}
+            className="header__bookmark"
+            type="button"
+          >
+            <Bookmark />
+            <span className="header__span">17</span>
+          </button>
+        </>
+      )}
+      <HeaderDropdown setShow={setShow} />
+      {!showAddButtonOnMobile && (
+        <button
+          onClick={() => navigate("/creation-of-checklist")}
+          className="header__btn br-8"
+          type="button"
+        >
+          <Plus />
+          Create
+        </button>
+      )}
+    </>
+  );
 
   return (
     <header className="header" ref={headerRef}>
@@ -96,35 +134,25 @@ const Header = () => {
           >
             <div className="header__wrap">
               {!showSearchOnMobile && <SearchInput />}
-              {!showAddButtonOnMobile && (
-                <>
+              {token ? (
+                onLogin
+              ) : (
+                <div className="header__buttons">
                   <button
-                    onClick={() => navigate("/active-checklists")}
-                    className="header__progress"
+                    onClick={() => navigate(`/sign-in`)}
+                    className="header__button SFPro-600"
                     type="button"
                   >
-                    <ProgressBarHeader done={29} />
+                    {translate("loginButton")}
                   </button>
                   <button
-                    onClick={() => navigate("/saved-checklists")}
-                    className="header__bookmark"
+                    onClick={() => navigate(`/sign-up`)}
+                    className="header__button SFPro-600"
                     type="button"
                   >
-                    <Bookmark />
-                    <span className="header__span">17</span>
+                    {translate("signUpButton")}
                   </button>
-                </>
-              )}
-              <HeaderDropdown setShow={setShow} />
-              {!showAddButtonOnMobile && (
-                <button
-                  onClick={() => navigate("/creation-of-checklist")}
-                  className="header__btn br-8"
-                  type="button"
-                >
-                  <Plus />
-                  Create
-                </button>
+                </div>
               )}
             </div>
           </CSSTransition>
