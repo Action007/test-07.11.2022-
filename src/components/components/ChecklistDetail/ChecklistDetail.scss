@@ -19,7 +19,7 @@
   &__heading {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
+    margin-bottom: 14px;
 
     @include media-breakpoint-down(sm) {
       flex-direction: column-reverse;
@@ -130,13 +130,13 @@
   }
 
   &__items {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 34px;
     margin-left: 16px;
 
     ::marker {
       font-weight: bold;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
   }
 
@@ -239,10 +239,10 @@
     padding: 1px 8px;
     background-color: #fff;
     transition: box-shadow 0.2s ease;
-    border: 1px solid transparent;
+    border: 1px solid rgba(101, 193, 126, 0.4);
 
     &:hover {
-      border-color: $primary;
+      border: 1px solid $primary;
     }
 
     &:not(:last-child) {

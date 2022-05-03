@@ -57,16 +57,16 @@
     margin-right: 55px;
     font-size: 1.5rem;
     word-break: break-word;
-    
+
     @include media-breakpoint-down(md) {
       font-size: 1.3rem;
     }
-    
+
     @include media-breakpoint-down(sm) {
       margin: 21px 0 18px;
       font-size: 1.2rem;
     }
-    
+
     button {
       text-align: left;
     }
@@ -200,10 +200,10 @@
     padding: 1px 8px;
     background-color: #fff;
     transition: box-shadow 0.2s ease;
-    border: 1px solid transparent;
+    border: 1px solid rgba(101, 193, 126, 0.4);
 
     &:hover {
-      border-color: $primary;
+      border: 1px solid $primary;
     }
 
     &:not(:last-child) {
