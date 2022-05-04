@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AccountSetting from "../components/components/AccountSetting/AccountSetting";
 
 const AccountSettingsPage = () => {
-  const token = useSelector((state) => state.isLoginSliceReducer.token);
+  const token = useSelector((state) => state.authSliceReducer.token);
   const navigate = useNavigate();
 
   useEffect(() => {

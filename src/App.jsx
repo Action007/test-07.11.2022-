@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { isLoginSliceActions } from "./store/isLoginSlice";
+import { authSliceActions } from "./store/authSlice";
 import Layout from "./components/UI/Layout/Layout";
 import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 import routes from "./router";
@@ -12,7 +12,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(isLoginSliceActions.tokenVerification());
+    dispatch(authSliceActions.tokenVerification());
   }, []);
 
   return (

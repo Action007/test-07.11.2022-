@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import CreationOfChecklist from "../components/components/CreationOfChecklist/CreationOfChecklist";
 
 const CreationOfChecklistPage = () => {
-  const token = useSelector((state) => state.isLoginSliceReducer.token);
+  const token = useSelector((state) => state.authSliceReducer.token);
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -104,7 +104,7 @@ const items = {
 const ChecklistReview = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const token = useSelector((state) => state.isLoginSliceReducer.token);
+  const token = useSelector((state) => state.authSliceReducer.token);
   const {
     data: checklists,
     error,

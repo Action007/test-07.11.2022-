@@ -5,6 +5,7 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./AccountSetting.scss";
 
 import { ReactComponent as EditProfileSvg } from "../../../assets/images/content/account-settings.svg";
+import validateEmail from "../../../utils/validateEmail";
 
 const AccountSetting = () => {
   const { t: translate } = useTranslation();
@@ -22,17 +23,9 @@ const AccountSetting = () => {
     { title: translate("accountSettings.accountSettings") },
   ];
 
-  const isValidEmail = () => {
-    return String(emilValue)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    const email = isValidEmail();
+    const email = validateEmail(emilValue);
     const oldPassword = oldPasswordRef.current.value.trim().length > 7;
     const newPassword = newPasswordRef.current.value.trim().length > 7;
     const confirmPassword =

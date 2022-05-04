@@ -68,7 +68,7 @@ const Checklist = ({ checklist, created = false, active = false }) => {
     (state) => state.navigationChecklistReducer.searchValue
   );
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.isLoginSliceReducer.token);
+  const token = useSelector((state) => state.authSliceReducer.token);
 
   const likeHandler = () => {
     if (!iLiked.liked) likeChecklist(id);

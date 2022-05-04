@@ -1,20 +1,24 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
+import validateEmail from "../../../../utils/validateEmail";
 import "./ForgotPassword.scss";
 
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 import { ReactComponent as EmailSvg } from "../../../../assets/images/icon/sendEmail.svg";
 
-const ForgotPassword = ({ emailIsValid, onSubmitHandler }) => {
+const ForgotPassword = () => {
   const email = useRef();
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
+  const [emailIsValid, setEmailIsValid] = useState(true);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    onSubmitHandler(email.current.value);
+    const validEmail = !!validateEmail(email.current.value);
+
+    setEmailIsValid(validEmail);
   };
 
   return (

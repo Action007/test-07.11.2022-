@@ -27,7 +27,7 @@ const Header = () => {
   const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
   const headerRef = useRef();
-  const token = useSelector((state) => state.isLoginSliceReducer.token);
+  const token = useSelector((state) => state.authSliceReducer.token);
   const { t: translate } = useTranslation();
 
   useEffect(() => {

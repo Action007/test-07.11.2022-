@@ -9,13 +9,18 @@ export const checklistAPI = createApi({
     baseUrl: API_KEY,
   }),
   tagTypes: ["Checklist"],
+  prepareHeaders: (headers, { getState }) => {
+    const { token } = getState().auth;
+    console.log(token);
+    if (token) {
+      headers.set("authentication", `Bearer ${token}`);
+    }
+    return headers;
+  },
   endpoints: (build) => ({
     fetchChecklist: build.query({
       query: (url) => `/api/v1${url}`,
       providesTags: () => ["Checklist"],
-      // headers: {
-      //   authorization: "text/plain",
-      // },
     }),
     fetchTagsChecklist: build.query({
       query: (url) => `/api/v1/tags/search?value=${url}`,

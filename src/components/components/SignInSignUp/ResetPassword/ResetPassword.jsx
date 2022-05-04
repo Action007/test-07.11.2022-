@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
@@ -8,7 +8,8 @@ import { ReactComponent as LoginSvg } from "../../../../assets/images/content/lo
 import { ReactComponent as ArrowSvg } from "../../../../assets/images/icon/rightArrow.svg";
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 
-const ResetPassword = ({ passwordIsValid, onSubmitHandler }) => {
+const ResetPassword = () => {
+  const [passwordIsValid, setPasswordIsValid] = useState(true);
   const password = useRef();
   const passwordCopy = useRef();
   const { t: translate } = useTranslation();
@@ -16,7 +17,12 @@ const ResetPassword = ({ passwordIsValid, onSubmitHandler }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    onSubmitHandler(password.current.value, passwordCopy.current.value);
+
+    const isValid =
+      password.trim() !== "" &&
+      password === passwordCopy &&
+      password.length > 7;
+    setPasswordIsValid(isValid);
   };
 
   return (

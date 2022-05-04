@@ -15,7 +15,7 @@ const CreationOfChecklistPage = () => {
     error,
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(`/checklists_auth/${id}`);
-  const token = useSelector((state) => state.isLoginSliceReducer.token);
+  const token = useSelector((state) => state.authSliceReducer.token);
 
   useEffect(() => {
     if (!token) navigate("/not-found");

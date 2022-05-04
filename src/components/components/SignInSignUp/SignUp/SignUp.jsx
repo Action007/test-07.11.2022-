@@ -1,31 +1,36 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import validateEmail from "../../../../utils/validateEmail";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import "./SignUp.scss";
 
 import { ReactComponent as LoginSvg } from "../../../../assets/images/content/login.svg";
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 
-const SignUp = ({
-  nameIsValid,
-  emailIsValid,
-  passwordIsValid,
-  onSubmitHandler,
-}) => {
-  const name = useRef();
-  const email = useRef();
-  const password = useRef();
+const SignUp = () => {
+  const [nameIsValid, setNameIsValid] = useState(true);
+  const [emailIsValid, setEmailIsValid] = useState(true);
+  const [passwordIsValid, setPasswordIsValid] = useState(true);
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
 
   const submitHandler = (e) => {
     e.preventDefault();
-    onSubmitHandler(
-      name.current.value,
-      email.current.value,
-      password.current.value
-    );
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    const validName = name.trim() !== "";
+    const validEmail = !!validateEmail(email);
+    const validPassword = password.trim() !== "" && password.trim().length > 7;
+
+    setNameIsValid(validName);
+    setEmailIsValid(validEmail);
+    setPasswordIsValid(validPassword);
   };
 
   return (
@@ -51,7 +56,7 @@ const SignUp = ({
         >
           <span>Name</span>
           <input
-            ref={name}
+            ref={nameRef}
             id="loginName"
             placeholder={translate("login.namePlaceholder")}
             type="text"
@@ -69,7 +74,7 @@ const SignUp = ({
         >
           <span>{translate("login.email")}</span>
           <input
-            ref={email}
+            ref={emailRef}
             id="loginEmail"
             placeholder={translate("login.emailPlaceholder")}
             type="text"
@@ -87,7 +92,7 @@ const SignUp = ({
         >
           <span>{translate("login.password")}</span>
           <input
-            ref={password}
+            ref={passwordRef}
             id="passwordEmail"
             placeholder={translate("login.incorrectPassword")}
             name="password"

@@ -23,7 +23,7 @@ const HomeChecklistPage = () => {
   const onMobile = useMediaQuery("(max-width:1199px)");
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
-  const token = useSelector((state) => state.isLoginSliceReducer.token);
+  const token = useSelector((state) => state.authSliceReducer.token);
 
   useEffect(() => {
     if (search) setUrl(search);

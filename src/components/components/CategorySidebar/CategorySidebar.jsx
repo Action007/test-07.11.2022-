@@ -147,7 +147,7 @@ const CategorySidebar = () => {
   const sidebarBody = (
     <ul className="sidebar__list">
       {categories.map((item) => (
-        <li className="sidebar__item SFPro-700" key={item.id}>
+        <li className="sidebar__item SFPro-500" key={item.id}>
           {item.type === "checkbox" && (
             <button
               onClick={() => onClickHandler(item.id)}

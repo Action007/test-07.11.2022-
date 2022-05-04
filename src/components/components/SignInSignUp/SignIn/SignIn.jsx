@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import validateEmail from "../../../../utils/validateEmail";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import "./SignIn.scss";
 
@@ -8,15 +9,24 @@ import { ReactComponent as LoginSvg } from "../../../../assets/images/content/lo
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 import { ReactComponent as GoogleSvg } from "../../../../assets/images/icon/google.svg";
 
-const SignIn = ({ emailIsValid, passwordIsValid, onSubmitHandler }) => {
-  const email = useRef();
-  const password = useRef();
+const SignIn = () => {
+  const [emailIsValid, setEmailIsValid] = useState(true);
+  const [passwordIsValid, setPasswordIsValid] = useState(true);
+  const emailRef = useRef();
+  const passwordRef = useRef();
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
 
   const submitHandler = (e) => {
     e.preventDefault();
-    onSubmitHandler("", email.current.value, password.current.value);
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    const validEmail = !!validateEmail(email);
+    const validPassword = password.trim() !== "" && password.trim().length > 7;
+
+    setEmailIsValid(validEmail);
+    setPasswordIsValid(validPassword);
   };
 
   return (
@@ -42,7 +52,7 @@ const SignIn = ({ emailIsValid, passwordIsValid, onSubmitHandler }) => {
         >
           <span>{translate("login.email")}</span>
           <input
-            ref={email}
+            ref={emailRef}
             id="loginEmail"
             placeholder={translate("login.emailPlaceholder")}
             type="text"
@@ -60,7 +70,7 @@ const SignIn = ({ emailIsValid, passwordIsValid, onSubmitHandler }) => {
         >
           <span>{translate("login.password")}</span>
           <input
-            ref={password}
+            ref={passwordRef}
             id="passwordEmail"
             placeholder={translate("login.incorrectPassword")}
             name="password"

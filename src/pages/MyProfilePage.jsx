@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import MyProfile from "../components/components/MyProfile/MyProfile";
 
 const ProfilePage = () => {
-  const token = useSelector((state) => state.isLoginSliceReducer.token);
+  const token = useSelector((state) => state.authSliceReducer.token);
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -3,14 +3,14 @@ import { checklistAPI } from "../services/checklistService";
 import { createChecklistReducer } from "./createChecklistSlice";
 import { navigationChecklistReducer } from "./navigationChecklistSlice";
 import { heightForScrollReducer } from "./heightForScrollSlice";
-import { isLoginSliceReducer } from "./isLoginSlice";
+import { authSliceReducer } from "./authSlice";
 
 const store = configureStore({
   reducer: {
     heightForScrollReducer,
     navigationChecklistReducer,
     createChecklistReducer,
-    isLoginSliceReducer,
+    authSliceReducer,
     [checklistAPI.reducerPath]: checklistAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>

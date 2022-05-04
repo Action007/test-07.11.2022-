@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import EditProfile from "../components/components/EditProfile/EditProfile";
 
 const MainPage = () => {
-  const token = useSelector((state) => state.isLoginSliceReducer.token);
+  const token = useSelector((state) => state.authSliceReducer.token);
   const navigate = useNavigate();
 
   useEffect(() => {

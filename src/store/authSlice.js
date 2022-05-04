@@ -2,8 +2,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "universal-cookie";
 
-const isLoginSlice = createSlice({
-  name: "isLogin",
+const authSlice = createSlice({
+  name: "auth",
   initialState: {
     token: "",
   },
@@ -25,5 +25,5 @@ const isLoginSlice = createSlice({
   },
 });
 
-export const isLoginSliceActions = isLoginSlice.actions;
-export const isLoginSliceReducer = isLoginSlice.reducer;
+export const authSliceActions = authSlice.actions;
+export const authSliceReducer = authSlice.reducer;
