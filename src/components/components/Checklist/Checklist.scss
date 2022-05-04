@@ -4,7 +4,7 @@
 .checklist {
   position: relative;
   margin: 0 auto 43px;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 34px 34px 25px;
   width: 100%;
   max-width: 834px;
@@ -92,7 +92,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 28px;
-    border-radius: 8px;
+    border-radius: 6px;
     width: 39px;
     height: 39px;
     background-color: $secondary;
@@ -196,8 +196,8 @@
   &__tag {
     display: inline-block;
     margin-bottom: 9px;
-    border-radius: 4px;
-    padding: 1px 8px;
+    border-radius: 6px;
+    padding: 2px 8px;
     background-color: #fff;
     transition: box-shadow 0.2s ease;
     border: 1px solid rgba(101, 193, 126, 0.4);
@@ -223,7 +223,7 @@
 
   &__viewed {
     margin-right: 8px;
-    border-radius: 8px;
+    border-radius: 6px;
     color: $dark;
     background-color: $secondary;
 
@@ -242,7 +242,7 @@
   }
 
   &__liked {
-    border-radius: 8px;
+    border-radius: 6px;
     color: #a3a3a3;
     background-color: $secondary;
     transition: box-shadow 0.2s ease;
@@ -287,7 +287,7 @@
   &__viewed {
     display: flex;
     align-items: center;
-    padding: 6px 11px;
+    padding: 5px 11px;
 
     svg {
       margin-right: 10px;

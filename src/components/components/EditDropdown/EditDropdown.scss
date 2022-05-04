@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 6px;
     width: 40px;
     height: 40px;
     transform: rotate(90deg);
@@ -36,7 +36,7 @@
     top: 45px;
     z-index: 10;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 6px;
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
     color: $dark;
     background-color: #fff;

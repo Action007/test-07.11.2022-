@@ -4,7 +4,7 @@
 .sidebar {
   overflow: hidden;
   margin-right: 45px;
-  border-radius: 8px;
+  border-radius: 6px;
   width: 100%;
   max-width: 326px;
 
@@ -48,7 +48,7 @@
   &__button {
     display: flex;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 16px 22px;
     width: 100%;
     font-size: 16px;
@@ -106,7 +106,7 @@
   &__popular {
     display: flex;
     align-items: center;
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 16px 22px;
     width: 100%;
     font-size: 16px;

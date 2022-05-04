@@ -17,7 +17,7 @@
     margin: 0 auto;
     padding: 34px 97px 51px 59px;
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 6px;
 
     @include media-breakpoint-down(lg) {
       flex-wrap: wrap-reverse;
@@ -61,7 +61,7 @@
     input {
       width: 100%;
       border: 1px solid #c8d4ff;
-      border-radius: 8px;
+      border-radius: 6px;
       height: 54px;
       padding: 0 21px;
       outline: transparent;
@@ -76,7 +76,7 @@
       margin-top: 6px;
       padding: 17px 21px;
       border: 1px solid #c8d4ff;
-      border-radius: 8px;
+      border-radius: 6px;
       height: 93px;
       resize: none;
       outline: transparent;
@@ -130,7 +130,7 @@
     height: 45px;
     color: #fff;
     background-color: $primary;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid transparent;
     transition: all 0.3s ease;
 

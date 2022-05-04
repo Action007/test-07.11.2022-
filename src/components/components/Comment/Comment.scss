@@ -25,7 +25,7 @@
 
   &__likes {
     margin-right: 8px;
-    border-radius: 8px;
+    border-radius: 6px;
 
     &.active {
       color: $primary;
@@ -48,7 +48,7 @@
 
   &__dislikes {
     margin-right: 8px;
-    border-radius: 8px;
+    border-radius: 6px;
 
     svg {
       transform: rotate(180deg);
