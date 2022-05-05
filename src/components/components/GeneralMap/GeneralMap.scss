@@ -7,6 +7,26 @@
   height: 231px;
   max-width: 458px;
 
+  &__location,
+  &__extend {
+    position: absolute;
+    z-index: 800;
+    border-radius: 6px;
+    width: 35px;
+    height: 35px;
+    box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+    background-color: #fff;
+
+    &:hover svg {
+      fill: $dark;
+    }
+
+    svg {
+      fill: #a3a3a3;
+      transition: fill 0.2s ease;
+    }
+  }
+
   &__location {
     right: 10px;
     bottom: 10px;
@@ -14,21 +34,6 @@
     svg {
       width: 18px;
       height: 18px;
-      fill: $dark;
-    }
-  }
-
-  &__del {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    right: 10px;
-    top: 90px;
-
-    svg {
-      width: 18px;
-      height: 18px;
-      stroke: $dark;
     }
   }
 
@@ -42,6 +47,9 @@
     height: 35px;
     box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
     background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .leaflet-container {
@@ -123,6 +131,15 @@
   .leaflet-control-geocoder-icon {
     background-image: url('../../../assets/images/icon/search.svg');
     background-size: contain;
+    transition: background-image 0.2s ease;
+  }
+
+  .leaflet-control-geocoder:hover .leaflet-control-geocoder-icon {
+    background-image: url('../../../assets/images/icon/searchHover.svg');
+  }
+
+  .leaflet-control-geocoder-expanded .leaflet-control-geocoder-icon {
+    background-image: url('../../../assets/images/icon/searchHover.svg');
   }
 
   .leaflet-control-attribution a {
@@ -138,18 +155,6 @@
   .leaflet-control-attribution {
     filter: grayscale(100%) opacity(90%);
     font-size: 5px;
-  }
-
-  &__location,
-  &__del,
-  &__extend {
-    position: absolute;
-    z-index: 800;
-    border-radius: 6px;
-    width: 35px;
-    height: 35px;
-    box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-    background-color: #fff;
   }
 }
 

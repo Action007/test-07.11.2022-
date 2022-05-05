@@ -7,11 +7,11 @@ import { authSliceReducer } from "./authSlice";
 
 const store = configureStore({
   reducer: {
+    [checklistAPI.reducerPath]: checklistAPI.reducer,
     heightForScrollReducer,
     navigationChecklistReducer,
     createChecklistReducer,
     authSliceReducer,
-    [checklistAPI.reducerPath]: checklistAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(checklistAPI.middleware),

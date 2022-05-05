@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import { useDispatch } from "react-redux";
+import { authSliceActions } from "../../../store/authSlice";
 import useClickOutside from "../../../hooks/useClickOutside";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
@@ -13,6 +15,7 @@ import { ReactComponent as Setting } from "../../../assets/images/icon/setting.s
 import { ReactComponent as Logout } from "../../../assets/images/icon/logout.svg";
 
 const HeaderDropdown = ({ setShow }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { ref, show, setShowHandler } = useClickOutside();
   const showOnMobile = useMediaQuery("(max-width:767px)");
@@ -20,6 +23,12 @@ const HeaderDropdown = ({ setShow }) => {
 
   const onClickHandler = (address) => {
     navigate(address);
+    setShow(false);
+    setShowHandler();
+  };
+
+  const logOutHandler = () => {
+    dispatch(authSliceActions.resetToken());
     setShow(false);
     setShowHandler();
   };
@@ -81,7 +90,11 @@ const HeaderDropdown = ({ setShow }) => {
             <Setting />
             Account settings
           </button>
-          <button className="header-dropdown__item" type="button">
+          <button
+            onClick={() => logOutHandler()}
+            className="header-dropdown__item"
+            type="button"
+          >
             <Logout />
             Log Out
           </button>

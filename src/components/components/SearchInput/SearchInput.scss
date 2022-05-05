@@ -61,6 +61,10 @@
 
     &.active {
       border-color: $primary;
+
+      &::before {
+        background-image: url('../../../assets/images/icon/searchHover.svg');
+      }
     }
 
     @include media-breakpoint-down(sm) {

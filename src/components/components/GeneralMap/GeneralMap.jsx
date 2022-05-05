@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { useDispatch, useSelector } from "react-redux";
-import { createChecklistActions } from "../../../store/createChecklistSlice";
+import { useSelector } from "react-redux";
 import CreationChecklistMapSearch from "../CreationChecklistMapSearch/CreationChecklistMapSearch";
 import LocationMarker from "../LocationMarker/LocationMarker";
 import AddMarkerToMap from "../AddMarkerToMap/AddMarkerToMap";
 import "./GeneralMap.scss";
 
 import { ReactComponent as LocationSvg } from "../../../assets/images/icon/location.svg";
-import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel.svg";
 import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-map.svg";
 
 const GeneralMap = ({
@@ -18,19 +16,15 @@ const GeneralMap = ({
   creation = false,
   id,
 }) => {
-  const [showLocation, setShowLocation] = useState(true);
-  const dispatch = useDispatch();
+  const [showLocation, setShowLocation] = useState(false);
   const checklist_items = useSelector(
     (state) => state.createChecklistReducer.checklist_items
   );
   const checklist = checklist_items.find((item) => item.id === id);
-  const removeMarkerHandler = () => {
-    dispatch(createChecklistActions.removeCoordinate(id));
-  };
 
   return (
     <div className="creation-map">
-      <MapContainer center={coordinates} zoom={12} scrollWheelZoom={1}>
+      <MapContainer center={coordinates} zoom={4} scrollWheelZoom={1}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -47,17 +41,6 @@ const GeneralMap = ({
         )}
         <CreationChecklistMapSearch id={id} />
       </MapContainer>
-      {creation && checklist.value.coordinates ? (
-        <button
-          onClick={removeMarkerHandler}
-          className="creation-map__del"
-          type="button"
-        >
-          <CancelIcon />
-        </button>
-      ) : (
-        ""
-      )}
       <button
         onClick={() => setShowLocation([])}
         className="creation-map__location"

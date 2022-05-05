@@ -67,7 +67,9 @@ const CreationChecklistItem = ({
 
   const selectImg = (
     <label className="creation-item__img" htmlFor={id + 1}>
-      <ImgIcon />
+      <div className="creation-item__svg">
+        <ImgIcon />
+      </div>
       <input
         type="file"
         accept="image/png, image/jpeg, image/jpg"
@@ -193,7 +195,14 @@ const CreationChecklistItem = ({
                 </div>
                 <CSSTransition in={showMap} timeout={300} unmountOnExit>
                   <PopupMap show={showMap} onHide={() => setShowMap(false)}>
-                    <GeneralMap popup creation id={id} />
+                    <GeneralMap
+                      popup
+                      coordinates={
+                        value.coordinates ? value.coordinates : undefined
+                      }
+                      creation
+                      id={id}
+                    />
                   </PopupMap>
                 </CSSTransition>
               </>

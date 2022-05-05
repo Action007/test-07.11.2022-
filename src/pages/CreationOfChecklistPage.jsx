@@ -8,8 +8,8 @@ const CreationOfChecklistPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) navigate("/not-found");
-  }, []);
+    if (!token) navigate("/sign-in");
+  }, [token]);
 
   return <CreationOfChecklist />;
 };

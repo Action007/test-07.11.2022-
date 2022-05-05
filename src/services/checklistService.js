@@ -5,26 +5,32 @@ const API_KEY = process.env.REACT_APP_HOSTNAME;
 // eslint-disable-next-line import/prefer-default-export
 export const checklistAPI = createApi({
   reducerPath: "checklistAPI",
+  tagTypes: ["Checklist"],
   baseQuery: fetchBaseQuery({
     baseUrl: API_KEY,
+    prepareHeaders: (headers, { getState }) => {
+      const { token } = getState().authSliceReducer;
+      // If we have a token set in state, let's assume that we should be passing it.
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
-  tagTypes: ["Checklist"],
-  prepareHeaders: (headers, { getState }) => {
-    const { token } = getState().auth;
-    console.log(token);
-    if (token) {
-      headers.set("authentication", `Bearer ${token}`);
-    }
-    return headers;
-  },
   endpoints: (build) => ({
     fetchChecklist: build.query({
       query: (url) => `/api/v1${url}`,
       providesTags: () => ["Checklist"],
     }),
-    fetchTagsChecklist: build.query({
+    fetchAccount: build.query({
+      query: () => ({
+        url: "/api/v1/account",
+      }),
+      invalidatesTags: ["Account"],
+    }),
+    fetchSearchTags: build.query({
       query: (url) => `/api/v1/tags/search?value=${url}`,
-      providesTags: () => ["Tags"],
+      providesTags: () => ["SearchTags"],
     }),
     fetchSavesChecklists: build.query({
       query: () => ({
@@ -32,11 +38,21 @@ export const checklistAPI = createApi({
       }),
       invalidatesTags: ["SaveChecklist"],
     }),
-    fetchAccount: build.query({
-      query: () => ({
-        url: "/api/v1/account",
+    signUp: build.mutation({
+      query: (body) => ({
+        url: "/api/v1/users/sign_up",
+        method: "POST",
+        body,
       }),
-      invalidatesTags: ["Account"],
+      invalidatesTags: ["Checklist"],
+    }),
+    signIn: build.mutation({
+      query: (body) => ({
+        url: "/api/v1/users/sign_in",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Checklist"],
     }),
     createChecklist: build.mutation({
       query: (checklist) => ({

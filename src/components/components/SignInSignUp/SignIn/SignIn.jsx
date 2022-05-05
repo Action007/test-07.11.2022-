@@ -1,6 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { checklistAPI } from "../../../../services/checklistService";
 import validateEmail from "../../../../utils/validateEmail";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import "./SignIn.scss";
@@ -8,6 +10,7 @@ import "./SignIn.scss";
 import { ReactComponent as LoginSvg } from "../../../../assets/images/content/login.svg";
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 import { ReactComponent as GoogleSvg } from "../../../../assets/images/icon/google.svg";
+import { authSliceActions } from "../../../../store/authSlice";
 
 const SignIn = () => {
   const [emailIsValid, setEmailIsValid] = useState(true);
@@ -16,6 +19,13 @@ const SignIn = () => {
   const passwordRef = useRef();
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
+  const [signIn, result] = checklistAPI.useSignInMutation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!result.isSuccess) return;
+    dispatch(authSliceActions.setToken(result.data.token));
+  }, [result]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -23,10 +33,17 @@ const SignIn = () => {
     const password = passwordRef.current.value;
 
     const validEmail = !!validateEmail(email);
-    const validPassword = password.trim() !== "" && password.trim().length > 7;
+    const validPassword = password !== "" && password.length > 7;
 
     setEmailIsValid(validEmail);
     setPasswordIsValid(validPassword);
+
+    if (validEmail && validPassword) {
+      signIn({
+        email,
+        password,
+      });
+    }
   };
 
   return (

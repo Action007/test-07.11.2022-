@@ -1,4 +1,4 @@
-@import "../../../global-styles/_variables.scss";
+@import '../../../global-styles/_variables.scss';
 
 .popup-map {
   .leaflet-container {
@@ -35,11 +35,15 @@
     overflow: hidden;
     border: none;
     border-radius: 6px;
-    box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+    box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
   }
 
-  .leaflet-bar a,
-  .leaflet-bar a:hover {
-    color: $dark;
+  .leaflet-bar a {
+    color: #a3a3a3;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $dark;
+    }
   }
 }

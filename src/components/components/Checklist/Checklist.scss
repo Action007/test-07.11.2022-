@@ -102,12 +102,11 @@
       margin: 0 0 0 21px;
     }
 
-    &.saved {
-      background-color: #f0f9f2;
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
 
       svg {
-        stroke: $primary;
-        fill: #fff;
+        stroke: $dark;
       }
     }
 
@@ -115,10 +114,16 @@
       width: 16px;
       height: 18px;
       stroke: #a3a3a3;
+      transition: stroke 0.2s ease;
     }
 
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+    &.saved {
+      background-color: #f0f9f2;
+
+      svg {
+        stroke: $primary;
+        fill: #fff;
+      }
     }
   }
 
@@ -245,14 +250,20 @@
     border-radius: 6px;
     color: #a3a3a3;
     background-color: $secondary;
-    transition: box-shadow 0.2s ease;
+    transition: box-shadow 0.2s ease, color 0.2s ease;
 
     svg {
       stroke: #a3a3a3;
+      transition: stroke 0.2s ease;
     }
 
     &:hover {
       box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+      color: $dark;
+
+      svg {
+        stroke: $dark;
+      }
     }
 
     &.active {

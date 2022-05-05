@@ -195,7 +195,13 @@ p {
     justify-content: center;
     width: 20px;
     height: 20px;
-    border-radius: 6px;
+    border-radius: 50%;
+
+    &:hover {
+      svg {
+        stroke: $dark;
+      }
+    }
 
     &:active {
       background-color: #e6e6e6;
@@ -204,6 +210,11 @@ p {
     &:hover + .complain-dropdown__desc {
       opacity: 1;
       visibility: visible;
+    }
+
+    svg {
+      stroke: #a3a3a3;
+      transition: stroke 0.2s ease;
     }
   }
 

@@ -5,7 +5,7 @@ import Cookies from "universal-cookie";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    token: "",
+    token: null,
   },
   reducers: {
     tokenVerification(state) {
@@ -16,10 +16,12 @@ const authSlice = createSlice({
     setToken(state, action) {
       const cookies = new Cookies();
       const token = action.payload;
-      state.token = token;
       cookies.set("Token", token, { path: "/", maxAge: 604800 });
+      state.token = token;
     },
     resetToken(state) {
+      const cookies = new Cookies();
+      cookies.remove("Token", { path: "/", maxAge: 604800 });
       state.token = "";
     },
   },

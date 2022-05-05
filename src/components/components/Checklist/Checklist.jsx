@@ -104,6 +104,14 @@ const Checklist = ({ checklist, created = false, active = false }) => {
     navigate(`/sign-in`);
   };
 
+  const complainHandler = () => {
+    if (token) {
+      setShowComplain(true);
+    } else {
+      loginHandler();
+    }
+  };
+
   const time = (
     <time className="checklist__time" dateTime={date}>
       <span className="checklist__date">{date}</span>
@@ -140,7 +148,7 @@ const Checklist = ({ checklist, created = false, active = false }) => {
             )}
             <div className="complain-dropdown SFPro-500">
               <button
-                onClick={() => setShowComplain(true)}
+                onClick={complainHandler}
                 className="complain-dropdown__info"
                 type="button"
               >

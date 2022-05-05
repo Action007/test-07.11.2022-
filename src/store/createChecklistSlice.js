@@ -123,14 +123,6 @@ const createChecklistSlice = createSlice({
           : item
       );
     },
-    removeCoordinate(state, action) {
-      const id = action.payload;
-      state.checklist_items = state.checklist_items.map((item) =>
-        item.id === id
-          ? { ...item, value: { ...item.value, coordinates: null } }
-          : item
-      );
-    },
     addCategory(state, action) {
       const category = action.payload;
       state.category = category;

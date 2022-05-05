@@ -18,8 +18,8 @@ const CreationOfChecklistPage = () => {
   const token = useSelector((state) => state.authSliceReducer.token);
 
   useEffect(() => {
-    if (!token) navigate("/not-found");
-  }, []);
+    if (!token) navigate("/sign-in");
+  }, [token]);
 
   useEffect(() => {
     if (!id) return;

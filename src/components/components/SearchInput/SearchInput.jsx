@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
 import useClickOutside from "../../../hooks/useClickOutside";
@@ -9,17 +9,19 @@ import "./SearchInput.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
 
+const API_KEY = process.env.REACT_APP_HOSTNAME;
+
 const SearchInput = ({ page = false }) => {
-  const [blur, setBlur] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const [myTags] = useState([]);
-  const [validTagValue, setValidTagValue] = useState("");
+  const [myTags, setMyTags] = useState([]);
   const [tagUrl, setTagUrl] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const [validTagValue, setValidTagValue] = useState("");
   const [sendRequestTag, setSendRequestTag] = useState("");
-  const { data: serverTags } =
-    checklistAPI.useFetchTagsChecklistQuery(sendRequestTag);
-  const { ref, show, setShow } = useClickOutside();
-  const [tags, setTags] = useState(serverTags);
+
+  const { data: searchTags } =
+    checklistAPI.useFetchSearchTagsQuery(sendRequestTag);
+  const [tags, setTags] = useState(searchTags);
+
   const pageValue = useSelector(
     (state) => state.navigationChecklistReducer.pageValue
   );
@@ -29,20 +31,36 @@ const SearchInput = ({ page = false }) => {
   const tagValue = useSelector(
     (state) => state.navigationChecklistReducer.tagValue
   );
+
+  const [blur, setBlur] = useState(false);
+  const { ref, show, setShow } = useClickOutside();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { search } = useLocation();
 
   useEffect(() => {
+    const tagsIds = searchParams.getAll("search_tag_ids[]");
+    if (tagsIds.length) {
+      (async () => {
+        const response = await fetch(`${API_KEY}/api/v1/tags/${tagsIds[0]}`);
+        const responseData = await response.json();
+        setMyTags([responseData]);
+      })();
+    } else {
+      setMyTags([]);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
     const tagVal = tagUrl.replace(/^#/g, "");
-    if (serverTags && serverTags.length) setValidTagValue(tagVal);
-    if (!serverTags) return;
+    if (searchTags && searchTags.length) setValidTagValue(tagVal);
+    if (!searchTags) return;
 
     setTags(
-      serverTags.filter((item) => !myTags.find((tag) => tag.id === item.id))
+      searchTags.filter((item) => !myTags.find((tag) => tag.id === item.id))
     );
-  }, [serverTags]);
+  }, [searchTags]);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -60,7 +78,7 @@ const SearchInput = ({ page = false }) => {
       setShow(false);
     } else {
       const tagVal = searchValue.replace(/^#/g, "");
-      if (serverTags.length || validTagValue === tagVal) setTagUrl(tagVal);
+      if (searchTags.length || validTagValue === tagVal) setTagUrl(tagVal);
       setShow(true);
     }
   }, [searchValue]);
@@ -121,22 +139,23 @@ const SearchInput = ({ page = false }) => {
           type="text"
         />
       </label>
-      {serverTags && serverTags.length !== 0 && show && (
+      {searchTags && searchTags.length !== 0 && show && (
         <TagListSearch tags={tags} findTypeHandler={findTypeHandler} />
       )}
       {page === "home" && (
         <div className="search-input__tags">
-          {myTags.map((tag) => (
-            <button
-              key={tag.id}
-              onClick={() => removeTagHandler(tag.id)}
-              className="search-input__tag"
-              type="button"
-            >
-              #{tag.name}
-              <CloseSvg />
-            </button>
-          ))}
+          {myTags.length !== 0 &&
+            myTags.map((tag) => (
+              <button
+                key={tag.id}
+                onClick={() => removeTagHandler(tag.id)}
+                className="search-input__tag"
+                type="button"
+              >
+                #{tag.name}
+                <CloseSvg />
+              </button>
+            ))}
         </div>
       )}
     </form>

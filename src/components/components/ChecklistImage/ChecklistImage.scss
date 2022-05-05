@@ -1,3 +1,5 @@
+@import '../../../global-styles/_variables.scss';
+
 .checklist-image {
   position: relative;
   overflow: hidden;
@@ -29,6 +31,18 @@
     height: 35px;
     box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
     background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover svg {
+      fill: $dark;
+    }
+
+    svg {
+      fill: #a3a3a3;
+      transition: fill 0.2s ease;
+    }
   }
 
   &__popup {
@@ -66,14 +80,23 @@
     .btn-close {
       position: absolute;
       background-color: #fff;
-      width: 15px;
-      height: 15px;
+      width: 35px;
+      height: 35px;
       right: 15px;
+      padding: 0;
+      background-size: 26px;
       border-radius: 6px;
       top: 15px;
       z-index: 1;
       opacity: 1;
-      box-shadow: 0 0 6px 0 #0000005e !important;
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+      background-position: center;
+      background-image: url('../../../assets/images/icon/closeImg.svg');
+      transition: background-image 0.2s ease;
+
+      &:hover {
+        background-image: url('../../../assets/images/icon/closeImgHover.svg');
+      }
     }
   }
 }

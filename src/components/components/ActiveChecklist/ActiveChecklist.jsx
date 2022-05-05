@@ -8,9 +8,8 @@ import PopupCreateDone from "../PopupCreateDone/PopupCreateDone";
 import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 
 const ActiveChecklist = () => {
-  const { data: checklist, isLoading } = checklistAPI.useFetchChecklistQuery(
-    "/checklists_auth/218"
-  );
+  const { data: checklist, isLoading } =
+    checklistAPI.useFetchChecklistQuery("/checklists/218");
   const [modalShow, setModalShow] = useState(true);
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklists") }];

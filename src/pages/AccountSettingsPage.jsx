@@ -8,8 +8,8 @@ const AccountSettingsPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!token) navigate("/not-found");
-  }, []);
+    if (!token) navigate("/sign-in");
+  }, [token]);
 
   return <AccountSetting />;
 };

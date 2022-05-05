@@ -41,8 +41,6 @@ const Pagination = ({
   }, [activePage]);
 
   const setPage = ({ selected }) => {
-    // console.log(height);
-    // console.log(headerHeight);
     window.scrollTo(0, height + headerHeight);
     setActivePage(selected * perPage + 1);
   };
