@@ -67,6 +67,12 @@ const Checklist = ({ checklist, created = false, active = false }) => {
   const searchValue = useSelector(
     (state) => state.navigationChecklistReducer.searchValue
   );
+  const popularValue = useSelector(
+    (state) => state.navigationChecklistReducer.popularValue
+  );
+  const latestValue = useSelector(
+    (state) => state.navigationChecklistReducer.latestValue
+  );
   const dispatch = useDispatch();
   const token = useSelector((state) => state.authSliceReducer.token);
 
@@ -96,7 +102,9 @@ const Checklist = ({ checklist, created = false, active = false }) => {
   const navigationHandler = (tagID) => {
     dispatch(navigationChecklistActions.setTagID(tagID));
     navigate(
-      `/?${searchValue}page=${pageValue}&per_page=3&search_tag_ids[]=${tagID}${categoryValue}`
+      `/?${searchValue}${
+        searchValue && (latestValue || popularValue) ? "&" : ""
+      }${popularValue}${latestValue}&page=${pageValue}&per_page=3&search_tag_ids[]=${tagID}${categoryValue}`
     );
   };
 

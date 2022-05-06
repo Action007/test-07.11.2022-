@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
+// import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./Pagination.scss";
 
@@ -16,29 +16,30 @@ const Pagination = ({
   totalPage,
   prevPage,
   nextPage,
-  page = false,
+  // page = false,
 }) => {
   // const height = useSelector((state) => state.heightForScrollReducer.height);
   // const headerHeight = useSelector(
   //   (state) => state.heightForScrollReducer.headerHeight
   // );
-  const [activePage, setActivePage] = useState(currentPage);
+  const [, setActivePage] = useState(currentPage);
   const showOnMobile = useMediaQuery("(max-width:550px)");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const perPage = 1;
 
   useEffect(() => {
     setActivePage(currentPage);
   }, [currentPage]);
 
-  useEffect(() => {
-    if (page === "home") {
-      navigate(`/?page=${activePage}&per_page=3`);
-      dispatch(navigationChecklistActions.setPageValue(activePage));
-    }
-    if (!page) navigate(`?page=${activePage}&per_page=10`);
-  }, [activePage]);
+  // useEffect(() => {
+  //   if (page === "home") {
+  //     console.log("1234");
+  //     navigate(`/?page=${activePage}&per_page=3`);
+  //     dispatch(navigationChecklistActions.setPageValue(activePage));
+  //   }
+  //   if (!page) navigate(`?page=${activePage}&per_page=10`);
+  // }, [activePage]);
 
   const setPage = ({ selected }) => {
     window.scrollTo(0, 0);

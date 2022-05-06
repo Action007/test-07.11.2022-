@@ -58,13 +58,13 @@ const CategorySidebar = () => {
       type: "checkbox",
     },
     {
-      id: -1,
+      id: "popular",
       name: translate("sidebar.popular"),
       svg: <PopularSvg />,
       type: "popular",
     },
     {
-      id: 0,
+      id: "latest",
       name: translate("sidebar.latests"),
       svg: <LatestSvg />,
     },
@@ -135,13 +135,44 @@ const CategorySidebar = () => {
   const onClickHandler = (id) => {
     setActive(id);
     if (id === "all") {
-      navigate(`/?${searchValue}page=${pageValue}&per_page=3${tagValue}`);
-      dispatch(navigationChecklistActions.removeCategoryID());
-    } else {
-      dispatch(navigationChecklistActions.setCategoryID(id));
       navigate(
-        `/?${searchValue}page=${pageValue}&per_page=3${tagValue}&search_category_ids[]=${id}`
+        `/?${searchValue}${
+          searchValue ? "&" : ""
+        }page=${pageValue}&per_page=3${tagValue}`
       );
+      dispatch(navigationChecklistActions.removeCategoryID());
+      dispatch(navigationChecklistActions.removePopular());
+      dispatch(navigationChecklistActions.removeLatest());
+    }
+
+    if (id === "popular" || id === "latest") {
+      navigate(
+        `/?${searchValue}${
+          searchValue ? "&" : ""
+        }${id}=${true}&page=${pageValue}&per_page=3${tagValue}`
+      );
+
+      if (id === "popular") {
+        dispatch(navigationChecklistActions.setPopular());
+        dispatch(navigationChecklistActions.removeLatest());
+      }
+      if (id === "latest") {
+        dispatch(navigationChecklistActions.setLatest());
+        dispatch(navigationChecklistActions.removePopular());
+      }
+
+      dispatch(navigationChecklistActions.removeCategoryID());
+    }
+
+    if (id !== "popular" && id !== "latest" && id !== "all") {
+      navigate(
+        `/?${searchValue}${
+          searchValue ? "&" : ""
+        }page=${pageValue}&per_page=3${tagValue}&search_category_ids[]=${id}`
+      );
+      dispatch(navigationChecklistActions.setCategoryID(id));
+      dispatch(navigationChecklistActions.removePopular());
+      dispatch(navigationChecklistActions.removeLatest());
     }
   };
 

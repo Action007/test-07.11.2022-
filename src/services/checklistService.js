@@ -38,6 +38,10 @@ export const checklistAPI = createApi({
       }),
       invalidatesTags: ["SaveChecklist"],
     }),
+    fetchChecklistForSupport: build.query({
+      query: (url) => url,
+      providesTags: () => ["Checklist"],
+    }),
     signUp: build.mutation({
       query: (body) => ({
         url: "/api/v1/users/sign_up",

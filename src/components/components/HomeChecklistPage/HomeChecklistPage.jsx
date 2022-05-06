@@ -26,8 +26,9 @@ const HomeChecklistPage = () => {
   const token = useSelector((state) => state.authSliceReducer.token);
 
   useEffect(() => {
-    if (search) setUrl(search);
-    if (!search) setUrl("?page=1&per_page=3");
+    if (search) {
+      setUrl(search);
+    }
   }, [search]);
 
   const {

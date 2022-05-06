@@ -8,6 +8,8 @@ const navigationChecklistSlice = createSlice({
     categoryValue: "",
     tagValue: "",
     searchValue: "",
+    popularValue: "",
+    latestValue: "",
   },
   reducers: {
     setTagID(state, action) {
@@ -35,11 +37,23 @@ const navigationChecklistSlice = createSlice({
     },
     setSearchValue(state, action) {
       const value = action.payload;
-      state.searchValue = `search_value=${value}&`;
+      state.searchValue = `search_value=${value}`;
     },
     setPageValue(state, action) {
       const value = action.payload;
       state.pageValue = value;
+    },
+    setPopular(state) {
+      state.popularValue = `popular=${true}`;
+    },
+    removePopular(state) {
+      state.popularValue = "";
+    },
+    setLatest(state) {
+      state.latestValue = `latest=${true}`;
+    },
+    removeLatest(state) {
+      state.latestValue = "";
     },
   },
 });
