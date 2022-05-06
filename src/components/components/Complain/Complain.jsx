@@ -13,9 +13,11 @@ const Complain = ({ closeHandler, id }) => {
   const [category, setCategory] = useState("");
   const [checklistId, setChecklistId] = useState(id);
   const { data: checklist, isLoading: isFetchLoading } =
-    checklistAPI.useFetchChecklistQuery(
-      checklistId ? `/checklists_auth/${checklistId}` : ""
-    );
+    checklistAPI.useFetchChecklistQuery(`/checklists_auth/${checklistId}`, {
+      skip: false,
+    });
+
+  console.log(checklistId);
   // eslint-disable-next-line no-empty-pattern
   const [supportChecklist, { isSuccess, isError, isLoading: isSendLoading }] =
     checklistAPI.useSupportChecklistMutation();

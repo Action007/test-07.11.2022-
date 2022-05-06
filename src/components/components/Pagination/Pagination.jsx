@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
@@ -18,10 +18,10 @@ const Pagination = ({
   nextPage,
   page = false,
 }) => {
-  const height = useSelector((state) => state.heightForScrollReducer.height);
-  const headerHeight = useSelector(
-    (state) => state.heightForScrollReducer.headerHeight
-  );
+  // const height = useSelector((state) => state.heightForScrollReducer.height);
+  // const headerHeight = useSelector(
+  //   (state) => state.heightForScrollReducer.headerHeight
+  // );
   const [activePage, setActivePage] = useState(currentPage);
   const showOnMobile = useMediaQuery("(max-width:550px)");
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const Pagination = ({
   }, [activePage]);
 
   const setPage = ({ selected }) => {
-    window.scrollTo(0, height + headerHeight);
+    window.scrollTo(0, 0);
     setActivePage(selected * perPage + 1);
   };
 

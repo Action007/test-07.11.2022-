@@ -30,6 +30,9 @@ const navigationChecklistSlice = createSlice({
       const id = action.payload;
       state.categoryValue = `&search_category_ids[]=${id}`;
     },
+    removeCategoryID(state) {
+      state.categoryValue = "";
+    },
     setSearchValue(state, action) {
       const value = action.payload;
       state.searchValue = `search_value=${value}&`;

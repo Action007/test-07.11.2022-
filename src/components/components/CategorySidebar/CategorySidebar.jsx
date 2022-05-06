@@ -136,6 +136,7 @@ const CategorySidebar = () => {
     setActive(id);
     if (id === "all") {
       navigate(`/?${searchValue}page=${pageValue}&per_page=3${tagValue}`);
+      dispatch(navigationChecklistActions.removeCategoryID());
     } else {
       dispatch(navigationChecklistActions.setCategoryID(id));
       navigate(

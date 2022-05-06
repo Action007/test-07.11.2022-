@@ -71,17 +71,17 @@ const Checklist = ({ checklist, created = false, active = false }) => {
   const token = useSelector((state) => state.authSliceReducer.token);
 
   const likeHandler = () => {
-    if (!iLiked.liked) likeChecklist(id);
-    if (iLiked.liked) dislikeChecklist(id);
+    if (!iLiked?.liked) likeChecklist(id);
+    if (iLiked?.liked) dislikeChecklist(id);
     // eslint-disable-next-line no-shadow
     setILiked((prevState) => ({
-      liked: !prevState.liked,
+      liked: !prevState?.liked,
       // eslint-disable-next-line no-nested-ternary
-      mount: !prevState.liked
-        ? user_track.liked
+      mount: !prevState?.liked
+        ? user_track?.liked
           ? liked
           : liked + 1
-        : user_track.liked
+        : user_track?.liked
         ? liked - 1
         : liked,
     }));
