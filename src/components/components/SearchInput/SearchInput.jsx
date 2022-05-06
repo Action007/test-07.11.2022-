@@ -99,7 +99,6 @@ const SearchInput = ({ page = false }) => {
 
   const addTagHandler = (tag) => {
     const addOrNot = myTags.find((item) => item.name === tag.name);
-
     if (addOrNot || myTags.length === 5) return;
     if (!tag || !tag.name.trim()) return;
 
