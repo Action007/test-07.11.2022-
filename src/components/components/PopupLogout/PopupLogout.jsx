@@ -6,8 +6,13 @@ import "./PopupLogout.scss";
 import { ReactComponent as LogoutSvg } from "../../../assets/images/content/popupLogout.svg";
 import { ReactComponent as DoorSvg } from "../../../assets/images/icon/door.svg";
 
-const PopupLogout = ({ show, onHide }) => {
+const PopupLogout = ({ setIsLogout, show, onHide }) => {
   const { t: translate } = useTranslation();
+
+  const onLogoutHandler = () => {
+    onHide();
+    setIsLogout(true);
+  };
 
   return (
     <Modal
@@ -35,10 +40,14 @@ const PopupLogout = ({ show, onHide }) => {
               {translate("popupLogout.subtitle")}
             </span>
             <div className="logout__buttons SFPro-500">
-              <button className="logout__button" type="button">
+              <button
+                onClick={onLogoutHandler}
+                className="logout__button"
+                type="button"
+              >
                 {translate("popupLogout.yes")}
               </button>
-              <button className="logout__button" type="button">
+              <button onClick={onHide} className="logout__button" type="button">
                 {translate("popupLogout.no")}
               </button>
             </div>

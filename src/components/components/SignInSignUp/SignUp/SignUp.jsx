@@ -93,7 +93,7 @@ const SignUp = () => {
               ref={emailRef}
               id="loginEmail"
               placeholder={translate("login.emailPlaceholder")}
-              type="text"
+              type="email"
             />
             {!emailIsValid && (
               <span className="sign-up__invalid SFPro-300">

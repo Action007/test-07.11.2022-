@@ -41,6 +41,8 @@ const ChecklistDetail = ({
   const [showComplain, setShowComplain] = useState(false);
   const [iSaved, setISaved] = useState(user_track?.saved);
   // eslint-disable-next-line no-empty-pattern
+  const [addActiveChecklist, {}] = checklistAPI.useAddActiveChecklistMutation();
+  // eslint-disable-next-line no-empty-pattern
   const [saveChecklist, {}] = checklistAPI.useSaveChecklistMutation();
   // eslint-disable-next-line no-empty-pattern
   const [likeChecklist, {}] = checklistAPI.useLikeChecklistMutation();
@@ -89,6 +91,11 @@ const ChecklistDetail = ({
         ? liked - 1
         : liked,
     }));
+  };
+
+  const addActiveChecklistHandler = () => {
+    if (token) addActiveChecklist({ checklist_id: id });
+    if (!token) navigate("/sign-in");
   };
 
   const saveHandler = () => {
@@ -195,6 +202,7 @@ const ChecklistDetail = ({
         {!preview && (
           <div className="checklist-detail__wrap">
             <button
+              onClick={addActiveChecklistHandler}
               className="checklist-detail__button SFPro-600"
               type="button"
             >

@@ -5,7 +5,6 @@ import { CSSTransition } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { heightForScrollActions } from "../../../store/heightForScrollSlice";
-// import PopupLogout from "../PopupLogout/PopupLogout";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
 import SearchInput from "../SearchInput/SearchInput";
@@ -27,6 +26,7 @@ const Header = () => {
   const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
   const headerRef = useRef();
+  const user = useSelector((state) => state.authSliceReducer.user);
   const token = useSelector((state) => state.authSliceReducer.token);
   const { t: translate } = useTranslation();
 
@@ -65,7 +65,9 @@ const Header = () => {
             type="button"
           >
             <Bookmark />
-            <span className="header__span">17</span>
+            {user && user.saved_counter !== 0 && (
+              <span className="header__span">{user.saved_counter}</span>
+            )}
           </button>
         </>
       )}
@@ -114,7 +116,9 @@ const Header = () => {
               type="button"
             >
               <BurgerSvg />
-              <span className="header__span">17</span>
+              {user && user.saved_counter !== 0 && (
+                <span className="header__span">{user.saved_counter}</span>
+              )}
             </button>
           )}
           {showAddButtonOnMobile && (
@@ -159,7 +163,6 @@ const Header = () => {
         </Container>
       </Navbar>
       {showSearchOnMobile && <SearchInput />}
-      {/* <PopupLogout show={modalShow} onHide={() => setModalShow(false)} /> */}
     </header>
   );
 };

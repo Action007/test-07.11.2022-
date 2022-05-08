@@ -6,6 +6,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     token: null,
+    user: null,
   },
   reducers: {
     tokenVerification(state) {
@@ -23,6 +24,13 @@ const authSlice = createSlice({
       const cookies = new Cookies();
       cookies.remove("Token", { path: "/", maxAge: 604800 });
       state.token = "";
+    },
+    setUser(state, action) {
+      const user = action.payload;
+      state.user = user;
+    },
+    resetUser(state) {
+      state.user = null;
     },
   },
 });

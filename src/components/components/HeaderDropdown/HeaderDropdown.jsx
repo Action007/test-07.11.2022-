@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authSliceActions } from "../../../store/authSlice";
+import { checklistAPI } from "../../../services/checklistService";
 import useClickOutside from "../../../hooks/useClickOutside";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
+import PopupLogout from "../PopupLogout/PopupLogout";
 import Profile from "../../../assets/images/content/profile.png";
 import "./HeaderDropdown.scss";
 
@@ -20,6 +22,31 @@ const HeaderDropdown = ({ setShow }) => {
   const { ref, show, setShowHandler } = useClickOutside();
   const showOnMobile = useMediaQuery("(max-width:767px)");
   const mobileClass = showOnMobile ? " mobile" : "";
+  const [logout, setLogout] = useState(false);
+  const [isLogout, setIsLogout] = useState(false);
+  const user = useSelector((state) => state.authSliceReducer.user);
+  // const [logOut, { isLoading }] = checklistAPI.useLogOutMutation();
+  const { data: accountInfo, isError } =
+    checklistAPI.useFetchAccountQuery("/api/v1/account");
+
+  useEffect(() => {
+    if (accountInfo) dispatch(authSliceActions.setUser(accountInfo));
+  }, [accountInfo]);
+
+  useEffect(() => {
+    if (!isError) return;
+    dispatch(authSliceActions.resetUser());
+    dispatch(authSliceActions.resetToken());
+  }, [isError]);
+
+  useEffect(() => {
+    if (!isLogout) return;
+    // logOut();
+    dispatch(authSliceActions.resetToken());
+    dispatch(authSliceActions.resetUser());
+    setShow(false);
+    setShowHandler();
+  }, [isLogout]);
 
   const onClickHandler = (address) => {
     navigate(address);
@@ -27,80 +54,84 @@ const HeaderDropdown = ({ setShow }) => {
     setShowHandler();
   };
 
-  const logOutHandler = () => {
-    dispatch(authSliceActions.resetToken());
-    setShow(false);
-    setShowHandler();
-  };
-
   return (
-    <div className={`header-dropdown SFPro-500${mobileClass}`} ref={ref}>
-      <button
-        onClick={setShowHandler}
-        className={`${`header-dropdown__button`}${
-          show ? " show" : ""
-        }${mobileClass}`}
-        variant="success"
-        type="button"
-      >
-        <div className="header-dropdown__img">
-          <img src={Profile} alt="account" />
-        </div>
-        <span className="header-dropdown__name">Alex64</span>
-      </button>
-      <CSSTransition
-        classNames="headerDropdown"
-        in={showOnMobile ? true : show}
-        timeout={300}
-        unmountOnExit
-      >
-        <div className={`header-dropdown__menu${mobileClass}`}>
-          <button
-            onClick={() => onClickHandler("/active-checklists")}
-            className="header-dropdown__inner"
-            type="button"
-          >
-            <span className="header-dropdown__percent">60%</span>
-            <div className="header-dropdown__progress">
-              <ProgressBarHeader done={29} />
-            </div>
-          </button>
-          <button
-            onClick={() => onClickHandler("/created-checklists")}
-            className="header-dropdown__item header-dropdown__item--first"
-            type="button"
-          >
-            <Bookmark />
-            <span />
-            All Checklists
-          </button>
-          <button
-            onClick={() => onClickHandler("/my-profile")}
-            className="header-dropdown__item"
-            type="button"
-          >
-            <Account />
-            Profile settings
-          </button>
-          <button
-            onClick={() => onClickHandler("/account-settings")}
-            className="header-dropdown__item"
-            type="button"
-          >
-            <Setting />
-            Account settings
-          </button>
-          <button
-            onClick={() => logOutHandler()}
-            className="header-dropdown__item"
-            type="button"
-          >
-            <Logout />
-            Log Out
-          </button>
-        </div>
-      </CSSTransition>
-    </div>
+    <>
+      <div className={`header-dropdown SFPro-500${mobileClass}`} ref={ref}>
+        <button
+          onClick={setShowHandler}
+          className={`header-dropdown__button${
+            show ? " show" : ""
+          }${mobileClass}`}
+          variant="success"
+          type="button"
+        >
+          <div className="header-dropdown__img">
+            <img src={Profile} alt="account" />
+          </div>
+          <span className="header-dropdown__name">
+            {user ? user.nickname : ""}
+          </span>
+        </button>
+        <CSSTransition
+          classNames="headerDropdown"
+          in={showOnMobile ? true : show}
+          timeout={300}
+          unmountOnExit
+        >
+          <div className={`header-dropdown__menu${mobileClass}`}>
+            <button
+              onClick={() => onClickHandler("/active-checklists")}
+              className="header-dropdown__inner"
+              type="button"
+            >
+              <span className="header-dropdown__percent">60%</span>
+              <div className="header-dropdown__progress">
+                <ProgressBarHeader done={29} />
+              </div>
+            </button>
+            <button
+              onClick={() => onClickHandler("/created-checklists")}
+              className="header-dropdown__item header-dropdown__item--first"
+              type="button"
+            >
+              <Bookmark />
+              <span />
+              All Checklists
+            </button>
+            <button
+              onClick={() => onClickHandler("/my-profile")}
+              className="header-dropdown__item"
+              type="button"
+            >
+              <Account />
+              Profile settings
+            </button>
+            <button
+              onClick={() => onClickHandler("/account-settings")}
+              className="header-dropdown__item"
+              type="button"
+            >
+              <Setting />
+              Account settings
+            </button>
+            <button
+              onClick={() => setLogout(true)}
+              className="header-dropdown__item"
+              type="button"
+            >
+              <Logout />
+              Log Out
+            </button>
+          </div>
+        </CSSTransition>
+      </div>
+      <PopupLogout
+        setIsLogout={setIsLogout}
+        show={logout}
+        onHide={() => setLogout(false)}
+      />
+      {/* <LoadingSpinnerPopup showSpinner={isLoading} /> */}
+    </>
   );
 };
 

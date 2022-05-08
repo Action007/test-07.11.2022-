@@ -23,20 +23,12 @@ export const checklistAPI = createApi({
       providesTags: () => ["Checklist"],
     }),
     fetchAccount: build.query({
-      query: () => ({
-        url: "/api/v1/account",
-      }),
-      invalidatesTags: ["Account"],
+      query: (url) => url,
+      providesTags: () => ["Account"],
     }),
     fetchSearchTags: build.query({
       query: (url) => `/api/v1/tags/search?value=${url}`,
       providesTags: () => ["SearchTags"],
-    }),
-    fetchSavesChecklists: build.query({
-      query: () => ({
-        url: "/api/v1/checklists_auth?search_type=saved&page=1&per_page=1000",
-      }),
-      invalidatesTags: ["SaveChecklist"],
     }),
     fetchChecklistForSupport: build.query({
       query: (url) => url,
@@ -56,7 +48,14 @@ export const checklistAPI = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Checklist"],
+      invalidatesTags: ["Checklist", "Account"],
+    }),
+    logOut: build.mutation({
+      query: () => ({
+        url: "/api/v1/users/logout",
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Checklist", "Account"],
     }),
     createChecklist: build.mutation({
       query: (checklist) => ({
@@ -91,7 +90,7 @@ export const checklistAPI = createApi({
         },
         body: id,
       }),
-      invalidatesTags: ["SaveChecklist"],
+      invalidatesTags: ["Account"],
     }),
     unsaveChecklist: build.mutation({
       query: (id) => ({
@@ -102,7 +101,7 @@ export const checklistAPI = createApi({
         },
         body: id,
       }),
-      invalidatesTags: ["SaveChecklist"],
+      invalidatesTags: ["Account"],
     }),
     likeChecklist: build.mutation({
       query: (id) => ({
@@ -132,6 +131,17 @@ export const checklistAPI = createApi({
         method: "DELETE",
       }),
       invalidatesTags: ["Checklist"],
+    }),
+    addActiveChecklist: build.mutation({
+      query: (body) => ({
+        url: "/api/v1/active_checklists",
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body,
+      }),
+      invalidatesTags: ["Account"],
     }),
   }),
 });
