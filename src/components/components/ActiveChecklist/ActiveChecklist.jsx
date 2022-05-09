@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import ActiveChecklistDetail from "../ActiveChecklistDetail/ActiveChecklistDetail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import PopupCreateDone from "../PopupCreateDone/PopupCreateDone";
 import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 
 const ActiveChecklist = () => {
+  const { id } = useParams();
   const { data: checklist, isLoading } =
-    checklistAPI.useFetchChecklistQuery("/checklists/218");
-  const [modalShow, setModalShow] = useState(true);
+    checklistAPI.useFetchActiveChecklistQuery(`/active_checklists/${id}`);
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklists") }];
 
@@ -21,9 +21,8 @@ const ActiveChecklist = () => {
         {translate("checklists")}
       </h2>
       <ProgressBarChecklist done={50} />
-      {checklist && <ActiveChecklistDetail checklist={checklist} />}
+      {checklist && <ActiveChecklistDetail checklist={checklist.entities} />}
       {isLoading && <LoadingSkeleton />}
-      <PopupCreateDone show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 };

@@ -46,7 +46,8 @@
   &__checkmark {
     position: absolute;
     left: -50px;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     width: 20px;
     height: 20px;
     background-image: url('../../../assets/images/icon/checkbox.svg');

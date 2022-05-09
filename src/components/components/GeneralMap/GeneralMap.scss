@@ -9,6 +9,9 @@
 
   &__location,
   &__extend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     z-index: 800;
     border-radius: 6px;
@@ -47,9 +50,6 @@
     height: 35px;
     box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
     background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .leaflet-container {

@@ -22,6 +22,10 @@ export const checklistAPI = createApi({
       query: (url) => `/api/v1${url}`,
       providesTags: () => ["Checklist"],
     }),
+    fetchActiveChecklist: build.query({
+      query: (url) => `/api/v1${url}`,
+      providesTags: () => ["ActiveChecklist"],
+    }),
     fetchAccount: build.query({
       query: (url) => url,
       providesTags: () => ["Account"],
@@ -141,7 +145,18 @@ export const checklistAPI = createApi({
         },
         body,
       }),
-      invalidatesTags: ["Account"],
+      invalidatesTags: ["ActiveChecklist"],
+    }),
+    checkActiveChecklistItem: build.mutation({
+      query: (body) => ({
+        url: `/api/v1/active_checklists/${body.id}/${body.checklist_item_id}/action`,
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body,
+      }),
+      invalidatesTags: ["ActiveChecklist"],
     }),
   }),
 });

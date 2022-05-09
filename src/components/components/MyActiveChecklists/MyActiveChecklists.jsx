@@ -6,39 +6,40 @@ import uniqueID from "../../../utils/uniqueID";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
 import Pagination from "../Pagination/Pagination";
+import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import Tabs from "../Tabs/Tabs";
+import HomeButton from "../../UI/Buttons/HomeButton/HomeButton";
 
 const MyActiveChecklists = () => {
   const [category, setCategory] = useState("active");
   const { t: translate } = useTranslation();
   const { search } = useLocation();
-  const [url, setUrl] = useState(search || "?page=1&per_page=10");
+  const [url, setUrl] = useState(
+    search || `?completed=false&page=1&per_page=10`
+  );
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (search) setUrl(search);
-    if (!search) setUrl("?page=1&per_page=10");
+    if (search) {
+      setUrl(search);
+    }
   }, [search]);
 
   const {
     data: checklists,
     error,
     isLoading,
-  } = checklistAPI.useFetchChecklistQuery(`/checklists_auth${url}`);
-
-  const breadcrumbs = [{ title: translate("myActiveChecklists.title") }];
-  const tabs = [
-    { id: 0, key: "active", title: translate("myActiveChecklists.active") },
-    { id: 1, key: "passed", title: translate("myActiveChecklists.passed") },
-  ];
+  } = checklistAPI.useFetchActiveChecklistQuery(`/active_checklists${url}`);
 
   useEffect(() => {
     if (pathname === "/active-checklists") {
+      setUrl(`?completed=false&page=1&per_page=10`);
       setCategory("active");
     }
     if (pathname === "/passed-checklists") {
+      setUrl(`?completed=true&page=1&per_page=10`);
       setCategory("passed");
     }
   }, [pathname]);
@@ -46,6 +47,12 @@ const MyActiveChecklists = () => {
   useEffect(() => {
     if (error) navigate("/error");
   }, [error]);
+
+  const breadcrumbs = [{ title: translate("myActiveChecklists.title") }];
+  const tabs = [
+    { id: 0, key: "active", title: translate("myActiveChecklists.active") },
+    { id: 1, key: "passed", title: translate("myActiveChecklists.passed") },
+  ];
 
   const loader = (
     <>
@@ -71,15 +78,30 @@ const MyActiveChecklists = () => {
         </h2>
         <Tabs tabs={tabs} category={category} />
         {isLoading && loader}
-        {checklists &&
+        {checklists && checklists.entities.length ? (
           checklists.entities.map((checklist) => (
-            <Checklist
-              key={uniqueID()}
-              checklist={checklist}
-              translate={translate("myActiveChecklists.showMore")}
-              active
-            />
-          ))}
+            <React.Fragment key={checklist.id}>
+              <ProgressBarChecklist done={20} />
+              <Checklist
+                key={uniqueID()}
+                checklist={checklist}
+                translate={translate("myActiveChecklists.showMore")}
+                page="my-active-checklists"
+              />
+            </React.Fragment>
+          ))
+        ) : (
+          <div className="text-center mt-7">
+            <div className="display-6 mb-6">
+              {category === "active" &&
+                translate("myActiveChecklists.activeEmpty")}
+              {category === "passed" &&
+                translate("myActiveChecklists.passedEmpty")}
+            </div>
+            {category === "active" && <HomeButton />}
+            {category === "passed" && <HomeButton />}
+          </div>
+        )}
       </div>
       {checklists && checklists.paginate.total_pages > 1 && (
         <Pagination

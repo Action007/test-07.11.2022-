@@ -19,12 +19,10 @@ import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addIte
 // import { Modal } from "react-bootstrap";
 
 const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
-  // eslint-disable-next-line no-empty-pattern
   const [
     createChecklist,
     { isSuccess: successCreate, error: errorCreate, isLoading: loadingCreate },
   ] = checklistAPI.useCreateChecklistMutation();
-  // eslint-disable-next-line no-empty-pattern
   const [
     updateChecklist,
     { isSuccess: successUpdate, error: errorUpdate, isLoading: loadingUpdate },

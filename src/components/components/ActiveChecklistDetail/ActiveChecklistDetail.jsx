@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import PopupCreateDone from "../PopupCreateDone/PopupCreateDone";
 import uniqueID from "../../../utils/uniqueID";
 import "./ActiveChecklistDetail.scss";
 
@@ -8,36 +9,50 @@ import { ReactComponent as ShareSvg } from "../../../assets/images/icon/share.sv
 import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
 
 const ActiveChecklistDetail = ({ checklist }) => {
+  const [modalShow, setModalShow] = useState(checklist.completed);
+
+  useEffect(() => {
+    setModalShow(checklist.completed);
+  }, [checklist.completed]);
+
   return (
-    <div className="active-checklist">
-      <h3 className="active-checklist__title SFPro-700">{checklist.name}</h3>
-      <ol className="active-checklist__items">
-        {checklist.checklist_items?.map(({ description, list_type, value }) => {
-          const id = uniqueID();
-          return (
-            <ChecklistCheckbox
-              key={id}
-              description={description}
-              list_type={list_type}
-              value={value}
-              idFor={id}
-            />
-          );
-        })}
-      </ol>
-      <div className="active-checklist__wrapper SFPro-500">
-        <button className="active-checklist__btn" type="button">
-          Share
-          <ShareSvg />
-        </button>
-        <button className="active-checklist__btn" type="button">
-          <UploadSvg />
-        </button>
-        <button className="active-checklist__btn" type="button">
-          <DeleteSvg />
-        </button>
+    <>
+      <div className="active-checklist">
+        <h3 className="active-checklist__title SFPro-700">{checklist.name}</h3>
+        <ol className="active-checklist__items">
+          {checklist.checklist_items?.map(
+            ({ description, list_type, value, completed, id }) => {
+              const idFor = uniqueID();
+              return (
+                <ChecklistCheckbox
+                  key={id}
+                  id={checklist.id}
+                  description={description}
+                  checklistItemId={id}
+                  list_type={list_type}
+                  value={value}
+                  idFor={idFor}
+                  completed={completed}
+                />
+              );
+            }
+          )}
+        </ol>
+        <div className="active-checklist__wrapper SFPro-500">
+          <button className="active-checklist__btn" type="button">
+            Share
+            <ShareSvg />
+          </button>
+          <button className="active-checklist__btn" type="button">
+            <UploadSvg />
+          </button>
+          <button className="active-checklist__btn" type="button">
+            <DeleteSvg />
+          </button>
+        </div>
       </div>
-    </div>
+      <PopupCreateDone show={modalShow} onHide={() => setModalShow(false)} />
+    </>
   );
 };
 

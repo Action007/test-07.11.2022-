@@ -100,9 +100,9 @@
     "created": "Created",
     "liked": "Liked",
     "saved": "Saved",
-    "createdEmpty": "Sorry, you don't have any checklists created yet :(",
-    "likedEmpty": "Sorry, you don't have your favorite checklists yet :(",
-    "savedEmpty": "Sorry, you don't have saved checklists yet :(",
+    "createdEmpty": "Sorry, you don't have any checklists created yet",
+    "likedEmpty": "Sorry, you don't have your favorite checklists yet",
+    "savedEmpty": "Sorry, you don't have saved checklists yet",
     "createButton": "Create checklist",
     "homeButton": "Go back to the main page"
   },
@@ -116,7 +116,9 @@
     "title": "My active checklists",
     "active": "Active",
     "passed": "Passed",
-    "showMore": "Show more"
+    "showMore": "Show more",
+    "activeEmpty": "Sorry, you don't have your active checklists yet",
+    "passedEmpty": "Sorry, you don't have your passed checklists yet"
   },
   "creationOfChecklist": {
     "title": "Сreation of checklisit",
@@ -172,7 +174,7 @@
     "heading": "Share knowledge, create your own checklists and help people learn new things",
     "desc": "Already more than 1000 people a day have their own checklists and correspond to pressing questions. Create your own checklists",
     "button": "Create checklist",
-    "notFound": "Sorry, no checklists found for this query :("
+    "notFound": "Sorry, no checklists found for this query"
   },
   "login": {
     "signIn": "Sign In",
@@ -181,7 +183,7 @@
     "title2": "Sign Up with Email",
     "title3": "Check your mail",
     "title4": "Reset Password",
-    "title5" :"Forgot Password",
+    "title5": "Forgot Password",
     "name": "Name",
     "namePlaceholder": "Enter a name",
     "email": "Email address",

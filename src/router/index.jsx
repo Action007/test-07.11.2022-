@@ -53,7 +53,11 @@ const routes = [
     path: "/passed-checklists",
     element: <MyActiveChecklistsPage />,
   },
-  { id: 14, path: "/active-checklist", element: <ActiveChecklistPage /> },
+  {
+    id: 14,
+    path: "/active-checklist/:id/:slug",
+    element: <ActiveChecklistPage />,
+  },
   {
     id: 15,
     path: "/creation-of-checklist",

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CSSTransition } from "react-transition-group";
+import { checklistAPI } from "../../../services/checklistService";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
 import GeneralMap from "../GeneralMap/GeneralMap";
 import PopupMap from "../PopupMap/PopupMap";
@@ -8,8 +9,19 @@ import "./ChecklistCheckbox.scss";
 
 import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg";
 
-const ChecklistCheckbox = ({ description, list_type, value, idFor }) => {
-  const [checked, setChecked] = useState(false);
+const ChecklistCheckbox = ({
+  id,
+  checklistItemId,
+  description,
+  list_type,
+  value,
+  idFor,
+  completed,
+}) => {
+  // eslint-disable-next-line no-empty-pattern
+  const [checkChecklistItem, {}] =
+    checklistAPI.useCheckActiveChecklistItemMutation();
+  const [checked, setChecked] = useState(completed);
   const [showMap, setShowMap] = useState(false);
   const test = /^(http|https):\/\//i;
   const link = test.test(value.link) ? value.link : `https://${value.link}`;
@@ -17,6 +29,7 @@ const ChecklistCheckbox = ({ description, list_type, value, idFor }) => {
 
   const checkboxHandler = () => {
     setChecked((prevState) => !prevState);
+    checkChecklistItem({ id, checklist_item_id: checklistItemId });
   };
 
   return (

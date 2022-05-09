@@ -10,7 +10,6 @@ import useMediaQuery from "../../../hooks/useMediaQuery";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
 import EditDropdown from "../EditDropdown/EditDropdown";
 import uniqueID from "../../../utils/uniqueID";
-import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 import Complain from "../Complain/Complain";
 import "./Checklist.scss";
 
@@ -20,7 +19,7 @@ import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
 import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
-const Checklist = ({ checklist, created = false, active = false }) => {
+const Checklist = ({ checklist, created = false, page = false }) => {
   const {
     id,
     checklist_items,
@@ -129,13 +128,22 @@ const Checklist = ({ checklist, created = false, active = false }) => {
   const head = (
     <>
       <h3 className="checklist__title SFPro-700">
-        <button onClick={() => navigate(`/list/${id}/${slug}`)} type="button">
+        <button
+          onClick={() =>
+            navigate(
+              `/${
+                page !== "my-active-checklists" ? "list" : "active-checklist"
+              }/${id}/${slug}`
+            )
+          }
+          type="button"
+        >
           {name}
         </button>
       </h3>
       <div className="checklist__head">
         {showOnMobile && time}
-        {!created && (
+        {!created && !page ? (
           <div className="checklist__buttons">
             {token ? (
               <button
@@ -165,6 +173,8 @@ const Checklist = ({ checklist, created = false, active = false }) => {
               <span className="complain-dropdown__desc">Complain</span>
             </div>
           </div>
+        ) : (
+          ""
         )}
       </div>
       {created && <EditDropdown id={id} />}
@@ -173,7 +183,6 @@ const Checklist = ({ checklist, created = false, active = false }) => {
 
   return (
     <>
-      {active && <ProgressBarChecklist done={20} />}
       <div className="checklist">
         <div className="checklist__heading">{head}</div>
         <ol className="checklist__items">
@@ -196,50 +205,65 @@ const Checklist = ({ checklist, created = false, active = false }) => {
               ))}
         </ol>
         <button
-          onClick={() => navigate(`/list/${id}/${slug}`)}
+          onClick={() =>
+            navigate(
+              `/${
+                page !== "my-active-checklists" ? "list" : "active-checklist"
+              }/${id}/${slug}`
+            )
+          }
           className="checklist__dots SFPro-600"
           type="button"
         >
           <DotsSvg />
         </button>
         <div className="checklist__tags">
-          {tags.map((tag) => (
-            <button
-              onClick={() => navigationHandler(tag.id)}
-              className="checklist__tag"
-              key={uniqueID()}
-              type="button"
-            >
-              #{tag.name}
-            </button>
-          ))}
-        </div>
-        <div className="checklist__box">
-          <div className="checklist__inner">
-            <span
-              className={`${`checklist__viewed SFPro-700`} ${
-                viewed ? "active" : ""
-              }`}
-            >
-              <ViewSvg />
-              <span>{viewed}</span>
-            </span>
-            {token ? (
-              <button onClick={likeHandler} className={likeClass} type="button">
-                <LikeSvg />
-                <span>{iLiked.mount}</span>
-              </button>
-            ) : (
+          {tags &&
+            tags.map((tag) => (
               <button
-                onClick={loginHandler}
-                className={likeClass}
+                onClick={() => navigationHandler(tag.id)}
+                className="checklist__tag"
+                key={uniqueID()}
                 type="button"
               >
-                <LikeSvg />
-                <span>{iLiked.mount}</span>
+                #{tag.name}
               </button>
-            )}
-          </div>
+            ))}
+        </div>
+        <div className="checklist__box">
+          {!page ? (
+            <div className="checklist__inner">
+              <span
+                className={`${`checklist__viewed SFPro-700`} ${
+                  viewed ? "active" : ""
+                }`}
+              >
+                <ViewSvg />
+                <span>{viewed}</span>
+              </span>
+              {token ? (
+                <button
+                  onClick={likeHandler}
+                  className={likeClass}
+                  type="button"
+                >
+                  <LikeSvg />
+                  <span>{iLiked.mount}</span>
+                </button>
+              ) : (
+                <button
+                  onClick={loginHandler}
+                  className={likeClass}
+                  type="button"
+                >
+                  <LikeSvg />
+                  <span>{iLiked.mount}</span>
+                </button>
+              )}
+            </div>
+          ) : (
+            ""
+          )}
           {!showOnMobile && time}
         </div>
       </div>

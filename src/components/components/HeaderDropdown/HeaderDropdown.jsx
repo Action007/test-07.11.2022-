@@ -25,7 +25,8 @@ const HeaderDropdown = ({ setShow }) => {
   const [logout, setLogout] = useState(false);
   const [isLogout, setIsLogout] = useState(false);
   const user = useSelector((state) => state.authSliceReducer.user);
-  // const [logOut, { isLoading }] = checklistAPI.useLogOutMutation();
+  // eslint-disable-next-line no-empty-pattern
+  const [logOut, {}] = checklistAPI.useLogOutMutation();
   const { data: accountInfo, isError } =
     checklistAPI.useFetchAccountQuery("/api/v1/account");
 
@@ -41,7 +42,7 @@ const HeaderDropdown = ({ setShow }) => {
 
   useEffect(() => {
     if (!isLogout) return;
-    // logOut();
+    logOut();
     dispatch(authSliceActions.resetToken());
     dispatch(authSliceActions.resetUser());
     setShow(false);
