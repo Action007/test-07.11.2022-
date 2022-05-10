@@ -57,9 +57,6 @@ const Checklist = ({ checklist, created = false, page = false }) => {
     iLiked.mount ? " active" : ""
   }${iLiked?.liked ? " liked" : ""}`;
   const savedClass = `checklist__bookmark${iSaved ? " saved" : ""}`;
-  const pageValue = useSelector(
-    (state) => state.navigationChecklistReducer.pageValue
-  );
   const categoryValue = useSelector(
     (state) => state.navigationChecklistReducer.categoryValue
   );
@@ -103,7 +100,7 @@ const Checklist = ({ checklist, created = false, page = false }) => {
     navigate(
       `/?${searchValue}${
         searchValue && (latestValue || popularValue) ? "&" : ""
-      }${popularValue}${latestValue}&page=${pageValue}&per_page=3&search_tag_ids[]=${tagID}${categoryValue}`
+      }${popularValue}${latestValue}&page=1&per_page=3&search_tag_ids[]=${tagID}${categoryValue}`
     );
   };
 

@@ -15,34 +15,14 @@ const MyActiveChecklists = () => {
   const [category, setCategory] = useState("active");
   const { t: translate } = useTranslation();
   const { search } = useLocation();
-  const [url, setUrl] = useState(
-    search || `?completed=false&page=1&per_page=10`
-  );
-  const { pathname } = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (search) {
-      setUrl(search);
-    }
-  }, [search]);
-
   const {
     data: checklists,
     error,
     isLoading,
-  } = checklistAPI.useFetchActiveChecklistQuery(`/active_checklists${url}`);
-
-  useEffect(() => {
-    if (pathname === "/active-checklists") {
-      setUrl(`?completed=false&page=1&per_page=10`);
-      setCategory("active");
-    }
-    if (pathname === "/passed-checklists") {
-      setUrl(`?completed=true&page=1&per_page=10`);
-      setCategory("passed");
-    }
-  }, [pathname]);
+  } = checklistAPI.useFetchActiveChecklistQuery(
+    `/active_checklists${search || "?completed=false&page=1&per_page=10"}`
+  );
 
   useEffect(() => {
     if (error) navigate("/error");
@@ -76,7 +56,12 @@ const MyActiveChecklists = () => {
         <h2 className="title--margin display-4 text-center SFPro-600">
           {translate("myActiveChecklists.title")}
         </h2>
-        <Tabs tabs={tabs} category={category} />
+        <Tabs
+          tabs={tabs}
+          category={category}
+          setCategory={setCategory}
+          page="my-active-checklists"
+        />
         {isLoading && loader}
         {checklists && checklists.entities.length ? (
           checklists.entities.map((checklist) => (
@@ -110,6 +95,9 @@ const MyActiveChecklists = () => {
           totalPage={checklists.paginate.total_pages}
           prevPage={checklists.paginate.prev_page}
           nextPage={checklists.paginate.next_page}
+          url={`${
+            category === "active" ? "completed=false" : "completed=true"
+          }`}
         />
       )}
     </div>

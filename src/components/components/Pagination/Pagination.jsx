@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./Pagination.scss";
 
@@ -17,6 +16,7 @@ const Pagination = ({
   prevPage,
   nextPage,
   page = false,
+  url,
 }) => {
   const height = useSelector((state) => state.heightForScrollReducer.height);
   const headerHeight = useSelector(
@@ -24,9 +24,24 @@ const Pagination = ({
   );
   const [activePage, setActivePage] = useState(currentPage);
   const showOnMobile = useMediaQuery("(max-width:550px)");
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const perPage = 1;
+
+  const searchValue = useSelector(
+    (state) => state.navigationChecklistReducer.searchValue
+  );
+  const categoryValue = useSelector(
+    (state) => state.navigationChecklistReducer.categoryValue
+  );
+  const tagValue = useSelector(
+    (state) => state.navigationChecklistReducer.tagValue
+  );
+  const popularValue = useSelector(
+    (state) => state.navigationChecklistReducer.popularValue
+  );
+  const latestValue = useSelector(
+    (state) => state.navigationChecklistReducer.latestValue
+  );
 
   useEffect(() => {
     setActivePage(currentPage);
@@ -34,10 +49,16 @@ const Pagination = ({
 
   useEffect(() => {
     if (page === "home") {
-      navigate(`/?page=${activePage}&per_page=3`);
-      dispatch(navigationChecklistActions.setPageValue(activePage));
+      navigate(
+        `/?${searchValue}${
+          searchValue && (latestValue || popularValue) ? "&" : ""
+        }${popularValue}${latestValue}${
+          latestValue || popularValue ? "&" : ""
+        }page=${activePage}&per_page=3${tagValue}${categoryValue}`
+      );
+    } else {
+      navigate(`?${url}&page=${activePage}&per_page=10`);
     }
-    if (!page) navigate(`?page=${activePage}&per_page=10`);
   }, [activePage]);
 
   const setPage = ({ selected }) => {
@@ -63,7 +84,7 @@ const Pagination = ({
     <div className="paginate">
       {!showOnMobile && (
         <ReactPaginate
-          initialPage={currentPage - 1}
+          forcePage={activePage - 1}
           pageCount={count}
           pageRangeDisplayed={2}
           marginPagesDisplayed={2}

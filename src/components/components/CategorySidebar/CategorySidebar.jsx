@@ -37,9 +37,6 @@ const CategorySidebar = () => {
   const [active, setActive] = useState("all");
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
-  const pageValue = useSelector(
-    (state) => state.navigationChecklistReducer.pageValue
-  );
   const searchValue = useSelector(
     (state) => state.navigationChecklistReducer.searchValue
   );
@@ -126,19 +123,30 @@ const CategorySidebar = () => {
   ];
 
   useEffect(() => {
-    const category = search.match(/&search_category_ids\[\]=(\d+)/g);
-    if (!category) return;
-    const [id] = category[0].match(/\d+/g);
-    setActive(+id);
-  }, []);
+    let category = "all";
+    const categoryIds = search.match(/&search_category_ids\[\]=(\d+)/g);
+    const papular = search.match(/popular=true/g);
+    const latest = search.match(/latest=true/g);
+
+    if (categoryIds) {
+      const [id] = categoryIds[0].match(/\d+/g);
+      category = +id;
+    } else if (papular) {
+      category = "popular";
+    } else if (latest) {
+      category = "latest";
+    } else {
+      category = "all";
+    }
+
+    setActive(category);
+  }, [search]);
 
   const onClickHandler = (id) => {
     setActive(id);
     if (id === "all") {
       navigate(
-        `/?${searchValue}${
-          searchValue ? "&" : ""
-        }page=${pageValue}&per_page=3${tagValue}`
+        `/?${searchValue}${searchValue ? "&" : ""}page=1&per_page=3${tagValue}`
       );
       dispatch(navigationChecklistActions.removeCategoryID());
       dispatch(navigationChecklistActions.removePopular());
@@ -149,7 +157,7 @@ const CategorySidebar = () => {
       navigate(
         `/?${searchValue}${
           searchValue ? "&" : ""
-        }${id}=${true}&page=${pageValue}&per_page=3${tagValue}`
+        }${id}=${true}&page=1&per_page=3${tagValue}`
       );
 
       if (id === "popular") {
@@ -168,7 +176,7 @@ const CategorySidebar = () => {
       navigate(
         `/?${searchValue}${
           searchValue ? "&" : ""
-        }page=${pageValue}&per_page=3${tagValue}&search_category_ids[]=${id}`
+        }page=1&per_page=3${tagValue}&search_category_ids[]=${id}`
       );
       dispatch(navigationChecklistActions.setCategoryID(id));
       dispatch(navigationChecklistActions.removePopular());

@@ -22,9 +22,6 @@ const SearchInput = ({ page = false }) => {
     checklistAPI.useFetchSearchTagsQuery(sendRequestTag);
   const [tags, setTags] = useState(searchTags);
 
-  const pageValue = useSelector(
-    (state) => state.navigationChecklistReducer.pageValue
-  );
   const categoryValue = useSelector(
     (state) => state.navigationChecklistReducer.categoryValue
   );
@@ -101,11 +98,17 @@ const SearchInput = ({ page = false }) => {
     const addOrNot = myTags.find((item) => item.name === tag.name);
     if (addOrNot || myTags.length === 5) return;
     if (!tag || !tag.name.trim()) return;
+    const tagsUrl = `${tagValue}&search_tag_ids[]=${tag.id}`;
 
-    dispatch(navigationChecklistActions.setTagsID(tag.id));
     setTagUrl("");
     setShow(false);
     setSearchValue("");
+    navigate(
+      `/?${popularValue}${latestValue}${
+        latestValue || popularValue ? "&" : ""
+      }page=1&per_page=3${tagsUrl}${categoryValue}`
+    );
+    dispatch(navigationChecklistActions.setTagsID(tag.id));
   };
 
   const findTypeHandler = (e, tag) => {
@@ -120,12 +123,14 @@ const SearchInput = ({ page = false }) => {
     const isTag = searchValue.trim().match(/^#/g);
     if (isTag) return;
 
-    dispatch(navigationChecklistActions.setSearchValue(searchValue));
-    navigate(
-      `/?search_value=${searchValue}${
-        searchValue && (latestValue || popularValue) ? "&" : ""
-      }${popularValue}${latestValue}&page=${pageValue}&per_page=3${tagValue}${categoryValue}`
-    );
+    if (searchValue) {
+      navigate(
+        `/?search_value=${searchValue}${
+          searchValue && (latestValue || popularValue) ? "&" : ""
+        }${popularValue}${latestValue}&page=1&per_page=3${tagValue}${categoryValue}`
+      );
+      dispatch(navigationChecklistActions.setSearchValue(searchValue));
+    }
   };
 
   const removeTagHandler = () => {

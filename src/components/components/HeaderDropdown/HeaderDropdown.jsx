@@ -91,7 +91,11 @@ const HeaderDropdown = ({ setShow }) => {
               </div>
             </button>
             <button
-              onClick={() => onClickHandler("/created-checklists")}
+              onClick={() =>
+                onClickHandler(
+                  "/created-checklists?search_type=created&page=1&per_page=10"
+                )
+              }
               className="header-dropdown__item header-dropdown__item--first"
               type="button"
             >

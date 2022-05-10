@@ -56,9 +56,6 @@ const ChecklistDetail = ({
   }${iLiked?.liked ? " liked" : ""}`;
   const savedClass = `checklist-detail__bookmark${iSaved ? " saved" : ""}`;
   const navigate = useNavigate();
-  const pageValue = useSelector(
-    (state) => state.navigationChecklistReducer.pageValue
-  );
   const categoryValue = useSelector(
     (state) => state.navigationChecklistReducer.categoryValue
   );
@@ -108,7 +105,7 @@ const ChecklistDetail = ({
     navigate(
       `/?${searchValue}${
         searchValue && (latestValue || popularValue) ? "&" : ""
-      }${popularValue}${latestValue}&page=${pageValue}&per_page=3&search_tag_ids[]=${tagID}${categoryValue}`
+      }${popularValue}${latestValue}&page=1&per_page=3&search_tag_ids[]=${tagID}${categoryValue}`
     );
   };
 

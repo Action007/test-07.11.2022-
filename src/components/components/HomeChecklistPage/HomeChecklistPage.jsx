@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
 import CategorySidebar from "../CategorySidebar/CategorySidebar";
@@ -17,6 +18,7 @@ import "./HomeChecklistPage.scss";
 import Logo from "../../../assets/images/content/logo.svg";
 
 const HomeChecklistPage = () => {
+  const dispatch = useDispatch();
   const { search } = useLocation();
   const [url, setUrl] = useState(search || "?page=1&per_page=3");
   const showOnMobile = useMediaQuery("(max-width:991px)");
@@ -28,6 +30,13 @@ const HomeChecklistPage = () => {
   useEffect(() => {
     if (search) {
       setUrl(search);
+    } else {
+      setUrl("?page=1&per_page=3");
+      dispatch(navigationChecklistActions.removeTagsID());
+      dispatch(navigationChecklistActions.removeTagID());
+      dispatch(navigationChecklistActions.removeCategoryID());
+      dispatch(navigationChecklistActions.removePopular());
+      dispatch(navigationChecklistActions.removeLatest());
     }
   }, [search]);
 

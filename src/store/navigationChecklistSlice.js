@@ -4,7 +4,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const navigationChecklistSlice = createSlice({
   name: "heightForScroll",
   initialState: {
-    pageValue: 1,
     categoryValue: "",
     tagValue: "",
     searchValue: "",
@@ -38,10 +37,6 @@ const navigationChecklistSlice = createSlice({
     setSearchValue(state, action) {
       const value = action.payload;
       state.searchValue = `search_value=${value}`;
-    },
-    setPageValue(state, action) {
-      const value = action.payload;
-      state.pageValue = value;
     },
     setPopular(state) {
       state.popularValue = `popular=${true}`;
