@@ -25,13 +25,24 @@ const HeaderDropdown = ({ setShow }) => {
   const [logout, setLogout] = useState(false);
   const [isLogout, setIsLogout] = useState(false);
   const user = useSelector((state) => state.authSliceReducer.user);
+  const percent = useSelector((state) => state.authSliceReducer.percent);
   // eslint-disable-next-line no-empty-pattern
   const [logOut, {}] = checklistAPI.useLogOutMutation();
   const { data: accountInfo, isError } =
     checklistAPI.useFetchAccountQuery("/api/v1/account");
 
   useEffect(() => {
-    if (accountInfo) dispatch(authSliceActions.setUser(accountInfo));
+    if (accountInfo) {
+      const { completed_counter, active_checklists_counter } = accountInfo;
+
+      dispatch(authSliceActions.setUser(accountInfo));
+      dispatch(
+        authSliceActions.setPercentActiveChecklist({
+          completed_counter,
+          active_checklists_counter,
+        })
+      );
+    }
   }, [accountInfo]);
 
   useEffect(() => {
@@ -87,15 +98,11 @@ const HeaderDropdown = ({ setShow }) => {
             >
               <span className="header-dropdown__percent">60%</span>
               <div className="header-dropdown__progress">
-                <ProgressBarHeader done={29} />
+                <ProgressBarHeader done={percent || 0} />
               </div>
             </button>
             <button
-              onClick={() =>
-                onClickHandler(
-                  "/created-checklists?search_type=created&page=1&per_page=10"
-                )
-              }
+              onClick={() => onClickHandler("/created-checklists")}
               className="header-dropdown__item header-dropdown__item--first"
               type="button"
             >

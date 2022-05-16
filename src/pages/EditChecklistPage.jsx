@@ -14,7 +14,9 @@ const CreationOfChecklistPage = () => {
     // eslint-disable-next-line no-unused-vars
     error,
     isLoading,
-  } = checklistAPI.useFetchChecklistQuery(`/checklists_auth/${id}`);
+  } = checklistAPI.useFetchChecklistQuery(
+    `/checklists_auth/${id}?page=1&per_page=1`
+  );
   const token = useSelector((state) => state.authSliceReducer.token);
 
   useEffect(() => {
@@ -27,10 +29,16 @@ const CreationOfChecklistPage = () => {
     // eslint-disable-next-line consistent-return
     if (error) return navigate("/not-found");
 
-    dispatch(createChecklistActions.editChecklist(checklists));
+    dispatch(createChecklistActions.editChecklist(checklists.checklist));
   }, [isLoading]);
 
-  return <CreationOfChecklist edit id={id} checklists={!!checklists} />;
+  return (
+    <CreationOfChecklist
+      page="edit-checklist"
+      id={id}
+      checklists={!!checklists}
+    />
+  );
 };
 
 export default CreationOfChecklistPage;

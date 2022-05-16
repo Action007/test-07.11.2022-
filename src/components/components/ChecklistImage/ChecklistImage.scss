@@ -51,12 +51,6 @@
       justify-content: center;
     }
 
-    .modal-header {
-      background-color: transparent;
-      padding: 0;
-      border: none;
-    }
-
     .modal-body {
       display: flex;
       align-items: center;
@@ -75,28 +69,6 @@
       position: relative;
       border: none;
       width: auto;
-    }
-
-    .btn-close {
-      position: absolute;
-      background-color: #fff;
-      width: 35px;
-      height: 35px;
-      right: 15px;
-      padding: 0;
-      background-size: 26px;
-      border-radius: 6px;
-      top: 15px;
-      z-index: 1;
-      opacity: 1;
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-      background-position: center;
-      background-image: url('../../../assets/images/icon/closeImg.svg');
-      transition: background-image 0.2s ease;
-
-      &:hover {
-        background-image: url('../../../assets/images/icon/closeImgHover.svg');
-      }
     }
   }
 }

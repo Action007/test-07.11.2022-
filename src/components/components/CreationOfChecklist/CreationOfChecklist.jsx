@@ -18,7 +18,7 @@ import { ReactComponent as CreationImg } from "../../../assets/images/content/cr
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
 // import { Modal } from "react-bootstrap";
 
-const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
+const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const [
     createChecklist,
     { isSuccess: successCreate, error: errorCreate, isLoading: loadingCreate },
@@ -57,13 +57,13 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
   useEffect(() => {
     const tagsIsValid = tags.length > 2;
     const checklistIsEmpty = checklist_items.find(
-      (item) => item.description.trim().length === 0
+      (item) => item.description.trim().length < 9
     );
     const isChecklistValid = checklist_items.find(
       (item) => item.description.trim().length > 150
     );
     // eslint-disable-next-line no-shadow
-    const titleIsValid = title.trim().length !== 0 && title.trim().length < 150;
+    const titleIsValid = title.trim().length > 9 && title.trim().length < 150;
 
     const validOrNot =
       checklist_items.length &&
@@ -89,14 +89,13 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
     if (e.target) e.preventDefault();
     const tagsIsValid = tags.length > 2;
     const checklistIsEmpty = checklist_items.find(
-      (item) => item.description.trim().length === 0
+      (item) => item.description.trim().length < 9
     );
-
     const isChecklistValid = checklist_items.find(
       (item) => item.description.trim().length > 150
     );
     // eslint-disable-next-line no-shadow
-    const titleIsValid = title.trim().length !== 0 && title.trim().length < 150;
+    const titleIsValid = title.trim().length > 9 && title.trim().length < 150;
     const categoryIsValid = categoryID !== "" && categoryID !== false;
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
@@ -128,7 +127,7 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
     setPreview(true);
   };
 
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = (e) => {
     if (!checkValidHandler(e)) return;
     let checklistBody = {};
     const tags_new = [];
@@ -208,8 +207,8 @@ const CreationOfChecklist = ({ edit = false, id, checklists = true }) => {
       }
     }
 
-    if (!edit) await createChecklist(checklistBody);
-    if (edit) await updateChecklist(checklistBody);
+    if (!page) createChecklist(checklistBody);
+    if (page === "edit-checklist") updateChecklist(checklistBody);
   };
 
   return (

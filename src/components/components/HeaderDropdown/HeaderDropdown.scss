@@ -74,6 +74,10 @@
   &__name {
     max-width: 80px;
     @include line-clamp;
+
+    @include media-breakpoint-down(md) {
+      max-width: 100%;
+    }
   }
 
   &__menu {

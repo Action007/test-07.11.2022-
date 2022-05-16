@@ -1,12 +1,16 @@
 @import "../../../global-styles/_variables.scss";
 
 .checklist-comment {
-  width: 100%;
-  max-width: 500px;
+  position: relative;
   word-break: break-word;
-
+  
   &:not(:last-child) {
     margin-bottom: 30px;
+  }
+  
+  &__wrapper {
+    width: 100%;
+    max-width: 500px; 
   }
 
   &__heading {

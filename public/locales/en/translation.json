@@ -123,7 +123,7 @@
   "creationOfChecklist": {
     "title": "Сreation of checklisit",
     "name": "Name checklist",
-    "max": "Maximum 150 characters",
+    "max": "Minimum 10 and Maximum 150 characters",
     "passed": "Passed",
     "points": "Сhecklist points",
     "text": "Include all the information someone might need to make your checklist popular.",

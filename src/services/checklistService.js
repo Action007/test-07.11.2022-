@@ -30,13 +30,13 @@ export const checklistAPI = createApi({
       query: (url) => url,
       providesTags: () => ["Account"],
     }),
-    fetchSearchTags: build.query({
-      query: (url) => `/api/v1/tags/search?value=${url}`,
-      providesTags: () => ["SearchTags"],
-    }),
     fetchChecklistForSupport: build.query({
       query: (url) => url,
       providesTags: () => ["Checklist"],
+    }),
+    fetchSearchTags: build.query({
+      query: (url) => `/api/v1/tags/search?value=${url}`,
+      providesTags: () => ["Tags"],
     }),
     signUp: build.mutation({
       query: (body) => ({
@@ -157,6 +157,44 @@ export const checklistAPI = createApi({
         body,
       }),
       invalidatesTags: ["ActiveChecklist"],
+    }),
+    addComment: build.mutation({
+      query: (body) => ({
+        url: `/api/v1/checklists_auth/${body.checklist_id}/comment`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Checklist"],
+    }),
+    likeComment: build.mutation({
+      query: (body) => ({
+        url: `/api/v1/checklists_auth/${body.checklist_id}/${body.comment_id}/like`,
+        method: "POST",
+        body,
+      }),
+    }),
+    unlikeComment: build.mutation({
+      query: (body) => ({
+        url: `/api/v1/checklists_auth/${body.checklist_id}/${body.comment_id}/unlike`,
+        method: "POST",
+        body,
+      }),
+    }),
+    updateComment: build.mutation({
+      query: (body) => ({
+        url: `/api/v1/checklists_auth/${body.checklist_id}/${body.comment_id}/update`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Checklist"],
+    }),
+    deleteComment: build.mutation({
+      query: (body) => ({
+        url: `/api/v1/checklists_auth/${body.checklist_id}/${body.comment_id}`,
+        method: "DELETE",
+        body,
+      }),
+      invalidatesTags: ["Checklist"],
     }),
   }),
 });

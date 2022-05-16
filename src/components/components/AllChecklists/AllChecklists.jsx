@@ -13,13 +13,17 @@ import Tabs from "../Tabs/Tabs";
 const AllChecklists = () => {
   const [category, setCategory] = useState("created");
   const { search } = useLocation();
+
   const {
     data: checklists,
     error,
     isFetching,
-  } = checklistAPI.useFetchChecklistQuery(`/checklists_auth${search}`);
+  } = checklistAPI.useFetchChecklistQuery(
+    `/checklists_auth${search || `?search_type=${category}&page=1&per_page=10`}`
+  );
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const breadcrumbs = [{ title: translate("allChecklistsPage.title") }];
   const tabs = [
@@ -27,6 +31,18 @@ const AllChecklists = () => {
     { id: 1, key: "liked", title: translate("allChecklistsPage.liked") },
     { id: 2, key: "saved", title: translate("allChecklistsPage.saved") },
   ];
+
+  useEffect(() => {
+    if (pathname === "/saved-checklists") {
+      setCategory("saved");
+    }
+    if (pathname === "/liked-checklists") {
+      setCategory("liked");
+    }
+    if (pathname === "/created-checklists") {
+      setCategory("created");
+    }
+  }, [pathname]);
 
   useEffect(() => {
     if (error) navigate("/error");

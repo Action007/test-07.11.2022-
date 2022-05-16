@@ -229,11 +229,11 @@
   &__viewed {
     margin-right: 8px;
     border-radius: 6px;
-    color: $dark;
+    color: #a3a3a3;
     background-color: $secondary;
 
     svg {
-      stroke: $dark;
+      stroke: #a3a3a3;
     }
 
     &.active {

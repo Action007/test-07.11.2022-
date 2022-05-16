@@ -50,7 +50,7 @@ const Support = () => {
             </p>
           </>
         ) : (
-          <Complain closeHandler={supportHandler} />
+          <Complain closeHandler={supportHandler} page="support" />
         )}
       </div>
     </div>

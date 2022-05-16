@@ -8,15 +8,13 @@ import "./Complain.scss";
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/close.svg";
 import { ReactComponent as DoneSvg } from "../../../assets/images/content/supportDone.svg";
 
-const Complain = ({ closeHandler, id }) => {
+const API_KEY = process.env.REACT_APP_HOSTNAME;
+
+const Complain = ({ closeHandler, id, name, page }) => {
   const [changeChecklist, setChangeChecklist] = useState(false);
   const [category, setCategory] = useState("");
   const [checklistId, setChecklistId] = useState(id);
-  const { data: checklist, isLoading: isFetchLoading } =
-    checklistAPI.useFetchChecklistForSupportQuery(
-      checklistId ? `/api/v1/checklists_auth/${checklistId}` : ""
-    );
-  // eslint-disable-next-line no-empty-pattern
+  const [checklist, setChecklist] = useState(null);
   const [supportChecklist, { isSuccess, isError, isLoading: isSendLoading }] =
     checklistAPI.useSupportChecklistMutation();
   const [done, setDone] = useState(false);
@@ -53,6 +51,14 @@ const Complain = ({ closeHandler, id }) => {
     if (id) {
       setChecklistId(id[1]);
       setChangeChecklist(false);
+
+      (async () => {
+        const response = await fetch(
+          `${API_KEY}/api/v1/checklists/${id[1]}?page=1&per_page=10`
+        );
+        const responseData = await response.json();
+        setChecklist(responseData);
+      })();
     }
   };
 
@@ -70,26 +76,25 @@ const Complain = ({ closeHandler, id }) => {
           <form className="complain__form" onSubmit={(e) => submitHandler(e)}>
             {checklistId && !changeChecklist ? (
               <>
-                {checklist &&
-                  (id ? (
-                    <div className="complain__title SFPro-600">
-                      {checklist.name}
-                    </div>
-                  ) : (
+                {page === "support" ? (
+                  checklist && (
                     <button
                       onClick={() => setChangeChecklist(true)}
                       className="complain__title SFPro-600"
                       type="button"
                     >
-                      {checklist.name}
+                      {checklist.checklist.name}
                     </button>
-                  ))}
-                {isFetchLoading && (
+                  )
+                ) : (
+                  <div className="complain__title SFPro-600">{name}</div>
+                )}
+                {/* {isLoading && (
                   <div className="complain__load">
                     <div className="complain__load-item" />
                     <div className="complain__load-item" />
                   </div>
-                )}
+                )} */}
               </>
             ) : (
               <>

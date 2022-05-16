@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
+import getPercent from "../../../utils/getPercent";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import ActiveChecklistDetail from "../ActiveChecklistDetail/ActiveChecklistDetail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -20,7 +21,14 @@ const ActiveChecklist = () => {
       <h2 className="title--margin display-4 text-center SFPro-600">
         {translate("checklists")}
       </h2>
-      <ProgressBarChecklist done={50} />
+      {checklist && (
+        <ProgressBarChecklist
+          done={getPercent(
+            checklist.entities.completed_items_counter,
+            checklist.entities.total_items_counter
+          )}
+        />
+      )}
       {checklist && <ActiveChecklistDetail checklist={checklist.entities} />}
       {isLoading && <LoadingSkeleton />}
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,18 +20,27 @@ import Logo from "../../../assets/images/content/logo.svg";
 const HomeChecklistPage = () => {
   const dispatch = useDispatch();
   const { search } = useLocation();
-  const [url, setUrl] = useState(search || "?page=1&per_page=3");
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const onMobile = useMediaQuery("(max-width:1199px)");
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const token = useSelector((state) => state.authSliceReducer.token);
+  const ref = useRef();
+  const {
+    data: checklists,
+    error,
+    isFetching,
+  } = checklistAPI.useFetchChecklistQuery(
+    `/${token ? "checklists_auth" : "checklists"}${
+      search || "?page=1&per_page=3"
+    }`
+  );
 
   useEffect(() => {
     if (search) {
-      setUrl(search);
+      ref.current.scrollIntoView();
+      window.scrollBy(0, -80);
     } else {
-      setUrl("?page=1&per_page=3");
       dispatch(navigationChecklistActions.removeTagsID());
       dispatch(navigationChecklistActions.removeTagID());
       dispatch(navigationChecklistActions.removeCategoryID());
@@ -39,14 +48,6 @@ const HomeChecklistPage = () => {
       dispatch(navigationChecklistActions.removeLatest());
     }
   }, [search]);
-
-  const {
-    data: checklists,
-    error,
-    isFetching,
-  } = checklistAPI.useFetchChecklistQuery(
-    `/${token ? "checklists_auth" : "checklists"}${url}`
-  );
 
   useEffect(() => {
     if (error) navigate("/error");
@@ -63,7 +64,7 @@ const HomeChecklistPage = () => {
   return (
     <>
       <MainBanner />
-      <div className="main-content">
+      <div className="main-content" ref={ref}>
         <div className="container main-content__wrapper">
           {!showOnMobile && <CategorySidebar />}
           <div className="main-content__wrap">

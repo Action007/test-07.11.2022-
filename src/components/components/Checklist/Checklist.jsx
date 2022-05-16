@@ -11,6 +11,7 @@ import ChecklistItem from "../ChecklistItem/ChecklistItem";
 import EditDropdown from "../EditDropdown/EditDropdown";
 import uniqueID from "../../../utils/uniqueID";
 import Complain from "../Complain/Complain";
+import PopupDelete from "../PopupDelete/PopupDelete";
 import "./Checklist.scss";
 
 import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg";
@@ -44,6 +45,8 @@ const Checklist = ({ checklist, created = false, page = false }) => {
   const [likeChecklist, {}] = checklistAPI.useLikeChecklistMutation();
   // eslint-disable-next-line no-empty-pattern
   const [dislikeChecklist, {}] = checklistAPI.useDislikeChecklistMutation();
+  // eslint-disable-next-line no-empty-pattern
+  const [deleteChecklist, {}] = checklistAPI.useDeleteChecklistMutation();
   const [showComplain, setShowComplain] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:575px)");
   const navigate = useNavigate();
@@ -71,6 +74,7 @@ const Checklist = ({ checklist, created = false, page = false }) => {
   );
   const dispatch = useDispatch();
   const token = useSelector((state) => state.authSliceReducer.token);
+  const [modalShow, setModalShow] = useState(false);
 
   const likeHandler = () => {
     if (!iLiked?.liked) likeChecklist(id);
@@ -114,6 +118,15 @@ const Checklist = ({ checklist, created = false, page = false }) => {
     } else {
       loginHandler();
     }
+  };
+
+  const onDeleteHandler = () => {
+    deleteChecklist(id);
+    setModalShow(false);
+  };
+
+  const onUpdateHandler = () => {
+    navigate(`/edit-checklist/${id}`);
   };
 
   const time = (
@@ -174,7 +187,12 @@ const Checklist = ({ checklist, created = false, page = false }) => {
           ""
         )}
       </div>
-      {created && <EditDropdown id={id} />}
+      {created && (
+        <EditDropdown
+          onUpdateHandler={onUpdateHandler}
+          onDeleteHandler={() => setModalShow(true)}
+        />
+      )}
     </>
   );
 
@@ -276,10 +294,19 @@ const Checklist = ({ checklist, created = false, page = false }) => {
             <Modal.Title id="contained-modal-title-vcenter" />
           </Modal.Header>
           <Modal.Body>
-            <Complain closeHandler={() => setShowComplain(false)} id={id} />
+            <Complain
+              closeHandler={() => setShowComplain(false)}
+              id={id}
+              name={name}
+            />
           </Modal.Body>
         </Modal>
       </CSSTransition>
+      <PopupDelete
+        deleteClickHandler={onDeleteHandler}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
     </>
   );
 };

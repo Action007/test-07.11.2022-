@@ -16,10 +16,9 @@ const SearchInput = ({ page = false }) => {
   const [tagUrl, setTagUrl] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [validTagValue, setValidTagValue] = useState("");
-  const [sendRequestTag, setSendRequestTag] = useState("");
 
   const { data: searchTags = [] } =
-    checklistAPI.useFetchSearchTagsQuery(sendRequestTag);
+    checklistAPI.useFetchSearchTagsQuery(tagUrl);
   const [tags, setTags] = useState(searchTags);
 
   const categoryValue = useSelector(
@@ -44,6 +43,7 @@ const SearchInput = ({ page = false }) => {
 
   useEffect(() => {
     const tagsIds = searchParams.getAll("search_tag_ids[]");
+    console.log(tagsIds);
     if (tagsIds.length) {
       // eslint-disable-next-line no-unused-vars
       let tagsUrl = "";
@@ -64,9 +64,9 @@ const SearchInput = ({ page = false }) => {
   }, [searchParams]);
 
   useEffect(() => {
+    if (!searchValue) return;
     const tagVal = tagUrl.replace(/^#/g, "");
     if (searchTags && searchTags.length) setValidTagValue(tagVal);
-    if (!searchTags) return;
 
     setTags(
       searchTags.filter((item) => !myTags.find((tag) => tag.id === item.id))
@@ -74,16 +74,7 @@ const SearchInput = ({ page = false }) => {
   }, [searchTags]);
 
   useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      setSendRequestTag(tagUrl);
-    }, 350);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [tagUrl]);
-
-  useEffect(() => {
     const isTag = searchValue.trim().match(/^#/g);
-
     if (searchValue.trim() === "" || !isTag) {
       setTagUrl("");
       setShow(false);

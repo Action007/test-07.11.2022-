@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
@@ -18,11 +18,6 @@ const Pagination = ({
   page = false,
   url,
 }) => {
-  const height = useSelector((state) => state.heightForScrollReducer.height);
-  const headerHeight = useSelector(
-    (state) => state.heightForScrollReducer.headerHeight
-  );
-  const [activePage, setActivePage] = useState(currentPage);
   const showOnMobile = useMediaQuery("(max-width:550px)");
   const navigate = useNavigate();
   const perPage = 1;
@@ -43,40 +38,45 @@ const Pagination = ({
     (state) => state.navigationChecklistReducer.latestValue
   );
 
-  useEffect(() => {
-    setActivePage(currentPage);
-  }, [currentPage]);
-
-  useEffect(() => {
+  const setPage = ({ selected }) => {
     if (page === "home") {
       navigate(
         `/?${searchValue}${
           searchValue && (latestValue || popularValue) ? "&" : ""
         }${popularValue}${latestValue}${
           latestValue || popularValue ? "&" : ""
-        }page=${activePage}&per_page=3${tagValue}${categoryValue}`
+        }page=${selected * perPage + 1}&per_page=3${tagValue}${categoryValue}`
       );
     } else {
-      navigate(`?${url}&page=${activePage}&per_page=10`);
+      navigate(`?${url}&page=${selected * perPage + 1}&per_page=10`);
+      window.scrollTo(0, 0);
     }
-  }, [activePage]);
-
-  const setPage = ({ selected }) => {
-    // console.log(height);
-    // console.log(headerHeight);
-    window.scrollTo(0, height + headerHeight);
-    setActivePage(selected * perPage + 1);
   };
 
   const onClickHandler = (type) => {
+    let changePage;
+
     if (type === "first") {
-      if (prevPage) setActivePage(1);
+      if (prevPage) changePage = 1;
     } else if (type === "last") {
-      if (nextPage) setActivePage(totalPage);
+      if (nextPage) changePage = totalPage;
     } else if (type === "prev") {
-      if (prevPage) setActivePage(prevPage);
+      if (prevPage) changePage = prevPage;
     } else if (type === "next") {
-      if (nextPage) setActivePage(nextPage);
+      if (nextPage) changePage = nextPage;
+    }
+
+    if (page === "home") {
+      navigate(
+        `/?${searchValue}${
+          searchValue && (latestValue || popularValue) ? "&" : ""
+        }${popularValue}${latestValue}${
+          latestValue || popularValue ? "&" : ""
+        }page=${changePage}&per_page=3${tagValue}${categoryValue}`
+      );
+    } else {
+      navigate(`?${url}&page=${changePage}&per_page=10`);
+      window.scrollTo(0, 0);
     }
   };
 
@@ -84,7 +84,7 @@ const Pagination = ({
     <div className="paginate">
       {!showOnMobile && (
         <ReactPaginate
-          forcePage={activePage - 1}
+          forcePage={currentPage - 1}
           pageCount={count}
           pageRangeDisplayed={2}
           marginPagesDisplayed={2}

@@ -8,99 +8,6 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ChecklistComments from "../ChecklistComments/ChecklistComments";
 import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
 
-const items = {
-  comments: [
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 2,
-      dislikes: 10,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-    {
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      likes: 0,
-      dislikes: 0,
-      user: {
-        id: 5,
-        nickname: "Alex67",
-        created_at: "2020-10-22T00:00:00",
-      },
-    },
-  ],
-};
-
 const ChecklistReview = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -110,7 +17,7 @@ const ChecklistReview = () => {
     error,
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(
-    `/${token ? "checklists_auth" : "checklists"}/${id}`
+    `/${token ? "checklists_auth" : "checklists"}/${id}?page=1&per_page=3`
   );
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklistReviewPage.title") }];
@@ -123,8 +30,15 @@ const ChecklistReview = () => {
     <div className="checklist-detail container container-breadcrumb pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {isLoading && <LoadingSkeleton />}
-      {checklists && <ChecklistDetail checklists={checklists} detailPage />}
-      <ChecklistComments comments={items.comments} />
+      {checklists && (
+        <ChecklistDetail checklists={checklists.checklist} detailPage />
+      )}
+      {checklists && (
+        <ChecklistComments
+          comments={checklists.pagination_comments}
+          checklistID={id}
+        />
+      )}
     </div>
   );
 };

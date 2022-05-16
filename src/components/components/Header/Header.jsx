@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { heightForScrollActions } from "../../../store/heightForScrollSlice";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
 import SearchInput from "../SearchInput/SearchInput";
@@ -18,7 +17,6 @@ import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark
 import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerSvg.svg";
 
 const Header = () => {
-  const dispatch = useDispatch();
   // const [modalShow, setModalShow] = useState(true);
   const { ref, show, setShowHandler, setShow } = useClickOutside();
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
@@ -28,6 +26,7 @@ const Header = () => {
   const headerRef = useRef();
   const user = useSelector((state) => state.authSliceReducer.user);
   const token = useSelector((state) => state.authSliceReducer.token);
+  const percent = useSelector((state) => state.authSliceReducer.percent);
   const { t: translate } = useTranslation();
 
   useEffect(() => {
@@ -37,10 +36,6 @@ const Header = () => {
 
     window.addEventListener("scroll", scrollHandler);
     return () => window.removeEventListener("scroll", scrollHandler);
-  }, []);
-
-  useEffect(() => {
-    dispatch(heightForScrollActions.setHeight(headerRef.current.clientHeight));
   }, []);
 
   const onClickHandler = (address) => {
@@ -57,7 +52,7 @@ const Header = () => {
             className="header__progress"
             type="button"
           >
-            <ProgressBarHeader done={29} />
+            <ProgressBarHeader done={percent || 0} />
           </button>
           <button
             onClick={() => navigate("/saved-checklists")}

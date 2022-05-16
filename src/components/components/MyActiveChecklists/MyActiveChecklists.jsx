@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import uniqueID from "../../../utils/uniqueID";
+import getPercent from "../../../utils/getPercent";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
 import Pagination from "../Pagination/Pagination";
@@ -66,7 +67,12 @@ const MyActiveChecklists = () => {
         {checklists && checklists.entities.length ? (
           checklists.entities.map((checklist) => (
             <React.Fragment key={checklist.id}>
-              <ProgressBarChecklist done={20} />
+              <ProgressBarChecklist
+                done={getPercent(
+                  checklist.completed_items_counter,
+                  checklist.total_items_counter
+                )}
+              />
               <Checklist
                 key={uniqueID()}
                 checklist={checklist}

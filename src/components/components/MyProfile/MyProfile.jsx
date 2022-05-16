@@ -1,10 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./MyProfile.scss";
 
-import ProfileImg from "../../../assets/images/content/profile.png";
+// import ProfileImg from "../../../assets/images/content/profile.png";
 import { ReactComponent as Setting } from "../../../assets/images/icon/setting.svg";
 import { ReactComponent as Facebook } from "../../../assets/images/icon/facebook.svg";
 import { ReactComponent as Twitter } from "../../../assets/images/icon/twitter.svg";
@@ -13,11 +14,16 @@ import { ReactComponent as World } from "../../../assets/images/icon/world.svg";
 import { ReactComponent as List } from "../../../assets/images/icon/list.svg";
 import { ReactComponent as Cup } from "../../../assets/images/icon/cup.svg";
 import { ReactComponent as Added } from "../../../assets/images/icon/added.svg";
+import { ReactComponent as EditSvg } from "../../../assets/images/icon/editPhoto.svg";
+import { ReactComponent as EmptySvg } from "../../../assets/images/icon/emptyPhoto.svg";
 
 const Profile = () => {
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
+  const user = useSelector((state) => state.authSliceReducer.user);
   const breadcrumbs = [{ title: translate("profilePage.myProfile") }];
+
+  console.log(user);
 
   return (
     <div className="profile container">
@@ -25,9 +31,13 @@ const Profile = () => {
       <div className="profile__wrapper">
         <div className="profile__inner">
           <div className="profile__box">
-            <div className="profile__img">
-              <img src={ProfileImg} alt="account" />
-            </div>
+            <button className="profile__edit-btn" type="button">
+              <div className="profile__img">
+                <EmptySvg />
+              </div>
+              {/* <img src={ProfileImg} alt="account" /> */}
+              <EditSvg />
+            </button>
             <div>
               <h1 className="profile__title SFPro-700">Aleksandr Vtorov</h1>
               <span className="profile__subtitle">Poznań, Poland</span>
