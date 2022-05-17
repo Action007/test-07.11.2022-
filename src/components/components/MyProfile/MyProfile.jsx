@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./MyProfile.scss";
 
@@ -20,10 +20,8 @@ import { ReactComponent as EmptySvg } from "../../../assets/images/icon/emptyPho
 const Profile = () => {
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
-  const user = useSelector((state) => state.authSliceReducer.user);
+  // const user = useSelector((state) => state.authSliceReducer.user);
   const breadcrumbs = [{ title: translate("profilePage.myProfile") }];
-
-  console.log(user);
 
   return (
     <div className="profile container">

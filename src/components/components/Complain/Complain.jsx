@@ -22,6 +22,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
   const [empty, setEmpty] = useState(false);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState();
 
   useEffect(() => {
     if (field.current) field.current.focus();
@@ -53,11 +54,17 @@ const Complain = ({ closeHandler, id, name, page }) => {
       setChangeChecklist(false);
 
       (async () => {
-        const response = await fetch(
-          `${API_KEY}/api/v1/checklists/${id[1]}?page=1&per_page=10`
-        );
-        const responseData = await response.json();
-        setChecklist(responseData);
+        try {
+          setIsLoading(true);
+          const response = await fetch(
+            `${API_KEY}/api/v1/checklists/${id[1]}?page=1&per_page=10`
+          );
+          const responseData = await response.json();
+          setChecklist(responseData);
+          setIsLoading(false);
+        } catch (err) {
+          navigate("/error");
+        }
       })();
     }
   };
@@ -89,12 +96,12 @@ const Complain = ({ closeHandler, id, name, page }) => {
                 ) : (
                   <div className="complain__title SFPro-600">{name}</div>
                 )}
-                {/* {isLoading && (
+                {isLoading && (
                   <div className="complain__load">
                     <div className="complain__load-item" />
                     <div className="complain__load-item" />
                   </div>
-                )} */}
+                )}
               </>
             ) : (
               <>

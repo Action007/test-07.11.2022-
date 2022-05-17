@@ -108,7 +108,6 @@ const AllChecklists = () => {
           totalPage={checklists.paginate.total_pages}
           prevPage={checklists.paginate.prev_page}
           nextPage={checklists.paginate.next_page}
-          url={`search_type=${category}`}
         />
       )}
     </div>

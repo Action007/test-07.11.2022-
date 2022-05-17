@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Accordion } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
+import { useLocation, useSearchParams } from "react-router-dom";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./CategorySidebar.scss";
 
@@ -33,17 +31,10 @@ import { ReactComponent as TravelSvg } from "../../../assets/images/icon/travel.
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
 
 const CategorySidebar = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const [active, setActive] = useState("all");
   const { t: translate } = useTranslation();
-  const navigate = useNavigate();
-  const searchValue = useSelector(
-    (state) => state.navigationChecklistReducer.searchValue
-  );
-  const tagValue = useSelector(
-    (state) => state.navigationChecklistReducer.tagValue
-  );
-  const dispatch = useDispatch();
   const { search } = useLocation();
 
   const categories = [
@@ -124,14 +115,13 @@ const CategorySidebar = () => {
 
   useEffect(() => {
     let category = "all";
-    const categoryIds = search.match(/&search_category_ids\[\]=(\d+)/g);
-    const papular = search.match(/popular=true/g);
+    const categoryIds = searchParams.get("search_category_ids[]");
+    const popular = search.match(/popular=true/g);
     const latest = search.match(/latest=true/g);
 
     if (categoryIds) {
-      const [id] = categoryIds[0].match(/\d+/g);
-      category = +id;
-    } else if (papular) {
+      category = +categoryIds;
+    } else if (popular) {
       category = "popular";
     } else if (latest) {
       category = "latest";
@@ -144,43 +134,24 @@ const CategorySidebar = () => {
 
   const onClickHandler = (id) => {
     setActive(id);
+    searchParams.delete("page");
+    searchParams.append("page", 1);
+    searchParams.delete("search_category_ids[]");
+    searchParams.delete("latest");
+    searchParams.delete("popular");
+
     if (id === "all") {
-      navigate(
-        `/?${searchValue}${searchValue ? "&" : ""}page=1&per_page=3${tagValue}`
-      );
-      dispatch(navigationChecklistActions.removeCategoryID());
-      dispatch(navigationChecklistActions.removePopular());
-      dispatch(navigationChecklistActions.removeLatest());
+      setSearchParams(searchParams);
     }
 
     if (id === "popular" || id === "latest") {
-      navigate(
-        `/?${searchValue}${
-          searchValue ? "&" : ""
-        }${id}=${true}&page=1&per_page=3${tagValue}`
-      );
-
-      if (id === "popular") {
-        dispatch(navigationChecklistActions.setPopular());
-        dispatch(navigationChecklistActions.removeLatest());
-      }
-      if (id === "latest") {
-        dispatch(navigationChecklistActions.setLatest());
-        dispatch(navigationChecklistActions.removePopular());
-      }
-
-      dispatch(navigationChecklistActions.removeCategoryID());
+      searchParams.append(id, true);
+      setSearchParams(searchParams);
     }
 
     if (id !== "popular" && id !== "latest" && id !== "all") {
-      navigate(
-        `/?${searchValue}${
-          searchValue ? "&" : ""
-        }page=1&per_page=3${tagValue}&search_category_ids[]=${id}`
-      );
-      dispatch(navigationChecklistActions.setCategoryID(id));
-      dispatch(navigationChecklistActions.removePopular());
-      dispatch(navigationChecklistActions.removeLatest());
+      searchParams.append("search_category_ids[]", id);
+      setSearchParams(searchParams);
     }
   };
 

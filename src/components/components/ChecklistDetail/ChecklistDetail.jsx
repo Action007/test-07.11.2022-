@@ -3,8 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import Modal from "react-bootstrap/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
+import { useSelector } from "react-redux";
 import { checklistAPI } from "../../../services/checklistService";
 import Complain from "../Complain/Complain";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
@@ -56,19 +55,6 @@ const ChecklistDetail = ({
   }${iLiked?.liked ? " liked" : ""}`;
   const savedClass = `checklist-detail__bookmark${iSaved ? " saved" : ""}`;
   const navigate = useNavigate();
-  const categoryValue = useSelector(
-    (state) => state.navigationChecklistReducer.categoryValue
-  );
-  const searchValue = useSelector(
-    (state) => state.navigationChecklistReducer.searchValue
-  );
-  const popularValue = useSelector(
-    (state) => state.navigationChecklistReducer.popularValue
-  );
-  const latestValue = useSelector(
-    (state) => state.navigationChecklistReducer.latestValue
-  );
-  const dispatch = useDispatch();
   const token = useSelector((state) => state.authSliceReducer.token);
 
   const likeHandler = () => {
@@ -101,12 +87,7 @@ const ChecklistDetail = ({
   };
 
   const navigationHandler = (tagID) => {
-    dispatch(navigationChecklistActions.setTagID(tagID));
-    navigate(
-      `/?${searchValue}${
-        searchValue && (latestValue || popularValue) ? "&" : ""
-      }${popularValue}${latestValue}&page=1&per_page=3&search_tag_ids[]=${tagID}${categoryValue}`
-    );
+    navigate(`/?page=1&per_page=3&search_tag_ids[]=${tagID}`);
   };
 
   const loginHandler = () => {

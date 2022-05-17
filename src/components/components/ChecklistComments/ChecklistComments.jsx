@@ -18,8 +18,6 @@ const ChecklistComments = ({ comments, checklistID }) => {
   const [deleteComment] = checklistAPI.useDeleteCommentMutation();
   const { t: translate } = useTranslation();
 
-  console.log(comments);
-
   const showCommentHandler = () => {
     setShowComments(true);
   };

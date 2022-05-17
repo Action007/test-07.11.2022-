@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
-import { useDispatch, useSelector } from "react-redux";
-import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
+import { useSelector } from "react-redux";
 import { checklistAPI } from "../../../services/checklistService";
+import { changeSearchParamsValue } from "../../../utils/searchParamsValue";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
@@ -20,7 +20,7 @@ import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
 import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
-const Checklist = ({ checklist, created = false, page = false }) => {
+const Checklist = ({ checklist, created = false, page = "home" }) => {
   const {
     id,
     checklist_items,
@@ -60,19 +60,7 @@ const Checklist = ({ checklist, created = false, page = false }) => {
     iLiked.mount ? " active" : ""
   }${iLiked?.liked ? " liked" : ""}`;
   const savedClass = `checklist__bookmark${iSaved ? " saved" : ""}`;
-  const categoryValue = useSelector(
-    (state) => state.navigationChecklistReducer.categoryValue
-  );
-  const searchValue = useSelector(
-    (state) => state.navigationChecklistReducer.searchValue
-  );
-  const popularValue = useSelector(
-    (state) => state.navigationChecklistReducer.popularValue
-  );
-  const latestValue = useSelector(
-    (state) => state.navigationChecklistReducer.latestValue
-  );
-  const dispatch = useDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
   const token = useSelector((state) => state.authSliceReducer.token);
   const [modalShow, setModalShow] = useState(false);
 
@@ -100,12 +88,13 @@ const Checklist = ({ checklist, created = false, page = false }) => {
   };
 
   const navigationHandler = (tagID) => {
-    dispatch(navigationChecklistActions.setTagID(tagID));
-    navigate(
-      `/?${searchValue}${
-        searchValue && (latestValue || popularValue) ? "&" : ""
-      }${popularValue}${latestValue}&page=1&per_page=3&search_tag_ids[]=${tagID}${categoryValue}`
-    );
+    if (page === "home") {
+      setSearchParams(
+        changeSearchParamsValue(searchParams, "search_tag_ids[]", tagID)
+      );
+    } else {
+      navigate(`/?page=1&per_page=3&search_tag_ids[]=${tagID}`);
+    }
   };
 
   const loginHandler = () => {
@@ -153,7 +142,7 @@ const Checklist = ({ checklist, created = false, page = false }) => {
       </h3>
       <div className="checklist__head">
         {showOnMobile && time}
-        {!created && !page ? (
+        {!created && page === "home" ? (
           <div className="checklist__buttons">
             {token ? (
               <button
@@ -246,7 +235,7 @@ const Checklist = ({ checklist, created = false, page = false }) => {
             ))}
         </div>
         <div className="checklist__box">
-          {!page ? (
+          {page === "home" ? (
             <div className="checklist__inner">
               <span
                 className={`${`checklist__viewed SFPro-700`} ${

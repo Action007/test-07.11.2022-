@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
+import { useSelector } from "react-redux";
 import { checklistAPI } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
 import CategorySidebar from "../CategorySidebar/CategorySidebar";
@@ -18,7 +17,6 @@ import "./HomeChecklistPage.scss";
 import Logo from "../../../assets/images/content/logo.svg";
 
 const HomeChecklistPage = () => {
-  const dispatch = useDispatch();
   const { search } = useLocation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const onMobile = useMediaQuery("(max-width:1199px)");
@@ -38,14 +36,11 @@ const HomeChecklistPage = () => {
 
   useEffect(() => {
     if (search) {
+      if (search === "?page=1&per_page=3") return;
       ref.current.scrollIntoView();
       window.scrollBy(0, -80);
     } else {
-      dispatch(navigationChecklistActions.removeTagsID());
-      dispatch(navigationChecklistActions.removeTagID());
-      dispatch(navigationChecklistActions.removeCategoryID());
-      dispatch(navigationChecklistActions.removePopular());
-      dispatch(navigationChecklistActions.removeLatest());
+      navigate(`?page=1&per_page=3`);
     }
   }, [search]);
 
@@ -77,7 +72,11 @@ const HomeChecklistPage = () => {
             {isFetching && loader}
             {checklists && !isFetching
               ? checklists.entities.map((checklist) => (
-                  <Checklist key={uniqueID()} checklist={checklist} />
+                  <Checklist
+                    key={uniqueID()}
+                    checklist={checklist}
+                    page="home"
+                  />
                 ))
               : ""}
             {checklists?.entities.length === 0 && (

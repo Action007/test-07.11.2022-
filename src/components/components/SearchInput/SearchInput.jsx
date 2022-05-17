@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
-import { navigationChecklistActions } from "../../../store/navigationChecklistSlice";
+import {
+  changeSearchParamsValue,
+  removeSearchParamsValue,
+} from "../../../utils/searchParamsValue";
 import useClickOutside from "../../../hooks/useClickOutside";
 import TagListSearch from "../TagListSearch/TagListSearch";
 import "./SearchInput.scss";
@@ -21,43 +23,29 @@ const SearchInput = ({ page = false }) => {
     checklistAPI.useFetchSearchTagsQuery(tagUrl);
   const [tags, setTags] = useState(searchTags);
 
-  const categoryValue = useSelector(
-    (state) => state.navigationChecklistReducer.categoryValue
-  );
-  const tagValue = useSelector(
-    (state) => state.navigationChecklistReducer.tagValue
-  );
-  const popularValue = useSelector(
-    (state) => state.navigationChecklistReducer.popularValue
-  );
-  const latestValue = useSelector(
-    (state) => state.navigationChecklistReducer.latestValue
-  );
-
   const [blur, setBlur] = useState(false);
   const { ref, show, setShow } = useClickOutside();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   // const { search } = useLocation();
 
-  useEffect(() => {
+  useEffect(async () => {
     const tagsIds = searchParams.getAll("search_tag_ids[]");
-    console.log(tagsIds);
     if (tagsIds.length) {
       // eslint-disable-next-line no-unused-vars
       let tagsUrl = "";
       tagsIds.forEach((id) => {
         tagsUrl += `tag_ids[]=${id}&`;
       });
-
-      (async () => {
+      try {
         const response = await fetch(
           `${API_KEY}/api/v1/tags/search?${tagsUrl.slice(0, -1)}`
         );
         const responseData = await response.json();
         setMyTags(responseData);
-      })();
+      } catch (err) {
+        navigate("/error");
+      }
     } else {
       setMyTags([]);
     }
@@ -89,17 +77,12 @@ const SearchInput = ({ page = false }) => {
     const addOrNot = myTags.find((item) => item.name === tag.name);
     if (addOrNot || myTags.length === 5) return;
     if (!tag || !tag.name.trim()) return;
-    const tagsUrl = `${tagValue}&search_tag_ids[]=${tag.id}`;
 
     setTagUrl("");
     setShow(false);
     setSearchValue("");
-    navigate(
-      `/?${popularValue}${latestValue}${
-        latestValue || popularValue ? "&" : ""
-      }page=1&per_page=3${tagsUrl}${categoryValue}`
-    );
-    dispatch(navigationChecklistActions.setTagsID(tag.id));
+    searchParams.append("search_tag_ids[]", tag.id);
+    setSearchParams(searchParams);
   };
 
   const findTypeHandler = (e, tag) => {
@@ -115,19 +98,16 @@ const SearchInput = ({ page = false }) => {
     if (isTag) return;
 
     if (searchValue) {
-      navigate(
-        `/?search_value=${searchValue}${
-          searchValue && (latestValue || popularValue) ? "&" : ""
-        }${popularValue}${latestValue}&page=1&per_page=3${tagValue}${categoryValue}`
+      setSearchParams(
+        changeSearchParamsValue(searchParams, "search_value", searchValue)
       );
-      dispatch(navigationChecklistActions.setSearchValue(searchValue));
     }
   };
 
-  const removeTagHandler = () => {
-    searchParams.delete("search_tag_ids[]");
-    setSearchParams(searchParams);
-    dispatch(navigationChecklistActions.removeTagsID());
+  const removeTagHandler = (id) => {
+    setSearchParams(
+      removeSearchParamsValue(searchParams, "search_tag_ids[]", id)
+    );
   };
 
   return (

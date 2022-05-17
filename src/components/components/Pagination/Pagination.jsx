@@ -1,7 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import { changeSearchParamsValue } from "../../../utils/searchParamsValue";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./Pagination.scss";
 
@@ -16,41 +16,22 @@ const Pagination = ({
   prevPage,
   nextPage,
   page = false,
-  url,
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const showOnMobile = useMediaQuery("(max-width:550px)");
-  const navigate = useNavigate();
   const perPage = 1;
 
-  const searchValue = useSelector(
-    (state) => state.navigationChecklistReducer.searchValue
-  );
-  const categoryValue = useSelector(
-    (state) => state.navigationChecklistReducer.categoryValue
-  );
-  const tagValue = useSelector(
-    (state) => state.navigationChecklistReducer.tagValue
-  );
-  const popularValue = useSelector(
-    (state) => state.navigationChecklistReducer.popularValue
-  );
-  const latestValue = useSelector(
-    (state) => state.navigationChecklistReducer.latestValue
-  );
-
   const setPage = ({ selected }) => {
-    if (page === "home") {
-      navigate(
-        `/?${searchValue}${
-          searchValue && (latestValue || popularValue) ? "&" : ""
-        }${popularValue}${latestValue}${
-          latestValue || popularValue ? "&" : ""
-        }page=${selected * perPage + 1}&per_page=3${tagValue}${categoryValue}`
-      );
-    } else {
-      navigate(`?${url}&page=${selected * perPage + 1}&per_page=10`);
-      window.scrollTo(0, 0);
-    }
+    setSearchParams(
+      changeSearchParamsValue(
+        searchParams,
+        "page",
+        selected * perPage + 1,
+        false
+      )
+    );
+
+    if (page !== "home") window.scrollTo(0, 0);
   };
 
   const onClickHandler = (type) => {
@@ -66,18 +47,10 @@ const Pagination = ({
       if (nextPage) changePage = nextPage;
     }
 
-    if (page === "home") {
-      navigate(
-        `/?${searchValue}${
-          searchValue && (latestValue || popularValue) ? "&" : ""
-        }${popularValue}${latestValue}${
-          latestValue || popularValue ? "&" : ""
-        }page=${changePage}&per_page=3${tagValue}${categoryValue}`
-      );
-    } else {
-      navigate(`?${url}&page=${changePage}&per_page=10`);
-      window.scrollTo(0, 0);
-    }
+    setSearchParams(
+      changeSearchParamsValue(searchParams, "page", changePage, false)
+    );
+    if (page !== "home") window.scrollTo(0, 0);
   };
 
   return (
