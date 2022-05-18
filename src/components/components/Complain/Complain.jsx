@@ -8,13 +8,15 @@ import "./Complain.scss";
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/close.svg";
 import { ReactComponent as DoneSvg } from "../../../assets/images/content/supportDone.svg";
 
-const API_KEY = process.env.REACT_APP_HOSTNAME;
-
 const Complain = ({ closeHandler, id, name, page }) => {
   const [changeChecklist, setChangeChecklist] = useState(false);
   const [category, setCategory] = useState("");
   const [checklistId, setChecklistId] = useState(id);
-  const [checklist, setChecklist] = useState(null);
+  const skip = page !== "support" || !checklistId;
+  const { data: checklist, isLoading } =
+    checklistAPI.useFetchChecklistForSupportQuery(checklistId, {
+      skip,
+    });
   const [supportChecklist, { isSuccess, isError, isLoading: isSendLoading }] =
     checklistAPI.useSupportChecklistMutation();
   const [done, setDone] = useState(false);
@@ -22,7 +24,6 @@ const Complain = ({ closeHandler, id, name, page }) => {
   const [empty, setEmpty] = useState(false);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState();
 
   useEffect(() => {
     if (field.current) field.current.focus();
@@ -36,7 +37,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     setEmpty(false);
-    if (!checklistId) return;
+    if (!checklistId || !category) return;
 
     const body = {
       checklist_id: checklistId,
@@ -47,26 +48,8 @@ const Complain = ({ closeHandler, id, name, page }) => {
   };
 
   const onChangeHandler = () => {
-    // eslint-disable-next-line no-shadow
-    const id = field.current.value.match(/\/list\/(\d+)/);
-    if (id) {
-      setChecklistId(id[1]);
-      setChangeChecklist(false);
-
-      (async () => {
-        try {
-          setIsLoading(true);
-          const response = await fetch(
-            `${API_KEY}/api/v1/checklists/${id[1]}?page=1&per_page=10`
-          );
-          const responseData = await response.json();
-          setChecklist(responseData);
-          setIsLoading(false);
-        } catch (err) {
-          navigate("/error");
-        }
-      })();
-    }
+    const checklistID = field.current.value.match(/\/list\/(\d+)/);
+    if (checklistID) setChecklistId(checklistID[1]);
   };
 
   return (

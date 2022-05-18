@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import {
   changeSearchParamsValue,
@@ -11,55 +11,40 @@ import "./SearchInput.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
 
-const API_KEY = process.env.REACT_APP_HOSTNAME;
-
 const SearchInput = ({ page = false }) => {
-  const [myTags, setMyTags] = useState([]);
   const [tagUrl, setTagUrl] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [validTagValue, setValidTagValue] = useState("");
+  const [myTagsUrl, setMyTagsUrl] = useState("");
 
-  const { data: searchTags = [] } =
-    checklistAPI.useFetchSearchTagsQuery(tagUrl);
-  const [tags, setTags] = useState(searchTags);
-
+  const { data: searchTags } = checklistAPI.useFetchSearchTagsQuery(tagUrl, {
+    skip: !tagUrl,
+  });
+  const { data: serverTags } = checklistAPI.useFetchTagsQuery(myTagsUrl, {
+    skip: !myTagsUrl,
+  });
+  const [myTags, setMyTags] = useState(serverTags);
   const [blur, setBlur] = useState(false);
   const { ref, show, setShow } = useClickOutside();
-  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  // const { search } = useLocation();
+  // const {search} = useLocation();
 
-  useEffect(async () => {
+  useEffect(() => {
+    if (!serverTags) return;
+    setMyTags(serverTags);
+  }, [serverTags]);
+
+  useEffect(() => {
     const tagsIds = searchParams.getAll("search_tag_ids[]");
     if (tagsIds.length) {
-      // eslint-disable-next-line no-unused-vars
       let tagsUrl = "";
       tagsIds.forEach((id) => {
         tagsUrl += `tag_ids[]=${id}&`;
       });
-      try {
-        const response = await fetch(
-          `${API_KEY}/api/v1/tags/search?${tagsUrl.slice(0, -1)}`
-        );
-        const responseData = await response.json();
-        setMyTags(responseData);
-      } catch (err) {
-        navigate("/error");
-      }
+      setMyTagsUrl(tagsUrl.slice(0, -1));
     } else {
       setMyTags([]);
     }
   }, [searchParams]);
-
-  useEffect(() => {
-    if (!searchValue) return;
-    const tagVal = tagUrl.replace(/^#/g, "");
-    if (searchTags && searchTags.length) setValidTagValue(tagVal);
-
-    setTags(
-      searchTags.filter((item) => !myTags.find((tag) => tag.id === item.id))
-    );
-  }, [searchTags]);
 
   useEffect(() => {
     const isTag = searchValue.trim().match(/^#/g);
@@ -68,7 +53,7 @@ const SearchInput = ({ page = false }) => {
       setShow(false);
     } else {
       const tagVal = searchValue.replace(/^#/g, "");
-      if (searchTags.length || validTagValue === tagVal) setTagUrl(tagVal);
+      setTagUrl(tagVal);
       setShow(true);
     }
   }, [searchValue]);
@@ -110,6 +95,12 @@ const SearchInput = ({ page = false }) => {
     );
   };
 
+  const filterTagsList = () => {
+    return searchTags.filter(
+      (item) => !myTags.find((tag) => tag.id === item.id)
+    );
+  };
+
   return (
     <form
       onSubmit={(e) => onSubmitHandler(e)}
@@ -130,12 +121,15 @@ const SearchInput = ({ page = false }) => {
           type="text"
         />
       </label>
-      {searchTags && tags.length !== 0 && show && (
-        <TagListSearch tags={tags} findTypeHandler={findTypeHandler} />
+      {searchTags && filterTagsList().length !== 0 && show && (
+        <TagListSearch
+          tags={filterTagsList()}
+          findTypeHandler={findTypeHandler}
+        />
       )}
       {page === "home" && (
         <div className="search-input__tags">
-          {myTags.length !== 0 &&
+          {myTags &&
             myTags.map((tag) => (
               <button
                 key={tag.id}

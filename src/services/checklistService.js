@@ -31,11 +31,16 @@ export const checklistAPI = createApi({
       providesTags: () => ["Account"],
     }),
     fetchChecklistForSupport: build.query({
-      query: (url) => url,
+      query: (checklistID) =>
+        `/api/v1/checklists/${checklistID}?page=1&per_page=10`,
       providesTags: () => ["Checklist"],
     }),
     fetchSearchTags: build.query({
       query: (url) => `/api/v1/tags/search?value=${url}`,
+      providesTags: () => ["Tags"],
+    }),
+    fetchTags: build.query({
+      query: (tagsUrl) => `/api/v1/tags/search?${tagsUrl}`,
       providesTags: () => ["Tags"],
     }),
     signUp: build.mutation({
