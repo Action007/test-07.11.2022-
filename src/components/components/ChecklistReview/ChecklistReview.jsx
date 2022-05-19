@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,12 +12,15 @@ const ChecklistReview = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const token = useSelector((state) => state.authSliceReducer.token);
+  const [pageCount, setPageCount] = useState(1);
   const {
     data: checklists,
     error,
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(
-    `/${token ? "checklists_auth" : "checklists"}/${id}?page=1&per_page=3`
+    `/${
+      token ? "checklists_auth" : "checklists"
+    }/${id}?page=${pageCount}&per_page=3`
   );
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklistReviewPage.title") }];
@@ -35,7 +38,9 @@ const ChecklistReview = () => {
       )}
       {checklists && (
         <ChecklistComments
-          comments={checklists.pagination_comments}
+          pagination_comments={checklists.pagination_comments}
+          next_page={checklists.paginate.next_page}
+          addComments={setPageCount}
           checklistID={id}
         />
       )}

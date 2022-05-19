@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { CSSTransition } from "react-transition-group";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
@@ -271,26 +270,24 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
           {!showOnMobile && time}
         </div>
       </div>
-      <CSSTransition in={showComplain} timeout={300} unmountOnExit>
-        <Modal
-          className="popup-complain"
-          show={showComplain}
-          onHide={setShowComplain}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter" />
-          </Modal.Header>
-          <Modal.Body>
-            <Complain
-              closeHandler={() => setShowComplain(false)}
-              id={id}
-              name={name}
-            />
-          </Modal.Body>
-        </Modal>
-      </CSSTransition>
+      <Modal
+        className="popup-complain"
+        show={showComplain}
+        onHide={setShowComplain}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter" />
+        </Modal.Header>
+        <Modal.Body>
+          <Complain
+            closeHandler={() => setShowComplain(false)}
+            id={id}
+            name={name}
+          />
+        </Modal.Body>
+      </Modal>
       <PopupDelete
         deleteClickHandler={onDeleteHandler}
         show={modalShow}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { CSSTransition } from "react-transition-group";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
 import GeneralMap from "../GeneralMap/GeneralMap";
 import PopupMap from "../PopupMap/PopupMap";
@@ -33,11 +32,9 @@ const ChecklistItem = ({ description, list_type, value, preview }) => {
       {list_type === "coordinates" && (
         <>
           <GeneralMap setShowMap={setShowMap} coordinates={value.coordinates} />
-          <CSSTransition in={showMap} timeout={300} unmountOnExit>
-            <PopupMap show={showMap} onHide={() => setShowMap(false)}>
-              <GeneralMap coordinates={value.coordinates} popup />
-            </PopupMap>
-          </CSSTransition>
+          <PopupMap show={showMap} onHide={() => setShowMap(false)}>
+            <GeneralMap coordinates={value.coordinates} popup />
+          </PopupMap>
         </>
       )}
       {list_type === "image" && (

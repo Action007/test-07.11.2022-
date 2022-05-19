@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../services/checklistService";
 import getTime from "../../../utils/getTime";
@@ -8,9 +8,14 @@ import "./ChecklistComments.scss";
 
 import { ReactComponent as ArrowSvg } from "../../../assets/images/icon/rightArrow.svg";
 
-const ChecklistComments = ({ comments, checklistID }) => {
+const ChecklistComments = ({
+  pagination_comments,
+  addComments,
+  next_page,
+  checklistID,
+}) => {
+  const [comments, setComments] = useState([]);
   const [value, setValue] = useState("");
-  const [showComments, setShowComments] = useState(false);
   const [addComment] = checklistAPI.useAddCommentMutation();
   const [likeComment] = checklistAPI.useLikeCommentMutation();
   const [unlikeComment] = checklistAPI.useUnlikeCommentMutation();
@@ -18,8 +23,12 @@ const ChecklistComments = ({ comments, checklistID }) => {
   const [deleteComment] = checklistAPI.useDeleteCommentMutation();
   const { t: translate } = useTranslation();
 
+  useEffect(() => {
+    setComments([...comments, ...pagination_comments]);
+  }, [pagination_comments]);
+
   const showCommentHandler = () => {
-    setShowComments(true);
+    if (next_page) addComments(next_page);
   };
 
   const onLikeHandler = (id) => {
@@ -36,12 +45,12 @@ const ChecklistComments = ({ comments, checklistID }) => {
 
   const onDeleteHandler = (id) => {
     deleteComment({ checklist_id: checklistID, comment_id: id });
+    setComments(comments.filter((comment) => comment.id !== id));
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (value.trim().length === 0) return;
-
     if (value.trim().length === 0) return;
     // const items = [
     //   ...data,
@@ -89,27 +98,7 @@ const ChecklistComments = ({ comments, checklistID }) => {
         </label>
       </form>
       <ul className="checklist-comments__items">
-        {showComments &&
-          comments &&
-          comments.map((comment) => {
-            const { date } = getTime(comment.created_at);
-            return (
-              <Comment
-                key={comment.id}
-                date={date}
-                commentID={comment.id}
-                text={comment.text}
-                liked={comment.liked}
-                unliked={comment.unliked}
-                onLikeHandler={onLikeHandler}
-                onUnlikeHandler={onUnlikeHandler}
-                onUpdateHandler={onUpdateHandler}
-                onDeleteHandler={onDeleteHandler}
-              />
-            );
-          })}
-        {!showComments &&
-          comments &&
+        {comments &&
           comments.map((comment) => {
             const { date } = getTime(comment.created_at);
             return (
@@ -128,7 +117,7 @@ const ChecklistComments = ({ comments, checklistID }) => {
             );
           })}
       </ul>
-      {!showComments && (
+      {next_page && (
         <button
           onClick={showCommentHandler}
           className="checklist-comments__button SFPro-500"

@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { CSSTransition } from "react-transition-group";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import useClickOutside from "../../../hooks/useClickOutside";
 import CreationChecklistItemEdit from "../CreationChecklistItemEdit/CreationChecklistItemEdit";
@@ -193,18 +192,16 @@ const CreationChecklistItem = ({
                     id={id}
                   />
                 </div>
-                <CSSTransition in={showMap} timeout={300} unmountOnExit>
-                  <PopupMap show={showMap} onHide={() => setShowMap(false)}>
-                    <GeneralMap
-                      popup
-                      coordinates={
-                        value.coordinates ? value.coordinates : undefined
-                      }
-                      creation
-                      id={id}
-                    />
-                  </PopupMap>
-                </CSSTransition>
+                <PopupMap show={showMap} onHide={() => setShowMap(false)}>
+                  <GeneralMap
+                    popup
+                    coordinates={
+                      value.coordinates ? value.coordinates : undefined
+                    }
+                    creation
+                    id={id}
+                  />
+                </PopupMap>
               </>
             )}
           </div>

@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 import { checklistAPI } from "../../../services/checklistService";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
+import ComplainDone from "../ComplainDone/ComplainDone";
 import "./Complain.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/close.svg";
-import { ReactComponent as DoneSvg } from "../../../assets/images/content/supportDone.svg";
 
 const Complain = ({ closeHandler, id, name, page }) => {
-  const [changeChecklist, setChangeChecklist] = useState(false);
+  // const [changeChecklist, setChangeChecklist] = useState(false);
+  const [showDone, setShowDone] = useState(false);
   const [category, setCategory] = useState("");
   const [checklistId, setChecklistId] = useState(id);
   const skip = page !== "support" || !checklistId;
@@ -24,13 +26,17 @@ const Complain = ({ closeHandler, id, name, page }) => {
   const [empty, setEmpty] = useState(false);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
+  const showComplain = (!done && !isSendLoading) || page === "support";
+
+  // useEffect(() => {
+  //   if (field.current) field.current.focus();
+  // }, [changeChecklist]);
 
   useEffect(() => {
-    if (field.current) field.current.focus();
-  }, [changeChecklist]);
-
-  useEffect(() => {
-    if (isSuccess) setDone(true);
+    if (isSuccess) {
+      setDone(true);
+      setShowDone(true);
+    }
     if (isError) navigate("/error");
   }, [isSuccess, isError]);
 
@@ -55,7 +61,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
   return (
     <>
       <LoadingSpinnerPopup showSpinner={isSendLoading} />
-      {!done && !isSendLoading && (
+      {showComplain && (
         <div className="complain bg-white br-8">
           <div className="complain__wrap d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
             <span className="SFPro-600">Complain</span>
@@ -64,12 +70,13 @@ const Complain = ({ closeHandler, id, name, page }) => {
             </button>
           </div>
           <form className="complain__form" onSubmit={(e) => submitHandler(e)}>
-            {checklistId && !changeChecklist ? (
+            {/* {checklistId && !changeChecklist ? ( */}
+            {checklistId ? (
               <>
                 {page === "support" ? (
                   checklist && (
                     <button
-                      onClick={() => setChangeChecklist(true)}
+                      // onClick={() => setChangeChecklist(true)}
                       className="complain__title SFPro-600"
                       type="button"
                     >
@@ -192,29 +199,24 @@ const Complain = ({ closeHandler, id, name, page }) => {
           </form>
         </div>
       )}
-      {done && (
-        <div className="complain-done">
-          <button
-            className="complain-done__btn"
-            onClick={closeHandler}
-            type="button"
-          >
-            <CloseSvg />
-          </button>
-          <div className="complain-done__wrapper">
-            <div className="complain-done__wrap">
-              <h3 className="complain-done__title SFPro-600">
-                {translate("supportDone.title")}
-              </h3>
-              <span className="complain-done__subtitle">
-                {translate("supportDone.subtitle")}
-              </span>
-            </div>
-            <div className="complain-done__img">
-              <DoneSvg />
-            </div>
-          </div>
-        </div>
+      {done && page !== "support" && (
+        <ComplainDone closeHandler={closeHandler} translate={translate} />
+      )}
+      {page === "support" && (
+        <Modal
+          className="popup-complain"
+          show={showDone}
+          onHide={setShowDone}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter" />
+          </Modal.Header>
+          <Modal.Body>
+            <ComplainDone closeHandler={closeHandler} translate={translate} />
+          </Modal.Body>
+        </Modal>
       )}
     </>
   );

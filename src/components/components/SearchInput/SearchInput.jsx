@@ -26,7 +26,6 @@ const SearchInput = ({ page = false }) => {
   const [blur, setBlur] = useState(false);
   const { ref, show, setShow } = useClickOutside();
   const [searchParams, setSearchParams] = useSearchParams();
-  // const {search} = useLocation();
 
   useEffect(() => {
     if (!serverTags) return;
@@ -46,17 +45,32 @@ const SearchInput = ({ page = false }) => {
     }
   }, [searchParams]);
 
-  useEffect(() => {
-    const isTag = searchValue.trim().match(/^#/g);
-    if (searchValue.trim() === "" || !isTag) {
+  const onChangeSearchValue = (value) => {
+    const isTag = value.trim().match(/^#/g);
+    const tagVal = value.replace(/^#/g, "");
+    setSearchValue(value);
+
+    if (value.trim() === "" || !isTag) {
       setTagUrl("");
       setShow(false);
     } else {
-      const tagVal = searchValue.replace(/^#/g, "");
-      setTagUrl(tagVal);
-      setShow(true);
+      // eslint-disable-next-line no-lonely-if
+      if (searchTags) {
+        if (!searchTags.length) {
+          if (tagVal === tagUrl.slice(0, -1) || tagVal.trim().length === 1) {
+            setShow(true);
+            setTagUrl(tagVal);
+          }
+        } else {
+          setShow(true);
+          setTagUrl(tagVal);
+        }
+      } else {
+        setTagUrl(tagVal);
+        setShow(true);
+      }
     }
-  }, [searchValue]);
+  };
 
   const addTagHandler = (tag) => {
     const addOrNot = myTags.find((item) => item.name === tag.name);
@@ -65,7 +79,6 @@ const SearchInput = ({ page = false }) => {
 
     setTagUrl("");
     setShow(false);
-    setSearchValue("");
     searchParams.append("search_tag_ids[]", tag.id);
     setSearchParams(searchParams);
   };
@@ -80,12 +93,13 @@ const SearchInput = ({ page = false }) => {
     e.preventDefault();
 
     const isTag = searchValue.trim().match(/^#/g);
-    if (isTag) return;
-
-    if (searchValue) {
+    if (isTag) {
+      setSearchValue("");
+    } else {
       setSearchParams(
         changeSearchParamsValue(searchParams, "search_value", searchValue)
       );
+      setSearchValue("");
     }
   };
 
@@ -112,7 +126,7 @@ const SearchInput = ({ page = false }) => {
         htmlFor="search-input"
       >
         <input
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => onChangeSearchValue(e.target.value)}
           onFocus={() => setBlur((prevState) => !prevState)}
           onBlur={() => setBlur((prevState) => !prevState)}
           value={searchValue}
