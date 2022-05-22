@@ -185,20 +185,13 @@ export const checklistAPI = createApi({
         body,
       }),
     }),
-    updateComment: build.mutation({
-      query: (body) => ({
-        url: `/api/v1/checklists_auth/${body.checklist_id}/${body.comment_id}/update`,
-        method: "PUT",
-        body,
-      }),
-      invalidatesTags: ["Checklist"],
-    }),
     deleteComment: build.mutation({
       query: (body) => ({
         url: `/api/v1/checklists_auth/${body.checklist_id}/${body.comment_id}`,
         method: "DELETE",
         body,
       }),
+      invalidatesTags: ["Checklist"],
     }),
   }),
 });

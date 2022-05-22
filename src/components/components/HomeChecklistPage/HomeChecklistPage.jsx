@@ -64,8 +64,7 @@ const HomeChecklistPage = () => {
           {!showOnMobile && <CategorySidebar />}
           <div className="main-content__wrap">
             <h3 className="main-content__title">
-              {!showOnMobile && translate("mainPage.popularQuestion")}
-              {showOnMobile && translate("mainPage.search")}
+              {translate("mainPage.popularQuestion")}
             </h3>
             <SearchInput page="home" />
             {showOnMobile && <CategorySidebar />}

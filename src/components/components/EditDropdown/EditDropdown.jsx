@@ -7,7 +7,12 @@ import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg"
 import { ReactComponent as EditSvg } from "../../../assets/images/icon/edit.svg";
 import { ReactComponent as DeleteSvg } from "../../../assets/images/icon/trash.svg";
 
-const EditDropdown = ({ commentID, onUpdateHandler, onDeleteHandler }) => {
+const EditDropdown = ({
+  commentID,
+  onUpdateHandler,
+  onDeleteHandler,
+  componentType,
+}) => {
   const { ref, show, setShowHandler } = useClickOutside();
 
   return (
@@ -26,14 +31,16 @@ const EditDropdown = ({ commentID, onUpdateHandler, onDeleteHandler }) => {
         unmountOnExit
       >
         <div className="edit-dropdown__menu">
-          <button
-            onClick={() => onUpdateHandler(commentID)}
-            className="edit-dropdown__edit"
-            type="button"
-          >
-            <EditSvg />
-            Edit
-          </button>
+          {componentType !== "comment" && (
+            <button
+              onClick={() => onUpdateHandler(commentID)}
+              className="edit-dropdown__edit"
+              type="button"
+            >
+              <EditSvg />
+              Edit
+            </button>
+          )}
           <button
             onClick={() => onDeleteHandler(commentID)}
             className="edit-dropdown__delete"

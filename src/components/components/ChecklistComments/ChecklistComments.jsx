@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { checklistAPI } from "../../../services/checklistService";
 import getTime from "../../../utils/getTime";
 import Comment from "../Comment/Comment";
@@ -19,12 +21,19 @@ const ChecklistComments = ({
   const [addComment] = checklistAPI.useAddCommentMutation();
   const [likeComment] = checklistAPI.useLikeCommentMutation();
   const [unlikeComment] = checklistAPI.useUnlikeCommentMutation();
-  const [updateComment] = checklistAPI.useUpdateCommentMutation();
   const [deleteComment] = checklistAPI.useDeleteCommentMutation();
+  const token = useSelector((state) => state.authSliceReducer.token);
   const { t: translate } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setComments([...comments, ...pagination_comments]);
+    if (!comments.length) setComments(pagination_comments);
+    if (comments.length) {
+      const lastComments = pagination_comments.filter(
+        (item) => !comments.find((comment) => comment.id === item.id)
+      );
+      setComments([...comments, ...lastComments]);
+    }
   }, [pagination_comments]);
 
   const showCommentHandler = () => {
@@ -32,19 +41,18 @@ const ChecklistComments = ({
   };
 
   const onLikeHandler = (id) => {
-    likeComment({ checklist_id: checklistID, comment_id: id });
+    if (token) likeComment({ checklist_id: checklistID, comment_id: id });
+    if (!token) navigate("/sign-in");
   };
 
   const onUnlikeHandler = (id) => {
-    unlikeComment({ checklist_id: checklistID, comment_id: id });
-  };
-
-  const onUpdateHandler = (id) => {
-    updateComment({ checklist_id: checklistID, comment_id: id });
+    if (token) unlikeComment({ checklist_id: checklistID, comment_id: id });
+    if (!token) navigate("/sign-in");
   };
 
   const onDeleteHandler = (id) => {
-    deleteComment({ checklist_id: checklistID, comment_id: id });
+    if (token) deleteComment({ checklist_id: checklistID, comment_id: id });
+    if (!token) navigate("/sign-in");
     setComments(comments.filter((comment) => comment.id !== id));
   };
 
@@ -52,28 +60,9 @@ const ChecklistComments = ({
     e.preventDefault();
     if (value.trim().length === 0) return;
     if (value.trim().length === 0) return;
-    // const items = [
-    //   ...data,
-    //   {
-    //     created_at: new Date().toISOString(),
-    //     id: checklistID,
-    //     liked: 0,
-    //     text: value,
-    //     unliked: 0,
-    //     user_id: 25,
-    //     user_track: null,
-    //   },
-    // ];
-
-    // setData(
-    //   [...items].sort((a, b) => {
-    //     const c = new Date(a.created_at);
-    //     const d = new Date(b.created_at);
-    //     return d - c;
-    //   })
-    // );
 
     addComment({ text: value, checklist_id: checklistID });
+    addComments(1);
     setValue("");
   };
 
@@ -111,7 +100,6 @@ const ChecklistComments = ({
                 unliked={comment.unliked}
                 onLikeHandler={onLikeHandler}
                 onUnlikeHandler={onUnlikeHandler}
-                onUpdateHandler={onUpdateHandler}
                 onDeleteHandler={onDeleteHandler}
               />
             );

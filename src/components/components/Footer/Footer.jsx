@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Footer.scss";
 
 import Logo from "../../../assets/images/content/logo.svg";
@@ -8,6 +8,12 @@ import Networks from "../Networks/Networks";
 
 const Footer = () => {
   const { t: translate } = useTranslation();
+  const navigate = useNavigate();
+
+  const onClickHandler = (address) => {
+    navigate(address);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <footer className="footer">
@@ -17,32 +23,53 @@ const Footer = () => {
       <nav className="footer__nav">
         <ul className="footer__items mb-0">
           <li className="footer__item">
-            <Link to="/">{translate("home")}</Link>
+            <button onClick={() => onClickHandler("/")} type="button">
+              {translate("home")}
+            </button>
           </li>
           <li className="footer__item">
-            <Link to="support">{translate("supportPage.title")}</Link>
+            <button onClick={() => onClickHandler("/support")} type="button">
+              {translate("supportPage.title")}
+            </button>
           </li>
-
           <li className="footer__item">
-            <Link to="popular-checklist">
+            <button
+              onClick={() => navigate("/?per_page=3&page=1&popular=true")}
+              type="button"
+            >
               {translate("popularChecklistPage.title")}
-            </Link>
+            </button>
           </li>
           <li className="footer__item">
-            <Link to="privacy-policy">
+            <button
+              onClick={() => onClickHandler("/privacy-policy")}
+              type="button"
+            >
               {translate("privacyPolicyPage.title")}
-            </Link>
+            </button>
           </li>
         </ul>
         <ul className="footer__items">
           <li className="footer__item">
-            <Link to="our-mission">{translate("ourMissionPage.title")}</Link>
+            <button
+              onClick={() => onClickHandler("/our-mission")}
+              type="button"
+            >
+              {translate("ourMissionPage.title")}
+            </button>
           </li>
           <li className="footer__item">
-            <Link to="terms-of-use">{translate("termOfUsePage.title")}</Link>
+            <button
+              onClick={() => onClickHandler("/terms-of-use")}
+              type="button"
+            >
+              {translate("termOfUsePage.title")}
+            </button>
           </li>
           <li className="footer__item">
-            <Link to="contacts">{translate("contactsPage.title")}</Link>
+            <button onClick={() => onClickHandler("/contacts")} type="button">
+              {translate("contactsPage.title")}
+            </button>
           </li>
         </ul>
         <Networks />

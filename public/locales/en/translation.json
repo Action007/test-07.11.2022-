@@ -121,11 +121,11 @@
     "passedEmpty": "Sorry, you don't have your passed checklists yet"
   },
   "creationOfChecklist": {
-    "title": "Сreation of checklisit",
+    "title": "Creation of Checklist",
     "name": "Name checklist",
     "max": "Minimum 10 and Maximum 150 characters",
     "passed": "Passed",
-    "points": "Сhecklist points",
+    "points": "Checklist points",
     "text": "Include all the information someone might need to make your checklist popular.",
     "addBtn": "Add item",
     "tags": "Tags",

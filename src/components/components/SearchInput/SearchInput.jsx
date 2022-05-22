@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import {
   changeSearchParamsValue,
@@ -22,10 +22,14 @@ const SearchInput = ({ page = false }) => {
   const { data: serverTags } = checklistAPI.useFetchTagsQuery(myTagsUrl, {
     skip: !myTagsUrl,
   });
+
   const [myTags, setMyTags] = useState(serverTags);
   const [blur, setBlur] = useState(false);
+
   const { ref, show, setShow } = useClickOutside();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!serverTags) return;
@@ -79,8 +83,12 @@ const SearchInput = ({ page = false }) => {
 
     setTagUrl("");
     setShow(false);
-    searchParams.append("search_tag_ids[]", tag.id);
-    setSearchParams(searchParams);
+    if (pathname === "/") {
+      searchParams.append("search_tag_ids[]", tag.id);
+      setSearchParams(searchParams);
+    } else {
+      navigate(`/?page=1&per_page=3&search_tag_ids[]=${tag.id}`);
+    }
   };
 
   const findTypeHandler = (e, tag) => {
@@ -96,9 +104,18 @@ const SearchInput = ({ page = false }) => {
     if (isTag) {
       setSearchValue("");
     } else {
-      setSearchParams(
-        changeSearchParamsValue(searchParams, "search_value", searchValue)
-      );
+      if (pathname === "/") {
+        if (searchValue) {
+          setSearchParams(
+            changeSearchParamsValue(searchParams, "search_value", searchValue)
+          );
+        } else {
+          searchParams.delete("search_value");
+          setSearchParams(searchParams);
+        }
+      } else {
+        navigate(`/?per_page=3&page=1&search_value=${searchValue}`);
+      }
       setSearchValue("");
     }
   };

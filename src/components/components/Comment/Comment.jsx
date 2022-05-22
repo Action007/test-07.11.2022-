@@ -12,7 +12,6 @@ const Comment = ({
   unliked,
   onLikeHandler,
   onUnlikeHandler,
-  onUpdateHandler,
   onDeleteHandler,
 }) => {
   const [like, setLiked] = useState(false);
@@ -38,31 +37,33 @@ const Comment = ({
           <span className="checklist-comment__time">{date}</span>
         </div>
         <p className="checklist-comment__text">{text}</p>
-        <button
-          onClick={setLikeHandler}
-          className={`${`checklist-comment__likes SFPro-700`}${
-            liked ? " active" : ""
-          }${like ? " liked" : ""}`}
-          type="button"
-        >
-          <LikeSvg />
-          {like ? liked + 1 : liked}
-        </button>
-        <button
-          onClick={setDislikeHandler}
-          className={`${`checklist-comment__dislikes SFPro-700`}${
-            unliked ? " active" : ""
-          }${dislike ? " disliked" : ""}`}
-          type="button"
-        >
-          <LikeSvg />
-          {dislike ? unliked + 1 : unliked}
-        </button>
+        <div className="checklist-comment__buttons">
+          <button
+            onClick={setLikeHandler}
+            className={`${`checklist-comment__likes SFPro-700`}${
+              liked ? " active" : ""
+            }${like ? " liked" : ""}`}
+            type="button"
+          >
+            <LikeSvg />
+            {like ? liked + 1 : liked}
+          </button>
+          <button
+            onClick={setDislikeHandler}
+            className={`${`checklist-comment__dislikes SFPro-700`}${
+              unliked ? " active" : ""
+            }${dislike ? " disliked" : ""}`}
+            type="button"
+          >
+            <LikeSvg />
+            {dislike ? unliked + 1 : unliked}
+          </button>
+        </div>
       </div>
       <EditDropdown
         commentID={commentID}
-        onUpdateHandler={onUpdateHandler}
         onDeleteHandler={onDeleteHandler}
+        componentType="comment"
       />
     </li>
   );

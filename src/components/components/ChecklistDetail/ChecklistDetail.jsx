@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
@@ -24,6 +24,7 @@ const ChecklistDetail = ({
 }) => {
   const {
     id,
+    slug,
     checklist_items,
     created_at,
     liked,
@@ -38,14 +39,11 @@ const ChecklistDetail = ({
   });
   const [showComplain, setShowComplain] = useState(false);
   const [iSaved, setISaved] = useState(user_track?.saved);
-  // eslint-disable-next-line no-empty-pattern
-  const [addActiveChecklist, {}] = checklistAPI.useAddActiveChecklistMutation();
-  // eslint-disable-next-line no-empty-pattern
-  const [saveChecklist, {}] = checklistAPI.useSaveChecklistMutation();
-  // eslint-disable-next-line no-empty-pattern
-  const [likeChecklist, {}] = checklistAPI.useLikeChecklistMutation();
-  // eslint-disable-next-line no-empty-pattern
-  const [dislikeChecklist, {}] = checklistAPI.useDislikeChecklistMutation();
+  const [addActiveChecklist, { isSuccess }] =
+    checklistAPI.useAddActiveChecklistMutation();
+  const [saveChecklist] = checklistAPI.useSaveChecklistMutation();
+  const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
+  const [dislikeChecklist] = checklistAPI.useDislikeChecklistMutation();
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:575px)");
   const { date } = getTime(created_at);
@@ -55,6 +53,10 @@ const ChecklistDetail = ({
   const savedClass = `checklist-detail__bookmark${iSaved ? " saved" : ""}`;
   const navigate = useNavigate();
   const token = useSelector((state) => state.authSliceReducer.token);
+
+  useEffect(() => {
+    if (isSuccess) navigate(`/active-checklist/${id}/${slug}`);
+  }, [isSuccess]);
 
   const likeHandler = () => {
     if (detailPage) {
@@ -76,8 +78,11 @@ const ChecklistDetail = ({
   };
 
   const addActiveChecklistHandler = () => {
-    if (token) addActiveChecklist({ checklist_id: id });
-    if (!token) navigate("/sign-in");
+    if (token) {
+      addActiveChecklist({ checklist_id: id });
+    } else {
+      navigate("/sign-in");
+    }
   };
 
   const saveHandler = () => {

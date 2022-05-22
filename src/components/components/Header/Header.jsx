@@ -92,7 +92,10 @@ const Header = () => {
           fluid
         >
           <button
-            onClick={() => onClickHandler("/")}
+            onClick={() => {
+              navigate("/");
+              window.scrollTo(0, 0);
+            }}
             className="header__logo"
             type="button"
           >
