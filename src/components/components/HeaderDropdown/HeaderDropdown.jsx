@@ -69,21 +69,23 @@ const HeaderDropdown = ({ setShow }) => {
   return (
     <>
       <div className={`header-dropdown SFPro-500${mobileClass}`} ref={ref}>
-        <button
-          onClick={setShowHandler}
-          className={`header-dropdown__button${
-            show ? " show" : ""
-          }${mobileClass}`}
-          variant="success"
-          type="button"
-        >
-          <div className="header-dropdown__img">
-            <img src={Profile} alt="account" />
-          </div>
-          <span className="header-dropdown__name">
-            {user ? user.nickname : ""}
-          </span>
-        </button>
+        {!showOnMobile && (
+          <button
+            onClick={setShowHandler}
+            className={`header-dropdown__button${
+              show ? " show" : ""
+            }${mobileClass}`}
+            variant="success"
+            type="button"
+          >
+            <div className="header-dropdown__img">
+              <img src={Profile} alt="account" />
+            </div>
+            <span className="header-dropdown__name">
+              {user ? user.nickname : ""}
+            </span>
+          </button>
+        )}
         <CSSTransition
           classNames="headerDropdown"
           in={showOnMobile ? true : show}
@@ -96,7 +98,9 @@ const HeaderDropdown = ({ setShow }) => {
               className="header-dropdown__inner"
               type="button"
             >
-              <span className="header-dropdown__percent">60%</span>
+              <span className="header-dropdown__percent SFPro-700">
+                {percent || 0}%
+              </span>
               <div className="header-dropdown__progress">
                 <ProgressBarHeader done={percent || 0} />
               </div>

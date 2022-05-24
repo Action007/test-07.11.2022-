@@ -34,7 +34,7 @@ const ChecklistReview = () => {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {isLoading && <LoadingSkeleton />}
       {checklists && (
-        <ChecklistDetail checklists={checklists.checklist} detailPage />
+        <ChecklistDetail checklist={checklists.checklist} detailPage />
       )}
       {checklists && (
         <ChecklistComments

@@ -13,10 +13,6 @@
   }
 
   @include media-breakpoint-down(md) {
-    margin-top: 85px;
-  }
-
-  @include media-breakpoint-down(sm) {
     margin-top: 73px;
   }
 

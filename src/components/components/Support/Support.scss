@@ -14,5 +14,13 @@
 
   &__text {
     line-height: 1.3;
+
+    button {
+      color: $primary;
+
+      &:hover {
+        color: #429f5b;
+      }
+    }
   }
 }

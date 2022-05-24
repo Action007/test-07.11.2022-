@@ -11,7 +11,9 @@ const ProgressBarHeader = ({ done }) => {
           width: `${done}%`,
         }}
       >
-        <span className="progressBar-header__text">Active checklist</span>
+        <span className="progressBar-header__text SFPro-400">
+          Active checklist
+        </span>
       </div>
     </div>
   );

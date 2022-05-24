@@ -18,7 +18,7 @@ import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark
 import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
 
 const ChecklistDetail = ({
-  checklists,
+  checklist,
   detailPage = false,
   preview = false,
 }) => {
@@ -32,7 +32,7 @@ const ChecklistDetail = ({
     tags,
     user_track,
     viewed,
-  } = checklists;
+  } = checklist;
   const [iLiked, setILiked] = useState({
     liked: user_track?.liked,
     mount: liked,

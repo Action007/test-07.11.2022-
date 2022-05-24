@@ -10,7 +10,7 @@ import "./SignInSignUp.scss";
 import { ReactComponent as LoginSvg } from "../../../assets/images/content/login.svg";
 import { ReactComponent as EmailSvg } from "../../../assets/images/icon/sendEmail.svg";
 
-const PopupLogin = () => {
+const SignInSignUp = () => {
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const { pathname } = useLocation();
 
@@ -36,4 +36,4 @@ const PopupLogin = () => {
   );
 };
 
-export default PopupLogin;
+export default SignInSignUp;

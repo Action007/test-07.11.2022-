@@ -36,9 +36,9 @@ const ForgotPassword = () => {
           <EmailSvg />
         </div>
       )}
-      <h3 className="forgot-password__title SFPro-600">
+      <h2 className="forgot-password__title SFPro-600">
         {translate("login.title5")}
-      </h3>
+      </h2>
       <span className="forgot-password__done">{translate("login.done")}</span>
       <form onSubmit={submitHandler} className="forgot-password__form">
         <label

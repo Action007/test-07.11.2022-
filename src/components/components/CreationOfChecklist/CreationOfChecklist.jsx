@@ -16,7 +16,6 @@ import "./CreationOfChecklist.scss";
 
 import { ReactComponent as CreationImg } from "../../../assets/images/content/creationChecklist.svg";
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
-// import { Modal } from "react-bootstrap";
 
 const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const [

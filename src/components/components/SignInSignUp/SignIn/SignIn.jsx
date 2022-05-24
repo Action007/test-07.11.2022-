@@ -65,9 +65,9 @@ const SignIn = () => {
             <LoginSvg />
           </div>
         )}
-        <h3 className="sign-in__title SFPro-600">
+        <h2 className="sign-in__title SFPro-600">
           {translate("login.title1")}
-        </h3>
+        </h2>
         <form onSubmit={submitHandler} className="sign-in__form">
           <label
             className={`sign-in__label${!emailIsValid ? " invalid" : ""}`}

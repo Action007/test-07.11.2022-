@@ -33,7 +33,7 @@ const CreationChecklistPreview = ({ show, onHide }) => {
     }
   });
 
-  const checklists = {
+  const checklist = {
     checklist_items: checklist_items_attributes,
     tags,
     name: title,
@@ -59,7 +59,7 @@ const CreationChecklistPreview = ({ show, onHide }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="p-0">
-        <ChecklistDetail checklists={checklists} preview />
+        <ChecklistDetail checklist={checklist} preview />
       </Modal.Body>
     </Modal>
   );
