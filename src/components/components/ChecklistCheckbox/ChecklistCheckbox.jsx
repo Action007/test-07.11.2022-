@@ -17,8 +17,7 @@ const ChecklistCheckbox = ({
   idFor,
   completed,
 }) => {
-  // eslint-disable-next-line no-empty-pattern
-  const [checkChecklistItem, {}] =
+  const [checkChecklistItem] =
     checklistAPI.useCheckActiveChecklistItemMutation();
   const [checked, setChecked] = useState(completed);
   const [showMap, setShowMap] = useState(false);

@@ -9,6 +9,7 @@ import ChecklistItem from "../ChecklistItem/ChecklistItem";
 import uniqueID from "../../../utils/uniqueID";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
+import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import "./ChecklistDetail.scss";
 
 import { ReactComponent as RightArrow } from "../../../assets/images/icon/arrow.svg";
@@ -24,7 +25,6 @@ const ChecklistDetail = ({
 }) => {
   const {
     id,
-    slug,
     checklist_items,
     created_at,
     liked,
@@ -39,7 +39,7 @@ const ChecklistDetail = ({
   });
   const [showComplain, setShowComplain] = useState(false);
   const [iSaved, setISaved] = useState(user_track?.saved);
-  const [addActiveChecklist, { isSuccess }] =
+  const [addActiveChecklist, { data, isSuccess, isLoading }] =
     checklistAPI.useAddActiveChecklistMutation();
   const [saveChecklist] = checklistAPI.useSaveChecklistMutation();
   const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
@@ -55,7 +55,9 @@ const ChecklistDetail = ({
   const token = useSelector((state) => state.authSliceReducer.token);
 
   useEffect(() => {
-    if (isSuccess) navigate(`/active-checklist/${id}/${slug}`);
+    if (isSuccess) {
+      navigate(`/active-checklist/${data.entities.id}/${data.entities.slug}`);
+    }
   }, [isSuccess]);
 
   const likeHandler = () => {
@@ -114,6 +116,7 @@ const ChecklistDetail = ({
 
   return (
     <>
+      <LoadingSpinnerPopup showSpinner={isLoading} />
       <div className="checklist-detail__wrapper">
         <div className="checklist-detail__heading">
           <h3 className="checklist-detail__title SFPro-700">{name}</h3>

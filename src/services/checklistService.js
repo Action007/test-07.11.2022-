@@ -27,7 +27,7 @@ export const checklistAPI = createApi({
       providesTags: () => ["ActiveChecklist"],
     }),
     fetchAccount: build.query({
-      query: (url) => url,
+      query: () => "/api/v1/account",
       providesTags: () => ["Account"],
     }),
     fetchChecklistForSupport: build.query({
@@ -37,11 +37,13 @@ export const checklistAPI = createApi({
     }),
     fetchSearchTags: build.query({
       query: (url) => `/api/v1/tags/search?value=${url}`,
-      providesTags: () => ["Tags"],
     }),
     fetchTags: build.query({
       query: (tagsUrl) => `/api/v1/tags/search?${tagsUrl}`,
       providesTags: () => ["Tags"],
+    }),
+    fetchCountryNames: build.query({
+      query: () => "/api/v1/account/valid_country_names",
     }),
     signUp: build.mutation({
       query: (body) => ({
@@ -81,6 +83,14 @@ export const checklistAPI = createApi({
         body: checklist,
       }),
       invalidatesTags: ["Checklist"],
+    }),
+    editAccount: build.mutation({
+      query: (info) => ({
+        url: `/api/v1/account`,
+        method: "PUT",
+        body: info,
+      }),
+      invalidatesTags: ["Account"],
     }),
     supportChecklist: build.mutation({
       query: (body) => ({
@@ -150,7 +160,7 @@ export const checklistAPI = createApi({
         },
         body,
       }),
-      invalidatesTags: ["ActiveChecklist"],
+      invalidatesTags: ["ActiveChecklist", "Account"],
     }),
     checkActiveChecklistItem: build.mutation({
       query: (body) => ({
@@ -161,7 +171,7 @@ export const checklistAPI = createApi({
         },
         body,
       }),
-      invalidatesTags: ["ActiveChecklist"],
+      invalidatesTags: ["ActiveChecklist", "Account"],
     }),
     addComment: build.mutation({
       query: (body) => ({

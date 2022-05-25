@@ -36,16 +36,11 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
     mount: liked,
   });
   const [iSaved, setISaved] = useState(user_track?.saved);
-  // eslint-disable-next-line no-empty-pattern
-  const [saveChecklist, {}] = checklistAPI.useSaveChecklistMutation();
-  // eslint-disable-next-line no-empty-pattern
-  const [unsaveChecklist, {}] = checklistAPI.useUnsaveChecklistMutation();
-  // eslint-disable-next-line no-empty-pattern
-  const [likeChecklist, {}] = checklistAPI.useLikeChecklistMutation();
-  // eslint-disable-next-line no-empty-pattern
-  const [dislikeChecklist, {}] = checklistAPI.useDislikeChecklistMutation();
-  // eslint-disable-next-line no-empty-pattern
-  const [deleteChecklist, {}] = checklistAPI.useDeleteChecklistMutation();
+  const [saveChecklist] = checklistAPI.useSaveChecklistMutation();
+  const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
+  const [unsaveChecklist] = checklistAPI.useUnsaveChecklistMutation();
+  const [dislikeChecklist] = checklistAPI.useDislikeChecklistMutation();
+  const [deleteChecklist] = checklistAPI.useDeleteChecklistMutation();
   const [showComplain, setShowComplain] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:575px)");
   const navigate = useNavigate();

@@ -89,10 +89,15 @@
     border-radius: 6px;
     min-width: 244px;
     max-height: 255px;
+    padding: 7px 0;
     font-size: 16px;
     background-color: #fff;
     box-shadow: 0px 4px 4px 0px #00000040;
     transition: max-height 0.3s ease;
+
+    @include media-breakpoint-down(md) {
+      padding: 0;
+    }
 
     svg {
       margin-right: 20px;
@@ -119,9 +124,12 @@
     display: flex;
     align-items: center;
     border-bottom: 2px solid #4f4f4f11;
-    border-top: 1px solid #f5f7fe;
     padding: 10px 19px 10px 26px;
     width: 100%;
+    
+    @include media-breakpoint-down(md) {
+      border-top: 1px solid #f5f7fe;
+    }
 
     &:hover {
       color: $primary;

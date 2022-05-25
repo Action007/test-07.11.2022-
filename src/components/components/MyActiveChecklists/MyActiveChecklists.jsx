@@ -25,15 +25,21 @@ const MyActiveChecklists = () => {
     `/active_checklists${search || "?completed=false&page=1&per_page=10"}`
   );
 
-  useEffect(() => {
-    if (error) navigate("/error");
-  }, [error]);
-
   const breadcrumbs = [{ title: translate("myActiveChecklists.title") }];
   const tabs = [
     { id: 0, key: "active", title: translate("myActiveChecklists.active") },
     { id: 1, key: "passed", title: translate("myActiveChecklists.passed") },
   ];
+
+  useEffect(() => {
+    if (error) navigate("/error");
+  }, [error]);
+
+  useEffect(() => {
+    if (!search) {
+      navigate(`?completed=false&page=1&per_page=10`);
+    }
+  }, [search]);
 
   const loader = (
     <>

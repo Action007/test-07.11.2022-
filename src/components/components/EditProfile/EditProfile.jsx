@@ -1,24 +1,33 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { checklistAPI } from "../../../services/checklistService";
+import useClickOutside from "../../../hooks/useClickOutside";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./EditProfile.scss";
 
+import { ReactComponent as ArrowSvg } from "../../../assets/images/icon/rightArrow.svg";
 import { ReactComponent as EditProfileSvg } from "../../../assets/images/content/editProfile.svg";
 
 const EditProfile = () => {
-  const { t: translate } = useTranslation();
+  const [nameValid, setNameValid] = useState(true);
+  const [nickNameValid, setNickNameValid] = useState(true);
+  const [bioValid, setBioValid] = useState(true);
+  const [country, setCountry] = useState("Select a country");
   const nameRef = useRef();
   const nickNameRef = useRef();
-  const locationRef = useRef();
   const bioRef = useRef();
   const websiteRef = useRef();
   const facebookRef = useRef();
   const instagramRef = useRef();
   const twitterRef = useRef();
-  const [nameValid, setNameValid] = useState(true);
-  const [nickNameValid, setNickNameValid] = useState(true);
-  const [bioValid, setBioValid] = useState(true);
+  const { t: translate } = useTranslation();
+  const { ref, show, setShowHandler } = useClickOutside();
+
+  const [editAccount] = checklistAPI.useEditAccountMutation();
+  const { data: countryNames } = checklistAPI.useFetchCountryNamesQuery("", {
+    skip: !show,
+  });
 
   const breadcrumbs = [
     { title: translate("profilePage.myProfile"), link: "/my-profile" },
@@ -29,44 +38,51 @@ const EditProfile = () => {
     const name =
       nameRef.current.value.length < 150 &&
       nameRef.current.value.trim().length > 0;
-
     setNameValid(name);
+
+    return name;
   };
 
   const onChangeNickNameHandler = () => {
     const nickName =
       nickNameRef.current.value.length < 150 &&
       nickNameRef.current.value.trim().length > 0;
-
     setNickNameValid(nickName);
+
+    return nickName;
   };
 
   const onChangeBioHandler = () => {
     const bio =
       bioRef.current.value.length < 150 &&
       bioRef.current.value.trim().length > 0;
-
     setBioValid(bio);
+
+    return bio;
+  };
+
+  const onSelectCountryHandler = (name) => {
+    setCountry(name);
+    setShowHandler();
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    onChangeNameHandler();
-    onChangeNickNameHandler();
-    onChangeBioHandler();
+    const name = onChangeNameHandler();
+    const nickname = onChangeNickNameHandler();
+    const bio = onChangeBioHandler();
 
-    const name =
-      nameRef.current.value.length < 150 &&
-      nameRef.current.value.trim().length > 0;
-    const nickName =
-      nickNameRef.current.value.length < 150 &&
-      nickNameRef.current.value.trim().length > 0;
-    const bio =
-      bioRef.current.value.length < 150 &&
-      bioRef.current.value.trim().length > 0;
-
-    if (name && nickName && bio) {
-      console.log("sd2");
+    if (name && nickname && bio) {
+      editAccount({
+        name: nameRef.current.value,
+        nickname: nickNameRef.current.value,
+        bio: bioRef.current.value,
+        site: websiteRef.current.value,
+        facebook: facebookRef.current.value,
+        instagram: instagramRef.current.value,
+        twitter: twitterRef.current.value,
+        country,
+      });
     }
   };
 
@@ -104,12 +120,48 @@ const EditProfile = () => {
               type="text"
             />
           </label>
-          <label className="edit-profile__label">
+          <div className="edit-profile__label">
             <span className="edit-profile__title SFPro-700">
-              {translate("editProfilePage.location")}
+              {translate("editProfilePage.country")}
             </span>
-            <input ref={locationRef} type="text" />
-          </label>
+            <div className="edit-profile__wrap" ref={ref}>
+              <button
+                onClick={setShowHandler}
+                className={`edit-profile__button SFPro-500${
+                  show ? " active" : ""
+                }`}
+                type="button"
+              >
+                {country}
+                <ArrowSvg />
+              </button>
+              {show && (
+                <ul className="edit-profile__list">
+                  {!countryNames ? (
+                    countryNames.contries.map((item) => (
+                      <li key={item} className="edit-profile__item">
+                        <button
+                          onClick={() => onSelectCountryHandler(item)}
+                          className="edit-profile__btn"
+                          type="button"
+                        >
+                          {item}
+                        </button>
+                      </li>
+                    ))
+                  ) : (
+                    <>
+                      <div className="loading-list__skeleton" />
+                      <div className="loading-list__skeleton" />
+                      <div className="loading-list__skeleton" />
+                      <div className="loading-list__skeleton" />
+                      <div className="loading-list__skeleton" />
+                    </>
+                  )}
+                </ul>
+              )}
+            </div>
+          </div>
           <label
             className={`edit-profile__label${!bioValid ? " invalid" : ""}`}
           >

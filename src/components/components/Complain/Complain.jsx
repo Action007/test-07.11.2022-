@@ -10,12 +10,12 @@ import "./Complain.scss";
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/close.svg";
 
 const Complain = ({ closeHandler, id, name, page }) => {
-  // const [changeChecklist, setChangeChecklist] = useState(false);
+  const [changeChecklist, setChangeChecklist] = useState(false);
   const [showDone, setShowDone] = useState(false);
   const [category, setCategory] = useState("");
   const [checklistId, setChecklistId] = useState(id);
   const skip = page !== "support" || !checklistId;
-  const { data: checklist, isLoading } =
+  const { data: checklist, isFetching } =
     checklistAPI.useFetchChecklistForSupportQuery(checklistId, {
       skip,
     });
@@ -28,9 +28,9 @@ const Complain = ({ closeHandler, id, name, page }) => {
   const navigate = useNavigate();
   const showComplain = (!done && !isSendLoading) || page === "support";
 
-  // useEffect(() => {
-  //   if (field.current) field.current.focus();
-  // }, [changeChecklist]);
+  useEffect(() => {
+    if (field.current) field.current.focus();
+  }, [changeChecklist]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -56,6 +56,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
   const onChangeHandler = () => {
     const checklistID = field.current.value.match(/\/list\/(\d+)/);
     if (checklistID) setChecklistId(checklistID[1]);
+    setChangeChecklist(false);
   };
 
   return (
@@ -70,13 +71,13 @@ const Complain = ({ closeHandler, id, name, page }) => {
             </button>
           </div>
           <form className="complain__form" onSubmit={(e) => submitHandler(e)}>
-            {/* {checklistId && !changeChecklist ? ( */}
-            {checklistId ? (
+            {checklistId && !changeChecklist ? (
               <>
                 {page === "support" ? (
-                  checklist && (
+                  checklist &&
+                  !isFetching && (
                     <button
-                      // onClick={() => setChangeChecklist(true)}
+                      onClick={() => setChangeChecklist(true)}
                       className="complain__title SFPro-600"
                       type="button"
                     >
@@ -86,7 +87,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
                 ) : (
                   <div className="complain__title SFPro-600">{name}</div>
                 )}
-                {isLoading && (
+                {isFetching && (
                   <div className="complain__load">
                     <div className="complain__load-item" />
                     <div className="complain__load-item" />

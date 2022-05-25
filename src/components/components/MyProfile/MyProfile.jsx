@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./MyProfile.scss";
 
@@ -20,7 +20,7 @@ import { ReactComponent as EmptySvg } from "../../../assets/images/icon/emptyPho
 const Profile = () => {
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
-  // const user = useSelector((state) => state.authSliceReducer.user);
+  const user = useSelector((state) => state.authSliceReducer.user);
   const breadcrumbs = [{ title: translate("profilePage.myProfile") }];
 
   return (
@@ -37,43 +37,61 @@ const Profile = () => {
               <EditSvg />
             </button>
             <div>
-              <h1 className="profile__title SFPro-700">Aleksandr Vtorov</h1>
-              <span className="profile__subtitle">Poznań, Poland</span>
-              <span className="profile__name SFPro-700">@alex64</span>
+              {user && user.name && (
+                <h1 className="profile__title SFPro-700">{user.name}</h1>
+              )}
+              {user && user.country && (
+                <span className="profile__subtitle">{user.country}</span>
+              )}
+              {user && user.nickname && (
+                <span className="profile__name SFPro-700">
+                  @{user.nickname}
+                </span>
+              )}
             </div>
           </div>
-          <span className="profile__span">
-            {translate("profilePage.aboutMe")}
-          </span>
-          <p className="profile__text">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer
-            adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor
-            sit.
-          </p>
-          <ul className="profile__networks">
-            <li className="profile__network">
-              <a href="/" target="_blank" rel="noreferrer">
-                <Facebook />
-              </a>
-            </li>
-            <li className="profile__network">
-              <a href="/" target="_blank" rel="noreferrer">
-                <Twitter />
-              </a>
-            </li>
-            <li className="profile__network">
-              <a href="/" target="_blank" rel="noreferrer">
-                <Instagram />
-              </a>
-            </li>
-            <li className="profile__network">
-              <a href="/" target="_blank" rel="noreferrer">
-                <World />
-                proxyone.eu
-              </a>
-            </li>
-          </ul>
+          {user && user.bio.length !== 0 && (
+            <>
+              <span className="profile__span">
+                {translate("profilePage.aboutMe")}
+              </span>
+              <p className="profile__text">{user.bio}</p>
+            </>
+          )}
+          {user &&
+            (user.facebook || user.twitter || user.instagram || user.site) && (
+              <ul className="profile__networks">
+                {user.facebook && (
+                  <li className="profile__network">
+                    <a href={user.facebook} target="_blank" rel="noreferrer">
+                      <Facebook />
+                    </a>
+                  </li>
+                )}
+                {user.twitter && (
+                  <li className="profile__network">
+                    <a href={user.twitter} target="_blank" rel="noreferrer">
+                      <Twitter />
+                    </a>
+                  </li>
+                )}
+                {user.instagram && (
+                  <li className="profile__network">
+                    <a href={user.instagram} target="_blank" rel="noreferrer">
+                      <Instagram />
+                    </a>
+                  </li>
+                )}
+                {user.site && (
+                  <li className="profile__network">
+                    <a href={user.site} target="_blank" rel="noreferrer">
+                      <World />
+                      {user.site}
+                    </a>
+                  </li>
+                )}
+              </ul>
+            )}
         </div>
         <div className="profile__edit">
           <button
@@ -92,46 +110,63 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      <div className="profile__wrap">
-        <span className="profile__head">
-          {translate("profilePage.myAwards")}
-        </span>
-        <ul className="profile__items">
-          <li className="profile__item SFPro-600">
-            <div className="profile__svg">
-              <List />
-            </div>
-            <div>
-              <span className="profile__num SFPro-700">3</span>
-              <div className="profile__desc">
-                {translate("profilePage.completedChecklists")}
-              </div>
-            </div>
-          </li>
-          <li className="profile__item SFPro-600">
-            <div className="profile__svg">
-              <Cup />
-            </div>
-            <div>
-              <span className="profile__num SFPro-700">30</span>
-              <div className="profile__desc">
-                {translate("profilePage.myAwards")}
-              </div>
-            </div>
-          </li>
-          <li className="profile__item SFPro-600">
-            <div className="profile__svg">
-              <Added />
-            </div>
-            <div>
-              <span className="profile__num SFPro-700">5</span>
-              <div className="profile__desc">
-                {translate("profilePage.createdChecklists")}
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+      {user &&
+        (user.created_counter ||
+          user.completed_counter ||
+          user.awards_counter) && (
+          <div className="profile__wrap">
+            <span className="profile__head">
+              {translate("profilePage.myAwards")}
+            </span>
+            <ul className="profile__items">
+              {user.completed_counter && (
+                <li className="profile__item SFPro-600">
+                  <div className="profile__svg">
+                    <List />
+                  </div>
+                  <div>
+                    <span className="profile__num SFPro-700">
+                      {user.completed_counter}
+                    </span>
+                    <div className="profile__desc">
+                      {translate("profilePage.completedChecklists")}
+                    </div>
+                  </div>
+                </li>
+              )}
+              {user.awards_counter && (
+                <li className="profile__item SFPro-600">
+                  <div className="profile__svg">
+                    <Cup />
+                  </div>
+                  <div>
+                    <span className="profile__num SFPro-700">
+                      {user.awards_counter}
+                    </span>
+                    <div className="profile__desc">
+                      {translate("profilePage.myAwards")}
+                    </div>
+                  </div>
+                </li>
+              )}
+              {user.created_counter && (
+                <li className="profile__item SFPro-600">
+                  <div className="profile__svg">
+                    <Added />
+                  </div>
+                  <div>
+                    <span className="profile__num SFPro-700">
+                      {user.created_counter}
+                    </span>
+                    <div className="profile__desc">
+                      {translate("profilePage.createdChecklists")}
+                    </div>
+                  </div>
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
     </div>
   );
 };

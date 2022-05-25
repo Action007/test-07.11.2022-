@@ -26,10 +26,8 @@ const HeaderDropdown = ({ setShow }) => {
   const [isLogout, setIsLogout] = useState(false);
   const user = useSelector((state) => state.authSliceReducer.user);
   const percent = useSelector((state) => state.authSliceReducer.percent);
-  // eslint-disable-next-line no-empty-pattern
-  const [logOut, {}] = checklistAPI.useLogOutMutation();
-  const { data: accountInfo, isError } =
-    checklistAPI.useFetchAccountQuery("/api/v1/account");
+  const [logOut] = checklistAPI.useLogOutMutation();
+  const { data: accountInfo, isError } = checklistAPI.useFetchAccountQuery();
 
   useEffect(() => {
     if (accountInfo) {

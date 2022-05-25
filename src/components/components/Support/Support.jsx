@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Complain from "../Complain/Complain";
 import "./Support.scss";
@@ -10,15 +9,9 @@ import { ReactComponent as SupportImg } from "../../../assets/images/content/sup
 const Support = () => {
   const [support, setSupport] = useState(false);
   const { t: translate } = useTranslation();
-  const navigate = useNavigate();
   const supportHandler = () => setSupport((prevState) => !prevState);
 
   const breadcrumbs = [{ title: translate("supportPage.title") }];
-
-  const onClickHandler = () => {
-    navigate("/support");
-    window.scrollTo(0, 0);
-  };
 
   return (
     <div className="container support pb-8">
@@ -49,7 +42,9 @@ const Support = () => {
                 i18nKey="supportPage.text1"
                 t={translate}
                 // eslint-disable-next-line jsx-a11y/control-has-associated-label
-                components={[<button onClick={onClickHandler} type="button" />]}
+                components={[
+                  <a href="mailto:support@checklists.com">support</a>,
+                ]}
               />
             </p>
             <p className="support__text SFPro-300 display-7">
@@ -57,7 +52,9 @@ const Support = () => {
                 i18nKey="supportPage.text2"
                 t={translate}
                 // eslint-disable-next-line jsx-a11y/control-has-associated-label
-                components={[<button onClick={onClickHandler} type="button" />]}
+                components={[
+                  <a href="mailto:support@checklists.com">support</a>,
+                ]}
               />
             </p>
           </>
