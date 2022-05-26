@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { checklistAPI } from "../../../../services/checklistService";
+import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import validateEmail from "../../../../utils/validateEmail";
 import "./ForgotPassword.scss";
@@ -9,6 +11,8 @@ import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon
 import { ReactComponent as EmailSvg } from "../../../../assets/images/icon/sendEmail.svg";
 
 const ForgotPassword = () => {
+  const [forgotPassword, { isSuccess, isLoading }] =
+    checklistAPI.useForgotPasswordMutation();
   const email = useRef();
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
@@ -17,8 +21,10 @@ const ForgotPassword = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const validEmail = !!validateEmail(email.current.value);
-
     setEmailIsValid(validEmail);
+    if (validEmail) {
+      forgotPassword({ email: email.current.value });
+    }
   };
 
   return (
@@ -39,7 +45,10 @@ const ForgotPassword = () => {
       <h2 className="forgot-password__title SFPro-600">
         {translate("login.title5")}
       </h2>
-      <span className="forgot-password__done">{translate("login.done")}</span>
+      {isSuccess && (
+        <span className="forgot-password__done">{translate("login.done")}</span>
+      )}
+      {isLoading && <LoadingSpinner />}
       <form onSubmit={submitHandler} className="forgot-password__form">
         <label
           className={`forgot-password__label${!emailIsValid ? " invalid" : ""}`}

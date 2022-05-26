@@ -68,6 +68,13 @@ export const checklistAPI = createApi({
       }),
       invalidatesTags: ["Checklist", "Account"],
     }),
+    forgotPassword: build.mutation({
+      query: (body) => ({
+        url: "/api/v1/users/forgot_password",
+        method: "POST",
+        body,
+      }),
+    }),
     createChecklist: build.mutation({
       query: (checklist) => ({
         url: "/api/v1/checklists_auth",
@@ -160,7 +167,7 @@ export const checklistAPI = createApi({
         },
         body,
       }),
-      invalidatesTags: ["ActiveChecklist", "Account"],
+      invalidatesTags: ["ActiveChecklist"],
     }),
     checkActiveChecklistItem: build.mutation({
       query: (body) => ({
@@ -171,7 +178,7 @@ export const checklistAPI = createApi({
         },
         body,
       }),
-      invalidatesTags: ["ActiveChecklist", "Account"],
+      invalidatesTags: ["Account"],
     }),
     addComment: build.mutation({
       query: (body) => ({

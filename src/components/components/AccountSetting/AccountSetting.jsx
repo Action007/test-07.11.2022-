@@ -1,27 +1,32 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import validateEmail from "../../../utils/validateEmail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./AccountSetting.scss";
 
 import { ReactComponent as EditProfileSvg } from "../../../assets/images/content/account-settings.svg";
-import validateEmail from "../../../utils/validateEmail";
 
 const AccountSetting = () => {
-  const { t: translate } = useTranslation();
-  const [emilValue, setEmailValue] = useState("Alex64@gmail.com");
-  const oldPasswordRef = useRef();
-  const newPasswordRef = useRef();
+  const user = useSelector((state) => state.authSliceReducer.user);
+  const [emilValue, setEmailValue] = useState("@");
   const confirmPasswordRef = useRef();
   const [emailValid, setEmailValid] = useState(true);
   const [oldPasswordValid, setOldPasswordValid] = useState(true);
   const [newPasswordValid, setNewPasswordValid] = useState(true);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
-
+  const oldPasswordRef = useRef();
+  const newPasswordRef = useRef();
+  const { t: translate } = useTranslation();
   const breadcrumbs = [
     { title: translate("profilePage.myProfile"), link: "/my-profile" },
     { title: translate("accountSettings.accountSettings") },
   ];
+
+  useEffect(() => {
+    if (user) setEmailValue(user.email);
+  }, [user]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -58,7 +63,7 @@ const AccountSetting = () => {
                 setEmailValue(e.target.value);
               }}
               value={emilValue}
-              type="text"
+              type="email"
             />
           </label>
           <label
@@ -72,7 +77,6 @@ const AccountSetting = () => {
             <input
               onChange={() => setOldPasswordValid(true)}
               ref={oldPasswordRef}
-              autoComplete="on"
               type="password"
             />
           </label>
@@ -90,7 +94,6 @@ const AccountSetting = () => {
             <input
               onChange={() => setNewPasswordValid(true)}
               ref={newPasswordRef}
-              autoComplete="on"
               type="password"
             />
           </label>
@@ -108,7 +111,6 @@ const AccountSetting = () => {
             <input
               onChange={() => setConfirmPasswordValid(true)}
               ref={confirmPasswordRef}
-              autoComplete="on"
               type="password"
             />
           </label>

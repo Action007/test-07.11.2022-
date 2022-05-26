@@ -92,7 +92,11 @@ const HeaderDropdown = ({ setShow }) => {
         >
           <div className={`header-dropdown__menu${mobileClass}`}>
             <button
-              onClick={() => onClickHandler("/active-checklists")}
+              onClick={() =>
+                onClickHandler(
+                  "/active-checklists?completed=false&page=1&per_page=10"
+                )
+              }
               className="header-dropdown__inner"
               type="button"
             >
@@ -104,7 +108,11 @@ const HeaderDropdown = ({ setShow }) => {
               </div>
             </button>
             <button
-              onClick={() => onClickHandler("/created-checklists")}
+              onClick={() =>
+                onClickHandler(
+                  "/created-checklists?search_type=created&page=1&per_page=10"
+                )
+              }
               className="header-dropdown__item header-dropdown__item--first"
               type="button"
             >

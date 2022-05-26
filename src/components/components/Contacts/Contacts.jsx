@@ -50,8 +50,8 @@ const Contacts = () => {
             <h4 className="SFPro-700 display-8">
               {translate("contactsPage.email")}
             </h4>
-            <a className="mb-4" href="mailto:go@info@example.com">
-              info@example.com
+            <a className="mb-4" href="mailto:support@checklists.com">
+              support@checklists.com
             </a>
           </address>
           <h4 className="SFPro-700 display-8">
@@ -62,9 +62,12 @@ const Contacts = () => {
           </span>
           <Networks />
           <div className="text-center">
-            <button className="checklist-button" type="button">
+            <a
+              href="mailto:support@checklists.com"
+              className="checklist-button"
+            >
               {translate("contactsPage.button")}
-            </button>
+            </a>
           </div>
         </div>
         <div className="contacts__img">

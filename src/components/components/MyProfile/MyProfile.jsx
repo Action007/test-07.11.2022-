@@ -119,7 +119,7 @@ const Profile = () => {
               {translate("profilePage.myAwards")}
             </span>
             <ul className="profile__items">
-              {user.completed_counter && (
+              {!!user.completed_counter && (
                 <li className="profile__item SFPro-600">
                   <div className="profile__svg">
                     <List />
@@ -134,7 +134,7 @@ const Profile = () => {
                   </div>
                 </li>
               )}
-              {user.awards_counter && (
+              {!!user.awards_counter && (
                 <li className="profile__item SFPro-600">
                   <div className="profile__svg">
                     <Cup />
@@ -149,7 +149,7 @@ const Profile = () => {
                   </div>
                 </li>
               )}
-              {user.created_counter && (
+              {!!user.created_counter && (
                 <li className="profile__item SFPro-600">
                   <div className="profile__svg">
                     <Added />

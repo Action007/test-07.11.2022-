@@ -86,6 +86,17 @@ const EditProfile = () => {
     }
   };
 
+  const loadingSkeletons = (
+    <>
+      <li className="edit-profile__skeleton" />
+      <li className="edit-profile__skeleton" />
+      <li className="edit-profile__skeleton" />
+      <li className="edit-profile__skeleton" />
+      <li className="edit-profile__skeleton" />
+      <li className="edit-profile__skeleton" />
+    </>
+  );
+
   return (
     <div className="edit-profile container">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
@@ -137,27 +148,19 @@ const EditProfile = () => {
               </button>
               {show && (
                 <ul className="edit-profile__list">
-                  {!countryNames ? (
-                    countryNames.contries.map((item) => (
-                      <li key={item} className="edit-profile__item">
-                        <button
-                          onClick={() => onSelectCountryHandler(item)}
-                          className="edit-profile__btn"
-                          type="button"
-                        >
-                          {item}
-                        </button>
-                      </li>
-                    ))
-                  ) : (
-                    <>
-                      <div className="loading-list__skeleton" />
-                      <div className="loading-list__skeleton" />
-                      <div className="loading-list__skeleton" />
-                      <div className="loading-list__skeleton" />
-                      <div className="loading-list__skeleton" />
-                    </>
-                  )}
+                  {countryNames
+                    ? countryNames.contries.map((item) => (
+                        <li key={item} className="edit-profile__item">
+                          <button
+                            onClick={() => onSelectCountryHandler(item)}
+                            className="edit-profile__btn"
+                            type="button"
+                          >
+                            {item}
+                          </button>
+                        </li>
+                      ))
+                    : loadingSkeletons}
                 </ul>
               )}
             </div>

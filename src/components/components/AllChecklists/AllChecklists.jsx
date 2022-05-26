@@ -33,6 +33,12 @@ const AllChecklists = () => {
   ];
 
   useEffect(() => {
+    if (!search) {
+      navigate(`?search_type=created&page=1&per_page=10`);
+    }
+  }, [search]);
+
+  useEffect(() => {
     if (pathname === "/saved-checklists") {
       setCategory("saved");
     }

@@ -48,7 +48,11 @@ const Header = () => {
       {!showAddButtonOnMobile && (
         <>
           <button
-            onClick={() => onClickHandler("/active-checklists")}
+            onClick={() =>
+              onClickHandler(
+                "/active-checklists?completed=false&page=1&per_page=10"
+              )
+            }
             className="header__progress"
             type="button"
           >
@@ -170,7 +174,7 @@ const Header = () => {
           <div className={`header__inner${!token ? " login" : ""}`}>
             <button
               onClick={() => {
-                onClickHandler("/");
+                onClickHandler("/?page=1&per_page=3");
                 window.scrollTo(0, 0);
               }}
               className="header__logo"
