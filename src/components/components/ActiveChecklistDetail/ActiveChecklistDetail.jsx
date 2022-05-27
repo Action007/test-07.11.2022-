@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
 import PopupCreateDone from "../PopupCreateDone/PopupCreateDone";
 import uniqueID from "../../../utils/uniqueID";
 import "./ActiveChecklistDetail.scss";
@@ -6,21 +7,23 @@ import "./ActiveChecklistDetail.scss";
 import { ReactComponent as DeleteSvg } from "../../../assets/images/icon/trash.svg";
 import { ReactComponent as UploadSvg } from "../../../assets/images/icon/upload.svg";
 import { ReactComponent as ShareSvg } from "../../../assets/images/icon/share.svg";
-import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
 
 const ActiveChecklistDetail = ({ checklist }) => {
+  const [checklistItems, setChecklistItems] = useState(checklist);
   const [modalShow, setModalShow] = useState(checklist.completed);
 
   useEffect(() => {
-    setModalShow(checklist.completed);
-  }, [checklist.completed]);
+    if (checklistItems.once_completed) {
+      setModalShow(checklistItems.once_completed);
+    }
+  }, [checklistItems.once_completed]);
 
   return (
     <>
       <div className="active-checklist">
         <h3 className="active-checklist__title SFPro-700">{checklist.name}</h3>
         <ol className="active-checklist__items">
-          {checklist.checklist_items?.map(
+          {checklistItems.checklist_items.map(
             ({ description, list_type, value, completed, id }) => {
               const idFor = uniqueID();
               return (
@@ -33,6 +36,7 @@ const ActiveChecklistDetail = ({ checklist }) => {
                   value={value}
                   idFor={idFor}
                   completed={completed}
+                  setChecklistItems={setChecklistItems}
                 />
               );
             }

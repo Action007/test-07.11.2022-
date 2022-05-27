@@ -12,13 +12,17 @@ import "./SearchInput.scss";
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
 
 const SearchInput = ({ page = false }) => {
+  const [searchTagUrl, setSearchTagUrl] = useState("");
   const [tagUrl, setTagUrl] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [myTagsUrl, setMyTagsUrl] = useState("");
 
-  const { data: searchTags } = checklistAPI.useFetchSearchTagsQuery(tagUrl, {
-    skip: !tagUrl,
-  });
+  const { data: searchTags } = checklistAPI.useFetchSearchTagsQuery(
+    searchTagUrl,
+    {
+      skip: !searchTagUrl,
+    }
+  );
   const { data: serverTags } = checklistAPI.useFetchTagsQuery(myTagsUrl, {
     skip: !myTagsUrl,
   });
@@ -30,6 +34,11 @@ const SearchInput = ({ page = false }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const setTime = setTimeout(() => setSearchTagUrl(tagUrl), 400);
+    return () => clearTimeout(setTime);
+  }, [tagUrl]);
 
   useEffect(() => {
     if (!serverTags) return;

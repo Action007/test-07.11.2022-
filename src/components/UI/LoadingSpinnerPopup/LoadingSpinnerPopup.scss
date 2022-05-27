@@ -1,7 +1,7 @@
 .loading-spinner {
   .modal-content {
-    transform: translateY(-50px);
     background-color: transparent;
+    transform: translateY(-50px);
   }
 
   .spinner {
@@ -10,6 +10,6 @@
 
   .spinner__wrap::after {
     border: 8px solid #64ff8e;
-    border-color: #64ff8e transparent #64ff8e transparent;
+    border-color: #64ff8e transparent;
   }
 }

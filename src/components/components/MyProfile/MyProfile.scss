@@ -1,24 +1,10 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../global-styles/_mixins.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../global-styles/_mixins.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .profile {
-  max-width: 1112px;
   margin-bottom: 30px;
-
-  &__wrapper,
-  &__wrap {
-    margin: 0 auto;
-    max-width: 1044px;
-    width: 100%;
-    background-color: #fff;
-    border-radius: 6px;
-    padding: 40px 68px;
-
-    @include media-breakpoint-down(md) {
-      padding: 28px 23px;
-    }
-  }
+  max-width: 1112px;
 
   &__wrapper {
     display: flex;
@@ -31,9 +17,9 @@
   }
 
   &__inner {
-    max-width: 443px;
-    width: 100%;
     margin-right: 10px;
+    width: 100%;
+    max-width: 443px;
 
     @include media-breakpoint-down(md) {
       margin: 0 0 40px;
@@ -51,9 +37,8 @@
 
   &__edit {
     display: flex;
-    align-items: start;
-    max-width: 206px;
     width: 100%;
+    max-width: 206px;
 
     @include media-breakpoint-down(md) {
       max-width: 100%;
@@ -62,41 +47,36 @@
 
   &__edit-btn {
     position: relative;
-    max-width: 105px;
+    margin-right: 27px;
     width: 100%;
     height: 105px;
-    margin-right: 27px;
-
-    @include media-breakpoint-down(sm) {
-      max-width: 83px;
-      height: 83px;
-      margin-right: 19px;
-    }
+    max-width: 105px;
 
     svg {
       position: absolute;
-      right: 0px;
-      bottom: 0px;
+      right: 0;
+      bottom: 0;
       width: 27px;
       height: 27px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-right: 19px;
+      height: 83px;
+      max-width: 83px;
     }
   }
 
   &__img {
-    max-width: 105px;
-    width: 100%;
-    height: 105px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #f5f7fe;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    @include media-breakpoint-down(sm) {
-      max-width: 83px;
-      height: 83px;
-    }
+    overflow: hidden;
+    border-radius: 50%;
+    width: 100%;
+    height: 105px;
+    max-width: 105px;
+    background-color: #f5f7fe;
 
     img {
       width: 100%;
@@ -109,19 +89,25 @@
       height: 69px;
 
       @include media-breakpoint-down(sm) {
-        max-width: 32px;
         height: 51px;
+        max-width: 32px;
       }
+    }
+
+    @include media-breakpoint-down(sm) {
+      height: 83px;
+      max-width: 83px;
     }
   }
 
   &__title {
-    max-width: 311px;
-    line-height: 1.3;
-    font-size: 28px;
-    color: $primary;
-    margin-bottom: 6px;
     @include line-clamp;
+
+    margin-bottom: 6px;
+    max-width: 311px;
+    font-size: 28px;
+    line-height: 1.3;
+    color: $primary;
 
     @include media-breakpoint-down(sm) {
       font-size: 20px;
@@ -129,10 +115,10 @@
   }
 
   &__subtitle {
-    line-height: 1.3;
     display: block;
-    font-size: 20px;
     margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 1.3;
 
     @include media-breakpoint-down(sm) {
       font-size: 16px;
@@ -140,10 +126,10 @@
   }
 
   &__span {
-    color: #888888;
-    margin-bottom: 16px;
     display: block;
+    margin-bottom: 16px;
     line-height: 1.1;
+    color: #888;
 
     @include media-breakpoint-down(sm) {
       font-size: 14px;
@@ -159,12 +145,10 @@
       margin-right: 25px;
     }
 
-    &:last-child {
-      svg {
-        margin-right: 5px;
-        fill: #fff;
-        stroke: $dark;
-      }
+    svg {
+      width: 20px;
+      height: 20px;
+      fill: $dark;
     }
 
     &:hover {
@@ -180,10 +164,12 @@
       }
     }
 
-    svg {
-      width: 20px;
-      height: 20px;
-      fill: $dark;
+    &:last-child {
+      svg {
+        margin-right: 5px;
+        fill: #fff;
+        stroke: $dark;
+      }
     }
   }
 
@@ -199,56 +185,56 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 45px;
-    padding: 0 38px;
     margin-right: 16px;
     border: 1px solid #c8d4ff;
-    font-size: 14px;
     border-radius: 6px;
+    padding: 0 38px;
+    height: 45px;
+    font-size: 14px;
     font-size: 14px;
     transition: all 0.3s ease;
+
+    &:hover {
+      border-color: transparent;
+      color: #fff;
+      background-color: $primary;
+    }
 
     @include media-breakpoint-down(md) {
       width: 100%;
     }
-
-    &:hover {
-      background-color: $primary;
-      color: #fff;
-      border-color: transparent;
-    }
   }
 
   &__setting {
-    max-width: 45px;
-    width: 100%;
-    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid #c8d4ff;
     border-radius: 6px;
+    width: 100%;
+    height: 45px;
+    max-width: 45px;
     transition: all 0.3s ease;
-
-    &:hover {
-      background-color: $primary;
-      border-color: transparent;
-
-      svg {
-        fill: #fff;
-      }
-    }
 
     svg {
       fill: $dark;
       transition: fill 0.3s ease;
+    }
+
+    &:hover {
+      border-color: transparent;
+      background-color: $primary;
+
+      svg {
+        fill: #fff;
+      }
     }
   }
 
   &__head {
     display: block;
     margin-bottom: 25px;
-    color: #888888;
+    color: #888;
   }
 
   &__items {
@@ -267,22 +253,22 @@
     justify-content: center;
     border: 1px solid #c8d4ff;
     border-radius: 6px;
-    box-shadow: 0px 3px 4px 0px #eceff9;
-    max-width: 180px;
     width: 100%;
     height: 175px;
+    max-width: 180px;
+    box-shadow: 0 3px 4px 0 #eceff9;
 
     &:not(:last-child) {
       margin-right: 20px;
     }
 
-    @include media-breakpoint-down(md) {
-      margin: 6px !important;
-    }
-
     div {
       display: flex;
       align-items: center;
+    }
+
+    @include media-breakpoint-down(md) {
+      margin: 6px !important;
     }
   }
 
@@ -292,24 +278,38 @@
   }
 
   &__desc {
-    line-height: 1.2;
-    font-size: 12px;
     max-width: 70px;
+    font-size: 12px;
+    line-height: 1.2;
   }
 
   &__svg {
-    height: 60px;
-    width: 60px;
     margin-bottom: 22px;
-
-    @include media-breakpoint-down(md) {
-      height: 50px;
-      width: 50px;
-    }
+    width: 60px;
+    height: 60px;
 
     svg {
       width: 100%;
       height: 100%;
+    }
+
+    @include media-breakpoint-down(md) {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &__wrapper,
+  &__wrap {
+    margin: 0 auto;
+    border-radius: 6px;
+    padding: 40px 68px;
+    width: 100%;
+    max-width: 1044px;
+    background-color: #fff;
+
+    @include media-breakpoint-down(md) {
+      padding: 28px 23px;
     }
   }
 }

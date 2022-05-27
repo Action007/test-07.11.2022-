@@ -1,24 +1,15 @@
-@import '../../../global-styles/_variables.scss';
+@import "../../../global-styles/_variables.scss";
 
 .paginate {
   margin-top: 40px;
+
   .pagination {
-    justify-content: center;
     flex-wrap: wrap;
-    font-family: 'SFPro-Bold', sans-serif;
+    justify-content: center;
+    font-family: "SFPro-Bold", sans-serif;
   }
 
   .page-item {
-    &.disabled {
-      a {
-        border-color: transparent !important;
-      }
-
-      svg {
-        fill: #dbdbdb;
-      }
-    }
-
     svg {
       fill: $dark;
     }
@@ -33,6 +24,16 @@
       margin-right: 8px;
     }
 
+    &.disabled {
+      a {
+        border-color: transparent !important;
+      }
+
+      svg {
+        fill: #dbdbdb;
+      }
+    }
+
     &.active .page-link {
       border-radius: 4px;
       color: $primary;
@@ -42,19 +43,19 @@
 
   &__wrapper {
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: space-around;
     width: 100%;
 
     button {
       display: flex;
       align-items: center;
       justify-content: center;
+      border: 1px solid #ebebeb;
       border-radius: 6px;
-      background-color: #fff;
       width: 40px;
       height: 40px;
-      border: 1px solid #ebebeb;
+      background-color: #fff;
 
       &.disabled {
         border-color: transparent;
@@ -86,8 +87,8 @@
 
   &__desc {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 100px;
     font-size: 14px;
   }

@@ -111,9 +111,9 @@ const Profile = () => {
         </div>
       </div>
       {user &&
-        (user.created_counter ||
-          user.completed_counter ||
-          user.awards_counter) && (
+        (!!user.created_counter ||
+          !!user.completed_counter ||
+          !!user.awards_counter) && (
           <div className="profile__wrap">
             <span className="profile__head">
               {translate("profilePage.myAwards")}

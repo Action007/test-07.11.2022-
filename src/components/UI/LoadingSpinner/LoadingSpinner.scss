@@ -1,4 +1,4 @@
-@import '../../../global-styles/_variables.scss';
+@import "../../../global-styles/_variables.scss";
 
 .spinner {
   display: flex;
@@ -15,7 +15,7 @@
   }
 
   &__wrap::after {
-    content: ' ';
+    content: " ";
     display: block;
     margin: 10px;
     border: 8px solid $primary;

@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .main-content {
   .container {
@@ -26,8 +26,8 @@
     font-size: 28px;
 
     @include media-breakpoint-down(sm) {
-      font-size: 20px;
       margin-bottom: 27px;
+      font-size: 20px;
     }
   }
 
@@ -47,13 +47,8 @@
     max-width: 1920px;
     background-color: #fff;
 
-    @include media-breakpoint-down(md) {
-      padding: 43px 0 54px;
-      margin-bottom: 50px;
-    }
-
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       top: 0;
@@ -61,7 +56,7 @@
       width: 100%;
       height: 331px;
       max-width: 414px;
-      background-image: url('../../../assets/images/content/main-bgc1.svg');
+      background-image: url("../../../assets/images/content/main-bgc1.svg");
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
@@ -72,7 +67,7 @@
     }
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       right: 24px;
       bottom: -3px;
@@ -80,21 +75,27 @@
       width: 100%;
       height: 608px;
       max-width: 939px;
-      background-image: url('../../../assets/images/content/main-bgc2.svg');
+      background-image: url("../../../assets/images/content/main-bgc2.svg");
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
 
       @include media-breakpoint-down(xl) {
         right: 0;
-        background-image: url('../../../assets/images/content/main-bgc3.svg');
+        background-image: url("../../../assets/images/content/main-bgc3.svg");
         background-position: right center;
       }
+    }
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: 50px;
+      padding: 43px 0 54px;
     }
   }
 
   &__container {
     position: relative;
+    z-index: 1;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -102,7 +103,6 @@
     padding: 0 200px 0 34px;
     width: 100%;
     max-width: 1614px;
-    z-index: 1;
 
     @include media-breakpoint-down(md) {
       padding: 0 16px;
@@ -125,13 +125,13 @@
     height: 36px;
     max-width: 150px;
 
-    @include media-breakpoint-down(md) {
-      margin-bottom: 41px;
-    }
-
     img {
       width: 100%;
       height: 100%;
+    }
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: 41px;
     }
   }
 
@@ -151,8 +151,8 @@
     }
 
     @include media-breakpoint-down(md) {
-      font-size: 32px;
       margin-bottom: 21px;
+      font-size: 32px;
     }
 
     @include media-breakpoint-down(sm) {
@@ -173,16 +173,16 @@
 
   &__text {
     display: block;
-    text-align: center;
     font-size: 28px;
+    text-align: center;
   }
 
   .create-button {
     margin: inherit;
 
     @include media-breakpoint-down(sm) {
-      width: 100%;
       justify-content: center;
+      width: 100%;
     }
   }
 
@@ -190,30 +190,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 444px;
+    border-radius: 32px;
     width: 100%;
     height: 130px;
-    background-color: #fff;
-    border-radius: 32px;
+    max-width: 444px;
     box-shadow: 0 0 8px 0 #0000001a;
+    background-color: #fff;
 
     @include media-breakpoint-down(xl) {
       margin-bottom: 52px;
     }
 
     @include media-breakpoint-down(md) {
-      max-width: 311px;
       height: 91px;
+      max-width: 311px;
     }
   }
 
   &__image {
     display: block;
-    border-radius: 6px;
-    background-repeat: no-repeat;
-    background-position: center;
     overflow: hidden;
+    border-radius: 6px;
+    background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
 
     &:not(:last-child) {
       margin-right: 45px;
@@ -225,50 +225,50 @@
   }
 
   &__image:nth-child(1) {
-    max-width: 40px;
     width: 100%;
     height: 40px;
-    background-image: url('../../../assets/images/content/S.png');
+    max-width: 40px;
+    background-image: url("../../../assets/images/content/S.png");
 
     @include media-breakpoint-down(md) {
-      max-width: 25px;
       height: 25px;
+      max-width: 25px;
     }
   }
 
   &__image:nth-child(2) {
-    max-width: 50px;
     width: 100%;
     height: 50px;
-    background-image: url('../../../assets/images/content/M.png');
+    max-width: 50px;
+    background-image: url("../../../assets/images/content/M.png");
 
     @include media-breakpoint-down(md) {
-      max-width: 35px;
       height: 35px;
+      max-width: 35px;
     }
   }
 
   &__image:nth-child(3) {
-    max-width: 70px;
     width: 100%;
     height: 70px;
-    background-image: url('../../../assets/images/content/L.png');
+    max-width: 70px;
+    background-image: url("../../../assets/images/content/L.png");
 
     @include media-breakpoint-down(md) {
-      max-width: 45px;
       height: 45px;
+      max-width: 45px;
     }
   }
 
   &__image:nth-child(4) {
-    max-width: 80px;
     width: 100%;
     height: 80px;
-    background-image: url('../../../assets/images/content/XL.png');
+    max-width: 80px;
+    background-image: url("../../../assets/images/content/XL.png");
 
     @include media-breakpoint-down(md) {
-      max-width: 55px;
       height: 55px;
+      max-width: 55px;
     }
   }
 }

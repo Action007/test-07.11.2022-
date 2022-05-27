@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .checklist-edit {
   z-index: 2;
@@ -13,28 +13,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-right: 1px solid #4f4f4f1c;
+    border-left: 1px solid #4f4f4f1c;
     width: 43px;
     height: 43px;
     background-color: #fff;
-    border-right: 1px solid #4f4f4f1c;
-    border-left: 1px solid #4f4f4f1c;
-
-    &:hover svg {
-      stroke: $primary;
-    }
 
     svg {
       stroke: $dark;
     }
 
-    &:nth-child(2) {
-      &:hover svg {
-        fill: $primary;
-      }
-      svg {
-        stroke: inherit;
-        fill: $dark;
-      }
+    &:hover svg {
+      stroke: $primary;
     }
 
     &:first-child {
@@ -56,17 +46,28 @@
       }
     }
 
-    &.active {
-      background-color: $primary;
-      border: none;
-
-      &:nth-child(2)svg {
+    &:nth-child(2) {
+      svg {
+        fill: $dark;
         stroke: inherit;
-        fill: #fff;
       }
+
+      &:hover svg {
+        fill: $primary;
+      }
+    }
+
+    &.active {
+      border: none;
+      background-color: $primary;
 
       svg {
         stroke: #fff;
+      }
+
+      &:nth-child(2)svg {
+        fill: #fff;
+        stroke: inherit;
       }
     }
   }

@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .creation-tag {
   display: flex;
@@ -11,14 +11,6 @@
   width: 100%;
   background-color: #fff;
 
-  @include media-breakpoint-down(sm) {
-    padding: 9px;
-  }
-
-  &.invalid {
-    border-color: $warning;
-  }
-
   &__search {
     position: relative;
     width: 250px;
@@ -26,12 +18,12 @@
 
   &__create {
     display: flex;
-    text-align: left;
     align-items: center;
     margin: 3px;
     border: 1px solid #b9b9b980;
     border-radius: 4px;
     padding: 2px 6px;
+    text-align: left;
 
     svg {
       margin-left: 7px;
@@ -48,9 +40,9 @@
 
   &__create--tag {
     border-color: transparent;
+    word-break: break-word;
     color: #fff;
     background-color: $primary;
-    word-break: break-word;
 
     svg {
       stroke: #fff;
@@ -66,5 +58,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  &.invalid {
+    border-color: $warning;
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 9px;
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../services/checklistService";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
@@ -16,14 +16,23 @@ const ChecklistCheckbox = ({
   value,
   idFor,
   completed,
+  setChecklistItems,
 }) => {
-  const [checkChecklistItem] =
+  const [checkChecklistItem, { isSuccess, data }] =
     checklistAPI.useCheckActiveChecklistItemMutation();
   const [checked, setChecked] = useState(completed);
   const [showMap, setShowMap] = useState(false);
   const test = /^(http|https):\/\//i;
   const link = test.test(value.link) ? value.link : `https://${value.link}`;
   const { t: translate } = useTranslation();
+
+  useEffect(() => {
+    if (data)
+      setChecklistItems({
+        checklist_items: data.entities.checklist_items,
+        once_completed: data.entities.once_completed,
+      });
+  }, [isSuccess]);
 
   const checkboxHandler = () => {
     setChecked((prevState) => !prevState);

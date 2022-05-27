@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .creation {
   &__title {
@@ -118,11 +118,6 @@
     background-color: $primary;
     transition: all 0.3s ease;
 
-    @include media-breakpoint-down(sm) {
-      width: 100%;
-      justify-content: center;
-    }
-
     svg {
       margin-right: 15px;
       stroke: #fff;
@@ -137,6 +132,11 @@
       svg {
         stroke: $primary;
       }
+    }
+
+    @include media-breakpoint-down(sm) {
+      justify-content: center;
+      width: 100%;
     }
   }
 
@@ -226,45 +226,27 @@
   }
 
   &__button {
+    border: 1px solid transparent;
     border-radius: 6px;
     padding: 10px;
-    max-width: 183px;
     width: 100%;
     height: 50px;
-    border: 1px solid transparent;
+    max-width: 183px;
     transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-
-    @include media-breakpoint-down(sm) {
-      max-width: 100%;
-    }
-
-    &.invalid {
-      &:first-child {
-        background-color: #dedede !important;
-        color: #4f4f4f80 !important;
-        border: 1px solid transparent !important;
-      }
-
-      &:last-child {
-        background-color: #4f4f4f80 !important;
-        color: #fff !important;
-        border: 1px solid transparent !important;
-      }
-    }
 
     &:first-child {
       margin-right: 8px;
       color: #fff;
       background-color: $dark;
 
-      @include media-breakpoint-down(sm) {
-        margin: 0 0 12px;
-      }
-
       &:hover {
         border-color: $dark;
-        background-color: #fff;
         color: $dark;
+        background-color: #fff;
+      }
+
+      @include media-breakpoint-down(sm) {
+        margin: 0 0 12px;
       }
     }
 
@@ -274,25 +256,43 @@
 
       &:hover {
         border-color: $primary;
-        background-color: #fff;
         color: $primary;
+        background-color: #fff;
       }
+    }
+
+    &.invalid {
+      &:first-child {
+        border: 1px solid transparent !important;
+        color: #4f4f4f80 !important;
+        background-color: #dedede !important;
+      }
+
+      &:last-child {
+        border: 1px solid transparent !important;
+        color: #fff !important;
+        background-color: #4f4f4f80 !important;
+      }
+    }
+
+    @include media-breakpoint-down(sm) {
+      max-width: 100%;
     }
   }
 
   &__dropdown {
     position: absolute;
-    word-break: break-word;
-    max-height: 300px;
-    margin: 0;
-    overflow-y: auto;
     left: 3px;
     top: 38px;
+    overflow-y: auto;
+    margin: 0;
+    border: 1px solid #ececec;
     border-radius: 4px;
     padding: 7px 0;
-    background-color: #fff;
-    border: 1px solid #ececec;
+    max-height: 300px;
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
+    word-break: break-word;
+    background-color: #fff;
   }
 
   &__item {

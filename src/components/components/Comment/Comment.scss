@@ -1,4 +1,4 @@
-@import '../../../global-styles/_variables.scss';
+@import "../../../global-styles/_variables.scss";
 
 .checklist-comment {
   position: relative;
@@ -33,32 +33,6 @@
 
   &__buttons {
     display: flex;
-  }
-
-  &__likes,
-  &__dislikes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 11px;
-    background-color: $secondary;
-    transition: box-shadow 0.2s ease, color 0.2s ease, background-color 0.2s ease;
-    color: #a3a3a3;
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-      color: $dark;
-
-      svg {
-        stroke: $dark;
-      }
-    }
-
-    svg {
-      margin-right: 10px;
-      stroke: #a3a3a3;
-      transition: stroke 0.2s ease;
-    }
   }
 
   &__likes {
@@ -107,6 +81,32 @@
 
       svg {
         stroke: #fff;
+      }
+    }
+  }
+
+  &__likes,
+  &__dislikes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 11px;
+    color: #a3a3a3;
+    background-color: $secondary;
+    transition: box-shadow 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+
+    svg {
+      margin-right: 10px;
+      stroke: #a3a3a3;
+      transition: stroke 0.2s ease;
+    }
+
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+      color: $dark;
+
+      svg {
+        stroke: $dark;
       }
     }
   }

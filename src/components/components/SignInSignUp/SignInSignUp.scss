@@ -1,18 +1,18 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .sign {
   margin-bottom: 60px;
 
   &__wrapper {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     overflow: hidden;
-    border-radius: 6px;
-    max-width: 1205px;
-    width: 100%;
     margin: 170px auto 0;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 1205px;
     background-color: #fff;
 
     @include media-breakpoint-down(xl) {
@@ -31,23 +31,23 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    
+
     svg {
       width: 100%;
       max-width: 465px;
     }
   }
 
-  
+
   &__image {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    
+
     svg {
-      max-width: 258px;
       width: 100%;
+      max-width: 258px;
     }
   }
 }

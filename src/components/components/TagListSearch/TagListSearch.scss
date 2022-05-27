@@ -1,24 +1,24 @@
 .tag-list {
   position: absolute;
-  z-index: 2;
-  word-break: break-word;
-  max-height: 300px;
-  min-width: 132px;
-  margin: 0;
-  overflow-y: auto;
   left: 3px;
   top: 38px;
+  z-index: 2;
+  overflow-y: auto;
+  margin: 0;
+  border: 1px solid #efefef;
   border-radius: 6px;
   padding: 7px 0;
-  background-color: #fff;
-  border: 1px solid #efefef;
+  min-width: 132px;
+  max-height: 300px;
   box-shadow: 0 2px 2px 0 #00000010;
+  word-break: break-word;
+  background-color: #fff;
 
   &__item {
     button {
+      padding: 10px 30px 10px 14px;
       width: 100%;
       line-height: 1.1;
-      padding: 10px 30px 10px 14px;
       text-align: left;
     }
 

@@ -12,11 +12,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 4px;
     width: 0;
     height: 100%;
     color: #fff;
     background-color: $primary;
-    border-radius: 4px;
   }
 
   &__text {

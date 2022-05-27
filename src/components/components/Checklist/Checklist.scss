@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .checklist {
   position: relative;
@@ -11,21 +11,12 @@
   background-color: #fff;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 
-  @include media-breakpoint-down(sm) {
-    padding: 30px 19px 25px;
-  }
-
   &:not(:last-child) {
     margin-bottom: 25px;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 12px;
     }
-  }
-
-  &:hover {
-    box-shadow: 0px 2px 4px 0px #e5e9f5;
-    transform: translateY(-1px);
   }
 
   .checklist-item {
@@ -53,10 +44,14 @@
   }
 
   &__title {
-    margin-bottom: 25px;
     margin-right: 55px;
+    margin-bottom: 25px;
     font-size: 1.5rem;
     word-break: break-word;
+
+    button {
+      text-align: left;
+    }
 
     @include media-breakpoint-down(md) {
       font-size: 1.3rem;
@@ -65,10 +60,6 @@
     @include media-breakpoint-down(sm) {
       margin: 21px 0 18px;
       font-size: 1.2rem;
-    }
-
-    button {
-      text-align: left;
     }
   }
 
@@ -81,9 +72,9 @@
     align-items: center;
 
     @include media-breakpoint-down(sm) {
-      flex-direction: row-reverse;
       right: 19px;
       top: 22px;
+      flex-direction: row-reverse;
     }
   }
 
@@ -98,8 +89,11 @@
     background-color: $secondary;
     transition: box-shadow 0.2s ease;
 
-    @include media-breakpoint-down(sm) {
-      margin: 0 0 0 21px;
+    svg {
+      width: 16px;
+      height: 18px;
+      stroke: #a3a3a3;
+      transition: stroke 0.2s ease;
     }
 
     &:hover {
@@ -110,26 +104,23 @@
       }
     }
 
-    svg {
-      width: 16px;
-      height: 18px;
-      stroke: #a3a3a3;
-      transition: stroke 0.2s ease;
-    }
-
     &.saved {
       background-color: #f0f9f2;
 
       svg {
-        stroke: $primary;
         fill: #fff;
+        stroke: $primary;
       }
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin: 0 0 0 21px;
     }
   }
 
   &__items {
-    margin-left: 18px;
     margin-bottom: 5px;
+    margin-left: 18px;
     word-break: break-word;
   }
 
@@ -139,7 +130,7 @@
     color: $primary;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 50%;
       bottom: 0;
@@ -175,18 +166,18 @@
   }
 
   &__dots {
-    margin-left: 36px;
     margin-bottom: 14px;
+    margin-left: 36px;
     opacity: 0.3;
-
-    &:hover {
-      opacity: 1;
-    }
 
     svg {
       width: 30px;
       height: 29px;
       fill: $dark;
+    }
+
+    &:hover {
+      opacity: 1;
     }
   }
 
@@ -201,18 +192,18 @@
   &__tag {
     display: inline-block;
     margin-bottom: 9px;
+    border: 1px solid rgb(101 193 126 / 40%);
     border-radius: 6px;
     padding: 2px 8px;
     background-color: #fff;
     transition: box-shadow 0.2s ease;
-    border: 1px solid rgba(101, 193, 126, 0.4);
-
-    &:hover {
-      border: 1px solid $primary;
-    }
 
     &:not(:last-child) {
       margin-right: 9px;
+    }
+
+    &:hover {
+      border: 1px solid $primary;
     }
   }
 
@@ -290,6 +281,11 @@
     color: $light;
   }
 
+  &:hover {
+    box-shadow: 0 2px 4px 0 #e5e9f5;
+    transform: translateY(-1px);
+  }
+
   &:last-child {
     margin-bottom: 42px;
   }
@@ -303,5 +299,9 @@
     svg {
       margin-right: 10px;
     }
+  }
+
+  @include media-breakpoint-down(sm) {
+    padding: 30px 19px 25px;
   }
 }

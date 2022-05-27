@@ -1,20 +1,20 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .complain-done {
   position: relative;
 
   &__btn {
     position: absolute;
-    top: 16px;
     right: 13px;
+    top: 16px;
   }
 
   &__wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 70px 15px 70px;
+    padding: 15px 70px;
 
     @include media-breakpoint-down(lg) {
       flex-direction: column-reverse;
@@ -23,12 +23,12 @@
   }
 
   &__wrap {
-    max-width: 327px;
     margin-right: 66px;
+    max-width: 327px;
 
     @include media-breakpoint-down(lg) {
-      max-width: 352px;
       margin-right: 0;
+      max-width: 352px;
       text-align: center;
     }
   }
@@ -38,13 +38,13 @@
     font-size: 1.75rem;
 
     @include media-breakpoint-down(lg) {
-      font-size: 1.5rem;
       margin-bottom: 22px;
+      font-size: 1.5rem;
     }
 
     @include media-breakpoint-down(sm) {
-      font-size: 1.3rem;
       margin-bottom: 22px;
+      font-size: 1.3rem;
     }
   }
 

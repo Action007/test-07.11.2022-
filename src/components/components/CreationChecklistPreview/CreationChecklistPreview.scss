@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .popup-preview {
   .modal-dialog {
@@ -13,7 +13,7 @@
 
   .checklist-detail__wrapper {
     margin: 0;
-    
+
     @include media-breakpoint-down(sm) {
       padding: 19px 19px 26px;
     }

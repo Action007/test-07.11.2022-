@@ -167,7 +167,7 @@ export const checklistAPI = createApi({
         },
         body,
       }),
-      invalidatesTags: ["ActiveChecklist"],
+      invalidatesTags: ["ActiveChecklist", "Account"],
     }),
     checkActiveChecklistItem: build.mutation({
       query: (body) => ({
@@ -178,7 +178,7 @@ export const checklistAPI = createApi({
         },
         body,
       }),
-      invalidatesTags: ["Account"],
+      invalidatesTags: ["ActiveChecklist", "Account"],
     }),
     addComment: build.mutation({
       query: (body) => ({

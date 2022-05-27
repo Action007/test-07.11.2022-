@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .checklist-detail {
   &__wrapper {
@@ -48,10 +48,10 @@
   }
 
   &__title {
+    margin-right: 55px;
     margin-bottom: 0;
     font-size: 1.6rem;
     word-break: break-word;
-    margin-right: 55px;
 
     @include media-breakpoint-down(md) {
       font-size: 1.3rem;
@@ -81,16 +81,16 @@
 
   &__buttons {
     position: absolute;
-    top: 25px;
     right: 36px;
+    top: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
 
     @include media-breakpoint-down(sm) {
-      flex-direction: row-reverse;
       right: 19px;
       top: 22px;
+      flex-direction: row-reverse;
     }
   }
 
@@ -105,8 +105,11 @@
     background-color: $secondary;
     transition: box-shadow 0.2s ease;
 
-    @include media-breakpoint-down(sm) {
-      margin: 0 0 0 21px;
+    svg {
+      width: 16px;
+      height: 18px;
+      stroke: #a3a3a3;
+      transition: stroke 0.2s ease;
     }
 
     &:hover {
@@ -117,27 +120,24 @@
       }
     }
 
-    svg {
-      width: 16px;
-      height: 18px;
-      stroke: #a3a3a3;
-      transition: stroke 0.2s ease;
-    }
-
     &.saved {
       background-color: #f0f9f2;
 
       svg {
-        stroke: $primary;
         fill: #fff;
+        stroke: $primary;
       }
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin: 0 0 0 21px;
     }
   }
 
   &__items {
-    font-size: 1.1rem;
     margin-bottom: 34px;
     margin-left: 16px;
+    font-size: 1.1rem;
 
     ::marker {
       font-weight: bold;
@@ -151,7 +151,7 @@
     color: $primary;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 50%;
       bottom: 0;
@@ -228,30 +228,30 @@
     margin-bottom: 28px;
     transition: box-shadow 0.2s ease;
 
-    @include media-breakpoint-down(sm) {
-      margin-bottom: 15px;
-    }
-
     &.preview {
       margin-bottom: -9px;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 15px;
     }
   }
 
   &__tag {
     display: inline-block;
     margin-bottom: 9px;
+    border: 1px solid rgb(101 193 126 / 40%);
     border-radius: 6px;
     padding: 2px 8px;
     background-color: #fff;
     transition: box-shadow 0.2s ease;
-    border: 1px solid rgba(101, 193, 126, 0.4);
-
-    &:hover {
-      border: 1px solid $primary;
-    }
 
     &:not(:last-child) {
       margin-right: 9px;
+    }
+
+    &:hover {
+      border: 1px solid $primary;
     }
   }
 
@@ -324,6 +324,15 @@
     }
   }
 
+  &__time {
+    display: block;
+    color: $light;
+  }
+
+  &:last-child {
+    margin-bottom: 42px;
+  }
+
   &__liked,
   &__viewed {
     display: flex;
@@ -333,14 +342,5 @@
     svg {
       margin-right: 10px;
     }
-  }
-
-  &__time {
-    display: block;
-    color: $light;
-  }
-
-  &:last-child {
-    margin-bottom: 42px;
   }
 }

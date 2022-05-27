@@ -1,17 +1,11 @@
-@import '../../../../global-styles/_variables.scss';
-@import '../../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../../global-styles/_variables.scss";
+@import "../../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .sign-in {
-  height: 780px;
-  padding: 43px 37px 0 37px;
+  padding: 43px 37px 0;
   width: 100%;
+  height: 780px;
   max-width: 585px;
-
-  @include media-breakpoint-down(lg) {
-    height: inherit;
-    padding: 40px 0 40px;
-    max-width: 100%;
-  }
 
   &__buttons {
     display: flex;
@@ -37,10 +31,6 @@
     max-width: 253px;
     background-color: #fff;
 
-    @include media-breakpoint-down(lg) {
-      max-width: 100%;
-    }
-
     &:first-child {
       border-right: none;
       border-radius: 6px;
@@ -54,9 +44,13 @@
 
     &.active {
       border-color: transparent;
-      font-family: 'SFPro-Medium', sans-serif;
+      font-family: "SFPro-Medium", sans-serif;
       color: #fff;
       background-color: $primary;
+    }
+
+    @include media-breakpoint-down(lg) {
+      max-width: 100%;
     }
   }
 
@@ -64,21 +58,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 465px;
     width: 100%;
+    max-width: 465px;
+
+    svg {
+      width: 100%;
+    }
 
     @include media-breakpoint-down(lg) {
       margin: 40px auto;
     }
 
     @include media-breakpoint-down(sm) {
-      max-width: 165px;
-      height: 168px;
       margin: 45px auto;
-    }
-
-    svg {
-      width: 100%;
+      height: 168px;
+      max-width: 165px;
     }
   }
 
@@ -98,7 +92,7 @@
     span {
       display: block;
       margin-bottom: 9px;
-      font-family: 'SFPro-Regular', sans-serif;
+      font-family: "SFPro-Regular", sans-serif;
       font-size: 16px;
     }
 
@@ -164,27 +158,27 @@
     text-align: center;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       top: 50%;
       width: 43%;
       height: 1px;
       background-color: #000;
-      transform: translateY(-50%);
       opacity: 0.5;
+      transform: translateY(-50%);
     }
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       right: 0;
       top: 50%;
       width: 43%;
       height: 1px;
       background-color: #000;
-      transform: translateY(-50%);
       opacity: 0.5;
+      transform: translateY(-50%);
     }
   }
 
@@ -196,8 +190,8 @@
     height: 60px;
     font-size: 18px;
     background-color: #fff;
-    transition: all 0.3s ease;
     opacity: 0.5;
+    transition: all 0.3s ease;
     cursor: inherit !important;
 
     svg {
@@ -227,5 +221,11 @@
     svg {
       margin-right: 10px;
     }
+  }
+
+  @include media-breakpoint-down(lg) {
+    padding: 40px 0;
+    height: inherit;
+    max-width: 100%;
   }
 }
