@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { checklistAPI } from "../../../../services/checklistService";
@@ -11,17 +11,23 @@ import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon
 import { ReactComponent as EmailSvg } from "../../../../assets/images/icon/sendEmail.svg";
 
 const ForgotPassword = () => {
-  const [forgotPassword, { isSuccess, isLoading }] =
+  const [forgotPassword, { isSuccess, isLoading, error }] =
     checklistAPI.useForgotPasswordMutation();
-  const email = useRef();
-  const { t: translate } = useTranslation();
-  const showOnMobile = useMediaQuery("(max-width:991px)");
   const [emailIsValid, setEmailIsValid] = useState(true);
+  const [emailIsValidServer, setEmailIsValidServer] = useState(true);
+  const email = useRef();
+  const showOnMobile = useMediaQuery("(max-width:991px)");
+  const { t: translate } = useTranslation();
+
+  useEffect(() => {
+    if (error?.data.error === "not_found") setEmailIsValidServer(false);
+  }, [error]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     const validEmail = !!validateEmail(email.current.value);
     setEmailIsValid(validEmail);
+    setEmailIsValidServer(true);
     if (validEmail) {
       forgotPassword({ email: email.current.value });
     }
@@ -30,9 +36,9 @@ const ForgotPassword = () => {
   return (
     <div className="forgot-password">
       <div className="forgot-password__buttons">
-        <button className="forgot-password__button active" type="button">
+        <Link to="/sign-in" className="forgot-password__button active">
           {translate("login.signIn")}
-        </button>
+        </Link>
         <Link to="/sign-up" className="forgot-password__button">
           {translate("login.signUp")}
         </Link>
@@ -51,20 +57,25 @@ const ForgotPassword = () => {
       {isLoading && <LoadingSpinner />}
       <form onSubmit={submitHandler} className="forgot-password__form">
         <label
-          className={`forgot-password__label${!emailIsValid ? " invalid" : ""}`}
+          className={`forgot-password__label${
+            !emailIsValid || !emailIsValidServer ? " invalid" : ""
+          }`}
           htmlFor="loginEmail"
         >
-          <span>{translate("login.email")}</span>
+          <span className="forgot-password__span">
+            {translate("login.email")}
+          </span>
           <input
             ref={email}
             id="loginEmail"
             placeholder={translate("login.emailPlaceholder")}
             type="text"
           />
-          {!emailIsValid && (
+          {(!emailIsValid || !emailIsValidServer) && (
             <span className="forgot-password__invalid SFPro-300">
               <ExclamationSvg />
-              {translate("login.incorrectEmail")}
+              {!emailIsValid && translate("login.incorrectEmail")}
+              {!emailIsValidServer && translate("login.emailNotFound")}
             </span>
           )}
         </label>

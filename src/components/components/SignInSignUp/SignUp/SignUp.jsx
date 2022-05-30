@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { checklistAPI } from "../../../../services/checklistService";
@@ -11,16 +11,34 @@ import { ReactComponent as LoginSvg } from "../../../../assets/images/content/lo
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 
 const SignUp = () => {
+  const [isValidNicknameServer, setIsValidNicknameServer] = useState(true);
+  const [isValidEmailServer, setIsValidEmailServer] = useState(true);
   const [nameIsValid, setNameIsValid] = useState(true);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [signUp, { isLoading, isSuccess, error }] =
+    checklistAPI.useSignUpMutation();
+  const emailValue = emailRef.current?.value;
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
-  const [signUp, { isLoading, isSuccess }] = checklistAPI.useSignUpMutation();
-  const emailValue = emailRef.current?.value;
+
+  useEffect(() => {
+    if (!error?.data.message) return;
+    setIsValidNicknameServer(true);
+    setIsValidEmailServer(true);
+    error.data.message.forEach((item) => {
+      if (item.attribute === "nickname" && item.type === "taken") {
+        setIsValidNicknameServer(false);
+      } else if (item.attribute === "email" && item.type === "taken") {
+        setIsValidEmailServer(false);
+      }
+    });
+    setEmailIsValid(true);
+    setPasswordIsValid(true);
+  }, [error]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -32,10 +50,6 @@ const SignUp = () => {
     const validEmail = !!validateEmail(email);
     const validPassword = password !== "" && password.trim().length > 7;
 
-    setNameIsValid(validName);
-    setEmailIsValid(validEmail);
-    setPasswordIsValid(validPassword);
-
     if (validName && validEmail && validPassword) {
       signUp({
         nickname: name,
@@ -43,6 +57,12 @@ const SignUp = () => {
         password,
         password_confirmation: password,
       });
+    } else {
+      setNameIsValid(validName);
+      setEmailIsValid(validEmail);
+      setPasswordIsValid(validPassword);
+      if (!validEmail) setIsValidEmailServer(true);
+      if (!validName) setIsValidNicknameServer(true);
     }
   };
 
@@ -64,38 +84,45 @@ const SignUp = () => {
       <h2 className="sign-up__title SFPro-600">{translate("login.title2")}</h2>
       <form onSubmit={submitHandler} className="sign-up__form">
         <label
-          className={`sign-up__label${!nameIsValid ? " invalid" : ""}`}
+          className={`sign-up__label${
+            !nameIsValid || !isValidNicknameServer ? " invalid" : ""
+          }`}
           htmlFor="loginName"
         >
-          <span>Name</span>
+          <span className="sign-up__span">{translate("login.name")}</span>
           <input
             ref={nameRef}
             id="loginName"
             placeholder={translate("login.namePlaceholder")}
+            minLength="2"
             type="text"
           />
-          {!nameIsValid && (
+          {(!nameIsValid || !isValidNicknameServer) && (
             <span className="sign-up__invalid SFPro-300">
               <ExclamationSvg />
-              {translate("login.incorrectName")}
+              {!nameIsValid && translate("login.incorrectName")}
+              {!isValidNicknameServer && translate("login.nickNameTaken")}
             </span>
           )}
         </label>
         <label
-          className={`sign-up__label${!emailIsValid ? " invalid" : ""}`}
+          className={`sign-up__label${
+            !emailIsValid || !isValidEmailServer ? " invalid" : ""
+          }`}
           htmlFor="loginEmail"
         >
-          <span>{translate("login.email")}</span>
+          <span className="sign-up__span">{translate("login.email")}</span>
           <input
             ref={emailRef}
             id="loginEmail"
             placeholder={translate("login.emailPlaceholder")}
             type="email"
           />
-          {!emailIsValid && (
+          {(!emailIsValid || !isValidEmailServer) && (
             <span className="sign-up__invalid SFPro-300">
               <ExclamationSvg />
-              {translate("login.incorrectEmail")}
+              {!emailIsValid && translate("login.incorrectEmail")}
+              {!isValidEmailServer && translate("login.emailTaken")}
             </span>
           )}
         </label>
@@ -103,7 +130,7 @@ const SignUp = () => {
           className={`sign-up__label${!passwordIsValid ? " invalid" : ""}`}
           htmlFor="passwordEmail"
         >
-          <span>{translate("login.password")}</span>
+          <span className="sign-up__span">{translate("login.password")}</span>
           <input
             ref={passwordRef}
             id="passwordEmail"
@@ -111,9 +138,10 @@ const SignUp = () => {
             name="password"
             autoComplete="on"
             type="password"
+            minLength="8"
           />
           {!passwordIsValid && (
-            <span className="sign-up__invalid SFPro-300">
+            <span className="sign-up__invalid sign-up__invalid--last SFPro-300">
               <ExclamationSvg />
               {translate("login.title1")}
             </span>

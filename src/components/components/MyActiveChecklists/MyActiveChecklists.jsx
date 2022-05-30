@@ -15,7 +15,7 @@ import HomeButton from "../../UI/Buttons/HomeButton/HomeButton";
 const MyActiveChecklists = () => {
   const [category, setCategory] = useState("active");
   const { t: translate } = useTranslation();
-  const { search } = useLocation();
+  const { pathname, search } = useLocation();
   const navigate = useNavigate();
   const {
     data: checklists,
@@ -40,6 +40,15 @@ const MyActiveChecklists = () => {
       navigate(`?completed=false&page=1&per_page=10`);
     }
   }, [search]);
+
+  useEffect(() => {
+    if (pathname === "/active-checklists") {
+      setCategory("active");
+    }
+    if (pathname === "/passed-checklists") {
+      setCategory("passed");
+    }
+  }, [pathname]);
 
   const loader = (
     <>

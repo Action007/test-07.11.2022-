@@ -1,5 +1,5 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .search-input {
   position: relative;
@@ -20,6 +20,7 @@
   &__label {
     position: relative;
     display: flex;
+    padding-left: 26px;
     align-items: center;
     overflow: hidden;
     border: 1px solid transparent;
@@ -28,49 +29,37 @@
     height: 62px;
     background-color: #fff;
 
-    &::before {
-      content: "";
-      position: absolute;
-      left: 24px;
-      bottom: 50%;
-      width: 24px;
-      height: 24px;
-      background-image: url("../../../assets/images/icon/search.svg");
-      background-position: center;
-      background-size: contain;
-      background-repeat: no-repeat;
-      transform: translateY(50%);
-
-      @include media-breakpoint-down(sm) {
-        left: 15px;
-      }
+    @include media-breakpoint-down(sm) {
+      height: 52px;
     }
 
     &.active {
       border-color: $primary;
 
-      &::before {
-        background-image: url("../../../assets/images/icon/searchHover.svg");
+      svg {
+        stroke: $dark;
       }
     }
 
-    @include media-breakpoint-down(sm) {
-      height: 52px;
+    svg {
+      width: 24px;
+      height: 24px;
+      stroke: #a6a6a6;
     }
   }
 
   &__input {
     outline: transparent;
-    padding: 0 20px 0 64px;
+    padding: 0 20px;
     width: 100%;
     height: 100%;
 
-    &::placeholder {
-      color: #bababa;
+    @include media-breakpoint-down(sm) {
+      padding: 0 15px;
     }
 
-    @include media-breakpoint-down(sm) {
-      padding: 0 15px 0 50px;
+    &::placeholder {
+      color: #bababa;
     }
   }
 

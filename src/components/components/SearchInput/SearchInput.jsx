@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../services/checklistService";
 import {
   changeSearchParamsValue,
@@ -10,13 +11,13 @@ import TagListSearch from "../TagListSearch/TagListSearch";
 import "./SearchInput.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
+import { ReactComponent as SearchSvg } from "../../../assets/images/icon/searchInput.svg";
 
 const SearchInput = ({ page = false }) => {
   const [searchTagUrl, setSearchTagUrl] = useState("");
   const [tagUrl, setTagUrl] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [myTagsUrl, setMyTagsUrl] = useState("");
-
   const { data: searchTags } = checklistAPI.useFetchSearchTagsQuery(
     searchTagUrl,
     {
@@ -26,14 +27,13 @@ const SearchInput = ({ page = false }) => {
   const { data: serverTags } = checklistAPI.useFetchTagsQuery(myTagsUrl, {
     skip: !myTagsUrl,
   });
-
   const [myTags, setMyTags] = useState(serverTags);
   const [blur, setBlur] = useState(false);
-
   const { ref, show, setShow } = useClickOutside();
   const [searchParams, setSearchParams] = useSearchParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     const setTime = setTimeout(() => setSearchTagUrl(tagUrl), 400);
@@ -151,13 +151,14 @@ const SearchInput = ({ page = false }) => {
         className={`${`search-input__label`}${blur ? " active" : ""}`}
         htmlFor="search-input"
       >
+        <SearchSvg />
         <input
           onChange={(e) => onChangeSearchValue(e.target.value)}
           onFocus={() => setBlur((prevState) => !prevState)}
           onBlur={() => setBlur((prevState) => !prevState)}
           value={searchValue}
           className="search-input__input border-0"
-          placeholder="Enter a word or #tag"
+          placeholder={translate("inputPlaceholder")}
           type="text"
         />
       </label>

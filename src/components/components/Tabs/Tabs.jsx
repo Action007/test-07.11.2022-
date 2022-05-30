@@ -14,7 +14,7 @@ const Tabs = ({ tabs, category, setCategory, page }) => {
     } else if (page === "my-active-checklists") {
       setCategory(tab.key);
       navigate(
-        `/active-checklists?${
+        `/${tab.key}-checklists?${
           tab.key === "active" ? "completed=false" : "completed=true"
         }&page=1&per_page=10`
       );

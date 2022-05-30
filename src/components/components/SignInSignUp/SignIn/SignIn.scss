@@ -1,11 +1,17 @@
-@import "../../../../global-styles/_variables.scss";
-@import "../../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../../global-styles/_variables.scss';
+@import '../../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .sign-in {
   padding: 43px 37px 0;
   width: 100%;
   height: 780px;
   max-width: 585px;
+
+  @include media-breakpoint-down(lg) {
+    padding: 40px 0;
+    height: inherit;
+    max-width: 100%;
+  }
 
   &__buttons {
     display: flex;
@@ -44,7 +50,7 @@
 
     &.active {
       border-color: transparent;
-      font-family: "SFPro-Medium", sans-serif;
+      font-family: 'SFPro-Medium', sans-serif;
       color: #fff;
       background-color: $primary;
     }
@@ -89,13 +95,6 @@
   &__label {
     margin-bottom: 29px;
 
-    span {
-      display: block;
-      margin-bottom: 9px;
-      font-family: "SFPro-Regular", sans-serif;
-      font-size: 16px;
-    }
-
     input {
       outline: transparent;
       border: 1px solid #4f4f4f4d;
@@ -131,6 +130,12 @@
     }
   }
 
+  &__span {
+    display: block;
+    margin-bottom: 9px;
+    line-height: 1.2;
+  }
+
   &__submit {
     margin-bottom: 30px;
     border: 1px solid transparent;
@@ -149,7 +154,7 @@
     }
   }
 
-  &__span {
+  &__absolute {
     position: relative;
     display: block;
     margin-bottom: 25px;
@@ -158,7 +163,7 @@
     text-align: center;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       top: 50%;
@@ -170,7 +175,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       right: 0;
       top: 50%;
@@ -214,8 +219,9 @@
   }
 
   &__invalid {
-    margin-top: 4px;
-    font-size: 16px;
+    display: flex;
+    align-items: center;
+    margin: 2px 0 9px;
     color: $warning;
 
     svg {
@@ -223,9 +229,7 @@
     }
   }
 
-  @include media-breakpoint-down(lg) {
-    padding: 40px 0;
-    height: inherit;
-    max-width: 100%;
+  &__invalid--last {
+    margin-bottom: 14px;
   }
 }

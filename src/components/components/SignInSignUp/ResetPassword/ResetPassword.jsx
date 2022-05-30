@@ -78,7 +78,7 @@ const ResetPassword = () => {
             type="password"
           />
           {!passwordIsValid && (
-            <span className="reset-password__invalid SFPro-300">
+            <span className="reset-password__invalid reset-password__invalid--last SFPro-300">
               <ExclamationSvg />
               {translate("login.incorrectPassword")}
             </span>

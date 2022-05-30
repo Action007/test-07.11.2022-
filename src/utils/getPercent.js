@@ -2,7 +2,7 @@ const getPercent = (completedCount, totalCount) => {
   const percent = Number(((100 * completedCount) / totalCount).toFixed());
 
   // eslint-disable-next-line no-self-compare
-  if (percent !== percent) {
+  if (percent !== percent || !Number.isFinite(percent)) {
     return 0;
   }
   return percent;

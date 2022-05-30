@@ -13,10 +13,10 @@ const ActiveChecklistDetail = ({ checklist }) => {
   const [modalShow, setModalShow] = useState(checklist.completed);
 
   useEffect(() => {
-    if (checklistItems.once_completed) {
-      setModalShow(checklistItems.once_completed);
+    if (checklist.completed) {
+      setModalShow(checklist.completed);
     }
-  }, [checklistItems.once_completed]);
+  }, [checklist.completed]);
 
   return (
     <>
