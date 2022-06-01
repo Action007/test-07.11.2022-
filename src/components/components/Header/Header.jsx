@@ -59,7 +59,11 @@ const Header = () => {
             <ProgressBarHeader done={percent || 0} />
           </button>
           <button
-            onClick={() => onClickHandler("/saved-checklists")}
+            onClick={() =>
+              onClickHandler(
+                "/saved-checklists?search_type=saved&page=1&per_page=10"
+              )
+            }
             className="header__bookmark"
             type="button"
           >

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ReactComponent as ArrowSvg } from "../../../assets/images/icon/rightArrow.svg";
+import { ReactComponent as ArrowSvg } from "../../../../assets/images/icon/rightArrow.svg";
 
 const EditProfileDropdown = ({
   dropdownRef,

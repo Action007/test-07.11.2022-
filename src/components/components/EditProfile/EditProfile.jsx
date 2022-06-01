@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { checklistAPI } from "../../../services/checklistService";
-import EditProfileInput from "./EditProfileInput";
-import EditProfileDropdown from "./EditProfileDropdown";
+import EditProfileInput from "./ChildComponents/EditProfileInput";
+import EditProfileDropdown from "./ChildComponents/EditProfileDropdown";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import useClickOutside from "../../../hooks/useClickOutside";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -26,7 +26,12 @@ const EditProfile = () => {
   const [isNickNameValid, setIsNickNameValid] = useState(true);
   const [isBioValid, setIsBioValid] = useState(true);
   const [isNicknameServerValid, setIsNicknameServerValid] = useState(null);
-  const [isLinkInValid, setIsLinkInValid] = useState(null);
+  const [isLinksInValid, setIsLinksInValid] = useState({
+    website: true,
+    facebook: true,
+    instagram: true,
+    twitter: true,
+  });
   const { ref, show, setShowHandler } = useClickOutside();
   const [editAccount, { isLoading: isUpdateLoading, error }] =
     checklistAPI.useEditAccountMutation();
@@ -42,24 +47,29 @@ const EditProfile = () => {
 
   useEffect(() => {
     if (!error) return;
-    const invalidLinks = {};
+    const invalidLinks = {
+      website: true,
+      facebook: true,
+      instagram: true,
+      twitter: true,
+    };
     error.data.message.forEach((item) => {
       if (item.attribute === "nickname" && item.type === "too_short") {
         setIsNicknameServerValid({ short: true });
       } else if (item.attribute === "nickname" && item.type === "taken") {
         setIsNicknameServerValid({ taken: true });
       } else if (item.attribute === "site") {
-        invalidLinks.website = true;
+        invalidLinks.website = false;
       } else if (item.attribute === "facebook") {
-        invalidLinks.facebook = true;
+        invalidLinks.facebook = false;
       } else if (item.attribute === "instagram") {
-        invalidLinks.instagram = true;
+        invalidLinks.instagram = false;
       } else if (item.attribute === "twitter") {
-        invalidLinks.twitter = true;
+        invalidLinks.twitter = false;
       }
     });
 
-    setIsLinkInValid(invalidLinks);
+    setIsLinksInValid(invalidLinks);
   }, [error]);
 
   useEffect(() => {
@@ -67,11 +77,11 @@ const EditProfile = () => {
     setNameValue(user.name || "");
     setNickNameValue(user.nickname || "");
     setBioValue(user.bio || "");
+    setCountry(user.country || "Select a country");
     setWebsiteValue(user.site || "");
     setFacebookValue(user.facebook || "");
     setInstagramValue(user.instagram || "");
     setTwitterValue(user.twitter || "");
-    setCountry(user.country || "Select a country");
   }, [user]);
 
   const onChangeNameHandler = (value) => {
@@ -104,13 +114,42 @@ const EditProfile = () => {
     setShowHandler();
   };
 
+  const testUrlHandler = (value) => {
+    if (!value) return true;
+    const urlTest =
+      // eslint-disable-next-line no-useless-escape
+      /^(?:(?:ht|f)tp(?:s?)\:\/\/|~\/|\/)?(?:\w+:\w+@)?(?:(?:[-\w]+\.)+(?:com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|travel|[a-z]{2}))(?::[\d]{1,5})?(?:(?:(?:\/(?:[-\w~!$+|.,=]|%[a-f\d]{2})+)+|\/)+|\?|#)?(?:(?:\?(?:[-\w~!$+|.,*:]|%[a-f\d{2}])+=?(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)(?:&(?:[-\w~!$+|.,*:]|%[a-f\d{2}])+=?(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)*)*(?:#(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)?$/;
+    const isValidUrl = value.match(urlTest);
+
+    return isValidUrl;
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const name = onChangeNameHandler(nameValue);
     const nickname = onChangeNickNameHandler(nickNameValue);
     const bio = onChangeBioHandler(bioValue);
+    const website = testUrlHandler(websiteValue);
+    const facebook = testUrlHandler(facebookValue);
+    const instagram = testUrlHandler(instagramValue);
+    const twitter = testUrlHandler(twitterValue);
+    const links = {
+      website,
+      facebook,
+      instagram,
+      twitter,
+    };
+    setIsLinksInValid(links);
 
-    if (name && nickname && bio) {
+    if (
+      name &&
+      nickname &&
+      bio &&
+      website &&
+      facebook &&
+      instagram &&
+      twitter
+    ) {
       editAccount({
         name: nameValue,
         nickname: nickNameValue,
@@ -141,28 +180,20 @@ const EditProfile = () => {
               setValue={onChangeNameHandler}
               value={nameValue}
             />
-            <label
-              className={`edit-profile__label${
-                !isNickNameValid || isNicknameServerValid ? " invalid" : ""
-              }`}
-            >
-              <span className="edit-profile__title edit-profile__title--two SFPro-700">
-                {translate("editProfilePage.nickName")}
-              </span>
-              <span className="edit-profile__subtitle">
-                {!isNickNameValid && translate("editProfilePage.maxNickname")}
-                {isNicknameServerValid?.taken &&
-                  translate("editProfilePage.nickNicknameTaken")}
-                {isNicknameServerValid?.short &&
-                  translate("editProfilePage.minNickname")}
-              </span>
-              <input
-                onChange={(e) => onChangeNickNameHandler(e.target.value)}
-                value={nickNameValue}
-                minLength="2"
-                type="text"
-              />
-            </label>
+            <EditProfileInput
+              isInvalid={{ isNickNameValid, isNicknameServerValid }}
+              invalidText={{
+                maxNickname: translate("editProfilePage.maxNickname"),
+                nickNicknameTaken: translate(
+                  "editProfilePage.nickNicknameTaken"
+                ),
+                minNickname: translate("editProfilePage.minNickname"),
+              }}
+              title={translate("editProfilePage.nickName")}
+              setValue={onChangeNickNameHandler}
+              value={nickNameValue}
+              inputType="nickname"
+            />
             <div className="edit-profile__label">
               <span className="edit-profile__title SFPro-700">
                 {translate("editProfilePage.country")}
@@ -185,28 +216,28 @@ const EditProfile = () => {
               value={bioValue}
             />
             <EditProfileInput
-              isInvalid={isLinkInValid?.website}
+              isInvalid={!isLinksInValid.website}
               invalidText={translate("editProfilePage.isLinkValid")}
               title={translate("editProfilePage.website")}
               setValue={setWebsiteValue}
               value={websiteValue}
             />
             <EditProfileInput
-              isInvalid={isLinkInValid?.facebook}
+              isInvalid={!isLinksInValid.facebook}
               invalidText={translate("editProfilePage.isLinkValid")}
               title={translate("editProfilePage.facebook")}
               setValue={setFacebookValue}
               value={facebookValue}
             />
             <EditProfileInput
-              isInvalid={isLinkInValid?.instagram}
+              isInvalid={!isLinksInValid.instagram}
               invalidText={translate("editProfilePage.isLinkValid")}
               title={translate("editProfilePage.instagram")}
               setValue={setInstagramValue}
               value={instagramValue}
             />
             <EditProfileInput
-              isInvalid={isLinkInValid?.twitter}
+              isInvalid={!isLinksInValid.twitter}
               invalidText={translate("editProfilePage.isLinkValid")}
               title={translate("editProfilePage.twitter")}
               setValue={setTwitterValue}
