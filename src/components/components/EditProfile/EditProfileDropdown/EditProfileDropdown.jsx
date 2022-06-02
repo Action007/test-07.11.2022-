@@ -1,4 +1,5 @@
 import React from "react";
+import "./EditProfileDropdown.scss";
 
 import { ReactComponent as ArrowSvg } from "../../../../assets/images/icon/rightArrow.svg";
 
@@ -13,33 +14,33 @@ const EditProfileDropdown = ({
 }) => {
   const loadingSkeletons = (
     <>
-      <li className="edit-profile__skeleton" />
-      <li className="edit-profile__skeleton" />
-      <li className="edit-profile__skeleton" />
-      <li className="edit-profile__skeleton" />
-      <li className="edit-profile__skeleton" />
-      <li className="edit-profile__skeleton" />
+      <li className="profile-dropdown__skeleton" />
+      <li className="profile-dropdown__skeleton" />
+      <li className="profile-dropdown__skeleton" />
+      <li className="profile-dropdown__skeleton" />
+      <li className="profile-dropdown__skeleton" />
+      <li className="profile-dropdown__skeleton" />
     </>
   );
 
   return (
-    <div className="edit-profile__wrap" ref={dropdownRef}>
+    <div className="profile-dropdown" ref={dropdownRef}>
       <button
         onClick={setShowHandler}
-        className={`edit-profile__button SFPro-500${show ? " active" : ""}`}
+        className={`profile-dropdown__button SFPro-500${show ? " active" : ""}`}
         type="button"
       >
         {country}
         <ArrowSvg />
       </button>
       {show && (
-        <ul className="edit-profile__list">
+        <ul className="profile-dropdown__list">
           {countryNames &&
             countryNames.contries.map((item) => (
-              <li key={item} className="edit-profile__item">
+              <li key={item} className="profile-dropdown__item">
                 <button
                   onClick={() => onSelectCountryHandler(item)}
-                  className="edit-profile__btn"
+                  className="profile-dropdown__btn"
                   type="button"
                 >
                   {item}

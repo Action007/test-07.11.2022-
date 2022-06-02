@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import useClickOutside from "../../../hooks/useClickOutside";
 import CreationChecklistItemEdit from "../CreationChecklistItemEdit/CreationChecklistItemEdit";
-import GeneralMap from "../GeneralMap/GeneralMap";
-import PopupMap from "../PopupMap/PopupMap";
+import MapGeneral from "../MapGeneral/MapGeneral";
+import MapModal from "../MapModal/MapModal";
 import "./CreationChecklistItem.scss";
 
 import { ReactComponent as ChecklistDots } from "../../../assets/images/icon/checklistDots.svg";
@@ -182,26 +182,25 @@ const CreationChecklistItem = ({
             {ImgSelected}
             {list_type === "coordinates" && (
               <>
-                <div className="creation-item__wrapper">
-                  <GeneralMap
-                    setShowMap={setShowMap}
-                    coordinates={
-                      value.coordinates ? value.coordinates : undefined
-                    }
-                    creation
-                    id={id}
-                  />
+                <div className="map-container">
+                  {!showMap ? (
+                    <MapGeneral
+                      setShowMap={setShowMap}
+                      coordinates={value.coordinates || undefined}
+                      page="creation-of-checklist"
+                      id={id}
+                    />
+                  ) : (
+                    <div className="map-fake" />
+                  )}
                 </div>
-                <PopupMap show={showMap} onHide={() => setShowMap(false)}>
-                  <GeneralMap
-                    popup
-                    coordinates={
-                      value.coordinates ? value.coordinates : undefined
-                    }
-                    creation
-                    id={id}
-                  />
-                </PopupMap>
+                <MapModal
+                  show={showMap}
+                  onHide={() => setShowMap(false)}
+                  coordinates={value.coordinates || undefined}
+                  page="creation-of-checklist"
+                  id={id}
+                />
               </>
             )}
           </div>

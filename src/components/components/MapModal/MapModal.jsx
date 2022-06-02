@@ -1,8 +1,9 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import "./PopupMap.scss";
+import MapGeneral from "../MapGeneral/MapGeneral";
+import "./MapModal.scss";
 
-const PopupOverall = ({ show, onHide, children }) => {
+const MapModal = ({ show, onHide, coordinates, page, id }) => {
   return (
     <Modal
       className="popup-map"
@@ -14,9 +15,16 @@ const PopupOverall = ({ show, onHide, children }) => {
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" />
       </Modal.Header>
-      <Modal.Body>{children}</Modal.Body>
+      <Modal.Body>
+        <MapGeneral
+          variant="modal"
+          coordinates={coordinates}
+          page={page}
+          id={id}
+        />
+      </Modal.Body>
     </Modal>
   );
 };
 
-export default PopupOverall;
+export default MapModal;

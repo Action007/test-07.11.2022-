@@ -1,10 +1,9 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { checklistAPI } from "../../../services/checklistService";
-import EditProfileInput from "./ChildComponents/EditProfileInput";
-import EditProfileDropdown from "./ChildComponents/EditProfileDropdown";
+import EditProfileInput from "./EditProfileLabel/EditProfileLabel";
+import EditProfileDropdown from "./EditProfileDropdown/EditProfileDropdown";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import useClickOutside from "../../../hooks/useClickOutside";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -194,7 +193,7 @@ const EditProfile = () => {
               value={nickNameValue}
               inputType="nickname"
             />
-            <div className="edit-profile__label">
+            <div className="edit-profile__inner">
               <span className="edit-profile__title SFPro-700">
                 {translate("editProfilePage.country")}
               </span>

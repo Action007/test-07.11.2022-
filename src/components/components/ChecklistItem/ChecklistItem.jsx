@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
-import GeneralMap from "../GeneralMap/GeneralMap";
-import PopupMap from "../PopupMap/PopupMap";
+import MapGeneral from "../MapGeneral/MapGeneral";
+import MapModal from "../MapModal/MapModal";
 import "./ChecklistItem.scss";
 
 import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg";
@@ -31,10 +31,19 @@ const ChecklistItem = ({ description, list_type, value, preview }) => {
       </p>
       {list_type === "coordinates" && (
         <>
-          <GeneralMap setShowMap={setShowMap} coordinates={value.coordinates} />
-          <PopupMap show={showMap} onHide={() => setShowMap(false)}>
-            <GeneralMap coordinates={value.coordinates} popup />
-          </PopupMap>
+          {!showMap ? (
+            <MapGeneral
+              setShowMap={setShowMap}
+              coordinates={value.coordinates}
+            />
+          ) : (
+            <div className="map-fake" />
+          )}
+          <MapModal
+            show={showMap}
+            onHide={() => setShowMap(false)}
+            coordinates={value.coordinates}
+          />
         </>
       )}
       {list_type === "image" && (

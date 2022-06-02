@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -53,6 +52,7 @@ const AccountSetting = () => {
         >
           <label
             className={`account-setting__label${!emailValid ? " invalid" : ""}`}
+            htmlFor="account-email"
           >
             <span className="account-setting__title account-setting__title--one SFPro-700">
               {translate("accountSettings.email")}
@@ -64,12 +64,14 @@ const AccountSetting = () => {
               }}
               value={emilValue}
               type="email"
+              id="account-email"
             />
           </label>
           <label
             className={`account-setting__label${
               !oldPasswordValid ? " invalid" : ""
             }`}
+            htmlFor="account-oldPassword"
           >
             <span className="account-setting__title account-setting__title--two SFPro-700">
               {translate("accountSettings.oldPassword")}
@@ -78,12 +80,14 @@ const AccountSetting = () => {
               onChange={() => setOldPasswordValid(true)}
               ref={oldPasswordRef}
               type="password"
+              id="account-oldPassword"
             />
           </label>
           <label
             className={`account-setting__label${
               !newPasswordValid ? " invalid" : ""
             }`}
+            htmlFor="account-newPassword"
           >
             <span className="account-setting__title SFPro-700">
               {translate("accountSettings.newPassword")}
@@ -95,12 +99,14 @@ const AccountSetting = () => {
               onChange={() => setNewPasswordValid(true)}
               ref={newPasswordRef}
               type="password"
+              id="account-newPassword"
             />
           </label>
           <label
             className={`account-setting__label${
               !confirmPasswordValid ? " invalid" : ""
             }`}
+            htmlFor="account-confirmPassword"
           >
             <span className="account-setting__title SFPro-700">
               {translate("accountSettings.confirmPassword")}
@@ -112,6 +118,7 @@ const AccountSetting = () => {
               onChange={() => setConfirmPasswordValid(true)}
               ref={confirmPasswordRef}
               type="password"
+              id="account-confirmPassword"
             />
           </label>
           <button className="account-setting__submit SFPro-600" type="submit">

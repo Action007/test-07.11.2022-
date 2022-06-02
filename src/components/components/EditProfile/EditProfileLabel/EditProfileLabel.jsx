@@ -1,5 +1,6 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from "react";
+import uniqueID from "../../../../utils/uniqueID";
+import "./EditProfileLabel.scss";
 
 const EditProfileInput = ({
   isInvalid,
@@ -13,13 +14,17 @@ const EditProfileInput = ({
     inputType === "nickname"
       ? !isInvalid.isNickNameValid || isInvalid.isNicknameServerValid
       : isInvalid;
+  const labelID = uniqueID();
 
   return (
-    <label className={`edit-profile__label${invalid ? " invalid" : ""}`}>
-      <span className="edit-profile__title SFPro-700">{title}</span>
+    <label
+      className={`profile-label${invalid ? " invalid" : ""}`}
+      htmlFor={labelID}
+    >
+      <span className="profile-label__title SFPro-700">{title}</span>
       {inputType === "nickname" ? (
         <>
-          <span className="edit-profile__subtitle">
+          <span className="profile-label__subtitle">
             {!isInvalid.isNickNameValid && invalidText.maxNickname}
             {isInvalid.isNicknameServerValid?.taken &&
               invalidText.nickNicknameTaken}
@@ -30,17 +35,19 @@ const EditProfileInput = ({
             value={value}
             minLength="2"
             type="text"
+            id={labelID}
           />
         </>
       ) : (
         <>
           {isInvalid && (
-            <span className="edit-profile__subtitle">{invalidText}</span>
+            <span className="profile-label__subtitle">{invalidText}</span>
           )}
           <input
             onChange={(e) => setValue(e.target.value)}
             value={value}
             type="text"
+            id={labelID}
           />
         </>
       )}

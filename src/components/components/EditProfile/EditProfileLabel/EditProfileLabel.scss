@@ -1,0 +1,60 @@
+@import '../../../../global-styles/_variables.scss';
+@import '../../../../../node_modules/bootstrap/scss/_mixins.scss';
+
+.profile-label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  width: 100%;
+
+  input {
+    margin-top: 6px;
+    outline: transparent;
+    border: 1px solid #c8d4ff;
+    border-radius: 6px;
+    padding: 0 21px;
+    width: 100%;
+    height: 54px;
+
+    &:focus {
+      border-color: $primary;
+    }
+  }
+
+  textarea {
+    margin-top: 6px;
+    outline: transparent;
+    border: 1px solid #c8d4ff;
+    border-radius: 6px;
+    padding: 17px 21px;
+    height: 93px;
+    line-height: 1.1;
+    resize: none;
+
+    &:focus {
+      border-color: $primary;
+    }
+  }
+
+  &.invalid {
+    input {
+      border-color: $warning !important;
+    }
+
+    textarea {
+      border-color: $warning !important;
+    }
+  }
+
+  &__title {
+    position: relative;
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  &__subtitle {
+    color: $warning;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+}

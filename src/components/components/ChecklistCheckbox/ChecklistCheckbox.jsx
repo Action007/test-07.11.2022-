@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../services/checklistService";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
-import GeneralMap from "../GeneralMap/GeneralMap";
-import PopupMap from "../PopupMap/PopupMap";
+import MapGeneral from "../MapGeneral/MapGeneral";
+import MapModal from "../MapModal/MapModal";
 import "./ChecklistCheckbox.scss";
 
 import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg";
@@ -66,10 +66,21 @@ const ChecklistCheckbox = ({
       </label>
       {list_type === "coordinates" && (
         <>
-          <GeneralMap setShowMap={setShowMap} coordinates={value.coordinates} />
-          <PopupMap show={showMap} onHide={() => setShowMap(false)}>
-            <GeneralMap coordinates={value.coordinates} popup />
-          </PopupMap>
+          <div className="map-container">
+            {!showMap ? (
+              <MapGeneral
+                setShowMap={setShowMap}
+                coordinates={value.coordinates}
+              />
+            ) : (
+              <div className="map-fake" />
+            )}
+          </div>
+          <MapModal
+            show={showMap}
+            onHide={() => setShowMap(false)}
+            coordinates={value.coordinates}
+          />
         </>
       )}
       {list_type === "image" && <ChecklistImage image={value.image} />}

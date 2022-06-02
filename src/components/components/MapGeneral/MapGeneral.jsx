@@ -1,43 +1,40 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { useSelector } from "react-redux";
 import CreationChecklistMapSearch from "../CreationChecklistMapSearch/CreationChecklistMapSearch";
 import LocationMarker from "../LocationMarker/LocationMarker";
 import AddMarkerToMap from "../AddMarkerToMap/AddMarkerToMap";
-import "./GeneralMap.scss";
+import "./MapGeneral.scss";
 
 import { ReactComponent as LocationSvg } from "../../../assets/images/icon/location.svg";
 import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-map.svg";
 
-const GeneralMap = ({
-  setShowMap,
-  coordinates = { lat: 51.505, lon: -0.09 },
-  popup = false,
-  creation = false,
-  id,
-}) => {
-  const [showLocation, setShowLocation] = useState(false);
-  const checklist_items = useSelector(
-    (state) => state.createChecklistReducer.checklist_items
-  );
-  const checklist = checklist_items.find((item) => item.id === id);
+const MapGeneral = ({ setShowMap, coordinates, page, variant, id }) => {
+  const [showLocation, setShowLocation] = useState(true);
 
   return (
     <div className="creation-map">
-      <MapContainer center={coordinates} zoom={4} scrollWheelZoom={1}>
+      <MapContainer
+        center={coordinates || { lat: 51.505, lon: -0.09 }}
+        zoom={4}
+        minZoom={2}
+        scrollWheelZoom={1}
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationMarker show={showLocation} />
-        {creation ? (
+        {page === "creation-of-checklist" ? (
           <AddMarkerToMap
-            coordinates={checklist.value.coordinates}
+            coordinates={coordinates}
             id={id}
-            creation={creation}
+            creation={page === "creation-of-checklist"}
           />
         ) : (
-          <AddMarkerToMap coordinates={coordinates} creation={creation} />
+          <AddMarkerToMap
+            coordinates={coordinates}
+            creation={page === "creation-of-checklist"}
+          />
         )}
         <CreationChecklistMapSearch id={id} />
       </MapContainer>
@@ -48,7 +45,7 @@ const GeneralMap = ({
       >
         <LocationSvg />
       </button>
-      {!popup && (
+      {variant !== "modal" && (
         <button
           onClick={() => setShowMap(true)}
           className="creation-map__extend"
@@ -61,4 +58,4 @@ const GeneralMap = ({
   );
 };
 
-export default GeneralMap;
+export default MapGeneral;

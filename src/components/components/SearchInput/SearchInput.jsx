@@ -8,6 +8,7 @@ import {
 } from "../../../utils/searchParamsValue";
 import useClickOutside from "../../../hooks/useClickOutside";
 import TagListSearch from "../TagListSearch/TagListSearch";
+import uniqueID from "../../../utils/uniqueID";
 import "./SearchInput.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
@@ -34,6 +35,7 @@ const SearchInput = ({ page = false }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
+  const labelID = uniqueID();
 
   useEffect(() => {
     const setTime = setTimeout(() => setSearchTagUrl(tagUrl), 400);
@@ -149,7 +151,7 @@ const SearchInput = ({ page = false }) => {
     >
       <label
         className={`${`search-input__label`}${blur ? " active" : ""}`}
-        htmlFor="search-input"
+        htmlFor={labelID}
       >
         <SearchSvg />
         <input
@@ -160,6 +162,7 @@ const SearchInput = ({ page = false }) => {
           className="search-input__input border-0"
           placeholder={translate("inputPlaceholder")}
           type="text"
+          id={labelID}
         />
       </label>
       {searchTags && filterTagsList().length !== 0 && show && (

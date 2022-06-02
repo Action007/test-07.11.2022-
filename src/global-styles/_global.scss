@@ -1,6 +1,6 @@
-@import "./_fonts.scss";
-@import "./_variables.scss";
-@import "../../node_modules/bootstrap/scss/_mixins.scss";
+@import './_fonts.scss';
+@import './_variables.scss';
+@import '../../node_modules/bootstrap/scss/_mixins.scss';
 
 html {
   scroll-behavior: inherit !important;
@@ -13,7 +13,7 @@ body,
 }
 
 body {
-  font-family: "SFPro-Regular", sans-serif;
+  font-family: 'SFPro-Regular', sans-serif;
   font-size: 16px;
   color: $dark;
   -webkit-tap-highlight-color: transparent;
@@ -95,23 +95,23 @@ button {
 }
 
 .SFPro-300 {
-  font-family: "SFPro-Regular", sans-serif;
+  font-family: 'SFPro-Regular', sans-serif;
 }
 
 .SFPro-400 {
-  font-family: "SFPro-Regular", sans-serif;
+  font-family: 'SFPro-Regular', sans-serif;
 }
 
 .SFPro-500 {
-  font-family: "SFPro-Medium", sans-serif;
+  font-family: 'SFPro-Medium', sans-serif;
 }
 
 .SFPro-600 {
-  font-family: "SFPro-SemiBold", sans-serif;
+  font-family: 'SFPro-SemiBold', sans-serif;
 }
 
 .SFPro-700 {
-  font-family: "SFPro-Bold", sans-serif;
+  font-family: 'SFPro-Bold', sans-serif;
 }
 
 .modal-dialog {
@@ -236,4 +236,13 @@ p {
     transform: translateX(28%);
     transition: opacity 0.3s ease, visibility 0.3s ease;
   }
+}
+
+.map-fake {
+  border-radius: 6px;
+  width: 100%;
+  height: 231px;
+  max-width: 458px;
+  background: #e3e3e3;
+  margin: 10px 0;
 }
