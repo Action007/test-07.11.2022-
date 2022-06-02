@@ -9,7 +9,7 @@ import { ReactComponent as LocationSvg } from "../../../assets/images/icon/locat
 import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-map.svg";
 
 const MapGeneral = ({ setShowMap, coordinates, page, variant, id }) => {
-  const [showLocation, setShowLocation] = useState(true);
+  const [showLocation, setShowLocation] = useState(false);
 
   return (
     <div className="creation-map">
