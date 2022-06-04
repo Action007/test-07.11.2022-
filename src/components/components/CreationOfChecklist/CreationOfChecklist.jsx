@@ -61,14 +61,13 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const isChecklistValid = checklist_items.find(
       (item) => item.description.trim().length > 150
     );
-    // eslint-disable-next-line no-shadow
-    const titleIsValid = title.trim().length > 9 && title.trim().length < 150;
+    const isValidTitle = title.trim().length > 9 && title.trim().length < 150;
 
     const validOrNot =
       checklist_items.length &&
       !isChecklistValid &&
       !checklistIsEmpty &&
-      titleIsValid &&
+      isValidTitle &&
       tagsIsValid &&
       categoryID;
 
@@ -93,8 +92,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const isChecklistValid = checklist_items.find(
       (item) => item.description.trim().length > 150
     );
-    // eslint-disable-next-line no-shadow
-    const titleIsValid = title.trim().length > 9 && title.trim().length < 150;
+    const isValidTitle = title.trim().length > 9 && title.trim().length < 150;
     const categoryIsValid = categoryID !== "" && categoryID !== false;
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
@@ -108,7 +106,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       checklist_items.length &&
       !isChecklistValid &&
       !checklistIsEmpty &&
-      titleIsValid &&
+      isValidTitle &&
       tagsIsValid &&
       categoryIsValid;
 

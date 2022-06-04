@@ -41,7 +41,6 @@ const Support = () => {
               <Trans
                 i18nKey="supportPage.text1"
                 t={translate}
-                // eslint-disable-next-line jsx-a11y/control-has-associated-label
                 components={[
                   <a href="mailto:support@checklists.com">support</a>,
                 ]}
@@ -51,7 +50,6 @@ const Support = () => {
               <Trans
                 i18nKey="supportPage.text2"
                 t={translate}
-                // eslint-disable-next-line jsx-a11y/control-has-associated-label
                 components={[
                   <a href="mailto:support@checklists.com">support</a>,
                 ]}

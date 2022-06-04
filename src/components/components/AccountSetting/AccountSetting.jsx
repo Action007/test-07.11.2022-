@@ -1,13 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { checklistAPI } from "../../../services/checklistService";
 import validateEmail from "../../../utils/validateEmail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import "./AccountSetting.scss";
 
 import { ReactComponent as EditProfileSvg } from "../../../assets/images/content/account-settings.svg";
 
 const AccountSetting = () => {
+  const [resetPassword, { isLoading, isError }] =
+    checklistAPI.useResetPasswordMutation();
   const user = useSelector((state) => state.authSliceReducer.user);
   const [emilValue, setEmailValue] = useState("@");
   const confirmPasswordRef = useRef();
@@ -17,11 +22,16 @@ const AccountSetting = () => {
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
+  const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const breadcrumbs = [
     { title: translate("profilePage.myProfile"), link: "/my-profile" },
     { title: translate("accountSettings.accountSettings") },
   ];
+
+  useEffect(() => {
+    if (isError) navigate("/error");
+  }, [isError]);
 
   useEffect(() => {
     if (user) setEmailValue(user.email);
@@ -33,103 +43,119 @@ const AccountSetting = () => {
     const oldPassword = oldPasswordRef.current.value.trim().length > 7;
     const newPassword = newPasswordRef.current.value.trim().length > 7;
     const confirmPassword =
-      confirmPasswordRef.current.value.length &&
-      confirmPasswordRef.current.value === oldPasswordRef.current.value;
+      confirmPasswordRef.current.value === newPasswordRef.current.value;
 
     setEmailValid(!!email);
     setOldPasswordValid(oldPassword);
     setNewPasswordValid(newPassword);
     setConfirmPasswordValid(confirmPassword);
+
+    if (email && oldPassword && newPassword && confirmPassword) {
+      resetPassword({
+        old_password: oldPasswordRef.current.value,
+        new_password: newPasswordRef.current.value,
+        new_password_confirmation: confirmPasswordRef.current.value,
+      });
+    }
   };
 
   return (
-    <div className="account-setting container">
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <div className="account-setting__wrapper">
-        <form
-          onSubmit={(e) => onSubmitHandler(e)}
-          className="account-setting__form"
-        >
-          <label
-            className={`account-setting__label${!emailValid ? " invalid" : ""}`}
-            htmlFor="account-email"
+    <>
+      <div className="account-setting container">
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
+        <div className="account-setting__wrapper">
+          <form
+            onSubmit={(e) => onSubmitHandler(e)}
+            className="account-setting__form"
           >
-            <span className="account-setting__title account-setting__title--one SFPro-700">
-              {translate("accountSettings.email")}
-            </span>
-            <input
-              onChange={(e) => {
-                setEmailValid(true);
-                setEmailValue(e.target.value);
-              }}
-              value={emilValue}
-              type="email"
-              id="account-email"
-            />
-          </label>
-          <label
-            className={`account-setting__label${
-              !oldPasswordValid ? " invalid" : ""
-            }`}
-            htmlFor="account-oldPassword"
-          >
-            <span className="account-setting__title account-setting__title--two SFPro-700">
-              {translate("accountSettings.oldPassword")}
-            </span>
-            <input
-              onChange={() => setOldPasswordValid(true)}
-              ref={oldPasswordRef}
-              type="password"
-              id="account-oldPassword"
-            />
-          </label>
-          <label
-            className={`account-setting__label${
-              !newPasswordValid ? " invalid" : ""
-            }`}
-            htmlFor="account-newPassword"
-          >
-            <span className="account-setting__title SFPro-700">
-              {translate("accountSettings.newPassword")}
-            </span>
-            <span className="account-setting__subtitle">
-              {translate("accountSettings.minimum")}
-            </span>
-            <input
-              onChange={() => setNewPasswordValid(true)}
-              ref={newPasswordRef}
-              type="password"
-              id="account-newPassword"
-            />
-          </label>
-          <label
-            className={`account-setting__label${
-              !confirmPasswordValid ? " invalid" : ""
-            }`}
-            htmlFor="account-confirmPassword"
-          >
-            <span className="account-setting__title SFPro-700">
-              {translate("accountSettings.confirmPassword")}
-            </span>
-            <span className="account-setting__subtitle">
-              {translate("accountSettings.minimum")}
-            </span>
-            <input
-              onChange={() => setConfirmPasswordValid(true)}
-              ref={confirmPasswordRef}
-              type="password"
-              id="account-confirmPassword"
-            />
-          </label>
-          <button className="account-setting__submit SFPro-600" type="submit">
-            {translate("editProfilePage.button")}
-          </button>
-        </form>
-        <div className="account-setting__svg">
-          <EditProfileSvg />
+            <label
+              className={`account-setting__label${
+                !emailValid ? " invalid" : ""
+              }`}
+              htmlFor="account-email"
+            >
+              <span className="account-setting__title account-setting__title--one SFPro-700">
+                {translate("accountSettings.email")}
+              </span>
+              <input
+                onChange={(e) => {
+                  setEmailValid(true);
+                  setEmailValue(e.target.value);
+                }}
+                value={emilValue}
+                type="email"
+                id="account-email"
+                disabled
+              />
+            </label>
+            <label
+              className={`account-setting__label${
+                !oldPasswordValid ? " invalid" : ""
+              }`}
+              htmlFor="account-oldPassword"
+            >
+              <span className="account-setting__title account-setting__title--two SFPro-700">
+                {translate("accountSettings.oldPassword")}
+              </span>
+              <input
+                onChange={() => setOldPasswordValid(true)}
+                ref={oldPasswordRef}
+                type="password"
+                id="account-oldPassword"
+                autoComplete="on"
+              />
+            </label>
+            <label
+              className={`account-setting__label${
+                !newPasswordValid ? " invalid" : ""
+              }`}
+              htmlFor="account-newPassword"
+            >
+              <span className="account-setting__title SFPro-700">
+                {translate("accountSettings.newPassword")}
+              </span>
+              <span className="account-setting__subtitle">
+                {translate("accountSettings.minimum")}
+              </span>
+              <input
+                onChange={() => setNewPasswordValid(true)}
+                ref={newPasswordRef}
+                type="password"
+                id="account-newPassword"
+                autoComplete="on"
+              />
+            </label>
+            <label
+              className={`account-setting__label${
+                !confirmPasswordValid ? " invalid" : ""
+              }`}
+              htmlFor="account-confirmPassword"
+            >
+              <span className="account-setting__title SFPro-700">
+                {translate("accountSettings.confirmPassword")}
+              </span>
+              <span className="account-setting__subtitle">
+                {translate("accountSettings.minimum")}
+              </span>
+              <input
+                onChange={() => setConfirmPasswordValid(true)}
+                ref={confirmPasswordRef}
+                type="password"
+                id="account-confirmPassword"
+                autoComplete="on"
+              />
+            </label>
+            <button className="account-setting__submit SFPro-600" type="submit">
+              {translate("editProfilePage.button")}
+            </button>
+          </form>
+          <div className="account-setting__svg">
+            <EditProfileSvg />
+          </div>
         </div>
       </div>
-    </div>
+      <LoadingSpinnerPopup showSpinner={isLoading} />
+    </>
   );
 };
 

@@ -61,7 +61,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
   const likeHandler = () => {
     if (!iLiked?.liked) likeChecklist(id);
     if (iLiked?.liked) dislikeChecklist(id);
-    // eslint-disable-next-line no-shadow
+
     setILiked((prevState) => ({
       liked: !prevState?.liked,
       // eslint-disable-next-line no-nested-ternary
@@ -138,23 +138,13 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
         {showOnMobile && time}
         {!created && page === "home" ? (
           <div className="checklist__buttons">
-            {token ? (
-              <button
-                onClick={saveHandler}
-                className={savedClass}
-                type="button"
-              >
-                <Bookmark />
-              </button>
-            ) : (
-              <button
-                onClick={loginHandler}
-                className={savedClass}
-                type="button"
-              >
-                <Bookmark />
-              </button>
-            )}
+            <button
+              onClick={token ? saveHandler : loginHandler}
+              className={savedClass}
+              type="button"
+            >
+              <Bookmark />
+            </button>
             <div className="complain-dropdown SFPro-500">
               <button
                 onClick={complainHandler}
@@ -239,25 +229,14 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
                 <ViewSvg />
                 <span>{viewed}</span>
               </span>
-              {token ? (
-                <button
-                  onClick={likeHandler}
-                  className={likeClass}
-                  type="button"
-                >
-                  <LikeSvg />
-                  <span>{iLiked.mount}</span>
-                </button>
-              ) : (
-                <button
-                  onClick={loginHandler}
-                  className={likeClass}
-                  type="button"
-                >
-                  <LikeSvg />
-                  <span>{iLiked.mount}</span>
-                </button>
-              )}
+              <button
+                onClick={token ? likeHandler : loginHandler}
+                className={likeClass}
+                type="button"
+              >
+                <LikeSvg />
+                <span>{iLiked.mount}</span>
+              </button>
             </div>
           ) : (
             ""

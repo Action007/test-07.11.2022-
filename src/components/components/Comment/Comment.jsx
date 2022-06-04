@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import EditDropdown from "../EditDropdown/EditDropdown";
 import "./Comment.scss";
 
 import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg";
-import EditDropdown from "../EditDropdown/EditDropdown";
 
 const Comment = ({
   date,
+  author,
   commentID,
   text,
   liked,
@@ -14,6 +16,7 @@ const Comment = ({
   onUnlikeHandler,
   onDeleteHandler,
 }) => {
+  const user = useSelector((state) => state.authSliceReducer.user);
   const [like, setLiked] = useState(false);
   const [dislike, setDisliked] = useState(false);
 
@@ -33,7 +36,7 @@ const Comment = ({
     <li className="checklist-comment">
       <div className="checklist-comment__wrapper">
         <div className="checklist-comment__heading">
-          {/* <span className="checklist-comment__heading SFPro-600">{nickname}</span> */}
+          <span className="checklist-comment__heading SFPro-600">{author}</span>
           <span className="checklist-comment__time">{date}</span>
         </div>
         <p className="checklist-comment__text">{text}</p>
@@ -60,11 +63,13 @@ const Comment = ({
           </button>
         </div>
       </div>
-      <EditDropdown
-        commentID={commentID}
-        onDeleteHandler={onDeleteHandler}
-        componentType="comment"
-      />
+      {user && user.nickname === author && (
+        <EditDropdown
+          commentID={commentID}
+          onDeleteHandler={onDeleteHandler}
+          componentType="comment"
+        />
+      )}
     </li>
   );
 };

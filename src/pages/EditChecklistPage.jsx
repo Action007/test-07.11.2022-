@@ -11,7 +11,6 @@ const CreationOfChecklistPage = () => {
   const dispatch = useDispatch();
   const {
     data: checklists,
-    // eslint-disable-next-line no-unused-vars
     error,
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(
@@ -26,8 +25,10 @@ const CreationOfChecklistPage = () => {
   useEffect(() => {
     if (!id) return;
     if (isLoading) return;
-    // eslint-disable-next-line consistent-return
-    if (error) return navigate("/not-found");
+    if (error) {
+      navigate("/not-found");
+      return;
+    }
 
     dispatch(createChecklistActions.editChecklist(checklists.checklist));
   }, [isLoading]);

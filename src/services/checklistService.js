@@ -75,6 +75,13 @@ export const checklistAPI = createApi({
         body,
       }),
     }),
+    resetPassword: build.mutation({
+      query: (body) => ({
+        url: "/api/v1/users/reset_password",
+        method: "POST",
+        body,
+      }),
+    }),
     createChecklist: build.mutation({
       query: (checklist) => ({
         url: "/api/v1/checklists_auth",

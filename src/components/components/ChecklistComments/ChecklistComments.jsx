@@ -11,6 +11,7 @@ import "./ChecklistComments.scss";
 import { ReactComponent as ArrowSvg } from "../../../assets/images/icon/rightArrow.svg";
 
 const ChecklistComments = ({
+  commentsTotalCount,
   pagination_comments,
   addComments,
   next_page,
@@ -69,7 +70,7 @@ const ChecklistComments = ({
   return (
     <div className="checklist-comments">
       <span className="checklist-comments__review SFPro-600">
-        {comments.length} Reviews
+        {commentsTotalCount} Reviews
       </span>
       <form
         onSubmit={(e) => onSubmitHandler(e)}
@@ -93,6 +94,7 @@ const ChecklistComments = ({
             return (
               <Comment
                 key={comment.id}
+                author={comment.author}
                 date={date}
                 commentID={comment.id}
                 text={comment.text}

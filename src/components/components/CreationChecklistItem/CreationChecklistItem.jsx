@@ -39,14 +39,13 @@ const CreationChecklistItem = ({
   }, []);
 
   const onChangeValueHandler = (e, type) => {
-    // eslint-disable-next-line no-shadow
-    const { value } = e.target;
+    const val = e.target.value;
     const inputValue = inputRef.current.value;
 
     dispatch(
       createChecklistActions.changeChecklistInputValue({
         type,
-        value,
+        value: val,
         id,
         inputValue,
       })

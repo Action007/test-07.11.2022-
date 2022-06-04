@@ -14,7 +14,7 @@ const ChecklistReview = () => {
   const token = useSelector((state) => state.authSliceReducer.token);
   const [pageCount, setPageCount] = useState(1);
   const {
-    data: checklists,
+    data: checklist,
     error,
     isLoading,
   } = checklistAPI.useFetchChecklistQuery(
@@ -33,13 +33,14 @@ const ChecklistReview = () => {
     <div className="checklist-detail container container-breadcrumb pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {isLoading && <LoadingSkeleton />}
-      {checklists && (
-        <ChecklistDetail checklist={checklists.checklist} detailPage />
+      {checklist && (
+        <ChecklistDetail checklist={checklist.checklist} detailPage />
       )}
-      {checklists && (
+      {checklist && (
         <ChecklistComments
-          pagination_comments={checklists.pagination_comments}
-          next_page={checklists.paginate.next_page}
+          commentsTotalCount={checklist.paginate.total_comments_value}
+          pagination_comments={checklist.pagination_comments}
+          next_page={checklist.paginate.next_page}
           addComments={setPageCount}
           checklistID={id}
         />

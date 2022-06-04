@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
+import Modal from "react-bootstrap/Modal";
 import { checklistAPI } from "../../../services/checklistService";
 import Complain from "../Complain/Complain";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
@@ -65,7 +65,6 @@ const ChecklistDetail = ({
       if (!iLiked.liked) likeChecklist(id);
       if (iLiked.liked) dislikeChecklist(id);
     }
-    // eslint-disable-next-line no-shadow
     setILiked((prevState) => ({
       liked: !prevState.liked,
       // eslint-disable-next-line no-nested-ternary
@@ -124,23 +123,13 @@ const ChecklistDetail = ({
             {showOnMobile && time}
             {detailPage && (
               <div className="checklist-detail__buttons">
-                {token ? (
-                  <button
-                    onClick={saveHandler}
-                    className={savedClass}
-                    type="button"
-                  >
-                    <Bookmark />
-                  </button>
-                ) : (
-                  <button
-                    onClick={loginHandler}
-                    className={savedClass}
-                    type="button"
-                  >
-                    <Bookmark />
-                  </button>
-                )}
+                <button
+                  onClick={token ? saveHandler : loginHandler}
+                  className={savedClass}
+                  type="button"
+                >
+                  <Bookmark />
+                </button>
                 <div className="complain-dropdown SFPro-500">
                   <button
                     onClick={complainHandler}
@@ -204,25 +193,14 @@ const ChecklistDetail = ({
                   <ViewSvg />
                   <span>{viewed}</span>
                 </span>
-                {token ? (
-                  <button
-                    onClick={likeHandler}
-                    className={likeClass}
-                    type="button"
-                  >
-                    <LikeSvg />
-                    <span>{iLiked.mount}</span>
-                  </button>
-                ) : (
-                  <button
-                    onClick={loginHandler}
-                    className={likeClass}
-                    type="button"
-                  >
-                    <LikeSvg />
-                    <span>{iLiked.mount}</span>
-                  </button>
-                )}
+                <button
+                  onClick={token ? likeHandler : loginHandler}
+                  className={likeClass}
+                  type="button"
+                >
+                  <LikeSvg />
+                  <span>{iLiked.mount}</span>
+                </button>
               </div>
               {!showOnMobile && time}
             </div>

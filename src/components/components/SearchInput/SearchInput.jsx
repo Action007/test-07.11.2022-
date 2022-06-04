@@ -68,22 +68,19 @@ const SearchInput = ({ page = false }) => {
     if (value.trim() === "" || !isTag) {
       setTagUrl("");
       setShow(false);
-    } else {
-      // eslint-disable-next-line no-lonely-if
-      if (searchTags) {
-        if (!searchTags.length) {
-          if (tagVal === tagUrl.slice(0, -1) || tagVal.trim().length === 1) {
-            setShow(true);
-            setTagUrl(tagVal);
-          }
-        } else {
+    } else if (searchTags) {
+      if (!searchTags.length) {
+        if (tagVal === tagUrl.slice(0, -1) || tagVal.trim().length === 1) {
           setShow(true);
           setTagUrl(tagVal);
         }
       } else {
-        setTagUrl(tagVal);
         setShow(true);
+        setTagUrl(tagVal);
       }
+    } else {
+      setTagUrl(tagVal);
+      setShow(true);
     }
   };
 
