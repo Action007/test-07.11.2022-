@@ -37,8 +37,8 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
   });
   const [iSaved, setISaved] = useState(user_track?.saved);
   const [saveChecklist] = checklistAPI.useSaveChecklistMutation();
-  const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
   const [unsaveChecklist] = checklistAPI.useUnsaveChecklistMutation();
+  const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
   const [dislikeChecklist] = checklistAPI.useDislikeChecklistMutation();
   const [deleteChecklist] = checklistAPI.useDeleteChecklistMutation();
   const [showComplain, setShowComplain] = useState(false);

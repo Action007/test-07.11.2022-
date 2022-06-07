@@ -12,10 +12,14 @@ import { ReactComponent as PlusSvg } from "../../../assets/images/icon/plusTags.
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
 
 const CreationTags = ({ tagsValid, setTagsValid }) => {
-  const [url, setUrl] = useState(null);
+  const [searchTagUrl, setSearchTagUrl] = useState("");
+  const [url, setUrl] = useState("");
   const [validTagValue, setValidTagValue] = useState("");
-  const { data: serverTags } = checklistAPI.useFetchChecklistQuery(
-    `/tags/search?value=${url}`
+  const { data: serverTags } = checklistAPI.useFetchSearchTagsQuery(
+    searchTagUrl,
+    {
+      skip: !searchTagUrl,
+    }
   );
   const [tags, setTags] = useState(serverTags);
   const [addTags, setAddTags] = useState(false);
@@ -25,11 +29,16 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   const { t: translate } = useTranslation();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const setTime = setTimeout(() => setSearchTagUrl(setUrl), 400);
+    return () => clearTimeout(setTime);
+  }, [url]);
+
   const searchTagsHandler = (value) => {
     if (value.trim() === "") {
       setUrl("");
     } else {
-      if (serverTags.length) setUrl(value);
+      if (serverTags?.length) setUrl(value);
       if (validTagValue === value) setUrl(value);
     }
   };
@@ -82,7 +91,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   }, [show]);
 
   useEffect(() => {
-    if (serverTags && serverTags.length) setValidTagValue(url);
+    if (serverTags && serverTags?.length) setValidTagValue(url);
     if (!serverTags) return;
 
     setTags(

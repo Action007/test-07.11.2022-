@@ -55,21 +55,20 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
 
   useEffect(() => {
     const tagsIsValid = tags.length > 2;
-    const checklistIsEmpty = checklist_items.find(
-      (item) => item.description.trim().length < 9
+    const isChecklistItemsValid = checklist_items.find(
+      (item) =>
+        item.description.trim().length > 9 &&
+        item.description.trim().length < 151
     );
-    const isChecklistValid = checklist_items.find(
-      (item) => item.description.trim().length > 150
-    );
-    const isValidTitle = title.trim().length > 9 && title.trim().length < 150;
+    const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
+    const categoryIsValid = categoryID !== "" && categoryID !== false;
 
     const validOrNot =
       checklist_items.length &&
-      !isChecklistValid &&
-      !checklistIsEmpty &&
+      isChecklistItemsValid &&
       isValidTitle &&
       tagsIsValid &&
-      categoryID;
+      categoryIsValid;
 
     setValidButton(!!validOrNot);
   }, [tags, title, checklist_items, categoryID]);
@@ -84,15 +83,14 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   }, [successCreate, successUpdate, errorCreate, errorUpdate]);
 
   const checkValidHandler = (e) => {
-    if (e.target) e.preventDefault();
+    if (e) e.preventDefault();
     const tagsIsValid = tags.length > 2;
-    const checklistIsEmpty = checklist_items.find(
-      (item) => item.description.trim().length < 9
+    const isChecklistItemsValid = checklist_items.find(
+      (item) =>
+        item.description.trim().length > 9 &&
+        item.description.trim().length < 151
     );
-    const isChecklistValid = checklist_items.find(
-      (item) => item.description.trim().length > 150
-    );
-    const isValidTitle = title.trim().length > 9 && title.trim().length < 150;
+    const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
     const categoryIsValid = categoryID !== "" && categoryID !== false;
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
@@ -104,8 +102,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
 
     const validOrNot =
       checklist_items.length &&
-      !isChecklistValid &&
-      !checklistIsEmpty &&
+      isChecklistItemsValid &&
       isValidTitle &&
       tagsIsValid &&
       categoryIsValid;
@@ -132,7 +129,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const checklist_items_attributes = [];
 
     checklist_items.forEach(({ description, list_type, value }) => {
-      const checkValid = value.image || value.link || value.coordinates;
+      const checkValid = value.image || value.link.value || value.coordinates;
       if (checkValid) {
         checklist_items_attributes.push({
           list_type,
@@ -256,7 +253,9 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
                     {translate("creationOfChecklist.addBtn")}
                   </button>
                 </div>
-                <CreationChecklistItems checklist_items={checklist_items} />
+                {!!checklist_items.length && (
+                  <CreationChecklistItems checklist_items={checklist_items} />
+                )}
                 <h3 className="creation__head SFPro-700">
                   {translate("creationOfChecklist.tags")}
                 </h3>

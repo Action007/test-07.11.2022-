@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
 import uniqueID from "../utils/uniqueID";
+import validateLink from "../utils/validateLink";
 
 const createChecklistSlice = createSlice({
   name: "createChecklist",
@@ -30,60 +31,75 @@ const createChecklistSlice = createSlice({
       ];
     },
     defineChecklist(state, action) {
-      const { str, id } = action.payload;
+      const { defineType, id } = action.payload;
 
-      if (str === "text") {
+      if (defineType === "text") {
         state.checklist_items = state.checklist_items.map((item) =>
           item.id === id
             ? { ...item, list_type: "text", value: { ...item.value } }
             : item
         );
-      } else if (str === "link") {
+      } else if (defineType === "link") {
         state.checklist_items = state.checklist_items.map((item) =>
           item.id === id
-            ? { ...item, list_type: "link", value: { ...item.value, link: "" } }
+            ? {
+                ...item,
+                list_type: "link",
+                value: { ...item.value, link: { value: "", isValid: true } },
+              }
             : item
         );
-      } else if (str === "image") {
+      } else if (defineType === "image") {
         state.checklist_items = state.checklist_items.map((item) =>
           item.id === id
             ? { ...item, list_type: "image", value: { ...item.value } }
             : item
         );
-      } else if (str === "coordinates") {
+      } else if (defineType === "coordinates") {
         state.checklist_items = state.checklist_items.map((item) =>
           item.id === id
             ? { ...item, list_type: "coordinates", value: { ...item.value } }
             : item
         );
-      } else if (str === "delete") {
+      } else if (defineType === "delete") {
         state.checklist_items = state.checklist_items.filter(
           (item) => item.id !== id
         );
       }
     },
     changeChecklistInputValue(state, action) {
-      const { type, value, id, inputValue } = action.payload;
-
-      state.checklist_items = state.checklist_items.map((item) => {
-        if (item.id === id) {
-          return inputValue.trim().length < 151 && inputValue.trim().length > 9
-            ? { ...item, inValid: false }
-            : { ...item, inValid: true };
-        }
-        return item;
-      });
+      const { type, inputValue, id } = action.payload;
 
       if (type === "link") {
-        state.checklist_items = state.checklist_items.map((item) =>
-          item.id === id ? { ...item, value: { link: value } } : item
-        );
+        state.checklist_items = state.checklist_items.map((item) => {
+          if (item.id === id) {
+            const isValid = validateLink(inputValue);
+            return {
+              ...item,
+              value: {
+                ...item.value,
+                link: { value: inputValue, isValid },
+              },
+            };
+          }
+          return item;
+        });
       } else if (type === "text") {
-        state.checklist_items = state.checklist_items.map((item) =>
-          item.id === id ? { ...item, description: value } : item
-        );
+        state.checklist_items = state.checklist_items.map((item) => {
+          if (item.id === id) {
+            const isValid =
+              inputValue.trim().length < 151 && inputValue.trim().length > 9;
+            return {
+              ...item,
+              inValid: !isValid,
+              description: inputValue,
+            };
+          }
+          return item;
+        });
       }
     },
+    // react-beautiful-dnd
     dropAndDownChecklists(state, action) {
       const result = action.payload;
 

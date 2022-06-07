@@ -15,10 +15,17 @@ const Comment = ({
   onLikeHandler,
   onUnlikeHandler,
   onDeleteHandler,
+  userTrack,
 }) => {
   const user = useSelector((state) => state.authSliceReducer.user);
-  const [like, setLiked] = useState(false);
-  const [dislike, setDisliked] = useState(false);
+  const [like, setLiked] = useState(!!userTrack?.liked);
+  const [dislike, setDisliked] = useState(!!userTrack?.unliked);
+  const likeClass = `${`checklist-comment__likes SFPro-700`}${
+    liked ? " active" : ""
+  }${like ? " liked" : ""}`;
+  const dislikeClass = `${`checklist-comment__dislikes SFPro-700`}${
+    unliked ? " active" : ""
+  }${dislike ? " disliked" : ""}`;
 
   const setLikeHandler = () => {
     setLiked((prevState) => !prevState);
@@ -41,25 +48,17 @@ const Comment = ({
         </div>
         <p className="checklist-comment__text">{text}</p>
         <div className="checklist-comment__buttons">
-          <button
-            onClick={setLikeHandler}
-            className={`${`checklist-comment__likes SFPro-700`}${
-              liked ? " active" : ""
-            }${like ? " liked" : ""}`}
-            type="button"
-          >
+          <button onClick={setLikeHandler} className={likeClass} type="button">
             <LikeSvg />
-            {like ? liked + 1 : liked}
+            {like && !userTrack?.liked ? liked + 1 : liked}
           </button>
           <button
             onClick={setDislikeHandler}
-            className={`${`checklist-comment__dislikes SFPro-700`}${
-              unliked ? " active" : ""
-            }${dislike ? " disliked" : ""}`}
+            className={dislikeClass}
             type="button"
           >
             <LikeSvg />
-            {dislike ? unliked + 1 : unliked}
+            {dislike && !userTrack?.unliked ? unliked + 1 : unliked}
           </button>
         </div>
       </div>

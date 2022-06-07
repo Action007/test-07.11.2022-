@@ -6,6 +6,7 @@ import EditProfileInput from "./EditProfileLabel/EditProfileLabel";
 import EditProfileDropdown from "./EditProfileDropdown/EditProfileDropdown";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import useClickOutside from "../../../hooks/useClickOutside";
+import validateLink from "../../../utils/validateLink";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./EditProfile.scss";
 
@@ -113,24 +114,15 @@ const EditProfile = () => {
     setShowHandler();
   };
 
-  const testUrlHandler = (value) => {
-    if (!value) return true;
-    const urlTest =
-      /^(?:(?:ht|f)tp(?:s?):\/\/|~\/|\/)(?:\w+:\w+@)?(?:(?:[-\w]+\.)+(?:com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|travel|[a-z]{2}))(?::[\d]{1,5})?(?:(?:(?:\/(?:[-\w~!$+|.,=]|%[a-f\d]{2})+)+|\/)+|\?|#)?(?:(?:\?(?:[-\w~!$+|.,*:]|%[a-f\d{2}])+=?(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)(?:&(?:[-\w~!$+|.,*:]|%[a-f\d{2}])+=?(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)*)*(?:#(?:[-\w~!$+|.,*:=]|%[a-f\d]{2})*)?$/;
-    const isValidUrl = value.match(urlTest);
-
-    return isValidUrl;
-  };
-
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const name = onChangeNameHandler(nameValue);
     const nickname = onChangeNickNameHandler(nickNameValue);
     const bio = onChangeBioHandler(bioValue);
-    const website = testUrlHandler(websiteValue);
-    const facebook = testUrlHandler(facebookValue);
-    const instagram = testUrlHandler(instagramValue);
-    const twitter = testUrlHandler(twitterValue);
+    const website = websiteValue ? validateLink(websiteValue) : true;
+    const facebook = facebookValue ? validateLink(facebookValue) : true;
+    const instagram = instagramValue ? validateLink(instagramValue) : true;
+    const twitter = twitterValue ? validateLink(twitterValue) : true;
     const links = {
       website,
       facebook,

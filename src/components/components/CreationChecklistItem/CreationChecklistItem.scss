@@ -8,6 +8,11 @@
   opacity: 0;
   transition: right 0.3s cubic-bezier(0.3, -0.3, 0.3, 1.3), opacity 0.3s ease;
 
+  &.show {
+    right: 0;
+    opacity: 1;
+  }
+
   &__wrap {
     display: flex;
     align-items: flex-start;
@@ -28,7 +33,7 @@
     width: 100%;
   }
 
-  &__name {
+  &__text {
     margin-left: auto;
     width: 100%;
     height: 54px;
@@ -72,14 +77,27 @@
         color: #000;
       }
     }
+
+    &.invalid {
+      input {
+        border-color: $warning;
+      }
+    }
   }
 
   &__invalid {
-    position: absolute;
-    left: 72px;
-    top: -2px;
     font-size: 14px;
     color: $warning;
+
+    &.text {
+      position: absolute;
+      left: 72px;
+      top: -2px;
+    }
+
+    &.link {
+      transform: translateY(5px);
+    }
   }
 
   &__img {
@@ -218,10 +236,5 @@
     &:hover svg {
       stroke: $dark;
     }
-  }
-
-  &.show {
-    right: 0;
-    opacity: 1;
   }
 }

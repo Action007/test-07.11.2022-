@@ -22,8 +22,6 @@ const ChecklistCheckbox = ({
     checklistAPI.useCheckActiveChecklistItemMutation();
   const [checked, setChecked] = useState(completed);
   const [showMap, setShowMap] = useState(false);
-  const test = /^(http|https):\/\//i;
-  const link = test.test(value.link) ? value.link : `https://${value.link}`;
   const { t: translate } = useTranslation();
 
   useEffect(() => {
@@ -54,7 +52,7 @@ const ChecklistCheckbox = ({
           {list_type === "link" && (
             <a
               className="checklist-checkbox__link"
-              href={link}
+              href={value.link.value}
               target="_blank"
               rel="noreferrer"
             >

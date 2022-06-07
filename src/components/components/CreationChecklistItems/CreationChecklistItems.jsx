@@ -3,6 +3,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import CreationChecklistItem from "../CreationChecklistItem/CreationChecklistItem";
+import "./CreationChecklistItems.scss";
 
 const CreationChecklistItems = ({ checklist_items }) => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const CreationChecklistItems = ({ checklist_items }) => {
       <Droppable droppableId="characters">
         {(provided) => (
           <ul
-            style={{ overflow: "hidden" }}
+            className="creation-items"
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provided.droppableProps}
             ref={provided.innerRef}

@@ -156,7 +156,7 @@ const SearchInput = ({ page = false }) => {
           onFocus={() => setBlur((prevState) => !prevState)}
           onBlur={() => setBlur((prevState) => !prevState)}
           value={searchValue}
-          className="search-input__input border-0"
+          className="search-input__input border-0 SFPro-400"
           placeholder={translate("inputPlaceholder")}
           type="text"
           id={labelID}

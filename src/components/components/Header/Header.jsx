@@ -38,9 +38,14 @@ const Header = () => {
     return () => window.removeEventListener("scroll", scrollHandler);
   }, []);
 
-  const onClickHandler = (address) => {
+  const onChangePageHandler = (address) => {
     navigate(address);
     setShow(false);
+  };
+
+  const onClickCreateHandler = () => {
+    window.scrollTo(0, 0);
+    navigate("/creation-of-checklist");
   };
 
   const authorized = (
@@ -49,7 +54,7 @@ const Header = () => {
         <>
           <button
             onClick={() =>
-              onClickHandler(
+              onChangePageHandler(
                 "/active-checklists?completed=false&page=1&per_page=10"
               )
             }
@@ -60,7 +65,7 @@ const Header = () => {
           </button>
           <button
             onClick={() =>
-              onClickHandler(
+              onChangePageHandler(
                 "/saved-checklists?search_type=saved&page=1&per_page=10"
               )
             }
@@ -77,7 +82,7 @@ const Header = () => {
       <HeaderDropdown setShow={setShow} />
       {!showAddButtonOnMobile && (
         <button
-          onClick={() => navigate("/creation-of-checklist")}
+          onClick={onClickCreateHandler}
           className="header__btn br-8"
           type="button"
         >
@@ -109,49 +114,51 @@ const Header = () => {
     <>
       <div className="header__items mb-0">
         <button
-          onClick={() => onClickHandler("/")}
+          onClick={() => onChangePageHandler("/")}
           className="header__item"
           type="button"
         >
           {translate("home")}
         </button>
         <button
-          onClick={() => onClickHandler("/support")}
+          onClick={() => onChangePageHandler("/support")}
           className="header__item"
           type="button"
         >
           {translate("supportPage.title")}
         </button>
         <button
-          onClick={() => onClickHandler("/?per_page=3&page=1&popular=true")}
+          onClick={() =>
+            onChangePageHandler("/?per_page=3&page=1&popular=true")
+          }
           className="header__item"
           type="button"
         >
           {translate("popularChecklistPage.title")}
         </button>
         <button
-          onClick={() => onClickHandler("/contacts")}
+          onClick={() => onChangePageHandler("/contacts")}
           className="header__item"
           type="button"
         >
           {translate("contactsPage.title")}
         </button>
         <button
-          onClick={() => onClickHandler("/our-mission")}
+          onClick={() => onChangePageHandler("/our-mission")}
           className="header__item"
           type="button"
         >
           {translate("ourMissionPage.title")}
         </button>
         <button
-          onClick={() => onClickHandler("/terms-of-use")}
+          onClick={() => onChangePageHandler("/terms-of-use")}
           className="header__item"
           type="button"
         >
           {translate("termOfUsePage.title")}
         </button>
         <button
-          onClick={() => onClickHandler("/privacy-policy")}
+          onClick={() => onChangePageHandler("/privacy-policy")}
           className="header__item"
           type="button"
         >
@@ -178,7 +185,7 @@ const Header = () => {
           <div className={`header__inner${!token ? " login" : ""}`}>
             <button
               onClick={() => {
-                onClickHandler("/?page=1&per_page=3");
+                onChangePageHandler("/?page=1&per_page=3");
                 window.scrollTo(0, 0);
               }}
               className="header__logo"
@@ -206,7 +213,9 @@ const Header = () => {
                 </button>
                 {token ? (
                   <button
-                    onClick={() => onClickHandler("/creation-of-checklist")}
+                    onClick={() =>
+                      onChangePageHandler("/creation-of-checklist")
+                    }
                     className="header__btn br-8"
                     type="button"
                   >
@@ -214,7 +223,7 @@ const Header = () => {
                   </button>
                 ) : (
                   <button
-                    onClick={() => onClickHandler(`/sign-in`)}
+                    onClick={() => onChangePageHandler(`/sign-in`)}
                     className="header__login SFPro-500"
                     type="button"
                   >

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -24,38 +24,34 @@ const CreationChecklistItem = ({
   inValid,
   id,
 }) => {
-  const [state, setState] = useState("text");
+  const [checklistItemType, setChecklistItemType] = useState("text");
   const [showMap, setShowMap] = useState(false);
   const [showImage, setShowImage] = useState(false);
   const [fadeIn, setFadeIn] = useState("");
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
   const { ref, show, setShowHandler } = useClickOutside(true);
-  const inputRef = useRef();
 
   useEffect(() => {
-    const setClassFunc = setTimeout(() => setFadeIn(" show"), 0);
-    return () => clearTimeout(setClassFunc);
+    setFadeIn(" show");
   }, []);
 
   const onChangeValueHandler = (e, type) => {
-    const val = e.target.value;
-    const inputValue = inputRef.current.value;
+    const inputValue = e.target.value;
 
     dispatch(
       createChecklistActions.changeChecklistInputValue({
         type,
-        value: val,
-        id,
         inputValue,
+        id,
       })
     );
   };
 
-  const checklistTypeHandler = (str) => {
-    if (state === str) return;
-    dispatch(createChecklistActions.defineChecklist({ str, id }));
-    setState(str);
+  const checklistTypeHandler = (defineType) => {
+    if (checklistItemType === defineType) return;
+    dispatch(createChecklistActions.defineChecklist({ defineType, id }));
+    setChecklistItemType(defineType);
   };
 
   const addItemOnEnter = (e) => {
@@ -64,7 +60,7 @@ const CreationChecklistItem = ({
   };
 
   const selectImg = (
-    <label className="creation-item__img" htmlFor={id + 1}>
+    <label className="creation-item__img" htmlFor={id + 2}>
       <div className="creation-item__svg">
         <ImgIcon />
       </div>
@@ -79,7 +75,7 @@ const CreationChecklistItem = ({
             })
           );
         }}
-        id={id + 1}
+        id={id + 2}
       />
       <span className="SFPro-500">Add image</span>
     </label>
@@ -144,14 +140,12 @@ const CreationChecklistItem = ({
             {number}.
           </div>
           <div className="creation-item__inner">
-            {inValid ? (
-              <span className="creation-item__invalid">
+            {!!inValid && (
+              <span className="creation-item__invalid text">
                 {translate("creationOfChecklist.max")}
               </span>
-            ) : (
-              ""
             )}
-            <label className="creation-item__name" htmlFor={id}>
+            <label className="creation-item__text" htmlFor={id}>
               <input
                 onChange={(e) => onChangeValueHandler(e, "text")}
                 onKeyPress={(e) => addItemOnEnter(e)}
@@ -159,23 +153,31 @@ const CreationChecklistItem = ({
                 value={description}
                 type="text"
                 id={id}
-                ref={inputRef}
               />
             </label>
             {list_type === "link" && (
-              <label
-                className={`creation-item__link${inValid ? " invalid" : ""}`}
-                htmlFor={id + 1}
-              >
-                <input
-                  onChange={(e) => onChangeValueHandler(e, "link")}
-                  onKeyPress={(e) => addItemOnEnter(e)}
-                  value={value.link}
-                  placeholder="Insert link"
-                  type="text"
-                  id={id + 1}
-                />
-              </label>
+              <>
+                {!value.link.isValid && (
+                  <span className="creation-item__invalid link">
+                    {translate("creationOfChecklist.isLinkValid")}
+                  </span>
+                )}
+                <label
+                  className={`creation-item__link${
+                    !value.link.isValid ? " invalid" : ""
+                  }`}
+                  htmlFor={id + 1}
+                >
+                  <input
+                    onChange={(e) => onChangeValueHandler(e, "link")}
+                    onKeyPress={(e) => addItemOnEnter(e)}
+                    value={value.link.value}
+                    placeholder={translate("creationOfChecklist.link")}
+                    type="text"
+                    id={id + 1}
+                  />
+                </label>
+              </>
             )}
             {list_type === "image" && !value.image && selectImg}
             {ImgSelected}

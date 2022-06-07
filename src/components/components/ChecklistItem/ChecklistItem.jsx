@@ -10,8 +10,6 @@ import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg"
 const ChecklistItem = ({ description, list_type, value, preview }) => {
   const [showMap, setShowMap] = useState(false);
   const { t: translate } = useTranslation();
-  const test = /^(http|https):\/\//i;
-  const link = test.test(value?.link) ? value?.link : `https://${value?.link}`;
 
   return (
     <li className="checklist-item">
@@ -20,7 +18,7 @@ const ChecklistItem = ({ description, list_type, value, preview }) => {
         {list_type === "link" && (
           <a
             className="checklist-item__link"
-            href={link}
+            href={value.link.value}
             target="_blank"
             rel="noreferrer"
           >

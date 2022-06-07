@@ -103,6 +103,7 @@ const ChecklistComments = ({
                 onLikeHandler={onLikeHandler}
                 onUnlikeHandler={onUnlikeHandler}
                 onDeleteHandler={onDeleteHandler}
+                userTrack={comment.user_track}
               />
             );
           })}

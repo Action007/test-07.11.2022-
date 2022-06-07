@@ -42,6 +42,7 @@ const ChecklistDetail = ({
   const [addActiveChecklist, { data, isSuccess, isLoading }] =
     checklistAPI.useAddActiveChecklistMutation();
   const [saveChecklist] = checklistAPI.useSaveChecklistMutation();
+  const [unsaveChecklist] = checklistAPI.useUnsaveChecklistMutation();
   const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
   const [dislikeChecklist] = checklistAPI.useDislikeChecklistMutation();
   const { t: translate } = useTranslation();
@@ -87,7 +88,8 @@ const ChecklistDetail = ({
   };
 
   const saveHandler = () => {
-    if (detailPage) saveChecklist(id);
+    if (!iSaved) saveChecklist(id);
+    if (iSaved) unsaveChecklist(id);
     setISaved((prevState) => !prevState);
   };
 
