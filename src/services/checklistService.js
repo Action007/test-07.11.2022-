@@ -215,7 +215,6 @@ export const checklistAPI = createApi({
         method: "DELETE",
         body,
       }),
-      invalidatesTags: ["Checklist"],
     }),
   }),
 });

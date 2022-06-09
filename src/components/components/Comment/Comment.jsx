@@ -20,12 +20,18 @@ const Comment = ({
   const user = useSelector((state) => state.authSliceReducer.user);
   const [like, setLiked] = useState(!!userTrack?.liked);
   const [dislike, setDisliked] = useState(!!userTrack?.unliked);
+  const likeAmount = like ? liked + 1 : liked;
+  const dislikeAmount = dislike ? unliked + 1 : unliked;
+  const finalLikeAmount = userTrack?.liked ? likeAmount - 1 : likeAmount;
+  const finalDislikeAmount = userTrack?.unliked
+    ? dislikeAmount - 1
+    : dislikeAmount;
   const likeClass = `${`checklist-comment__likes SFPro-700`}${
-    liked ? " active" : ""
-  }${like ? " liked" : ""}`;
+    liked && finalLikeAmount ? " liked" : ""
+  }${like ? " active" : ""}`;
   const dislikeClass = `${`checklist-comment__dislikes SFPro-700`}${
-    unliked ? " active" : ""
-  }${dislike ? " disliked" : ""}`;
+    unliked && finalDislikeAmount ? " disliked" : ""
+  }${dislike ? " active" : ""}`;
 
   const setLikeHandler = () => {
     setLiked((prevState) => !prevState);
@@ -50,7 +56,7 @@ const Comment = ({
         <div className="checklist-comment__buttons">
           <button onClick={setLikeHandler} className={likeClass} type="button">
             <LikeSvg />
-            {like && !userTrack?.liked ? liked + 1 : liked}
+            {finalLikeAmount}
           </button>
           <button
             onClick={setDislikeHandler}
@@ -58,7 +64,7 @@ const Comment = ({
             type="button"
           >
             <LikeSvg />
-            {dislike && !userTrack?.unliked ? unliked + 1 : unliked}
+            {finalDislikeAmount}
           </button>
         </div>
       </div>

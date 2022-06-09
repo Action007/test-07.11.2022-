@@ -65,7 +65,7 @@
     margin-right: 8px;
     border-radius: 6px;
 
-    &.active {
+    &.liked {
       color: $primary;
       background-color: #65c17e1a;
 
@@ -74,7 +74,7 @@
       }
     }
 
-    &.liked {
+    &.active {
       color: #fff;
       background-color: $primary;
 
@@ -92,7 +92,7 @@
       transform: rotate(180deg);
     }
 
-    &.active {
+    &.disliked {
       color: $warning;
       background-color: #eb57571a;
 
@@ -101,7 +101,7 @@
       }
     }
 
-    &.disliked {
+    &.active {
       color: #fff;
       background-color: $warning;
 

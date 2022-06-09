@@ -11,7 +11,16 @@ import { ReactComponent as World } from "../../../../assets/images/icon/world.sv
 import { ReactComponent as EditSvg } from "../../../../assets/images/icon/editPhoto.svg";
 import { ReactComponent as EmptySvg } from "../../../../assets/images/icon/emptyPhoto.svg";
 
-const MyProfileInfo = ({ user }) => {
+const MyProfileInfo = ({
+  name,
+  nickname,
+  country,
+  bio,
+  website,
+  facebook,
+  twitter,
+  instagram,
+}) => {
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
 
@@ -27,60 +36,73 @@ const MyProfileInfo = ({ user }) => {
             <EditSvg />
           </button>
           <div>
-            {user?.name && (
-              <h1 className="profile-info__title SFPro-700">{user.name}</h1>
-            )}
-            {user?.country && (
-              <span className="profile-info__subtitle">{user.country}</span>
-            )}
-            {user?.nickname && (
-              <span className="profile-info__name SFPro-700">
-                @{user.nickname}
-              </span>
+            {name && <h1 className="profile-info__title SFPro-700">{name}</h1>}
+            <span
+              className={`profile-info__subtitle${!country ? " empty" : ""}`}
+            >
+              {country || translate("profilePage.country")}
+            </span>
+            {nickname && (
+              <span className="profile-info__name SFPro-700">@{nickname}</span>
             )}
           </div>
         </div>
-        {user?.bio.length !== 0 && (
-          <>
-            <span className="profile-info__span">
-              {translate("profilePage.aboutMe")}
-            </span>
-            <p className="profile-info__text">{user?.bio}</p>
-          </>
-        )}
-        {(user?.facebook || user?.twitter || user?.instagram || user?.site) && (
+        <span
+          className={`profile-info__span${bio.length === 0 ? " empty" : ""}`}
+        >
+          {translate("profilePage.aboutMe")}
+        </span>
+        <p className={`profile-info__text${bio.length === 0 ? " empty" : ""}`}>
+          {bio.length !== 0 ? bio : translate("profilePage.emptyBio")}
+        </p>
+        {facebook || twitter || instagram || website ? (
           <ul className="profile-info__networks">
-            {user?.facebook && (
+            {facebook && (
               <li className="profile-info__network">
-                <a href={user.facebook} target="_blank" rel="noreferrer">
+                <a href={facebook} target="_blank" rel="noreferrer">
                   <Facebook />
                 </a>
               </li>
             )}
-            {user?.twitter && (
+            {twitter && (
               <li className="profile-info__network">
-                <a href={user.twitter} target="_blank" rel="noreferrer">
+                <a href={twitter} target="_blank" rel="noreferrer">
                   <Twitter />
                 </a>
               </li>
             )}
-            {user?.instagram && (
+            {instagram && (
               <li className="profile-info__network">
-                <a href={user.instagram} target="_blank" rel="noreferrer">
+                <a href={instagram} target="_blank" rel="noreferrer">
                   <Instagram />
                 </a>
               </li>
             )}
-            {user?.site && (
+            {website && (
               <li className="profile-info__network profile-info__network--website">
-                <a href={user.site} target="_blank" rel="noreferrer">
+                <a href={website} target="_blank" rel="noreferrer">
                   <World />
                   <span className="profile-info__link">
-                    {user.site.replace(/https?:\/\//g, "")}
+                    {website.replace(/https?:\/\//g, "")}
                   </span>
                 </a>
               </li>
             )}
+          </ul>
+        ) : (
+          <ul className="profile-info__networks">
+            <li className="profile-info__network empty">
+              <Facebook />
+            </li>
+            <li className="profile-info__network empty">
+              <Twitter />
+            </li>
+            <li className="profile-info__network empty">
+              <Instagram />
+            </li>
+            <li className="profile-info__network profile-info__network--website empty">
+              <World />
+            </li>
           </ul>
         )}
       </div>

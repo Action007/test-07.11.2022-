@@ -16,17 +16,25 @@ const Profile = () => {
   return (
     <div className="profile container">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <MyProfileInfo user={user} />
-      {user &&
-        (!!user.created_counter ||
-          !!user.completed_counter ||
-          !!user.awards_counter) && (
-          <MyProfileAwards
-            completedCounter={user.completed_counter}
-            createdCounter={user.created_counter}
-            awardsCounter={user.awards_counter}
-          />
-        )}
+      {user && (
+        <MyProfileInfo
+          name={user.name}
+          nickname={user.nickname}
+          country={user.country}
+          bio={user.bio}
+          website={user.site}
+          facebook={user.facebook}
+          twitter={user.twitter}
+          instagram={user.instagram}
+        />
+      )}
+      {user && (
+        <MyProfileAwards
+          completedCounter={user.completed_counter}
+          createdCounter={user.created_counter}
+          awardsCounter={user.awards_counter}
+        />
+      )}
     </div>
   );
 };

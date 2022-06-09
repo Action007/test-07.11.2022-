@@ -14,14 +14,12 @@ import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag
 const CreationTags = ({ tagsValid, setTagsValid }) => {
   const [searchTagUrl, setSearchTagUrl] = useState("");
   const [url, setUrl] = useState("");
-  const [validTagValue, setValidTagValue] = useState("");
   const { data: serverTags } = checklistAPI.useFetchSearchTagsQuery(
     searchTagUrl,
     {
       skip: !searchTagUrl,
     }
   );
-  const [tags, setTags] = useState(serverTags);
   const [addTags, setAddTags] = useState(false);
   const myTags = useSelector((state) => state.createChecklistReducer.tags);
   const inputTag = useRef();
@@ -30,16 +28,30 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const setTime = setTimeout(() => setSearchTagUrl(setUrl), 400);
+    const setTime = setTimeout(() => setSearchTagUrl(url), 400);
     return () => clearTimeout(setTime);
   }, [url]);
 
-  const searchTagsHandler = (value) => {
+  useEffect(() => {
+    if (!inputTag.current) return;
+    inputTag.current.focus();
+  }, [addTags]);
+
+  const onChangeSearchValue = (value) => {
     if (value.trim() === "") {
       setUrl("");
+      setShow(false);
+    } else if (serverTags) {
+      if (!serverTags.length) {
+        setShow(true);
+        setUrl(value);
+      } else {
+        setShow(true);
+        setUrl(value);
+      }
     } else {
-      if (serverTags?.length) setUrl(value);
-      if (validTagValue === value) setUrl(value);
+      setUrl(value);
+      setShow(true);
     }
   };
 
@@ -49,19 +61,12 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   };
 
   const addTagHandler = (tag) => {
-    const tagsIsValid = myTags.length > 1;
     const addOrNot = myTags.find((item) => item.name === tag.name);
-
-    if (addOrNot) return;
+    if (addOrNot || myTags.length === 5) return;
     if (!tag || !tag.name.trim()) return;
 
     setAddTagsHandler();
     setShow(false);
-
-    dispatch(createChecklistActions.addTag(tag));
-    if (tagsIsValid) {
-      setTagsValid(true);
-    }
   };
 
   const removeTagHandler = (tag) => {
@@ -76,28 +81,11 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
     }
   };
 
-  useEffect(() => {
-    if (!inputTag.current) return;
-    inputTag.current.focus();
-  }, [addTags]);
-
-  useEffect(() => {
-    if (!inputTag.current) return;
-    addTagHandler({
-      name: inputTag.current.value,
-      id: uniqueID(),
-      tags_new: true,
-    });
-  }, [show]);
-
-  useEffect(() => {
-    if (serverTags && serverTags?.length) setValidTagValue(url);
-    if (!serverTags) return;
-
-    setTags(
-      serverTags.filter((item) => !myTags.find((tag) => tag.id === item.id))
+  const filterTagsList = () => {
+    return serverTags.filter(
+      (item) => !myTags.find((tag) => tag.id === item.id)
     );
-  }, [serverTags]);
+  };
 
   return (
     <div className={`creation-tag${!tagsValid ? " invalid" : ""}`}>
@@ -121,7 +109,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
               ref={ref}
             >
               <input
-                onChange={() => searchTagsHandler(inputTag.current.value)}
+                onChange={() => onChangeSearchValue(inputTag.current.value)}
                 onKeyPress={(e) =>
                   findTypeHandler(e, {
                     name: inputTag.current.value,
@@ -143,8 +131,11 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
               >
                 <CloseSvg />
               </button>
-              {serverTags && serverTags.length !== 0 && show && (
-                <TagListSearch tags={tags} findTypeHandler={findTypeHandler} />
+              {serverTags && filterTagsList().length !== 0 && show && (
+                <TagListSearch
+                  tags={filterTagsList()}
+                  findTypeHandler={findTypeHandler}
+                />
               )}
             </label>
           </div>

@@ -1,4 +1,4 @@
-@import "../../../global-styles/_variables.scss";
+@import '../../../global-styles/_variables.scss';
 
 .checklist-comments {
   margin: 0 auto;
@@ -42,13 +42,22 @@
     margin-bottom: 0;
   }
 
-  &__button {
+  &__button,
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 235px;
+    width: 100%;
+    height: 52px;
     margin-top: 30px;
     border-radius: 6px;
-    padding: 12px 30px;
+    padding: 5px;
     background-color: #ecf2ff;
     transition: all 0.3s ease;
+  }
 
+  &__button {
     svg {
       margin-right: 13px;
       stroke: $dark;
@@ -63,6 +72,33 @@
       svg {
         stroke: #fff;
       }
+    }
+  }
+
+  &__loading {
+    position: relative;
+    cursor: wait;
+  }
+
+  .spinner {
+    position: absolute;
+    left: 28px;
+    width: auto;
+    height: auto;
+    justify-content: start;
+    margin-right: 0;
+    background-color: transparent;
+  }
+
+  .spinner__wrap {
+    width: 32px;
+    height: 32px;
+
+    &::after {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      border-width: 5px;
     }
   }
 }

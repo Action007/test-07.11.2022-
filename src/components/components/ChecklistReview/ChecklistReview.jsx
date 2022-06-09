@@ -17,6 +17,7 @@ const ChecklistReview = () => {
     data: checklist,
     error,
     isLoading,
+    isFetching,
   } = checklistAPI.useFetchChecklistQuery(
     `/${
       token ? "checklists_auth" : "checklists"
@@ -43,6 +44,7 @@ const ChecklistReview = () => {
           next_page={checklist.paginate.next_page}
           addComments={setPageCount}
           checklistID={id}
+          loadingComments={isFetching}
         />
       )}
     </div>

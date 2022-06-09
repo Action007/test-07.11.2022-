@@ -11,13 +11,14 @@ import "./AccountSetting.scss";
 import { ReactComponent as EditProfileSvg } from "../../../assets/images/content/account-settings.svg";
 
 const AccountSetting = () => {
-  const [resetPassword, { isLoading, isError }] =
+  const [resetPassword, { isLoading, isError, error }] =
     checklistAPI.useResetPasswordMutation();
   const user = useSelector((state) => state.authSliceReducer.user);
   const [emilValue, setEmailValue] = useState("@");
   const confirmPasswordRef = useRef();
   const [emailValid, setEmailValid] = useState(true);
   const [oldPasswordValid, setOldPasswordValid] = useState(true);
+  const [oldPasswordIncorrect, setOldPasswordIncorrect] = useState(true);
   const [newPasswordValid, setNewPasswordValid] = useState(true);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
   const oldPasswordRef = useRef();
@@ -30,7 +31,14 @@ const AccountSetting = () => {
   ];
 
   useEffect(() => {
-    if (isError) navigate("/error");
+    if (!error) return;
+
+    const message = error.data?.message[0];
+    if (message?.attribute === "old_password" && message?.type === "invalid") {
+      setOldPasswordIncorrect(false);
+    } else {
+      navigate("/error");
+    }
   }, [isError]);
 
   useEffect(() => {
@@ -40,7 +48,7 @@ const AccountSetting = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const email = validateEmail(emilValue);
-    const oldPassword = oldPasswordRef.current.value.trim().length > 7;
+    const oldPassword = oldPasswordRef.current.value.trim().length > 0;
     const newPassword = newPasswordRef.current.value.trim().length > 7;
     const confirmPassword =
       confirmPasswordRef.current.value === newPasswordRef.current.value;
@@ -49,6 +57,7 @@ const AccountSetting = () => {
     setOldPasswordValid(oldPassword);
     setNewPasswordValid(newPassword);
     setConfirmPasswordValid(confirmPassword);
+    setOldPasswordIncorrect(true);
 
     if (email && oldPassword && newPassword && confirmPassword) {
       resetPassword({
@@ -90,13 +99,18 @@ const AccountSetting = () => {
             </label>
             <label
               className={`account-setting__label${
-                !oldPasswordValid ? " invalid" : ""
+                !oldPasswordValid || !oldPasswordIncorrect ? " invalid" : ""
               }`}
               htmlFor="account-oldPassword"
             >
               <span className="account-setting__title account-setting__title--two SFPro-700">
                 {translate("accountSettings.oldPassword")}
               </span>
+              {!oldPasswordIncorrect && (
+                <span className="account-setting__subtitle">
+                  {translate("accountSettings.incorrect")}
+                </span>
+              )}
               <input
                 onChange={() => setOldPasswordValid(true)}
                 ref={oldPasswordRef}
@@ -114,9 +128,11 @@ const AccountSetting = () => {
               <span className="account-setting__title SFPro-700">
                 {translate("accountSettings.newPassword")}
               </span>
-              <span className="account-setting__subtitle">
-                {translate("accountSettings.minimum")}
-              </span>
+              {!newPasswordValid && (
+                <span className="account-setting__subtitle">
+                  {translate("accountSettings.minimum")}
+                </span>
+              )}
               <input
                 onChange={() => setNewPasswordValid(true)}
                 ref={newPasswordRef}
@@ -127,16 +143,18 @@ const AccountSetting = () => {
             </label>
             <label
               className={`account-setting__label${
-                !confirmPasswordValid ? " invalid" : ""
+                !confirmPasswordValid || !newPasswordValid ? " invalid" : ""
               }`}
               htmlFor="account-confirmPassword"
             >
               <span className="account-setting__title SFPro-700">
                 {translate("accountSettings.confirmPassword")}
               </span>
-              <span className="account-setting__subtitle">
-                {translate("accountSettings.minimum")}
-              </span>
+              {!confirmPasswordValid && (
+                <span className="account-setting__subtitle">
+                  {translate("accountSettings.invalid")}
+                </span>
+              )}
               <input
                 onChange={() => setConfirmPasswordValid(true)}
                 ref={confirmPasswordRef}

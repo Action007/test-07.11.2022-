@@ -127,6 +127,11 @@
     @include media-breakpoint-down(sm) {
       font-size: 16px;
     }
+
+    &.empty {
+      font-size: 16px;
+      opacity: 0.5;
+    }
   }
 
   &__span {
@@ -137,6 +142,11 @@
 
     @include media-breakpoint-down(sm) {
       font-size: 14px;
+    }
+
+    &.empty {
+      color: #4f4f4f;
+      opacity: 0.5;
     }
   }
 
@@ -167,6 +177,16 @@
         fill: $primary;
       }
     }
+
+    &.empty {
+      svg {
+        opacity: 0.5;
+      }
+
+      &:hover svg {
+        fill: $dark;
+      }
+    }
   }
 
   &__network--website {
@@ -180,6 +200,9 @@
     }
 
     svg {
+      max-width: 100%;
+      width: 24px;
+      height: 24px;
       margin-right: 4px;
       fill: #fff;
       stroke: $dark;
@@ -189,6 +212,18 @@
       svg {
         fill: #fff;
         stroke: $primary;
+      }
+    }
+
+    &.empty {
+      svg {
+        fill: #fff;
+        stroke: $dark;
+      }
+
+      &:hover svg {
+        fill: #fff;
+        stroke: $dark;
       }
     }
   }
@@ -206,6 +241,10 @@
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 35px;
+    }
+
+    &.empty {
+      opacity: 0.5;
     }
   }
 
