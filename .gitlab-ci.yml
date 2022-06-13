@@ -6,10 +6,10 @@ stages:
   - build
   - deploy
 
-# .runs-only: &run_only
-#   only:
-#     refs:
-#       - main
+.runs-only: &run_only
+  only:
+    refs:
+      - main
 
 lint-test:
   stage: test
@@ -18,18 +18,33 @@ lint-test:
     - sleep 1
     - echo "No lint issues found."
 
-build-image:
-  image: docker:latest
+.build-image-base: &build-image-base
+  image: docker:20-dind
   stage: build
   services:
-    - docker:dind
+    - name: docker:20-dind
+      alias: docker
+      command: [ "--tls=false" ]
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:latest" .
-    - docker push "$CI_REGISTRY_IMAGE:latest"
+
+build-image:
+  <<: *build-image-base
+
+build-image-prod:
+  <<: *build-image-base
+  <<: *run_only
+  script:
+    - docker push "$CI_REGISTRY_IMAGE:latest
 
 deploy:
+  <<: *run_only
   stage: deploy
   variables:
     CLEAR_COMMAND: $(docker image ls -f 'dangling=true' -q)
