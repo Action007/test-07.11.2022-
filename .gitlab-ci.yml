@@ -37,7 +37,11 @@ lint-test:
 build-image:
   <<: *build-image-base
   rules:
+<<<<<<< HEAD
     - if: '$CI_COMMIT_BRANCH != "master"'
+=======
+    - if: '$CI_COMMIT_BRANCH != "main"'
+>>>>>>> d7d4e1b (Fix values)
 
 build-image-prod:
   <<: *build-image-base
