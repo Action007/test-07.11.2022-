@@ -36,12 +36,14 @@ lint-test:
 
 build-image:
   <<: *build-image-base
+  rules:
+    - if: '$CI_COMMIT_BRANCH != "master"'
 
 build-image-prod:
   <<: *build-image-base
   <<: *run_only
   script:
-    - docker push "$CI_REGISTRY_IMAGE:latest
+    - docker push "$CI_REGISTRY_IMAGE:latest"
 
 deploy:
   <<: *run_only
