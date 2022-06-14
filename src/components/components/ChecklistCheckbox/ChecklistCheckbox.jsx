@@ -52,7 +52,7 @@ const ChecklistCheckbox = ({
           {list_type === "link" && (
             <a
               className="checklist-checkbox__link"
-              href={value.link.value}
+              href={value.link}
               target="_blank"
               rel="noreferrer"
             >

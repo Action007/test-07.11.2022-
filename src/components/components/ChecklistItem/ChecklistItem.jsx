@@ -18,7 +18,7 @@ const ChecklistItem = ({ description, list_type, value, preview }) => {
         {list_type === "link" && (
           <a
             className="checklist-item__link"
-            href={value.link.value}
+            href={value.link}
             target="_blank"
             rel="noreferrer"
           >
