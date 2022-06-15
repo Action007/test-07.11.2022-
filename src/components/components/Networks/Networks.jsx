@@ -6,13 +6,21 @@ import { ReactComponent as Instagram } from "../../../assets/images/icon/instagr
 
 const Networks = () => (
   <div className="networks">
-    <a href="/#">
+    <a href="https://proxyone.eu/" target="_blank" rel="noreferrer">
       <Facebook />
     </a>
-    <a href="/#">
+    <a
+      href="https://twitter.com/proxyonecompany"
+      target="_blank"
+      rel="noreferrer"
+    >
       <Twitter />
     </a>
-    <a href="/#">
+    <a
+      href="https://www.instagram.com/proxyone.company/"
+      target="_blank"
+      rel="noreferrer"
+    >
       <Instagram />
     </a>
   </div>
