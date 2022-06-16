@@ -91,6 +91,7 @@ const SearchInput = ({ page = false }) => {
 
     setTagUrl("");
     setShow(false);
+    setSearchValue("");
     if (pathname === "/") {
       searchParams.append("search_tag_ids[]", tag.id);
       setSearchParams(searchParams);

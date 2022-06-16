@@ -144,7 +144,12 @@
     "category": "Checklist category",
     "categoryDesc": "Select a category from the list that applies to your checklist",
     "link": "Insert link",
-    "isLinkValid": "Please enter a valid URL (e.g. https://www.google.com)"
+    "isLinkValid": "Please enter a valid url",
+    "textHover": "Text",
+    "linkHover": "Link",
+    "imageHover": "Image",
+    "locationHover": "Location",
+    "deleteHover": "Delete"
   },
   "sidebar": {
     "select": "Select a category",
@@ -246,7 +251,7 @@
     "facebook": "Facebook",
     "instagram": "Instagram",
     "twitter": "Twitter",
-    "isLinkValid": "Please enter a valid URL (e.g. https://www.google.com)",
+    "isLinkValid": "Please enter a valid url",
     "max": "Maximum 150 characters",
     "bioMax": "Brief description of you or your profile. Maximum 150 characters",
     "button": "Save Change"

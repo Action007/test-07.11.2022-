@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import "./CreationChecklistItemEdit.scss";
 
 import { ReactComponent as TextIcon } from "../../../assets/images/icon/text.svg";
@@ -14,16 +15,17 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
   );
   const type = checklists.find((item) => item.id === id).list_type;
   const [isActive, setIsActive] = useState(type);
-  const activeText = `checklist-edit__item ${
+  const { t: translate } = useTranslation();
+  const activeText = `checklist-edit__item${
     isActive === "text" ? " active" : ""
   }`;
-  const activeLink = `checklist-edit__item ${
+  const activeLink = `checklist-edit__item${
     isActive === "link" ? " active" : ""
   }`;
-  const activeImg = `checklist-edit__item ${
+  const activeImg = `checklist-edit__item${
     isActive === "image" ? " active" : ""
   }`;
-  const activeMap = `checklist-edit__item ${
+  const activeMap = `checklist-edit__item${
     isActive === "coordinates" ? " active" : ""
   }`;
 
@@ -41,43 +43,68 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
   };
 
   return (
-    <div className="checklist-edit">
-      <button
-        onClick={() => setIsActiveHandler("text")}
-        className={activeText}
-        type="button"
-      >
-        <TextIcon />
-      </button>
-      <button
-        onClick={() => setIsActiveHandler("link")}
-        className={activeLink}
-        type="button"
-      >
-        <LinkIcon />
-      </button>
-      <button
-        onClick={() => setIsActiveHandler("image")}
-        className={activeImg}
-        type="button"
-      >
-        <ImgIcon />
-      </button>
-      <button
-        onClick={() => setIsActiveHandler("coordinates")}
-        className={activeMap}
-        type="button"
-      >
-        <MapIcon />
-      </button>
-      <button
-        onClick={() => setIsActiveHandler("delete")}
-        className="checklist-edit__item"
-        type="button"
-      >
-        <TrashIcon />
-      </button>
-    </div>
+    <nav className="checklist-edit">
+      <div className={activeText}>
+        <button
+          onClick={() => setIsActiveHandler("text")}
+          className="checklist-edit__button"
+          type="button"
+        >
+          <TextIcon />
+        </button>
+        <span className="checklist-edit__desc">
+          {translate("creationOfChecklist.textHover")}
+        </span>
+      </div>
+      <div className={activeLink}>
+        <button
+          onClick={() => setIsActiveHandler("link")}
+          className="checklist-edit__button"
+          type="button"
+        >
+          <LinkIcon />
+        </button>
+        <span className="checklist-edit__desc">
+          {translate("creationOfChecklist.linkHover")}
+        </span>
+      </div>
+      <div className={activeImg}>
+        <button
+          onClick={() => setIsActiveHandler("image")}
+          className="checklist-edit__button"
+          type="button"
+        >
+          <ImgIcon />
+        </button>
+        <span className="checklist-edit__desc">
+          {translate("creationOfChecklist.imageHover")}
+        </span>
+      </div>
+      <div className={activeMap}>
+        <button
+          onClick={() => setIsActiveHandler("coordinates")}
+          className="checklist-edit__button"
+          type="button"
+        >
+          <MapIcon />
+        </button>
+        <span className="checklist-edit__desc">
+          {translate("creationOfChecklist.locationHover")}
+        </span>
+      </div>
+      <div className="checklist-edit__item">
+        <button
+          onClick={() => setIsActiveHandler("delete")}
+          className="checklist-edit__button"
+          type="button"
+        >
+          <TrashIcon />
+        </button>
+        <span className="checklist-edit__desc">
+          {translate("creationOfChecklist.deleteHover")}
+        </span>
+      </div>
+    </nav>
   );
 };
 

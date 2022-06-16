@@ -30,6 +30,9 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const [validButton, setValidButton] = useState();
   const [done, setDone] = useState(false);
   const [tagsValid, setTagsValid] = useState(true);
+  const validateAfterSubmit = useSelector(
+    (state) => state.createChecklistReducer.validateAfterSubmit
+  );
   const checklist_items = useSelector(
     (state) => state.createChecklistReducer.checklist_items
   );
@@ -40,8 +43,8 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     (state) => state.createChecklistReducer.title.isValid
   );
   const tags = useSelector((state) => state.createChecklistReducer.tags);
-  const categoryID = useSelector(
-    (state) => state.createChecklistReducer.category
+  const categoryValue = useSelector(
+    (state) => state.createChecklistReducer.category.value
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,23 +58,27 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
 
   useEffect(() => {
     const tagsIsValid = tags.length > 2;
-    const isChecklistItemsValid = checklist_items.find(
+    const isDescriptionValid = checklist_items.findIndex(
       (item) =>
-        item.description.trim().length > 9 &&
-        item.description.trim().length < 151
+        item.description.trim().length < 10 ||
+        item.description.trim().length > 150
+    );
+    const isLinksValid = checklist_items.findIndex((item) =>
+      item.value?.link ? item.value.link.isValid : true
     );
     const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
-    const categoryIsValid = categoryID !== "" && categoryID !== false;
+    const categoryIsValid = categoryValue !== "" && categoryValue !== false;
 
     const validOrNot =
       checklist_items.length &&
-      isChecklistItemsValid &&
+      isDescriptionValid &&
       isValidTitle &&
       tagsIsValid &&
+      !isLinksValid &&
       categoryIsValid;
 
     setValidButton(!!validOrNot);
-  }, [tags, title, checklist_items, categoryID]);
+  }, [tags, title, checklist_items, categoryValue]);
 
   useEffect(() => {
     if (successCreate || successUpdate) {
@@ -85,26 +92,31 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const checkValidHandler = (e) => {
     if (e) e.preventDefault();
     const tagsIsValid = tags.length > 2;
-    const isChecklistItemsValid = checklist_items.find(
+    const isDescriptionValid = checklist_items.findIndex(
       (item) =>
-        item.description.trim().length > 9 &&
-        item.description.trim().length < 151
+        item.description.trim().length < 10 ||
+        item.description.trim().length > 150
+    );
+    const isLinksValid = checklist_items.findIndex((item) =>
+      item.value?.link ? item.value.link.isValid : true
     );
     const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
-    const categoryIsValid = categoryID !== "" && categoryID !== false;
+    const categoryIsValid = categoryValue !== "" && categoryValue !== false;
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
       dispatch(createChecklistActions.addChecklist());
     }
-    dispatch(createChecklistActions.isValid());
+    dispatch(createChecklistActions.isValidDescription());
     dispatch(createChecklistActions.isTitleValid());
-    if (!categoryIsValid) dispatch(createChecklistActions.addCategory(false));
+    dispatch(createChecklistActions.setValidateAfterSubmit());
+    if (!categoryIsValid) dispatch(createChecklistActions.addCategory(""));
 
     const validOrNot =
       checklist_items.length &&
-      isChecklistItemsValid &&
+      isDescriptionValid &&
       isValidTitle &&
       tagsIsValid &&
+      !isLinksValid &&
       categoryIsValid;
 
     return !!validOrNot;
@@ -113,7 +125,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const changeTitleHandler = (e) => {
     const { value } = e.target;
     dispatch(createChecklistActions.addTitle(value));
-    dispatch(createChecklistActions.isTitleValid());
+    if (validateAfterSubmit) dispatch(createChecklistActions.isTitleValid());
   };
 
   const onClickPreviewHandler = () => {
@@ -129,8 +141,19 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const checklist_items_attributes = [];
 
     checklist_items.forEach(({ description, list_type, value }) => {
-      const checkValid = value.image || value.link.value || value.coordinates;
-      if (checkValid) {
+      if (value.link?.value) {
+        checklist_items_attributes.push({
+          list_type,
+          description,
+          value: { link: value.link?.value },
+        });
+      } else if (value.image) {
+        checklist_items_attributes.push({
+          list_type,
+          description,
+          value,
+        });
+      } else if (value.coordinates) {
         checklist_items_attributes.push({
           list_type,
           description,
@@ -155,7 +178,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
           tag_ids,
           tags_new,
           checklist_items_attributes,
-          category_ids: [categoryID],
+          category_ids: [categoryValue],
           id,
         };
       } else if (tags_new.length) {
@@ -163,7 +186,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
           name: title,
           tags_new,
           checklist_items_attributes,
-          category_ids: [categoryID],
+          category_ids: [categoryValue],
           id,
         };
       } else if (tag_ids.length) {
@@ -171,7 +194,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
           name: title,
           tag_ids,
           checklist_items_attributes,
-          category_ids: [categoryID],
+          category_ids: [categoryValue],
           id,
         };
       }
@@ -182,21 +205,21 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
           tag_ids,
           tags_new,
           checklist_items_attributes,
-          category_ids: [categoryID],
+          category_ids: [categoryValue],
         };
       } else if (tags_new.length) {
         checklistBody = {
           name: title,
           tags_new,
           checklist_items_attributes,
-          category_ids: [categoryID],
+          category_ids: [categoryValue],
         };
       } else if (tag_ids.length) {
         checklistBody = {
           name: title,
           tag_ids,
           checklist_items_attributes,
-          category_ids: [categoryID],
+          category_ids: [categoryValue],
         };
       }
     }
@@ -260,7 +283,9 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
                   {translate("creationOfChecklist.tags")}
                 </h3>
                 <span
-                  className={`creation__desc${!tagsValid ? " invalid" : ""}`}
+                  className={`creation__desc${
+                    !tagsValid && validateAfterSubmit ? " invalid" : ""
+                  }`}
                 >
                   {translate("creationOfChecklist.desc")}
                 </span>

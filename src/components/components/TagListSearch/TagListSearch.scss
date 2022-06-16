@@ -22,6 +22,10 @@
       text-align: left;
     }
 
+    &:hover {
+      background-color: #efefef;
+    }
+
     &.active {
       background-color: #efefef;
     }

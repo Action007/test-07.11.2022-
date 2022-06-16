@@ -14,7 +14,6 @@ const PopupDelete = ({ show, onHide, deleteClickHandler }) => {
       className="delete-popup"
       show={show}
       onHide={onHide}
-      animation={false}
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >

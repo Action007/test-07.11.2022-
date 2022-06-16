@@ -1,6 +1,7 @@
 const validateLink = (value) => {
   const urlTest =
-    /(http(s)?:\/\/.)(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
+    // eslint-disable-next-line no-useless-escape
+    /^(?:http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g;
   const isValidUrl = urlTest.test(value);
 
   return isValidUrl;

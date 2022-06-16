@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import useClickOutside from "../../../hooks/useClickOutside";
 import CreationChecklistItemEdit from "../CreationChecklistItemEdit/CreationChecklistItemEdit";
@@ -24,6 +24,9 @@ const CreationChecklistItem = ({
   inValid,
   id,
 }) => {
+  const validateAfterSubmit = useSelector(
+    (state) => state.createChecklistReducer.validateAfterSubmit
+  );
   const [checklistItemType, setChecklistItemType] = useState("text");
   const [showMap, setShowMap] = useState(false);
   const [showImage, setShowImage] = useState(false);
@@ -33,7 +36,8 @@ const CreationChecklistItem = ({
   const { ref, show, setShowHandler } = useClickOutside(true);
 
   useEffect(() => {
-    setFadeIn(" show");
+    const setClassFunc = setTimeout(() => setFadeIn(" show"), 0);
+    return () => clearTimeout(setClassFunc);
   }, []);
 
   const onChangeValueHandler = (e, type) => {
@@ -59,6 +63,15 @@ const CreationChecklistItem = ({
     dispatch(createChecklistActions.addChecklist());
   };
 
+  const onUpdateImageHandler = (event) => {
+    dispatch(
+      createChecklistActions.addImage({
+        id,
+        image: URL.createObjectURL(event.target.files[0]),
+      })
+    );
+  };
+
   const selectImg = (
     <label className="creation-item__img" htmlFor={id + 2}>
       <div className="creation-item__svg">
@@ -67,14 +80,7 @@ const CreationChecklistItem = ({
       <input
         type="file"
         accept="image/png, image/jpeg, image/jpg"
-        onChange={(event) => {
-          dispatch(
-            createChecklistActions.addImage({
-              id,
-              image: URL.createObjectURL(event.target.files[0]),
-            })
-          );
-        }}
+        onChange={(event) => onUpdateImageHandler(event)}
         id={id + 2}
       />
       <span className="SFPro-500">Add image</span>
@@ -84,7 +90,7 @@ const CreationChecklistItem = ({
   const ImgSelected = list_type === "image" && value?.image && (
     <>
       <div className="creation-item__img">
-        <img src={value.image} alt="" />
+        <img src={URL.createObjectURL(value.image)} alt="" />
         <button
           onClick={() => dispatch(createChecklistActions.removeImage(id))}
           className="creation-item__remove"
@@ -126,21 +132,23 @@ const CreationChecklistItem = ({
     >
       <div ref={ref}>
         <div
-          className={`creation-item__wrap${inValid ? " invalid" : ""}`}
+          className={`creation-item__wrap${
+            inValid && validateAfterSubmit ? " invalid" : ""
+          }`}
           onMouseDown={setShowHandler}
         >
           <div
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provide.dragHandleProps}
             className={`creation-item__number SFPro-600${
-              inValid ? " invalid" : ""
+              inValid && validateAfterSubmit ? " invalid" : ""
             }`}
           >
             <ChecklistDots />
             {number}.
           </div>
           <div className="creation-item__inner">
-            {!!inValid && (
+            {!!inValid && validateAfterSubmit && (
               <span className="creation-item__invalid text">
                 {translate("creationOfChecklist.max")}
               </span>
@@ -157,14 +165,14 @@ const CreationChecklistItem = ({
             </label>
             {list_type === "link" && (
               <>
-                {!value.link.isValid && (
+                {!value.link.isValid && validateAfterSubmit && (
                   <span className="creation-item__invalid link">
                     {translate("creationOfChecklist.isLinkValid")}
                   </span>
                 )}
                 <label
                   className={`creation-item__link${
-                    !value.link.isValid ? " invalid" : ""
+                    !value.link.isValid && validateAfterSubmit ? " invalid" : ""
                   }`}
                   htmlFor={id + 1}
                 >

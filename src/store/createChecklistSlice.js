@@ -9,7 +9,8 @@ const createChecklistSlice = createSlice({
     title: { value: "", isValid: true },
     checklist_items: [],
     tags: [],
-    category: "",
+    category: { value: "", isValid: true },
+    validateAfterSubmit: false,
   },
   reducers: {
     addTitle(state, action) {
@@ -17,18 +18,51 @@ const createChecklistSlice = createSlice({
 
       state.title.value = value;
     },
-    isTitleValid(state) {
-      const titleIsValid =
-        state.title.value.trim().length > 9 &&
-        state.title.value.trim().length < 151;
-
-      state.title.isValid = titleIsValid;
-    },
     addChecklist(state) {
       state.checklist_items = [
         ...state.checklist_items,
         { id: uniqueID(), list_type: "text", description: "", value: {} },
       ];
+    },
+    addTag(state, action) {
+      const tag = action.payload;
+      state.tags = [...state.tags, tag];
+    },
+    removeTag(state, action) {
+      const id = action.payload;
+      state.tags = state.tags.filter((tag) => tag.id !== id);
+    },
+    addImage(state, action) {
+      const { id, image } = action.payload;
+      state.checklist_items = state.checklist_items.map((item) =>
+        item.id === id ? { ...item, value: { image } } : item
+      );
+    },
+    removeImage(state, action) {
+      const id = action.payload;
+      state.checklist_items = state.checklist_items.map((item) =>
+        item.id === id ? { ...item, value: {} } : item
+      );
+    },
+    addCoordinate(state, action) {
+      const { id, latLng } = action.payload;
+      state.checklist_items = state.checklist_items.map((item) =>
+        item.id === id
+          ? { ...item, value: { ...item.value, coordinates: latLng } }
+          : item
+      );
+    },
+    addCategory(state, action) {
+      const category = action.payload;
+
+      if (category) {
+        state.category = { value: category, isValid: true };
+      } else {
+        state.category = { value: "", isValid: false };
+      }
+    },
+    setValidateAfterSubmit(state) {
+      state.validateAfterSubmit = true;
     },
     defineChecklist(state, action) {
       const { defineType, id } = action.payload;
@@ -99,51 +133,14 @@ const createChecklistSlice = createSlice({
         });
       }
     },
-    // react-beautiful-dnd
-    dropAndDownChecklists(state, action) {
-      const result = action.payload;
+    isTitleValid(state) {
+      const titleIsValid =
+        state.title.value.trim().length > 9 &&
+        state.title.value.trim().length < 151;
 
-      if (!result.destination) return;
-
-      const items = [...state.checklist_items];
-      const [reorderedItem] = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, reorderedItem);
-
-      state.checklist_items = items;
+      state.title.isValid = titleIsValid;
     },
-    addTag(state, action) {
-      const tag = action.payload;
-      state.tags = [...state.tags, tag];
-    },
-    removeTag(state, action) {
-      const id = action.payload;
-      state.tags = state.tags.filter((tag) => tag.id !== id);
-    },
-    addImage(state, action) {
-      const { id, image } = action.payload;
-      state.checklist_items = state.checklist_items.map((item) =>
-        item.id === id ? { ...item, value: { image } } : item
-      );
-    },
-    removeImage(state, action) {
-      const id = action.payload;
-      state.checklist_items = state.checklist_items.map((item) =>
-        item.id === id ? { ...item, value: {} } : item
-      );
-    },
-    addCoordinate(state, action) {
-      const { id, latLng } = action.payload;
-      state.checklist_items = state.checklist_items.map((item) =>
-        item.id === id
-          ? { ...item, value: { ...item.value, coordinates: latLng } }
-          : item
-      );
-    },
-    addCategory(state, action) {
-      const category = action.payload;
-      state.category = category;
-    },
-    isValid(state) {
+    isValidDescription(state) {
       state.checklist_items = state.checklist_items.map((item) =>
         item.description.trim().length < 151 &&
         item.description.trim().length > 9
@@ -155,7 +152,8 @@ const createChecklistSlice = createSlice({
       state.title = { value: "", isValid: true };
       state.checklist_items = [];
       state.tags = [];
-      state.category = "";
+      state.category = { value: "", isValid: true };
+      state.validateAfterSubmit = false;
     },
     editChecklist(state, action) {
       const { checklist_items, name, tags } = action.payload;
@@ -166,6 +164,18 @@ const createChecklistSlice = createSlice({
       state.title = { value: name, isValid: true };
       state.checklist_items = checklistItems;
       state.tags = tags;
+    },
+    // react-beautiful-dnd
+    dropAndDownChecklists(state, action) {
+      const result = action.payload;
+
+      if (!result.destination) return;
+
+      const items = [...state.checklist_items];
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+
+      state.checklist_items = items;
     },
   },
 });

@@ -1,13 +1,9 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .edit-profile {
   margin-bottom: 100px;
   max-width: 1112px;
-
-  @include media-breakpoint-down(lg) {
-    margin-bottom: 50px;
-  }
 
   &__wrapper {
     display: flex;
@@ -74,10 +70,14 @@
   &__title--one,
   &__title--two {
     &::after {
-      content: '*';
+      content: "*";
       position: absolute;
       font-size: 14px;
       color: $primary;
     }
+  }
+
+  @include media-breakpoint-down(lg) {
+    margin-bottom: 50px;
   }
 }
