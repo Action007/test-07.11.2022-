@@ -1,5 +1,5 @@
-@import '../../../../global-styles/_variables.scss';
-@import '../../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../../global-styles/_variables.scss";
+@import "../../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .profile-label {
   display: flex;
@@ -36,6 +36,18 @@
     }
   }
 
+  &__title {
+    position: relative;
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  &__subtitle {
+    font-size: 12px;
+    line-height: 1.3;
+    color: $warning;
+  }
+
   &.invalid {
     input {
       border-color: $warning !important;
@@ -44,17 +56,5 @@
     textarea {
       border-color: $warning !important;
     }
-  }
-
-  &__title {
-    position: relative;
-    font-size: 18px;
-    line-height: 1.3;
-  }
-
-  &__subtitle {
-    color: $warning;
-    font-size: 12px;
-    line-height: 1.3;
   }
 }

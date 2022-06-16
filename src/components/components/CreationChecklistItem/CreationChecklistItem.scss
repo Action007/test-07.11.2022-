@@ -4,13 +4,11 @@
 .creation-item {
   position: relative;
   right: -100%;
-  margin-bottom: 15px;
   opacity: 0;
   transition: right 0.3s cubic-bezier(0.3, -0.3, 0.3, 1.3), opacity 0.3s ease;
 
-  &.show {
-    right: 0;
-    opacity: 1;
+  &:not(:first-child) {
+    margin-top: 15px;
   }
 
   &__wrap {
@@ -196,10 +194,6 @@
     max-width: 67px;
     font-size: 22px;
 
-    @include media-breakpoint-down(sm) {
-      margin-right: 5px;
-    }
-
     svg {
       margin-right: 8px;
       width: 16px;
@@ -208,6 +202,10 @@
 
     &.invalid {
       color: $warning;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-right: 5px;
     }
   }
 
@@ -236,5 +234,10 @@
     &:hover svg {
       stroke: $dark;
     }
+  }
+
+  &.show {
+    right: 0;
+    opacity: 1;
   }
 }

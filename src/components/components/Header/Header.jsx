@@ -213,9 +213,7 @@ const Header = () => {
                 </button>
                 {token ? (
                   <button
-                    onClick={() =>
-                      onChangePageHandler("/creation-of-checklist")
-                    }
+                    onClick={onClickCreateHandler}
                     className="header__btn br-8"
                     type="button"
                   >

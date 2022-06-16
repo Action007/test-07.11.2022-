@@ -12,6 +12,9 @@ import { ReactComponent as PlusSvg } from "../../../assets/images/icon/plusTags.
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
 
 const CreationTags = ({ tagsValid, setTagsValid }) => {
+  const validateAfterSubmit = useSelector(
+    (state) => state.createChecklistReducer.validateAfterSubmit
+  );
   const [searchTagUrl, setSearchTagUrl] = useState("");
   const [url, setUrl] = useState("");
   const { data: serverTags } = checklistAPI.useFetchSearchTagsQuery(
@@ -61,12 +64,18 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   };
 
   const addTagHandler = (tag) => {
+    const tagsIsValid = myTags.length > 1;
     const addOrNot = myTags.find((item) => item.name === tag.name);
     if (addOrNot || myTags.length === 5) return;
     if (!tag || !tag.name.trim()) return;
 
     setAddTagsHandler();
     setShow(false);
+    dispatch(createChecklistActions.addTag(tag));
+
+    if (tagsIsValid) {
+      setTagsValid(true);
+    }
   };
 
   const removeTagHandler = (tag) => {
@@ -88,7 +97,11 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   };
 
   return (
-    <div className={`creation-tag${!tagsValid ? " invalid" : ""}`}>
+    <div
+      className={`creation-tag${
+        !tagsValid && validateAfterSubmit ? " invalid" : ""
+      }`}
+    >
       {myTags.map((tag) => (
         <button
           key={tag.id}
@@ -135,6 +148,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
                 <TagListSearch
                   tags={filterTagsList()}
                   findTypeHandler={findTypeHandler}
+                  page="creation-of-checklist"
                 />
               )}
             </label>

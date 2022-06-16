@@ -5,18 +5,12 @@
   z-index: 2;
   display: flex;
   align-items: center;
-  overflow: hidden;
-  margin: 9px 0 0 72px;
+  margin: 8px 0 0 72px;
 
   &__item {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-right: 1px solid #4f4f4f1c;
     border-left: 1px solid #4f4f4f1c;
-    width: 43px;
-    height: 43px;
     background-color: #fff;
 
     svg {
@@ -70,5 +64,60 @@
         stroke: inherit;
       }
     }
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+  }
+
+  &__desc {
+    position: absolute;
+    left: 50%;
+    bottom: -42px;
+    z-index: 100;
+    display: block;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    padding: 6px 12px;
+    box-shadow: 0 4px 4px 0 #d5dbf0;
+    background-color: rgb(255 255 255);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%);
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -3px;
+      z-index: -2;
+      border: 1px solid #ebebeb;
+      width: 30px;
+      height: 30px;
+      background-color: rgb(255 255 255);
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      z-index: -1;
+      width: 45px;
+      height: 35px;
+      background-color: rgb(255 255 255);
+      transform: translateX(-50%);
+    }
+  }
+
+  &__button:hover ~ &__desc {
+    opacity: 1;
+    visibility: visible;
   }
 }

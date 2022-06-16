@@ -1,6 +1,6 @@
-@import '../../../../global-styles/_variables.scss';
-@import '../../../../global-styles/_mixins.scss';
-@import '../../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../../global-styles/_variables.scss";
+@import "../../../../global-styles/_mixins.scss";
+@import "../../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .profile-info {
   display: flex;
@@ -11,14 +11,6 @@
   width: 100%;
   max-width: 1044px;
   background-color: #fff;
-
-  @include media-breakpoint-down(md) {
-    flex-direction: column;
-  }
-
-  @include media-breakpoint-down(md) {
-    padding: 28px 23px;
-  }
 
   &__inner {
     margin-right: 10px;
@@ -124,13 +116,13 @@
     font-size: 20px;
     line-height: 1.3;
 
-    @include media-breakpoint-down(sm) {
-      font-size: 16px;
-    }
-
     &.empty {
       font-size: 16px;
       opacity: 0.5;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 16px;
     }
   }
 
@@ -140,13 +132,13 @@
     line-height: 1.1;
     color: #888;
 
-    @include media-breakpoint-down(sm) {
-      font-size: 14px;
-    }
-
     &.empty {
       color: #4f4f4f;
       opacity: 0.5;
+    }
+
+    @include media-breakpoint-down(sm) {
+      font-size: 14px;
     }
   }
 
@@ -164,9 +156,9 @@
     }
 
     svg {
-      max-width: 20px;
       width: 100%;
       height: 20px;
+      max-width: 20px;
       fill: $dark;
     }
 
@@ -191,8 +183,8 @@
 
   &__network--website {
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
 
     a {
       display: flex;
@@ -200,51 +192,30 @@
     }
 
     svg {
-      max-width: 100%;
+      margin-right: 4px;
       width: 24px;
       height: 24px;
-      margin-right: 4px;
-      fill: #fff;
-      stroke: $dark;
-    }
-
-    &:hover {
-      svg {
-        fill: #fff;
-        stroke: $primary;
-      }
-    }
-
-    &.empty {
-      svg {
-        fill: #fff;
-        stroke: $dark;
-      }
-
-      &:hover svg {
-        fill: #fff;
-        stroke: $dark;
-      }
+      max-width: 100%;
     }
   }
 
   &__link {
-    max-width: 170px;
-    word-break: initial;
     display: inline-block;
     overflow: hidden;
+    max-width: 170px;
+    word-break: initial;
     white-space: nowrap;
   }
 
   &__text {
     margin-bottom: 40px;
 
-    @include media-breakpoint-down(sm) {
-      margin-bottom: 35px;
-    }
-
     &.empty {
       opacity: 0.5;
+    }
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 35px;
     }
   }
 
@@ -296,5 +267,13 @@
         fill: #fff;
       }
     }
+  }
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 28px 23px;
   }
 }

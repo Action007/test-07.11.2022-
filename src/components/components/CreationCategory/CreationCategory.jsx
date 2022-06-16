@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
@@ -34,10 +34,9 @@ const CreationCategory = () => {
     translate("sidebar.select")
   );
   const dispatch = useDispatch();
-  const category = useSelector(
-    (state) => state.createChecklistReducer.category
+  const isValidCategory = useSelector(
+    (state) => state.createChecklistReducer.category.isValid
   );
-  const [isCategoryValid, setIsCategoryValid] = useState(true);
 
   const categories = [
     {
@@ -97,14 +96,6 @@ const CreationCategory = () => {
     { id: 20, name: translate("sidebar.other"), svg: <DotsSvg />, fill: true },
   ];
 
-  useEffect(() => {
-    if (category === false) {
-      setIsCategoryValid(false);
-    } else if (category !== "") {
-      setIsCategoryValid(true);
-    }
-  }, [category]);
-
   const onSelectCategoryHandler = (name, id) => {
     dispatch(createChecklistActions.addCategory(id));
     setSelectCategory(name);
@@ -117,7 +108,7 @@ const CreationCategory = () => {
         {translate("creationOfChecklist.category")}
       </h3>
       <span
-        className={`select-category__desc${!isCategoryValid ? " invalid" : ""}`}
+        className={`select-category__desc${!isValidCategory ? " invalid" : ""}`}
       >
         {translate("creationOfChecklist.categoryDesc")}
       </span>
@@ -125,7 +116,7 @@ const CreationCategory = () => {
         <button
           onClick={setShowHandler}
           className={`select-category__button SFPro-600${
-            !isCategoryValid ? " invalid" : ""
+            !isValidCategory ? " invalid" : ""
           }${show ? " active" : ""}`}
           type="button"
         >

@@ -1,5 +1,5 @@
-@import '../../../../global-styles/_variables.scss';
-@import '../../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../../global-styles/_variables.scss";
+@import "../../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .profile-dropdown {
   position: relative;
@@ -77,7 +77,7 @@
     text-align: left;
 
     &:hover {
-      font-family: 'SFPro-SemiBold', sans-serif;
+      font-family: "SFPro-SemiBold", sans-serif;
       background-color: #e8eaf0;
     }
   }
@@ -93,7 +93,7 @@
     background-color: #ebebeb;
 
     &::after {
-      content: ' ';
+      content: " ";
       position: absolute;
       left: 0;
       right: 0;
