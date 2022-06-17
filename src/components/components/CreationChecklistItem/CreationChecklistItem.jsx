@@ -1,15 +1,12 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
-import useClickOutside from "../../../hooks/useClickOutside";
 import CreationChecklistItemEdit from "../CreationChecklistItemEdit/CreationChecklistItemEdit";
 import MapGeneral from "../MapGeneral/MapGeneral";
 import MapModal from "../MapModal/MapModal";
 import "./CreationChecklistItem.scss";
-
 import { ReactComponent as ChecklistDots } from "../../../assets/images/icon/checklistDots.svg";
 import { ReactComponent as ImgIcon } from "../../../assets/images/icon/img.svg";
 import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel.svg";
@@ -33,12 +30,21 @@ const CreationChecklistItem = ({
   const [fadeIn, setFadeIn] = useState("");
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
-  const { ref, show, setShowHandler } = useClickOutside(true);
+  const [show, setShow] = useState(false);
+  const textInput = useRef(null);
 
   useEffect(() => {
     const setClassFunc = setTimeout(() => setFadeIn(" show"), 0);
-    return () => clearTimeout(setClassFunc);
+    const setFocusFunc = setTimeout(() => textInput.current.focus(), 300);
+    return () => {
+      clearTimeout(setClassFunc);
+      clearTimeout(setFocusFunc);
+    };
   }, []);
+
+  const toggleShow = () => {
+    setShow(!show);
+  };
 
   const onChangeValueHandler = (e, type) => {
     const inputValue = e.target.value;
@@ -130,12 +136,11 @@ const CreationChecklistItem = ({
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...provide.draggableProps}
     >
-      <div ref={ref}>
+      <div>
         <div
           className={`creation-item__wrap${
             inValid && validateAfterSubmit ? " invalid" : ""
           }`}
-          onMouseDown={setShowHandler}
         >
           <div
             // eslint-disable-next-line react/jsx-props-no-spreading
@@ -143,6 +148,7 @@ const CreationChecklistItem = ({
             className={`creation-item__number SFPro-600${
               inValid && validateAfterSubmit ? " invalid" : ""
             }`}
+            tabIndex="-1"
           >
             <ChecklistDots />
             {number}.
@@ -161,6 +167,9 @@ const CreationChecklistItem = ({
                 value={description}
                 type="text"
                 id={id}
+                ref={textInput}
+                onFocus={toggleShow}
+                onBlur={toggleShow}
               />
             </label>
             {list_type === "link" && (

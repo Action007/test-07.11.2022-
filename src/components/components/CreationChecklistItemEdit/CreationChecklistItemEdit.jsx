@@ -49,6 +49,7 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
           onClick={() => setIsActiveHandler("text")}
           className="checklist-edit__button"
           type="button"
+          tabIndex="-1"
         >
           <TextIcon />
         </button>
@@ -61,6 +62,7 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
           onClick={() => setIsActiveHandler("link")}
           className="checklist-edit__button"
           type="button"
+          tabIndex="-1"
         >
           <LinkIcon />
         </button>
@@ -73,6 +75,7 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
           onClick={() => setIsActiveHandler("image")}
           className="checklist-edit__button"
           type="button"
+          tabIndex="-1"
         >
           <ImgIcon />
         </button>
@@ -85,6 +88,7 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
           onClick={() => setIsActiveHandler("coordinates")}
           className="checklist-edit__button"
           type="button"
+          tabIndex="-1"
         >
           <MapIcon />
         </button>
@@ -97,6 +101,7 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
           onClick={() => setIsActiveHandler("delete")}
           className="checklist-edit__button"
           type="button"
+          tabIndex="-1"
         >
           <TrashIcon />
         </button>
