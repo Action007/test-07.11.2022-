@@ -1,17 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
-import { checklistAPI } from "../../../services/checklistService";
 import getPercent from "../../../utils/getPercent";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import ActiveChecklistDetail from "../ActiveChecklistDetail/ActiveChecklistDetail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 
-const ActiveChecklist = () => {
-  const { id } = useParams();
-  const { data: checklist, isLoading } =
-    checklistAPI.useFetchActiveChecklistQuery(`/active_checklists/${id}`);
+const ActiveChecklist = ({ checklist, isLoading }) => {
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("checklists") }];
 

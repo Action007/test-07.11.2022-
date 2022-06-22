@@ -1,14 +1,10 @@
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
-@import '../../../global-styles/_variables.scss';
-@import '../../../global-styles/_fonts.scss';
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../global-styles/_variables.scss";
+@import "../../../global-styles/_fonts.scss";
 
 .header {
   padding: 0 34px;
   width: 100%;
-
-  @include media-breakpoint-down(md) {
-    padding: 0 16px;
-  }
 
   .header__navbar {
     position: fixed;
@@ -243,7 +239,7 @@
     padding: 2px 3px;
     min-width: 18px;
     min-height: 10px;
-    font-family: 'SFPro-SemiBold', sans-serif;
+    font-family: "SFPro-SemiBold", sans-serif;
     font-size: 9px;
     color: #fff;
     background-color: $warning;
@@ -256,7 +252,7 @@
     order: 3;
     border: 1px solid $primary;
     padding: 13px 27px 13px 19px;
-    font-family: 'SFPro-SemiBold', sans-serif;
+    font-family: "SFPro-SemiBold", sans-serif;
     font-size: 16px;
     color: #fff;
     background-color: $primary;
@@ -334,6 +330,12 @@
     font-size: 16px;
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 
+    &:hover {
+      border-color: $primary;
+      color: $primary;
+      background-color: #fff;
+    }
+
     &:first-child {
       margin-right: 24px;
       border-color: $dark;
@@ -343,12 +345,10 @@
       color: #fff;
       background-color: $primary;
     }
+  }
 
-    &:hover {
-      border-color: $primary;
-      color: $primary;
-      background-color: #fff;
-    }
+  @include media-breakpoint-down(md) {
+    padding: 0 16px;
   }
 }
 

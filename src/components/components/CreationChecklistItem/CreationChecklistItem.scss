@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .creation-item {
   position: relative;
@@ -48,7 +48,7 @@
 
       &:focus {
         border-color: $primary;
-        font-family: 'SFPro-Medium', sans-serif;
+        font-family: "SFPro-Medium", sans-serif;
         color: #000;
       }
     }
@@ -71,7 +71,7 @@
 
       &:focus {
         border-color: $primary;
-        font-family: 'SFPro-Medium', sans-serif;
+        font-family: "SFPro-Medium", sans-serif;
         color: #000;
       }
     }
