@@ -108,7 +108,9 @@ const CreationChecklistItem = ({
         onChange={(event) => onUpdateImageHandler(event)}
         id={id + 2}
       />
-      <span className="SFPro-500">Add image</span>
+      <span className="SFPro-500">
+        {translate("creationOfChecklist.addImage")}
+      </span>
     </label>
   );
 

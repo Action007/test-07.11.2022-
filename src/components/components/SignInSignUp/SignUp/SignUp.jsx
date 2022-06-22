@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { checklistAPI } from "../../../../services/checklistService";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
@@ -152,14 +152,14 @@ const SignUp = () => {
         </button>
       </form>
       <p className="sign-up__desc SFPro-300">
-        By signing up you agree to the{" "}
-        <Link className="sign-up__link" to="/terms-of-use">
-          Terms of Service
-        </Link>{" "}
-        and{" "}
-        <Link className="sign-up__link" to="/privacy-policy">
-          Privacy Policy
-        </Link>
+        <Trans
+          i18nKey="login.signInDesc"
+          t={translate}
+          components={[
+            <Link className="sign-up__link" to="/terms-of-use" />,
+            <Link className="sign-up__link" to="/privacy-policy" />,
+          ]}
+        />
       </p>
     </>
   );

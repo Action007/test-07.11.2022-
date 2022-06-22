@@ -58,6 +58,7 @@ const HomeChecklistPage = () => {
 
   return (
     <>
+      <h1 className="sr-only">This is our home page</h1>
       <MainBanner />
       <div className="main-content" ref={ref}>
         <div className="container main-content__wrapper">

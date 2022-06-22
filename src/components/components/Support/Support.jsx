@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -41,18 +43,14 @@ const Support = () => {
               <Trans
                 i18nKey="supportPage.text1"
                 t={translate}
-                components={[
-                  <a href="mailto:support@checklists.com">support</a>,
-                ]}
+                components={[<a href="mailto:support@checklists.com" />]}
               />
             </p>
             <p className="support__text SFPro-300 display-7">
               <Trans
                 i18nKey="supportPage.text2"
                 t={translate}
-                components={[
-                  <a href="mailto:support@checklists.com">support</a>,
-                ]}
+                components={[<a href="mailto:support@checklists.com" />]}
               />
             </p>
           </>

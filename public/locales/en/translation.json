@@ -27,7 +27,16 @@
     "subtitle": "Do you want to complain?",
     "button": "Complain",
     "text1": "We care about our users' comfort and strive to become even better. If you have any questions or are dissatisfied with the app content, please contact our <0>support team</0>. There you can ask a question or complain. Anyway, our team is happy to help, so you can always count on our support.",
-    "text2": "Got a problem? Our <0>support team</0> is ready to help!"
+    "text2": "Got a problem? Our <0>support team</0> is ready to help!",
+    "field": "Required field*",
+    "desc": "What exactly do you think is unacceptable in this material?",
+    "span": "Spam",
+    "prohibited": "Prohibited item",
+    "violence": "Violence and hostility",
+    "adult": "Adult Materials",
+    "cancel": "Cancel",
+    "submit": "Submit a complaint",
+    "more": "<0>Learn more</0> about the rules of Checklist"
   },
   "privacyPolicyPage": {
     "title": "Privacy Policy",
@@ -132,6 +141,7 @@
     "points": "Checklist points",
     "text": "Include all the information someone might need to make your checklist popular.",
     "addBtn": "Add item",
+    "addImage": "Add image",
     "tags": "Tags",
     "desc": "Add up to 3-5 tags to describe what your checlist is about",
     "addTags": "Add tag",
@@ -149,7 +159,8 @@
     "linkHover": "Link",
     "imageHover": "Image",
     "locationHover": "Location",
-    "deleteHover": "Delete"
+    "deleteHover": "Delete",
+    "edit": "Edit Checklist"
   },
   "sidebar": {
     "select": "Select a category",
@@ -179,6 +190,7 @@
     "other": "Other"
   },
   "mainPage": {
+    "checklist": "Checklists",
     "title": "Ask question and get a checklist for your question",
     "popularQuestion": "Search by checklists:",
     "search": "Search by checklists:",
@@ -220,12 +232,15 @@
     "not_found": "Invalid email",
     "nickNameTaken": "This user name is already in use, please try another one",
     "emailTaken": "Email address invalid or already taken",
-    "emailNotFound": "Email was not found"
+    "emailNotFound": "Email was not found",
+    "signInDesc": "By signing up you agree to the <0>Terms of Service</0> and <1>Privacy Policy</1>"
   },
   "error": {
     "title": "Oops..  Sorry, page not found",
+    "notFound": "Page Not Found",
     "subtitle": "That's an error. There was an error. Please try again later. That's all we know",
-    "button": "Go back to the main page"
+    "button": "Go back to the main page",
+    "error": "Server Error"
   },
   "profilePage": {
     "myProfile": "My profile",
@@ -257,7 +272,7 @@
     "button": "Save Change"
   },
   "accountSettings": {
-    "accountSettings": "Account settings",
+    "title": "Account settings",
     "email": "Email",
     "oldPassword": "Old Password",
     "newPassword": "New Password",
