@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import CreationOfChecklist from "../components/components/CreationOfChecklist/CreationOfChecklist";
 
 const API_KEY = process.env.REACT_APP_HOSTNAME;
 
 const CreationOfChecklistPage = () => {
-  const { pathname } = useLocation();
+  const { t: translate } = useTranslation();
   const token = useSelector((state) => state.authSliceReducer.token);
   const navigate = useNavigate();
 
@@ -18,10 +19,7 @@ const CreationOfChecklistPage = () => {
   return (
     <>
       <Helmet>
-        <title>Creation of Checklist</title>
-        <meta property="og:title" content="Creation of Checklist" />
-        <meta property="og:url" content={API_KEY + pathname} />
-        <meta name="description" content="Creation of Checklist" />
+        <title>{translate("creationOfChecklist.title")}</title>
       </Helmet>
       <CreationOfChecklist />
     </>

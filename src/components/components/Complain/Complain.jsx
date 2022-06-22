@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { checklistAPI } from "../../../services/checklistService";
@@ -112,12 +112,12 @@ const Complain = ({ closeHandler, id, name, page }) => {
                   className={`form-text mb-4 d-block ${empty && "text-danger"}`}
                   id="textHelp"
                 >
-                  Required field*
+                  {translate("supportPage.field")}
                 </small>
               </>
             )}
             <p className="SFPro-600 display-8 mb-4">
-              What exactly do you think is unacceptable in this material?
+              {translate("supportPage.desc")}
             </p>
             <div className="form-check mb-3">
               <label
@@ -131,7 +131,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
                   name="flexRadioDefault"
                   id="flexRadioDefault1"
                 />
-                Spam
+                {translate("supportPage.spam")}
               </label>
             </div>
             <div className="form-check mb-3">
@@ -146,7 +146,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
                   name="flexRadioDefault"
                   id="flexRadioDefault2"
                 />
-                Prohibited item
+                {translate("supportPage.prohibited")}
               </label>
             </div>
             <div className="form-check mb-3">
@@ -161,7 +161,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
                   name="flexRadioDefault"
                   id="flexRadioDefault3"
                 />
-                Violence and hostility
+                {translate("supportPage.violence")}
               </label>
             </div>
             <div className="form-check mb-4">
@@ -176,14 +176,20 @@ const Complain = ({ closeHandler, id, name, page }) => {
                   name="flexRadioDefault"
                   id="flexRadioDefault4"
                 />
-                Adult Materials
+                {translate("supportPage.adult")}
               </label>
             </div>
             <span className="mb-4 d-block text-light">
-              <Link className="complain__link text-primary" to="/terms-of-use">
-                Learn more&nbsp;
-              </Link>
-              about the rules of Chekclist
+              <Trans
+                i18nKey="supportPage.more"
+                t={translate}
+                components={[
+                  <Link
+                    className="complain__link text-primary"
+                    to="/terms-of-use"
+                  />,
+                ]}
+              />
             </span>
             <div className="complain__buttons">
               <button
@@ -191,10 +197,10 @@ const Complain = ({ closeHandler, id, name, page }) => {
                 className="complain__button SFPro-600"
                 type="button"
               >
-                Cancel
+                {translate("supportPage.cancel")}
               </button>
               <button className="complain__button SFPro-600" type="submit">
-                Submit a complaint
+                {translate("supportPage.submit")}
               </button>
             </div>
           </form>

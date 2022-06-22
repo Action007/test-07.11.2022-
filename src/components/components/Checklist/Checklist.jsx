@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../services/checklistService";
 import { changeSearchParamsValue } from "../../../utils/searchParamsValue";
 import getTime from "../../../utils/getTime";
@@ -44,6 +45,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
   const [showComplain, setShowComplain] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:575px)");
   const navigate = useNavigate();
+  const { t: translate } = useTranslation();
   const { date } = getTime(created_at);
   const checklistItem = checklist_items.map((item) =>
     item.list_type !== "text" ? { ...item, list_type: "text" } : item
@@ -155,7 +157,9 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
               >
                 <InfoSvg />
               </button>
-              <span className="complain-dropdown__desc">Complain</span>
+              <span className="complain-dropdown__desc">
+                {translate("supportPage.button")}
+              </span>
             </div>
           </div>
         ) : (

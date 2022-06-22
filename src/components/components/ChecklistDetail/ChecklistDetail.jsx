@@ -140,7 +140,9 @@ const ChecklistDetail = ({
                   >
                     <InfoSvg />
                   </button>
-                  <span className="complain-dropdown__desc">Complain</span>
+                  <span className="complain-dropdown__desc">
+                    {translate("supportPage.button")}
+                  </span>
                 </div>
               </div>
             )}

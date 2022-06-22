@@ -27,7 +27,7 @@ const AccountSetting = () => {
   const { t: translate } = useTranslation();
   const breadcrumbs = [
     { title: translate("profilePage.myProfile"), link: "/my-profile" },
-    { title: translate("accountSettings.accountSettings") },
+    { title: translate("accountSettings.title") },
   ];
 
   useEffect(() => {
