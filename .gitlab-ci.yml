@@ -71,5 +71,4 @@ deploy:
     - eval $(cat docker)
   when: on_success
   needs:
-  - job: lint-test
   - job: build-image-prod
