@@ -1,5 +1,4 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import ForgotPassword from "./ForgotPassword/ForgotPassword";
 import SignUp from "./SignUp/SignUp";
 import SignIn from "./SignIn/SignIn";
@@ -10,9 +9,8 @@ import "./SignInSignUp.scss";
 import { ReactComponent as LoginSvg } from "../../../assets/images/content/login.svg";
 import { ReactComponent as EmailSvg } from "../../../assets/images/icon/sendEmail.svg";
 
-const SignInSignUp = () => {
+const SignInSignUp = ({ pathname }) => {
   const showOnMobile = useMediaQuery("(max-width:991px)");
-  const { pathname } = useLocation();
 
   return (
     <div className="sign container">

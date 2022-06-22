@@ -125,7 +125,9 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
           onClick={() =>
             navigate(
               `/${
-                page !== "my-active-checklists" ? "list" : "active-checklist"
+                page !== "my-active-checklists"
+                  ? "checklist"
+                  : "active-checklist"
               }/${id}/${slug}`
             )
           }
@@ -196,7 +198,9 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
           onClick={() =>
             navigate(
               `/${
-                page !== "my-active-checklists" ? "list" : "active-checklist"
+                page !== "my-active-checklists"
+                  ? "checklist"
+                  : "active-checklist"
               }/${id}/${slug}`
             )
           }

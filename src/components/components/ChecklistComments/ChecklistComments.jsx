@@ -27,7 +27,8 @@ const ChecklistComments = ({
     checklistAPI.useAddCommentMutation();
   const [likeComment] = checklistAPI.useLikeCommentMutation();
   const [unlikeComment] = checklistAPI.useUnlikeCommentMutation();
-  const [deleteComment] = checklistAPI.useDeleteCommentMutation();
+  const [deleteComment, { isLoading: isLoadingDelete }] =
+    checklistAPI.useDeleteCommentMutation();
   const token = useSelector((state) => state.authSliceReducer.token);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
@@ -72,8 +73,8 @@ const ChecklistComments = ({
   };
 
   const onDeleteHandler = (id) => {
-    if (token) deleteComment({ checklist_id: checklistID, comment_id: id });
     if (!token) navigate("/sign-in");
+    if (token) deleteComment({ checklist_id: checklistID, comment_id: id });
     setComments(comments.filter((comment) => comment.id !== id));
   };
 
@@ -88,7 +89,7 @@ const ChecklistComments = ({
 
   return (
     <>
-      <LoadingSpinnerPopup showSpinner={isLoading} />
+      <LoadingSpinnerPopup showSpinner={isLoading || isLoadingDelete} />
       <div className="checklist-comments">
         <span className="checklist-comments__review SFPro-600">
           {commentsTotalCount} Reviews

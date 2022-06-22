@@ -42,7 +42,7 @@ const routes = [
   { id: 7, path: "/privacy-policy", element: <PrivacyPolicyPage /> },
   { id: 8, path: "/support", element: <SupportPage /> },
   { id: 9, path: "/contacts", element: <ContactsPage /> },
-  { id: 11, path: "/list/:id/:slug", element: <ChecklistReviewPage /> },
+  { id: 11, path: "/checklist/:id/:slug", element: <ChecklistReviewPage /> },
   {
     id: 12,
     path: "/active-checklists",
