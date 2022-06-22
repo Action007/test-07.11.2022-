@@ -32,18 +32,37 @@ const CreationChecklistItem = ({
   const { t: translate } = useTranslation();
   const [show, setShow] = useState(false);
   const textInput = useRef(null);
+  const divCurent = useRef(null);
 
   useEffect(() => {
     const setClassFunc = setTimeout(() => setFadeIn(" show"), 0);
-    const setFocusFunc = setTimeout(() => textInput.current.focus(), 300);
+    const setFocusFunc = setTimeout(() => {
+      textInput.current.focus();
+      divCurent.current.focus();
+    }, 300);
+
     return () => {
-      clearTimeout(setClassFunc);
       clearTimeout(setFocusFunc);
+      clearTimeout(setClassFunc);
     };
   }, []);
 
-  const toggleShow = () => {
-    setShow(!show);
+  const contains = (parent, child) => {
+    if (!child || !child.parentElement) return false;
+    if (child.parentElement === parent) return true;
+    return contains(parent, child.parentElement);
+  };
+
+  const onFocusHandler = () => {
+    setShow(true);
+  };
+
+  const onBlurHandler = (e) => {
+    const target = e.relatedTarget;
+    const parent = e.currentTarget;
+    if (!contains(parent, target)) {
+      setShow(false);
+    }
   };
 
   const onChangeValueHandler = (e, type) => {
@@ -136,7 +155,7 @@ const CreationChecklistItem = ({
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...provide.draggableProps}
     >
-      <div>
+      <div ref={divCurent} onFocus={onFocusHandler} onBlur={onBlurHandler}>
         <div
           className={`creation-item__wrap${
             inValid && validateAfterSubmit ? " invalid" : ""
@@ -168,8 +187,6 @@ const CreationChecklistItem = ({
                 type="text"
                 id={id}
                 ref={textInput}
-                onFocus={toggleShow}
-                onBlur={toggleShow}
               />
             </label>
             {list_type === "link" && (
