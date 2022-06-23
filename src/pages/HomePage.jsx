@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import HomeChecklistPage from "../components/components/HomeChecklistPage/HomeChecklistPage";
 
 const API_KEY = process.env.REACT_APP_HOSTNAME;
+
 const HomePage = () => (
   <>
     <Helmet>

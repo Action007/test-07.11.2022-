@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AccountSetting from "../components/components/AccountSetting/AccountSetting";
 
-const API_KEY = process.env.REACT_APP_HOSTNAME;
-
 const AccountSettingsPage = () => {
   const { t: translate } = useTranslation();
   const token = useSelector((state) => state.authSliceReducer.token);

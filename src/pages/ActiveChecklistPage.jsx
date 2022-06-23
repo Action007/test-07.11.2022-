@@ -5,8 +5,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { checklistAPI } from "../services/checklistService";
 import ActiveChecklist from "../components/components/ActiveChecklist/ActiveChecklist";
 
-const API_KEY = process.env.REACT_APP_HOSTNAME;
-
 const ActiveChecklistPage = () => {
   const { id } = useParams();
   const { data: checklist, isLoading } =
