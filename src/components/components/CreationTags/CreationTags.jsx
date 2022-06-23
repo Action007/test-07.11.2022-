@@ -64,6 +64,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   };
 
   const addTagHandler = (tag) => {
+    if (!tag) return;
     const tagsIsValid = myTags.length > 1;
     const addOrNot = myTags.find((item) => item.name === tag.name);
     if (addOrNot || myTags.length === 5) return;
@@ -77,6 +78,15 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
       setTagsValid(true);
     }
   };
+
+  useEffect(() => {
+    if (show) return;
+    addTagHandler({
+      name: url,
+      id: uniqueID(),
+      tags_new: true,
+    });
+  }, [show]);
 
   const removeTagHandler = (tag) => {
     const tagsIsValid = myTags.length > 3;
