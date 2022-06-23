@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
@@ -30,12 +30,17 @@ import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg"
 const CreationCategory = () => {
   const { ref, show, setShowHandler } = useClickOutside();
   const { t: translate } = useTranslation();
-  const [selectCategory, setSelectCategory] = useState(
-    translate("sidebar.select")
+  const categoryValue = useSelector(
+    (state) => state.createChecklistReducer.category.name
   );
+  const initialCategory = translate("sidebar.select");
+  const [selectCategory, setSelectCategory] = useState();
   const dispatch = useDispatch();
   const isValidCategory = useSelector(
     (state) => state.createChecklistReducer.category.isValid
+  );
+  const validateAfterSubmit = useSelector(
+    (state) => state.createChecklistReducer.validateAfterSubmit
   );
 
   const categories = [
@@ -102,6 +107,12 @@ const CreationCategory = () => {
     setShowHandler();
   };
 
+  useEffect(() => {
+    if (validateAfterSubmit) {
+      setSelectCategory("");
+    }
+  }, [validateAfterSubmit]);
+
   return (
     <div className="select-category">
       <h3 className="select-category__head SFPro-700">
@@ -113,16 +124,34 @@ const CreationCategory = () => {
         {translate("creationOfChecklist.categoryDesc")}
       </span>
       <div className="select-category__wrapper" ref={ref}>
-        <button
-          onClick={setShowHandler}
-          className={`select-category__button SFPro-600${
-            !isValidCategory ? " invalid" : ""
-          }${show ? " active" : ""}`}
-          type="button"
-        >
-          {selectCategory}
-          <ArrowSvg />
-        </button>
+        {selectCategory ? (
+          <button
+            onClick={setShowHandler}
+            className={`select-category__button SFPro-600${
+              !isValidCategory ? " invalid" : ""
+            }${show ? " active" : ""}`}
+            type="button"
+          >
+            {selectCategory}
+            <ArrowSvg />
+          </button>
+        ) : (
+          <button
+            onClick={setShowHandler}
+            className={`select-category__button SFPro-600${
+              !isValidCategory ? " invalid" : ""
+            }${show ? " active" : ""}`}
+            type="button"
+          >
+            {categoryValue ? (
+              <span>{categoryValue}</span>
+            ) : (
+              <span>{initialCategory}</span>
+            )}
+            <ArrowSvg />
+          </button>
+        )}
+
         {show && (
           <ul className="select-category__list SFPro-700">
             {categories.map((item) => (
