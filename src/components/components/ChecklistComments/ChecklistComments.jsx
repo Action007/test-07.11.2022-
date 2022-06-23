@@ -25,8 +25,7 @@ const ChecklistComments = ({
   const [addComment, { isSuccess }] = checklistAPI.useAddCommentMutation();
   const [likeComment] = checklistAPI.useLikeCommentMutation();
   const [unlikeComment] = checklistAPI.useUnlikeCommentMutation();
-  const [deleteComment, { isLoading: isLoadingDelete }] =
-    checklistAPI.useDeleteCommentMutation();
+  const [deleteComment] = checklistAPI.useDeleteCommentMutation();
   const token = useSelector((state) => state.authSliceReducer.token);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
