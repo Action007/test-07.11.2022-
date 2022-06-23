@@ -245,6 +245,8 @@
     padding: 2px 8px;
     background-color: #fff;
     transition: box-shadow 0.2s ease;
+    word-break: break-word;
+    text-align: left;
 
     &:not(:last-child) {
       margin-right: 9px;

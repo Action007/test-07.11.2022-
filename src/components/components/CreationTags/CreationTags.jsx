@@ -65,14 +65,22 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
 
   const addTagHandler = (tag) => {
     if (!tag) return;
+    let validTag = tag;
     const tagsIsValid = myTags.length > 1;
     const addOrNot = myTags.find((item) => item.name === tag.name);
     if (addOrNot || myTags.length === 5) return;
     if (!tag || !tag.name.trim()) return;
+    if (tag.name.length > 16) {
+      validTag = {
+        name: `${tag.name.substring(0, 17)}...`,
+        id: tag.id,
+        tags_new: tag.tags_new,
+      };
+    }
 
     setAddTagsHandler();
     setShow(false);
-    dispatch(createChecklistActions.addTag(tag));
+    dispatch(createChecklistActions.addTag(validTag));
 
     if (tagsIsValid) {
       setTagsValid(true);
