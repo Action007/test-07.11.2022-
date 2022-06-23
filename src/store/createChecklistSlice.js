@@ -9,7 +9,7 @@ const createChecklistSlice = createSlice({
     title: { value: "", isValid: true },
     checklist_items: [],
     tags: [],
-    category: { value: "", isValid: true },
+    category: { value: "", isValid: true, name: "" },
     validateAfterSubmit: false,
   },
   reducers: {
@@ -152,11 +152,11 @@ const createChecklistSlice = createSlice({
       state.title = { value: "", isValid: true };
       state.checklist_items = [];
       state.tags = [];
-      state.category = { value: "", isValid: true };
+      state.category = { value: "", isValid: true, name: "" };
       state.validateAfterSubmit = false;
     },
     editChecklist(state, action) {
-      const { checklist_items, name, tags } = action.payload;
+      const { checklist_items, name, tags, categories } = action.payload;
       const checklistItems = checklist_items.map((item) =>
         item.id ? item : { ...item, id: uniqueID() }
       );
@@ -164,6 +164,11 @@ const createChecklistSlice = createSlice({
       state.title = { value: name, isValid: true };
       state.checklist_items = checklistItems;
       state.tags = tags;
+      state.category = {
+        value: categories[0].id,
+        isValid: true,
+        name: categories[0].name,
+      };
     },
     // react-beautiful-dnd
     dropAndDownChecklists(state, action) {
