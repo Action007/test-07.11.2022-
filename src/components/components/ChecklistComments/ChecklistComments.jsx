@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +19,8 @@ const ChecklistComments = ({
   loadingComments,
 }) => {
   const [comments, setComments] = useState([]);
-  const [value, setValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const [isValidComment, setIsValidComment] = useState(true);
   const [newComment, setNewComment] = useState(false);
   const [addComment, { isSuccess }] = checklistAPI.useAddCommentMutation();
   const [likeComment] = checklistAPI.useLikeCommentMutation();
@@ -75,29 +75,44 @@ const ChecklistComments = ({
     setComments(comments.filter((comment) => comment.id !== id));
   };
 
+  const onChangeHandler = (value) => {
+    setInputValue(value);
+    if (value.trim().length > 150) {
+      setIsValidComment(false);
+    } else {
+      setIsValidComment(true);
+    }
+  };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (!token) navigate("/sign-in");
-    if (value.trim().length === 0) return;
-
-    addComment({ text: value, checklist_id: checklistID });
-    setValue("");
+    if (inputValue.trim().length === 0 || !isValidComment) return;
+    addComment({ text: inputValue.trim(), checklist_id: checklistID });
+    setInputValue("");
   };
 
   return (
     <div className="checklist-comments">
       <span className="checklist-comments__review SFPro-600">
-        {commentsTotalCount} Reviews
+        {commentsTotalCount} {translate("checklistReviewPage.review")}
       </span>
       <form
         onSubmit={(e) => onSubmitHandler(e)}
         className="checklist-comments__form"
       >
         <label className="checklist-comments__label" htmlFor="checklistReview">
+          {!isValidComment && (
+            <span className="checklist-comments__desc">
+              {translate("checklistReviewPage.max")}
+            </span>
+          )}
           <input
-            onChange={(e) => setValue(e.target.value)}
-            className="checklist-comments__input"
-            value={value}
+            onChange={(e) => onChangeHandler(e.target.value)}
+            className={`checklist-comments__input${
+              !isValidComment ? " invalid" : ""
+            }`}
+            value={inputValue}
             id="checklistReview"
             type="text"
             placeholder="Leave a comment..."

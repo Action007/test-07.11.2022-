@@ -368,7 +368,9 @@
     "button": "Start to pass",
     "link": "Link",
     "moreComments": "Show more comments",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "max": "Maximum 150 characters",
+    "review": "Reviews"
   },
   "myActiveChecklists": {
     "title": "My active checklists",
