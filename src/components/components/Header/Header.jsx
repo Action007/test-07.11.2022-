@@ -207,9 +207,6 @@ const Header = () => {
                   type="button"
                 >
                   <BurgerSvg />
-                  {user && user.saved_counter !== 0 && (
-                    <span className="header__span">{user.saved_counter}</span>
-                  )}
                 </button>
                 {token ? (
                   <button
