@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
 import uniqueID from "../utils/uniqueID";
-import validateLink from "../utils/validateLink";
 
 const createChecklistSlice = createSlice({
   name: "createChecklist",
@@ -79,7 +78,7 @@ const createChecklistSlice = createSlice({
             ? {
                 ...item,
                 list_type: "link",
-                value: { ...item.value, link: { value: "", isValid: true } },
+                value: { ...item.value, link: "" },
               }
             : item
         );
@@ -107,12 +106,11 @@ const createChecklistSlice = createSlice({
       if (type === "link") {
         state.checklist_items = state.checklist_items.map((item) => {
           if (item.id === id) {
-            const isValid = validateLink(inputValue);
             return {
               ...item,
               value: {
                 ...item.value,
-                link: { value: inputValue, isValid },
+                link: inputValue,
               },
             };
           }

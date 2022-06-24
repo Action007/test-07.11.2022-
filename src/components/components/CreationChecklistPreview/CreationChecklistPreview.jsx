@@ -18,7 +18,7 @@ const CreationChecklistPreview = ({ show, onHide }) => {
   const checklist_items_attributes = [];
 
   checklist_items.forEach(({ description, list_type, value }) => {
-    const checkValid = value.image || value.link?.value || value.coordinates;
+    const checkValid = value.image || value.link || value.coordinates;
     if (checkValid) {
       checklist_items_attributes.push({
         list_type,
