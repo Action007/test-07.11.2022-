@@ -11,6 +11,7 @@ import CreationTags from "../CreationTags/CreationTags";
 import PopupCreateDone from "../PopupCreateDone/PopupCreateDone";
 import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
 import CreationCategory from "../CreationCategory/CreationCategory";
+import validateLink from "../../../utils/validateLink";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import "./CreationOfChecklist.scss";
 
@@ -64,7 +65,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
         item.description.trim().length > 150
     );
     const isLinksValid = checklist_items.findIndex((item) =>
-      item.value?.link ? item.value.link.isValid : true
+      item.value?.link ? validateLink(item.value.link) : true
     );
     const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
     const categoryIsValid = categoryValue !== "" && categoryValue !== false;
@@ -98,7 +99,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
         item.description.trim().length > 150
     );
     const isLinksValid = checklist_items.findIndex((item) =>
-      item.value?.link ? item.value.link.isValid : true
+      item.value?.link ? validateLink(item.value.link) : true
     );
     const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
     const categoryIsValid = categoryValue !== "" && categoryValue !== false;
@@ -141,13 +142,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const checklist_items_attributes = [];
 
     checklist_items.forEach(({ description, list_type, value }) => {
-      if (value.link?.value) {
-        checklist_items_attributes.push({
-          list_type,
-          description,
-          value: { link: value.link?.value },
-        });
-      } else if (value.image) {
+      if (value.link || value.image) {
         checklist_items_attributes.push({
           list_type,
           description,

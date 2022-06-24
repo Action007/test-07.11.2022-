@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import CreationChecklistItemEdit from "../CreationChecklistItemEdit/CreationChecklistItemEdit";
 import MapGeneral from "../MapGeneral/MapGeneral";
+import validateLink from "../../../utils/validateLink";
 import MapModal from "../MapModal/MapModal";
 import "./CreationChecklistItem.scss";
 import { ReactComponent as ChecklistDots } from "../../../assets/images/icon/checklistDots.svg";
@@ -32,13 +33,14 @@ const CreationChecklistItem = ({
   const { t: translate } = useTranslation();
   const [show, setShow] = useState(false);
   const textInput = useRef(null);
-  const divCurent = useRef(null);
+  const divCurrent = useRef(null);
+  const isLinkValid = validateLink(value.link);
 
   useEffect(() => {
     const setClassFunc = setTimeout(() => setFadeIn(" show"), 0);
     const setFocusFunc = setTimeout(() => {
       textInput.current.focus();
-      divCurent.current.focus();
+      divCurrent.current.focus();
     }, 300);
 
     return () => {
@@ -117,7 +119,7 @@ const CreationChecklistItem = ({
   const ImgSelected = list_type === "image" && value?.image && (
     <>
       <div className="creation-item__img">
-        <img src={URL.createObjectURL(value.image)} alt="" />
+        <img src={value.image} alt="" />
         <button
           onClick={() => dispatch(createChecklistActions.removeImage(id))}
           className="creation-item__remove"
@@ -157,7 +159,7 @@ const CreationChecklistItem = ({
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...provide.draggableProps}
     >
-      <div ref={divCurent} onFocus={onFocusHandler} onBlur={onBlurHandler}>
+      <div ref={divCurrent} onFocus={onFocusHandler} onBlur={onBlurHandler}>
         <div
           className={`creation-item__wrap${
             inValid && validateAfterSubmit ? " invalid" : ""
@@ -193,21 +195,21 @@ const CreationChecklistItem = ({
             </label>
             {list_type === "link" && (
               <>
-                {!value.link.isValid && validateAfterSubmit && (
+                {!isLinkValid && validateAfterSubmit && (
                   <span className="creation-item__invalid link">
                     {translate("creationOfChecklist.isLinkValid")}
                   </span>
                 )}
                 <label
                   className={`creation-item__link${
-                    !value.link.isValid && validateAfterSubmit ? " invalid" : ""
+                    !isLinkValid && validateAfterSubmit ? " invalid" : ""
                   }`}
                   htmlFor={id + 1}
                 >
                   <input
                     onChange={(e) => onChangeValueHandler(e, "link")}
                     onKeyPress={(e) => addItemOnEnter(e)}
-                    value={value.link.value}
+                    value={value.link}
                     placeholder={translate("creationOfChecklist.link")}
                     type="text"
                     id={id + 1}
