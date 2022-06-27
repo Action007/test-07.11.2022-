@@ -32,7 +32,7 @@ lint-test:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   when: on_success
-  needs: ["lint-test"]
+
 
 build-image:
   <<: *build-image-base
@@ -70,5 +70,3 @@ deploy:
         " > docker
     - eval $(cat docker)
   when: on_success
-  needs:
-  - job: build-image-prod
