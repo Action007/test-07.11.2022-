@@ -34,9 +34,9 @@ const Contacts = () => {
               {translate("contactsPage.address")}
             </h4>
             <a
-              className="mb-4"
+              className="contacts__link mb-4"
               target="_blank"
-              href="https://www.google.com/maps/place/%D1%83%D0%BB.+%D0%9A%D0%B0%D0%BB%D1%8C%D0%B2%D0%B0%D1%80%D0%B8%D0%B9%D1%81%D0%BA%D0%B0%D1%8F+33,+%D0%9C%D0%B8%D0%BD%D1%81%D0%BA,+%D0%91%D0%B5%D0%BB%D0%B0%D1%80%D1%83%D1%81%D1%8C/@53.9074448,27.5134533,17z/data=!3m1!4b1!4m5!3m4!1s0x46dbc559a0e0b6f1:0xbb0965877a255b26!8m2!3d53.9074417!4d27.515642"
+              href="https://www.google.com/maps/place/Ma%C5%82achowskiego+8%2Fp1,+61-129+Pozna%C5%84,+%D0%9F%D0%BE%D0%BB%D1%8C%D1%88%D0%B0/data=!4m2!3m1!1s0x47045b916c5f20a7:0x5d2dff2aa3b3b28b?sa=X&ved=2ahUKEwjJ0LOs5s34AhWBQvEDHRJFDa0Q8gF6BAgNEAE"
               rel="noreferrer"
             >
               {translate("contactsPage.addressText")}
@@ -44,14 +44,17 @@ const Contacts = () => {
             <h4 className="SFPro-700 display-8">
               {translate("contactsPage.numbers")}
             </h4>
-            <a className="mb-4" href="tel:(+375)0000000000">
-              + 375 00 000 000 00
+            <a className="contacts__tel" href="tel:(+375)0000000000">
+              +48222085472
+            </a>
+            <a className="contacts__tel mb-4" href="tel:(+375)0000000000">
+              +12098130160
             </a>
             <h4 className="SFPro-700 display-8">
               {translate("contactsPage.email")}
             </h4>
-            <a className="mb-4" href="mailto:support@checklists.com">
-              support@checklists.com
+            <a className="mb-4" href="mailto:info@proxyone.eu">
+              info@proxyone.eu
             </a>
           </address>
           <h4 className="SFPro-700 display-8">

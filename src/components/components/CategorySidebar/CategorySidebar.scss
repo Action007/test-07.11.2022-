@@ -8,6 +8,15 @@
   width: 100%;
   max-width: 326px;
 
+  @include media-breakpoint-down(xl) {
+    margin-right: 20px;
+  }
+
+  @include media-breakpoint-down(lg) {
+    margin: 0 0 40px;
+    max-width: 100%;
+  }
+
   &__head {
     padding: 18px 28px;
     width: 100%;
@@ -47,6 +56,10 @@
     text-align: left;
     transition: transform 0.09s ease;
 
+    @include media-breakpoint-down(sm) {
+      padding: 9px 16px;
+    }
+
     svg {
       margin-right: 25px;
     }
@@ -62,10 +75,6 @@
     &.active {
       color: #fff;
       background-color: $primary;
-    }
-
-    @include media-breakpoint-down(sm) {
-      padding: 9px 16px;
     }
   }
 
@@ -106,6 +115,10 @@
     color: $warning;
     transition: transform 0.09s ease, background-color 0.15s ease;
 
+    @include media-breakpoint-down(sm) {
+      padding: 9px 16px;
+    }
+
     svg {
       margin-right: 25px;
       width: 25px;
@@ -131,10 +144,6 @@
         stroke: #fff;
       }
     }
-
-    @include media-breakpoint-down(sm) {
-      padding: 9px 16px;
-    }
   }
 
   .accordion-button {
@@ -159,14 +168,5 @@
 
   .accordion-body {
     padding: 0;
-  }
-
-  @include media-breakpoint-down(xl) {
-    margin-right: 20px;
-  }
-
-  @include media-breakpoint-down(lg) {
-    margin: 0 0 40px;
-    max-width: 100%;
   }
 }

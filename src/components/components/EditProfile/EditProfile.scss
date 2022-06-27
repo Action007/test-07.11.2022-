@@ -9,6 +9,10 @@
   margin-bottom: 100px;
   max-width: 1514px;
 
+  @include media-breakpoint-down(lg) {
+    margin-bottom: 50px;
+  }
+
   &__wrapper {
     display: flex;
     justify-content: space-between;
@@ -56,18 +60,18 @@
     background-color: $primary;
     transition: all 0.3s ease;
 
-    &:hover {
-      border-color: $primary;
-      color: $primary;
-      background-color: #fff;
-    }
-
     @include media-breakpoint-down(lg) {
       margin-top: 31px;
     }
 
     @include media-breakpoint-down(sm) {
       max-width: 100%;
+    }
+
+    &:hover {
+      border-color: $primary;
+      color: $primary;
+      background-color: #fff;
     }
   }
 

@@ -3,23 +3,14 @@
 @import '../../../global-styles/_fonts.scss';
 
 .header {
+  padding: 0 34px;
+  width: 100%;
+
   @include media-breakpoint-down(md) {
     padding: 0 16px;
   }
 
-  padding: 0 34px;
-  width: 100%;
-
   .header__navbar {
-    @include media-breakpoint-down(xl) {
-      padding: 20px 0;
-    }
-
-    @include media-breakpoint-down(md) {
-      padding: 11px 0 0;
-      background-color: #fff;
-    }
-
     position: fixed;
     left: 50%;
     z-index: 1010;
@@ -30,6 +21,15 @@
     transform: translateX(-50%);
     transition: padding 0.3s ease;
 
+    @include media-breakpoint-down(xl) {
+      padding: 20px 0;
+    }
+
+    @include media-breakpoint-down(md) {
+      padding: 11px 0 0;
+      background-color: #fff;
+    }
+
     &.login {
       @include media-breakpoint-down(md) {
         padding: 16px 0 0;
@@ -37,11 +37,11 @@
     }
 
     &.scroll {
+      padding: 9px 0;
+
       @include media-breakpoint-down(md) {
         padding: 9px 0 0;
       }
-
-      padding: 9px 0;
 
       .header__inner {
         padding: 0 0 9px;
@@ -55,28 +55,34 @@
   }
 
   &__container {
-    @include media-breakpoint-down(md) {
-      padding: 0 16px !important;
-    }
-
     margin: 0;
     padding: 0 34px !important;
     max-width: 1614px;
 
-    &.scroll {
-      @include media-breakpoint-down(md) {
-        padding: 0 16px !important;
-      }
-
-      padding: 0 34px;
+    @include media-breakpoint-down(md) {
+      padding: 0 16px !important;
     }
 
     @include media-breakpoint-down(md) {
       padding: 0 16px !important;
     }
+
+    &.scroll {
+      padding: 0 34px;
+
+      @include media-breakpoint-down(md) {
+        padding: 0 16px !important;
+      }
+    }
   }
 
   &__wrap {
+    display: flex;
+    align-items: center;
+    order: 4;
+    border-top: 1px solid #f5f7fe;
+    width: 100%;
+
     @include media-breakpoint-down(md) {
       flex-direction: column;
       margin: 0 -16px;
@@ -84,11 +90,12 @@
       width: auto;
     }
 
-    display: flex;
-    align-items: center;
-    order: 4;
-    border-top: 1px solid #f5f7fe;
-    width: 100%;
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+      margin: 0 -16px;
+      padding-bottom: 7px;
+      width: auto;
+    }
 
     .networks {
       justify-content: start;
@@ -105,13 +112,6 @@
       @include media-breakpoint-down(md) {
         width: 112%;
       }
-    }
-
-    @include media-breakpoint-down(md) {
-      flex-direction: column;
-      margin: 0 -16px;
-      padding-bottom: 7px;
-      width: auto;
     }
   }
 
@@ -135,28 +135,34 @@
   }
 
   &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     @include media-breakpoint-down(md) {
       padding-bottom: 11px;
       width: 100%;
     }
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include media-breakpoint-down(md) {
+      padding-bottom: 11px;
+      width: 100%;
+    }
 
     &.login {
       @include media-breakpoint-down(md) {
         padding-bottom: 16px;
       }
     }
-
-    @include media-breakpoint-down(md) {
-      padding-bottom: 11px;
-      width: 100%;
-    }
   }
 
   &__logo {
+    display: block;
+    margin-right: 30px;
+    width: 100%;
+    height: 36px;
+    max-width: 161px;
+
     @include media-breakpoint-down(md) {
       order: 2;
       margin-right: 0;
@@ -169,12 +175,6 @@
       max-width: 89px;
     }
 
-    display: block;
-    margin-right: 30px;
-    width: 100%;
-    height: 36px;
-    max-width: 161px;
-
     img {
       width: 100%;
       height: 100%;
@@ -182,14 +182,18 @@
   }
 
   &__burger {
-    @include media-breakpoint-down(md) {
-      order: 1;
-    }
-
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
+
+    @include media-breakpoint-down(md) {
+      order: 1;
+    }
+
+    @include media-breakpoint-down(md) {
+      order: 1;
+    }
 
     .header__span {
       left: 18px;
@@ -199,13 +203,15 @@
     &:focus {
       box-shadow: none;
     }
-
-    @include media-breakpoint-down(md) {
-      order: 1;
-    }
   }
 
   &__progress {
+    margin-right: 17px;
+    width: 100%;
+    height: 20px;
+    max-width: 119px;
+    font-size: 12px;
+
     @include media-breakpoint-down(xl) {
       margin-left: auto;
     }
@@ -213,12 +219,6 @@
     @include media-breakpoint-down(lg) {
       margin-right: 14px;
     }
-
-    margin-right: 17px;
-    width: 100%;
-    height: 20px;
-    max-width: 119px;
-    font-size: 12px;
 
     span::before {
       left: 7px;
@@ -274,10 +274,6 @@
   }
 
   &__btn {
-    @include media-breakpoint-down(md) {
-      padding: 7px;
-    }
-
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -294,14 +290,22 @@
       transform: scale(0.96);
     }
 
-    svg {
-      @include media-breakpoint-down(md) {
-        margin-right: 0;
-      }
+    @include media-breakpoint-down(md) {
+      padding: 7px;
+    }
 
+    @include media-breakpoint-down(md) {
+      padding: 7px;
+    }
+
+    svg {
       margin-right: 11px;
       stroke: #fff;
       transition: stroke 0.3s ease;
+
+      @include media-breakpoint-down(md) {
+        margin-right: 0;
+      }
     }
 
     &:hover {
@@ -312,10 +316,6 @@
       svg {
         stroke: $primary;
       }
-    }
-
-    @include media-breakpoint-down(md) {
-      padding: 7px;
     }
   }
 
@@ -343,11 +343,11 @@
   }
 
   .search-input {
+    max-width: 672px;
+
     @include media-breakpoint-down(xl) {
       max-width: 100%;
     }
-
-    max-width: 672px;
   }
 
   &__buttons {
@@ -364,7 +364,9 @@
     height: 40px;
     max-width: 130px;
     font-size: 16px;
-    transition: background-color 0.3s ease, border-color 0.3s ease,
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
       color 0.3s ease;
 
     &:first-child {
@@ -376,6 +378,7 @@
       color: #fff;
       background-color: $primary;
     }
+
     &:hover {
       border-color: $primary;
       color: $primary;

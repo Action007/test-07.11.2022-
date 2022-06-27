@@ -11,6 +11,11 @@
   max-width: 834px;
   background-color: #fff;
 
+  @include media-breakpoint-down(sm) {
+    margin-bottom: 12px;
+    padding: 21px 19px 25px;
+  }
+
   &__title {
     margin-bottom: 21px;
     padding-right: 25px;
@@ -54,14 +59,6 @@
       margin-right: 25px;
     }
 
-    &:hover {
-      color: $primary;
-
-      svg {
-        stroke: $primary;
-      }
-    }
-
     &:first-child {
       svg {
         margin-left: 4px;
@@ -73,10 +70,13 @@
         stroke: $warning;
       }
     }
-  }
 
-  @include media-breakpoint-down(sm) {
-    margin-bottom: 12px;
-    padding: 21px 19px 25px;
+    &:hover {
+      color: $primary;
+
+      svg {
+        stroke: $primary;
+      }
+    }
   }
 }

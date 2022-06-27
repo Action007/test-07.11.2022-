@@ -105,6 +105,10 @@
     background-color: $secondary;
     transition: box-shadow 0.2s ease;
 
+    @include media-breakpoint-down(sm) {
+      margin: 0 0 0 21px;
+    }
+
     svg {
       width: 16px;
       height: 18px;
@@ -127,10 +131,6 @@
         fill: #fff;
         stroke: $primary;
       }
-    }
-
-    @include media-breakpoint-down(sm) {
-      margin: 0 0 0 21px;
     }
   }
 
@@ -194,6 +194,15 @@
     background-color: $primary;
     transition: all 0.3s ease;
 
+    @include media-breakpoint-down(sm) {
+      margin-right: 0;
+    }
+
+    @include media-breakpoint-down(sm) {
+      justify-content: center;
+      width: 100%;
+    }
+
     span {
       margin-right: 9px;
     }
@@ -213,27 +222,18 @@
         transform: translateX(3px);
       }
     }
-
-    @include media-breakpoint-down(sm) {
-      margin-right: 0;
-    }
-
-    @include media-breakpoint-down(sm) {
-      justify-content: center;
-      width: 100%;
-    }
   }
 
   &__tags {
     margin-bottom: 28px;
     transition: box-shadow 0.2s ease;
 
-    &.preview {
-      margin-bottom: -9px;
-    }
-
     @include media-breakpoint-down(sm) {
       margin-bottom: 15px;
+    }
+
+    &.preview {
+      margin-bottom: -9px;
     }
   }
 
@@ -243,10 +243,10 @@
     border: 1px solid rgb(101 193 126 / 40%);
     border-radius: 6px;
     padding: 2px 8px;
-    background-color: #fff;
-    transition: box-shadow 0.2s ease;
     word-break: break-word;
     text-align: left;
+    background-color: #fff;
+    transition: box-shadow 0.2s ease;
 
     &:not(:last-child) {
       margin-right: 9px;

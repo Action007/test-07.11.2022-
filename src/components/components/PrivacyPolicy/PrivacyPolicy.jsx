@@ -14,39 +14,16 @@ const PrivacyPolicy = () => {
     <section className="container policy pb-8">
       <div className="container-wrapper">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
-        <h2 className="title--margin display-4 text-center SFPro-600">
+        <h1 className="title--margin display-4 text-center SFPro-600">
           {translate("privacyPolicyPage.title")}
-        </h2>
+        </h1>
         <div className="policy__img mb-5 mx-auto">
           <PrivacyImg />
         </div>
+        <h2 className="sr-only">{translate("privacyPolicyPage.h2")}</h2>
         <h3 className="display-6 SFPro-600">
           {translate("privacyPolicyPage.section1.title")}
         </h3>
-        <span className="mb-4 d-block SFPro-300 display-7">
-          {translate("privacyPolicyPage.section1.subtitle")}
-        </span>
-        <p className="policy__text SFPro-300 display-7 mb-7">
-          {translate("privacyPolicyPage.section1.text")}
-        </p>
-        <h3 className="display-6 SFPro-600">
-          {translate("privacyPolicyPage.section2.title")}
-        </h3>
-        <span className="mb-4 d-block SFPro-300 display-7">
-          {translate("privacyPolicyPage.section2.subtitle")}
-        </span>
-        <p className="policy__text SFPro-300 display-7 mb-7">
-          {translate("privacyPolicyPage.section2.text")}
-        </p>
-        <h3 className="display-6 SFPro-600">
-          {translate("privacyPolicyPage.section3.title")}
-        </h3>
-        <span className="mb-4 d-block SFPro-300 display-7">
-          {translate("privacyPolicyPage.section3.subtitle")}
-        </span>
-        <p className="policy__text SFPro-300 display-7">
-          {translate("privacyPolicyPage.section3.text")}
-        </p>
       </div>
     </section>
   );
