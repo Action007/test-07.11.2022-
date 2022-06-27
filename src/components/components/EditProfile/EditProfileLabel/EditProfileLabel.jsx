@@ -33,7 +33,6 @@ const EditProfileInput = ({
           <input
             onChange={(e) => setValue(e.target.value)}
             value={value}
-            minLength="2"
             type="text"
             id={labelID}
           />

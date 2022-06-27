@@ -11,6 +11,7 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./EditProfile.scss";
 
 import { ReactComponent as EditProfileSvg } from "../../../assets/images/content/editProfile.svg";
+import audio from "../../../assets/sound/song.mp3";
 
 const EditProfile = () => {
   const user = useSelector((state) => state.authSliceReducer.user);
@@ -33,8 +34,10 @@ const EditProfile = () => {
     twitter: true,
   });
   const { ref, show, setShowHandler } = useClickOutside();
-  const [editAccount, { isLoading: isUpdateLoading, error }] =
-    checklistAPI.useEditAccountMutation();
+  const [
+    editAccount,
+    { isSuccess: successEdit, isLoading: isUpdateLoading, error },
+  ] = checklistAPI.useEditAccountMutation();
   const { data: countryNames, isLoading } =
     checklistAPI.useFetchCountryNamesQuery("", {
       skip: !show,
@@ -44,9 +47,14 @@ const EditProfile = () => {
     { title: translate("profilePage.myProfile"), link: "/my-profile" },
     { title: translate("editProfilePage.editProfile") },
   ];
+  const [showPopupSave, setShowPopupSave] = useState("");
+  const [showPopupError, setShowPopupError] = useState("");
+  const song = new Audio(audio);
+  song.volume = 0.1;
 
   useEffect(() => {
     if (!error) return;
+
     const invalidLinks = {
       website: true,
       facebook: true,
@@ -68,8 +76,10 @@ const EditProfile = () => {
         invalidLinks.twitter = false;
       }
     });
-
     setIsLinksInValid(invalidLinks);
+    setShowPopupError(" show");
+    setShowPopupSave("");
+    setTimeout(() => setShowPopupError(""), 5000);
   }, [error]);
 
   useEffect(() => {
@@ -85,7 +95,7 @@ const EditProfile = () => {
   }, [user]);
 
   const onChangeNameHandler = (value) => {
-    const name = value.length < 151 && value.trim().length > 0;
+    const name = value.length < 51 && value.trim().length > 1;
     setNameValue(value);
     setIsNameValid(name);
 
@@ -93,7 +103,7 @@ const EditProfile = () => {
   };
 
   const onChangeNickNameHandler = (value) => {
-    const nickName = value.length < 51 && value.trim().length > 0;
+    const nickName = value.length < 51 && value.trim().length > 1;
     setNickNameValue(value);
     setIsNickNameValid(nickName);
     setIsNicknameServerValid(null);
@@ -113,6 +123,34 @@ const EditProfile = () => {
     setCountry(name);
     setShowHandler();
   };
+
+  useEffect(() => {
+    console.log(isLinksInValid);
+    if (
+      !isNameValid ||
+      !isNickNameValid ||
+      !isBioValid ||
+      !isLinksInValid.website ||
+      !isLinksInValid.facebook ||
+      !isLinksInValid.instagram ||
+      !isLinksInValid.twitter
+    ) {
+      setShowPopupError(" show");
+      setShowPopupSave("");
+    }
+    if (
+      isNameValid &&
+      isNickNameValid &&
+      isBioValid &&
+      isLinksInValid.website &&
+      isLinksInValid.facebook &&
+      isLinksInValid.instagram &&
+      isLinksInValid.twitter &&
+      !error
+    ) {
+      setShowPopupError("");
+    }
+  }, [isNameValid, isNickNameValid, isBioValid, isLinksInValid, error]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -153,11 +191,41 @@ const EditProfile = () => {
     }
   };
 
+  useEffect(() => {
+    let setClassSucces;
+    if (successEdit && !error) {
+      setShowPopupSave(" show");
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+      song.play();
+      setClassSucces = setTimeout(() => setShowPopupSave(""), 5000);
+    }
+    return () => {
+      clearTimeout(setClassSucces);
+    };
+  }, [successEdit, error]);
+
   return (
     <>
       <LoadingSpinnerPopup showSpinner={isUpdateLoading} />
-      <div className="edit-profile container">
+      {showPopupError ? (
+        <div className="edit-profile__popup error SFPro-500">
+          There was a problem updating your profile
+        </div>
+      ) : null}
+      {showPopupSave ? (
+        <div className="edit-profile__popup succes SFPro-500">
+          Profile updated successfully
+        </div>
+      ) : null}
+      <div
+        className={`edit-profile container ${showPopupSave} ${showPopupError}`}
+      >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
+
         <div className="edit-profile__wrapper">
           <form
             onSubmit={(e) => onSubmitHandler(e)}
@@ -165,7 +233,7 @@ const EditProfile = () => {
           >
             <EditProfileInput
               isInvalid={!isNameValid}
-              invalidText={translate("editProfilePage.max")}
+              invalidText={translate("editProfilePage.maxNickname")}
               title={translate("editProfilePage.name")}
               setValue={onChangeNameHandler}
               value={nameValue}
@@ -233,6 +301,7 @@ const EditProfile = () => {
               setValue={setTwitterValue}
               value={twitterValue}
             />
+
             <button className="edit-profile__submit SFPro-600" type="submit">
               {translate("editProfilePage.button")}
             </button>

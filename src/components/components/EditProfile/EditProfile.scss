@@ -1,9 +1,13 @@
 @import "../../../global-styles/_variables.scss";
 @import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
+.show {
+  margin-top: 0px;
+}
+
 .edit-profile {
   margin-bottom: 100px;
-  max-width: 1112px;
+  max-width: 1514px;
 
   &__wrapper {
     display: flex;
@@ -67,6 +71,12 @@
     }
   }
 
+  &__svg {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   &__title--one,
   &__title--two {
     &::after {
@@ -80,4 +90,25 @@
   @include media-breakpoint-down(lg) {
     margin-bottom: 50px;
   }
+
+  &__popup {
+    width: 100vw !important;
+    height: 30px;
+    font-size: 16px;
+    line-height: 19px;
+    color: #ffffff;
+    background: $primary;
+    margin-top: 116px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include media-breakpoint-down(xl) {
+      margin-top: 20px;
+    }
+  }
 }
+
+.error{
+	background: $warning;
+  }
