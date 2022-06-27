@@ -12,14 +12,14 @@
     width: 100%;
     max-width: 571px;
 
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-
     @include media-breakpoint-down(sm) {
       margin-bottom: 51px;
       max-width: 223px;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
     }
   }
 

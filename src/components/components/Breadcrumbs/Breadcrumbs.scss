@@ -7,8 +7,17 @@
   padding: 42px 0 50px;
   font-size: 14px;
 
+  @include media-breakpoint-down(sm) {
+    padding: 16px 0 26px;
+    font-size: 12px;
+  }
+
   &__item {
     margin-right: 20px;
+
+    @include media-breakpoint-down(sm) {
+      margin-right: 14px;
+    }
 
     a {
       color: $dark;
@@ -38,14 +47,5 @@
         stroke: $primary;
       }
     }
-
-    @include media-breakpoint-down(sm) {
-      margin-right: 14px;
-    }
-  }
-
-  @include media-breakpoint-down(sm) {
-    padding: 16px 0 26px;
-    font-size: 12px;
   }
 }

@@ -11,6 +11,10 @@
   width: 100%;
   background-color: #fff;
 
+  @include media-breakpoint-down(sm) {
+    padding: 9px;
+  }
+
   &__search {
     position: relative;
     width: 250px;
@@ -62,9 +66,5 @@
 
   &.invalid {
     border-color: $warning;
-  }
-
-  @include media-breakpoint-down(sm) {
-    padding: 9px;
   }
 }

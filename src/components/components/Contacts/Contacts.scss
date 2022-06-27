@@ -9,6 +9,18 @@
       flex-direction: column-reverse;
     }
   }
+  
+  &__link {
+    display: block;
+    max-width: 210px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__tel {
+    display: flex;
+    justify-content: center;
+  }
 
   .networks {
     margin-bottom: 62px;
@@ -19,15 +31,15 @@
     height: 500px;
     max-width: 500px;
 
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-
     @include media-breakpoint-down(sm) {
       width: 100%;
       height: 226px;
       max-width: 226px;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
     }
   }
 }

@@ -88,18 +88,18 @@
     background-color: $primary;
     transition: all 0.3s ease;
 
-    &:hover {
-      border-color: $primary;
-      color: $primary;
-      background-color: #fff;
-    }
-
     @include media-breakpoint-down(lg) {
       margin-top: 12px;
     }
 
     @include media-breakpoint-down(sm) {
       max-width: 100%;
+    }
+
+    &:hover {
+      border-color: $primary;
+      color: $primary;
+      background-color: #fff;
     }
   }
 }

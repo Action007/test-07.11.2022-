@@ -8,6 +8,10 @@
   max-width: 834px;
   background-color: #fff;
 
+  @include media-breakpoint-down(sm) {
+    padding: 17px 19px 12px;
+  }
+
   &__wrap {
     display: flex;
     justify-content: space-between;
@@ -50,9 +54,5 @@
     height: 100%;
     color: #fff;
     background-color: $primary;
-  }
-
-  @include media-breakpoint-down(sm) {
-    padding: 17px 19px 12px;
   }
 }

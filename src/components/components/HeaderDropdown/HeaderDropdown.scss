@@ -10,6 +10,10 @@
   margin-right: 26px;
   color: $primary;
 
+  @include media-breakpoint-down(md) {
+    margin-right: 0;
+  }
+
   &__button {
     position: relative;
     display: flex;
@@ -19,6 +23,13 @@
     height: 52px;
     color: $dark;
     background-color: #fff;
+
+    @include media-breakpoint-down(md) {
+      margin: 20px 0 10px;
+      padding: 6px 0;
+      width: 100%;
+      background-color: $body;
+    }
 
     &::after {
       content: "";
@@ -46,13 +57,6 @@
 
     &.show::after {
       transform: rotate(0deg);
-    }
-
-    @include media-breakpoint-down(md) {
-      margin: 20px 0 10px;
-      padding: 6px 0;
-      width: 100%;
-      background-color: $body;
     }
   }
 
@@ -96,6 +100,10 @@
     background-color: #fff;
     transition: max-height 0.3s ease;
 
+    @include media-breakpoint-down(md) {
+      padding: 0;
+    }
+
     svg {
       margin-right: 20px;
     }
@@ -115,10 +123,6 @@
         }
       }
     }
-
-    @include media-breakpoint-down(md) {
-      padding: 0;
-    }
   }
 
   &__inner {
@@ -128,14 +132,14 @@
     padding: 10px 19px 10px 26px;
     width: 100%;
 
+    @include media-breakpoint-down(md) {
+      border-top: 1px solid #f5f7fe;
+    }
+
     &:hover {
       border-color: transparent;
       color: $primary;
       background-color: #4f4f4f11;
-    }
-
-    @include media-breakpoint-down(md) {
-      border-top: 1px solid #f5f7fe;
     }
   }
 
@@ -150,6 +154,10 @@
     max-width: 156px;
     font-size: 16px;
 
+    @include media-breakpoint-down(md) {
+      font-size: 14px;
+    }
+
     span::before {
       left: 9px;
       width: 9px;
@@ -159,10 +167,6 @@
         left: 15px;
       }
     }
-
-    @include media-breakpoint-down(md) {
-      font-size: 14px;
-    }
   }
 
   &__item {
@@ -170,6 +174,10 @@
     width: 100%;
     text-align: left;
     color: $dark;
+
+    @include media-breakpoint-down(md) {
+      padding: 9px 26px;
+    }
 
     &:not(:last-child) {
       border-bottom: 2px solid #4f4f4f11;
@@ -186,10 +194,6 @@
     &:hover {
       color: $dark;
       background-color: #4f4f4f11;
-    }
-
-    @include media-breakpoint-down(md) {
-      padding: 9px 26px;
     }
   }
 
@@ -219,10 +223,6 @@
   &.mobile {
     flex-direction: column;
     width: 100%;
-  }
-
-  @include media-breakpoint-down(md) {
-    margin-right: 0;
   }
 }
 

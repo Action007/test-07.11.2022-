@@ -194,6 +194,10 @@
     max-width: 67px;
     font-size: 22px;
 
+    @include media-breakpoint-down(sm) {
+      margin-right: 5px;
+    }
+
     svg {
       margin-right: 8px;
       width: 16px;
@@ -202,10 +206,6 @@
 
     &.invalid {
       color: $warning;
-    }
-
-    @include media-breakpoint-down(sm) {
-      margin-right: 5px;
     }
   }
 

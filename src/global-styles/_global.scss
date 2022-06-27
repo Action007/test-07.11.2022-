@@ -179,14 +179,14 @@ p {
     transform: scale(0.96);
   }
 
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+  }
+
   &:hover {
     border-color: $primary;
     color: $primary;
     background-color: #fff;
-  }
-
-  @include media-breakpoint-down(sm) {
-    width: 100%;
   }
 }
 

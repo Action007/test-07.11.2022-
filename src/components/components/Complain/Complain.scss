@@ -65,17 +65,21 @@
     font-size: 16px;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
+
     &:first-child {
       margin-right: 8px;
       background-color: #f2f2f2;
 
+      @include media-breakpoint-down(md) {
+        margin: 0 0 11px;
+      }
+
       &:hover {
         border-color: $dark;
         background-color: #fff;
-      }
-
-      @include media-breakpoint-down(md) {
-        margin: 0 0 11px;
       }
     }
 
@@ -88,10 +92,6 @@
         color: $primary;
         background-color: #fff;
       }
-    }
-
-    @include media-breakpoint-down(md) {
-      width: 100%;
     }
   }
 
@@ -141,12 +141,12 @@
     line-height: 1;
     background-color: var(--base-color);
 
-    &:not(:last-child) {
-      margin-bottom: 8px;
-    }
-
     @include media-breakpoint-down(sm) {
       height: 22px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 8px;
     }
   }
 

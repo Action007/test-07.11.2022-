@@ -10,6 +10,10 @@
   max-width: 834px;
   background-color: #fff;
 
+  @include media-breakpoint-down(sm) {
+    padding: 30px 19px;
+  }
+
   &:not(:last-child) {
     margin-bottom: 25px;
 
@@ -149,10 +153,6 @@
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-direction: var(--animation-direction);
-  }
-
-  @include media-breakpoint-down(sm) {
-    padding: 30px 19px;
   }
 
   @keyframes react-loading-skeleton {

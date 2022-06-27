@@ -379,14 +379,14 @@
     }
   },
   "contactsPage": {
-    "title": "Contacts",
-    "companyName": "LCC “PROXYONE”",
+    "title": "Contact information",
+    "companyName": "“PROXYONE” LLC",
     "address": "Address:",
-    "addressText": "Minsk, Kalvariyskaya 33",
+    "addressText": "Poland, Poznan 61-129, Malachowskiego 8 / P1",
     "numbers": "Phone numbers:",
     "email": "Email:",
     "hours": "Working hours:",
-    "days": "Mon-Fri: 10:00-19:00",
+    "days": "Mon-Fri: 10:00-19:00(GMT+2)",
     "button": "Write email"
   },
   "popularChecklistPage": {

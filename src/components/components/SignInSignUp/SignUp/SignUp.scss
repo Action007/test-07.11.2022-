@@ -7,6 +7,16 @@
   height: 780px;
   max-width: 585px;
 
+  @include media-breakpoint-down(lg) {
+    padding-bottom: 90px;
+    height: inherit;
+    max-width: 100%;
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 40px 0;
+  }
+
   &__buttons {
     display: flex;
     align-items: center;
@@ -31,6 +41,10 @@
     max-width: 253px;
     background-color: #fff;
 
+    @include media-breakpoint-down(lg) {
+      max-width: 100%;
+    }
+
     &:first-child {
       border-right: none;
       border-radius: 6px;
@@ -48,10 +62,6 @@
       color: #fff;
       background-color: $primary;
     }
-
-    @include media-breakpoint-down(lg) {
-      max-width: 100%;
-    }
   }
 
   &__img {
@@ -61,10 +71,6 @@
     width: 100%;
     max-width: 465px;
 
-    svg {
-      width: 100%;
-    }
-
     @include media-breakpoint-down(lg) {
       margin: 40px auto;
     }
@@ -73,6 +79,10 @@
       margin: 45px auto;
       height: 168px;
       max-width: 165px;
+    }
+
+    svg {
+      width: 100%;
     }
   }
 
@@ -209,15 +219,5 @@
       color: $primary;
       background-color: #fff;
     }
-  }
-
-  @include media-breakpoint-down(lg) {
-    padding-bottom: 90px;
-    height: inherit;
-    max-width: 100%;
-  }
-
-  @include media-breakpoint-down(md) {
-    padding: 40px 0;
   }
 }
