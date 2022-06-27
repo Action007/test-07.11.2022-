@@ -33,7 +33,7 @@ const TermOfUse = () => {
             target="_blank"
             rel="noreferrer"
           >
-            https://checklests.com/
+            {window.location.hostname}
           </a>
           {translate("termOfUsePage.section1.text.part2")}
         </p>
