@@ -7,13 +7,18 @@ import { ReactComponent as RightArrow } from "../../../assets/images/icon/right-
 
 const Breadcrumbs = ({ breadcrumbs }) => {
   const { t: translate } = useTranslation();
+  const items = breadcrumbs.map((breadcrumb) =>
+    breadcrumb.title.length > 25
+      ? { ...breadcrumb, title: `${breadcrumb.title.substring(0, 26)}...` }
+      : breadcrumb
+  );
 
   return (
     <ul className="breadcrumbs">
       <li className="breadcrumbs__item">
         <Link to="/">{translate("home")}</Link>
       </li>
-      {breadcrumbs.map((breadcrumb) => (
+      {items.map((breadcrumb) => (
         <li key={breadcrumb.title} className="breadcrumbs__item">
           <RightArrow />
           {breadcrumb.link ? (
