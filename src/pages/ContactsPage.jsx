@@ -13,10 +13,14 @@ const ContactsPage = () => {
   return (
     <>
       <Helmet>
-        <title>{translate("contactsPage.title")}</title>
-        <meta property="og:title" content="Contacts" />
+        <title>{translate("seo.contacts.title")}</title>
+        <meta property="og:title" content={translate("seo.contacts.title")} />
         <meta property="og:url" content={API_KEY + pathname} />
-        <meta name="description" content="Contacts" />
+        <meta name="description" content={translate("seo.contacts.desc")} />
+        <meta
+          property="og:description"
+          content={translate("seo.contacts.desc")}
+        />
       </Helmet>
       <Contacts />
     </>

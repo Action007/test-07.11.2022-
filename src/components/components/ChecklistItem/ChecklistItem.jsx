@@ -45,7 +45,11 @@ const ChecklistItem = ({ description, list_type, value, preview }) => {
         </>
       )}
       {list_type === "image" && (
-        <ChecklistImage image={value.image} preview={preview} />
+        <ChecklistImage
+          image={value.image}
+          alt={description}
+          preview={preview}
+        />
       )}
     </li>
   );

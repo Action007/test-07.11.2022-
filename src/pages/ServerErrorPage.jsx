@@ -13,10 +13,11 @@ const ServerErrorPage = () => {
   return (
     <>
       <Helmet>
-        <title>{translate("error.error")}</title>
-        <meta property="og:title" content="Server Error" />
+        <title>{translate("seo.error.title")}</title>
+        <meta property="og:title" content={translate("seo.error.title")} />
         <meta property="og:url" content={API_KEY + pathname} />
-        <meta name="description" content="Server Error" />
+        <meta name="description" content={translate("seo.error.desc")} />
+        <meta property="og:description" content={translate("seo.error.desc")} />
       </Helmet>
       <ServerError />
     </>

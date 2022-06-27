@@ -13,10 +13,14 @@ const TermsOfUsePage = () => {
   return (
     <>
       <Helmet>
-        <title>{translate("termOfUsePage.title")}</title>
-        <meta property="og:title" content="Term of use" />
+        <title>{translate("seo.termsOfUse.title")}</title>
+        <meta property="og:title" content={translate("seo.termsOfUse.title")} />
         <meta property="og:url" content={API_KEY + pathname} />
-        <meta name="description" content="Term of use" />
+        <meta name="description" content={translate("seo.termsOfUse.desc")} />
+        <meta
+          property="og:description"
+          content={translate("seo.termsOfUse.desc")}
+        />
       </Helmet>
       <TermsOfUse />
     </>

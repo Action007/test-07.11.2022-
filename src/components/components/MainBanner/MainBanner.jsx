@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "../../../hooks/useMediaQuery";
@@ -10,14 +10,13 @@ import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 const MainBanner = () => {
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const { t: translate } = useTranslation();
-  const ref = useRef(null);
 
   return (
-    <div className="main-banner" ref={ref}>
+    <section className="main-banner">
       <div className="main-banner__wrap">
-        <h2 className="main-banner__title SFPro-600">
+        <h1 className="main-banner__title SFPro-600">
           {translate("mainPage.title")}
-        </h2>
+        </h1>
         {showOnMobile && (
           <div className="main-banner__img">
             <BannerImage />
@@ -32,7 +31,7 @@ const MainBanner = () => {
           <BannerImage />
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

@@ -19,29 +19,75 @@ const SignUpPage = () => {
 
   return (
     <>
-      <Helmet>
-        {pathname === "/sign-in" && <title>{translate("login.signIn")}</title>}
-        {pathname === "/sign-in" && (
-          <meta name="description" content="Sign In" />
-        )}
-        {pathname === "/sign-up" && <title>{translate("login.signUp")}</title>}
-        {pathname === "/sign-up" && (
-          <meta name="description" content="Sign Up" />
-        )}
-        {pathname === "/sign-in/reset-password" && (
-          <title>{translate("login.title4")}</title>
-        )}
-        {pathname === "/sign-in/reset-password" && (
-          <meta name="description" content="Reset Password" />
-        )}
-        {pathname === "/sign-in/reset" && (
-          <title>{translate("login.forgot")}</title>
-        )}
-        {pathname === "/sign-in/reset" && (
-          <meta name="description" content="Forgot Password" />
-        )}
-        <meta property="og:url" content={API_KEY + pathname} />
-      </Helmet>
+      {pathname === "/sign-in" && (
+        <Helmet>
+          <title>
+            {translate("login.signIn")} | {translate("seo.signIn.title")}
+          </title>
+          <meta property="og:title" content={translate("seo.signIn.title")} />
+          <meta name="description" content={translate("seo.signIn.desc")} />
+          <meta
+            property="og:description"
+            content={translate("seo.signIn.desc")}
+          />
+          <meta property="og:url" content={API_KEY + pathname} />
+        </Helmet>
+      )}
+      {pathname === "/sign-up" && (
+        <Helmet>
+          <title>
+            {translate("login.signUp")} | {translate("seo.signUp.title")}
+          </title>
+          <meta name="description" content={translate("seo.signUp.desc")} />
+          <meta property="og:title" content={translate("seo.signUp.title")} />
+          <meta
+            property="og:description"
+            content={translate("seo.signUp.desc")}
+          />
+          <meta property="og:url" content={API_KEY + pathname} />
+        </Helmet>
+      )}
+      {pathname === "/sign-in/reset" && (
+        <Helmet>
+          <title>
+            {translate("login.forgot")} | {translate("seo.signInReset.title")}
+          </title>
+          <meta
+            property="og:title"
+            content={translate("seo.signInReset.title")}
+          />
+          <meta
+            name="description"
+            content={translate("seo.signInReset.desc")}
+          />
+          <meta
+            property="og:description"
+            content={translate("seo.signInReset.desc")}
+          />
+          <meta property="og:url" content={API_KEY + pathname} />
+        </Helmet>
+      )}
+      {pathname === "/sign-in/reset-password" && (
+        <Helmet>
+          <title>
+            {translate("login.title4")} |{" "}
+            {translate("seo.signInResetPassword.title")}
+          </title>
+          <meta
+            property="og:title"
+            content={translate("seo.signInResetPassword.title")}
+          />
+          <meta
+            name="description"
+            content={translate("seo.signInResetPassword.desc")}
+          />
+          <meta
+            property="og:description"
+            content={translate("seo.signInResetPassword.desc")}
+          />
+          <meta property="og:url" content={API_KEY + pathname} />
+        </Helmet>
+      )}
       <SignInSignUp pathname={pathname} />
     </>
   );

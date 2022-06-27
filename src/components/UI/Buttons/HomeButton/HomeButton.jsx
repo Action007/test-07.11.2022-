@@ -8,7 +8,7 @@ const HomeButton = () => {
 
   return (
     <button
-      onClick={() => navigate(`/`)}
+      onClick={() => navigate("/")}
       className="checklist-button SFPro-600"
       type="button"
     >

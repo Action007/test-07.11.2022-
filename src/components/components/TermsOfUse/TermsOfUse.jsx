@@ -10,7 +10,7 @@ const TermOfUse = () => {
   const breadcrumbs = [{ title: translate("termOfUsePage.title") }];
 
   return (
-    <div className="container term pb-8">
+    <section className="container term pb-8">
       <div className="container-wrapper">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <h2 className="title--margin display-4 text-center SFPro-600">
@@ -410,7 +410,7 @@ const TermOfUse = () => {
           {translate("termOfUsePage.section27.text.email")}
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 

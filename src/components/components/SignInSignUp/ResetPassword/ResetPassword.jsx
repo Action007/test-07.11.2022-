@@ -36,9 +36,9 @@ const ResetPassword = () => {
           <LoginSvg />
         </div>
       )}
-      <h2 className="reset-password__head SFPro-600">
+      <h1 className="reset-password__head SFPro-600">
         {translate("login.title4")}
-      </h2>
+      </h1>
       <form onSubmit={(e) => submitHandler(e)} className="reset-password__form">
         <label
           className={`reset-password__label${

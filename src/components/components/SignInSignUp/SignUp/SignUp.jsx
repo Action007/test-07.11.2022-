@@ -81,7 +81,7 @@ const SignUp = () => {
           <LoginSvg />
         </div>
       )}
-      <h2 className="sign-up__title SFPro-600">{translate("login.title2")}</h2>
+      <h1 className="sign-up__title SFPro-600">{translate("login.title2")}</h1>
       <form onSubmit={submitHandler} className="sign-up__form">
         <label
           className={`sign-up__label${

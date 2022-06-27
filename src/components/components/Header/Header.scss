@@ -1,6 +1,6 @@
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
-@import "../../../global-styles/_variables.scss";
-@import "../../../global-styles/_fonts.scss";
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import '../../../global-styles/_variables.scss';
+@import '../../../global-styles/_fonts.scss';
 
 .header {
   @include media-breakpoint-down(md) {
@@ -239,7 +239,11 @@
     height: 52px;
     max-width: 52px;
     background-color: #fff;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.09s ease;
+
+    &:active {
+      transform: scale(0.96);
+    }
 
     svg {
       stroke: $primary;
@@ -263,7 +267,7 @@
     padding: 2px 3px;
     min-width: 18px;
     min-height: 10px;
-    font-family: "SFPro-SemiBold", sans-serif;
+    font-family: 'SFPro-SemiBold', sans-serif;
     font-size: 9px;
     color: #fff;
     background-color: $warning;
@@ -280,12 +284,15 @@
     order: 3;
     border: 1px solid $primary;
     padding: 13px 27px 13px 19px;
-    font-family: "SFPro-SemiBold", sans-serif;
+    font-family: 'SFPro-SemiBold', sans-serif;
     font-size: 16px;
     color: #fff;
     background-color: $primary;
-    transition: background-color 0.3s ease, border-color 0.3s ease,
-      color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.09s ease;
+
+    &:active {
+      transform: scale(0.96);
+    }
 
     svg {
       @include media-breakpoint-down(md) {

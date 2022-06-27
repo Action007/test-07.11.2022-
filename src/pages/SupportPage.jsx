@@ -13,10 +13,14 @@ const SupportPage = () => {
   return (
     <>
       <Helmet>
-        <title>{translate("supportPage.title")}</title>
-        <meta property="og:title" content="Support" />
+        <title>{translate("seo.support.title")}</title>
+        <meta property="og:title" content={translate("seo.support.title")} />
         <meta property="og:url" content={API_KEY + pathname} />
-        <meta name="description" content="Support" />
+        <meta name="description" content={translate("seo.support.desc")} />
+        <meta
+          property="og:description"
+          content={translate("seo.support.desc")}
+        />
       </Helmet>
       <Support />
     </>

@@ -13,10 +13,14 @@ const OurMissionPage = () => {
   return (
     <>
       <Helmet>
-        <title>{translate("ourMissionPage.title")}</title>
-        <meta property="og:title" content="Our mission" />
+        <title>{translate("seo.ourMission.title")}</title>
+        <meta property="og:title" content={translate("seo.ourMission.title")} />
         <meta property="og:url" content={API_KEY + pathname} />
-        <meta name="description" content="Our mission" />
+        <meta name="description" content={translate("seo.ourMission.desc")} />
+        <meta
+          property="og:description"
+          content={translate("seo.ourMission.desc")}
+        />
       </Helmet>
       <OurMission />
     </>

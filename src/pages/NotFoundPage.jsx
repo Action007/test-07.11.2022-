@@ -12,10 +12,14 @@ const NotFoundPage = () => {
 
   <>
     <Helmet>
-      <title>{translate("error.notFound")}</title>
-      <meta property="og:title" content="Page Not Found" />
+      <title>{translate("seo.notFound.title")}</title>
+      <meta property="og:title" content={translate("seo.notFound.title")} />
       <meta property="og:url" content={API_KEY + pathname} />
-      <meta name="description" content="Page Not Found" />
+      <meta name="description" content={translate("seo.notFound.desc")} />
+      <meta
+        property="og:description"
+        content={translate("seo.notFound.desc")}
+      />
     </Helmet>
     <NotFound />
   </>;

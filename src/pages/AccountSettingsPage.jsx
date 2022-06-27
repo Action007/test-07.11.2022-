@@ -18,6 +18,7 @@ const AccountSettingsPage = () => {
     <>
       <Helmet>
         <title>{translate("accountSettings.title")}</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <AccountSetting />
     </>
