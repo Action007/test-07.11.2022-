@@ -1,6 +1,6 @@
-@import "../../../../global-styles/_variables.scss";
-@import "../../../../global-styles/_mixins.scss";
-@import "../../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../../global-styles/_variables.scss';
+@import '../../../../global-styles/_mixins.scss';
+@import '../../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .profile-info {
   @include media-breakpoint-down(md) {
@@ -19,6 +19,32 @@
   width: 100%;
   max-width: 1044px;
   background-color: #fff;
+
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
+
+  @include media-breakpoint-down(md) {
+    padding: 28px 23px;
+  }
+
+  &__onload {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 27px;
+    height: 27px;
+    cursor: pointer;
+  }
+
+  &__input {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 27px;
+    height: 27px;
+    opacity: 0;
+  }
 
   &__inner {
     @include media-breakpoint-down(md) {
@@ -62,6 +88,7 @@
     width: 100%;
     height: 105px;
     max-width: 105px;
+    cursor: pointer;
 
     svg {
       position: absolute;
@@ -91,6 +118,7 @@
     img {
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
 
     svg {

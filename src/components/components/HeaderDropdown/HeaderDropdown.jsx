@@ -8,7 +8,7 @@ import useClickOutside from "../../../hooks/useClickOutside";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import PopupLogout from "../PopupLogout/PopupLogout";
-import Profile from "../../../assets/images/content/profile.png";
+import EmptySvg from "../../../assets/images/icon/emptyPhoto.svg";
 import "./HeaderDropdown.scss";
 
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
@@ -32,7 +32,6 @@ const HeaderDropdown = ({ setShow }) => {
   useEffect(() => {
     if (accountInfo) {
       const { completed_counter, active_checklists_counter } = accountInfo;
-
       dispatch(authSliceActions.setUser(accountInfo));
       dispatch(
         authSliceActions.setPercentActiveChecklist({
@@ -77,7 +76,12 @@ const HeaderDropdown = ({ setShow }) => {
             type="button"
           >
             <div className="header-dropdown__img">
-              <img src={Profile} alt="account" />
+              {user ? (
+                <img
+                  src={user.avatar_url ? user.avatar_url : EmptySvg}
+                  alt="account"
+                />
+              ) : null}
             </div>
             <span className="header-dropdown__name">
               {user ? user.nickname : ""}

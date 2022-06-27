@@ -91,12 +91,17 @@ const CreationChecklistItem = ({
   };
 
   const onUpdateImageHandler = (event) => {
-    dispatch(
-      createChecklistActions.addImage({
-        id,
-        image: URL.createObjectURL(event.target.files[0]),
-      })
-    );
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = () => {
+      const images = reader.result;
+      dispatch(
+        createChecklistActions.addImage({
+          id,
+          image: images,
+        })
+      );
+    };
   };
 
   const selectImg = (
