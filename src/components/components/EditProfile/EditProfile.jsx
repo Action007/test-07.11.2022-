@@ -125,7 +125,6 @@ const EditProfile = () => {
   };
 
   useEffect(() => {
-    console.log(isLinksInValid);
     if (
       !isNameValid ||
       !isNickNameValid ||
