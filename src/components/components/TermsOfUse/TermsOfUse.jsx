@@ -7,10 +7,7 @@ import { ReactComponent as Example } from "../../../assets/images/content/terms-
 
 const TermOfUse = () => {
   const { t: translate } = useTranslation();
-
   const breadcrumbs = [{ title: translate("termOfUsePage.title") }];
-
-  const url = window.location.hostname;
 
   return (
     <div className="container term pb-8">
@@ -30,7 +27,12 @@ const TermOfUse = () => {
         </span>
         <p className="term__text SFPro-300 display-7 ">
           {translate("termOfUsePage.section1.text.part1")}
-          <a className="term__link" href={url} target="_blank" rel="noreferrer">
+          <a
+            className="term__link"
+            href={window.location.origin}
+            target="_blank"
+            rel="noreferrer"
+          >
             https://checklests.com/
           </a>
           {translate("termOfUsePage.section1.text.part2")}
@@ -389,36 +391,23 @@ const TermOfUse = () => {
         <h3 className="display-6 SFPro-600">
           {translate("termOfUsePage.section27.title")}
         </h3>
-        <span className="mb-4 d-block SFPro-300 display-7">
-          {translate("termOfUsePage.section27.subtitle")}
-        </span>
-        <p className="term__text SFPro-300 display-7 mb-7">
+        <p className="term__text SFPro-300 display-7">
           {translate("termOfUsePage.section27.text.part1")}
         </p>
-
-        <h3 className="display-6 SFPro-600">
-          {translate("termOfUsePage.section28.title")}
-        </h3>
-        <p className="term__text SFPro-300 display-7">
-          {translate("termOfUsePage.section28.text.part1")}
+        <p className="term SFPro-500 display-7 ">
+          {translate("termOfUsePage.section27.text.companyName")}
         </p>
         <p className="term SFPro-500 display-7 ">
-          {translate("termOfUsePage.section28.text.companyName")}
+          {translate("termOfUsePage.section27.text.address")}
         </p>
         <p className="term SFPro-500 display-7 ">
-          {translate("termOfUsePage.section28.text.address")}
+          {translate("termOfUsePage.section27.text.addressCity")}
         </p>
         <p className="term SFPro-500 display-7 ">
-          {translate("termOfUsePage.section28.text.addressCity")}
-        </p>
-        <p className="term SFPro-500 display-7 ">
-          {translate("termOfUsePage.section28.text.country")}
-        </p>
-        <p className="term SFPro-500 display-7 ">
-          {translate("termOfUsePage.section28.text.phone")}
+          {translate("termOfUsePage.section27.text.phone")}
         </p>
         <p className="term__text SFPro-500 display-7 ">
-          {translate("termOfUsePage.section28.text.email")}
+          {translate("termOfUsePage.section27.text.email")}
         </p>
       </div>
     </div>
