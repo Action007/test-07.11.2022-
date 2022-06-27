@@ -20,6 +20,7 @@ const ActiveChecklistPage = () => {
     <>
       <Helmet>
         <title>{checklist && checklist.entities.name}</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <ActiveChecklist checklist={checklist} isLoading={isLoading} />
     </>

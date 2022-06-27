@@ -124,7 +124,7 @@ const CreationChecklistItem = ({
   const ImgSelected = list_type === "image" && value?.image && (
     <>
       <div className="creation-item__img">
-        <img src={value.image} alt="" />
+        <img src={URL.createObjectURL(value.image)} alt={description} />
         <button
           onClick={() => dispatch(createChecklistActions.removeImage(id))}
           className="creation-item__remove"
@@ -151,7 +151,7 @@ const CreationChecklistItem = ({
           <Modal.Title id="contained-modal-title-vcenter" />
         </Modal.Header>
         <Modal.Body>
-          <img src={value.image} alt="" />
+          <img src={value.image} alt={description} />
         </Modal.Body>
       </Modal>
     </>

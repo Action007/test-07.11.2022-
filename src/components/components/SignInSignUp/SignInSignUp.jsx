@@ -13,7 +13,7 @@ const SignInSignUp = ({ pathname }) => {
   const showOnMobile = useMediaQuery("(max-width:991px)");
 
   return (
-    <div className="sign container">
+    <section className="sign container">
       <div className="sign__wrapper">
         {pathname === "/sign-in" && <SignIn />}
         {pathname === "/sign-up" && <SignUp />}
@@ -30,7 +30,7 @@ const SignInSignUp = ({ pathname }) => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

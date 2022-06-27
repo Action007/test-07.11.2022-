@@ -9,11 +9,11 @@ const ServerError = () => {
   const { t: translate } = useTranslation();
 
   return (
-    <div className="server-error container py-8">
+    <section className="server-error container py-8">
       <div className="container-wrapper">
-        <h2 className="server-error__title display-4 text-center SFPro-600">
+        <h1 className="server-error__title display-4 text-center SFPro-600">
           {translate("error.title")}
-        </h2>
+        </h1>
         <span className="server-error__subtitle">
           {translate("error.subtitle")}
         </span>
@@ -22,7 +22,7 @@ const ServerError = () => {
         </div>
         <HomeButton />
       </div>
-    </div>
+    </section>
   );
 };
 

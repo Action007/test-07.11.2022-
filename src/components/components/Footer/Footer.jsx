@@ -23,10 +23,7 @@ const Footer = () => {
       <nav className="footer__nav">
         <ul className="footer__items mb-0">
           <li className="footer__item">
-            <button
-              onClick={() => onClickHandler("/?page=1&per_page=3")}
-              type="button"
-            >
+            <button onClick={() => onClickHandler("/")} type="button">
               {translate("home")}
             </button>
           </li>

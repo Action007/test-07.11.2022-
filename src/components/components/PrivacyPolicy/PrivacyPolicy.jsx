@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
   const breadcrumbs = [{ title: translate("privacyPolicyPage.title") }];
 
   return (
-    <div className="container policy pb-8">
+    <section className="container policy pb-8">
       <div className="container-wrapper">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <h2 className="title--margin display-4 text-center SFPro-600">
@@ -48,7 +48,7 @@ const PrivacyPolicy = () => {
           {translate("privacyPolicyPage.section3.text")}
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 

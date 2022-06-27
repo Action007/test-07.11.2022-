@@ -13,10 +13,20 @@ const PrivacyPolicyPage = () => {
   return (
     <>
       <Helmet>
-        <title>{translate("privacyPolicyPage.title")}</title>
-        <meta property="og:title" content="Privacy Policy" />
+        <title>{translate("seo.privacyPolicy.title")}</title>
+        <meta
+          property="og:title"
+          content={translate("seo.privacyPolicy.title")}
+        />
         <meta property="og:url" content={API_KEY + pathname} />
-        <meta name="description" content="Privacy Policy" />
+        <meta
+          name="description"
+          content={translate("seo.privacyPolicy.desc")}
+        />
+        <meta
+          property="og:description"
+          content={translate("seo.privacyPolicy.desc")}
+        />
       </Helmet>
       <PrivacyPolicy />
     </>

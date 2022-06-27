@@ -20,7 +20,7 @@ const Contacts = () => {
   );
 
   return (
-    <div className="container contacts pb-8">
+    <section className="container contacts pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       {showTitleOnMobile && title}
       <div className="contacts__wrapper d-flex justify-content-between align-items-center">
@@ -74,7 +74,7 @@ const Contacts = () => {
           <ContactsImg />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

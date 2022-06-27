@@ -48,9 +48,9 @@ const ForgotPassword = () => {
           <EmailSvg />
         </div>
       )}
-      <h2 className="forgot-password__title SFPro-600">
+      <h1 className="forgot-password__title SFPro-600">
         {translate("login.title5")}
-      </h2>
+      </h1>
       {isSuccess && (
         <span className="forgot-password__done">{translate("login.done")}</span>
       )}

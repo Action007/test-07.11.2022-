@@ -1,5 +1,5 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .tabs {
   display: flex;
@@ -21,6 +21,11 @@
     border-radius: 6px;
     padding: 11px 45px;
     font-size: 1.125rem;
+    transition: transform 0.09s ease;
+
+    &:active {
+      transform: scale(0.96);
+    }
 
     &:not(:last-child) {
       margin-right: 6px;

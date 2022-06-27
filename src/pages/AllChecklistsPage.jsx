@@ -18,6 +18,7 @@ const AllCheckListsPage = () => {
     <>
       <Helmet>
         <title>{translate("allChecklistsPage.title")}</title>
+        <meta name="robots" content="noindex, nofollow" />
       </Helmet>
       <AllChecklists />
     </>

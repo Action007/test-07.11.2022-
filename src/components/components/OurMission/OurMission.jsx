@@ -11,7 +11,7 @@ const OurMission = () => {
   const breadcrumbs = [{ title: translate("ourMissionPage.title") }];
 
   return (
-    <div className="container about pb-8">
+    <section className="container about pb-8">
       <div className="container-wrapper">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <h2 className="title--margin display-4 text-center SFPro-600">
@@ -48,7 +48,7 @@ const OurMission = () => {
           {translate("ourMissionPage.section3.text")}
         </p>
       </div>
-    </div>
+    </section>
   );
 };
 

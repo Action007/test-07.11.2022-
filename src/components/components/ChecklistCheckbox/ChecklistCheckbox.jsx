@@ -49,45 +49,12 @@ const ChecklistCheckbox = ({
             id={idFor}
             type="checkbox"
           />
-          <span className="checklist-checkbox__checkmark" />
-          <p className="checklist-checkbox__todo">
-            {description}
-            {list_type === "link" && (
-              <a
-                className="checklist-checkbox__link"
-                href={value.link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {translate("checklistReviewPage.link")}
-                <LinkSvg />
-              </a>
-            )}
-          </p>
-        </label>
-        {list_type === "coordinates" && (
-          <>
-            <div className="map-container">
-              {!showMap ? (
-                <MapGeneral
-                  setShowMap={setShowMap}
-                  coordinates={value.coordinates}
-                />
-              ) : (
-                <div className="map-fake" />
-              )}
-            </div>
-            <MapModal
-              show={showMap}
-              onHide={() => setShowMap(false)}
-              coordinates={value.coordinates}
-            />
-          </>
-        )}
-        {list_type === "image" && <ChecklistImage image={value.image} />}
-      </li>
-      <PopupCreateDone show={modalShow} onHide={() => setModalShow(false)} />
-    </>
+        </>
+      )}
+      {list_type === "image" && (
+        <ChecklistImage image={value.image} alt={description} />
+      )}
+    </li>
   );
 };
 

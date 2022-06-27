@@ -38,6 +38,7 @@ const ChecklistDetailPage = () => {
         />
         <meta property="og:url" content={API_KEY + pathname} />
         <meta name="description" content="Checklist Review" />
+        <meta property="og:description" content="Checklist Review" />
       </Helmet>
       <ChecklistReview
         checklist={checklist}
