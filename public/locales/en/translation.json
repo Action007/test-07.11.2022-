@@ -506,7 +506,7 @@
     "nickName": "Nick name",
     "nickNicknameTaken": "This user name is already in use, please try another one",
     "minNickname": "Must be at least 2 characters long",
-    "maxNickname": "Maximum 50 characters",
+    "maxNickname": "Must be at least 2 characters long, maximum 50 characters",
     "country": "Country",
     "bio": "Bio",
     "website": "Personal website",
