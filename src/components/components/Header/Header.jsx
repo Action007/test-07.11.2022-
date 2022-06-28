@@ -241,7 +241,7 @@ const Header = () => {
           </CSSTransition>
         </Container>
       </Navbar>
-      {showSearchOnMobile && <SearchInput />}
+      {showSearchOnMobile && !token && <SearchInput />}
     </header>
   );
 };

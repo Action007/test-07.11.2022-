@@ -59,8 +59,8 @@ const HomeChecklistPage = () => {
   return (
     <>
       <h1 className="sr-only">This is our home page</h1>
-      <MainBanner />
-      <div className="main-content" ref={ref}>
+      {!token && <MainBanner />}
+      <div className={token ? "main-content user" : "main-content"} ref={ref}>
         <div className="container main-content__wrapper">
           {!showOnMobile && <CategorySidebar />}
           <div className="main-content__wrap">
