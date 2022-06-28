@@ -106,10 +106,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    @include media-breakpoint-down(xl) {
-      margin-top: 20px;
-    }
   }
 }
 
