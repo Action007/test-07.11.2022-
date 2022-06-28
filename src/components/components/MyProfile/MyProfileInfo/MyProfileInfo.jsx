@@ -31,6 +31,9 @@ const MyProfileInfo = ({
   const [editAccount, { isLoading: isUpdateLoading, error }] =
     checklistAPI.useEditAccountMutation();
 
+  const websiteHostName = new URL(website);
+  const host = websiteHostName.hostname;
+
   const onLoad = (event) => {
     const reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
@@ -123,9 +126,7 @@ const MyProfileInfo = ({
                 <li className="profile-info__network profile-info__network--website">
                   <a href={website} target="_blank" rel="noreferrer">
                     <World />
-                    <span className="profile-info__link">
-                      {website.replace(/https?:\/\//g, "")}
-                    </span>
+                    <span className="profile-info__link">{host}</span>
                   </a>
                 </li>
               )}

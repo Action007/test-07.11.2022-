@@ -124,7 +124,7 @@ const CreationChecklistItem = ({
   const ImgSelected = list_type === "image" && value?.image && (
     <>
       <div className="creation-item__img">
-        <img src={URL.createObjectURL(value.image)} alt={description} />
+        <img src={value.image} alt={description} />
         <button
           onClick={() => dispatch(createChecklistActions.removeImage(id))}
           className="creation-item__remove"

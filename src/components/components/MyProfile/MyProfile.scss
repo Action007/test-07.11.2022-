@@ -23,10 +23,6 @@
   justify-content: center;
   align-items: center;
 
-  @include media-breakpoint-down(xl) {
-    margin-top: 20px;
-  }
-
   @include media-breakpoint-down(sm) {
 	font-size: 14px;
 	line-height: 15px;
