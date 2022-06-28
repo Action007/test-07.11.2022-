@@ -33,11 +33,14 @@ const Complain = ({ closeHandler, id, name, page }) => {
   }, [changeChecklist]);
 
   useEffect(() => {
+    let setComplainDoneShowFunc;
     if (isSuccess) {
       setDone(true);
       setShowDone(true);
+      setComplainDoneShowFunc = setTimeout(() => closeHandler(), 7000);
     }
     if (isError) navigate("/error");
+    return () => clearTimeout(setComplainDoneShowFunc);
   }, [isSuccess, isError]);
 
   const submitHandler = (e) => {
@@ -54,7 +57,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
   };
 
   const onChangeHandler = () => {
-    const checklistID = field.current.value.match(/\/list\/(\d+)/);
+    const checklistID = field.current.value.match(/\/checklist\/(\d+)/);
     if (checklistID) setChecklistId(checklistID[1]);
     setChangeChecklist(false);
   };
