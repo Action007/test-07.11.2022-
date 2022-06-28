@@ -80,7 +80,7 @@
     "text2": "Got a problem? Our <0>support team</0> is ready to help!",
     "field": "Required field*",
     "desc": "What exactly do you think is unacceptable in this material?",
-    "span": "Spam",
+    "spam": "Spam",
     "prohibited": "Prohibited item",
     "violence": "Violence and hostility",
     "adult": "Adult Materials",
