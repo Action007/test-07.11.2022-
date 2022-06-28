@@ -100,16 +100,11 @@
       position: absolute;
       right: 9px;
       top: 50%;
-      display: none;
       transform: translateY(-50%);
     }
 
     &:hover {
       border-color: #65c17e;
-
-      svg {
-        display: block;
-      }
     }
   }
 }
