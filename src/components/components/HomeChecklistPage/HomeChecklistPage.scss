@@ -272,3 +272,15 @@
     }
   }
 }
+
+.user{
+	margin-top: 183px;
+
+	@include media-breakpoint-down(xl) {
+      margin-top: 145px;
+    }
+
+	 @include media-breakpoint-down(lg) {
+      margin-top: 110px;
+    }
+}
