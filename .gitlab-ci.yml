@@ -17,6 +17,9 @@ lint-test:
     - echo "Linting code... This will take about 10 seconds."
     - sleep 1
     - echo "No lint issues found."
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event' || $CI_COMMIT_MESSAGE != null
+
 
 .build-image-base: &build-image-base
   image: docker:20-dind
