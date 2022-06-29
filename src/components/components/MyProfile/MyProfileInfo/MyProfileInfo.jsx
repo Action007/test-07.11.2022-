@@ -31,8 +31,11 @@ const MyProfileInfo = ({
   const [editAccount, { isLoading: isUpdateLoading, error }] =
     checklistAPI.useEditAccountMutation();
 
-  const websiteHostName = new URL(website);
-  const host = websiteHostName.hostname;
+  let host;
+  if (website) {
+    const websiteHostName = new URL(website);
+    host = websiteHostName.hostname;
+  }
 
   const onLoad = (event) => {
     const reader = new FileReader();
