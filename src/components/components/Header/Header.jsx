@@ -73,7 +73,7 @@ const Header = () => {
             type="button"
           >
             <Bookmark />
-            {user && user.saved_counter !== 0 && (
+            {user && user.saved_counter > 0 && (
               <span className="header__span">{user.saved_counter}</span>
             )}
           </button>
@@ -129,7 +129,7 @@ const Header = () => {
         </button>
         <button
           onClick={() =>
-            onChangePageHandler("/?per_page=3&page=1&popular=true")
+            onChangePageHandler("/?per_page=5&page=1&popular=true")
           }
           className="header__item"
           type="button"

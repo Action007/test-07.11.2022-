@@ -94,7 +94,7 @@ const ChecklistDetail = ({
   };
 
   const navigationHandler = (tagID) => {
-    navigate(`/?page=1&per_page=3&search_tag_ids[]=${tagID}`);
+    navigate(`/?page=1&per_page=5&search_tag_ids[]=${tagID}`);
   };
 
   const loginHandler = () => {

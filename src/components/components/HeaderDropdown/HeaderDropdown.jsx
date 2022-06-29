@@ -121,7 +121,7 @@ const HeaderDropdown = ({ setShow }) => {
               type="button"
             >
               <Bookmark />
-              <span />
+              {user && user.saved_counter > 0 && <span />}
               All Checklists
             </button>
             <button
