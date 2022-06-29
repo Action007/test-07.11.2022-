@@ -30,17 +30,17 @@ const HomeChecklistPage = () => {
     isFetching,
   } = checklistAPI.useFetchChecklistQuery(
     `/${token ? "checklists_auth" : "checklists"}${
-      search || "?page=1&per_page=3"
+      search || "?page=1&per_page=5"
     }`
   );
 
   useEffect(() => {
     if (search) {
-      if (search === "?page=1&per_page=3") return;
+      if (search === "?page=1&per_page=5") return;
       ref.current.scrollIntoView();
       window.scrollBy(0, -80);
     } else {
-      navigate(`?page=1&per_page=3`);
+      navigate(`?page=1&per_page=5`);
     }
   }, [search]);
 
