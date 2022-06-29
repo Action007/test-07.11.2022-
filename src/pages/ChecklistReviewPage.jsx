@@ -21,7 +21,7 @@ const ChecklistDetailPage = () => {
   } = checklistAPI.useFetchChecklistQuery(
     `/${
       token ? "checklists_auth" : "checklists"
-    }/${id}?page=${pageCount}&per_page=3`
+    }/${id}?page=${pageCount}&per_page=5`
   );
 
   useEffect(() => {

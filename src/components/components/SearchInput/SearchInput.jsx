@@ -96,7 +96,7 @@ const SearchInput = ({ page = false }) => {
       searchParams.append("search_tag_ids[]", tag.id);
       setSearchParams(searchParams);
     } else {
-      navigate(`/?page=1&per_page=3&search_tag_ids[]=${tag.id}`);
+      navigate(`/?page=1&per_page=5&search_tag_ids[]=${tag.id}`);
     }
   };
 
@@ -123,7 +123,7 @@ const SearchInput = ({ page = false }) => {
           setSearchParams(searchParams);
         }
       } else {
-        navigate(`/?per_page=3&page=1&search_value=${searchValue}`);
+        navigate(`/?per_page=5&page=1&search_value=${searchValue}`);
       }
       setSearchValue("");
     }

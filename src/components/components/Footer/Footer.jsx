@@ -34,7 +34,7 @@ const Footer = () => {
           </li>
           <li className="footer__item">
             <button
-              onClick={() => navigate("/?per_page=3&page=1&popular=true")}
+              onClick={() => navigate("/?per_page=5&page=1&popular=true")}
               type="button"
             >
               {translate("popularChecklistPage.title")}
