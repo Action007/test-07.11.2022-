@@ -185,7 +185,7 @@ const Header = () => {
           <div className={`header__inner${!token ? " login" : ""}`}>
             <button
               onClick={() => {
-                onChangePageHandler("/?page=1&per_page=3");
+                onChangePageHandler("/?page=1&per_page=5");
                 window.scrollTo(0, 0);
               }}
               className="header__logo"
