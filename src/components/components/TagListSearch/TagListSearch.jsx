@@ -33,9 +33,7 @@ const TagListSearch = ({ tags, findTypeHandler, page }) => {
   }, [cursor, enterPress]);
   useEffect(() => {
     if (page === "creation-of-checklist") return;
-    if (tags.length && hovered) {
-      setCursor(tags.indexOf(hovered));
-    }
+    if (tags.length && hovered) setCursor(tags.indexOf(hovered));
   }, [hovered]);
 
   return (
