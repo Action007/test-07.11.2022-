@@ -44,10 +44,10 @@ const Contacts = () => {
             <h4 className="SFPro-700 display-8">
               {translate("contactsPage.numbers")}
             </h4>
-            <a className="contacts__tel" href="tel:(+375)0000000000">
+            <a className="contacts__tel" href="tel:+48222085472">
               +48222085472
             </a>
-            <a className="contacts__tel mb-4" href="tel:(+375)0000000000">
+            <a className="contacts__tel mb-4" href="tel:+12098130160">
               +12098130160
             </a>
             <h4 className="SFPro-700 display-8">
