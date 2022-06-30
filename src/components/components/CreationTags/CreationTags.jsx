@@ -37,6 +37,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
 
   useEffect(() => {
     if (!inputTag.current) return;
+
     inputTag.current.focus();
   }, [addTags, show]);
 
@@ -65,10 +66,17 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
 
   const addTagHandler = (tag) => {
     if (!tag) return;
+    if (tag.name.length === 0) {
+      setAddTagsHandler(false);
+      return;
+    }
     let validTag = tag;
     const tagsIsValid = myTags.length > 1;
     const addOrNot = myTags.find((item) => item.name === tag.name);
-    if (addOrNot || myTags.length === 5) return;
+    if (addOrNot || myTags.length === 5) {
+      setAddTagsHandler(false);
+      return;
+    }
     if (!tag || !tag.name.trim()) return;
     if (tag.name.length > 16) {
       validTag = {
@@ -111,7 +119,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
 
   const filterTagsList = () => {
     return serverTags.filter(
-      (item) => !myTags.find((tag) => tag.id === item.id)
+      (item) => !myTags.find((tag) => tag.name === item.name)
     );
   };
 
@@ -175,7 +183,10 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
           </div>
         ) : (
           <button
-            onClick={() => setAddTagsHandler(true)}
+            onClick={() => {
+              setAddTagsHandler(true);
+              setShow(true);
+            }}
             className="creation-tag__create"
             type="button"
           >
