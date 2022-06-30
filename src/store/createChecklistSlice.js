@@ -8,7 +8,7 @@ const createChecklistSlice = createSlice({
     title: { value: "", isValid: true },
     checklist_items: [],
     tags: [],
-    category: { value: "", isValid: true, name: "" },
+    category: { id: "", value: "", isValid: true },
     validateAfterSubmit: false,
   },
   reducers: {
@@ -52,12 +52,12 @@ const createChecklistSlice = createSlice({
       );
     },
     addCategory(state, action) {
-      const category = action.payload;
+      const { id, value } = action.payload;
 
-      if (category) {
-        state.category = { value: category, isValid: true };
+      if (id) {
+        state.category = { id, value, isValid: true };
       } else {
-        state.category = { value: "", isValid: false };
+        state.category = { value: "", name: "", isValid: false };
       }
     },
     setValidateAfterSubmit(state) {

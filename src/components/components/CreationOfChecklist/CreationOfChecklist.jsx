@@ -44,8 +44,8 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     (state) => state.createChecklistReducer.title.isValid
   );
   const tags = useSelector((state) => state.createChecklistReducer.tags);
-  const categoryValue = useSelector(
-    (state) => state.createChecklistReducer.category.value
+  const categoryID = useSelector(
+    (state) => state.createChecklistReducer.category.id
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       item.value?.link ? validateLink(item.value.link) : true
     );
     const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
-    const categoryIsValid = categoryValue !== "" && categoryValue !== false;
+    const categoryIsValid = categoryID !== "" && categoryID !== false;
 
     const validOrNot =
       checklist_items.length &&
@@ -79,7 +79,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       categoryIsValid;
 
     setValidButton(!!validOrNot);
-  }, [tags, title, checklist_items, categoryValue]);
+  }, [tags, title, checklist_items, categoryID]);
 
   useEffect(() => {
     if (successCreate || successUpdate) {
@@ -102,7 +102,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       item.value?.link ? validateLink(item.value.link) : true
     );
     const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
-    const categoryIsValid = categoryValue !== "" && categoryValue !== false;
+    const categoryIsValid = categoryID !== "" && categoryID !== false;
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
       dispatch(createChecklistActions.addChecklist());
@@ -110,7 +110,8 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     dispatch(createChecklistActions.isValidDescription());
     dispatch(createChecklistActions.isTitleValid());
     dispatch(createChecklistActions.setValidateAfterSubmit());
-    if (!categoryIsValid) dispatch(createChecklistActions.addCategory(""));
+    if (!categoryIsValid)
+      dispatch(createChecklistActions.addCategory({ id: false, value: false }));
 
     const validOrNot =
       checklist_items.length &&
@@ -173,7 +174,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
           tag_ids,
           tags_new,
           checklist_items_attributes,
-          category_ids: [categoryValue],
+          category_ids: [categoryID],
           id,
         };
       } else if (tags_new.length) {
@@ -181,7 +182,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
           name: title,
           tags_new,
           checklist_items_attributes,
-          category_ids: [categoryValue],
+          category_ids: [categoryID],
           id,
         };
       } else if (tag_ids.length) {
@@ -189,7 +190,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
           name: title,
           tag_ids,
           checklist_items_attributes,
-          category_ids: [categoryValue],
+          category_ids: [categoryID],
           id,
         };
       }
@@ -200,21 +201,21 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
           tag_ids,
           tags_new,
           checklist_items_attributes,
-          category_ids: [categoryValue],
+          category_ids: [categoryID],
         };
       } else if (tags_new.length) {
         checklistBody = {
           name: title,
           tags_new,
           checklist_items_attributes,
-          category_ids: [categoryValue],
+          category_ids: [categoryID],
         };
       } else if (tag_ids.length) {
         checklistBody = {
           name: title,
           tag_ids,
           checklist_items_attributes,
-          category_ids: [categoryValue],
+          category_ids: [categoryID],
         };
       }
     }

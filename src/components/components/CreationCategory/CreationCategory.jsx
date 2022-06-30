@@ -31,7 +31,7 @@ const CreationCategory = () => {
   const { ref, show, setShowHandler } = useClickOutside();
   const { t: translate } = useTranslation();
   const categoryValue = useSelector(
-    (state) => state.createChecklistReducer.category.name
+    (state) => state.createChecklistReducer.category.value
   );
   const initialCategory = translate("sidebar.select");
   const [selectCategory, setSelectCategory] = useState();
@@ -102,7 +102,7 @@ const CreationCategory = () => {
   ];
 
   const onSelectCategoryHandler = (name, id) => {
-    dispatch(createChecklistActions.addCategory(id));
+    dispatch(createChecklistActions.addCategory({ id, value: name }));
     setSelectCategory(name);
     setShowHandler();
   };
