@@ -38,7 +38,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   useEffect(() => {
     if (!inputTag.current) return;
     inputTag.current.focus();
-  }, [addTags]);
+  }, [addTags, show]);
 
   const onChangeSearchValue = (value) => {
     if (value.trim() === "") {
@@ -58,8 +58,8 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
     }
   };
 
-  const setAddTagsHandler = () => {
-    setAddTags((prevState) => !prevState);
+  const setAddTagsHandler = (close) => {
+    setAddTags(close);
     setUrl("");
   };
 
@@ -78,7 +78,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
       };
     }
 
-    setAddTagsHandler();
+    setAddTagsHandler(true);
     setShow(false);
     dispatch(createChecklistActions.addTag(validTag));
 
@@ -100,6 +100,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
     const tagsIsValid = myTags.length > 3;
     dispatch(createChecklistActions.removeTag(tag.id));
     setTagsValid(tagsIsValid);
+    setAddTagsHandler(false);
   };
 
   const findTypeHandler = (e, tag) => {
@@ -151,12 +152,13 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
                 onFocus={() => setShow(true)}
                 className="creation-tag__create creation-tag__create--input"
                 ref={inputTag}
+                value={url}
                 id="creation-tagAdd"
                 type="text"
                 autoComplete="off"
               />
               <button
-                onClick={() => setAddTagsHandler()}
+                onClick={() => setAddTagsHandler(false)}
                 className="creation-tag__close"
                 type="button"
               >
@@ -173,10 +175,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
           </div>
         ) : (
           <button
-            onClick={() => {
-              setAddTagsHandler();
-              setShow(true);
-            }}
+            onClick={() => setAddTagsHandler(true)}
             className="creation-tag__create"
             type="button"
           >
