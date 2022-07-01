@@ -14,7 +14,7 @@ import "./SearchInput.scss";
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
 import { ReactComponent as SearchSvg } from "../../../assets/images/icon/searchInput.svg";
 
-const SearchInput = ({ page = false }) => {
+const SearchInput = ({ page = false, header }) => {
   const [searchTagUrl, setSearchTagUrl] = useState("");
   const [tagUrl, setTagUrl] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -125,7 +125,9 @@ const SearchInput = ({ page = false }) => {
       } else {
         navigate(`/?per_page=5&page=1&search_value=${searchValue}`);
       }
-      setSearchValue("");
+      if (header) {
+        setSearchValue("");
+      }
     }
   };
 

@@ -241,7 +241,7 @@ const Header = () => {
             unmountOnExit
           >
             <div className={`header__wrap SFPro-500${!token ? " login" : ""}`}>
-              {!showSearchOnMobile && <SearchInput />}
+              {!showSearchOnMobile && <SearchInput header />}
               {token ? authorized : notAuthorized}
             </div>
           </CSSTransition>
@@ -249,7 +249,7 @@ const Header = () => {
       </Navbar>
       {token
         ? showSearchOnMobile && !homePage && <SearchInput />
-        : showSearchOnMobile && <SearchInput />}
+        : showSearchOnMobile && <SearchInput header />}
     </header>
   );
 };
