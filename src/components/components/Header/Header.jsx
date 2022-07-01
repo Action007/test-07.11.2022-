@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
@@ -28,6 +28,12 @@ const Header = () => {
   const token = useSelector((state) => state.authSliceReducer.token);
   const percent = useSelector((state) => state.authSliceReducer.percent);
   const { t: translate } = useTranslation();
+  const location = useLocation();
+  const [homePage, setHomePage] = useState();
+
+  useEffect(() => {
+    setHomePage(location.pathname === "/");
+  }, [location.pathname]);
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -241,7 +247,9 @@ const Header = () => {
           </CSSTransition>
         </Container>
       </Navbar>
-      {showSearchOnMobile && !token && <SearchInput />}
+      {token
+        ? showSearchOnMobile && !homePage && <SearchInput />
+        : showSearchOnMobile && <SearchInput />}
     </header>
   );
 };

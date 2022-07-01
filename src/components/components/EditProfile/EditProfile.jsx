@@ -216,7 +216,7 @@ const EditProfile = () => {
         </div>
       ) : null}
       {showPopupSave ? (
-        <div className="edit-profile__popup succes SFPro-500">
+        <div className="edit-profile__popup SFPro-500">
           Profile updated successfully
         </div>
       ) : null}

@@ -3,7 +3,6 @@ import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import "./PopupCreateDone.scss";
 
-import { Link } from "react-router-dom";
 import PopupImg from "../../../assets/images/content/popupDone.png";
 import PostedImg from "../../../assets/images/content/posted.png";
 
@@ -35,9 +34,13 @@ const PopupCreateDone = ({ show, onHide, preview = false }) => {
                 : translate("popupDone.text")}
             </p>
             {preview ? (
-              <Link className="create-done__btn SFPro-500" to="/">
+              <button
+                className="create-done__btn SFPro-500"
+                onClick={onHide}
+                type="button"
+              >
                 {translate("creationOfChecklist.popupButton")}
-              </Link>
+              </button>
             ) : (
               <button
                 className="create-done__btn SFPro-500"

@@ -21,7 +21,12 @@ import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addIte
 const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const [
     createChecklist,
-    { isSuccess: successCreate, error: errorCreate, isLoading: loadingCreate },
+    {
+      isSuccess: successCreate,
+      error: errorCreate,
+      isLoading: loadingCreate,
+      data: newChecklist,
+    },
   ] = checklistAPI.useCreateChecklistMutation();
   const [
     updateChecklist,
@@ -224,6 +229,13 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     if (page === "edit-checklist") updateChecklist(checklistBody);
   };
 
+  const showNewChecklist = () => {
+    setDone(false);
+    const newChecklistId = newChecklist.id;
+    const newChecklistSlug = newChecklist.slug;
+    navigate(`/checklist/${newChecklistId}/${newChecklistSlug}`);
+  };
+
   return (
     <>
       <div className="container creation pb-8">
@@ -324,7 +336,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
         onHide={() => setPreview(false)}
         show={preview}
       />
-      <PopupCreateDone show={done} onHide={() => setDone(false)} preview />
+      <PopupCreateDone show={done} onHide={showNewChecklist} preview />
       <LoadingSpinnerPopup showSpinner={!!loadingCreate || !!loadingUpdate} />
     </>
   );
