@@ -53,7 +53,10 @@ const Contacts = () => {
             <h4 className="SFPro-700 display-8">
               {translate("contactsPage.email")}
             </h4>
-            <a className="mb-4" href="mailto:info@proxyone.eu">
+            <a
+              className="mb-4"
+              href="mailto:support@checklists.com?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please..."
+            >
               info@proxyone.eu
             </a>
           </address>
@@ -66,7 +69,7 @@ const Contacts = () => {
           <Networks />
           <div className="text-center">
             <a
-              href="mailto:support@checklists.com"
+              href="mailto:support@checklists.com?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please..."
               className="checklist-button"
             >
               {translate("contactsPage.button")}

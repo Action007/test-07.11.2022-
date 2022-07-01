@@ -43,14 +43,18 @@ const Support = () => {
               <Trans
                 i18nKey="supportPage.text1"
                 t={translate}
-                components={[<a href="mailto:support@checklists.com" />]}
+                components={[
+                  <a href="mailto:support@checklists.com?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please..." />,
+                ]}
               />
             </p>
             <p className="support__text SFPro-300 display-7">
               <Trans
                 i18nKey="supportPage.text2"
                 t={translate}
-                components={[<a href="mailto:support@checklists.com" />]}
+                components={[
+                  <a href="mailto:support@checklists.com?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please..." />,
+                ]}
               />
             </p>
           </>
