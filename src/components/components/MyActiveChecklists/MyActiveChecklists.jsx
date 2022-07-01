@@ -79,35 +79,36 @@ const MyActiveChecklists = () => {
           page="my-active-checklists"
         />
         {isLoading && loader}
-        {checklists && checklists.entities.length ? (
-          checklists.entities.map((checklist) => (
-            <React.Fragment key={checklist.id}>
-              <ProgressBarChecklist
-                done={getPercent(
-                  checklist.completed_items_counter,
-                  checklist.total_items_counter
-                )}
-              />
-              <Checklist
-                key={uniqueID()}
-                checklist={checklist}
-                translate={translate("myActiveChecklists.showMore")}
-                page="my-active-checklists"
-              />
-            </React.Fragment>
-          ))
-        ) : (
-          <div className="text-center mt-7">
-            <div className="display-6 mb-6">
-              {category === "active" &&
-                translate("myActiveChecklists.activeEmpty")}
-              {category === "passed" &&
-                translate("myActiveChecklists.passedEmpty")}
+        {!isLoading &&
+          (checklists && checklists.entities.length ? (
+            checklists.entities.map((checklist) => (
+              <React.Fragment key={checklist.id}>
+                <ProgressBarChecklist
+                  done={getPercent(
+                    checklist.completed_items_counter,
+                    checklist.total_items_counter
+                  )}
+                />
+                <Checklist
+                  key={uniqueID()}
+                  checklist={checklist}
+                  translate={translate("myActiveChecklists.showMore")}
+                  page="my-active-checklists"
+                />
+              </React.Fragment>
+            ))
+          ) : (
+            <div className="text-center mt-7">
+              <div className="display-6 mb-6">
+                {category === "active" &&
+                  translate("myActiveChecklists.activeEmpty")}
+                {category === "passed" &&
+                  translate("myActiveChecklists.passedEmpty")}
+              </div>
+              {category === "active" && <HomeButton />}
+              {category === "passed" && <HomeButton />}
             </div>
-            {category === "active" && <HomeButton />}
-            {category === "passed" && <HomeButton />}
-          </div>
-        )}
+          ))}
       </div>
       {checklists && checklists.paginate.total_pages > 1 && (
         <Pagination
