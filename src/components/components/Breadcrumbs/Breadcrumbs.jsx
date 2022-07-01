@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./Breadcrumbs.scss";
 
@@ -7,9 +7,10 @@ import { ReactComponent as RightArrow } from "../../../assets/images/icon/right-
 
 const Breadcrumbs = ({ breadcrumbs }) => {
   const { t: translate } = useTranslation();
+  const navigate = useNavigate();
   const items = breadcrumbs.map((breadcrumb) =>
-    breadcrumb.title.length > 25
-      ? { ...breadcrumb, title: `${breadcrumb.title.substring(0, 26)}...` }
+    breadcrumb.title.length > 15
+      ? { ...breadcrumb, title: `${breadcrumb.title.substring(0, 16)}...` }
       : breadcrumb
   );
 
@@ -22,7 +23,9 @@ const Breadcrumbs = ({ breadcrumbs }) => {
         <li key={breadcrumb.title} className="breadcrumbs__item">
           <RightArrow />
           {breadcrumb.link ? (
-            <Link to={breadcrumb.link}>{breadcrumb.title}</Link>
+            <button onClick={() => navigate(breadcrumb.link)} type="button">
+              {breadcrumb.title}
+            </button>
           ) : (
             <span className="breadcrumbs__span">{breadcrumb.title}</span>
           )}

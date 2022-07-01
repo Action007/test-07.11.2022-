@@ -28,8 +28,11 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!error?.data.error) return;
-    if (error?.data.error === "not_found") {
+    if (error) {
+      navigate("/error");
+      return;
+    }
+    if (error?.data?.error === "not_found") {
       setIsValidEmailServer(false);
       setIsValidPasswordServer(true);
     }

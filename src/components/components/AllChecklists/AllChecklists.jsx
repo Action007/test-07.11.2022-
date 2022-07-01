@@ -83,29 +83,30 @@ const AllChecklists = () => {
           page="all-checklists"
         />
         {isFetching && loader}
-        {!isFetching && checklists && checklists.entities.length ? (
-          checklists.entities.map((checklist) => (
-            <Checklist
-              key={checklist.id}
-              checklist={checklist}
-              created={category === "created"}
-            />
-          ))
-        ) : (
-          <div className="text-center mt-7">
-            <div className="display-6 mb-6">
-              {category === "saved" &&
-                translate("allChecklistsPage.savedEmpty")}
-              {category === "liked" &&
-                translate("allChecklistsPage.likedEmpty")}
-              {category === "created" &&
-                translate("allChecklistsPage.createdEmpty")}
+        {!isFetching &&
+          (checklists && checklists.entities.length ? (
+            checklists.entities.map((checklist) => (
+              <Checklist
+                key={checklist.id}
+                checklist={checklist}
+                created={category === "created"}
+              />
+            ))
+          ) : (
+            <div className="text-center mt-7">
+              <div className="display-6 mb-6">
+                {category === "saved" &&
+                  translate("allChecklistsPage.savedEmpty")}
+                {category === "liked" &&
+                  translate("allChecklistsPage.likedEmpty")}
+                {category === "created" &&
+                  translate("allChecklistsPage.createdEmpty")}
+              </div>
+              {category === "saved" && <HomeButton />}
+              {category === "liked" && <HomeButton />}
+              {category === "created" && <CreateButton />}
             </div>
-            {category === "saved" && <HomeButton />}
-            {category === "liked" && <HomeButton />}
-            {category === "created" && <CreateButton />}
-          </div>
-        )}
+          ))}
       </div>
       {checklists && checklists.paginate.total_pages > 1 && (
         <Pagination

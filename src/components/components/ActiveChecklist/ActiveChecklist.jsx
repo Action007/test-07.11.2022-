@@ -8,7 +8,10 @@ import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 
 const ActiveChecklist = ({ checklist, isLoading }) => {
   const { t: translate } = useTranslation();
-  const breadcrumbs = [{ title: translate("checklists") }];
+  const breadcrumbs = [
+    { title: translate("myActiveChecklists.title"), link: -1 },
+    { title: checklist && checklist.entities.checklist.name },
+  ];
 
   return (
     <div className="container container-breadcrumb pb-8">
