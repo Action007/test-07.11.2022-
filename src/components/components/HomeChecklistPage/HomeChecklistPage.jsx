@@ -38,7 +38,15 @@ const HomeChecklistPage = () => {
     if (search) {
       if (search === "?page=1&per_page=5") return;
       ref.current.scrollIntoView();
-      window.scrollBy(0, -80);
+      if (onMobile) {
+        if (token) {
+          window.scrollBy(0, -160);
+        } else {
+          window.scrollBy(0, -100);
+        }
+      } else {
+        window.scrollBy(0, -188);
+      }
     } else {
       navigate(`?page=1&per_page=5`);
     }
