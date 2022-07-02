@@ -17,6 +17,10 @@
       stroke: $dark;
     }
 
+    &:hover svg {
+      stroke: $primary;
+    }
+
     &:first-child {
       border-left: none;
       border-radius: 4px 0 0 4px;
@@ -45,10 +49,6 @@
       &:hover svg {
         fill: $primary;
       }
-    }
-
-    &:hover svg {
-      stroke: $primary;
     }
 
     &.active {
@@ -82,7 +82,6 @@
     display: block;
     border: 1px solid #ebebeb;
     border-radius: 4px;
-    padding: 6px 12px;
     padding: 6px 12px;
     box-shadow: 0 4px 4px 0 #d5dbf0;
     background-color: rgb(255 255 255);

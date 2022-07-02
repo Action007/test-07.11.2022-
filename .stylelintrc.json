@@ -29,22 +29,6 @@
       "rules",
       {
         "type": "rule",
-        "selector": "&:first-child"
-      },
-      {
-        "type": "rule",
-        "selector": "&:last-child"
-      },
-      {
-        "type": "rule",
-        "selector": "&:nth-child.+"
-      },
-      {
-        "type": "rule",
-        "selector": "&:link"
-      },
-      {
-        "type": "rule",
         "selector": "&:visited"
       },
       {
@@ -62,6 +46,22 @@
       {
         "type": "rule",
         "selector": "&:disabled"
+      },
+      {
+        "type": "rule",
+        "selector": "&:first-child"
+      },
+      {
+        "type": "rule",
+        "selector": "&:last-child"
+      },
+      {
+        "type": "rule",
+        "selector": "&:nth-child.+"
+      },
+      {
+        "type": "rule",
+        "selector": "&:link"
       },
       {
         "type": "rule",
@@ -560,12 +560,6 @@
         ]
       }
     ],
-    "declaration-no-important": [
-      true,
-      {
-        "severity": "warning"
-      }
-    ],
     "font-family-name-quotes": "always-unless-keyword",
     "font-family-no-duplicate-names": true,
     "font-weight-notation": "numeric",
@@ -580,7 +574,7 @@
     "function-parentheses-newline-inside": "always-multi-line",
     "function-parentheses-space-inside": "never-single-line",
     "function-url-no-scheme-relative": true,
-    "function-url-quotes": "always",
+    "function-url-quotes": null,
     "function-whitespace-after": "always",
     "indentation": 2,
     "keyframe-declaration-no-important": true,
@@ -601,7 +595,7 @@
     "media-query-list-comma-space-after": "always-single-line",
     "media-query-list-comma-space-before": "never",
     "no-descending-specificity": null,
-    "no-duplicate-selectors": true,
+    "no-duplicate-selectors": null,
     "no-empty-source": [
       true,
       {
@@ -690,7 +684,8 @@
     "scss/at-function-pattern": null,
     "scss/at-if-closing-brace-newline-after": "always-last-in-chain",
     "scss/at-if-closing-brace-space-after": "always-intermediate",
-    "scss/at-import-no-partial-leading-underscore": true,
+    "scss/at-import-no-partial-leading-underscore": null,
+    "scss/at-import-partial-extension": null,
     "scss/at-import-partial-extension-blacklist": null,
     "scss/at-mixin-argumentless-call-parentheses": "never",
     "scss/at-mixin-parentheses-space-before": "never",
@@ -729,7 +724,7 @@
       }
     ],
     "scss/double-slash-comment-inline": null,
-    "scss/double-slash-comment-whitespace-inside": "always",
+    "scss/double-slash-comment-whitespace-inside": null,
     "scss/media-feature-value-dollar-variable": null,
     "scss/operator-no-newline-after": null,
     "scss/operator-no-newline-before": null,

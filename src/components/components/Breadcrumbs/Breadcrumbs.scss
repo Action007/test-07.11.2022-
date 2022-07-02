@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .breadcrumbs {
   display: flex;
@@ -8,8 +8,8 @@
   font-size: 14px;
 
   @include media-breakpoint-down(lg) {
-    white-space: nowrap;
     overflow-x: scroll;
+    white-space: nowrap;
     -webkit-overflow-scrolling: touch;
   }
 

@@ -13,13 +13,13 @@
   }
 
   &__title {
-    font-size: 1.5rem;
     margin-bottom: 1.25rem;
+    font-size: 1.5rem;
   }
 
   &__subtitle {
-    font-size: 1.35rem;
     margin-bottom: 1.25rem;
+    font-size: 1.35rem;
   }
 
   &__texts {
@@ -36,8 +36,8 @@
 
   &__list {
     list-style-type: disc;
-    margin-left: 1.3rem;
     margin-bottom: 2rem;
+    margin-left: 1.3rem;
 
     li {
       margin-bottom: 1rem;
@@ -49,8 +49,8 @@
   }
 
   &__desc {
-    text-decoration: underline;
     font-style: italic;
+    text-decoration: underline;
   }
 
   &__address {

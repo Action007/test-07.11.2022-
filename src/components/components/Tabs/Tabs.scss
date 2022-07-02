@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_variables.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .tabs {
   display: flex;
@@ -23,10 +23,6 @@
     font-size: 1.125rem;
     transition: transform 0.09s ease;
 
-    &:active {
-      transform: scale(0.96);
-    }
-
     @include media-breakpoint-down(sm) {
       padding: 11px 20px;
       font-size: 1rem;
@@ -39,6 +35,10 @@
     &:hover {
       color: $primary;
       background-color: #f5f7fe;
+    }
+
+    &:active {
+      transform: scale(0.96);
     }
 
     &.active {

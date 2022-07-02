@@ -61,15 +61,15 @@
   }
 
   &__img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     margin-right: 11px;
     border-radius: 50%;
     width: 36px;
     height: 36px;
-	 background: #f5f7fe;
-	 display: flex;
-    align-items: center;
-    justify-content: center;
+    background: #f5f7fe;
 
     img {
       width: 75%;

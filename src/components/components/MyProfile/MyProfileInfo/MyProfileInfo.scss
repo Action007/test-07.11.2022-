@@ -3,14 +3,6 @@
 @import "../../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .profile-info {
-  @include media-breakpoint-down(md) {
-    flex-direction: column;
-  }
-
-  @include media-breakpoint-down(md) {
-    padding: 28px 23px;
-  }
-
   display: flex;
   justify-content: space-between;
   margin: 0 auto 16px;
@@ -20,49 +12,57 @@
   max-width: 1044px;
   background-color: #fff;
 
-  &__inner {
-    @include media-breakpoint-down(md) {
-      margin: 0 0 40px;
-    }
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+  }
 
+  @include media-breakpoint-down(md) {
+    padding: 28px 23px;
+  }
+
+  &__inner {
     margin-right: 10px;
     width: 100%;
     max-width: 443px;
     word-break: break-word;
+
+    @include media-breakpoint-down(md) {
+      margin: 0 0 40px;
+    }
   }
 
   &__box {
+    display: flex;
+    margin-bottom: 34px;
+
     @include media-breakpoint-down(sm) {
       margin-bottom: 30px;
     }
-
-    display: flex;
-    margin-bottom: 34px;
   }
 
   &__edit {
-    @include media-breakpoint-down(md) {
-      max-width: 100%;
-    }
-
     display: flex;
     width: 100%;
     max-width: 206px;
+
+    @include media-breakpoint-down(md) {
+      max-width: 100%;
+    }
   }
 
   &__edit-btn {
-    @include media-breakpoint-down(sm) {
-      margin-right: 19px;
-      height: 83px;
-      max-width: 83px;
-    }
-
     position: relative;
     margin-right: 27px;
     width: 100%;
     height: 105px;
     max-width: 105px;
     cursor: pointer;
+
+    @include media-breakpoint-down(sm) {
+      margin-right: 19px;
+      height: 83px;
+      max-width: 83px;
+    }
 
     svg {
       position: absolute;
@@ -73,17 +73,12 @@
     }
 
     input {
-      opacity: 0;
       position: absolute;
+      opacity: 0;
     }
   }
 
   &__img {
-    @include media-breakpoint-down(sm) {
-      height: 83px;
-      max-width: 83px;
-    }
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,45 +89,51 @@
     max-width: 105px;
     background-color: #f5f7fe;
 
+    @include media-breakpoint-down(sm) {
+      height: 83px;
+      max-width: 83px;
+    }
+
     img {
       width: 100%;
       height: 100%;
     }
 
     svg {
+      position: inherit;
+      width: 50px;
+      height: 69px;
+
       @include media-breakpoint-down(sm) {
         height: 51px;
         max-width: 32px;
       }
-
-      position: inherit;
-      width: 50px;
-      height: 69px;
     }
   }
 
   &__title {
     @include line-clamp;
-    @include media-breakpoint-down(sm) {
-      font-size: 20px;
-    }
 
     margin-bottom: 6px;
     font-size: 28px;
     line-height: 1.3;
     color: $primary;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 20px;
+    }
   }
 
   &__subtitle {
-    @include media-breakpoint-down(sm) {
-      font-size: 16px;
-    }
-
     display: block;
     margin-bottom: 10px;
     font-size: 20px;
     line-height: 1.3;
     color: #888;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 16px;
+    }
 
     &.empty {
       font-size: 16px;
@@ -140,14 +141,14 @@
   }
 
   &__span {
-    @include media-breakpoint-down(sm) {
-      font-size: 14px;
-    }
-
     display: block;
     margin-bottom: 16px;
     line-height: 1.1;
     color: #888;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 14px;
+    }
   }
 
   &__networks {
@@ -156,11 +157,11 @@
 
   &__network {
     &:not(:last-child) {
+      margin-right: 25px;
+
       @include media-breakpoint-down(sm) {
         margin-right: 20px;
       }
-
-      margin-right: 25px;
     }
 
     svg {
@@ -216,11 +217,11 @@
   }
 
   &__text {
+    margin-bottom: 40px;
+
     @include media-breakpoint-down(sm) {
       margin-bottom: 35px;
     }
-
-    margin-bottom: 40px;
 
     &.empty {
       opacity: 0.5;
@@ -228,10 +229,6 @@
   }
 
   &__button {
-    @include media-breakpoint-down(md) {
-      width: 100%;
-    }
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -241,8 +238,11 @@
     padding: 0 38px;
     height: 45px;
     font-size: 14px;
-    font-size: 14px;
     transition: all 0.3s ease;
+
+    @include media-breakpoint-down(md) {
+      width: 100%;
+    }
 
     &:hover {
       border-color: transparent;
