@@ -574,7 +574,7 @@
     "function-parentheses-newline-inside": "always-multi-line",
     "function-parentheses-space-inside": "never-single-line",
     "function-url-no-scheme-relative": true,
-    "function-url-quotes": "always",
+    "function-url-quotes": null,
     "function-whitespace-after": "always",
     "indentation": 2,
     "keyframe-declaration-no-important": true,
@@ -595,7 +595,7 @@
     "media-query-list-comma-space-after": "always-single-line",
     "media-query-list-comma-space-before": "never",
     "no-descending-specificity": null,
-    "no-duplicate-selectors": true,
+    "no-duplicate-selectors": null,
     "no-empty-source": [
       true,
       {
@@ -724,7 +724,7 @@
       }
     ],
     "scss/double-slash-comment-inline": null,
-    "scss/double-slash-comment-whitespace-inside": "always",
+    "scss/double-slash-comment-whitespace-inside": null,
     "scss/media-feature-value-dollar-variable": null,
     "scss/operator-no-newline-after": null,
     "scss/operator-no-newline-before": null,
