@@ -14,12 +14,12 @@ stages:
 lint-test:
   stage: test
   script:
-    - echo "Linting code... This will take about 10 seconds."
-    - sleep 1
-    - echo "No lint issues found."
+    - npm install
+    - npm audit fix
+    - npm run stylelint
+    - npm run eslint
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event' || $CI_COMMIT_MESSAGE != null
-
 
 .build-image-base: &build-image-base
   image: docker:20-dind
@@ -27,7 +27,7 @@ lint-test:
   services:
     - name: docker:20-dind
       alias: docker
-      command: [ "--tls=false" ]
+      command: ["--tls=false"]
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
@@ -35,7 +35,6 @@ lint-test:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   when: on_success
-
 
 build-image:
   <<: *build-image-base
@@ -57,7 +56,7 @@ deploy:
   variables:
     CLEAR_COMMAND: $(docker image ls -f 'dangling=true' -q)
   before_script:
-    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_KEY")
     - mkdir -p ~/.ssh
@@ -65,12 +64,12 @@ deploy:
   script:
     - echo $SSH_HOST
     - echo "ssh $SSH_HOST 'cd ~/checklist;
-        docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com;
-        docker pull "$CI_REGISTRY_IMAGE:latest";
-        docker-compose stop frontend;
-        docker-compose rm frontend;
-        docker-compose up -d frontend;
-        docker image rmi $CLEAR_COMMAND;'
-        " > docker
+      docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com;
+      docker pull "$CI_REGISTRY_IMAGE:latest";
+      docker-compose stop frontend;
+      docker-compose rm frontend;
+      docker-compose up -d frontend;
+      docker image rmi $CLEAR_COMMAND;'
+      " > docker
     - eval $(cat docker)
   when: on_success

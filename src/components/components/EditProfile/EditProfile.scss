@@ -2,12 +2,20 @@
 @import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .show {
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .edit-profile {
   margin-bottom: 100px;
   max-width: 1514px;
+
+  @include media-breakpoint-down(lg) {
+    margin-bottom: 50px;
+  }
+
+  @include media-breakpoint-down(lg) {
+    margin-bottom: 50px;
+  }
 
   @include media-breakpoint-down(lg) {
     margin-bottom: 50px;
@@ -81,6 +89,36 @@
     justify-content: space-between;
   }
 
+  &__popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 116px;
+    width: 100vw !important;
+    height: 30px;
+    font-size: 16px;
+    line-height: 19px;
+    color: #fff;
+    background: $primary;
+  }
+
+  &__popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 116px;
+    width: 100vw !important;
+    height: 30px;
+    font-size: 16px;
+    line-height: 19px;
+    color: #fff;
+    background: $primary;
+
+    @include media-breakpoint-down(xl) {
+      margin-top: 20px;
+    }
+  }
+
   &__title--one,
   &__title--two {
     &::after {
@@ -88,27 +126,6 @@
       position: absolute;
       font-size: 14px;
       color: $primary;
-    }
-  }
-
-  @include media-breakpoint-down(lg) {
-    margin-bottom: 50px;
-  }
-
-  &__popup {
-    width: 100vw !important;
-    height: 30px;
-    font-size: 16px;
-    line-height: 19px;
-    color: #ffffff;
-    background: $primary;
-    margin-top: 116px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @include media-breakpoint-down(xl) {
-      margin-top: 20px;
     }
   }
 }

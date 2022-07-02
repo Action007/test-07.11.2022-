@@ -1,10 +1,10 @@
 @import "../../../global-styles/_variables.scss";
-@import '../../../global-styles/_mixins.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import "../../../global-styles/_mixins.scss";
+@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
 
 .show {
-	margin-top: 0px;
- }
+  margin-top: 0;
+}
 
 .profile {
   margin-bottom: 30px;
@@ -12,25 +12,25 @@
 }
 
 .error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 116px;
   width: 100vw !important;
   height: 30px;
   font-size: 16px;
   line-height: 19px;
-  color: #ffffff;
+  color: #fff;
   background: $warning;
-  margin-top: 116px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   @include media-breakpoint-down(xl) {
-	margin-top: 20px;
- }
+    margin-top: 20px;
+  }
 
   @include media-breakpoint-down(sm) {
-	font-size: 14px;
-	line-height: 15px;
-	padding: 4px 15px;
-	text-align: center;
- }
+    padding: 4px 15px;
+    font-size: 14px;
+    line-height: 15px;
+    text-align: center;
+  }
 }

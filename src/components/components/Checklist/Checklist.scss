@@ -280,13 +280,13 @@
     color: $light;
   }
 
-  &:last-child {
-    margin-bottom: 42px;
-  }
-
   &:hover {
     box-shadow: 0 2px 4px 0 #e5e9f5;
     transform: translateY(-1px);
+  }
+
+  &:last-child {
+    margin-bottom: 42px;
   }
 
   &__liked,

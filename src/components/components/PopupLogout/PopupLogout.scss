@@ -123,14 +123,14 @@
       max-width: 50%;
     }
 
-    &:first-child {
-      margin-right: 14px;
-    }
-
     &:hover {
       border-color: transparent;
       color: #fff;
       background-color: $primary;
+    }
+
+    &:first-child {
+      margin-right: 14px;
     }
   }
 }

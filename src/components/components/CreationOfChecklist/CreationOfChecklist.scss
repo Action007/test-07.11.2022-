@@ -118,10 +118,6 @@
     background-color: $primary;
     transition: color 0.3s ease, background-color 0.3s ease, transform 0.09s ease;
 
-    &:active {
-      transform: scale(0.96);
-    }
-
     @include media-breakpoint-down(sm) {
       justify-content: center;
       width: 100%;
@@ -141,6 +137,10 @@
       svg {
         stroke: $primary;
       }
+    }
+
+    &:active {
+      transform: scale(0.96);
     }
   }
 
@@ -238,12 +238,12 @@
     max-width: 183px;
     transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, transform 0.09s ease;
 
-    &:active {
-      transform: scale(0.96);
-    }
-
     @include media-breakpoint-down(sm) {
       max-width: 100%;
+    }
+
+    &:active {
+      transform: scale(0.96);
     }
 
     &:first-child {
