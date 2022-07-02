@@ -107,7 +107,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       item.value?.link ? validateLink(item.value.link) : true
     );
     const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
-    const categoryIsValid = categoryID !== "" && categoryID !== false;
+    const categoryIsValid = categoryID !== "";
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
       dispatch(createChecklistActions.addChecklist());

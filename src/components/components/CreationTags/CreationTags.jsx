@@ -72,7 +72,9 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
     }
     let validTag = tag;
     const tagsIsValid = myTags.length > 1;
-    const addOrNot = myTags.find((item) => item.name === tag.name);
+    const addOrNot = myTags.find(
+      (item) => item.name === tag.name || item.id === tag.id
+    );
     if (addOrNot || myTags.length === 5) {
       setAddTagsHandler(false);
       return;
@@ -87,7 +89,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
     }
 
     setAddTagsHandler(true);
-    setShow(false);
+    setShow(true);
     dispatch(createChecklistActions.addTag(validTag));
 
     if (tagsIsValid) {
@@ -119,7 +121,8 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
 
   const filterTagsList = () => {
     return serverTags.filter(
-      (item) => !myTags.find((tag) => tag.name === item.name)
+      (item) =>
+        !myTags.find((tag) => tag.name === item.name || tag.id === item.id)
     );
   };
 

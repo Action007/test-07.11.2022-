@@ -57,7 +57,7 @@ const createChecklistSlice = createSlice({
       if (id) {
         state.category = { id, value, isValid: true };
       } else {
-        state.category = { value: "", name: "", isValid: false };
+        state.category = { id: "", value: "", isValid: false };
       }
     },
     setValidateAfterSubmit(state) {
@@ -150,7 +150,7 @@ const createChecklistSlice = createSlice({
       state.title = { value: "", isValid: true };
       state.checklist_items = [];
       state.tags = [];
-      state.category = { value: "", isValid: true, name: "" };
+      state.category = { value: "", isValid: true, id: "" };
       state.validateAfterSubmit = false;
     },
     editChecklist(state, action) {
@@ -163,9 +163,9 @@ const createChecklistSlice = createSlice({
       state.checklist_items = checklistItems;
       state.tags = tags;
       state.category = {
-        value: categories[0].id,
+        id: categories[0].id,
         isValid: true,
-        name: categories[0].name,
+        value: categories[0].value,
       };
     },
     // react-beautiful-dnd
