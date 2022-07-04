@@ -1,5 +1,5 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../global-styles/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
 
 .show {
   margin-top: 0;
@@ -87,19 +87,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-
-  &__popup {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 116px;
-    width: 100vw !important;
-    height: 30px;
-    font-size: 16px;
-    line-height: 19px;
-    color: #fff;
-    background: $primary;
   }
 
   &__popup {

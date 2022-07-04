@@ -10,25 +10,17 @@ $grid-breakpoints: (
   sm: 576px,
   md: 768px,
   lg: 992px,
-  xl: 1200px
+  xl: 1200px,
 );
 $display-font-sizes: (
   1: 5rem,
-  // can be changed
   2: 4.5rem,
-  // can be changed
   3: 4rem,
-  // can be changed
   4: 2.8rem,
-  //can"t be changed. Already in use
   5: 2rem,
-  // Can be changed
   6: 1.5rem,
-  //Can"t be changed. already in use
   7: 1.25rem,
-  //can"t be changed. Already in use
   8: 1rem,
-  //Can"t be changed. already in use
 );
 $spacer: 1rem;
 $spacers: (

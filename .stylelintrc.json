@@ -1,5 +1,9 @@
 {
-  "extends": "stylelint-config-standard-scss",
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-clean-order",
+    "stylelint-config-prettier"
+  ],
   "plugins": [
     "stylelint-order"
   ],
@@ -595,7 +599,7 @@
     "media-query-list-comma-space-after": "always-single-line",
     "media-query-list-comma-space-before": "never",
     "no-descending-specificity": null,
-    "no-duplicate-selectors": null,
+    "no-duplicate-selectors": true,
     "no-empty-source": [
       true,
       {
@@ -724,7 +728,7 @@
       }
     ],
     "scss/double-slash-comment-inline": null,
-    "scss/double-slash-comment-whitespace-inside": null,
+    "scss/double-slash-comment-whitespace-inside": "always",
     "scss/media-feature-value-dollar-variable": null,
     "scss/operator-no-newline-after": null,
     "scss/operator-no-newline-before": null,
@@ -732,13 +736,5 @@
     "scss/partial-no-import": null,
     "scss/percent-placeholder-pattern": null,
     "scss/selector-no-redundant-nesting-selector": true
-  },
-  "overrides": [
-    {
-      "files": [
-        "src/scss/*/**.scss"
-      ],
-      "customSyntax": "postcss-scss"
-    }
-  ]
+  }
 }

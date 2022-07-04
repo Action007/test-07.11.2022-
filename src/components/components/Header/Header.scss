@@ -1,6 +1,6 @@
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
-@import "../../../global-styles/_variables.scss";
-@import "../../../global-styles/_fonts.scss";
+@import "../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../global-styles/variables";
+@import "../../../global-styles/fonts";
 
 .header {
   padding: 0 34px;
@@ -364,10 +364,7 @@
     height: 40px;
     max-width: 130px;
     font-size: 16px;
-    transition:
-      background-color 0.3s ease,
-      border-color 0.3s ease,
-      color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 
     &:hover {
       border-color: $primary;
