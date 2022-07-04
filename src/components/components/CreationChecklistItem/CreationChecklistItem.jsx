@@ -184,7 +184,7 @@ const CreationChecklistItem = ({
           <div className="creation-item__inner">
             {!!inValid && validateAfterSubmit && (
               <span className="creation-item__invalid text">
-                {translate("creationOfChecklist.max")}
+                {translate("creationOfChecklist.maxItem")}
               </span>
             )}
             <label className="creation-item__text" htmlFor={id}>
