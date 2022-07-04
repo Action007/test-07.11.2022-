@@ -66,7 +66,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const tagsIsValid = tags.length > 2;
     const isDescriptionValid = checklist_items.findIndex(
       (item) =>
-        item.description.trim().length < 10 ||
+        item.description.trim().length < 2 ||
         item.description.trim().length > 150
     );
     const isLinksValid = checklist_items.findIndex((item) =>
@@ -100,7 +100,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const tagsIsValid = tags.length > 2;
     const isDescriptionValid = checklist_items.findIndex(
       (item) =>
-        item.description.trim().length < 10 ||
+        item.description.trim().length < 2 ||
         item.description.trim().length > 150
     );
     const isLinksValid = checklist_items.findIndex((item) =>
