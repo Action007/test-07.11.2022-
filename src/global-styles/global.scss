@@ -1,6 +1,6 @@
-@import "./_fonts.scss";
-@import "./_variables.scss";
-@import "../../node_modules/bootstrap/scss/_mixins.scss";
+@import "./fonts";
+@import "./variables";
+@import "../../node_modules/bootstrap/scss/mixins";
 
 html {
   scroll-behavior: inherit !important;
@@ -239,6 +239,16 @@ p {
     visibility: hidden;
     transform: translateX(28%);
     transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+}
+
+.modal-body {
+  .creation-map {
+    margin-left: 0;
+
+    .leaflet-control-geocoder {
+      top: 0;
+    }
   }
 }
 

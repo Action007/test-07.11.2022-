@@ -1,4 +1,4 @@
-@import "../../../global-styles/_variables.scss";
+@import "../../../global-styles/variables";
 
 .creation-map {
   position: relative;
@@ -40,25 +40,13 @@
     display: none;
   }
 
-  .leaflet-control-geocoder-alternatives li {
-    text-align: left;
-  }
-
-  .leaflet-control-geocoder-form input {
-    display: flex;
-    width: 100%;
-    max-width: 300px;
-  }
-
   .leaflet-control-geocoder-alternatives {
     width: 100%;
     max-width: 300px;
-  }
 
-  .leaflet-touch .leaflet-control-geocoder {
-    top: 40px;
-    min-width: 35px;
-    min-height: 35px;
+    li {
+      text-align: left;
+    }
   }
 
   .leaflet-bottom.leaflet-right {
@@ -71,24 +59,10 @@
     color: $dark;
   }
 
-  .leaflet-control-geocoder-alternatives li {
-    text-align: left;
-  }
-
   .leaflet-control-geocoder-form input {
     display: flex;
     width: 100%;
     max-width: 300px;
-  }
-
-  .leaflet-control-geocoder-alternatives {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .leaflet-touch .leaflet-control-geocoder {
-    min-width: 35px;
-    min-height: 35px;
   }
 
   .leaflet-touch .leaflet-control-geocoder-icon {
@@ -98,9 +72,12 @@
   }
 
   .leaflet-touch .leaflet-control-geocoder {
+    top: 40px;
     border: none;
     border-radius: 6px;
     padding: 5px;
+    min-width: 35px;
+    min-height: 35px;
     box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
     cursor: pointer;
   }
@@ -154,16 +131,6 @@
 
     &:hover svg {
       fill: $dark;
-    }
-  }
-}
-
-.modal-body {
-  .creation-map {
-    margin-left: 0;
-
-    .leaflet-control-geocoder {
-      top: 0;
     }
   }
 }

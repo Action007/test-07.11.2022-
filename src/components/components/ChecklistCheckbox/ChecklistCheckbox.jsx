@@ -86,6 +86,7 @@ const ChecklistCheckbox = ({
         )}
         {list_type === "image" && <ChecklistImage image={value.image} />}
       </li>
+
       <PopupCreateDone show={modalShow} onHide={() => setModalShow(false)} />
     </>
   );

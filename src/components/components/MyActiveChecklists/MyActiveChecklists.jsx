@@ -117,9 +117,8 @@ const MyActiveChecklists = () => {
           totalPage={checklists.paginate.total_pages}
           prevPage={checklists.paginate.prev_page}
           nextPage={checklists.paginate.next_page}
-          url={`${
-            category === "active" ? "completed=false" : "completed=true"
-          }`}
+          url={`${category === "active" ? "completed=false" : "completed=true"
+            }`}
         />
       )}
     </div>
