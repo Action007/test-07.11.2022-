@@ -3,6 +3,7 @@
 
 .checklist-item {
   margin-right: 55px;
+
   line-height: 1.2;
   word-break: break-word;
 
@@ -20,11 +21,13 @@
 
   &__link {
     margin: 5px 8px;
+
     color: $primary;
 
     svg {
       margin-top: -4px;
       margin-left: 2px;
+
       fill: $primary;
     }
   }

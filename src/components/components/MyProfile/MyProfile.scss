@@ -7,20 +7,23 @@
 }
 
 .profile {
-  margin-bottom: 30px;
   max-width: 1112px;
+  margin-bottom: 30px;
 }
 
 .error {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 116px;
+
   width: 100vw !important;
   height: 30px;
+  margin-top: 116px;
+
   font-size: 16px;
   line-height: 19px;
   color: #fff;
+
   background: $warning;
 
   @include media-breakpoint-down(xl) {
@@ -29,6 +32,7 @@
 
   @include media-breakpoint-down(sm) {
     padding: 4px 15px;
+
     font-size: 14px;
     line-height: 15px;
     text-align: center;

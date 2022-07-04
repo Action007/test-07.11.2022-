@@ -1,16 +1,19 @@
 @import "../../../global-styles/variables";
 
 .checklist-comments {
-  margin: 0 auto;
-  border-radius: 6px;
-  padding: 25px;
   width: 100%;
   max-width: 834px;
+  margin: 0 auto;
+  padding: 25px;
+
   background-color: #fff;
+  border-radius: 6px;
 
   &__review {
     display: block;
+
     margin-bottom: 16px;
+
     font-size: 16px;
   }
 
@@ -28,22 +31,23 @@
   }
 
   &__input {
-    outline: transparent;
+    width: 100%;
+    padding: 10px 0;
+
     border: none;
     border-bottom: 2px solid #4f4f4f38;
-    padding: 10px 0;
-    width: 100%;
+    outline: transparent;
 
     &::placeholder {
       color: $dark;
     }
 
-    &:focus {
-      border-color: $primary;
-    }
-
     &.invalid {
       border-color: $warning;
+    }
+
+    &:focus {
+      border-color: $primary;
     }
   }
 
@@ -53,14 +57,18 @@
 
   &__button {
     svg {
-      margin-right: 13px;
-      stroke: $dark;
       transform: rotate(90deg);
+
+      margin-right: 13px;
+
+      stroke: $dark;
+
       transition: stroke 0.3s ease;
     }
 
     &:hover {
       color: #fff;
+
       background-color: $primary;
 
       svg {
@@ -70,17 +78,21 @@
   }
 
   &__loading {
-    position: relative;
     cursor: wait;
+
+    position: relative;
   }
 
   .spinner {
     position: absolute;
     left: 28px;
+
     justify-content: start;
-    margin-right: 0;
+
     width: auto;
     height: auto;
+    margin-right: 0;
+
     background-color: transparent;
   }
 
@@ -89,10 +101,11 @@
     height: 32px;
 
     &::after {
-      margin: 0;
-      border-width: 5px;
       width: 100%;
       height: 100%;
+      margin: 0;
+
+      border-width: 5px;
     }
   }
 
@@ -101,13 +114,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 30px;
-    border-radius: 6px;
-    padding: 5px;
+
     width: 100%;
-    height: 52px;
     max-width: 235px;
+    height: 52px;
+    margin-top: 30px;
+    padding: 5px;
+
     background-color: #ecf2ff;
+    border-radius: 6px;
+
     transition: all 0.3s ease;
   }
 }

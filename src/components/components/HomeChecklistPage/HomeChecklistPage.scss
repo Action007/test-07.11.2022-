@@ -8,6 +8,7 @@
 
   &__wrapper {
     display: flex;
+
     margin-bottom: 100px;
 
     @include media-breakpoint-down(lg) {
@@ -23,10 +24,12 @@
 
   &__title {
     margin-bottom: 20px;
+
     font-size: 28px;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 27px;
+
       font-size: 20px;
     }
   }
@@ -41,10 +44,12 @@
 
   &__inner {
     position: relative;
-    margin: 0 auto;
-    padding: 93px 0 101px;
+
     width: 100%;
     max-width: 1920px;
+    margin: 0 auto;
+    padding: 93px 0 101px;
+
     background-color: #fff;
 
     @include media-breakpoint-down(md) {
@@ -54,17 +59,20 @@
 
     &::before {
       content: "";
+
       position: absolute;
-      left: 0;
-      top: 0;
       z-index: 0;
+      top: 0;
+      left: 0;
+
       width: 100%;
-      height: 331px;
       max-width: 414px;
+      height: 331px;
+
       background-image: url("../../../assets/images/content/main-bgc1.svg");
+      background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
-      background-repeat: no-repeat;
 
       @include media-breakpoint-down(sm) {
         display: none;
@@ -73,20 +81,24 @@
 
     &::after {
       content: "";
+
       position: absolute;
+      z-index: 0;
       right: 24px;
       bottom: -3px;
-      z-index: 0;
+
       width: 100%;
-      height: 608px;
       max-width: 939px;
+      height: 608px;
+
       background-image: url("../../../assets/images/content/main-bgc2.svg");
+      background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
-      background-repeat: no-repeat;
 
       @include media-breakpoint-down(xl) {
         right: 0;
+
         background-image: url("../../../assets/images/content/main-bgc3.svg");
         background-position: right center;
       }
@@ -96,13 +108,15 @@
   &__container {
     position: relative;
     z-index: 1;
+
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin: 0 auto;
-    padding: 0 200px 0 34px;
+
     width: 100%;
     max-width: 1614px;
+    margin: 0 auto;
+    padding: 0 200px 0 34px;
 
     @include media-breakpoint-down(md) {
       padding: 0 16px;
@@ -120,10 +134,11 @@
   &__img {
     position: relative;
     z-index: 1;
-    margin-bottom: 29px;
+
     width: 100%;
-    height: 36px;
     max-width: 150px;
+    height: 36px;
+    margin-bottom: 29px;
 
     @include media-breakpoint-down(md) {
       margin-bottom: 41px;
@@ -138,8 +153,10 @@
   &__heading {
     position: relative;
     z-index: 1;
-    margin-bottom: 44px;
+
     max-width: 547px;
+    margin-bottom: 44px;
+
     font-size: 42px;
 
     @include media-breakpoint-down(xl) {
@@ -152,6 +169,7 @@
 
     @include media-breakpoint-down(md) {
       margin-bottom: 21px;
+
       font-size: 32px;
     }
 
@@ -163,8 +181,9 @@
   &__desc {
     position: relative;
     z-index: 1;
-    margin-bottom: 69px;
+
     max-width: 491px;
+    margin-bottom: 69px;
 
     @include media-breakpoint-down(md) {
       margin-bottom: 84px;
@@ -173,6 +192,7 @@
 
   &__text {
     display: block;
+
     font-size: 28px;
     text-align: center;
   }
@@ -182,6 +202,7 @@
 
     @include media-breakpoint-down(sm) {
       justify-content: center;
+
       width: 100%;
     }
   }
@@ -190,30 +211,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 32px;
+
     width: 100%;
-    height: 130px;
     max-width: 444px;
-    box-shadow: 0 0 8px 0 #0000001a;
+    height: 130px;
+
     background-color: #fff;
+    border-radius: 32px;
+    box-shadow: 0 0 8px 0 #0000001a;
 
     @include media-breakpoint-down(xl) {
       margin-bottom: 52px;
     }
 
     @include media-breakpoint-down(md) {
-      height: 91px;
       max-width: 311px;
+      height: 91px;
     }
   }
 
   &__image {
-    display: block;
     overflow: hidden;
-    border-radius: 6px;
+    display: block;
+
+    background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
+    border-radius: 6px;
 
     &:not(:last-child) {
       margin-right: 45px;
@@ -226,49 +250,53 @@
 
   &__image:nth-child(1) {
     width: 100%;
-    height: 40px;
     max-width: 40px;
+    height: 40px;
+
     background-image: url("../../../assets/images/content/S.png");
 
     @include media-breakpoint-down(md) {
-      height: 25px;
       max-width: 25px;
+      height: 25px;
     }
   }
 
   &__image:nth-child(2) {
     width: 100%;
-    height: 50px;
     max-width: 50px;
+    height: 50px;
+
     background-image: url("../../../assets/images/content/M.png");
 
     @include media-breakpoint-down(md) {
-      height: 35px;
       max-width: 35px;
+      height: 35px;
     }
   }
 
   &__image:nth-child(3) {
     width: 100%;
-    height: 70px;
     max-width: 70px;
+    height: 70px;
+
     background-image: url("../../../assets/images/content/L.png");
 
     @include media-breakpoint-down(md) {
-      height: 45px;
       max-width: 45px;
+      height: 45px;
     }
   }
 
   &__image:nth-child(4) {
     width: 100%;
-    height: 80px;
     max-width: 80px;
+    height: 80px;
+
     background-image: url("../../../assets/images/content/XL.png");
 
     @include media-breakpoint-down(md) {
-      height: 55px;
       max-width: 55px;
+      height: 55px;
     }
   }
 }
