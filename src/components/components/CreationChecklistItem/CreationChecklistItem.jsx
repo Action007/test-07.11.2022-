@@ -152,6 +152,13 @@ const CreationChecklistItem = ({
         </Modal.Header>
         <Modal.Body>
           <img src={value.image} alt={description} />
+          <button
+            onClick={() => setShowImage(false)}
+            className="creation-item__remove"
+            type="button"
+          >
+            <CancelIcon />
+          </button>
         </Modal.Body>
       </Modal>
     </>
