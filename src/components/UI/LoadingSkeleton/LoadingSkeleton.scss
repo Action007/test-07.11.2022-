@@ -3,12 +3,14 @@
 
 .loading-list {
   position: relative;
-  margin: 0 auto 43px;
-  border-radius: 6px;
-  padding: 34px;
+
   width: 100%;
   max-width: 834px;
+  margin: 0 auto 43px;
+  padding: 34px;
+
   background-color: #fff;
+  border-radius: 6px;
 
   @include media-breakpoint-down(sm) {
     padding: 30px 19px;
@@ -23,8 +25,8 @@
   }
 
   &__skeleton--title {
-    margin-bottom: 18px;
     height: 28px;
+    margin-bottom: 18px;
   }
 
   &__skeleton--text {
@@ -54,19 +56,22 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     width: 100%;
     max-width: 235px;
 
     @include media-breakpoint-down(sm) {
       justify-content: flex-end;
-      margin-bottom: 7px;
+
       max-width: 128px;
+      margin-bottom: 7px;
     }
   }
 
   &__tags {
     display: flex;
     flex-wrap: wrap;
+
     margin-bottom: 28px;
 
     @include media-breakpoint-down(sm) {
@@ -76,9 +81,10 @@
 
   &__buttons {
     display: flex;
-    margin-right: 25px;
+
     width: 100%;
     max-width: 127px;
+    margin-right: 25px;
 
     @include media-breakpoint-down(sm) {
       margin-right: 0;
@@ -86,17 +92,18 @@
   }
 
   &__skeleton--tag {
+    max-width: 43px;
+    height: 28px;
     margin-right: 4px;
     margin-bottom: 4px;
+
     border-radius: 4px;
-    height: 28px;
-    max-width: 43px;
   }
 
   &__skeleton--button {
-    margin-right: 10px;
-    height: 50px;
     max-width: 150px;
+    height: 50px;
+    margin-right: 10px;
 
     @include media-breakpoint-down(sm) {
       margin: 25px 10px 0 0;
@@ -104,8 +111,8 @@
   }
 
   &__skeleton--btn {
-    height: 36px;
     max-width: 58px;
+    height: 36px;
 
     &:first-child {
       margin-right: 8px;
@@ -113,8 +120,8 @@
   }
 
   &__skeleton--time {
-    height: 18px;
     max-width: 80px;
+    height: 18px;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 24px;
@@ -130,24 +137,33 @@
 
     position: relative;
     z-index: 1; /* Necessary for overflow: hidden to work correctly in Safari */
+
     overflow: hidden;
-    border-radius: 6px;
+
     width: 100%;
+
     line-height: 1;
+
     background-color: var(--base-color);
+    border-radius: 6px;
   }
 
   &__skeleton::after {
     content: " ";
+
     position: absolute;
-    left: 0;
-    right: 0;
     top: 0;
+    right: 0;
+    left: 0;
+    transform: translateX(-100%);
+
     display: var(--pseudo-element-display);
+
     height: 100%;
+
     background-image: linear-gradient(90deg, var(--base-color), var(--highlight-color), var(--base-color));
     background-repeat: no-repeat;
-    transform: translateX(-100%);
+
     animation-name: react-loading-skeleton;
     animation-duration: var(--animation-duration);
     animation-timing-function: ease-in-out;

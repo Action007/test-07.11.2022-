@@ -1,32 +1,37 @@
 .tag-list {
   position: absolute;
-  left: 3px;
-  top: 38px;
   z-index: 2;
+  top: 38px;
+  left: 3px;
+
   overflow-y: auto;
-  margin: 0;
-  border: 1px solid #efefef;
-  border-radius: 6px;
-  padding: 7px 0;
+
   min-width: 132px;
   max-height: 300px;
-  box-shadow: 0 2px 2px 0 #00000010;
+  margin: 0;
+  padding: 7px 0;
+
   word-break: break-word;
+
   background-color: #fff;
+  border: 1px solid #efefef;
+  border-radius: 6px;
+  box-shadow: 0 2px 2px 0 #00000010;
 
   &__item {
     button {
-      padding: 10px 30px 10px 14px;
       width: 100%;
+      padding: 10px 30px 10px 14px;
+
       line-height: 1.1;
       text-align: left;
     }
 
-    &:hover {
+    &.active {
       background-color: #efefef;
     }
 
-    &.active {
+    &:hover {
       background-color: #efefef;
     }
   }

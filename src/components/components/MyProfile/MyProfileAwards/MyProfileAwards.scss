@@ -3,12 +3,13 @@
 
 .profile-awards {
   &__wrap {
-    margin: 0 auto;
-    border-radius: 6px;
-    padding: 40px 68px;
     width: 100%;
     max-width: 1044px;
+    margin: 0 auto;
+    padding: 40px 68px;
+
     background-color: #fff;
+    border-radius: 6px;
 
     @include media-breakpoint-down(md) {
       padding: 28px 23px;
@@ -17,7 +18,9 @@
 
   &__head {
     display: block;
+
     margin-bottom: 25px;
+
     color: #888;
   }
 
@@ -35,11 +38,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    width: 100%;
+    max-width: 180px;
+    height: 175px;
+
     border: 1px solid #c8d4ff;
     border-radius: 6px;
-    width: 100%;
-    height: 175px;
-    max-width: 180px;
     box-shadow: 0 3px 4px 0 #eceff9;
 
     @include media-breakpoint-down(md) {
@@ -58,19 +63,21 @@
 
   &__num {
     margin-right: 10px;
+
     font-size: 22px;
   }
 
   &__desc {
     max-width: 70px;
+
     font-size: 12px;
     line-height: 1.2;
   }
 
   &__svg {
-    margin-bottom: 22px;
     width: 60px;
     height: 60px;
+    margin-bottom: 22px;
 
     @include media-breakpoint-down(md) {
       width: 50px;
@@ -84,10 +91,11 @@
   }
 
   &__empty {
+    transform: translateY(-30px);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: translateY(-30px);
   }
 
   &__inner {
@@ -98,10 +106,12 @@
 
   &__span {
     margin-bottom: 25px;
+
     font-size: 22px;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 20px;
+
       font-size: 18px;
     }
   }
@@ -110,7 +120,8 @@
 .create-button {
   @include media-breakpoint-down(sm) {
     justify-content: center;
-    padding: 13px 30px;
+
     width: 100%;
+    padding: 13px 30px;
   }
 }

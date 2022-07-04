@@ -2,15 +2,15 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
 .sign-up {
-  padding: 43px 37px 0;
   width: 100%;
-  height: 780px;
   max-width: 585px;
+  height: 780px;
+  padding: 43px 37px 0;
 
   @include media-breakpoint-down(lg) {
-    padding-bottom: 90px;
-    height: inherit;
     max-width: 100%;
+    height: inherit;
+    padding-bottom: 90px;
   }
 
   @include media-breakpoint-down(md) {
@@ -18,15 +18,19 @@
   }
 
   &__buttons {
+    overflow: hidden;
     display: flex;
     align-items: center;
-    overflow: hidden;
+
     margin-bottom: 40px;
-    border-radius: 6px;
+
     font-size: 18px;
+
+    border-radius: 6px;
 
     @include media-breakpoint-down(lg) {
       justify-content: center;
+
       margin-bottom: 0;
     }
   }
@@ -35,11 +39,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #4f4f4f4d;
+
     width: 100%;
-    height: 60px;
     max-width: 253px;
+    height: 60px;
+
     background-color: #fff;
+    border: 1px solid #4f4f4f4d;
 
     @include media-breakpoint-down(lg) {
       max-width: 100%;
@@ -56,10 +62,11 @@
     }
 
     &.active {
-      border-color: transparent;
-      font-family: "SFPro-Medium", sans-serif;
+      font-family: SFPro-Medium, sans-serif;
       color: #fff;
+
       background-color: $primary;
+      border-color: transparent;
     }
   }
 
@@ -67,6 +74,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     width: 100%;
     max-width: 465px;
 
@@ -75,9 +83,9 @@
     }
 
     @include media-breakpoint-down(sm) {
-      margin: 45px auto;
-      height: 168px;
       max-width: 165px;
+      height: 168px;
+      margin: 45px auto;
     }
 
     svg {
@@ -87,6 +95,7 @@
 
   &__title {
     margin-bottom: 45px;
+
     font-size: 24px;
   }
 
@@ -99,12 +108,13 @@
     margin-bottom: 29px;
 
     input {
-      outline: transparent;
-      border: 1px solid #4f4f4f4d;
-      border-radius: 6px;
-      padding: 0 18px;
       width: 100%;
       height: 60px;
+      padding: 0 18px;
+
+      border: 1px solid #4f4f4f4d;
+      border-radius: 6px;
+      outline: transparent;
 
       &::placeholder {
         font-size: 16px;
@@ -135,33 +145,41 @@
 
   &__span {
     display: block;
+
     margin-bottom: 9px;
+
     line-height: 1.2;
   }
 
   &__submit {
-    margin-bottom: 26px;
-    border: 1px solid transparent;
-    border-radius: 6px;
     width: 100%;
     height: 60px;
+    margin-bottom: 26px;
+
     font-size: 18px;
     color: #fff;
+
     background-color: $primary;
+    border: 1px solid transparent;
+    border-radius: 6px;
+
     transition: all 0.3s ease;
 
     &:hover {
-      border-color: $primary;
       color: $primary;
+
       background-color: #fff;
+      border-color: $primary;
     }
   }
 
   &__invalid {
     display: flex;
     align-items: center;
+
     margin-top: 2px;
     margin-bottom: 9px;
+
     font-size: 16px;
     color: $warning;
 
@@ -175,8 +193,8 @@
   }
 
   &__link {
-    text-decoration: underline;
     color: $primary;
+    text-decoration: underline;
   }
 
   &__desc {
@@ -187,16 +205,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     height: 100%;
   }
 
   &__heading {
     margin-bottom: 27px;
+
     font-size: 24px;
   }
 
   &__subtitle {
     margin-bottom: 62px;
+
     font-size: 18px;
   }
 
@@ -204,19 +225,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid transparent;
-    border-radius: 8px;
+
     width: 100%;
     height: 60px;
+
     font-size: 18px;
     color: #fff;
+
     background-color: $primary;
+    border: 1px solid transparent;
+    border-radius: 8px;
+
     transition: all 0.3s ease;
 
     &:hover {
-      border-color: $primary;
       color: $primary;
+
       background-color: #fff;
+      border-color: $primary;
     }
   }
 }

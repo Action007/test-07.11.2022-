@@ -3,29 +3,34 @@
 
 .sidebar {
   overflow: hidden;
-  margin-right: 45px;
-  border-radius: 6px;
+
   width: 100%;
   max-width: 326px;
+  margin-right: 45px;
+
+  border-radius: 6px;
 
   @include media-breakpoint-down(xl) {
     margin-right: 20px;
   }
 
   @include media-breakpoint-down(lg) {
-    margin: 0 0 40px;
     max-width: 100%;
+    margin: 0 0 40px;
   }
 
   &__head {
-    padding: 18px 28px;
     width: 100%;
+    padding: 18px 28px;
+
     font-size: 20px;
     color: #fff;
+
     background-color: $dark;
 
     @include media-breakpoint-down(lg) {
       padding: 0;
+
       background-color: $dark;
     }
   }
@@ -33,11 +38,13 @@
   &__list {
     display: flex;
     flex-direction: column;
-    margin: 0;
-    border-radius: 0 0 8px 8px;
-    padding: 12px 12px 22px;
+
     width: 100%;
+    margin: 0;
+    padding: 12px 12px 22px;
+
     background-color: #fff;
+    border-radius: 0 0 8px 8px;
 
     @include media-breakpoint-down(lg) {
       border: 1px solid #b9b9b980;
@@ -48,12 +55,16 @@
   &__button {
     display: flex;
     align-items: center;
-    margin-bottom: 3px;
-    border-radius: 6px;
-    padding: 16px 22px;
+
     width: 100%;
+    margin-bottom: 3px;
+    padding: 16px 22px;
+
     font-size: 16px;
     text-align: left;
+
+    border-radius: 6px;
+
     transition: transform 0.09s ease;
 
     @include media-breakpoint-down(sm) {
@@ -64,17 +75,18 @@
       margin-right: 25px;
     }
 
-    &:hover {
-      background-color: #eee;
+    &.active {
+      color: #fff;
+
+      background-color: $primary;
     }
 
     &:active {
       transform: scale(0.96);
     }
 
-    &.active {
-      color: #fff;
-      background-color: $primary;
+    &:hover {
+      background-color: #eee;
     }
   }
 
@@ -82,6 +94,7 @@
     svg {
       width: 25px;
       height: 25px;
+
       fill: $dark;
     }
 
@@ -92,9 +105,10 @@
 
   &__button--stroke {
     svg {
-      margin-right: 25px;
       width: 25px;
       height: 25px;
+      margin-right: 25px;
+
       stroke: $dark;
     }
 
@@ -106,13 +120,17 @@
   &__popular {
     display: flex;
     align-items: center;
-    margin-bottom: 3px;
-    border-radius: 6px;
-    padding: 16px 22px;
+
     width: 100%;
+    margin-bottom: 3px;
+    padding: 16px 22px;
+
     font-size: 16px;
-    text-align: left;
     color: $warning;
+    text-align: left;
+
+    border-radius: 6px;
+
     transition: transform 0.09s ease, background-color 0.15s ease;
 
     @include media-breakpoint-down(sm) {
@@ -120,43 +138,50 @@
     }
 
     svg {
-      margin-right: 25px;
       width: 25px;
       height: 25px;
+      margin-right: 25px;
+
       fill: $warning;
       stroke: $warning;
     }
 
-    &:hover {
-      background-color: #eee;
-    }
-
-    &:active {
-      transform: scale(0.96);
-    }
-
     &.hot {
       color: #fff;
+
       background-color: $warning;
+
       transition: transform 0.09s ease, background-color 0.15s ease;
 
       svg {
         stroke: #fff;
       }
     }
+
+    &:active {
+      transform: scale(0.96);
+    }
+
+    &:hover {
+      background-color: #eee;
+    }
   }
 
   .accordion-button {
     justify-content: center;
+
     padding: 16px 28px;
+
     font-size: 16px;
     color: #fff;
+
     background-color: $dark;
 
     &::after {
-      margin-left: 22px;
       width: 14px;
       height: 10px;
+      margin-left: 22px;
+
       background-image: url("../../../assets/images/icon/accordion.svg");
       background-size: contain;
     }

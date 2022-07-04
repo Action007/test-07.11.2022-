@@ -2,23 +2,27 @@
 @import "../../../../node_modules/bootstrap/scss/mixins";
 
 .account-setting {
-  margin-bottom: 100px;
   max-width: 1112px;
+  margin-bottom: 100px;
 
   &__wrapper {
     display: flex;
     justify-content: space-between;
-    margin: 0 auto;
-    border-radius: 6px;
-    padding: 34px 97px 51px 59px;
+
     width: 100%;
     max-width: 1044px;
+    margin: 0 auto;
+    padding: 34px 97px 51px 59px;
+
     background-color: #fff;
+    border-radius: 6px;
 
     @include media-breakpoint-down(lg) {
       flex-wrap: wrap-reverse;
       justify-content: center;
+
       padding: 0;
+
       background-color: $body;
     }
   }
@@ -26,6 +30,7 @@
   &__form {
     display: flex;
     flex-direction: column;
+
     width: 100%;
     max-width: 512px;
 
@@ -37,17 +42,19 @@
   &__label {
     display: flex;
     flex-direction: column;
-    margin-bottom: 24px;
+
     width: 100%;
+    margin-bottom: 24px;
 
     input {
-      margin-top: 8px;
-      outline: transparent;
-      border: 1px solid #c8d4ff;
-      border-radius: 6px;
-      padding: 0 21px;
       width: 100%;
       height: 54px;
+      margin-top: 8px;
+      padding: 0 21px;
+
+      border: 1px solid #c8d4ff;
+      border-radius: 6px;
+      outline: transparent;
 
       &:focus {
         border-color: $primary;
@@ -67,25 +74,30 @@
 
   &__title {
     position: relative;
+
     font-size: 18px;
     line-height: 1.3;
   }
 
   &__subtitle {
     margin-top: 4px;
+
     font-size: 12px;
     line-height: 1.3;
   }
 
   &__submit {
+    width: 100%;
+    max-width: 159px;
+    height: 45px;
     margin-top: 36px;
+
+    color: #fff;
+
+    background-color: $primary;
     border: 1px solid transparent;
     border-radius: 6px;
-    width: 100%;
-    height: 45px;
-    max-width: 159px;
-    color: #fff;
-    background-color: $primary;
+
     transition: all 0.3s ease;
 
     @include media-breakpoint-down(lg) {
@@ -97,9 +109,10 @@
     }
 
     &:hover {
-      border-color: $primary;
       color: $primary;
+
       background-color: #fff;
+      border-color: $primary;
     }
   }
 }

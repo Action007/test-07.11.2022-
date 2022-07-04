@@ -1,6 +1,6 @@
-@import "./fonts";
-@import "./variables";
-@import "../../node_modules/bootstrap/scss/mixins";
+@import './fonts';
+@import './variables';
+@import '../../node_modules/bootstrap/scss/mixins';
 
 html {
   scroll-behavior: inherit !important;
@@ -13,16 +13,55 @@ body,
 }
 
 body {
-  font-family: "SFPro-Regular", sans-serif;
+  font-family: SFPro-Regular, sans-serif;
   font-size: 16px;
   color: $dark;
-  -webkit-tap-highlight-color: transparent;
+
   background-color: $body;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+ul {
+  padding: 0;
+
+  list-style: none;
+}
+
+ol {
+  padding-left: 16px;
+}
+
+a {
+  display: inline-block;
+
+  color: inherit;
+  text-decoration: none;
+
+  outline: transparent;
+}
+
+button {
+  cursor: pointer;
+
+  padding: 0;
+
+  color: inherit;
+
+  background: none;
+  border: none;
+  outline: transparent;
+}
+
+ul,
+p {
+  margin: 0;
 }
 
 #root {
   display: flex;
   flex-direction: column;
+
   min-height: 100%;
 }
 
@@ -31,10 +70,10 @@ body {
 }
 
 .container {
-  margin: 116px auto 0;
-  padding: 0 34px;
   width: 100%;
   max-width: 1614px;
+  margin: 116px auto 0;
+  padding: 0 34px;
 
   @include media-breakpoint-down(xl) {
     margin-top: 0;
@@ -46,8 +85,8 @@ body {
 }
 
 .container-wrapper {
-  margin: 0 auto;
   max-width: 1047px;
+  margin: 0 auto;
 }
 
 .container-breadcrumb {
@@ -56,38 +95,16 @@ body {
 
 .sr-only {
   position: absolute;
+
   overflow: hidden;
-  margin: -1px;
-  border: 0;
-  padding: 0;
+
   width: 1px;
   height: 1px;
+  margin: -1px;
+  padding: 0;
+
   clip: rect(0, 0, 0, 0);
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-ol {
-  padding-left: 16px;
-}
-
-a {
-  display: inline-block;
-  outline: transparent;
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  outline: transparent;
-  border: none;
-  padding: 0;
-  color: inherit;
-  background: none;
-  cursor: pointer;
+  border: 0;
 }
 
 .br-8 {
@@ -95,23 +112,23 @@ button {
 }
 
 .SFPro-300 {
-  font-family: "SFPro-Regular", sans-serif;
+  font-family: SFPro-Regular, sans-serif;
 }
 
 .SFPro-400 {
-  font-family: "SFPro-Regular", sans-serif;
+  font-family: SFPro-Regular, sans-serif;
 }
 
 .SFPro-500 {
-  font-family: "SFPro-Medium", sans-serif;
+  font-family: SFPro-Medium, sans-serif;
 }
 
 .SFPro-600 {
-  font-family: "SFPro-SemiBold", sans-serif;
+  font-family: SFPro-SemiBold, sans-serif;
 }
 
 .SFPro-700 {
-  font-family: "SFPro-Bold", sans-serif;
+  font-family: SFPro-Bold, sans-serif;
 }
 
 .modal-dialog {
@@ -121,6 +138,7 @@ button {
 
 .modal-content {
   overflow: hidden;
+
   border: none;
   border-radius: 6px;
 }
@@ -128,16 +146,16 @@ button {
 .popup-complain {
   display: none;
 
+  .modal-body {
+    padding: 0;
+  }
+
   .modal-content {
     width: inherit;
   }
 
   .modal-header {
     display: none;
-  }
-
-  .modal-body {
-    padding: 0;
   }
 
   .modal-dialog {
@@ -153,11 +171,6 @@ button {
   padding: 0 !important;
 }
 
-ul,
-p {
-  margin: 0;
-}
-
 .title--margin {
   margin-bottom: 46px;
 
@@ -167,26 +180,30 @@ p {
 }
 
 .checklist-button {
-  border: 1px solid transparent;
-  border-radius: 6px;
   padding: 13px 36px;
+
   font-size: 16px;
   color: #fff;
+
   background-color: $primary;
+  border: 1px solid transparent;
+  border-radius: 6px;
+
   transition: color 0.3s ease, background-color 0.3s ease, transform 0.09s ease;
 
   @include media-breakpoint-down(sm) {
     width: 100%;
   }
 
-  &:hover {
-    border-color: $primary;
-    color: $primary;
-    background-color: #fff;
-  }
-
   &:active {
     transform: scale(0.96);
+  }
+
+  &:hover {
+    color: $primary;
+
+    background-color: #fff;
+    border-color: $primary;
   }
 }
 
@@ -197,13 +214,25 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+
     width: 20px;
     height: 20px;
 
+    border-radius: 50%;
+
     svg {
       stroke: #a3a3a3;
+
       transition: stroke 0.2s ease;
+    }
+
+    &:active {
+      background-color: #e6e6e6;
+    }
+
+    &:hover + .complain-dropdown__desc {
+      visibility: visible;
+      opacity: 1;
     }
 
     &:hover {
@@ -211,33 +240,29 @@ p {
         stroke: $dark;
       }
     }
-
-    &:hover + .complain-dropdown__desc {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    &:active {
-      background-color: #e6e6e6;
-    }
   }
 
   &__desc {
     position: absolute;
-    right: -50%;
-    top: 30px;
     z-index: 10;
+    top: 30px;
+    right: -50%;
+    transform: translateX(28%);
+
+    overflow: hidden;
     display: flex;
     align-items: center;
-    overflow: hidden;
-    border-radius: 6px;
+
     padding: 4px 22px;
-    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 4%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+
     color: #4f4f4f;
-    background-color: #fff;
-    opacity: 0;
+
     visibility: hidden;
-    transform: translateX(28%);
+    opacity: 0;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 4%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+
     transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 }
@@ -253,10 +278,11 @@ p {
 }
 
 .map-fake {
-  margin: 10px 0;
-  border-radius: 6px;
   width: 100%;
-  height: 231px;
   max-width: 458px;
+  height: 231px;
+  margin: 10px 0;
+
   background: #e3e3e3;
+  border-radius: 6px;
 }

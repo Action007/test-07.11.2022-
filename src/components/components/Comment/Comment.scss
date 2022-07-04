@@ -2,6 +2,7 @@
 
 .checklist-comment {
   position: relative;
+
   word-break: break-word;
 
   &:not(:last-child) {
@@ -28,6 +29,7 @@
 
   &__text {
     margin-bottom: 19px;
+
     line-height: 1.3;
   }
 
@@ -37,10 +39,12 @@
 
   &__likes {
     margin-right: 8px;
+
     border-radius: 6px;
 
     &.liked {
       color: $primary;
+
       background-color: #65c17e1a;
 
       svg {
@@ -50,6 +54,7 @@
 
     &.active {
       color: #fff;
+
       background-color: $primary;
 
       svg {
@@ -60,6 +65,7 @@
 
   &__dislikes {
     margin-right: 8px;
+
     border-radius: 6px;
 
     svg {
@@ -68,6 +74,7 @@
 
     &.disliked {
       color: $warning;
+
       background-color: #eb57571a;
 
       svg {
@@ -77,6 +84,7 @@
 
     &.active {
       color: #fff;
+
       background-color: $warning;
 
       svg {
@@ -90,14 +98,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: 5px 11px;
+
     color: #a3a3a3;
+
     background-color: $secondary;
+
     transition: box-shadow 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 
     svg {
       margin-right: 10px;
+
       stroke: #a3a3a3;
+
       transition: stroke 0.2s ease;
     }
 
