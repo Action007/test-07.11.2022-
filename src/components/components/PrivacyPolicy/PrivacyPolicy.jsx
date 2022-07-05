@@ -737,7 +737,7 @@ const PrivacyPolicy = () => {
               <span>{translate("privacyPolicyPage.section15.item4")}</span>
             </address>
           </li>
-          <li className="mb-5">
+          <li>
             <h3 className="policy__title SFPro-600">
               {translate("privacyPolicyPage.section16.title")}
             </h3>
@@ -750,20 +750,6 @@ const PrivacyPolicy = () => {
                     <a
                       className="policy__link"
                       href="https://app.termly.io/notify/d960af72-f0bc-4d01-a206-8af5decee010"
-                      target="_blank"
-                      rel="noreferrer"
-                    />,
-                  ]}
-                />
-              </p>
-              <p>
-                <Trans
-                  i18nKey="privacyPolicyPage.section16.text2"
-                  t={translate}
-                  components={[
-                    <a
-                      className="policy__link"
-                      href="https://termly.io/products/privacy-policy-generator/"
                       target="_blank"
                       rel="noreferrer"
                     />,
