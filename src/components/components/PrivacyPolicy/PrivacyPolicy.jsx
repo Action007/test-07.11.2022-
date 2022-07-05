@@ -1,14 +1,33 @@
-import React from "react";
+/* eslint-disable jsx-a11y/anchor-has-content */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+import React, { useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import { Link, useLocation } from "react-router-dom";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import "./PrivacyPolicy.scss";
 
 import { ReactComponent as PrivacyImg } from "../../../assets/images/content/privacy-policy.svg";
 
 const PrivacyPolicy = () => {
+  const { pathname, hash, key } = useLocation();
   const { t: translate } = useTranslation();
-
   const breadcrumbs = [{ title: translate("privacyPolicyPage.title") }];
+
+  useEffect(() => {
+    // if not a hash link, scroll to top
+    if (hash === "") {
+      window.scrollTo(0, 0);
+    }
+    // else scroll to id
+    else {
+      const id = hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView();
+        window.scrollBy(0, -110);
+      }
+    }
+  }, [pathname, hash, key]);
 
   return (
     <section className="policy container pb-8 display-7">
@@ -73,7 +92,12 @@ const PrivacyPolicy = () => {
                   t={translate}
                   components={[
                     <span className="SFPro-600" />,
-                    // <a className="policy__link" />,
+                    <Link
+                      className="policy__link"
+                      to={{
+                        hash: "#handleLogins",
+                      }}
+                    />,
                   ]}
                 />
               </p>
@@ -82,7 +106,11 @@ const PrivacyPolicy = () => {
               </p>
             </div>
             <h4 className="policy__subtitle">
-              {translate("privacyPolicyPage.section1.subtitle2")}
+              <Trans
+                i18nKey="privacyPolicyPage.section1.subtitle2"
+                t={translate}
+                components={[<span className="SFPro-600" />]}
+              />
             </h4>
             <div>
               <p className="mb-4">
@@ -197,7 +225,12 @@ const PrivacyPolicy = () => {
                   t={translate}
                   components={[
                     <span className="SFPro-600" />,
-                    // <a className="policy__link" />,
+                    <Link
+                      className="policy__link"
+                      to={{
+                        hash: "#privacyRights",
+                      }}
+                    />,
                   ]}
                 />
               </li>
@@ -262,7 +295,12 @@ const PrivacyPolicy = () => {
                   t={translate}
                   components={[
                     <span className="SFPro-600" />,
-                    // <a className="policy__link" />,
+                    <Link
+                      className="policy__link"
+                      to={{
+                        hash: "#withdrawing",
+                      }}
+                    />,
                   ]}
                 />
               </li>
@@ -307,7 +345,20 @@ const PrivacyPolicy = () => {
               <p className="policy__desc SFPro-600">
                 {translate("privacyPolicyPage.section3.text4")}
               </p>
-              <p>{translate("privacyPolicyPage.section3.text5")}</p>
+              <p>
+                <Trans
+                  i18nKey="privacyPolicyPage.section3.text5"
+                  t={translate}
+                  components={[
+                    <Link
+                      className="policy__link"
+                      to={{
+                        hash: "#withdrawing",
+                      }}
+                    />,
+                  ]}
+                />
+              </p>
               <p>{translate("privacyPolicyPage.section3.text6")}</p>
             </div>
             <ul className="policy__list">
@@ -361,25 +412,13 @@ const PrivacyPolicy = () => {
               <li>{translate("privacyPolicyPage.section4.item14")}</li>
               <li>{translate("privacyPolicyPage.section4.item15")}</li>
               <li>{translate("privacyPolicyPage.section4.item16")}</li>
+              <li>{translate("privacyPolicyPage.section4.item17")}</li>
+              <li>{translate("privacyPolicyPage.section4.item18")}</li>
             </ul>
             <p className="mb-4">
               {translate("privacyPolicyPage.section4.text3")}
             </p>
             <ul className="policy__list">
-              <li>
-                <Trans
-                  i18nKey="privacyPolicyPage.section4.item17"
-                  t={translate}
-                  components={[<span className="SFPro-600" />]}
-                />
-              </li>
-              <li>
-                <Trans
-                  i18nKey="privacyPolicyPage.section4.item18"
-                  t={translate}
-                  components={[<span className="SFPro-600" />]}
-                />
-              </li>
               <li>
                 <Trans
                   i18nKey="privacyPolicyPage.section4.item19"
@@ -391,12 +430,34 @@ const PrivacyPolicy = () => {
                 <Trans
                   i18nKey="privacyPolicyPage.section4.item20"
                   t={translate}
-                  components={[<span className="SFPro-600" />]}
+                  components={[
+                    <span className="SFPro-600" />,
+                    <a
+                      className="policy__link"
+                      href="https://policies.google.com/privacy"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
                 />
               </li>
               <li>
                 <Trans
                   i18nKey="privacyPolicyPage.section4.item21"
+                  t={translate}
+                  components={[<span className="SFPro-600" />]}
+                />
+              </li>
+              <li>
+                <Trans
+                  i18nKey="privacyPolicyPage.section4.item22"
+                  t={translate}
+                  components={[<span className="SFPro-600" />]}
+                />
+              </li>
+              <li>
+                <Trans
+                  i18nKey="privacyPolicyPage.section4.item23"
                   t={translate}
                   components={[<span className="SFPro-600" />]}
                 />
@@ -433,7 +494,7 @@ const PrivacyPolicy = () => {
               <p>{translate("privacyPolicyPage.section6.text2")}</p>
             </div>
           </li>
-          <li className="mb-5">
+          <li id="handleLogins" className="mb-5">
             <h3 className="policy__title SFPro-600">
               {translate("privacyPolicyPage.section7.title")}
             </h3>
@@ -495,7 +556,7 @@ const PrivacyPolicy = () => {
               <p>{translate("privacyPolicyPage.section10.text2")}</p>
             </div>
           </li>
-          <li className="mb-5">
+          <li id="privacyRights" className="mb-5">
             <h3 className="policy__title SFPro-600">
               {translate("privacyPolicyPage.section11.title")}
             </h3>
@@ -511,7 +572,14 @@ const PrivacyPolicy = () => {
                 <Trans
                   i18nKey="privacyPolicyPage.section11.text2"
                   t={translate}
-                  // components={[<a className="policy__link" />]}
+                  components={[
+                    <Link
+                      className="policy__link"
+                      to={{
+                        hash: "#contactUs",
+                      }}
+                    />,
+                  ]}
                 />
               </p>
               <p>{translate("privacyPolicyPage.section11.text3")}</p>
@@ -519,23 +587,42 @@ const PrivacyPolicy = () => {
                 <Trans
                   i18nKey="privacyPolicyPage.section11.text4"
                   t={translate}
-                  // components={[<a className="policy__link" />]}
+                  components={[
+                    <a
+                      className="policy__link"
+                      target="_blank"
+                      href="https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm"
+                      rel="noreferrer"
+                    />,
+                  ]}
                 />
               </p>
               <p>
                 <Trans
                   i18nKey="privacyPolicyPage.section11.text5"
                   t={translate}
-                  // components={[<a className="policy__link" />]}
+                  components={[
+                    <a
+                      className="policy__link"
+                      target="_blank"
+                      href="https://www.edoeb.admin.ch/edoeb/en/home.html"
+                      rel="noreferrer"
+                    />,
+                  ]}
                 />
               </p>
-              <p>
+              <p id="withdrawing">
                 <Trans
                   i18nKey="privacyPolicyPage.section11.text6"
                   t={translate}
                   components={[
                     <span className="SFPro-600" />,
-                    // <a className="policy__link" />,
+                    <Link
+                      className="policy__link"
+                      to={{
+                        hash: "#contactUs",
+                      }}
+                    />,
                   ]}
                 />
               </p>
@@ -546,7 +633,12 @@ const PrivacyPolicy = () => {
                   t={translate}
                   components={[
                     <span className="SFPro-600" />,
-                    // <a className="policy__link" />,
+                    <Link
+                      className="policy__link"
+                      to={{
+                        hash: "#contactUs",
+                      }}
+                    />,
                   ]}
                 />
               </p>
@@ -568,7 +660,12 @@ const PrivacyPolicy = () => {
                   t={translate}
                   components={[
                     <span className="SFPro-600" />,
-                    // <a className="policy__link" />,
+                    <a
+                      className="policy__link"
+                      target="_blank"
+                      href="http://www.aboutads.info/choices/"
+                      rel="noreferrer"
+                    />,
                   ]}
                 />
               </p>
@@ -612,7 +709,7 @@ const PrivacyPolicy = () => {
               <p>{translate("privacyPolicyPage.section14.text2")}</p>
             </div>
           </li>
-          <li className="mb-5">
+          <li id="contactUs" className="mb-5">
             <h3 className="policy__title SFPro-600">
               {translate("privacyPolicyPage.section15.title")}
             </h3>
@@ -640,7 +737,7 @@ const PrivacyPolicy = () => {
               <span>{translate("privacyPolicyPage.section15.item4")}</span>
             </address>
           </li>
-          <li className="mb-5">
+          <li>
             <h3 className="policy__title SFPro-600">
               {translate("privacyPolicyPage.section16.title")}
             </h3>
@@ -649,15 +746,14 @@ const PrivacyPolicy = () => {
                 <Trans
                   i18nKey="privacyPolicyPage.section16.text1"
                   t={translate}
-                  // components={[<a className="policy__link" />]}
-                />
-              </p>
-              <p>
-                {translate("privacyPolicyPage.section16.text2")}
-                <Trans
-                  i18nKey="privacyPolicyPage.section16.text2"
-                  t={translate}
-                  // components={[<a className="policy__link" />]}
+                  components={[
+                    <a
+                      className="policy__link"
+                      href="https://app.termly.io/notify/d960af72-f0bc-4d01-a206-8af5decee010"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
                 />
               </p>
             </div>

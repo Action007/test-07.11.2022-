@@ -1,20 +1,25 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../global-styles/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
 
 .breadcrumbs {
   display: flex;
+
   margin: 0;
   padding: 42px 0 50px;
+
   font-size: 14px;
 
   @include media-breakpoint-down(lg) {
     overflow-x: scroll;
+
     white-space: nowrap;
+
     -webkit-overflow-scrolling: touch;
   }
 
   @include media-breakpoint-down(sm) {
     padding: 16px 0 26px;
+
     font-size: 12px;
   }
 
@@ -36,6 +41,7 @@
 
     svg {
       margin-right: 20px;
+
       stroke: $dark;
 
       @include media-breakpoint-down(sm) {

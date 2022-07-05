@@ -10,7 +10,7 @@ const ActiveChecklist = ({ checklist, isLoading }) => {
   const { t: translate } = useTranslation();
   const breadcrumbs = [
     { title: translate("myActiveChecklists.title"), link: -1 },
-    { title: checklist && checklist.entities.checklist.name },
+    { title: checklist ? checklist.entities.checklist.name : "" },
   ];
 
   return (

@@ -1,14 +1,17 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../global-styles/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
 
 .checklist {
   position: relative;
-  margin: 0 auto 43px;
-  border-radius: 6px;
-  padding: 34px 34px 25px;
+
   width: 100%;
   max-width: 834px;
+  margin: 0 auto 43px;
+  padding: 34px 34px 25px;
+
   background-color: #fff;
+  border-radius: 6px;
+
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 
   @include media-breakpoint-down(sm) {
@@ -32,6 +35,7 @@
   &__heading {
     display: flex;
     justify-content: space-between;
+
     text-align: left;
 
     @include media-breakpoint-down(sm) {
@@ -50,6 +54,7 @@
   &__title {
     margin-right: 55px;
     margin-bottom: 25px;
+
     font-size: 1.5rem;
     word-break: break-word;
 
@@ -59,6 +64,7 @@
 
     @include media-breakpoint-down(sm) {
       margin: 21px 0 18px;
+
       font-size: 1.2rem;
     }
 
@@ -69,15 +75,17 @@
 
   &__buttons {
     position: absolute;
-    right: 36px;
     top: 25px;
+    right: 36px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 
     @include media-breakpoint-down(sm) {
-      right: 19px;
       top: 22px;
+      right: 19px;
+
       flex-direction: row-reverse;
     }
   }
@@ -86,11 +94,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 28px;
-    border-radius: 6px;
+
     width: 39px;
     height: 39px;
+    margin-bottom: 28px;
+
     background-color: $secondary;
+    border-radius: 6px;
+
     transition: box-shadow 0.2s ease;
 
     @include media-breakpoint-down(sm) {
@@ -100,16 +111,10 @@
     svg {
       width: 16px;
       height: 18px;
+
       stroke: #a3a3a3;
+
       transition: stroke 0.2s ease;
-    }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-
-      svg {
-        stroke: $dark;
-      }
     }
 
     &.saved {
@@ -120,28 +125,42 @@
         stroke: $primary;
       }
     }
+
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+
+      svg {
+        stroke: $dark;
+      }
+    }
   }
 
   &__items {
     margin-bottom: 5px;
     margin-left: 18px;
+
     word-break: break-word;
   }
 
   &__show {
     position: relative;
+
     margin-left: 3px;
+
     color: $primary;
 
     &::before {
       content: "";
+
       position: absolute;
-      left: 50%;
       bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
       width: 100%;
       height: 1px;
+
       background-color: $primary;
-      transform: translateX(-50%);
     }
   }
 
@@ -172,11 +191,13 @@
   &__dots {
     margin-bottom: 14px;
     margin-left: 36px;
+
     opacity: 0.3;
 
     svg {
       width: 30px;
       height: 29px;
+
       fill: $dark;
     }
 
@@ -195,11 +216,14 @@
 
   &__tag {
     display: inline-block;
+
     margin-bottom: 9px;
+    padding: 2px 8px;
+
+    background-color: #fff;
     border: 1px solid rgb(101 193 126 / 40%);
     border-radius: 6px;
-    padding: 2px 8px;
-    background-color: #fff;
+
     transition: box-shadow 0.2s ease;
 
     &:not(:last-child) {
@@ -213,6 +237,7 @@
 
   &__inner {
     display: flex;
+
     margin-right: 25px;
 
     @include media-breakpoint-down(sm) {
@@ -223,9 +248,11 @@
 
   &__viewed {
     margin-right: 8px;
-    border-radius: 6px;
+
     color: #a3a3a3;
+
     background-color: $secondary;
+    border-radius: 6px;
 
     svg {
       stroke: #a3a3a3;
@@ -233,6 +260,7 @@
 
     &.active {
       color: #6d9aff;
+
       background-color: #407bff1a;
 
       svg {
@@ -242,22 +270,22 @@
   }
 
   &__liked {
-    border-radius: 6px;
     color: #a3a3a3;
+
     background-color: $secondary;
+    border-radius: 6px;
+
     transition: box-shadow 0.2s ease, color 0.2s ease;
 
     svg {
       stroke: #a3a3a3;
-      transition: stroke 0.2s ease;
-    }
 
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+      transition: stroke 0.2s ease;
     }
 
     &.active {
       color: $primary;
+
       background-color: #65c17e1a;
 
       svg {
@@ -267,22 +295,23 @@
 
     &.liked {
       color: #fff;
+
       background-color: $primary;
 
       svg {
         stroke: #fff;
       }
     }
+
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+    }
   }
 
   &__time {
     display: block;
-    color: $light;
-  }
 
-  &:hover {
-    box-shadow: 0 2px 4px 0 #e5e9f5;
-    transform: translateY(-1px);
+    color: $light;
   }
 
   &:last-child {
@@ -293,10 +322,17 @@
   &__viewed {
     display: flex;
     align-items: center;
+
     padding: 5px 11px;
 
     svg {
       margin-right: 10px;
     }
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+
+    box-shadow: 0 2px 4px 0 #e5e9f5;
   }
 }

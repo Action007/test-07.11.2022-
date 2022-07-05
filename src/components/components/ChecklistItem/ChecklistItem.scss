@@ -1,8 +1,9 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../global-styles/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
 
 .checklist-item {
   margin-right: 55px;
+
   line-height: 1.2;
   word-break: break-word;
 
@@ -20,11 +21,13 @@
 
   &__link {
     margin: 5px 8px;
+
     color: $primary;
 
     svg {
       margin-top: -4px;
       margin-left: 2px;
+
       fill: $primary;
     }
   }

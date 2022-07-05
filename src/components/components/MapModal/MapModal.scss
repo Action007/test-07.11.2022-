@@ -1,17 +1,18 @@
-@import "../../../global-styles/_variables.scss";
+@import "../../../global-styles/variables";
 
 .popup-map {
   .leaflet-container {
-    border-radius: 0;
     width: 100%;
-    height: 100%;
     max-width: 1500px;
+    height: 100%;
+
+    border-radius: 0;
   }
 
   .creation-map {
-    margin-top: 0;
-    height: 100%;
     max-width: 100%;
+    height: 100%;
+    margin-top: 0;
   }
 
   .modal-body {
@@ -33,6 +34,7 @@
   .leaflet-touch .leaflet-control-layers,
   .leaflet-touch .leaflet-bar {
     overflow: hidden;
+
     border: none;
     border-radius: 6px;
     box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
@@ -40,6 +42,7 @@
 
   .leaflet-bar a {
     color: #a3a3a3;
+
     transition: color 0.2s ease;
 
     &:hover {

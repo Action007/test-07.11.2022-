@@ -1,9 +1,10 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../global-styles/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
 
 .creation {
   &__title {
     margin-bottom: 20px;
+
     font-size: 28px;
 
     @include media-breakpoint-down(xl) {
@@ -22,29 +23,29 @@
   }
 
   &__wrap {
-    margin-right: 15px;
     width: 100%;
     max-width: 706px;
+    margin-right: 15px;
 
     @include media-breakpoint-down(xl) {
-      margin-right: 0;
       max-width: 854px;
+      margin-right: 0;
     }
   }
 
   &__img {
-    margin-right: 130px;
     width: 100%;
-    height: 400px;
     max-width: 400px;
+    height: 400px;
+    margin-right: 130px;
 
     @include media-breakpoint-down(xl) {
       margin: 0 0 40px;
     }
 
     @include media-breakpoint-down(sm) {
-      height: 300px;
       max-width: 300px;
+      height: 300px;
     }
 
     svg {
@@ -55,6 +56,7 @@
 
   &__head {
     margin-bottom: 6px;
+
     font-size: 18px;
   }
 
@@ -67,17 +69,18 @@
   }
 
   &__name {
-    margin: 3px 0 42px;
     width: 100%;
     height: 54px;
+    margin: 3px 0 42px;
 
     input {
-      outline: transparent;
-      border: 1px solid transparent;
-      border-radius: 6px;
-      padding: 0 15px;
       width: 100%;
       height: 100%;
+      padding: 0 15px;
+
+      border: 1px solid transparent;
+      border-radius: 6px;
+      outline: transparent;
 
       &:focus {
         border-color: $primary;
@@ -96,6 +99,7 @@
     flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
+
     margin-bottom: 28px;
   }
 
@@ -110,43 +114,53 @@
   &__add {
     display: flex;
     align-items: center;
+
     margin-bottom: 15px;
+    padding: 12px 32px 12px 18px;
+
+    color: #fff;
+
+    background-color: $primary;
     border: 1px solid transparent;
     border-radius: 6px;
-    padding: 12px 32px 12px 18px;
-    color: #fff;
-    background-color: $primary;
+
     transition: color 0.3s ease, background-color 0.3s ease, transform 0.09s ease;
 
     @include media-breakpoint-down(sm) {
       justify-content: center;
+
       width: 100%;
     }
 
     svg {
       margin-right: 15px;
+
       stroke: #fff;
+
       transition: stroke 0.3s ease;
-    }
-
-    &:hover {
-      border-color: $primary;
-      color: $primary;
-      background-color: #fff;
-
-      svg {
-        stroke: $primary;
-      }
     }
 
     &:active {
       transform: scale(0.96);
     }
+
+    &:hover {
+      color: $primary;
+
+      background-color: #fff;
+      border-color: $primary;
+
+      svg {
+        stroke: $primary;
+      }
+    }
   }
 
   &__desc {
     display: block;
+
     margin-bottom: 4px;
+
     font-size: 14px;
 
     &.invalid {
@@ -157,12 +171,14 @@
   &__field {
     display: flex;
     flex-wrap: wrap;
+
+    width: 100%;
     margin-bottom: 70px;
+    padding: 9px 15px;
+
+    background-color: #fff;
     border: 1px solid transparent;
     border-radius: 6px;
-    padding: 9px 15px;
-    width: 100%;
-    background-color: #fff;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 25px;
@@ -175,16 +191,19 @@
 
   &__search {
     position: relative;
+
     width: 250px;
   }
 
   &__create {
     display: flex;
     align-items: center;
+
     margin: 3px;
+    padding: 2px 8px;
+
     border: 1px solid $dark;
     border-radius: 4px;
-    padding: 2px 8px;
 
     svg {
       margin-left: 7px;
@@ -192,21 +211,24 @@
   }
 
   &__create--input {
-    margin: 0;
-    outline: transparent;
-    border: none;
-    padding: 0;
     width: 100px;
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    outline: transparent;
   }
 
   &__create--tag {
-    border-color: transparent;
     color: #fff;
+
     background-color: $primary;
+    border-color: transparent;
 
     svg {
-      stroke: #fff;
       transform: rotate(45deg);
+
+      stroke: #fff;
     }
   }
 
@@ -230,25 +252,25 @@
   }
 
   &__button {
+    width: 100%;
+    max-width: 183px;
+    height: 50px;
+    padding: 10px;
+
     border: 1px solid transparent;
     border-radius: 6px;
-    padding: 10px;
-    width: 100%;
-    height: 50px;
-    max-width: 183px;
+
     transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease, transform 0.09s ease;
 
     @include media-breakpoint-down(sm) {
       max-width: 100%;
     }
 
-    &:active {
-      transform: scale(0.96);
-    }
-
     &:first-child {
       margin-right: 8px;
+
       color: #fff;
+
       background-color: $dark;
 
       @include media-breakpoint-down(sm) {
@@ -256,56 +278,70 @@
       }
 
       &:hover {
-        border-color: $dark;
         color: $dark;
+
         background-color: #fff;
+        border-color: $dark;
       }
     }
 
     &:last-child {
       color: #fff;
+
       background-color: $primary;
 
       &:hover {
-        border-color: $primary;
         color: $primary;
+
         background-color: #fff;
+        border-color: $primary;
       }
     }
 
     &.invalid {
       &:first-child {
-        border: 1px solid transparent !important;
         color: #4f4f4f80 !important;
+
         background-color: #dedede !important;
+        border: 1px solid transparent !important;
       }
 
       &:last-child {
-        border: 1px solid transparent !important;
         color: #fff !important;
+
         background-color: #4f4f4f80 !important;
+        border: 1px solid transparent !important;
       }
+    }
+
+    &:active {
+      transform: scale(0.96);
     }
   }
 
   &__dropdown {
     position: absolute;
-    left: 3px;
     top: 38px;
+    left: 3px;
+
     overflow-y: auto;
+
+    max-height: 300px;
     margin: 0;
+    padding: 7px 0;
+
+    word-break: break-word;
+
+    background-color: #fff;
     border: 1px solid #ececec;
     border-radius: 4px;
-    padding: 7px 0;
-    max-height: 300px;
     box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%), 0 3px 1px -2px rgb(0 0 0 / 20%);
-    word-break: break-word;
-    background-color: #fff;
   }
 
   &__item {
     button {
       padding: 4px 34px 4px 14px;
+
       text-align: left;
     }
 

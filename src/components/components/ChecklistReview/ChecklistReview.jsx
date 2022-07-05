@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ChecklistComments from "../ChecklistComments/ChecklistComments";
@@ -11,7 +12,11 @@ const ChecklistReview = ({
   isLoading,
   isFetching,
 }) => {
-  const breadcrumbs = [{ title: checklist ? checklist.checklist.name : "" }];
+  const { t: translate } = useTranslation();
+  const breadcrumbs = [
+    { title: translate("allChecklistsPage.title"), link: -1 },
+    { title: checklist ? checklist.checklist.name : "" },
+  ];
 
   return (
     <div className="checklist-detail container container-breadcrumb pb-8">

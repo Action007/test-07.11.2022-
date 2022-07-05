@@ -1,14 +1,16 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../global-styles/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
 
 .active-checklist {
   position: relative;
-  margin: 0 auto 16px;
-  border-radius: 6px;
-  padding: 34px 29px 36px;
+
   width: 100%;
   max-width: 834px;
+  margin: 0 auto 16px;
+  padding: 34px 29px 36px;
+
   background-color: #fff;
+  border-radius: 6px;
 
   @include media-breakpoint-down(sm) {
     margin-bottom: 12px;
@@ -18,6 +20,7 @@
   &__title {
     margin-bottom: 21px;
     padding-right: 25px;
+
     font-size: 1.5rem;
     word-break: break-word;
 
@@ -27,6 +30,7 @@
 
     @include media-breakpoint-down(sm) {
       padding-right: 0;
+
       font-size: 1rem;
     }
   }
@@ -44,11 +48,13 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
     color: $light;
 
     svg {
       width: 24px;
       height: 24px;
+
       stroke: $light;
     }
   }
@@ -56,14 +62,6 @@
   &__btn {
     &:not(:last-child) {
       margin-right: 25px;
-    }
-
-    &:hover {
-      color: $primary;
-
-      svg {
-        stroke: $primary;
-      }
     }
 
     &:first-child {
@@ -75,6 +73,14 @@
     &:last-child:hover {
       svg {
         stroke: $warning;
+      }
+    }
+
+    &:hover {
+      color: $primary;
+
+      svg {
+        stroke: $primary;
       }
     }
   }
