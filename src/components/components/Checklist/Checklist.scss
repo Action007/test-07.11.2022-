@@ -225,6 +225,7 @@
     border-radius: 6px;
 
     transition: box-shadow 0.2s ease;
+    word-break: break-word;
 
     &:not(:last-child) {
       margin-right: 9px;
