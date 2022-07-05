@@ -1,5 +1,5 @@
-@import "../../../global-styles/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../global-styles/_variables.scss';
+@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
 
 .creation-item {
   position: relative;
@@ -52,7 +52,8 @@
       outline: transparent;
 
       &:focus {
-        font-family: SFPro-Medium, sans-serif;
+        border-color: $primary;
+        font-family: 'SFPro-Medium', sans-serif;
         color: #000;
 
         border-color: $primary;
@@ -78,7 +79,8 @@
       outline: transparent;
 
       &:focus {
-        font-family: SFPro-Medium, sans-serif;
+        border-color: $primary;
+        font-family: 'SFPro-Medium', sans-serif;
         color: #000;
 
         border-color: $primary;
@@ -183,6 +185,15 @@
       justify-content: center;
 
       max-width: 990px;
+    }
+
+    .modal-header {
+      padding: 0;
+      border: none;
+
+      button {
+        display: none;
+      }
     }
 
     .modal-body {
