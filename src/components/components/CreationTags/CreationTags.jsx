@@ -80,9 +80,9 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
       return;
     }
     if (!tag || !tag.name.trim()) return;
-    if (tag.name.length > 16) {
+    if (tag.name.length < 31) {
       validTag = {
-        name: `${tag.name.substring(0, 17)}...`,
+        name: tag.name,
         id: tag.id,
         tags_new: tag.tags_new,
       };
@@ -165,6 +165,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
                 ref={inputTag}
                 value={url}
                 id="creation-tagAdd"
+                maxLength="30"
                 type="text"
                 autoComplete="off"
               />
