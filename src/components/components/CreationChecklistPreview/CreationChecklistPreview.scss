@@ -1,5 +1,5 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../global-styles/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
 
 .popup-preview {
   .modal-dialog {
@@ -7,8 +7,9 @@
   }
 
   .modal-header {
-    border-bottom: 1px solid #e1e1e1;
     padding: 16px 22px;
+
+    border-bottom: 1px solid #e1e1e1;
   }
 
   .checklist-detail__wrapper {

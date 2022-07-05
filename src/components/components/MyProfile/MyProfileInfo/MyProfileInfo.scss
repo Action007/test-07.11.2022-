@@ -1,16 +1,18 @@
-@import "../../../../global-styles/_variables.scss";
-@import "../../../../global-styles/_mixins.scss";
-@import "../../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../../global-styles/variables";
+@import "../../../../global-styles/mixins";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
 
 .profile-info {
   display: flex;
   justify-content: space-between;
-  margin: 0 auto 16px;
-  border-radius: 6px;
-  padding: 40px 68px;
+
   width: 100%;
   max-width: 1044px;
+  margin: 0 auto 16px;
+  padding: 40px 68px;
+
   background-color: #fff;
+  border-radius: 6px;
 
   @include media-breakpoint-down(md) {
     flex-direction: column;
@@ -21,9 +23,10 @@
   }
 
   &__inner {
-    margin-right: 10px;
     width: 100%;
     max-width: 443px;
+    margin-right: 10px;
+
     word-break: break-word;
 
     @include media-breakpoint-down(md) {
@@ -33,6 +36,7 @@
 
   &__box {
     display: flex;
+
     margin-bottom: 34px;
 
     @include media-breakpoint-down(sm) {
@@ -42,6 +46,7 @@
 
   &__edit {
     display: flex;
+
     width: 100%;
     max-width: 206px;
 
@@ -51,47 +56,53 @@
   }
 
   &__edit-btn {
-    position: relative;
-    margin-right: 27px;
-    width: 100%;
-    height: 105px;
-    max-width: 105px;
     cursor: pointer;
 
+    position: relative;
+
+    width: 100%;
+    max-width: 105px;
+    height: 105px;
+    margin-right: 27px;
+
     @include media-breakpoint-down(sm) {
-      margin-right: 19px;
-      height: 83px;
       max-width: 83px;
+      height: 83px;
+      margin-right: 19px;
     }
 
     svg {
       position: absolute;
       right: 0;
       bottom: 0;
+
       width: 27px;
       height: 27px;
     }
 
     input {
       position: absolute;
+
       opacity: 0;
     }
   }
 
   &__img {
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    border-radius: 50%;
+
     width: 100%;
-    height: 105px;
     max-width: 105px;
+    height: 105px;
+
     background-color: #f5f7fe;
+    border-radius: 50%;
 
     @include media-breakpoint-down(sm) {
-      height: 83px;
       max-width: 83px;
+      height: 83px;
     }
 
     img {
@@ -101,12 +112,13 @@
 
     svg {
       position: inherit;
+
       width: 50px;
       height: 69px;
 
       @include media-breakpoint-down(sm) {
-        height: 51px;
         max-width: 32px;
+        height: 51px;
       }
     }
   }
@@ -115,6 +127,7 @@
     @include line-clamp;
 
     margin-bottom: 6px;
+
     font-size: 28px;
     line-height: 1.3;
     color: $primary;
@@ -126,7 +139,9 @@
 
   &__subtitle {
     display: block;
+
     margin-bottom: 10px;
+
     font-size: 20px;
     line-height: 1.3;
     color: #888;
@@ -142,7 +157,9 @@
 
   &__span {
     display: block;
+
     margin-bottom: 16px;
+
     line-height: 1.1;
     color: #888;
 
@@ -166,17 +183,10 @@
 
     svg {
       width: 100%;
-      height: 20px;
       max-width: 20px;
+      height: 20px;
+
       fill: $dark;
-    }
-
-    &:hover {
-      color: $primary;
-
-      svg {
-        fill: $primary;
-      }
     }
 
     &.empty {
@@ -188,12 +198,21 @@
         fill: $dark;
       }
     }
+
+    &:hover {
+      color: $primary;
+
+      svg {
+        fill: $primary;
+      }
+    }
   }
 
   &__network--website {
     overflow: hidden;
-    white-space: nowrap;
+
     text-overflow: ellipsis;
+    white-space: nowrap;
 
     a {
       display: flex;
@@ -201,17 +220,19 @@
     }
 
     svg {
-      margin-right: 4px;
       width: 24px;
-      height: 24px;
       max-width: 100%;
+      height: 24px;
+      margin-right: 4px;
     }
   }
 
   &__link {
-    display: inline-block;
     overflow: hidden;
+    display: inline-block;
+
     max-width: 170px;
+
     word-break: initial;
     white-space: nowrap;
   }
@@ -232,12 +253,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    height: 45px;
     margin-right: 16px;
+    padding: 0 38px;
+
+    font-size: 14px;
+
     border: 1px solid #c8d4ff;
     border-radius: 6px;
-    padding: 0 38px;
-    height: 45px;
-    font-size: 14px;
+
     transition: all 0.3s ease;
 
     @include media-breakpoint-down(md) {
@@ -245,9 +270,10 @@
     }
 
     &:hover {
-      border-color: transparent;
       color: #fff;
+
       background-color: $primary;
+      border-color: transparent;
     }
   }
 
@@ -255,21 +281,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    width: 100%;
+    max-width: 45px;
+    height: 45px;
+
     border: 1px solid #c8d4ff;
     border-radius: 6px;
-    width: 100%;
-    height: 45px;
-    max-width: 45px;
+
     transition: all 0.3s ease;
 
     svg {
       fill: $dark;
+
       transition: fill 0.3s ease;
     }
 
     &:hover {
-      border-color: transparent;
       background-color: $primary;
+      border-color: transparent;
 
       svg {
         fill: #fff;

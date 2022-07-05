@@ -1,5 +1,5 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../global-styles/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
 
 .server-error {
   text-align: center;
@@ -13,13 +13,13 @@
   }
 
   &__img {
-    margin-bottom: 30px;
     width: 100%;
     max-width: 571px;
+    margin-bottom: 30px;
 
     @include media-breakpoint-down(sm) {
-      margin-bottom: 51px;
       max-width: 223px;
+      margin-bottom: 51px;
     }
 
     img {

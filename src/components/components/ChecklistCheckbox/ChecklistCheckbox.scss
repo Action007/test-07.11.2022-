@@ -1,13 +1,13 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .checklist-checkbox {
   font-size: 1.2rem;
   line-height: 1.2;
 
   &::marker {
-    font-weight: 600;
     font-size: 1.2rem;
+    font-weight: 600;
   }
 
   &:not(:last-child) {
@@ -19,62 +19,72 @@
   }
 
   &__label {
-    position: relative;
-    display: flex;
-    margin-left: 2px;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 
+    position: relative;
+
+    display: flex;
+
+    margin-left: 2px;
+
     input {
+      cursor: pointer;
+
       position: absolute;
+
       width: 0;
       height: 0;
+
       opacity: 0;
-      cursor: pointer;
     }
   }
 
   &__checkmark {
     position: absolute;
-    left: -50px;
     top: 50%;
-    width: 20px;
-    height: 20px;
-    background-image: url("../../../assets/images/icon/checkbox.svg");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: transparent;
+    left: -50px;
     transform: translateY(-50%);
 
+    width: 20px;
+    height: 20px;
+
+    background-color: transparent;
+    background-image: url('../../../assets/images/icon/checkbox.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
     &::after {
-      content: "";
+      content: '';
+
       position: absolute;
+
       display: none;
     }
   }
 
   &__link {
     margin: 5px 8px;
+
     color: $primary;
 
     svg {
       margin-top: -4px;
       margin-left: 2px;
+
       fill: $primary;
     }
   }
 
   &__label input:checked ~ p {
-    text-decoration: line-through;
     color: $primary;
+    text-decoration: line-through;
   }
 
   &__todo {
     margin-bottom: 0;
+
     word-break: break-word;
   }
 
@@ -89,7 +99,7 @@
   }
 
   &__label input:checked ~ &__checkmark {
-    background-image: url("../../../assets/images/icon/checkboxActive.svg");
+    background-image: url('../../../assets/images/icon/checkboxActive.svg');
   }
 
   &__label input:checked ~ &__checkmark::after {
@@ -101,13 +111,15 @@
   }
 
   &__label &__checkmark::after {
-    right: 4px;
     top: 4px;
+    right: 4px;
+
     width: 12px;
     height: 12px;
-    background-image: url("../../../assets/images/icon/tick.svg");
+
+    background-image: url('../../../assets/images/icon/tick.svg');
+    background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    background-repeat: no-repeat;
   }
 }

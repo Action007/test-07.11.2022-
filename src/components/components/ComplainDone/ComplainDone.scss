@@ -1,56 +1,64 @@
-@import "../../../global-styles/_variables.scss";
-@import "../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../global-styles/variables";
+@import "../../../../node_modules/bootstrap/scss/mixins";
 
 .complain-done {
   position: relative;
 
   &__btn {
     position: absolute;
-    right: 13px;
     top: 16px;
+    right: 13px;
   }
 
   &__wrapper {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 15px 70px;
 
     @include media-breakpoint-down(lg) {
       flex-direction: column-reverse;
+
       padding: 24px 24px 50px;
     }
   }
 
   &__wrap {
-    margin-right: 66px;
     max-width: 327px;
+    margin-right: 66px;
 
     @include media-breakpoint-down(lg) {
-      margin-right: 0;
       max-width: 352px;
+      margin-right: 0;
+
       text-align: center;
     }
   }
 
   &__title {
     margin-bottom: 12px;
+
     font-size: 1.75rem;
 
     @include media-breakpoint-down(lg) {
       margin-bottom: 22px;
+
       font-size: 1.5rem;
     }
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 22px;
+
       font-size: 1.3rem;
     }
   }
 
   &__subtitle {
     display: block;
+
     max-width: 185px;
+
     font-size: 14px;
 
     @include media-breakpoint-down(lg) {

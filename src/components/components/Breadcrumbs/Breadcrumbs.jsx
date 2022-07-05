@@ -9,8 +9,8 @@ const Breadcrumbs = ({ breadcrumbs }) => {
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
   const items = breadcrumbs.map((breadcrumb) =>
-    breadcrumb.title.length > 15
-      ? { ...breadcrumb, title: `${breadcrumb.title.substring(0, 16)}...` }
+    breadcrumb.title.length > 30
+      ? { ...breadcrumb, title: `${breadcrumb.title.substring(0, 31)}...` }
       : breadcrumb
   );
 

@@ -1,35 +1,42 @@
-@import "../../../../global-styles/_variables.scss";
-@import "../../../../../node_modules/bootstrap/scss/_mixins.scss";
+@import "../../../../global-styles/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
 
 .create-button {
   display: flex;
   align-items: center;
+
   margin: 0 auto;
-  border: 1px solid transparent;
-  border-radius: 6px;
   padding: 13px 60px 13px 45px;
+
   font-size: 16px;
   color: #fff;
+
   background-color: $primary;
+  border: 1px solid transparent;
+  border-radius: 6px;
+
   transition: all 0.3s ease, transform 0.09s ease;
 
   svg {
     margin-right: 11px;
+
     stroke: #fff;
+
     transition: stroke 0.3s ease;
-  }
-
-  &:hover {
-    border-color: $primary;
-    color: $primary;
-    background-color: #fff;
-
-    svg {
-      stroke: $primary;
-    }
   }
 
   &:active {
     transform: scale(0.96);
+  }
+
+  &:hover {
+    color: $primary;
+
+    background-color: #fff;
+    border-color: $primary;
+
+    svg {
+      stroke: $primary;
+    }
   }
 }

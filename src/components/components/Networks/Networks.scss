@@ -1,9 +1,10 @@
-@import "../../../global-styles/_variables.scss";
+@import "../../../global-styles/variables";
 
 .networks {
   display: flex;
   align-items: center;
   justify-content: center;
+
   height: 30px;
 
   a {
