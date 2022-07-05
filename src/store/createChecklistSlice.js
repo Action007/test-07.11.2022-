@@ -120,7 +120,7 @@ const createChecklistSlice = createSlice({
         state.checklist_items = state.checklist_items.map((item) => {
           if (item.id === id) {
             const isValid =
-              inputValue.trim().length < 151 && inputValue.trim().length > 9;
+              inputValue.trim().length < 151 && inputValue.trim().length > 1;
             return {
               ...item,
               inValid: !isValid,
@@ -141,7 +141,7 @@ const createChecklistSlice = createSlice({
     isValidDescription(state) {
       state.checklist_items = state.checklist_items.map((item) =>
         item.description.trim().length < 151 &&
-        item.description.trim().length > 9
+        item.description.trim().length > 1
           ? { ...item, inValid: false }
           : { ...item, inValid: true }
       );

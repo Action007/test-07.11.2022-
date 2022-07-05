@@ -595,6 +595,7 @@
     "title": "Creation of Checklist",
     "name": "Name checklist",
     "max": "Minimum 10 and Maximum 150 characters",
+	 "maxItem": "Minimum 2 and Maximum 150 characters",
     "passed": "Passed",
     "points": "Checklist points",
     "text": "Include all the information someone might need to make your checklist popular.",
