@@ -1,11 +1,13 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import "./Breadcrumbs.scss";
 
 import { ReactComponent as RightArrow } from "../../../assets/images/icon/right-arrow.svg";
 
 const Breadcrumbs = ({ breadcrumbs }) => {
+  const filters = useSelector((state) => state.homePageFiltersSliceReducer.url);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
   const items = breadcrumbs.map((breadcrumb) =>
@@ -17,7 +19,9 @@ const Breadcrumbs = ({ breadcrumbs }) => {
   return (
     <ul className="breadcrumbs">
       <li className="breadcrumbs__item">
-        <Link to="/">{translate("home")}</Link>
+        <button onClick={() => navigate(`/${filters}`)} type="button">
+          {translate("home")}
+        </button>
       </li>
       {items.map((breadcrumb) => (
         <li key={breadcrumb.title} className="breadcrumbs__item">

@@ -1,7 +1,8 @@
 import React, { Suspense, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authSliceActions } from "./store/authSlice";
+import { homePageFiltersSliceActions } from "./store/homePageFiltersSlice";
 import Layout from "./components/UI/Layout/Layout";
 import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 import routes from "./router";
@@ -10,10 +11,16 @@ import "leaflet/dist/leaflet.css";
 
 const App = () => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const { search } = useLocation();
 
   useEffect(() => {
     dispatch(authSliceActions.tokenVerification());
   }, []);
+
+  useEffect(() => {
+    if (pathname === "/") dispatch(homePageFiltersSliceActions.setUrl(search));
+  }, [search]);
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
