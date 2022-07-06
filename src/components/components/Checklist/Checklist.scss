@@ -117,20 +117,20 @@
       transition: stroke 0.2s ease;
     }
 
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+
+      svg {
+        stroke: $dark;
+      }
+    }
+
     &.saved {
       background-color: #f0f9f2;
 
       svg {
         fill: #fff;
         stroke: $primary;
-      }
-    }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-
-      svg {
-        stroke: $dark;
       }
     }
   }
@@ -220,12 +220,13 @@
     margin-bottom: 9px;
     padding: 2px 8px;
 
+    word-break: break-word;
+
     background-color: #fff;
     border: 1px solid rgb(101 193 126 / 40%);
     border-radius: 6px;
 
     transition: box-shadow 0.2s ease;
-    word-break: break-word;
 
     &:not(:last-child) {
       margin-right: 9px;
@@ -284,6 +285,10 @@
       transition: stroke 0.2s ease;
     }
 
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+    }
+
     &.active {
       color: $primary;
 
@@ -303,10 +308,6 @@
         stroke: #fff;
       }
     }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-    }
   }
 
   &__time {
@@ -319,6 +320,12 @@
     margin-bottom: 42px;
   }
 
+  &:hover {
+    transform: translateY(-1px);
+
+    box-shadow: 0 2px 4px 0 #e5e9f5;
+  }
+
   &__liked,
   &__viewed {
     display: flex;
@@ -329,11 +336,5 @@
     svg {
       margin-right: 10px;
     }
-  }
-
-  &:hover {
-    transform: translateY(-1px);
-
-    box-shadow: 0 2px 4px 0 #e5e9f5;
   }
 }

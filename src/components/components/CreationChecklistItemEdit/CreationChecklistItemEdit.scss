@@ -1,5 +1,5 @@
-@import "../../../global-styles/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .checklist-edit {
   z-index: 2;
@@ -42,12 +42,16 @@
     &:nth-child(2) {
       svg {
         fill: $dark;
-        stroke: inherit;
+        stroke: inherit !important;
       }
 
       &:hover svg {
         fill: $primary;
       }
+    }
+
+    &:hover svg {
+      stroke: $primary;
     }
 
     &.active {
@@ -62,10 +66,6 @@
         fill: #fff;
         stroke: inherit;
       }
-    }
-
-    &:hover svg {
-      stroke: $primary;
     }
   }
 
@@ -99,7 +99,7 @@
     transition: opacity 0.5s ease, visibility 0.5s ease;
 
     &::before {
-      content: "";
+      content: '';
 
       position: absolute;
       z-index: -2;
@@ -115,7 +115,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
 
       position: absolute;
       z-index: -1;

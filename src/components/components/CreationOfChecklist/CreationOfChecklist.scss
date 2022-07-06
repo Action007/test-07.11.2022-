@@ -298,6 +298,10 @@
       }
     }
 
+    &:active {
+      transform: scale(0.96);
+    }
+
     &.invalid {
       &:first-child {
         color: #4f4f4f80 !important;
@@ -312,10 +316,6 @@
         background-color: #4f4f4f80 !important;
         border: 1px solid transparent !important;
       }
-    }
-
-    &:active {
-      transform: scale(0.96);
     }
   }
 
