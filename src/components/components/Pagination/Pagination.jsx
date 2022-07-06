@@ -1,5 +1,5 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { changeSearchParamsValue } from "../../../utils/searchParamsValue";
 import useMediaQuery from "../../../hooks/useMediaQuery";
@@ -18,19 +18,23 @@ const Pagination = ({
   page = false,
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { search } = useLocation();
   const showOnMobile = useMediaQuery("(max-width:550px)");
   const perPage = 1;
 
   const setPage = ({ selected }) => {
-    setSearchParams(
-      changeSearchParamsValue(
-        searchParams,
-        "page",
-        selected * perPage + 1,
-        false
-      )
-    );
-
+    if (!search) {
+      setSearchParams(`?per_page=5&page=${selected * perPage + 1}`);
+    } else {
+      setSearchParams(
+        changeSearchParamsValue(
+          searchParams,
+          "page",
+          selected * perPage + 1,
+          false
+        )
+      );
+    }
     if (page !== "home") window.scrollTo(0, 0);
   };
 
@@ -47,9 +51,11 @@ const Pagination = ({
       if (nextPage) changePage = nextPage;
     }
 
-    setSearchParams(
-      changeSearchParamsValue(searchParams, "page", changePage, false)
-    );
+    if (!search) {
+      setSearchParams(`?per_page=5&page=${changePage}`);
+    } else {
+      setSearchParams(searchParams);
+    }
     if (page !== "home") window.scrollTo(0, 0);
   };
 

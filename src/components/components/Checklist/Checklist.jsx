@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -32,6 +32,9 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
     user_track,
     viewed,
   } = checklist;
+  const token = useSelector((state) => state.authSliceReducer.token);
+  const [modalShow, setModalShow] = useState(false);
+
   const [iLiked, setILiked] = useState({
     liked: user_track?.liked,
     mount: liked,
@@ -57,8 +60,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
   }${iLiked?.liked ? " liked" : ""}`;
   const savedClass = `checklist__bookmark${iSaved ? " saved" : ""}`;
   const [searchParams, setSearchParams] = useSearchParams();
-  const token = useSelector((state) => state.authSliceReducer.token);
-  const [modalShow, setModalShow] = useState(false);
+  const { search } = useLocation();
 
   const likeHandler = () => {
     if (!iLiked?.liked) likeChecklist(id);
@@ -85,9 +87,19 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
 
   const navigationHandler = (tagID) => {
     if (page === "home") {
-      setSearchParams(
-        changeSearchParamsValue(searchParams, "search_tag_ids[]", tagID)
-      );
+      if (!search) {
+        setSearchParams(
+          `?page=1&per_page=5&${changeSearchParamsValue(
+            searchParams,
+            "search_tag_ids[]",
+            tagID
+          )}`
+        );
+      } else {
+        setSearchParams(
+          changeSearchParamsValue(searchParams, "search_tag_ids[]", tagID)
+        );
+      }
     } else {
       navigate(`/?page=1&per_page=5&search_tag_ids[]=${tagID}`);
     }

@@ -141,17 +141,29 @@ const CategorySidebar = () => {
     searchParams.delete("popular");
 
     if (id === "all") {
-      setSearchParams(searchParams);
+      if (!search) {
+        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+      } else {
+        setSearchParams(searchParams);
+      }
     }
 
     if (id === "popular" || id === "latest") {
       searchParams.append(id, true);
-      setSearchParams(searchParams);
+      if (!search) {
+        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+      } else {
+        setSearchParams(searchParams);
+      }
     }
 
     if (id !== "popular" && id !== "latest" && id !== "all") {
       searchParams.append("search_category_ids[]", id);
-      setSearchParams(searchParams);
+      if (!search) {
+        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+      } else {
+        setSearchParams(searchParams);
+      }
     }
   };
 

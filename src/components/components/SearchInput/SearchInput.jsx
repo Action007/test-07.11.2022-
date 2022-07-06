@@ -32,7 +32,7 @@ const SearchInput = ({ page = false, header }) => {
   const [blur, setBlur] = useState(false);
   const { ref, show, setShow } = useClickOutside();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const labelID = uniqueID();
@@ -94,7 +94,12 @@ const SearchInput = ({ page = false, header }) => {
     setSearchValue("");
     if (pathname === "/") {
       searchParams.append("search_tag_ids[]", tag.id);
-      setSearchParams(searchParams);
+
+      if (!search) {
+        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+      } else {
+        setSearchParams(searchParams);
+      }
     } else {
       navigate(`/?page=1&per_page=5&search_tag_ids[]=${tag.id}`);
     }
@@ -115,9 +120,19 @@ const SearchInput = ({ page = false, header }) => {
     } else {
       if (pathname === "/") {
         if (searchValue) {
-          setSearchParams(
-            changeSearchParamsValue(searchParams, "search_value", searchValue)
-          );
+          if (!search) {
+            setSearchParams(
+              `?page=1&per_page=5&${changeSearchParamsValue(
+                searchParams,
+                "search_value",
+                searchValue
+              )}`
+            );
+          } else {
+            setSearchParams(
+              changeSearchParamsValue(searchParams, "search_value", searchValue)
+            );
+          }
         } else {
           searchParams.delete("search_value");
           setSearchParams(searchParams);
