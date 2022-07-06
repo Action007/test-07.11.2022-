@@ -76,12 +76,20 @@ const HeaderDropdown = ({ setShow }) => {
             type="button"
           >
             <div className="header-dropdown__img">
-              {user ? (
-                <img
-                  src={user.avatar_url ? user.avatar_url : EmptySvg}
-                  alt="account"
-                />
-              ) : null}
+              {user &&
+                (user.avatar_url ? (
+                  <img
+                    src={user.avatar_url}
+                    alt="account"
+                    className="header-dropdown__img_fill"
+                  />
+                ) : (
+                  <img
+                    src={EmptySvg}
+                    alt="account"
+                    className="header-dropdown__img_empty"
+                  />
+                ))}
             </div>
             <span className="header-dropdown__name">
               {user ? user.nickname : ""}
