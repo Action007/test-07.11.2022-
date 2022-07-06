@@ -10,18 +10,20 @@ const NotFoundPage = () => {
   const { t: translate } = useTranslation();
   const { pathname } = useLocation();
 
-  <>
-    <Helmet>
-      <title>{translate("seo.notFound.title")}</title>
-      <meta property="og:title" content={translate("seo.notFound.title")} />
-      <meta property="og:url" content={API_KEY + pathname} />
-      <meta name="description" content={translate("seo.notFound.desc")} />
-      <meta
-        property="og:description"
-        content={translate("seo.notFound.desc")}
-      />
-    </Helmet>
-    <NotFound />
-  </>;
+  return (
+    <>
+      <Helmet>
+        <title>{translate("seo.notFound.title")}</title>
+        <meta property="og:title" content={translate("seo.notFound.title")} />
+        <meta property="og:url" content={API_KEY + pathname} />
+        <meta name="description" content={translate("seo.notFound.desc")} />
+        <meta
+          property="og:description"
+          content={translate("seo.notFound.desc")}
+        />
+      </Helmet>
+      <NotFound />
+    </>
+  );
 };
 export default NotFoundPage;
