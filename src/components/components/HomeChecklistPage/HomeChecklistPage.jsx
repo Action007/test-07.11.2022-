@@ -47,8 +47,6 @@ const HomeChecklistPage = () => {
       } else {
         window.scrollBy(0, -188);
       }
-    } else {
-      navigate(`?page=1&per_page=5`);
     }
   }, [search]);
 
