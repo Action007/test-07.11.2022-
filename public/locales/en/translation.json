@@ -560,7 +560,7 @@
     "button": "Write email"
   },
   "popularChecklistPage": {
-    "title": "Popular checklist"
+    "title": "Popular checklists"
   },
   "allChecklistsPage": {
     "title": "All checklists",
@@ -594,7 +594,8 @@
   "creationOfChecklist": {
     "title": "Creation of Checklist",
     "name": "Name checklist",
-    "max": "Minimum 10 and Maximum 150 characters",
+    "max": "Minimum 10 and Maximum 150 characters.",
+	 "isNotContainLinks": " Name checklist must not contain links.",
 	 "maxItem": "Minimum 2 and Maximum 150 characters",
     "passed": "Passed",
     "points": "Checklist points",

@@ -48,6 +48,10 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const titleIsValid = useSelector(
     (state) => state.createChecklistReducer.title.isValid
   );
+  const isNotContainLinks = useSelector(
+    (state) => state.createChecklistReducer.title.isNotContainLinks
+  );
+  console.log(isNotContainLinks);
   const tags = useSelector((state) => state.createChecklistReducer.tags);
   const categoryID = useSelector(
     (state) => state.createChecklistReducer.category.id
@@ -73,12 +77,14 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       item.value?.link ? validateLink(item.value.link) : true
     );
     const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
+    const titleNotContainLinks = !title.includes("://");
     const categoryIsValid = categoryID !== "" && categoryID !== false;
 
     const validOrNot =
       checklist_items.length &&
       isDescriptionValid &&
       isValidTitle &&
+      titleNotContainLinks &&
       tagsIsValid &&
       !isLinksValid &&
       categoryIsValid;
@@ -107,6 +113,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       item.value?.link ? validateLink(item.value.link) : true
     );
     const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
+    const titleNotContainLinks = !title.includes("://");
     const categoryIsValid = categoryID !== "";
     setTagsValid(tagsIsValid);
     if (!checklist_items.length) {
@@ -114,6 +121,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     }
     dispatch(createChecklistActions.isValidDescription());
     dispatch(createChecklistActions.isTitleValid());
+    dispatch(createChecklistActions.isTitleNotContainLinks());
     dispatch(createChecklistActions.setValidateAfterSubmit());
     if (!categoryIsValid)
       dispatch(createChecklistActions.addCategory({ id: false, value: false }));
@@ -122,6 +130,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       checklist_items.length &&
       isDescriptionValid &&
       isValidTitle &&
+      titleNotContainLinks &&
       tagsIsValid &&
       !isLinksValid &&
       categoryIsValid;
@@ -132,7 +141,10 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const changeTitleHandler = (e) => {
     const { value } = e.target;
     dispatch(createChecklistActions.addTitle(value));
-    if (validateAfterSubmit) dispatch(createChecklistActions.isTitleValid());
+    if (validateAfterSubmit) {
+      dispatch(createChecklistActions.isTitleValid());
+      dispatch(createChecklistActions.isTitleNotContainLinks());
+    }
   };
 
   const onClickPreviewHandler = () => {
@@ -250,13 +262,19 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
                 {translate("creationOfChecklist.name")}
               </h3>
               <span
-                className={`creation__span${!titleIsValid ? " invalid" : ""}`}
+                className={`creation__span${
+                  !titleIsValid || !isNotContainLinks ? " invalid" : ""
+                }`}
               >
-                {translate("creationOfChecklist.max")}
+                {!titleIsValid && translate("creationOfChecklist.max")}
+                {!isNotContainLinks &&
+                  translate("creationOfChecklist.isNotContainLinks")}
               </span>
               <form className="creation__form">
                 <label
-                  className={`creation__name${!titleIsValid ? " invalid" : ""}`}
+                  className={`creation__name${
+                    !titleIsValid || !isNotContainLinks ? " invalid" : ""
+                  }`}
                   htmlFor="creationID"
                 >
                   <input
