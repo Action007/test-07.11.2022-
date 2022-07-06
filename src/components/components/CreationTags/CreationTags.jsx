@@ -44,7 +44,6 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   const onChangeSearchValue = (value) => {
     if (value.trim() === "") {
       setUrl("");
-      setShow(false);
     } else if (serverTags) {
       if (!serverTags.length) {
         setShow(true);

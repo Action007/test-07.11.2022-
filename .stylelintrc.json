@@ -49,22 +49,6 @@
       },
       {
         "type": "rule",
-        "selector": "&\\[[^\\[\\]]+\\]"
-      },
-      {
-        "type": "rule",
-        "selector": "&\\..+"
-      },
-      {
-        "type": "rule",
-        "selector": "&--.+"
-      },
-      {
-        "type": "rule",
-        "selector": ".* &"
-      },
-      {
-        "type": "rule",
         "selector": "&:focus"
       },
       {
@@ -82,6 +66,22 @@
       {
         "type": "rule",
         "selector": "&:disabled"
+      },
+      {
+        "type": "rule",
+        "selector": "&\\[[^\\[\\]]+\\]"
+      },
+      {
+        "type": "rule",
+        "selector": "&\\..+"
+      },
+      {
+        "type": "rule",
+        "selector": "&--.+"
+      },
+      {
+        "type": "rule",
+        "selector": ".* &"
       },
       "at-rules"
     ],

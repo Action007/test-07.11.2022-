@@ -75,18 +75,18 @@
       margin-right: 25px;
     }
 
-    &.active {
-      color: #fff;
-
-      background-color: $primary;
-    }
-
     &:active {
       transform: scale(0.96);
     }
 
     &:hover {
       background-color: #eee;
+    }
+
+    &.active {
+      color: #fff;
+
+      background-color: $primary;
     }
   }
 
@@ -146,6 +146,14 @@
       stroke: $warning;
     }
 
+    &:active {
+      transform: scale(0.96);
+    }
+
+    &:hover {
+      background-color: #eee;
+    }
+
     &.hot {
       color: #fff;
 
@@ -156,14 +164,6 @@
       svg {
         stroke: #fff;
       }
-    }
-
-    &:active {
-      transform: scale(0.96);
-    }
-
-    &:hover {
-      background-color: #eee;
     }
   }
 

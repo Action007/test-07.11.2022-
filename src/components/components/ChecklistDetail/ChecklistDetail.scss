@@ -129,20 +129,20 @@
       transition: stroke 0.2s ease;
     }
 
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+
+      svg {
+        stroke: $dark;
+      }
+    }
+
     &.saved {
       background-color: #f0f9f2;
 
       svg {
         fill: #fff;
         stroke: $primary;
-      }
-    }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-
-      svg {
-        stroke: $dark;
       }
     }
   }
@@ -337,6 +337,10 @@
       transition: stroke 0.2s ease;
     }
 
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+    }
+
     &.active {
       color: $primary;
 
@@ -355,10 +359,6 @@
       svg {
         stroke: #fff;
       }
-    }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
     }
   }
 
