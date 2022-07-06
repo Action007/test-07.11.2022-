@@ -42,12 +42,12 @@
       color: $dark;
     }
 
-    &.invalid {
-      border-color: $warning;
-    }
-
     &:focus {
       border-color: $primary;
+    }
+
+    &.invalid {
+      border-color: $warning;
     }
   }
 

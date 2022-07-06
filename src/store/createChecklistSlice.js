@@ -34,7 +34,9 @@ const createChecklistSlice = createSlice({
     addImage(state, action) {
       const { id, image } = action.payload;
       state.checklist_items = state.checklist_items.map((item) =>
-        item.id === id ? { ...item, value: { image } } : item
+        item.id === id
+          ? { ...item, list_type: "image", value: { ...item.value, image } }
+          : item
       );
     },
     removeImage(state, action) {
@@ -78,7 +80,10 @@ const createChecklistSlice = createSlice({
             ? {
                 ...item,
                 list_type: "link",
-                value: { ...item.value, link: "" },
+                value: {
+                  ...item.value,
+                  link: item.value.link ? item.value.link : "",
+                },
               }
             : item
         );
