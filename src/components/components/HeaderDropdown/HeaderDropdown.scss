@@ -86,12 +86,17 @@
     background: #f5f7fe;
     border-radius: 50%;
 
-    img {
-      width: 75%;
-      height: 75%;
-
-      object-fit: contain;
+    &_fill {
+      width: 100%;
+      height: 100%;
+		border-radius: 50%;
+		object-fit: cover;
     }
+	 &_empty{
+		width: 75%;
+      height: 75%;
+      object-fit: contain;
+	 }
   }
 
   &__name {
