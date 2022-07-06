@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../services/checklistService";
@@ -30,6 +30,7 @@ const SearchInput = ({ page = false, header }) => {
   });
   const [myTags, setMyTags] = useState(serverTags);
   const [blur, setBlur] = useState(false);
+  const focusRef = useRef(null);
   const { ref, show, setShow } = useClickOutside();
   const [searchParams, setSearchParams] = useSearchParams();
   const { pathname, search } = useLocation();
@@ -58,7 +59,17 @@ const SearchInput = ({ page = false, header }) => {
     } else {
       setMyTags([]);
     }
-  }, [searchParams]);
+
+    if (page === "home") {
+      const searchValueUrl = searchParams.get("search_value");
+      if (searchValueUrl) {
+        setSearchValue(searchValueUrl);
+        focusRef.current.focus();
+      } else {
+        setSearchValue("");
+      }
+    }
+  }, [search]);
 
   const onChangeSearchValue = (value) => {
     const isTag = value.trim().match(/^#/g);
@@ -178,6 +189,7 @@ const SearchInput = ({ page = false, header }) => {
           placeholder={translate("inputPlaceholder")}
           type="text"
           id={labelID}
+          ref={focusRef}
         />
       </label>
       {searchTags && filterTagsList().length !== 0 && show && (
