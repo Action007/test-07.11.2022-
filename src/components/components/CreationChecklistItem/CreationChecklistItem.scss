@@ -1,5 +1,5 @@
-@import '../../../global-styles/_variables.scss';
-@import '../../../../node_modules/bootstrap/scss/_mixins.scss';
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .creation-item {
   position: relative;
@@ -52,8 +52,7 @@
       outline: transparent;
 
       &:focus {
-        border-color: $primary;
-        font-family: 'SFPro-Medium', sans-serif;
+        font-family: SFPro-Medium, sans-serif;
         color: #000;
 
         border-color: $primary;
@@ -79,8 +78,7 @@
       outline: transparent;
 
       &:focus {
-        border-color: $primary;
-        font-family: 'SFPro-Medium', sans-serif;
+        font-family: SFPro-Medium, sans-serif;
         color: #000;
 
         border-color: $primary;
@@ -189,6 +187,7 @@
 
     .modal-header {
       padding: 0;
+
       border: none;
 
       button {
