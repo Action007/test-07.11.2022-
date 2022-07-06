@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -26,9 +26,11 @@ const MyProfileInfo = ({
   errorSize,
 }) => {
   const user = useSelector((state) => state.authSliceReducer.user);
+  const [avatar, setAvatar] = useState(avatar_url);
+
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
-  const [editAccount, { isLoading: isUpdateLoading, error }] =
+  const [editAccount, { isLoading: isUpdateLoading, error, data }] =
     checklistAPI.useEditAccountMutation();
 
   let host;
@@ -49,9 +51,9 @@ const MyProfileInfo = ({
   };
 
   useEffect(() => {
-    if (!error) return;
-    errorSize();
-  }, [error]);
+    if (error) errorSize();
+    if (data) setAvatar(data.avatar_url);
+  }, [error, data]);
 
   return (
     <>
@@ -61,11 +63,7 @@ const MyProfileInfo = ({
           <div className="profile-info__box">
             <label className="profile-info__edit-btn" htmlFor="uploadImg">
               <div className="profile-info__img">
-                {avatar_url ? (
-                  <img src={avatar_url} alt="account" />
-                ) : (
-                  <EmptySvg />
-                )}
+                {avatar ? <img src={avatar} alt="account" /> : <EmptySvg />}
               </div>
               <EditSvg />
               <input
