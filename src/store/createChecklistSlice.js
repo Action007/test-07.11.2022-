@@ -5,7 +5,7 @@ import uniqueID from "../utils/uniqueID";
 const createChecklistSlice = createSlice({
   name: "createChecklist",
   initialState: {
-    title: { value: "", isValid: true },
+    title: { value: "", isValid: true, isNotContainLinks: true },
     checklist_items: [],
     tags: [],
     category: { id: "", value: "", isValid: true },
@@ -140,8 +140,11 @@ const createChecklistSlice = createSlice({
       const titleIsValid =
         state.title.value.trim().length > 9 &&
         state.title.value.trim().length < 151;
-
       state.title.isValid = titleIsValid;
+    },
+    isTitleNotContainLinks(state) {
+      const titleNotContainLinks = !state.title.value.includes("://");
+      state.title.isNotContainLinks = titleNotContainLinks;
     },
     isValidDescription(state) {
       state.checklist_items = state.checklist_items.map((item) =>
@@ -152,7 +155,7 @@ const createChecklistSlice = createSlice({
       );
     },
     onSubmitClear(state) {
-      state.title = { value: "", isValid: true };
+      state.title = { value: "", isValid: true, isNotContainLinks: true };
       state.checklist_items = [];
       state.tags = [];
       state.category = { value: "", isValid: true, id: "" };
@@ -164,7 +167,7 @@ const createChecklistSlice = createSlice({
         item.id ? item : { ...item, id: uniqueID() }
       );
 
-      state.title = { value: name, isValid: true };
+      state.title = { value: name, isValid: true, isNotContainLinks: true };
       state.checklist_items = checklistItems;
       state.tags = tags;
       state.category = {
