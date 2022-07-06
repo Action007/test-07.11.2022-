@@ -51,7 +51,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const isNotContainLinks = useSelector(
     (state) => state.createChecklistReducer.title.isNotContainLinks
   );
-  console.log(isNotContainLinks);
+
   const tags = useSelector((state) => state.createChecklistReducer.tags);
   const categoryID = useSelector(
     (state) => state.createChecklistReducer.category.id
