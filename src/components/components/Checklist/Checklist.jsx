@@ -89,7 +89,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
     if (page === "home") {
       if (!search) {
         setSearchParams(
-          `?page=1&per_page=5&${changeSearchParamsValue(
+          `?per_page=5&${changeSearchParamsValue(
             searchParams,
             "search_tag_ids[]",
             tagID

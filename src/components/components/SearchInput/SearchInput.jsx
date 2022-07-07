@@ -28,7 +28,6 @@ const SearchInput = ({ page = false, header }) => {
   const { data: serverTags } = checklistAPI.useFetchTagsQuery(myTagsUrl, {
     skip: !myTagsUrl,
   });
-  const [myTags, setMyTags] = useState(serverTags);
   const [blur, setBlur] = useState(false);
   const focusRef = useRef(null);
   const { ref, show, setShow } = useClickOutside();
@@ -44,11 +43,6 @@ const SearchInput = ({ page = false, header }) => {
   }, [tagUrl]);
 
   useEffect(() => {
-    if (!serverTags) return;
-    setMyTags(serverTags);
-  }, [serverTags]);
-
-  useEffect(() => {
     const tagsIds = searchParams.getAll("search_tag_ids[]");
     if (tagsIds.length) {
       let tagsUrl = "";
@@ -57,7 +51,7 @@ const SearchInput = ({ page = false, header }) => {
       });
       setMyTagsUrl(tagsUrl.slice(0, -1));
     } else {
-      setMyTags([]);
+      setMyTagsUrl("");
     }
 
     if (page === "home") {
@@ -96,8 +90,7 @@ const SearchInput = ({ page = false, header }) => {
   };
 
   const addTagHandler = (tag) => {
-    const addOrNot = myTags.find((item) => item.name === tag.name);
-    if (addOrNot || myTags.length === 5) return;
+    if (serverTags?.length === 5 && serverTags) return;
     if (!tag || !tag.name.trim()) return;
 
     setTagUrl("");
@@ -164,8 +157,12 @@ const SearchInput = ({ page = false, header }) => {
   };
 
   const filterTagsList = () => {
-    return searchTags.filter(
-      (item) => !myTags.find((tag) => tag.id === item.id)
+    return searchTags.filter((item) =>
+      serverTags && (serverTags.length !== 1 || myTagsUrl)
+        ? !serverTags.find(
+            (tag) => tag.id === item.id && tag.name === item.name
+          )
+        : item
     );
   };
 
@@ -200,8 +197,9 @@ const SearchInput = ({ page = false, header }) => {
       )}
       {page === "home" && (
         <div className="search-input__tags">
-          {myTags &&
-            myTags.map((tag) => (
+          {serverTags &&
+            myTagsUrl &&
+            serverTags.map((tag) => (
               <button
                 key={tag.id}
                 onClick={() => removeTagHandler(tag.id)}

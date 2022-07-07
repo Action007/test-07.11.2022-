@@ -142,7 +142,7 @@ const CategorySidebar = () => {
 
     if (id === "all") {
       if (!search) {
-        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+        setSearchParams(`?per_page=5&${searchParams}`);
       } else {
         setSearchParams(searchParams);
       }
@@ -151,7 +151,7 @@ const CategorySidebar = () => {
     if (id === "popular" || id === "latest") {
       searchParams.append(id, true);
       if (!search) {
-        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+        setSearchParams(`?per_page=5&${searchParams}`);
       } else {
         setSearchParams(searchParams);
       }
@@ -160,7 +160,7 @@ const CategorySidebar = () => {
     if (id !== "popular" && id !== "latest" && id !== "all") {
       searchParams.append("search_category_ids[]", id);
       if (!search) {
-        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+        setSearchParams(`?per_page=5&${searchParams}`);
       } else {
         setSearchParams(searchParams);
       }
