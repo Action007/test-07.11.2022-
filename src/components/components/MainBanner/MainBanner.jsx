@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./MainBanner.scss";
@@ -22,9 +21,9 @@ const MainBanner = () => {
             <BannerImage />
           </div>
         )}
-        <Link className="main-banner__link" to="/creation-of-checklist">
+        <div className="d-inline-block">
           <CreateButton />
-        </Link>
+        </div>
       </div>
       {!showOnMobile && (
         <div className="main-banner__img">
