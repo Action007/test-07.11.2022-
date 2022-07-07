@@ -9,18 +9,18 @@ const ChecklistImage = ({ image, alt, preview = false }) => {
 
   return (
     <>
-      <div className="checklist-image">
+      <button
+        className="checklist-image"
+        onClick={() => setShowImage(true)}
+        type="button"
+      >
         <img src={image} alt={alt} />
         {!preview && (
-          <button
-            onClick={() => setShowImage(true)}
-            className="checklist-image__extend"
-            type="button"
-          >
+          <span className="checklist-image__extend">
             <ExtendSvg />
-          </button>
+          </span>
         )}
-      </div>
+      </button>
       <Modal
         className="checklist-image__popup"
         show={showImage}

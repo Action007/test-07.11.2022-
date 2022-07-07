@@ -1,6 +1,8 @@
 @import "../../../global-styles/variables";
 
 .checklist-image {
+  cursor: pointer;
+  
   position: relative;
 
   overflow: hidden;
