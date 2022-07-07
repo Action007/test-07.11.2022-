@@ -1,5 +1,5 @@
-@import "../../../global-styles/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .checklist {
   position: relative;
@@ -52,8 +52,7 @@
   }
 
   &__title {
-    margin-right: 55px;
-    margin-bottom: 25px;
+    margin: 0 55px 25px 0;
 
     font-size: 1.5rem;
     word-break: break-word;
@@ -68,8 +67,10 @@
       font-size: 1.2rem;
     }
 
-    button {
-      text-align: left;
+    a {
+      &:hover {
+        color: inherit;
+      }
     }
   }
 
@@ -150,7 +151,7 @@
     color: $primary;
 
     &::before {
-      content: "";
+      content: '';
 
       position: absolute;
       bottom: 0;
