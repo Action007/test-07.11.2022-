@@ -1,22 +1,41 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ChecklistComments from "../ChecklistComments/ChecklistComments";
 import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
 
-const ChecklistReview = ({
-  checklist,
-  setPageCount,
-  id,
-  isLoading,
-  isFetching,
-}) => {
+const ChecklistReview = (props) => {
+  const { checklist, setPageCount, id, isLoading, isFetching } = props;
   const { t: translate } = useTranslation();
-  const breadcrumbs = [
-    { title: translate("allChecklistsPage.title"), link: -1 },
-    { title: checklist ? checklist.checklist.name : "" },
-  ];
+  const { state } = useLocation();
+  const breadcrumbs =
+    state?.previousPath !== "/"
+      ? [
+          {
+            title: translate("allChecklistsPage.title"),
+            link: `${
+              state?.previousPath === "/created-checklists"
+                ? "/created-checklists"
+                : ""
+            }${
+              state?.previousPath === "/liked-checklists"
+                ? "/liked-checklists"
+                : ""
+            }${
+              state?.previousPath === "/saved-checklists"
+                ? "/saved-checklists"
+                : ""
+            }?search_type=${
+              state?.previousPath === "/created-checklists" ? "created" : ""
+            }${state?.previousPath === "/liked-checklists" ? "liked" : ""}${
+              state?.previousPath === "/saved-checklists" ? "saved" : ""
+            }&page=1&per_page=10`,
+          },
+          { title: checklist ? checklist.checklist.name : "" },
+        ]
+      : [{ title: checklist ? checklist.checklist.name : "" }];
 
   return (
     <div className="checklist-detail container container-breadcrumb pb-8">

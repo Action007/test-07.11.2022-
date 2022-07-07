@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -60,7 +65,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
   }${iLiked?.liked ? " liked" : ""}`;
   const savedClass = `checklist__bookmark${iSaved ? " saved" : ""}`;
   const [searchParams, setSearchParams] = useSearchParams();
-  const { search } = useLocation();
+  const { search, pathname } = useLocation();
 
   const likeHandler = () => {
     if (!iLiked?.liked) likeChecklist(id);
@@ -135,20 +140,14 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
   const head = (
     <>
       <h3 className="checklist__title SFPro-700">
-        <button
-          onClick={() =>
-            navigate(
-              `/${
-                page !== "my-active-checklists"
-                  ? "checklist"
-                  : "active-checklist"
-              }/${id}/${slug}`
-            )
-          }
-          type="button"
+        <Link
+          to={`/${
+            page !== "my-active-checklists" ? "checklist" : "active-checklist"
+          }/${id}/${slug}`}
+          state={{ previousPath: pathname }}
         >
           {name}
-        </button>
+        </Link>
       </h3>
       <div className="checklist__head">
         {showOnMobile && time}
@@ -210,21 +209,15 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
                 />
               ))}
         </ol>
-        <button
-          onClick={() =>
-            navigate(
-              `/${
-                page !== "my-active-checklists"
-                  ? "checklist"
-                  : "active-checklist"
-              }/${id}/${slug}`
-            )
-          }
+        <Link
           className="checklist__dots SFPro-600"
-          type="button"
+          to={`/${
+            page !== "my-active-checklists" ? "checklist" : "active-checklist"
+          }/${id}/${slug}`}
+          state={{ previousPath: pathname }}
         >
           <DotsSvg />
-        </button>
+        </Link>
         <div className="checklist__tags">
           {tags &&
             tags.map((tag) => (
