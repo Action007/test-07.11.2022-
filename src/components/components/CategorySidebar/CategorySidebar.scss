@@ -1,5 +1,5 @@
-@import "../../../global-styles/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .sidebar {
   overflow: hidden;
@@ -7,7 +7,6 @@
   width: 100%;
   max-width: 326px;
   margin-right: 45px;
-
   border-radius: 6px;
 
   @include media-breakpoint-down(xl) {
@@ -21,7 +20,7 @@
 
   &__head {
     width: 100%;
-    padding: 18px 28px;
+    padding: 15px 28px;
 
     font-size: 20px;
     color: #fff;
@@ -29,9 +28,38 @@
     background-color: $dark;
 
     @include media-breakpoint-down(lg) {
-      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: SFPro-SemiBold, sans-serif;
+      font-size: 18px;
+      padding: 11px 0;
+    }
 
-      background-color: $dark;
+    @include media-breakpoint-down(sm) {
+      font-size: 16px;
+    }
+
+    svg {
+      transform: rotate(-180deg);
+      margin-left: 22px;
+      transition: 0.3s transform ease;
+    }
+
+    &.close svg {
+      transform: rotate(0deg);
+    }
+  }
+
+  &__body {
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+    height: auto;
+    max-height: 9999px;
+
+    &.collapsed {
+      max-height: 0;
+      transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
     }
   }
 
@@ -165,33 +193,5 @@
         stroke: #fff;
       }
     }
-  }
-
-  .accordion-button {
-    justify-content: center;
-
-    padding: 16px 28px;
-
-    font-size: 16px;
-    color: #fff;
-
-    background-color: $dark;
-
-    &::after {
-      width: 14px;
-      height: 10px;
-      margin-left: 22px;
-
-      background-image: url("../../../assets/images/icon/accordion.svg");
-      background-size: contain;
-    }
-
-    &:focus {
-      box-shadow: none;
-    }
-  }
-
-  .accordion-body {
-    padding: 0;
   }
 }
