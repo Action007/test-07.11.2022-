@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Accordion } from "react-bootstrap";
 import { useLocation, useSearchParams } from "react-router-dom";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./CategorySidebar.scss";
@@ -29,13 +28,70 @@ import { ReactComponent as SocialSvg } from "../../../assets/images/icon/social.
 import { ReactComponent as SportSvg } from "../../../assets/images/icon/sport.svg";
 import { ReactComponent as TravelSvg } from "../../../assets/images/icon/travel.svg";
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
+import { ReactComponent as ArrowSvg } from "../../../assets/images/icon/accordionArrow.svg";
 
 const CategorySidebar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const [active, setActive] = useState("all");
+  const [showAccordion, setShowAccordion] = useState(false);
   const { t: translate } = useTranslation();
   const { search } = useLocation();
+
+  useEffect(() => {
+    let category = "all";
+    const categoryIds = searchParams.get("search_category_ids[]");
+    const popular = search.match(/popular=true/g);
+    const latest = search.match(/latest=true/g);
+
+    if (categoryIds) {
+      category = +categoryIds;
+    } else if (popular) {
+      category = "popular";
+    } else if (latest) {
+      category = "latest";
+    } else {
+      category = "all";
+    }
+
+    setActive(category);
+  }, [search]);
+
+  const onClickHandler = (id) => {
+    setActive(id);
+    setShowAccordion(false);
+    searchParams.delete("page");
+    searchParams.append("page", 1);
+    searchParams.delete("search_category_ids[]");
+    searchParams.delete("latest");
+    searchParams.delete("popular");
+
+    if (id === "all") {
+      if (!search) {
+        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+      } else {
+        setSearchParams(searchParams);
+      }
+    }
+
+    if (id === "popular" || id === "latest") {
+      searchParams.append(id, true);
+      if (!search) {
+        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+      } else {
+        setSearchParams(searchParams);
+      }
+    }
+
+    if (id !== "popular" && id !== "latest" && id !== "all") {
+      searchParams.append("search_category_ids[]", id);
+      if (!search) {
+        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+      } else {
+        setSearchParams(searchParams);
+      }
+    }
+  };
 
   const categories = [
     {
@@ -113,60 +169,6 @@ const CategorySidebar = () => {
     { id: 20, name: translate("sidebar.other"), svg: <DotsSvg />, fill: true },
   ];
 
-  useEffect(() => {
-    let category = "all";
-    const categoryIds = searchParams.get("search_category_ids[]");
-    const popular = search.match(/popular=true/g);
-    const latest = search.match(/latest=true/g);
-
-    if (categoryIds) {
-      category = +categoryIds;
-    } else if (popular) {
-      category = "popular";
-    } else if (latest) {
-      category = "latest";
-    } else {
-      category = "all";
-    }
-
-    setActive(category);
-  }, [search]);
-
-  const onClickHandler = (id) => {
-    setActive(id);
-    searchParams.delete("page");
-    searchParams.append("page", 1);
-    searchParams.delete("search_category_ids[]");
-    searchParams.delete("latest");
-    searchParams.delete("popular");
-
-    if (id === "all") {
-      if (!search) {
-        setSearchParams(`?per_page=5&${searchParams}`);
-      } else {
-        setSearchParams(searchParams);
-      }
-    }
-
-    if (id === "popular" || id === "latest") {
-      searchParams.append(id, true);
-      if (!search) {
-        setSearchParams(`?per_page=5&${searchParams}`);
-      } else {
-        setSearchParams(searchParams);
-      }
-    }
-
-    if (id !== "popular" && id !== "latest" && id !== "all") {
-      searchParams.append("search_category_ids[]", id);
-      if (!search) {
-        setSearchParams(`?per_page=5&${searchParams}`);
-      } else {
-        setSearchParams(searchParams);
-      }
-    }
-  };
-
   const sidebarBody = (
     <ul className="sidebar__list">
       {categories.map((item) => (
@@ -232,12 +234,21 @@ const CategorySidebar = () => {
       )}
       {!showOnMobile && sidebarBody}
       {showOnMobile && (
-        <Accordion>
-          <Accordion.Header className="sidebar__head sidebar__head--accordion SFPro-600">
+        <div>
+          <button
+            onClick={() => setShowAccordion((prevState) => !prevState)}
+            className={`sidebar__head SFPro-600${
+              !showAccordion ? " close" : ""
+            }`}
+            type="button"
+          >
             {translate("sidebar.checklistCategories")}
-          </Accordion.Header>
-          <Accordion.Body>{sidebarBody}</Accordion.Body>
-        </Accordion>
+            <ArrowSvg />
+          </button>
+          <div className={`sidebar__body${!showAccordion ? " collapsed" : ""}`}>
+            {sidebarBody}
+          </div>
+        </div>
       )}
     </nav>
   );
