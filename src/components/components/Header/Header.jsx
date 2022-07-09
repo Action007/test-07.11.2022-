@@ -106,7 +106,7 @@ const Header = () => {
         className="header__button SFPro-600"
         type="button"
       >
-        {translate("loginButton")}
+        {translate("signInButton")}
       </button>
       <button
         onClick={() => navigate(`/sign-up`)}

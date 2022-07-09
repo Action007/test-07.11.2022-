@@ -55,7 +55,6 @@
   "progress": "Your checklist is",
   "complete": "complete",
   "finish": "Finish",
-  "loginButton": "Log In",
   "signUpButton": "Sign Up",
   "signInButton": "Sign In",
   "inputPlaceholder": "Enter a word or #tag",
@@ -65,7 +64,7 @@
     "allChecklists": "All Checklists",
     "profileSettings": "Profile settings",
     "accountSettings": "Account settings",
-    "logOut": "Log Out"
+    "signOut": "Sign Out"
   },
   "popupDone": {
     "title": "Your checklist completed successfully!",
@@ -744,7 +743,7 @@
     "subtitle": "We will process it very soon and send you a reply by email."
   },
   "popupLogout": {
-    "title": "Log Out?",
+    "title": "Sign Out?",
     "subtitle": "Are you really going out?",
     "yes": "Yes",
     "no": "No"
