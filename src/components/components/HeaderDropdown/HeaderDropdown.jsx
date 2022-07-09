@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { authSliceActions } from "../../../store/authSlice";
 import { checklistAPI } from "../../../services/checklistService";
 import useClickOutside from "../../../hooks/useClickOutside";
@@ -27,6 +28,7 @@ const HeaderDropdown = ({ setShow }) => {
   const user = useSelector((state) => state.authSliceReducer.user);
   const percent = useSelector((state) => state.authSliceReducer.percent);
   const [logOut] = checklistAPI.useLogOutMutation();
+  const { t: translate } = useTranslation();
   const { data: accountInfo, isError } = checklistAPI.useFetchAccountQuery();
 
   useEffect(() => {
@@ -65,6 +67,11 @@ const HeaderDropdown = ({ setShow }) => {
 
   return (
     <>
+      <PopupLogout
+        setIsLogout={setIsLogout}
+        show={logout}
+        onHide={() => setLogout(false)}
+      />
       <div className={`header-dropdown SFPro-500${mobileClass}`} ref={ref}>
         {!showOnMobile && (
           <button
@@ -130,7 +137,7 @@ const HeaderDropdown = ({ setShow }) => {
             >
               <Bookmark />
               {user && user.saved_counter > 0 && <span />}
-              All Checklists
+              {translate("header.allChecklists")}
             </button>
             <button
               onClick={() => onClickHandler("/my-profile")}
@@ -138,7 +145,7 @@ const HeaderDropdown = ({ setShow }) => {
               type="button"
             >
               <Account />
-              Profile settings
+              {translate("header.profileSettings")}
             </button>
             <button
               onClick={() => onClickHandler("/account-settings")}
@@ -146,7 +153,7 @@ const HeaderDropdown = ({ setShow }) => {
               type="button"
             >
               <Setting />
-              Account settings
+              {translate("header.accountSettings")}
             </button>
             <button
               onClick={() => setLogout(true)}
@@ -154,17 +161,11 @@ const HeaderDropdown = ({ setShow }) => {
               type="button"
             >
               <Logout />
-              Log Out
+              {translate("header.signOut")}
             </button>
           </div>
         </CSSTransition>
       </div>
-      <PopupLogout
-        setIsLogout={setIsLogout}
-        show={logout}
-        onHide={() => setLogout(false)}
-      />
-      {/* <LoadingSpinnerPopup showSpinner={isLoading} /> */}
     </>
   );
 };
