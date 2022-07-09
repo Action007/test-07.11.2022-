@@ -18,6 +18,7 @@ const createChecklistSlice = createSlice({
       state.title.value = value;
     },
     addChecklist(state) {
+      if (state.checklist_items.length > 24) return;
       state.checklist_items = [
         ...state.checklist_items,
         { id: uniqueID(), list_type: "text", description: "", value: {} },
