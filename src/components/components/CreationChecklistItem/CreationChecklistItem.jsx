@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState, useRef } from "react";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import CreationChecklistItemEdit from "../CreationChecklistItemEdit/CreationChecklistItemEdit";
+import useClickOutside from "../../../hooks/useClickOutside";
 import MapGeneral from "../MapGeneral/MapGeneral";
 import validateLink from "../../../utils/validateLink";
 import MapModal from "../MapModal/MapModal";
@@ -31,41 +33,14 @@ const CreationChecklistItem = ({
   const [fadeIn, setFadeIn] = useState("");
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
-  const [show, setShow] = useState(false);
+  const { ref, show, setShow } = useClickOutside(true);
   const textInput = useRef(null);
-  const divCurrent = useRef(null);
   const isLinkValid = validateLink(value.link);
 
   useEffect(() => {
-    const setClassFunc = setTimeout(() => setFadeIn(" show"), 0);
-    const setFocusFunc = setTimeout(() => {
-      textInput.current.focus();
-      divCurrent.current.focus();
-    }, 300);
-
-    return () => {
-      clearTimeout(setFocusFunc);
-      clearTimeout(setClassFunc);
-    };
+    const setTime = setTimeout(() => setFadeIn(" show"), 0);
+    return () => clearTimeout(setTime);
   }, []);
-
-  const contains = (parent, child) => {
-    if (!child || !child.parentElement) return false;
-    if (child.parentElement === parent) return true;
-    return contains(parent, child.parentElement);
-  };
-
-  const onFocusHandler = () => {
-    setShow(true);
-  };
-
-  const onBlurHandler = (e) => {
-    const target = e.relatedTarget;
-    const parent = e.currentTarget;
-    if (!contains(parent, target)) {
-      setShow(false);
-    }
-  };
 
   const onChangeValueHandler = (e, type) => {
     const inputValue = e.target.value;
@@ -88,6 +63,10 @@ const CreationChecklistItem = ({
   const addItemOnEnter = (e) => {
     if (e.key !== "Enter") return;
     dispatch(createChecklistActions.addChecklist());
+  };
+
+  const onTabClick = (e) => {
+    if (e.key === "Tab") setShow(false);
   };
 
   const onUpdateImageHandler = (event) => {
@@ -171,11 +150,13 @@ const CreationChecklistItem = ({
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...provide.draggableProps}
     >
-      <div ref={divCurrent} onFocus={onFocusHandler} onBlur={onBlurHandler}>
+      <div ref={ref}>
         <div
           className={`creation-item__wrap${
             inValid && validateAfterSubmit ? " invalid" : ""
           }`}
+          onKeyDown={onTabClick}
+          onFocus={() => setShow(true)}
         >
           <div
             // eslint-disable-next-line react/jsx-props-no-spreading
