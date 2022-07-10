@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import jwt_decode from "jwt-decode";
 import { authSliceActions } from "../../../../store/authSlice";
 import { checklistAPI } from "../../../../services/checklistService";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
@@ -12,7 +11,7 @@ import "./SignIn.scss";
 
 import { ReactComponent as LoginSvg } from "../../../../assets/images/content/login.svg";
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
-// import { ReactComponent as GoogleSvg } from "../../../../assets/images/icon/google.svg";
+import { ReactComponent as GoogleSvg } from "../../../../assets/images/icon/google.svg";
 
 const SignIn = () => {
   const [isValidEmailServer, setIsValidEmailServer] = useState(true);
@@ -71,25 +70,6 @@ const SignIn = () => {
       setIsValidEmailServer(true);
     }
   };
-  function handleCallbackResponse(response) {
-    console.log(response.credential);
-    const userObject = jwt_decode(response.credential);
-    console.log(userObject);
-  }
-
-  useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id:
-        "1098782050996-4k4fs2d8gkgp84mlobg6u43o7a4me71c.apps.googleusercontent.com",
-      callback: handleCallbackResponse,
-    });
-    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
-      theme: "outline",
-      size: "large",
-      policy: "strict-origin-when-cross-origin",
-    });
-  });
 
   return (
     <>
@@ -160,12 +140,10 @@ const SignIn = () => {
           </button>
         </form>
         <span className="sign-in__absolute">{translate("login.or")}</span>
-        {/* <button className="sign-in__google SFPro-500" type="button">
+        <button className="sign-in__google SFPro-500" type="button">
           <GoogleSvg />
           {translate("login.google")}
-        </button> */}
-        <div id="signInDiv" />
-
+        </button>
         <Link to="reset" className="sign-in__btn">
           {translate("login.forgot")}
         </Link>
