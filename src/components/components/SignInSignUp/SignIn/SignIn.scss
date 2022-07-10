@@ -1,6 +1,14 @@
 @import "../../../../global-styles/variables";
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
+.g_id_signin{
+	height: 50px;
+}
+
+.google{
+	max-width: 400px;
+}
+
 .sign-in {
   width: 100%;
   max-width: 585px;
