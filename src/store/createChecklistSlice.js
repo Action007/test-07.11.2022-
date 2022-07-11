@@ -127,9 +127,11 @@ const createChecklistSlice = createSlice({
           if (item.id === id) {
             const isValid =
               inputValue.trim().length < 151 && inputValue.trim().length > 1;
+            const itemsNotContainLinks = !inputValue.includes("://");
             return {
               ...item,
               inValid: !isValid,
+              itemsNotContainLinks: !itemsNotContainLinks,
               description: inputValue,
             };
           }
@@ -153,6 +155,13 @@ const createChecklistSlice = createSlice({
         item.description.trim().length > 1
           ? { ...item, inValid: false }
           : { ...item, inValid: true }
+      );
+    },
+    isValidDescriptionForLinks(state) {
+      state.checklist_items = state.checklist_items.map((item) =>
+        item.description.includes("://")
+          ? { ...item, itemsNotContainLinks: true }
+          : { ...item, itemsNotContainLinks: false }
       );
     },
     onSubmitClear(state) {
