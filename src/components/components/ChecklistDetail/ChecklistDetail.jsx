@@ -28,32 +28,42 @@ const ChecklistDetail = ({
     checklist_items,
     created_at,
     liked,
+    unliked,
     name,
     tags,
     user_track,
     viewed,
   } = checklist;
-  const [iLiked, setILiked] = useState({
-    liked: user_track?.liked,
-    mount: liked,
-  });
-  const [showComplain, setShowComplain] = useState(false);
-  const [iSaved, setISaved] = useState(user_track?.saved);
+  const token = useSelector((state) => state.authSliceReducer.token);
+
   const [addActiveChecklist, { data, isSuccess, isLoading }] =
     checklistAPI.useAddActiveChecklistMutation();
   const [saveChecklist] = checklistAPI.useSaveChecklistMutation();
   const [unsaveChecklist] = checklistAPI.useUnsaveChecklistMutation();
   const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
   const [dislikeChecklist] = checklistAPI.useDislikeChecklistMutation();
-  const { t: translate } = useTranslation();
-  const showOnMobile = useMediaQuery("(max-width:575px)");
+
   const { date } = getTime(created_at);
-  const likeClass = `checklist-detail__liked SFPro-700${
-    iLiked.mount ? " active" : ""
-  }${iLiked?.liked ? " liked" : ""}`;
-  const savedClass = `checklist-detail__bookmark${iSaved ? " saved" : ""}`;
+  const showOnMobile = useMediaQuery("(max-width:575px)");
   const navigate = useNavigate();
-  const token = useSelector((state) => state.authSliceReducer.token);
+  const { t: translate } = useTranslation();
+  const [showComplain, setShowComplain] = useState(false);
+  const [iSaved, setISaved] = useState(user_track?.saved);
+  const [like, setLiked] = useState(!!user_track?.liked);
+  const [dislike, setDisliked] = useState(!!user_track?.unliked);
+  const likeAmount = like ? liked + 1 : liked;
+  const dislikeAmount = dislike ? unliked + 1 : unliked;
+  const finalLikeAmount = user_track?.liked ? likeAmount - 1 : likeAmount;
+  const finalDislikeAmount = user_track?.unliked
+    ? dislikeAmount - 1
+    : dislikeAmount;
+  const likeClass = `${`checklist-detail__likes SFPro-700`}${
+    liked && finalLikeAmount ? " liked" : ""
+  }${like ? " active" : ""}`;
+  const dislikeClass = `${`checklist-detail__dislikes SFPro-700`}${
+    unliked && finalDislikeAmount ? " disliked" : ""
+  }${dislike ? " active" : ""}`;
+  const savedClass = `checklist-detail__bookmark${iSaved ? " saved" : ""}`;
 
   useEffect(() => {
     if (isSuccess) {
@@ -61,22 +71,16 @@ const ChecklistDetail = ({
     }
   }, [isSuccess]);
 
-  const likeHandler = () => {
-    if (detailPage) {
-      if (!iLiked.liked) likeChecklist(id);
-      if (iLiked.liked) dislikeChecklist(id);
-    }
-    setILiked((prevState) => ({
-      liked: !prevState.liked,
-      // eslint-disable-next-line no-nested-ternary
-      mount: !prevState?.liked
-        ? user_track?.liked
-          ? liked
-          : liked + 1
-        : user_track?.liked
-        ? liked - 1
-        : liked,
-    }));
+  const setLikeHandler = () => {
+    setLiked((prevState) => !prevState);
+    setDisliked(false);
+    likeChecklist(id);
+  };
+
+  const setDislikeHandler = () => {
+    setDisliked((prevState) => !prevState);
+    setLiked(false);
+    dislikeChecklist(id);
   };
 
   const addActiveChecklistHandler = () => {
@@ -124,7 +128,7 @@ const ChecklistDetail = ({
           <div className="checklist-detail__head">
             {showOnMobile && time}
             {detailPage && (
-              <div className="checklist-detail__buttons">
+              <div className="checklist-detail__btns">
                 <button
                   onClick={token ? saveHandler : loginHandler}
                   className={savedClass}
@@ -197,14 +201,24 @@ const ChecklistDetail = ({
                   <ViewSvg />
                   <span>{viewed}</span>
                 </span>
-                <button
-                  onClick={token ? likeHandler : loginHandler}
-                  className={likeClass}
-                  type="button"
-                >
-                  <LikeSvg />
-                  <span>{iLiked.mount}</span>
-                </button>
+                <div className="checklist-detail__buttons">
+                  <button
+                    onClick={setLikeHandler}
+                    className={likeClass}
+                    type="button"
+                  >
+                    <LikeSvg />
+                    {finalLikeAmount}
+                  </button>
+                  <button
+                    onClick={setDislikeHandler}
+                    className={dislikeClass}
+                    type="button"
+                  >
+                    <LikeSvg />
+                    {finalDislikeAmount}
+                  </button>
+                </div>
               </div>
               {!showOnMobile && time}
             </div>

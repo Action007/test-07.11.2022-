@@ -31,6 +31,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
     checklist_items,
     created_at,
     liked,
+    unliked,
     name,
     slug,
     tags,
@@ -38,50 +39,56 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
     viewed,
   } = checklist;
   const token = useSelector((state) => state.authSliceReducer.token);
-  const [modalShow, setModalShow] = useState(false);
 
-  const [iLiked, setILiked] = useState({
-    liked: user_track?.liked,
-    mount: liked,
-  });
-  const [iSaved, setISaved] = useState(user_track?.saved);
   const [saveChecklist] = checklistAPI.useSaveChecklistMutation();
   const [unsaveChecklist] = checklistAPI.useUnsaveChecklistMutation();
   const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
   const [dislikeChecklist] = checklistAPI.useDislikeChecklistMutation();
   const [deleteChecklist] = checklistAPI.useDeleteChecklistMutation();
+
+  const [modalShow, setModalShow] = useState(false);
   const [showComplain, setShowComplain] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   const showOnMobile = useMediaQuery("(max-width:575px)");
-  const navigate = useNavigate();
+  const { search, pathname } = useLocation();
   const { t: translate } = useTranslation();
+  const navigate = useNavigate();
   const { date } = getTime(created_at);
+
   const checklistItem = checklist_items.map((item) =>
     item.list_type !== "text" ? { ...item, list_type: "text" } : item
   );
   const fiveItems = checklistItem.slice(0, 5);
   const moreThanFive = checklist_items.length > 5;
-  const likeClass = `checklist__liked SFPro-700${
-    iLiked.mount ? " active" : ""
-  }${iLiked?.liked ? " liked" : ""}`;
+
+  const [iSaved, setISaved] = useState(user_track?.saved);
   const savedClass = `checklist__bookmark${iSaved ? " saved" : ""}`;
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { search, pathname } = useLocation();
 
-  const likeHandler = () => {
-    if (!iLiked?.liked) likeChecklist(id);
-    if (iLiked?.liked) dislikeChecklist(id);
+  const [like, setLiked] = useState(!!user_track?.liked);
+  const [dislike, setDisliked] = useState(!!user_track?.unliked);
+  const likeAmount = like ? liked + 1 : liked;
+  const dislikeAmount = dislike ? unliked + 1 : unliked;
+  const finalLikeAmount = user_track?.liked ? likeAmount - 1 : likeAmount;
+  const finalDislikeAmount = user_track?.unliked
+    ? dislikeAmount - 1
+    : dislikeAmount;
+  const likeClass = `${`checklist__likes SFPro-700`}${
+    liked && finalLikeAmount ? " liked" : ""
+  }${like ? " active" : ""}`;
+  const dislikeClass = `${`checklist__dislikes SFPro-700`}${
+    unliked && finalDislikeAmount ? " disliked" : ""
+  }${dislike ? " active" : ""}`;
 
-    setILiked((prevState) => ({
-      liked: !prevState?.liked,
-      // eslint-disable-next-line no-nested-ternary
-      mount: !prevState?.liked
-        ? user_track?.liked
-          ? liked
-          : liked + 1
-        : user_track?.liked
-        ? liked - 1
-        : liked,
-    }));
+  const setLikeHandler = () => {
+    setLiked((prevState) => !prevState);
+    setDisliked(false);
+    likeChecklist(id);
+  };
+
+  const setDislikeHandler = () => {
+    setDisliked((prevState) => !prevState);
+    setLiked(false);
+    dislikeChecklist(id);
   };
 
   const saveHandler = () => {
@@ -151,8 +158,8 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
       </h3>
       <div className="checklist__head">
         {showOnMobile && time}
-        {!created && page === "home" ? (
-          <div className="checklist__buttons">
+        {!created && page === "home" && (
+          <div className="checklist__wrap">
             <button
               onClick={token ? saveHandler : loginHandler}
               className={savedClass}
@@ -173,8 +180,6 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
               </span>
             </div>
           </div>
-        ) : (
-          ""
         )}
       </div>
       {created && (
@@ -232,7 +237,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
             ))}
         </div>
         <div className="checklist__box">
-          {page === "home" ? (
+          {page === "home" && (
             <div className="checklist__inner">
               <span
                 className={`${`checklist__viewed SFPro-700`} ${
@@ -242,17 +247,25 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
                 <ViewSvg />
                 <span>{viewed}</span>
               </span>
-              <button
-                onClick={token ? likeHandler : loginHandler}
-                className={likeClass}
-                type="button"
-              >
-                <LikeSvg />
-                <span>{iLiked.mount}</span>
-              </button>
+              <div className="checklist__buttons">
+                <button
+                  onClick={setLikeHandler}
+                  className={likeClass}
+                  type="button"
+                >
+                  <LikeSvg />
+                  {finalLikeAmount}
+                </button>
+                <button
+                  onClick={setDislikeHandler}
+                  className={dislikeClass}
+                  type="button"
+                >
+                  <LikeSvg />
+                  {finalDislikeAmount}
+                </button>
+              </div>
             </div>
-          ) : (
-            ""
           )}
           {!showOnMobile && time}
         </div>

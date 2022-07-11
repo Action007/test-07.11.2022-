@@ -7,6 +7,7 @@
   width: 100%;
   max-width: 326px;
   margin-right: 45px;
+
   border-radius: 6px;
 
   @include media-breakpoint-down(xl) {
@@ -29,11 +30,13 @@
 
     @include media-breakpoint-down(lg) {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+
+      padding: 11px 0;
+
       font-family: SFPro-SemiBold, sans-serif;
       font-size: 18px;
-      padding: 11px 0;
     }
 
     @include media-breakpoint-down(sm) {
@@ -42,7 +45,9 @@
 
     svg {
       transform: rotate(-180deg);
+
       margin-left: 22px;
+
       transition: 0.3s transform ease;
     }
 
@@ -53,12 +58,15 @@
 
   &__body {
     overflow: hidden;
-    transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+
     height: auto;
     max-height: 9999px;
 
+    transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+
     &.collapsed {
       max-height: 0;
+
       transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
     }
   }
