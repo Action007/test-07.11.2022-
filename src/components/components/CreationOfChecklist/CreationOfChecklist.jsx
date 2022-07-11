@@ -36,6 +36,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const [validButton, setValidButton] = useState();
   const [done, setDone] = useState(false);
   const [tagsValid, setTagsValid] = useState(true);
+  const [tagIncludesLink, setTagIncludesLink] = useState(false);
   const validateAfterSubmit = useSelector(
     (state) => state.createChecklistReducer.validateAfterSubmit
   );
@@ -68,10 +69,14 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
 
   useEffect(() => {
     const tagsIsValid = tags.length > 2;
+    const tagNameIncludesLink = tags.find((tag) => tag.name.includes("://"));
     const isDescriptionValid = checklist_items.findIndex(
       (item) =>
         item.description.trim().length < 2 ||
         item.description.trim().length > 150
+    );
+    const itemsNotContainLinks = checklist_items.findIndex((item) =>
+      item.description.includes("://")
     );
     const isLinksValid = checklist_items.findIndex((item) =>
       item.value?.link ? validateLink(item.value.link) : true
@@ -83,9 +88,11 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const validOrNot =
       checklist_items.length &&
       isDescriptionValid &&
+      itemsNotContainLinks &&
       isValidTitle &&
       titleNotContainLinks &&
       tagsIsValid &&
+      !tagNameIncludesLink &&
       !isLinksValid &&
       categoryIsValid;
 
@@ -104,10 +111,14 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const checkValidHandler = (e) => {
     if (e) e.preventDefault();
     const tagsIsValid = tags.length > 2;
+    const tagNameIncludesLink = tags.find((tag) => tag.name.includes("://"));
     const isDescriptionValid = checklist_items.findIndex(
       (item) =>
         item.description.trim().length < 2 ||
         item.description.trim().length > 150
+    );
+    const itemsNotContainLinks = checklist_items.findIndex((item) =>
+      item.description.includes("://")
     );
     const isLinksValid = checklist_items.findIndex((item) =>
       item.value?.link ? validateLink(item.value.link) : true
@@ -116,10 +127,12 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const titleNotContainLinks = !title.includes("://");
     const categoryIsValid = categoryID !== "";
     setTagsValid(tagsIsValid);
+    setTagIncludesLink(tagNameIncludesLink);
     if (!checklist_items.length) {
       dispatch(createChecklistActions.addChecklist());
     }
     dispatch(createChecklistActions.isValidDescription());
+    dispatch(createChecklistActions.isValidDescriptionForLinks());
     dispatch(createChecklistActions.isTitleValid());
     dispatch(createChecklistActions.isTitleNotContainLinks());
     dispatch(createChecklistActions.setValidateAfterSubmit());
@@ -129,9 +142,11 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const validOrNot =
       checklist_items.length &&
       isDescriptionValid &&
+      itemsNotContainLinks &&
       isValidTitle &&
       titleNotContainLinks &&
       tagsIsValid &&
+      !tagNameIncludesLink &&
       !isLinksValid &&
       categoryIsValid;
 
@@ -310,14 +325,20 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
                 </h3>
                 <span
                   className={`creation__desc${
-                    !tagsValid && validateAfterSubmit ? " invalid" : ""
+                    tagIncludesLink || (!tagsValid && validateAfterSubmit)
+                      ? " invalid"
+                      : ""
                   }`}
                 >
                   {translate("creationOfChecklist.desc")}
+                  {tagIncludesLink &&
+                    translate("creationOfChecklist.tagIncludesLink")}
                 </span>
                 <CreationTags
                   tagsValid={tagsValid}
                   setTagsValid={setTagsValid}
+                  tagIncludesLink={tagIncludesLink}
+                  setTagIncludesLink={setTagIncludesLink}
                 />
                 <CreationCategory />
                 <div className="creation__buttons SFPro-600">

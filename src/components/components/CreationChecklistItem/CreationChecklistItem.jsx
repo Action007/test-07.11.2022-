@@ -22,6 +22,7 @@ const CreationChecklistItem = ({
   number,
   value,
   inValid,
+  itemsNotContainLinks,
   id,
 }) => {
   const validateAfterSubmit = useSelector(
@@ -153,7 +154,9 @@ const CreationChecklistItem = ({
       <div ref={ref}>
         <div
           className={`creation-item__wrap${
-            inValid && validateAfterSubmit ? " invalid" : ""
+            itemsNotContainLinks || (inValid && validateAfterSubmit)
+              ? " invalid"
+              : ""
           }`}
           onKeyDown={onTabClick}
           onFocus={() => setShow(true)}
@@ -162,7 +165,9 @@ const CreationChecklistItem = ({
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...provide.dragHandleProps}
             className={`creation-item__number SFPro-600${
-              inValid && validateAfterSubmit ? " invalid" : ""
+              itemsNotContainLinks || (inValid && validateAfterSubmit)
+                ? " invalid"
+                : ""
             }`}
             tabIndex="-1"
           >
@@ -173,6 +178,11 @@ const CreationChecklistItem = ({
             {!!inValid && validateAfterSubmit && (
               <span className="creation-item__invalid text">
                 {translate("creationOfChecklist.maxItem")}
+              </span>
+            )}
+            {itemsNotContainLinks && (
+              <span className="creation-item__invalid text">
+                {translate("creationOfChecklist.itemsNotContainLinks")}
               </span>
             )}
             <label className="creation-item__text" htmlFor={id}>

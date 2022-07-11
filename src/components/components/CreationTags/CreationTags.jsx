@@ -11,7 +11,12 @@ import "./CreationTags.scss";
 import { ReactComponent as PlusSvg } from "../../../assets/images/icon/plusTags.svg";
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
 
-const CreationTags = ({ tagsValid, setTagsValid }) => {
+const CreationTags = ({
+  tagsValid,
+  setTagsValid,
+  tagIncludesLink,
+  setTagIncludesLink,
+}) => {
   const validateAfterSubmit = useSelector(
     (state) => state.createChecklistReducer.validateAfterSubmit
   );
@@ -70,7 +75,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
       return;
     }
     let validTag = tag;
-    const tagsIsValid = myTags.length > 1;
+    const tagNameIncludesLink = tag.name.includes("://");
     const addOrNot = myTags.find(
       (item) => item.name === tag.name || item.id === tag.id
     );
@@ -91,8 +96,8 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
     setShow(true);
     dispatch(createChecklistActions.addTag(validTag));
 
-    if (tagsIsValid) {
-      setTagsValid(true);
+    if (tagNameIncludesLink) {
+      setTagIncludesLink(true);
     }
   };
 
@@ -104,6 +109,19 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
       tags_new: true,
     });
   }, [show]);
+
+  useEffect(() => {
+    const tagsIsValid = myTags.length > 2;
+    const tagNameIncludesLink = myTags.find((item) =>
+      item.name.includes("://")
+    );
+    if (tagsIsValid) {
+      setTagsValid(true);
+    }
+    if (!tagNameIncludesLink) {
+      setTagIncludesLink(false);
+    }
+  }, [myTags]);
 
   const removeTagHandler = (tag) => {
     const tagsIsValid = myTags.length > 3;
@@ -128,7 +146,7 @@ const CreationTags = ({ tagsValid, setTagsValid }) => {
   return (
     <div
       className={`creation-tag${
-        !tagsValid && validateAfterSubmit ? " invalid" : ""
+        tagIncludesLink || (!tagsValid && validateAfterSubmit) ? " invalid" : ""
       }`}
     >
       {myTags.map((tag) => (
