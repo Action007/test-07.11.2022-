@@ -74,7 +74,7 @@
     }
   }
 
-  &__buttons {
+  &__wrap {
     position: absolute;
     top: 25px;
     right: 36px;
@@ -82,12 +82,73 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+
+    @include media-breakpoint-down(md) {
+      flex-wrap: wrap-reverse;
+    }
 
     @include media-breakpoint-down(sm) {
       top: 22px;
       right: 19px;
 
       flex-direction: row-reverse;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+  }
+
+  &__likes {
+    margin-right: 8px;
+
+    &.liked {
+      color: $primary;
+
+      background-color: #65c17e1a;
+
+      svg {
+        stroke: $primary;
+      }
+    }
+
+    &.active {
+      color: #fff;
+
+      background-color: $primary;
+
+      svg {
+        stroke: #fff;
+      }
+    }
+  }
+
+  &__dislikes {
+    border-radius: 6px;
+
+    svg {
+      transform: rotate(180deg);
+    }
+
+    &.disliked {
+      color: $warning;
+
+      background-color: #eb57571a;
+
+      svg {
+        stroke: $warning;
+      }
+    }
+
+    &.active {
+      color: #fff;
+
+      background-color: $warning;
+
+      svg {
+        stroke: #fff;
+      }
     }
   }
 
@@ -162,17 +223,6 @@
       height: 1px;
 
       background-color: $primary;
-    }
-  }
-
-  &__wrap {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    @include media-breakpoint-down(md) {
-      flex-wrap: wrap-reverse;
-      align-items: flex-start;
     }
   }
 
@@ -325,6 +375,34 @@
     transform: translateY(-1px);
 
     box-shadow: 0 2px 4px 0 #e5e9f5;
+  }
+
+  &__likes,
+  &__dislikes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 11px;
+
+    color: #a3a3a3;
+
+    background-color: $secondary;
+    border-radius: 6px;
+
+    transition: box-shadow 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+
+    svg {
+      margin-right: 10px;
+
+      stroke: #a3a3a3;
+
+      transition: stroke 0.2s ease;
+    }
+
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+    }
   }
 
   &__liked,
