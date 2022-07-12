@@ -21,6 +21,7 @@ const AccountSetting = () => {
   const [oldPasswordIncorrect, setOldPasswordIncorrect] = useState(true);
   const [newPasswordValid, setNewPasswordValid] = useState(true);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
+  const [errorMatchPassword, setErrorMatchPassword] = useState(false);
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
   const navigate = useNavigate();
@@ -48,8 +49,13 @@ const AccountSetting = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const email = validateEmail(emilValue);
-    const oldPassword = oldPasswordRef.current.value.trim().length > 0;
+    const oldPassword = oldPasswordRef.current.value.trim();
     const newPassword = newPasswordRef.current.value.trim().length > 7;
+    if (newPassword) {
+      setErrorMatchPassword(
+        oldPasswordRef.current.value === newPasswordRef.current.value
+      );
+    }
     const confirmPassword =
       confirmPasswordRef.current.value === newPasswordRef.current.value;
 
@@ -59,12 +65,21 @@ const AccountSetting = () => {
     setConfirmPasswordValid(confirmPassword);
     setOldPasswordIncorrect(true);
 
-    if (email && oldPassword && newPassword && confirmPassword) {
+    if (
+      email &&
+      oldPassword &&
+      newPassword &&
+      confirmPassword &&
+      !errorMatchPassword
+    ) {
       resetPassword({
         old_password: oldPasswordRef.current.value,
         new_password: newPasswordRef.current.value,
         new_password_confirmation: confirmPasswordRef.current.value,
       });
+      oldPasswordRef.current.value = "";
+      newPasswordRef.current.value = "";
+      confirmPasswordRef.current.value = "";
     }
   };
 
@@ -121,7 +136,7 @@ const AccountSetting = () => {
             </label>
             <label
               className={`account-setting__label${
-                !newPasswordValid ? " invalid" : ""
+                !newPasswordValid || errorMatchPassword ? " invalid" : ""
               }`}
               htmlFor="account-newPassword"
             >
@@ -133,8 +148,16 @@ const AccountSetting = () => {
                   {translate("accountSettings.minimum")}
                 </span>
               )}
+              {errorMatchPassword && (
+                <span className="account-setting__subtitle">
+                  {translate("accountSettings.passwordMatch")}
+                </span>
+              )}
               <input
-                onChange={() => setNewPasswordValid(true)}
+                onChange={() => {
+                  setNewPasswordValid(true);
+                  setErrorMatchPassword(false);
+                }}
                 ref={newPasswordRef}
                 type="password"
                 id="account-newPassword"
@@ -143,7 +166,9 @@ const AccountSetting = () => {
             </label>
             <label
               className={`account-setting__label${
-                !confirmPasswordValid || !newPasswordValid ? " invalid" : ""
+                !confirmPasswordValid || !newPasswordValid || errorMatchPassword
+                  ? " invalid"
+                  : ""
               }`}
               htmlFor="account-confirmPassword"
             >
