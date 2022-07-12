@@ -116,12 +116,3 @@
     }
   }
 }
-
-.create-button {
-  @include media-breakpoint-down(sm) {
-    justify-content: center;
-
-    width: 100%;
-    padding: 13px 30px;
-  }
-}

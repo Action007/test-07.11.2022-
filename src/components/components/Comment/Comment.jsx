@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import EditDropdown from "../EditDropdown/EditDropdown";
 import "./Comment.scss";
@@ -32,6 +33,7 @@ const Comment = ({
   const dislikeClass = `${`checklist-comment__dislikes SFPro-700`}${
     unliked && finalDislikeAmount ? " disliked" : ""
   }${dislike ? " active" : ""}`;
+  const navigate = useNavigate();
 
   const setLikeHandler = () => {
     setLiked((prevState) => !prevState);
@@ -45,11 +47,21 @@ const Comment = ({
     onUnlikeHandler(commentID);
   };
 
+  const onClickHandler = () => {
+    navigate(`/${author}`);
+  };
+
   return (
     <li className="checklist-comment">
       <div className="checklist-comment__wrapper">
         <div className="checklist-comment__heading">
-          <span className="checklist-comment__heading SFPro-600">{author}</span>
+          <button
+            onClick={onClickHandler}
+            className="checklist-comment__heading SFPro-600"
+            type="button"
+          >
+            {author}
+          </button>
           <span className="checklist-comment__time">{date}</span>
         </div>
         <p className="checklist-comment__text">{text}</p>

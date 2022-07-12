@@ -42,6 +42,10 @@ export const checklistAPI = createApi({
       query: (tagsUrl) => `/api/v1/tags/search?${tagsUrl}`,
       providesTags: () => ["Tags"],
     }),
+    fetchUserProfile: build.query({
+      query: (nickname) => `/api/v1/users?user_nickname=${nickname}`,
+      providesTags: () => ["UserProfile"],
+    }),
     fetchCountryNames: build.query({
       query: () => "/api/v1/account/valid_country_names",
     }),

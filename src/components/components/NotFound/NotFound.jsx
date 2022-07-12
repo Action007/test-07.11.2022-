@@ -9,12 +9,12 @@ const NotFound = () => {
   const { t: translate } = useTranslation();
 
   return (
-    <section className="container error py-8">
+    <section className="not-found container py-8">
       <div className="container-wrapper">
-        <h1 className="error__title display-4 text-center SFPro-600">
+        <h1 className="not-found__title display-4 text-center SFPro-600">
           {translate("error.title")}
         </h1>
-        <div className="error__img mx-auto">
+        <div className="not-found__img mx-auto">
           <Error />
         </div>
         <div className="text-center">

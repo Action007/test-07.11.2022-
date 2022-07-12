@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
-import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
+import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ChecklistComments from "../ChecklistComments/ChecklistComments";
 import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
@@ -40,7 +40,7 @@ const ChecklistReview = (props) => {
   return (
     <div className="checklist-detail container container-breadcrumb pb-8">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      {isLoading && <LoadingSkeleton />}
+      {isLoading && <ChecklistSkeleton />}
       {checklist && (
         <ChecklistDetail checklist={checklist.checklist} detailPage />
       )}

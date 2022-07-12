@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../../services/checklistService";
-import "./MyProfileInfo.scss";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
+import "./ProfileInfo.scss";
+
 import { ReactComponent as Setting } from "../../../../assets/images/icon/setting.svg";
 import { ReactComponent as Facebook } from "../../../../assets/images/icon/facebook.svg";
 import { ReactComponent as Twitter } from "../../../../assets/images/icon/twitter.svg";
@@ -13,7 +14,7 @@ import { ReactComponent as World } from "../../../../assets/images/icon/world.sv
 import { ReactComponent as EditSvg } from "../../../../assets/images/icon/editPhoto.svg";
 import { ReactComponent as EmptySvg } from "../../../../assets/images/icon/emptyPhoto.svg";
 
-const MyProfileInfo = ({
+const ProfileInfo = ({
   name,
   nickname,
   country,
@@ -27,6 +28,7 @@ const MyProfileInfo = ({
 }) => {
   const user = useSelector((state) => state.authSliceReducer.user);
   const [avatar, setAvatar] = useState(avatar_url);
+  const { pathname } = useLocation();
 
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
@@ -93,7 +95,9 @@ const MyProfileInfo = ({
           <span
             className={`profile-info__span${bio.length === 0 ? " empty" : ""}`}
           >
-            {translate("profilePage.aboutMe")}
+            {pathname === "/my-profile"
+              ? translate("profilePage.aboutMe")
+              : translate("profilePage.about")}
           </span>
           <p
             className={`profile-info__text${bio.length === 0 ? " empty" : ""}`}
@@ -149,25 +153,27 @@ const MyProfileInfo = ({
             </ul>
           )}
         </div>
-        <div className="profile-info__edit">
-          <button
-            onClick={() => navigate(`/edit-profile`)}
-            className="profile-info__button SFPro-600"
-            type="button"
-          >
-            {translate("profilePage.editProfile")}
-          </button>
-          <button
-            onClick={() => navigate(`/account-settings`)}
-            className="profile-info__setting"
-            type="button"
-          >
-            <Setting />
-          </button>
-        </div>
+        {pathname === "/my-profile" && (
+          <div className="profile-info__edit">
+            <button
+              onClick={() => navigate(`/edit-profile`)}
+              className="profile-info__button SFPro-600"
+              type="button"
+            >
+              {translate("profilePage.editProfile")}
+            </button>
+            <button
+              onClick={() => navigate(`/account-settings`)}
+              className="profile-info__setting"
+              type="button"
+            >
+              <Setting />
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
 };
 
-export default MyProfileInfo;
+export default ProfileInfo;

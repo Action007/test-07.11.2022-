@@ -1,24 +1,24 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import CreateButton from "../../../UI/Buttons/CreateButton/CreateButton";
-import "./MyProfileAwards.scss";
+import "./ProfileAwards.scss";
 
 import { ReactComponent as ListSvg } from "../../../../assets/images/icon/list.svg";
 import { ReactComponent as CupSvg } from "../../../../assets/images/icon/cup.svg";
 import { ReactComponent as AddedSvg } from "../../../../assets/images/icon/added.svg";
 import { ReactComponent as EmptySvg } from "../../../../assets/images/icon/emptyAwards.svg";
 
-const MyProfileAwards = ({
-  completedCounter,
-  createdCounter,
-  awardsCounter,
-}) => {
+const ProfileAwards = ({ completedCounter, createdCounter, awardsCounter }) => {
   const { t: translate } = useTranslation();
+  const { pathname } = useLocation();
 
   return (
     <div className="profile-awards__wrap">
       <span className="profile-awards__head">
-        {translate("profilePage.myAwards")}
+        {pathname === "/my-profile"
+          ? translate("profilePage.myAwards")
+          : translate("profilePage.awards")}
       </span>
       {!!completedCounter || !!createdCounter || !!awardsCounter ? (
         <ul className="profile-awards__items">
@@ -73,14 +73,16 @@ const MyProfileAwards = ({
           <div className="profile-awards__inner">
             <EmptySvg />
             <span className="profile-awards__span SFPro-600">
-              {translate("profilePage.emptyAwards")}
+              {pathname === "/my-profile"
+                ? translate("profilePage.myEmptyAwards")
+                : translate("profilePage.emptyAwards")}
             </span>
           </div>
-          <CreateButton />
+          {pathname === "/my-profile" && <CreateButton />}
         </div>
       )}
     </div>
   );
 };
 
-export default MyProfileAwards;
+export default ProfileAwards;

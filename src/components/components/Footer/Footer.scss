@@ -1,5 +1,5 @@
-@import "../../../global-styles/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .footer {
   width: 100%;
@@ -43,10 +43,18 @@
 
   &__items:first-child {
     margin-right: 60px;
+
+    @include media-breakpoint-down(sm) {
+      margin-right: 0;
+    }
   }
 
   &__items:nth-child(2) {
     margin-right: 87px;
+
+    @include media-breakpoint-down(sm) {
+      margin-right: 0;
+    }
   }
 
   &__item {

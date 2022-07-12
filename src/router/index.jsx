@@ -24,7 +24,7 @@ const CreationOfChecklistPage = React.lazy(() =>
 );
 const HomePage = React.lazy(() => import("../pages/HomePage"));
 const NotFoundPage = React.lazy(() => import("../pages/NotFoundPage"));
-const MyProfilePage = React.lazy(() => import("../pages/MyProfilePage"));
+const ProfilePage = React.lazy(() => import("../pages/ProfilePage"));
 const EditProfilePage = React.lazy(() => import("../pages/EditProfilePage"));
 const AccountSettingsPage = React.lazy(() =>
   import("../pages/AccountSettingsPage")
@@ -71,16 +71,17 @@ const routes = [
   { id: 17, path: "/saved-checklists", element: <AllChecklistsPage /> },
   { id: 18, path: "/liked-checklists", element: <AllChecklistsPage /> },
   { id: 19, path: "/created-checklists", element: <AllChecklistsPage /> },
-  { id: 20, path: "/my-profile", element: <MyProfilePage /> },
+  { id: 20, path: "/my-profile", element: <ProfilePage /> },
   { id: 21, path: "/edit-profile", element: <EditProfilePage /> },
-  { id: 22, path: "/account-settings", element: <AccountSettingsPage /> },
+  { id: 22, path: "/:nickname", element: <ProfilePage /> },
+  { id: 23, path: "/account-settings", element: <AccountSettingsPage /> },
   { id: 24, path: "/sign-up", element: <SignInSignUpPage /> },
-  { id: 23, path: "/sign-in", element: <SignInSignUpPage /> },
-  { id: 25, path: "/sign-in/reset", element: <SignInSignUpPage /> },
-  { id: 26, path: "/sign-in/reset-password", element: <SignInSignUpPage /> },
-  { id: 27, path: "/*", element: <NotFoundPage /> },
-  { id: 28, path: "/not-found", element: <NotFoundPage /> },
-  { id: 29, path: "/error", element: <ServerErrorPage /> },
+  { id: 25, path: "/sign-in", element: <SignInSignUpPage /> },
+  { id: 26, path: "/sign-in/reset", element: <SignInSignUpPage /> },
+  { id: 27, path: "/sign-in/reset-password", element: <SignInSignUpPage /> },
+  { id: 28, path: "/*", element: <NotFoundPage /> },
+  { id: 29, path: "/not-found", element: <NotFoundPage /> },
+  { id: 30, path: "/error", element: <ServerErrorPage /> },
 ];
 
 export default routes;
