@@ -12,7 +12,7 @@ const EditProfileDropdown = ({
   onSelectCountryHandler,
   isLoading,
 }) => {
-  const loadingSkeletons = (
+  const ChecklistSkeletons = (
     <>
       <li className="profile-dropdown__skeleton" />
       <li className="profile-dropdown__skeleton" />
@@ -47,7 +47,7 @@ const EditProfileDropdown = ({
                 </button>
               </li>
             ))}
-          {isLoading && loadingSkeletons}
+          {isLoading && ChecklistSkeletons}
         </ul>
       )}
     </div>

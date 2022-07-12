@@ -8,7 +8,7 @@ import CategorySidebar from "../CategorySidebar/CategorySidebar";
 import SearchInput from "../SearchInput/SearchInput";
 import Checklist from "../Checklist/Checklist";
 import Pagination from "../Pagination/Pagination";
-import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
+import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
 import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import uniqueID from "../../../utils/uniqueID";
@@ -56,9 +56,9 @@ const HomeChecklistPage = () => {
 
   const loader = (
     <>
-      <LoadingSkeleton />
-      <LoadingSkeleton />
-      <LoadingSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
     </>
   );
 

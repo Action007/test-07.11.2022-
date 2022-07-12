@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import getPercent from "../../../utils/getPercent";
-import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
+import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
 import ActiveChecklistDetail from "../ActiveChecklistDetail/ActiveChecklistDetail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
@@ -39,7 +39,7 @@ const ActiveChecklist = ({ checklist, isLoading }) => {
         />
       )}
       {checklist && <ActiveChecklistDetail checklist={checklist.entities} />}
-      {isLoading && <LoadingSkeleton />}
+      {isLoading && <ChecklistSkeleton />}
     </div>
   );
 };

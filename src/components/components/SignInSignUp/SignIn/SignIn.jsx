@@ -28,20 +28,23 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (error) {
-      navigate("/error");
-      return;
-    }
     if (error?.data?.error === "not_found") {
       setIsValidEmailServer(false);
       setIsValidPasswordServer(true);
+      setEmailIsValid(true);
+      setPasswordIsValid(true);
+      return;
     }
     if (error?.data.error === "unauthorized") {
       setIsValidPasswordServer(false);
       setIsValidEmailServer(true);
+      setEmailIsValid(true);
+      setPasswordIsValid(true);
+      return;
     }
-    setEmailIsValid(true);
-    setPasswordIsValid(true);
+    if (error) {
+      navigate("/error");
+    }
   }, [error]);
 
   useEffect(() => {

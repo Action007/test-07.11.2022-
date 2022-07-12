@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { checklistAPI } from "../../../services/checklistService";
 import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 import HomeButton from "../../UI/Buttons/HomeButton/HomeButton";
-import LoadingSkeleton from "../../UI/LoadingSkeleton/LoadingSkeleton";
+import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
 import Pagination from "../Pagination/Pagination";
@@ -56,16 +56,16 @@ const AllChecklists = () => {
 
   const loader = (
     <>
-      <LoadingSkeleton />
-      <LoadingSkeleton />
-      <LoadingSkeleton />
-      <LoadingSkeleton />
-      <LoadingSkeleton />
-      <LoadingSkeleton />
-      <LoadingSkeleton />
-      <LoadingSkeleton />
-      <LoadingSkeleton />
-      <LoadingSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
     </>
   );
 
