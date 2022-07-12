@@ -157,9 +157,13 @@ const EditProfile = () => {
     const nickname = onChangeNickNameHandler(nickNameValue);
     const bio = onChangeBioHandler(bioValue);
     const website = websiteValue ? validateLink(websiteValue) : true;
-    const facebook = facebookValue ? validateLink(facebookValue) : true;
-    const instagram = instagramValue ? validateLink(instagramValue) : true;
-    const twitter = twitterValue ? validateLink(twitterValue) : true;
+    const facebook = facebookValue
+      ? validateLink(facebookValue, "facebook")
+      : true;
+    const instagram = instagramValue
+      ? validateLink(instagramValue, "instagram")
+      : true;
+    const twitter = twitterValue ? validateLink(twitterValue, "twitter") : true;
     const links = {
       website,
       facebook,
