@@ -8,6 +8,33 @@
   height: 231px;
   margin: 10px 0;
 
+  &__location,
+  &__extend {
+    position: absolute;
+    z-index: 800;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 35px;
+    height: 35px;
+
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+
+    svg {
+      fill: #a3a3a3;
+
+      transition: fill 0.2s ease;
+    }
+
+    &:hover svg {
+      fill: $dark;
+    }
+  }
+
   &__location {
     right: 10px;
     bottom: 10px;
@@ -119,32 +146,5 @@
     font-size: 5px;
 
     filter: grayscale(100%) opacity(90%);
-  }
-
-  &__location,
-  &__extend {
-    position: absolute;
-    z-index: 800;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 35px;
-    height: 35px;
-
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-
-    svg {
-      fill: #a3a3a3;
-
-      transition: fill 0.2s ease;
-    }
-
-    &:hover svg {
-      fill: $dark;
-    }
   }
 }

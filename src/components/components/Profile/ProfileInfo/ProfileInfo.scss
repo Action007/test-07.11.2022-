@@ -83,8 +83,9 @@
     input {
       position: absolute;
 
-      opacity: 0;
       width: 0;
+
+      opacity: 0;
     }
   }
 
@@ -176,6 +177,16 @@
   }
 
   &__network {
+    &.empty {
+      svg {
+        opacity: 0.5;
+      }
+
+      &:hover svg {
+        fill: $dark;
+      }
+    }
+
     &:not(:last-child) {
       margin-right: 25px;
 
@@ -197,16 +208,6 @@
 
       svg {
         fill: $primary;
-      }
-    }
-
-    &.empty {
-      svg {
-        opacity: 0.5;
-      }
-
-      &:hover svg {
-        fill: $dark;
       }
     }
   }

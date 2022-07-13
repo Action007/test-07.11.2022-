@@ -11,22 +11,6 @@
   }
 
   .page-item {
-    svg {
-      fill: $dark;
-    }
-
-    .page-link {
-      padding: 0.3rem 0.69rem;
-
-      color: $dark;
-
-      border-radius: 4px;
-    }
-
-    &:not(:last-child) {
-      margin-right: 8px;
-    }
-
     &.disabled {
       a {
         border-color: transparent !important;
@@ -42,6 +26,22 @@
 
       background-color: #fff;
       border-radius: 4px;
+    }
+
+    svg {
+      fill: $dark;
+    }
+
+    .page-link {
+      padding: 0.3rem 0.69rem;
+
+      color: $dark;
+
+      border-radius: 4px;
+    }
+
+    &:not(:last-child) {
+      margin-right: 8px;
     }
   }
 

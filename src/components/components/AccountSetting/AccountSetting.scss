@@ -46,6 +46,16 @@
     width: 100%;
     margin-bottom: 24px;
 
+    &.invalid {
+      .account-setting__subtitle {
+        color: $warning;
+      }
+
+      input {
+        border-color: $warning !important;
+      }
+    }
+
     input {
       width: 100%;
       height: 54px;
@@ -58,16 +68,6 @@
 
       &:focus {
         border-color: $primary;
-      }
-    }
-
-    &.invalid {
-      .account-setting__subtitle {
-        color: $warning;
-      }
-
-      input {
-        border-color: $warning !important;
       }
     }
   }

@@ -106,6 +106,12 @@
       padding-bottom: 7px;
     }
 
+    &.login {
+      @include media-breakpoint-down(md) {
+        width: 112%;
+      }
+    }
+
     .networks {
       justify-content: start;
 
@@ -115,12 +121,6 @@
       svg {
         width: 19px;
         height: 19px;
-      }
-    }
-
-    &.login {
-      @include media-breakpoint-down(md) {
-        width: 112%;
       }
     }
   }

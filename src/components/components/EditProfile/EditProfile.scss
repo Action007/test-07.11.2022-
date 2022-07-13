@@ -13,6 +13,18 @@
     margin-bottom: 50px;
   }
 
+  &__title--one,
+  &__title--two {
+    &::after {
+      content: '*';
+
+      position: absolute;
+
+      font-size: 14px;
+      color: $primary;
+    }
+  }
+
   &__wrapper {
     display: flex;
     justify-content: space-between;
@@ -108,18 +120,6 @@
 
     @include media-breakpoint-down(xl) {
       margin-top: 20px;
-    }
-  }
-
-  &__title--one,
-  &__title--two {
-    &::after {
-      content: '*';
-
-      position: absolute;
-
-      font-size: 14px;
-      color: $primary;
     }
   }
 }

@@ -9,6 +9,24 @@
   background-color: #fff;
   border-radius: 6px;
 
+  &__button,
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 235px;
+    height: 52px;
+    margin-top: 30px;
+    padding: 5px;
+
+    background-color: #ecf2ff;
+    border-radius: 6px;
+
+    transition: all 0.3s ease;
+  }
+
   &__review {
     display: block;
 
@@ -38,16 +56,16 @@
     border-bottom: 2px solid #4f4f4f38;
     outline: transparent;
 
+    &.invalid {
+      border-color: $warning;
+    }
+
     &::placeholder {
       color: $dark;
     }
 
     &:focus {
       border-color: $primary;
-    }
-
-    &.invalid {
-      border-color: $warning;
     }
   }
 
@@ -107,23 +125,5 @@
 
       border-width: 5px;
     }
-  }
-
-  &__button,
-  &__loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    max-width: 235px;
-    height: 52px;
-    margin-top: 30px;
-    padding: 5px;
-
-    background-color: #ecf2ff;
-    border-radius: 6px;
-
-    transition: all 0.3s ease;
   }
 }

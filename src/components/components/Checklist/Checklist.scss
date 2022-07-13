@@ -18,6 +18,46 @@
     padding: 30px 19px 25px;
   }
 
+  &__likes,
+  &__dislikes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px 11px;
+
+    color: #a3a3a3;
+
+    background-color: $secondary;
+    border-radius: 6px;
+
+    transition: box-shadow 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+
+    svg {
+      margin-right: 10px;
+
+      stroke: #a3a3a3;
+
+      transition: stroke 0.2s ease;
+    }
+
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+    }
+  }
+
+  &__liked,
+  &__viewed {
+    display: flex;
+    align-items: center;
+
+    padding: 5px 11px;
+
+    svg {
+      margin-right: 10px;
+    }
+  }
+
   &:not(:last-child) {
     margin-bottom: 25px;
 
@@ -127,10 +167,6 @@
   &__dislikes {
     border-radius: 6px;
 
-    svg {
-      transform: rotate(180deg);
-    }
-
     &.disliked {
       color: $warning;
 
@@ -149,6 +185,10 @@
       svg {
         stroke: #fff;
       }
+    }
+
+    svg {
+      transform: rotate(180deg);
     }
   }
 
@@ -170,6 +210,15 @@
       margin: 0 0 0 21px;
     }
 
+    &.saved {
+      background-color: #f0f9f2;
+
+      svg {
+        fill: #fff;
+        stroke: $primary;
+      }
+    }
+
     svg {
       width: 16px;
       height: 18px;
@@ -184,15 +233,6 @@
 
       svg {
         stroke: $dark;
-      }
-    }
-
-    &.saved {
-      background-color: #f0f9f2;
-
-      svg {
-        fill: #fff;
-        stroke: $primary;
       }
     }
   }
@@ -307,10 +347,6 @@
     background-color: $secondary;
     border-radius: 6px;
 
-    svg {
-      stroke: #a3a3a3;
-    }
-
     &.active {
       color: #6d9aff;
 
@@ -319,6 +355,10 @@
       svg {
         stroke: #6d9aff;
       }
+    }
+
+    svg {
+      stroke: #a3a3a3;
     }
   }
 
@@ -329,16 +369,6 @@
     border-radius: 6px;
 
     transition: box-shadow 0.2s ease, color 0.2s ease;
-
-    svg {
-      stroke: #a3a3a3;
-
-      transition: stroke 0.2s ease;
-    }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-    }
 
     &.active {
       color: $primary;
@@ -359,6 +389,16 @@
         stroke: #fff;
       }
     }
+
+    svg {
+      stroke: #a3a3a3;
+
+      transition: stroke 0.2s ease;
+    }
+
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+    }
   }
 
   &__time {
@@ -375,45 +415,5 @@
     transform: translateY(-1px);
 
     box-shadow: 0 2px 4px 0 #e5e9f5;
-  }
-
-  &__likes,
-  &__dislikes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 5px 11px;
-
-    color: #a3a3a3;
-
-    background-color: $secondary;
-    border-radius: 6px;
-
-    transition: box-shadow 0.2s ease, color 0.2s ease, background-color 0.2s ease;
-
-    svg {
-      margin-right: 10px;
-
-      stroke: #a3a3a3;
-
-      transition: stroke 0.2s ease;
-    }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-    }
-  }
-
-  &__liked,
-  &__viewed {
-    display: flex;
-    align-items: center;
-
-    padding: 5px 11px;
-
-    svg {
-      margin-right: 10px;
-    }
   }
 }
