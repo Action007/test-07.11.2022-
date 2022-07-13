@@ -740,6 +740,7 @@
     "oldPassword": "Old Password",
     "newPassword": "New Password",
     "confirmPassword": "Confirm Password",
+    "passwordMatch": "The password entered is already in use",
     "minimum": "Minimum 8 characters",
     "invalid": "The new passwords don't match",
     "incorrect": "Incorrect password",
