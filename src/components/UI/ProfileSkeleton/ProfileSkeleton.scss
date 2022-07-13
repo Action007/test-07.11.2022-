@@ -9,15 +9,16 @@
     display: flex;
     justify-content: space-between;
 
-    padding: 40px 68px;
     margin-bottom: 16px;
+    padding: 40px 68px;
 
     background-color: #fff;
     border-radius: 6px;
 
     @include media-breakpoint-down(md) {
-      padding: 28px 23px;
       flex-direction: column;
+
+      padding: 28px 23px;
     }
   }
 
@@ -37,6 +38,7 @@
   &__wrap {
     display: flex;
     align-items: center;
+
     width: 100%;
     margin: 0 10px 36px 0;
 
@@ -52,6 +54,7 @@
 
   &__edit {
     position: relative;
+
     width: 100%;
     max-width: 105px;
     height: 105px;
@@ -65,12 +68,12 @@
 
     svg {
       position: absolute;
+      z-index: 10;
       right: 0;
       bottom: 0;
 
       width: 27px;
       height: 27px;
-      z-index: 10;
     }
   }
 
@@ -94,19 +97,22 @@
 
   &__title {
     display: block;
+
     height: 200px;
-    margin-bottom: 16px;
     height: 20px;
+    margin-bottom: 16px;
   }
 
   &__subtitle {
     display: block;
-    margin-bottom: 15px;
+
     height: 16px;
+    margin-bottom: 15px;
   }
 
   &__name {
     display: block;
+
     height: 14px;
   }
 
@@ -122,6 +128,7 @@
       font-size: 14px;
     }
   }
+
   &__networks {
     display: flex;
   }
@@ -136,10 +143,11 @@
     }
 
     svg {
-      opacity: 0.5;
       width: 100%;
       max-width: 20px;
       height: 20px;
+
+      opacity: 0.5;
 
       fill: $dark;
     }
@@ -201,8 +209,9 @@
 
   &__buttons {
     display: flex;
-    max-width: 205px;
+
     width: 100%;
+    max-width: 205px;
 
     @include media-breakpoint-down(md) {
       max-width: 100%;
@@ -210,11 +219,12 @@
   }
 
   &__button {
+    width: 100%;
+    max-width: 144px;
     height: 45px;
     margin-right: 16px;
+
     border-radius: 6px;
-    max-width: 144px;
-    width: 100%;
 
     @include media-breakpoint-down(md) {
       max-width: 100%;

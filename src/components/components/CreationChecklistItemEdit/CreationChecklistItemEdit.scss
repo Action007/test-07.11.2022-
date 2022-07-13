@@ -9,12 +9,31 @@
 
   margin: 8px 0 0 72px;
 
+  &__button:hover ~ &__desc {
+    visibility: visible;
+    opacity: 1;
+  }
+
   &__item {
     position: relative;
 
     background-color: #fff;
     border-right: 1px solid #4f4f4f1c;
     border-left: 1px solid #4f4f4f1c;
+
+    &.active {
+      background-color: $primary;
+      border: none;
+
+      svg {
+        stroke: #fff;
+      }
+
+      &:nth-child(2)svg {
+        fill: #fff;
+        stroke: inherit;
+      }
+    }
 
     svg {
       stroke: $dark;
@@ -52,20 +71,6 @@
 
     &:hover svg {
       stroke: $primary;
-    }
-
-    &.active {
-      background-color: $primary;
-      border: none;
-
-      svg {
-        stroke: #fff;
-      }
-
-      &:nth-child(2)svg {
-        fill: #fff;
-        stroke: inherit;
-      }
     }
   }
 
@@ -128,10 +133,5 @@
 
       background-color: rgb(255 255 255);
     }
-  }
-
-  &__button:hover ~ &__desc {
-    visibility: visible;
-    opacity: 1;
   }
 }

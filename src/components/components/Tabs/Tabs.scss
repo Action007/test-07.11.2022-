@@ -35,6 +35,12 @@
       font-size: 1rem;
     }
 
+    &.active {
+      color: #fff;
+
+      background-color: $primary;
+    }
+
     &:not(:last-child) {
       margin-right: 6px;
     }
@@ -47,12 +53,6 @@
       color: $primary;
 
       background-color: #f5f7fe;
-    }
-
-    &.active {
-      color: #fff;
-
-      background-color: $primary;
     }
   }
 }

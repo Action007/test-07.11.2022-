@@ -39,7 +39,7 @@ const CreationChecklistItem = ({
   const isLinkValid = validateLink(value.link);
 
   useEffect(() => {
-    const setTime = setTimeout(() => setFadeIn(" show"), 0);
+    const setTime = setTimeout(() => setFadeIn("show"), 0);
     return () => clearTimeout(setTime);
   }, []);
 
@@ -146,7 +146,7 @@ const CreationChecklistItem = ({
 
   return (
     <li
-      className={`creation-item${fadeIn}`}
+      className={`creation-item ${fadeIn}`}
       ref={provide.innerRef}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...provide.draggableProps}

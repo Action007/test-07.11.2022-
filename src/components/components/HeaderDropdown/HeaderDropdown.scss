@@ -17,6 +17,12 @@
     margin-right: 0;
   }
 
+  &.mobile {
+    flex-direction: column;
+
+    width: 100%;
+  }
+
   &__button {
     position: relative;
 
@@ -39,6 +45,20 @@
       background-color: $body;
     }
 
+    &.mobile {
+      margin-bottom: 0;
+
+      background-color: #fff;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &.show::after {
+      transform: rotate(0deg);
+    }
+
     &::after {
       content: "";
 
@@ -56,20 +76,6 @@
       border: none;
 
       transition: transform 0.3s ease;
-    }
-
-    &.mobile {
-      margin-bottom: 0;
-
-      background-color: #fff;
-
-      &::after {
-        display: none;
-      }
-    }
-
-    &.show::after {
-      transform: rotate(0deg);
     }
   }
 
@@ -136,10 +142,6 @@
       padding: 0;
     }
 
-    svg {
-      margin-right: 20px;
-    }
-
     &.mobile {
       position: relative;
       top: 0;
@@ -156,6 +158,10 @@
           padding: 11px 26px 9px;
         }
       }
+    }
+
+    svg {
+      margin-right: 20px;
     }
   }
 
@@ -264,12 +270,6 @@
       fill: transparent;
       stroke: $primary;
     }
-  }
-
-  &.mobile {
-    flex-direction: column;
-
-    width: 100%;
   }
 }
 

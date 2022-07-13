@@ -17,6 +17,10 @@
     padding: 9px;
   }
 
+  &.invalid {
+    border-color: $warning;
+  }
+
   &__search {
     position: relative;
 
@@ -71,9 +75,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  &.invalid {
-    border-color: $warning;
   }
 }

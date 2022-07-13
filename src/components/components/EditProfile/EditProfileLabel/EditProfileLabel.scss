@@ -8,6 +8,16 @@
   width: 100%;
   margin-bottom: 16px;
 
+  &.invalid {
+    input {
+      border-color: $warning !important;
+    }
+
+    textarea {
+      border-color: $warning !important;
+    }
+  }
+
   input {
     width: 100%;
     height: 54px;
@@ -52,15 +62,5 @@
     font-size: 12px;
     line-height: 1.3;
     color: $warning;
-  }
-
-  &.invalid {
-    input {
-      border-color: $warning !important;
-    }
-
-    textarea {
-      border-color: $warning !important;
-    }
   }
 }
