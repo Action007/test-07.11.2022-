@@ -2,12 +2,16 @@ import i18next from "i18next";
 import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
 import React from "react";
 import ReactDOM from "react-dom";
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
 import { initReactI18next } from "react-i18next";
 import { BrowserRouter } from "react-router-dom";
 import HttpApi from "i18next-http-backend";
 import { Provider } from "react-redux";
 import App from "./App";
 import store from "./store";
+
+const API_KEY = process.env.REACT_APP_SENTRY_TOKEN;
 
 // Localization
 i18next
@@ -25,6 +29,16 @@ i18next
       loadPath: "/locales/{{lng}}/translation.json",
     },
   });
+
+Sentry.init({
+  dsn: API_KEY,
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 ReactDOM.render(
   <BrowserRouter>

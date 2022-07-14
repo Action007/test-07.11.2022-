@@ -70,7 +70,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   useEffect(() => {
     const tagsIsValid = tags.length > 2;
     const tagNameIncludesLink = tags.find((tag) => tag.name.includes("://"));
-    const isDescriptionValid = checklist_items.findIndex(
+    const isDescriptionValid = checklist_items.find(
       (item) =>
         item.description.trim().length < 2 ||
         item.description.trim().length > 150
@@ -87,7 +87,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
 
     const validOrNot =
       checklist_items.length &&
-      isDescriptionValid &&
+      !isDescriptionValid &&
       itemsNotContainLinks &&
       isValidTitle &&
       titleNotContainLinks &&
@@ -112,9 +112,9 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     if (e) e.preventDefault();
     const tagsIsValid = tags.length > 2;
     const tagNameIncludesLink = tags.find((tag) => tag.name.includes("://"));
-    const isDescriptionValid = checklist_items.findIndex(
+    const isDescriptionValid = checklist_items.find(
       (item) =>
-        item.description.trim().length < 2 ||
+        item.description.trim().length > 2 ||
         item.description.trim().length > 150
     );
     const itemsNotContainLinks = checklist_items.findIndex((item) =>
@@ -141,7 +141,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
 
     const validOrNot =
       checklist_items.length &&
-      isDescriptionValid &&
+      !isDescriptionValid &&
       itemsNotContainLinks &&
       isValidTitle &&
       titleNotContainLinks &&
