@@ -125,7 +125,7 @@ const SignIn = () => {
             <input
               ref={passwordRef}
               id="loginPassword"
-              placeholder={translate("login.incorrectPassword")}
+              placeholder={translate("login.passwordPlaceholder")}
               name="password"
               autoComplete="on"
               type="password"
