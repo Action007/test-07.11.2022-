@@ -183,7 +183,7 @@ const createChecklistSlice = createSlice({
       state.category = {
         id: categories[0].id,
         isValid: true,
-        value: categories[0].value,
+        value: categories[0].name,
       };
     },
     // react-beautiful-dnd
