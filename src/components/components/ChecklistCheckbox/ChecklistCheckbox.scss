@@ -23,8 +23,13 @@
     display: block;
   }
 
-  &__label input:checked ~ &__number {
+  &__label input:checked ~ &__num,
+  &__label input:checked ~ &__todo {
     color: $primary;
+  }
+
+  &__label input:checked ~ p {
+    text-decoration: line-through;
   }
 
   &__label &__checkmark::after {
@@ -46,11 +51,7 @@
   }
 
   &:not(:last-child) {
-    margin-bottom: 4px;
-  }
-
-  &__number {
-    margin-right: 5px;
+    margin-bottom: 7px;
   }
 
   &__label {
@@ -77,10 +78,8 @@
 
   &__checkmark {
     position: absolute;
-    top: 50%;
-    left: -50px;
-    transform: translateY(-50%);
-
+    left: -30px;
+    top: 1px;
     width: 20px;
     height: 20px;
 
@@ -100,7 +99,7 @@
   }
 
   &__link {
-    margin: 5px 8px;
+    margin: 0 8px;
 
     color: $primary;
 
@@ -112,9 +111,8 @@
     }
   }
 
-  &__label input:checked ~ p {
-    color: $primary;
-    text-decoration: line-through;
+  &__num {
+    margin-right: 3px;
   }
 
   &__todo {
