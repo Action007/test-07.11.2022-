@@ -15,7 +15,6 @@ const Profile = ({ user, isLoading }) => {
   const breadcrumbs = [
     {
       title:
-        // eslint-disable-next-line no-nested-ternary
         pathname === "/my-profile"
           ? translate("profilePage.myProfile")
           : translate("profilePage.profile"),

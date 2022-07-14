@@ -11,6 +11,7 @@ import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg"
 
 const ChecklistCheckbox = ({
   id,
+  index,
   checklistItemId,
   description,
   list_type,
@@ -50,6 +51,9 @@ const ChecklistCheckbox = ({
             type="checkbox"
           />
           <span className="checklist-checkbox__checkmark" />
+          <span className="checklist-checkbox__num SFPro-700">
+            {index + 1}.
+          </span>
           <p className="checklist-checkbox__todo">
             {description}
             {list_type === "link" && (
