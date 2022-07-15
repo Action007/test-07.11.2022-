@@ -23,30 +23,42 @@ const Complain = ({ closeHandler, id, name, page }) => {
     checklistAPI.useSupportChecklistMutation();
   const [done, setDone] = useState(false);
   const field = useRef();
-  const [empty, setEmpty] = useState(false);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
   const showComplain = (!done && !isSendLoading) || page === "support";
+  const [isValidLink, setIsValidLink] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [isEmptyCheckbox, setIsEmptyCheckbox] = useState(false);
 
   useEffect(() => {
     if (field.current) field.current.focus();
   }, [changeChecklist]);
 
   useEffect(() => {
-    let setComplainDoneShowFunc;
+    if (isError) navigate("/error");
+    let setShowDonePopup;
     if (isSuccess) {
       setDone(true);
       setShowDone(true);
-      setComplainDoneShowFunc = setTimeout(() => closeHandler(), 7000);
+      setShowDonePopup = setTimeout(() => closeHandler(), 7000);
     }
-    if (isError) navigate("/error");
-    return () => clearTimeout(setComplainDoneShowFunc);
+    return () => clearTimeout(setShowDonePopup);
   }, [isSuccess, isError]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setEmpty(false);
-    if (!checklistId || !category) return;
+    const checklistID = field.current.value.match(/\/checklist\/(\d+)/);
+
+    if (field.current.value === "") {
+      setIsEmpty(true);
+      if (!category) setIsEmptyCheckbox(true);
+      return;
+    }
+    if (field.current.value !== "") {
+      if (!category) setIsEmptyCheckbox(true);
+      if (!checklistID) setIsValidLink(true);
+      return;
+    }
 
     const body = {
       checklist_id: checklistId,
@@ -58,8 +70,17 @@ const Complain = ({ closeHandler, id, name, page }) => {
 
   const onChangeHandler = () => {
     const checklistID = field.current.value.match(/\/checklist\/(\d+)/);
-    if (checklistID) setChecklistId(checklistID[1]);
-    setChangeChecklist(false);
+    if (checklistID) {
+      setChecklistId(checklistID[1]);
+      setChangeChecklist(false);
+    }
+    setIsEmpty(false);
+    setIsValidLink(false);
+  };
+
+  const onChangeCheckboxHandler = (value) => {
+    setCategory(value);
+    setIsEmptyCheckbox(false);
   };
 
   return (
@@ -103,7 +124,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
                   <textarea
                     onChange={onChangeHandler}
                     className={`complain__textarea form-control ${
-                      empty && "border-danger"
+                      isEmpty || isValidLink ? "border-danger" : ""
                     }`}
                     type="text"
                     id="exampleInputText"
@@ -111,12 +132,16 @@ const Complain = ({ closeHandler, id, name, page }) => {
                     ref={field}
                   />
                 </label>
-                <small
-                  className={`form-text mb-4 d-block ${empty && "text-danger"}`}
+                <span
+                  className={`form-text mb-4 d-block ${
+                    isEmpty || isValidLink ? "text-danger" : ""
+                  }`}
                   id="textHelp"
                 >
-                  {translate("supportPage.field")}
-                </small>
+                  {!isValidLink
+                    ? translate("supportPage.field")
+                    : translate("supportPage.invalidUrl")}
+                </span>
               </>
             )}
             <p className="SFPro-600 display-8 mb-4">
@@ -128,8 +153,10 @@ const Complain = ({ closeHandler, id, name, page }) => {
                 htmlFor="flexRadioDefault1"
               >
                 <input
-                  onChange={() => setCategory("spam")}
-                  className="form-check-input"
+                  onChange={() => onChangeCheckboxHandler("spam")}
+                  className={`form-check-input${
+                    isEmptyCheckbox ? " invalid" : ""
+                  }`}
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault1"
@@ -143,8 +170,10 @@ const Complain = ({ closeHandler, id, name, page }) => {
                 htmlFor="flexRadioDefault2"
               >
                 <input
-                  onChange={() => setCategory("prohibited")}
-                  className="form-check-input"
+                  onChange={() => onChangeCheckboxHandler("prohibited")}
+                  className={`form-check-input${
+                    isEmptyCheckbox ? " invalid" : ""
+                  }`}
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault2"
@@ -158,8 +187,10 @@ const Complain = ({ closeHandler, id, name, page }) => {
                 htmlFor="flexRadioDefault3"
               >
                 <input
-                  onChange={() => setCategory("violence")}
-                  className="form-check-input"
+                  onChange={() => onChangeCheckboxHandler("violence")}
+                  className={`form-check-input${
+                    isEmptyCheckbox ? " invalid" : ""
+                  }`}
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault3"
@@ -173,8 +204,10 @@ const Complain = ({ closeHandler, id, name, page }) => {
                 htmlFor="flexRadioDefault4"
               >
                 <input
-                  onChange={() => setCategory("adult")}
-                  className="form-check-input"
+                  onChange={() => onChangeCheckboxHandler("adult")}
+                  className={`form-check-input${
+                    isEmptyCheckbox ? " invalid" : ""
+                  }`}
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault4"
