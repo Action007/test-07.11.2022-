@@ -78,6 +78,7 @@
     "text1": "We care about our users' comfort and strive to become even better. If you have any questions or are dissatisfied with the app content, please contact our <0>support team</0>. There you can ask a question or complain. Anyway, our team is happy to help, so you can always count on our support.",
     "text2": "Got a problem? Our <0>support team</0> is ready to help!",
     "field": "Required field*",
+    "invalidUrl": "Must be a valid checklist url*",
     "desc": "What exactly do you think is unacceptable in this material?",
     "spam": "Spam",
     "prohibited": "Prohibited item",

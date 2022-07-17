@@ -1,5 +1,5 @@
-@import "../../../global-styles/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .complain {
   width: 100%;
@@ -34,6 +34,10 @@
     &::placeholder {
       font-size: 16px;
     }
+
+    &:focus {
+      box-shadow: none;
+    }
   }
 
   .form-check-input {
@@ -41,6 +45,15 @@
     height: 1.2em;
     margin-top: 0;
     margin-right: 13px;
+    cursor: pointer;
+
+    &.invalid {
+      border-color: $warning;
+    }
+  }
+
+  .form-check-label {
+    cursor: pointer;
   }
 
   &__link {
@@ -168,7 +181,7 @@
   }
 
   &__load-item::after {
-    content: " ";
+    content: ' ';
 
     position: absolute;
     top: 0;
