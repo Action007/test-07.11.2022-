@@ -30,7 +30,12 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   ] = checklistAPI.useCreateChecklistMutation();
   const [
     updateChecklist,
-    { isSuccess: successUpdate, error: errorUpdate, isLoading: loadingUpdate },
+    {
+      isSuccess: successUpdate,
+      error: errorUpdate,
+      isLoading: loadingUpdate,
+      data: updatedChecklist,
+    },
   ] = checklistAPI.useUpdateChecklistMutation();
   const [preview, setPreview] = useState(false);
   const [validButton, setValidButton] = useState();
@@ -72,7 +77,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const tagNameIncludesLink = tags.find((tag) => tag.name.includes("://"));
     const isDescriptionValid = checklist_items.find(
       (item) =>
-        item.description.trim().length < 2 ||
+        item.description.trim().length < 3 ||
         item.description.trim().length > 150
     );
     const itemsNotContainLinks = checklist_items.findIndex((item) =>
@@ -114,7 +119,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const tagNameIncludesLink = tags.find((tag) => tag.name.includes("://"));
     const isDescriptionValid = checklist_items.find(
       (item) =>
-        item.description.trim().length > 2 ||
+        item.description.trim().length < 3 ||
         item.description.trim().length > 150
     );
     const itemsNotContainLinks = checklist_items.findIndex((item) =>
@@ -258,9 +263,12 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
 
   const showNewChecklist = () => {
     setDone(false);
-    const newChecklistId = newChecklist.id;
-    const newChecklistSlug = newChecklist.slug;
-    navigate(`/checklist/${newChecklistId}/${newChecklistSlug}`);
+
+    if (page === "edit-checklist") {
+      navigate(`/checklist/${updatedChecklist.id}/${updatedChecklist.slug}`);
+    } else {
+      navigate(`/checklist/${newChecklist.id}/${newChecklist.slug}`);
+    }
   };
 
   return (
