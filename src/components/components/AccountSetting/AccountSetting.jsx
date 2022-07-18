@@ -6,12 +6,14 @@ import { checklistAPI } from "../../../services/checklistService";
 import validateEmail from "../../../utils/validateEmail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
+import Notification from "../../UI/Notification/Notification";
+import audio from "../../../assets/sound/song.mp3";
 import "./AccountSetting.scss";
 
 import { ReactComponent as EditProfileSvg } from "../../../assets/images/content/account-settings.svg";
 
 const AccountSetting = () => {
-  const [resetPassword, { isLoading, isError, error }] =
+  const [resetPassword, { isLoading, isSuccess, isError, error }] =
     checklistAPI.useResetPasswordMutation();
   const user = useSelector((state) => state.authSliceReducer.user);
   const [emilValue, setEmailValue] = useState("@");
@@ -22,6 +24,7 @@ const AccountSetting = () => {
   const [newPasswordValid, setNewPasswordValid] = useState(true);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
   const [errorMatchPassword, setErrorMatchPassword] = useState(false);
+  const [notification, setNotification] = useState(false);
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
   const navigate = useNavigate();
@@ -30,6 +33,8 @@ const AccountSetting = () => {
     { title: translate("profilePage.myProfile"), link: "/my-profile" },
     { title: translate("accountSettings.title") },
   ];
+  const song = new Audio(audio);
+  song.volume = 0.1;
 
   useEffect(() => {
     if (!error) return;
@@ -41,6 +46,24 @@ const AccountSetting = () => {
       navigate("/error");
     }
   }, [isError]);
+
+  useEffect(() => {
+    let showNotification;
+    if (isSuccess) {
+      setNotification(true);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+      if (isSuccess) song.play();
+      showNotification = setTimeout(() => setNotification(false), 5000);
+    }
+
+    return () => {
+      if (showNotification) clearTimeout(showNotification);
+    };
+  }, [isSuccess]);
 
   useEffect(() => {
     if (user) setEmailValue(user.email);
@@ -85,7 +108,15 @@ const AccountSetting = () => {
 
   return (
     <>
-      <div className="account-setting container">
+      <LoadingSpinnerPopup showSpinner={isLoading} />
+      {isSuccess && notification && (
+        <Notification translate={translate("notification.profileUpdate")} />
+      )}
+      <div
+        className={`account-setting container${
+          notification ? " show-notification" : ""
+        }`}
+      >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <div className="account-setting__wrapper">
           <form
@@ -197,7 +228,6 @@ const AccountSetting = () => {
           </div>
         </div>
       </div>
-      <LoadingSpinnerPopup showSpinner={isLoading} />
     </>
   );
 };

@@ -22,6 +22,8 @@ const ChecklistDetail = ({
   checklist,
   detailPage = false,
   preview = false,
+  setNotification,
+  setIsError,
 }) => {
   const {
     id,
@@ -36,8 +38,16 @@ const ChecklistDetail = ({
   } = checklist;
   const token = useSelector((state) => state.authSliceReducer.token);
 
-  const [addActiveChecklist, { data, isSuccess, isLoading }] =
-    checklistAPI.useAddActiveChecklistMutation();
+  const [
+    addActiveChecklist,
+    {
+      data,
+      isSuccess: isStartSuccess,
+      isError: isStartError,
+      isLoading,
+      error: startError,
+    },
+  ] = checklistAPI.useAddActiveChecklistMutation();
   const [saveChecklist] = checklistAPI.useSaveChecklistMutation();
   const [unsaveChecklist] = checklistAPI.useUnsaveChecklistMutation();
   const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
@@ -66,10 +76,27 @@ const ChecklistDetail = ({
   const savedClass = `checklist-detail__bookmark${iSaved ? " saved" : ""}`;
 
   useEffect(() => {
-    if (isSuccess) {
+    let showNotification;
+    if (isStartSuccess) {
       navigate(`/active-checklist/${data.entities.id}/${data.entities.slug}`);
+    } else if (
+      isStartError &&
+      startError.data.error === "record_already_exist"
+    ) {
+      setIsError(true);
+      setNotification(true);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+      showNotification = setTimeout(() => setNotification(false), 5000);
     }
-  }, [isSuccess]);
+
+    return () => {
+      if (showNotification) clearTimeout(showNotification);
+    };
+  }, [isStartSuccess, isStartError]);
 
   const setLikeHandler = () => {
     setLiked((prevState) => !prevState);

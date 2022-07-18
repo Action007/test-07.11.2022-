@@ -8,10 +8,11 @@ import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopu
 import useClickOutside from "../../../hooks/useClickOutside";
 import validateLink from "../../../utils/validateLink";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import Notification from "../../UI/Notification/Notification";
 import "./EditProfile.scss";
 
-import { ReactComponent as EditProfileSvg } from "../../../assets/images/content/editProfile.svg";
 import audio from "../../../assets/sound/song.mp3";
+import { ReactComponent as EditProfileSvg } from "../../../assets/images/content/editProfile.svg";
 
 const EditProfile = () => {
   const user = useSelector((state) => state.authSliceReducer.user);
@@ -22,6 +23,7 @@ const EditProfile = () => {
   const [facebookValue, setFacebookValue] = useState("");
   const [instagramValue, setInstagramValue] = useState("");
   const [twitterValue, setTwitterValue] = useState("");
+  const [notification, setNotification] = useState(false);
   const [country, setCountry] = useState("Select a country");
   const [isNameValid, setIsNameValid] = useState(true);
   const [isNickNameValid, setIsNickNameValid] = useState(true);
@@ -36,7 +38,12 @@ const EditProfile = () => {
   const { ref, show, setShowHandler } = useClickOutside();
   const [
     editAccount,
-    { isSuccess: successEdit, isLoading: isUpdateLoading, error },
+    {
+      isSuccess: isEditSuccess,
+      isLoading: isUpdateLoading,
+      isError: isEditError,
+      error,
+    },
   ] = checklistAPI.useEditAccountMutation();
   const { data: countryNames, isLoading } =
     checklistAPI.useFetchCountryNamesQuery("", {
@@ -47,8 +54,6 @@ const EditProfile = () => {
     { title: translate("profilePage.myProfile"), link: "/my-profile" },
     { title: translate("editProfilePage.editProfile") },
   ];
-  const [showPopupSave, setShowPopupSave] = useState("");
-  const [showPopupError, setShowPopupError] = useState("");
   const song = new Audio(audio);
   song.volume = 0.1;
 
@@ -77,9 +82,6 @@ const EditProfile = () => {
       }
     });
     setIsLinksInValid(invalidLinks);
-    setShowPopupError(" show");
-    setShowPopupSave("");
-    setTimeout(() => setShowPopupError(""), 5000);
   }, [error]);
 
   useEffect(() => {
@@ -93,6 +95,24 @@ const EditProfile = () => {
     setInstagramValue(user.instagram || "");
     setTwitterValue(user.twitter || "");
   }, [user]);
+
+  useEffect(() => {
+    let showNotification;
+    if (isEditSuccess || isEditError) {
+      setNotification(true);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+      if (isEditSuccess) song.play();
+      showNotification = setTimeout(() => setNotification(false), 5000);
+    }
+
+    return () => {
+      if (showNotification) clearTimeout(showNotification);
+    };
+  }, [isEditSuccess, isEditError]);
 
   const onChangeNameHandler = (value) => {
     const name = value.length < 51 && value.trim().length > 1;
@@ -123,33 +143,6 @@ const EditProfile = () => {
     setCountry(name);
     setShowHandler();
   };
-
-  useEffect(() => {
-    if (
-      !isNameValid ||
-      !isNickNameValid ||
-      !isBioValid ||
-      !isLinksInValid.website ||
-      !isLinksInValid.facebook ||
-      !isLinksInValid.instagram ||
-      !isLinksInValid.twitter
-    ) {
-      setShowPopupError(" show");
-      setShowPopupSave("");
-    }
-    if (
-      isNameValid &&
-      isNickNameValid &&
-      isBioValid &&
-      isLinksInValid.website &&
-      isLinksInValid.facebook &&
-      isLinksInValid.instagram &&
-      isLinksInValid.twitter &&
-      !error
-    ) {
-      setShowPopupError("");
-    }
-  }, [isNameValid, isNickNameValid, isBioValid, isLinksInValid, error]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -194,38 +187,16 @@ const EditProfile = () => {
     }
   };
 
-  useEffect(() => {
-    let setClassSucces;
-    if (successEdit && !error) {
-      setShowPopupSave(" show");
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
-      song.play();
-      setClassSucces = setTimeout(() => setShowPopupSave(""), 5000);
-    }
-    return () => {
-      clearTimeout(setClassSucces);
-    };
-  }, [successEdit, error]);
-
   return (
     <>
       <LoadingSpinnerPopup showSpinner={isUpdateLoading} />
-      {showPopupError ? (
-        <div className="edit-profile__popup error SFPro-500">
-          There was a problem updating your profile
-        </div>
-      ) : null}
-      {showPopupSave ? (
-        <div className="edit-profile__popup SFPro-500">
-          Profile updated successfully
-        </div>
-      ) : null}
+      {isEditSuccess && notification && (
+        <Notification translate={translate("notification.profileUpdate")} />
+      )}
       <div
-        className={`edit-profile container ${showPopupSave} ${showPopupError}`}
+        className={`edit-profile container${
+          notification ? " show-notification" : ""
+        }`}
       >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
 
