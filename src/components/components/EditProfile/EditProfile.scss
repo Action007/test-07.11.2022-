@@ -1,10 +1,6 @@
 @import '../../../global-styles/variables';
 @import '../../../../node_modules/bootstrap/scss/mixins';
 
-.show {
-  margin-top: 0;
-}
-
 .edit-profile {
   max-width: 1112px;
   margin-bottom: 100px;
@@ -102,28 +98,4 @@
     flex-direction: column;
     justify-content: space-between;
   }
-
-  &__popup {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    height: 30px;
-    margin-top: 116px;
-
-    font-size: 16px;
-    line-height: 19px;
-    color: #fff;
-
-    background: $primary;
-
-    @include media-breakpoint-down(xl) {
-      margin-top: 20px;
-    }
-  }
-}
-
-.error {
-  background: $warning;
 }

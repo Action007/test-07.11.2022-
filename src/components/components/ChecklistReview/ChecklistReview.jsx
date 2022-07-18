@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
+import Notification from "../../UI/Notification/Notification";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ChecklistComments from "../ChecklistComments/ChecklistComments";
 import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
 
-const ChecklistReview = (props) => {
-  const { checklist, setPageCount, id, isLoading, isFetching } = props;
+const ChecklistReview = ({
+  checklist,
+  setPageCount,
+  id,
+  isLoading,
+  isFetching,
+}) => {
+  const [notification, setNotification] = useState(false);
+  const [isError, setIsError] = useState(false);
   const { t: translate } = useTranslation();
   const { state } = useLocation();
   const breadcrumbs =
@@ -38,23 +46,37 @@ const ChecklistReview = (props) => {
       : [{ title: checklist ? checklist.checklist.name : "" }];
 
   return (
-    <div className="checklist-detail container container-breadcrumb pb-8">
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
-      {isLoading && <ChecklistSkeleton />}
-      {checklist && (
-        <ChecklistDetail checklist={checklist.checklist} detailPage />
+    <>
+      {isError && notification && (
+        <Notification translate={translate("notification.alreadyAdded")} />
       )}
-      {checklist && (
-        <ChecklistComments
-          commentsTotalCount={checklist.paginate.total_comments_value}
-          pagination_comments={checklist.pagination_comments}
-          next_page={checklist.paginate.next_page}
-          addComments={setPageCount}
-          checklistID={id}
-          loadingComments={isFetching}
-        />
-      )}
-    </div>
+      <div
+        className={`checklist-detail container container-breadcrumb pb-8${
+          notification ? " show-notification" : ""
+        }`}
+      >
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
+        {isLoading && <ChecklistSkeleton />}
+        {checklist && (
+          <ChecklistDetail
+            checklist={checklist.checklist}
+            setNotification={setNotification}
+            setIsError={setIsError}
+            detailPage
+          />
+        )}
+        {checklist && (
+          <ChecklistComments
+            commentsTotalCount={checklist.paginate.total_comments_value}
+            pagination_comments={checklist.pagination_comments}
+            next_page={checklist.paginate.next_page}
+            addComments={setPageCount}
+            checklistID={id}
+            loadingComments={isFetching}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

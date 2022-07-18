@@ -2,18 +2,18 @@
   "seo": {
     "home": {
       "title": "Checklists are a lot of saved options for solving your questions",
-      "desc": "Using the Checklists you can get an answer to any question and you don't have to spend a lot of time scrolling a lot of sites. All you have to do is open the application and type in your question."
+      "desc": "Using the Checklists, you can get an answer to any question, and you don't have to spend a lot of time scrolling through a lot of sites. All you have to do is open the application and type in your question."
     },
     "ourMission": {
-      "title": "An application that will help you reach your goal!",
-      "desc": "Thanks to the fact that users share their experiences, you can reach your goals more quickly, find more opportunities and save time in the process."
+      "title": "An application that will help you achieve your goal!",
+      "desc": "Thanks to the fact that users share their experiences, you can achieve your goals more quickly, find more opportunities and save time."
     },
     "termsOfUse": {
       "title": "Terms of use for the Checklists application",
       "desc": "These terms of use explain the rules, requirements, restrictions, and limitations that users must abide by in order to use an application."
     },
     "privacyPolicy": {
-      "title": "Privacy policy is secure processing of our customers' data",
+      "title": "Our Privacy policy is secure processing of our customers' data",
       "desc": "We take measures to protect your sensitive personal information but cannot guarantee its security in transit or storage."
     },
     "support": {
@@ -33,7 +33,7 @@
       "desc": "The interface of the Checklists is very easy, so you don't need much effort to enter your account. All you have to do to log in is enter some of your information."
     },
     "signInReset": {
-      "title": "We’re happy to see you, sign in!",
+      "title": "We’re happy to see you. Sign in!",
       "desc": "You can enter your account, but if you’ve lost your password and wish to reset it, use the link to get started."
     },
     "signInResetPassword": {
@@ -41,7 +41,7 @@
       "desc": "Forgot your password? Don't worry. If you’ve lost your password and wish to reset it, use the link to get started."
     },
     "notFound": {
-      "title": "No search results found",
+      "title": "No results found",
       "desc": "We weren't able to find a match."
     },
     "error": {
@@ -67,9 +67,14 @@
     "signOut": "Sign Out"
   },
   "popupDone": {
-    "title": "Your checklist completed successfully!",
+    "title": "Your checklist was completed successfully!",
     "text": "Browse more checklists and receive awards for this.",
     "button": "Continue"
+  },
+  "notification": {
+    "profileUpdate": "Profile updated successfully",
+    "profileError": "There was a problem updating your profile",
+    "alreadyAdded": "This checklist has already been added for passing"
   },
   "supportPage": {
     "title": "Support",
@@ -78,7 +83,6 @@
     "text1": "We care about our users' comfort and strive to become even better. If you have any questions or are dissatisfied with the app content, please contact our <0>support team</0>. There you can ask a question or complain. Anyway, our team is happy to help, so you can always count on our support.",
     "text2": "Got a problem? Our <0>support team</0> is ready to help!",
     "field": "Required field*",
-    "invalidUrl": "Must be a valid checklist url*",
     "desc": "What exactly do you think is unacceptable in this material?",
     "spam": "Spam",
     "prohibited": "Prohibited item",
@@ -95,8 +99,8 @@
       "h2": "Privacy Policy Preview",
       "subtitle1": "Personal information you disclose to us",
       "desc": "<0>In Short:</0> We collect personal information that you provide to us.",
-      "text1": "We collect personal information that you voluntarily provide to us when you register on theServices, express an interest in obtaining information about us or our products and Services, when you participate in activities on the Services, or otherwise when you contact us.",
-      "text2": "<0>Personal Information Provided by You.</0> The personal information that we collect depends on the contextof your interactions with us and the Services, the choices you make, and the products and features youuse. The personal information we collect may include the following:",
+      "text1": "We collect personal information that you voluntarily provide to us when you register on the Services, express an interest in learning more about us, our products and services, participate in activities on the Services, or contact us in any other way.",
+      "text2": "<0>You Provided information.</0> The personal information that we collect depends on the context of your interactions with us and the Services, the choices you make, and the products and features you use. The personal information we collect may include the following:",
       "item1": "names",
       "item2": "phone numbers",
       "item3": "email addresses",
@@ -110,22 +114,22 @@
       "item11": "debit/credit card numbers",
       "text3": "<0>Sensitive Information.</0> When necessary, with your consent or as otherwise permitted by applicable law, we process the following categories of sensitive information:",
       "text4": "<0>Social Media Login Data.</0> We may provide you with the option to register with us using your existing social media account details, like your Facebook, Twitter, or other social media account. If you choose to register in this way, we will collect the information described in the section called '<1>HOW DO WE HANDLE YOUR SOCIAL LOGINS?</1>' below.",
-      "text5": "All personal information that you provide to us must be true, complete, and accurate, and you must notify us of any changes to such personal information.",
+      "text5": "All the personal information that you provide to us must be true, complete, and accurate, and you must notify us of any changes to such personal information.",
       "subtitle2": "<0>Information automatically collected</0>",
       "text6": "<0>In Short:</0> Some information — such as your Internet Protocol (IP) address and/or browser and device characteristics — is collected automatically when you visit our Services.",
       "text7": "We automatically collect certain information when you visit, use, or navigate the Services. This information does not reveal your specific identity (like your name or contact information) but may include device and usage information, such as your IP address, browser and device characteristics, operating system, language preferences, referring URLs, device name, country, location, information about how and when you use our Services, and other technical information. This information is primarily needed to maintain the security and operation of our Services, and for our internal analytics and reporting purposes.",
       "text8": "Like many businesses, we also collect information through cookies and similar technologies.",
       "text9": "The information we collect includes:",
       "item13": "Log and Usage Data. Log and usage data is service-related, diagnostic, usage, and performance information our servers automatically collect when you access or use our Services and which we record in log files. Depending on how you interact with us, this log data may include your IP address, device information, browser type, and settings and information about your activity in the Services (such as the date/time stamps associated with your usage, pages and files viewed, searches, and other actions you take such as which features you use), device event information (such as system activity, error reports (sometimes called 'crash dumps'), and hardware settings).",
-      "item14": "Device Data. We collect device data such as information about your computer, phone, tablet, or other device you use to access the Services. Depending on the device used, this device data may include information such as your IP address (or proxy server), device and application identification numbers, location, browser type, hardware model, Internet service provider and/or mobile carrier, operating system, and system configuration information.",
-      "item15": "Location Data. We collect location data such as information about your device's location, which can be either precise or imprecise. How much information we collect depends on the type and settings of the device you use to access the Services. For example, we may use GPS and other technologies to collect geolocation data that tells us your current location (based on your IP address). You can opt out of allowing us to collect this information either by refusing access to the information or by disabling your Location setting on your device. However, if you choose to opt out, you may not be able to use certain aspects of the Services.",
+      "item14": "Device Data. We collect device data, such as information about your computer, phone, tablet, or other device you use to access the Services. Depending on the device used, this device data may include information such as your IP address (or proxy server), device and application identification numbers, location, browser type, hardware model, Internet service provider and/or mobile carrier, operating system, and system configuration information.",
+      "item15": "Location Data. We collect location data, such as information about your device's location, which can be either precise or imprecise. How much information we collect depends on the type and settings of the device you use to access the Services. For example, we may use GPS and other technologies to collect geolocation data that tells us your current location (based on your IP address). You can opt out of allowing us to collect this information either by refusing access to the information or by disabling your location setting on your device. However, if you choose to opt out, you may not be able to use certain aspects of the Services.",
       "subtitle3": "Information collected from other sources",
       "item16": "<0>In Short:</0> We may collect limited data from public databases, marketing partners, social media platforms, and other outside sources.",
-      "item17": "In order to enhance our ability to provide relevant marketing, offers, and services to you and update our records, we may obtain information about you from other sources, such as public databases, joint marketing partners, affiliate programs, data providers, social media platforms, and from other third parties. This information includes mailing addresses, job titles, email addresses, phone numbers, intent data (or user behaviour data), Internet Protocol (IP) addresses, social media profiles, social media URLs, and custom profiles, for purposes of targeted advertising and event promotion. If you interact with us on a social media platform using your social media account (e.g. Facebook or Twitter), we receive personal information about you such as your name, email address, and gender. Any personal information that we collect from your social media account depends on your social media account's privacy settings."
+      "item17": "We collect location data, such as information about your device's location, which can be either precise or imprecise. How much information we collect depends on the type and settings of the device you use to access the Services. For example, we may use GPS and other technologies to collect geolocation data that tells us your current location (based on your IP address). You can opt out of allowing us to collect this information either by refusing access to the information or by disabling your location setting on your device. However, if you choose to opt out, you may not be able to use certain aspects of the Services."
     },
     "section2": {
       "title": "2. How do we process your information?",
-      "text1": "<0>In Short:</0> We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to comply with law. We may also process your information for other purposes with your consent.",
+      "text1": "<0>In Short:</0>  process your information for other purposes with your consent.",
       "text2": "<0>We process your personal information for a variety of reasons, depending on how you interact with our Services, including:</0>",
       "item1": "<0>To facilitate account creation and authentication and otherwise manage user accounts.</0> We may process your information so you can create and log in to your account, as well as keep your account in working order.",
       "item2": "<0>To deliver and facilitate delivery of services to the user.</0> We may process your information to provide you with the requested service.",
@@ -139,10 +143,10 @@
       "item10": "<0>To protect our Services.</0> We may process your information as part of our efforts to keep our Services safe and secure, including fraud monitoring and prevention.",
       "item11": "<0>To identify usage trends.</0> We may process information about how you use our Services to better understand how they are being used so we can improve them.",
       "item12": "<0>To determine the effectiveness of our marketing and promotional campaigns.</0> We may process your information to better understand how to provide marketing and promotional campaigns that are most relevant to you.",
-      "item13": "<0>To save or protect an individual's vital interest.</0> We may process your information when necessary to save or protect an individual’s vital interest, such as to prevent harm."
+      "item13": "<0>To save or protect an individual's vital interest.</0> We may process your information when necessary to save or protect an individual’s vital interests, such as to prevent harm."
     },
     "section3": {
-      "title": "3. What legal bases do we rely on to process your information?",
+      "title": "3. What legal basis do we rely on to process your information?",
       "text1": "<0>In Short:</0> We only process your personal information when we believe it is necessary and we have a valid legal reason (i.e. legal basis) to do so under applicable law, like with your consent, to comply with laws, to provide you with services to enter into or fulfil our contractual obligations, to protect your rights, or to fulfil our legitimate business interests.",
       "text2": "If you are located in the EU or UK, this section applies to you",
       "text3": "The General Data Protection Regulation (GDPR) and UK GDPR require us to explain the valid legal bases we rely on in order to process your personal information. As such, we may rely on the following legal bases to process your personal information:",
@@ -165,8 +169,8 @@
       "item14": "For business transactions provided certain conditions are met",
       "item15": "If it is contained in a witness statement and the collection is necessary to assess, process, or settle an insurance claim",
       "item16": "For identifying injured, ill, or deceased persons and communicating with next of kin",
-      "item17": "If we have reasonable grounds to believe an individual has been, is, or may be victim of financial abuse",
-      "item18": "If it is reasonable to expect collection and use with consent would compromise the availability or the accuracy of the information and the collection is reasonable for purposes related to investigating a breach of an agreement or a contravention of the laws of Canada or a province",
+      "item17": "If we have reasonable grounds to believe an individual has been, is, or may be a victim of financial abuse",
+      "item18": "If it is reasonable to expect that collection and use with consent would compromise the availability or the accuracy of the information and the collection is reasonable for purposes related to investigating a breach of an agreement or a contravention of the laws of Canada or a province",
       "item19": "If disclosure is required to comply with a subpoena, warrant, court order, or rules of the court relating to the production of records",
       "item20": "If it was produced by an individual in the course of their employment, business, or profession and the collection is consistent with the purposes for which the information was produced",
       "item21": "If the collection is solely for journalistic, artistic, or literary purposes",
@@ -196,14 +200,14 @@
       "item18": "Data Analytics Services",
       "text3": "We also may need to share your personal information in the following situations:",
       "item19": "<0>Business Transfers.</0> We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company. ",
-      "item20": "<0>When we use Google Maps Platform APIs.</0> We may share your information with certain Google Maps Platform APIs (e.g. Google Maps API, Places API). To find out more about Google’s Privacy Policy, please refer to this <1>link</1>. We obtain and store on your device ('cache') your location. You may revoke your consent anytime by contacting us at the contact details provided at the end of this document.",
-      "item21": "<0>Affiliates</0>. We may share your information with our affiliates, in which case we will require those affiliates to honour this privacy notice. Affiliates include our parent company and any subsidiaries, joint venture partners, or other companies that we control or that are under common control with us.",
+      "item20": "<0>When we use Google Maps Platform APIs.</0> We may share your information with certain Google Maps Platform APIs (e.g. Google Maps API, Places API). To find out more about Google’s Privacy Policy, please refer to this <1>link</1. We obtain and store on your device ('cache') your location. You may revoke your consent anytime by contacting us at the contact details provided at the end of this document.",
+      "item21": "<0>Affiliates</0>. We may share your information with our affiliates, in which case we will require those affiliates to honor this privacy notice. Affiliates include our parent company and any subsidiaries, joint venture partners, or other companies that we control or that are under common control with us.",
       "item22": "<0>Business Partners.</0> We may share your information with our business partners to offer you certain products, services, or promotions",
-      "item23": "<0>Other Users.</0> When you share personal information (for example, by posting comments, contributions, or other content to the Services) or otherwise interact with public areas of the Services, such personal information may be viewed by all users and may be publicly made available outside the Services in perpetuity. If you interact with other users of our Services and register for our Services through a social network (such as Facebook), your contacts on the social network will see your name, profile photo, and descriptions of your activity. Similarly, other users will be able to view descriptions of your activity, communicate with you within our Services, and view your profile."
+      "item23": "<0>Other Users.</0> When you share personal information (for example, by posting comments, contributions, or other content to the Services) or otherwise interact with public areas of the Services, such personal information may be viewed by all users and may be publicly made available outside the Services in perpetuity. If you interact with other users of our Services and register for our Services through a social network (such as Facebook), your contacts on the social network will see your name, profile photo, and descriptions of your activities. Similarly, other users will be able to view descriptions of your activities, communicate with you within our Services, and view your profile."
     },
     "section5": {
       "title": "5. What is our stance on third-party websites?",
-      "text1": "<0>In Short:</0> We are not responsible for the safety of any information that you share with third parties that we may link to or who advertise on our Services, but are not affiliated with, our Services.",
+      "text1": "<0>In Short:</0> We are not responsible for the safety of any information that you share with third parties that we may link to or who advertise on our Services, but are not affiliated with our Services.",
       "text2": "The Services may link to third-party websites, online services, or mobile applications and/or contain advertisements from third parties that are not affiliated with us and which may link to other websites, services, or applications. Accordingly, we do not make any guarantee regarding any such third parties, and we will not be liable for any loss or damage caused by the use of such third-party websites, services, or applications. The inclusion of a link towards a third-party website, service, or application does not imply an endorsement by us. We cannot guarantee the safety and privacy of data you provide to any third parties. Any data collected by third parties is not covered by this privacy notice. We are not responsible for the content or privacy and security practices and policies of any third parties, including other websites, services, or applications that may be linked to or from the Services. You should review the policies of such third parties and contact them directly to respond to your questions."
     },
     "section6": {
@@ -214,19 +218,19 @@
     "section7": {
       "title": "7. How do we handle your social logins?",
       "text1": "<0>In Short:</0> If you choose to register or log in to our services using a social media account, we may have access to certain information about you.",
-      "text2": "Our Services offer you the ability to register and log in using your third-party social media account details (like your Facebook or Twitter logins). Where you choose to do this, we will receive certain profile information about you from your social media provider. The profile information we receive may vary depending on the social media provider concerned, but will often include your name, email address, friends list, and profile picture, as well as other information you choose to make public on such a social media platform.",
+      "text2": "Our Services offer you the ability to register and log in using your third-party social media account details (like your Facebook or Twitter logins). If you choose to do this, we will receive certain profile information about you from your social media provider. The profile information we receive may vary depending on the social media provider concerned, but will often include your name, email address, friends list, and profile picture, as well as other information you choose to make public on such a social media platform.",
       "text3": "We will use the information we receive only for the purposes that are described in this privacy notice or that are otherwise made clear to you on the relevant Services. Please note that we do not control, and are not responsible for, other uses of your personal information by your third-party social media provider. We recommend that you review their privacy notice to understand how they collect, use, and share your personal information, and how you can set your privacy preferences on their sites and apps."
     },
     "section8": {
       "title": "8. How long do we keep your information?",
-      "text1": "<0>In Short:</0> We keep your information for as long as necessary to fulfil the purposes outlined in this privacy notice unless otherwise required by law.",
-      "text2": "We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy notice, unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal requirements). No purpose in this notice will require us keeping your personal information for longer than twelve (12) months past the termination of the user's account.",
-      "text3": "When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymise such information, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible."
+      "text1": "<0>In Short:</0> We keep your information for as long as necessary to fulfill the purposes outlined in this privacy notice, unless otherwise required by law.",
+      "text2": "We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy notice, unless a longer retention period is required or permitted by law (such as tax, accounting, or other legal requirements). No purpose in this notice will require us to keep your personal information for longer than twelve (12) months past the termination of the user's account.",
+      "text3": "When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymise such information; or, if this is not possible (for example, because your personal information has been stored in backup archives), we will securely store your personal information and isolate it from any further processing until deletion is possible."
     },
     "section9": {
       "title": "9. How do we keep your information safe?",
       "text1": "<0>In Short:</0> We aim to protect your personal information through a system of organisational and technical security measures.",
-      "text2": "We have implemented appropriate and reasonable technical and organisational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or other unauthorised third parties will not be able to defeat our security and improperly collect, access, steal, or modify your information. Although we will do our best to protect your personal information, transmission of personal information to and from our Services is at your own risk. You should only access the Services within a secure environment."
+      "text2": "We have implemented appropriate and reasonable technical and organisational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or other unauthorised third parties will not be able to defeat our security and improperly collect, access, steal, or modify your information. Although we will do our best to protect your personal information, the transmission of personal information to and from our Services is at your own risk. You should only access the Services within a secure environment."
     },
     "section10": {
       "title": "10. Do we collect information from minors?",
@@ -238,6 +242,8 @@
       "text1": "<0>In Short:</0> In some regions, such as the European Economic Area (EEA), United Kingdom (UK), and Canada, you have rights that allow you greater access to and control over your personal information. You may review, change, or terminate your account at any time.",
       "text2": "In some regions (like the EEA, UK, and Canada), you have certain rights under applicable data protection laws. These may include the right (i) to request access and obtain a copy of your personal information, (ii) to request rectification or erasure; (iii) to restrict the processing of your personal information; and (iv) if applicable, to data portability. In certain circumstances, you may also have the right to object to the processing of your personal information. You can make such a request by contacting us by using the contact details provided in the section '<0>HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</0>' below.",
       "text3": "We will consider and act upon any request in accordance with applicable data protection laws.",
+      "text4": "If you are located in the EEA or UK and you believe we are unlawfully processing your personal information, you also have the right to complain to your local data protection supervisory authority. You can find their contact details here: <0>https://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm</0>",
+      "text5": "If you are located in Switzerland, the contact details for the data protection authorities are available here: <0>https://www.edoeb.admin.ch/edoeb/en/home.html</0>.",
       "text6": "<0>Withdrawing your consent:</0> If we are relying on your consent to process your personal information, which may be express and/or implied consent depending on the applicable law, you have the right to withdraw your consent at any time. You can withdraw your consent at any time by contacting us by using the contact details provided in the section '<1>HOW CAN YOU CONTACT US ABOUT THIS NOTICE</1>?' below or updating your preferences.",
       "text7": "However, please note that this will not affect the lawfulness of the processing before its withdrawal, nor when applicable law allows, will it affect the processing of your personal information conducted in reliance on lawful processing grounds other than consent.",
       "text8": "<0>Opting out of marketing and promotional communications:</0> You can unsubscribe from our marketing and promotional communications at any time by or by contacting us using the details provided in the section '<1>HOW CAN YOU CONTACT US ABOUT THIS NOTICE</1>?' below. You will then be removed from the marketing lists. However, we may still communicate with you — for example, to send you service-related messages that are necessary for the administration and use of your account, to respond to service requests, or for other non-marketing purposes.",
@@ -245,6 +251,7 @@
       "text9": "If you would at any time like to review or change the information in your account or terminate your account, you can:",
       "item": "Log in to your account settings and update your user account.",
       "text10": "Upon your request to terminate your account, we will deactivate or delete your account and information from our active databases. However, we may retain some information in our files to prevent fraud, troubleshoot problems, assist with any investigations, enforce our legal terms and/or comply with applicable legal requirements.",
+      "text11": "<0>Cookies and similar technologies:</0> Most Web browsers are set to accept cookies by default. If you prefer, you can usually choose to set your browser to remove cookies and to reject cookies. If you choose to remove cookies or reject cookies, this could affect certain features or services of our Services. To opt out of interest-based advertising by advertisers on our Services visit <1>http://www.aboutads.info/choices/</1>.",
       "text12": "If you have questions or comments about your privacy rights, you may email us at info@proxyone.eu"
     },
     "section12": {
@@ -252,7 +259,7 @@
       "text": "Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track ('DNT') feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage no uniform technology standard for recognising and implementing DNT signals has been finalised. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this privacy notice."
     },
     "section13": {
-      "title": "13. Do california residents have specific privacy rights?",
+      "title": "13. Do California residents have specific privacy rights?",
       "text1": "<0>In Short:</0> Yes, if you are a resident of California, you are granted specific rights regarding access to your personal information.",
       "text2": "California Civil Code Section 1798.83, also known as the 'Shine The Light' law, permits our users who are California residents to request and obtain from us, once a year and free of charge, information about categories of personal information (if any) we disclosed to third parties for direct marketing purposes and the names and addresses of all third parties with which we shared personal information in the immediately preceding calendar year. If you are a California resident and would like to make such a request, please submit your request in writing to us using the contact information provided below.",
       "text3": "If you are under 18 years of age, reside in California, and have a registered account with Services, you have the right to request removal of unwanted data that you publicly post on the Services. To request removal of such data, please contact us using the contact information provided below and include the email address associated with your account and a statement that you reside in California. We will make sure the data is not publicly displayed on the Services, but please be aware that the data may not be completely or comprehensively removed from all our systems (e.g. backups, etc.)."
@@ -272,14 +279,14 @@
     },
     "section16": {
       "title": "16. How can you review, update, or delete the data we collect from you?",
-      "text1": "Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it. To request to review, update, or delete your personal information, please submit a request form by clicking <0>here</0>."
+      "text1": "Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that information, or delete it. Please submit a request form by clicking here to review, update, or delete your personal information <0>here</0>."
     }
   },
   "ourMissionPage": {
     "title": "Our mission",
     "section1": {
       "title": "1. Reaching goals",
-      "subtitle": "The Checklists – it's easy achievement your goals!",
+      "subtitle": "The Checklists – it's easy to achieve your goals!",
       "text": "We created the Checklists to make achieving your goals an easy process for you. The Checklists is a platform that uses responses from users who have already gone one way or another. This way, you will already have some sort of plan for achieving your goals, which makes the process much easier. Agree, when you're not a trailblazer, everything is smoother and easier."
     },
     "section2": {
@@ -290,7 +297,7 @@
     "section3": {
       "title": "3. More opportunities",
       "subtitle": "The Checklists – it's a new opportunities!",
-      "text": "Thanks to the fact that users share their experiences, new opportunities open up for you. When you enter your request, you get a lot of variants for solving this or that problem. In this way you discover new locations, places, and methods of achieving your goals. And that means new opportunities!"
+      "text": "New opportunities open up for you thanks to the fact that users share their experiences. When you enter your request, you get a lot of variants for solving this or that problem. In this way, you discover new locations, places, and methods of achieving your goals. And that means new opportunities!"
     }
   },
   "termOfUsePage": {
@@ -301,8 +308,8 @@
         "part1": "These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and PROXYONE SP. Z O.O., doing business as PROXYONE (“PROXYONE,” “we,” “us,” or “our”), concerning your access to and use of the ",
         "part2": " website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”). We are registered in Poland and have our registered office at Małachowskiego 8 / P1, Poznan, Poznan 61-129. Our VAT number is PL7822906109. You agree that by accessing the Site, you have read, understood, and agreed to be bound by all of these Terms of Use. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS OF USE, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SITE AND YOU MUST DISCONTINUE USE IMMEDIATELY.",
         "part3": "Supplemental terms and conditions or documents that may be posted on the Site from time to time are hereby expressly incorporated herein by reference. We reserve the right, in our sole discretion, to make changes or modifications to these Terms of Use from time to time. We will alert you about any changes by updating the “Last updated” date of these Terms of Use, and you waive any right to receive specific notice of each such change. Please ensure that you check the applicable Terms every time you use our Site so that you understand which Terms apply. You will be subject to, and will be deemed to have been made aware of and to have accepted, the changes in any revised Terms of Use by your continued use of the Site after the date such revised Terms of Use are posted.",
-        "part4": "The information provided on the Site is not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation or which would subject us to any registration requirement within such jurisdiction or country. Accordingly, those persons who choose to access the Site from other locations do so on their own initiative and are solely responsible for compliance with local laws, if and to the extent local laws are applicable.",
-        "part5": "The Site is not tailored to comply with industry-specific regulations (Health Insurance Portability andAccountability Act (HIPAA), Federal Information Security Management Act (FISMA), etc.), so if your interactions would be subjected to such laws, you may not use this Site. You may not use the Site in a way that would violate the Gramm-Leach-Bliley Act (GLBA).",
+        "part4": "The information provided on the Site is not intended for distribution to or use by any person or entity in any jurisdiction or country where such distribution or use would be contrary to law or regulation or which would subject us to any registration requirement within such jurisdiction or country. Accordingly, those individuals who choose to access the Site from other locations do so on their own initiative and are solely responsible for compliance with local laws, if and to the extent local laws are applicable.",
+        "part5": "The Site is not tailored to comply with industry-specific regulations (Health Insurance Portability and Accountability Act (HIPAA), Federal Information Security Management Act (FISMA), etc.), so if your interactions would be subjected to such laws, you may not use this Site. You may not use the Site in a way that would violate the Gramm-Leach-Bliley Act (GLBA).",
         "part6": "All users who are minors in the jurisdiction in which they reside (generally under the age of 18) must have the permission of, and be directly supervised by, their parent or guardian to use the Site. If you are a minor,you must have your parent or guardian read and agree to these Terms of Use prior to you using the Site."
       }
     },
@@ -326,14 +333,14 @@
       "title": "4. User registration",
       "subtitle": "",
       "text": {
-        "part1": "You may be required to register with the Site. You agree to keep your password confidential and will be responsible for all use of your account and password. We reserve the right to remove, reclaim, or change a username you select if we determine, in our sole discretion, that such username is inappropriate, obscene, or otherwise objectionable."
+        "part1": "You may be required to register with the Site. You agree to keep your password confidential and will be responsible for all use of your account and password. We reserve the right to remove, reclaim, or change a username you select if we determine, in our sole discretion, that such a username is inappropriate, obscene, or otherwise objectionable."
       }
     },
     "section5": {
       "title": "5. Prohibited activities",
       "subtitle": "",
       "text": {
-        "part1": "You may not access or use the Site for any purpose other than that for which we make the Site available. The Site may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us.",
+        "part1": "You may not access or use the Site for any purpose other than that for which we make it available. The Site may not be used in connection with any commercial endeavor unless expressly endorsed or approved by us.",
         "part2": "As a user of the Site, you agree not to:",
         "part3": "Systematically retrieve data or other content from the Site to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.",
         "part4": "Trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords.",
@@ -346,7 +353,7 @@
         "part11": "Upload or transmit (or attempt to upload or to transmit) viruses, Trojan horses, or other material, including excessive use of capital letters and spamming (continuous posting of repetitive text), that interferes with any party’s uninterrupted use and enjoyment of the Site or modifies, impairs, disrupts, alters, or interferes with the use, features, functions, operation, or maintenance of the Site.",
         "part12": "Engage in any automated use of the system, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.",
         "part13": "Delete the copyright or other proprietary rights notice from any Content.",
-        "part14": "Attempt to impersonate another user or person or use the username of another user.",
+        "part14": "Attempt to impersonate another user or person, or use the username of another user.",
         "part15": "Upload or transmit (or attempt to upload or to transmit) any material that acts as a passive or active information collection or transmission mechanism, including without limitation, clear graphics interchange formats (“gifs”), 1×1 pixels, web bugs, cookies, or other similar devices (sometimes referred to as “spyware” or “passive collection mechanisms” or “pcms”).",
         "part16": "Interfere with, disrupt, or create an undue burden on the Site or the networks or services connected to the Site.",
         "part17": "Harass, annoy, intimidate, or threaten any of our employees or agents engaged in providing any portion of the Site to you.",
@@ -355,7 +362,7 @@
         "part20": "Except as permitted by applicable law, decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the Site.",
         "part21": "Except as may be the result of standard search engine or Internet browser usage, use, launch, develop, or distribute any automated system, including without limitation, any spider, robot, cheat utility, scraper, or offline reader that accesses the Site, or using or launching any unauthorized script or other software.",
         "part22": "Use a buying agent or purchasing agent to make purchases on the Site.",
-        "part23": "Make any unauthorized use of the Site, including collecting usernames and/or email addresses of users by electronic or other means for the purpose of sending unsolicited email, or creating user accounts by automated means or under false pretenses.",
+        "part23": "Make any unauthorized use of the Site, including collecting user usernames and/or email addresses for the purpose of sending unsolicited email, or creating user accounts through automated means or under false pretenses.",
         "part24": "Use the Site as part of any effort to compete with us or otherwise use the Site and/or the Content for any revenue-generating endeavor or commercial enterprise.",
         "part25": "Use the Site to advertise or offer to sell goods and services.",
         "part26": "Sell or otherwise transfer your profile."
@@ -373,12 +380,12 @@
         "part6": "Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, mass mailings, or other forms of solicitation.",
         "part7": "Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing, libelous, slanderous, or otherwise objectionable (as determined by us).",
         "part8": "Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.",
-        "part9": "Your Contributions are not used to harass or threaten (in the legal sense of those terms) any other person and to promote violence against a specific person or class of people.",
+        "part9": "Your Contributions are not used to harass or threaten (in the legal sense of those terms) any other person or to promote violence against a specific person or class of people.",
         "part10": "Your Contributions do not violate any applicable law, regulation, or rule.",
         "part11": "Your Contributions do not violate the privacy or publicity rights of any third party.",
         "part12": "Your Contributions do not violate any applicable law concerning child pornography, or otherwise intended to protect the health or well-being of minors.",
         "part13": "Your Contributions do not include any offensive comments that are connected to race, national origin, gender, sexual preference, or physical handicap.",
-        "part14": "Your Contributions do not otherwise violate, or link to material that violates, any provision of these Terms of Use, or any applicable law or regulation.",
+        "part14": "Your Contributions do not otherwise violate, or link to material that violates, any provision of these Terms of Use or any applicable law or regulation.",
         "part15": "Any use of the Site in violation of the foregoing violates these Terms of Use and may result in, among other things, termination or suspension of your rights to use the Site."
       }
     },
@@ -415,7 +422,7 @@
       }
     },
     "section11": {
-      "title": "11. Third-party website and content",
+      "title": "11. Third-party websites and content",
       "text": {
         "part1": "The Site may contain (or you may be sent via the Site) links to other websites (\"Third-Party Websites\") as well as articles, photographs, text, graphics, pictures, designs, music, sound, video, information, applications, software, and other content or items belonging to or originating from third parties (\"Third-Party Content\"). Such Third-Party Websites and Third-Party Content are not investigated, monitored, or checked for accuracy, appropriateness, or completeness by us, and we are not responsible for any Third-Party Websites accessed through the Site or any Third-Party Content posted on, available through, or installed from the Site, including the content, accuracy, offensiveness, opinions, reliability, privacy practices, or other policies of or contained in the Third-Party Websites or the Third-Party Content. Inclusion of, linking to, or permitting the use or installation of any Third-Party Websites or any Third-Party Content does not imply approval or endorsement thereof by us. If you decide to leave the Site and access the Third-Party Websites or to use or install any Third-Party Content, you do so at your own risk, and you should be aware these Terms of Use no longer govern. You should review the applicable terms and policies, including privacy and data gathering practices, of any website to which you navigate from the Site or relating to any applications you use or install from the Site. Any purchases you make through Third-Party Websites will be through other websites and from other companies, and we take no responsibility whatsoever in relation to such purchases which are exclusively between you and the applicable third party. You agree and acknowledge that we do not endorse the products or services offered on Third-Party Websites and you shall hold us harmless from any harm caused by your purchase of such products or services. Additionally, you shall hold us harmless from any losses sustained by you or harm caused to you relating to or resulting in any way from any Third-Party Content or any contact with Third-Party Websites."
       }
@@ -424,7 +431,7 @@
       "title": "12. Advertisers",
       "subtitle": "",
       "text": {
-        "part1": "We allow advertisers to display their advertisements and other information in certain areas of the Site, such as sidebar advertisements or banner advertisements. If you are an advertiser, you shall take full responsibility for any advertisements you place on the Site and any services provided on the Site or products sold through those advertisements. Further, as an advertiser, you warrant and represent that you possess all rights and authority to place advertisements on the Site, including, but not limited to, intellectual property rights, publicity rights, and contractual rights. We simply provide the space to place such advertisements, and we have no other relationship with advertisers."
+        "part1": "We allow advertisers to display their advertisements and other information in certain areas of the Site, such as sidebar advertisements or banner advertisements. If you are an advertiser, you are fully responsible for any advertisements you place on the Site, as well as any services or products sold through those advertisements. Furthermore, as an advertiser, you warrant and represent that you have all necessary rights and authority to place advertisements on the Site, including but not limited to intellectual property, publicity, and contractual rights. We simply provide the space to place such advertisements, and we have no other relationship with advertisers."
       }
     },
     "section13": {
@@ -438,7 +445,7 @@
       "title": "14. Privacy policy",
       "subtitle": "",
       "text": {
-        "part1": "We care about data privacy and security. By using the Site, you agree to be bound by our Privacy Policy posted on the Site, which is incorporated into these Terms of Use. Please be advised the Site is hosted in the United States. If you access the Site from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United States, then through your continued use of the Site, you are transferring your data to the United States, and you agree to have your data transferred to and processed in the United States."
+        "part1": "We care about data privacy and security. By using the Site, you agree to be bound by our Privacy Policy posted on the Site, which is incorporated into these Terms of Use. Please be advised that the Site is hosted in the United States. If you access the Site from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in the United States, then through your continued use of the Site, you are transferring your data to the United States, and you agree to have your data transferred to and processed in the United States."
       }
     },
     "section15": {
@@ -453,14 +460,14 @@
       "subtitle": "",
       "text": {
         "part1": "These Terms of Use shall remain in full force and effect while you use the Site. WITHOUT LIMITING ANY OTHER PROVISION OF THESE TERMS OF USE, WE RESERVE THE RIGHT TO, IN OUR SOLE DISCRETION AND WITHOUT NOTICE OR LIABILITY, DENY ACCESS TO AND USE OF THE SITE (INCLUDING BLOCKING CERTAIN IP ADDRESSES), TO ANY PERSON FOR ANY REASON OR FOR NO REASON, INCLUDING WITHOUT LIMITATION FOR BREACH OF ANY REPRESENTATION, WARRANTY, OR COVENANT CONTAINED IN THESE TERMS OF USE OR OF ANY APPLICABLE LAW OR REGULATION. WE MAY TERMINATE YOUR USE OR PARTICIPATION IN THE SITE OR DELETE YOUR ACCOUNT AND ANY CONTENT OR INFORMATION THAT YOU POSTED AT ANY TIME, WITHOUT WARNING, IN OUR SOLE DISCRETION.",
-        "part2": "If we terminate or suspend your account for any reason, you are prohibited from registering and creating a new account under your name, a fake or borrowed name, or the name of any third party, even if you may be acting on behalf of the third party. In addition to terminating or suspending your account, we reserve the right to take appropriate legal action, including without limitation pursuing civil, criminal, and injunctive redress."
+        "part2": "If we terminate or suspend your account for any reason, you are prohibited from registering and creating a new account under your name, a fake or borrowed name, or the name of any third party, even if you may be acting on behalf of the third party. In addition to terminating or suspending your account, we reserve the right to take appropriate legal action, including without limitation, pursuing civil, criminal, and injunctive redress."
       }
     },
     "section17": {
       "title": "17. Modifications and interruptions",
       "subtitle": "",
       "text": {
-        "part1": "We reserve the right to change, modify, or remove the contents of the Site at any time or for any reason at our sole discretion without notice. However, we have no obligation to update any information on our Site. We also reserve the right to modify or discontinue all or part of the Site without notice at any time. We will not be liable to you or any third party for any modification, price change, suspension, or discontinuance of the Site.",
+        "part1": "We reserve the right to change, modify, or remove the contents of the Site at any time or for any reason, at our sole discretion without notice. However, we have no obligation to update any information on our Site. We also reserve the right to modify or discontinue all or part of the Site without notice at any time. We will not be liable to you or any third party for any modification, price change, suspension, or discontinuance of the Site.",
         "part2": "We cannot guarantee the Site will be available at all times. We may experience hardware, software, or other problems or need to perform maintenance related to the Site, resulting in interruptions, delays, or errors. We reserve the right to change, revise, update, suspend, discontinue, or otherwise modify the Site at any time or for any reason without notice to you. You agree that we have no liability whatsoever for any loss, damage, or inconvenience caused by your inability to access or use the Site during any downtime or discontinuance of the Site. Nothing in these Terms of Use will be construed to obligate us to maintain and support the Site or to supply any corrections, updates, or releases in connection therewith."
       }
     },
@@ -468,7 +475,7 @@
       "title": "18. Governing law",
       "subtitle": "",
       "text": {
-        "part1": "These conditions are governed by and interpreted following the laws of Poland, and the use of the United Nations Convention of Contracts for the International Sale of Goods is expressly excluded. If your habitual residence is in the EU, and you are a consumer, you additionally possess the protection provided to you by obligatory provisions of the law of your country of residence. PROXYONE SP. Z O.O. and yourself both agree to submit to the non-exclusive jurisdiction of the courts of Poznan, which means that you may make a claim to defend your consumer protection rights in regards to these Conditions of Use in Poland, or in the EU country in which you reside."
+        "part1": "These conditions are governed by and interpreted according to the laws of Poland, and the use of the United Nations Convention of Contracts for the International Sale of Goods is expressly excluded. If your habitual residence is in the EU and you are a consumer, you additionally possess the protection provided to you by the obligatory provisions of the law of your country of residence. PROXYONE SP. Z O.O. and yourself agree to submit to the non-exclusive jurisdiction of the courts of Poznan, which means that you may make a claim to defend your consumer protection rights in regards to these Conditions of Use in Poland, or in the EU country in which you reside."
       }
     },
     "section19": {
@@ -476,7 +483,7 @@
       "subtitle1": "Informal Negotiations",
       "text1": "To expedite resolution and control the cost of any dispute, controversy, or claim related to these Terms of Use (each \"Dispute\" and collectively, the “Disputes”) brought by either you or us (individually, a “Party” and collectively, the “Parties”), the Parties agree to first attempt to negotiate any Dispute (except those Disputes expressly provided below) informally for at least three hundred sixty (360) days before initiating arbitration. Such informal negotiations commence upon written notice from one Party to the other Party.",
       "subtitle2": "Binding Arbitration",
-      "text2": "Any dispute arising from the relationships between the Parties to this contract shall be determined by one arbitrator who will be chosen in accordance with the Arbitration and Internal Rules of the European Court of Arbitration being part of the European Centre of Arbitration having its seat in Strasbourg, and which are in force at the time the application for arbitration is filed, and of which adoption of this clause constitutes acceptance. The seat of arbitration shall be Poznan, Poland. The language of the proceedings shall be English. Applicable rules of substantive law shall be the law of Poland.",
+      "text2": "Any dispute arising from the relationships between the Parties to this contract shall be determined by one arbitrator who will be chosen in accordance with the Arbitration and Internal Rules of the European Court of Arbitration being part of the European Center of Arbitration having its seat in Strasbourg, and which are in force at the time the application for arbitration is filed, and of which adoption of this clause constitutes acceptance. The arbitration will take place in Poznan, Poland. The proceedings will be held in English. The applicable substantive law rules shall be Polish law.",
       "subtitle3": "Restrictions",
       "text3": "The Parties agree that any arbitration shall be limited to the Dispute between the Parties individually. To the full extent permitted by law, (a) no arbitration shall be joined with any other proceeding; (b) there is no right or authority for any Dispute to be arbitrated on a class-action basis or to utilize class action procedures; and (c) there is no right or authority for any Dispute to be brought in a purported representative capacity on behalf of the general public or any other persons.",
       "subtitle4": "Exceptions to Informal Negotiations and Arbitration",
@@ -521,21 +528,21 @@
       "title": "25. Electronic communications, transactions, and signatures",
       "subtitle": "",
       "text": {
-        "part1": "Visiting the Site, sending us emails, and completing online forms constitute electronic communications. You consent to receive electronic communications, and you agree that all agreements, notices, disclosures, and other communications we provide to you electronically, via email and on the Site, satisfy any legal requirement that such communication be in writing. YOU HEREBY AGREE TO THE USE OF ELECTRONIC SIGNATURES, CONTRACTS, ORDERS, AND OTHER RECORDS, AND TO ELECTRONIC DELIVERY OF NOTICES, POLICIES, AND RECORDS OF TRANSACTIONS INITIATED OR COMPLETED BY US OR VIA THE SITE. You hereby waive any rights or requirements under any statutes, regulations, rules, ordinances, or other laws in any jurisdiction which require an original signature or delivery or retention of non-electronic records, or to payments or the granting of credits by any means other than electronic means."
+        "part1": "Visiting the Site, sending us emails, and completing online forms constitute electronic communications. You consent to receiving electronic communications, and you agree that all agreements, notices, disclosures, and other communications we provide to you electronically, via email and on the Site, satisfy any legal requirement that such communication be in writing. YOU HEREBY AGREE TO THE USE OF ELECTRONIC SIGNATURES, CONTRACTS, ORDERS, AND OTHER RECORDS, AND TO ELECTRONIC DELIVERY OF NOTICES, POLICIES, AND RECORDS OF TRANSACTIONS INITIATED OR COMPLETED BY US OR VIA THE SITE. You hereby waive any rights or requirements under any statutes, regulations, rules, ordinances, or other laws in any jurisdiction which require an original signature or delivery or retention of non-electronic records, or for payments or the granting of credits by any means other than electronic means."
       }
     },
     "section26": {
       "title": "26. Miscellaneous",
       "subtitle": "",
       "text": {
-        "part1": "These Terms of Use and any policies or operating rules posted by us on the Site or in respect to the Site constitute the entire agreement and understanding between you and us. Our failure to exercise or enforce any right or provision of these Terms of Use shall not operate as a waiver of such right or provision. These Terms of Use operate to the fullest extent permissible by law. We may assign any or all of our rights and obligations to others at any time. We shall not be responsible or liable for any loss, damage, delay, or failure to act caused by any cause beyond our reasonable control. If any provision or part of a provision of these Terms of Use is determined to be unlawful, void, or unenforceable, that provision or part of the provision is deemed severable from these Terms of Use and does not affect the validity and enforceability of any remaining provisions. There is no joint venture, partnership, employment or agency relationship created between you and us as a result of these Terms of Use or use of the Site. You agree that these Terms of Use will not be construed against us by virtue of having drafted them. You hereby waive any and all defenses you may have based on the electronic form of these Terms of Use and the lack of signing by the parties hereto to execute these Terms of Use."
+        "part1": "These Terms of Use and any policies or operating rules posted by us on the Site or with respect to the Site constitute the entire agreement and understanding between you and us. Our failure to exercise or enforce any right or provision of these Terms of Service does not constitute a waiver of that right or provision. These Terms of Use operate to the fullest extent permissible by law. We may assign any or all of our rights and obligations to others at any time. We will not be responsible or liable for any loss, damage, delay, or failure to act caused by any cause beyond our reasonable control. If any provision or part of a provision of these Terms of Use is determined to be unlawful, void, or unenforceable, that provision or part of the provision is deemed severable from these Terms of Use and does not affect the validity and enforceability of any remaining provisions. As a result of these Terms of Use or your use of the Site, no joint venture, partnership, employment, or agency relationship exists between you and us. You agree that these Terms of Use will not be construed against us by virtue of having drafted them. You hereby waive any and all defenses you may have based on the electronic form of these Terms of Use and the lack of signing by the parties hereto to execute these Terms of Use."
       }
     },
     "section27": {
       "title": "27. Contact us",
       "subtitle": "",
       "text": {
-        "part1": "In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at:",
+        "part1": "In order to resolve a complaint regarding the Site or to receive further information regarding the use of the Site, please contact us a:",
         "companyName": "PROXYONE SP. Z O.O.",
         "address": "Małachowskiego 8 / P1",
         "addressCity": "Poland, Poznan 61-129",
@@ -557,7 +564,7 @@
     "button": "Write email"
   },
   "popularChecklistPage": {
-    "title": "Popular checklists"
+    "title": "Popular checklist"
   },
   "allChecklistsPage": {
     "title": "All checklists",
@@ -591,29 +598,26 @@
   "creationOfChecklist": {
     "title": "Creation of Checklist",
     "name": "Name checklist",
-    "max": "Minimum 10 and Maximum 150 characters.",
-    "isNotContainLinks": " Name checklist must not contain links.",
-    "maxItem": "Minimum 2 and Maximum 150 characters",
-    "itemsNotContainLinks": " This item type should not contain links.",
+    "max": "Minimum of 10 characters and Maximum of 150 characters",
+    "maxItem": "Minimum of 2 characters and Maximum of 150 characters",
     "passed": "Passed",
     "points": "Checklist points",
     "text": "Include all the information someone might need to make your checklist popular.",
     "addBtn": "Add item",
     "addImage": "Add image",
     "tags": "Tags",
-    "desc": "Add up to 3-5 tags to describe what your checlist is about",
+    "desc": "Add up to 3-5 tags to describe what your checklist is about",
     "addTags": "Add tag",
-    "tagIncludesLink": ". Tag should not contain links",
     "preview": "Preview",
     "publish": "Publish",
     "popupTitle": "Your checklist has been posted successfully!",
-    "popupDesc": "Create more checklists and get rewards for it.",
+    "popupDesc": "Create more checklists and get rewarded for it.",
     "popupButton": "Look at the checklist",
     "checklistPreview": "Checklist preview",
     "category": "Checklist category",
     "categoryDesc": "Select a category from the list that applies to your checklist",
     "link": "Insert link",
-    "isLinkValid": "Please enter a valid url",
+    "isLinkValid": "Please enter a valid URL",
     "textHover": "Text",
     "linkHover": "Link",
     "imageHover": "Image",
@@ -650,18 +654,18 @@
   },
   "mainPage": {
     "checklist": "Checklists",
-    "title": "Ask question and get a checklist for your question",
+    "title": "Ask a question and get a checklist for your question",
     "popularQuestion": "Search:",
     "search": "Search by checklists:",
     "heading": "Share knowledge, create your own checklists and help people learn new things",
     "desc": "Already more than 1000 people a day have their own checklists and correspond to pressing questions. Create your own checklists",
     "button": "Create checklist",
-    "notFound": "Sorry, no checklists found for this query"
+    "notFound": "Sorry, no checklists were found for this query"
   },
   "login": {
     "signIn": "Sign In",
     "signUp": "Sign Up",
-    "title1": "Sign In to your account",
+    "title1": "Sign in to your account",
     "title2": "Sign Up with Email",
     "title3": "Check your mail",
     "title4": "Reset Password",
@@ -679,7 +683,7 @@
     "incorrectEmail": "Incorrect email address",
     "incorrectPassword": "Incorrect password",
     "back": "Back",
-    "desc": "We have sent a password recoveinstructions to your email",
+    "desc": "We have sent a password recovery instruction to your email",
     "openEmail": "Open email app",
     "enterPassword": "Enter a new password",
     "enterAPassword": "Enter a password",
@@ -689,8 +693,8 @@
     "done": "A password reset link has been sent to your email. Make sure the email didn't end up in the Spam folder",
     "unauthorized": "Invalid password",
     "not_found": "Invalid email",
-    "nickNameTaken": "This user name is already in use, please try another one",
-    "emailTaken": "Email address invalid or already taken",
+    "nickNameTaken": "This username is already in use. Please try another one",
+    "emailTaken": "Email addresses are either invalid or already in use",
     "emailNotFound": "Email was not found",
     "signInDesc": "By signing up you agree to the <0>Terms of Service</0> and <1>Privacy Policy</1>"
   },
@@ -702,18 +706,13 @@
     "error": "Server Error"
   },
   "profilePage": {
-    "profile": "Profile",
     "myProfile": "My profile",
-    "2mb": "There was a problem updating your profile, file size must not be more than 2Mb",
     "editProfile": "Edit Profile",
     "aboutMe": "About me",
-    "about": "About",
     "myAwards": "My awards",
-    "awards": "Awards",
     "completedChecklists": "Completed checklists",
     "createdChecklists": "Created checklists",
-    "myEmptyAwards": "You don't have an awards yet..",
-    "emptyAwards": "This user has no awards yet..",
+    "emptyAwards": "You don't have an awards yet..",
     "emptyBio": "Add a little description about yourself so that more people get to know you and your experience",
     "country": "Country"
   },
@@ -721,7 +720,7 @@
     "editProfile": "Edit profile",
     "name": "Name",
     "nickName": "Nick name",
-    "nickNicknameTaken": "This user name is already in use, please try another one",
+    "nickNicknameTaken": "This username is already in use. Please try another one",
     "minNickname": "Must be at least 2 characters long",
     "maxNickname": "Must be at least 2 characters long, maximum 50 characters",
     "country": "Country",
@@ -732,7 +731,7 @@
     "twitter": "Twitter",
     "isLinkValid": "Please enter a valid url",
     "max": "Maximum 150 characters",
-    "bioMax": "Brief description of you or your profile. Maximum 150 characters",
+    "bioMax": "A brief description of you or your profile. maximum of 150 characters",
     "button": "Save Change"
   },
   "accountSettings": {
@@ -741,7 +740,6 @@
     "oldPassword": "Old Password",
     "newPassword": "New Password",
     "confirmPassword": "Confirm Password",
-    "passwordMatch": "The password entered is already in use",
     "minimum": "Minimum 8 characters",
     "invalid": "The new passwords don't match",
     "incorrect": "Incorrect password",
