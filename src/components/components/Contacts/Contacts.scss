@@ -4,6 +4,10 @@
 .contacts {
   max-width: 1044px;
 
+  .networks {
+    margin-bottom: 62px;
+  }
+
   &__wrapper {
     @include media-breakpoint-down(md) {
       flex-direction: column-reverse;
@@ -22,10 +26,6 @@
   &__tel {
     display: flex;
     justify-content: center;
-  }
-
-  .networks {
-    margin-bottom: 62px;
   }
 
   &__img {

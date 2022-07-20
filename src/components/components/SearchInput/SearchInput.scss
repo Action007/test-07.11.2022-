@@ -45,14 +45,6 @@
       height: 52px;
     }
 
-    &.active {
-      border-color: $primary;
-
-      svg {
-        stroke: $dark;
-      }
-    }
-
     svg {
       cursor: text;
 
@@ -68,6 +60,14 @@
 
       @include media-breakpoint-down(sm) {
         left: 19px;
+      }
+    }
+
+    &.active {
+      border-color: $primary;
+
+      svg {
+        stroke: $dark;
       }
     }
   }

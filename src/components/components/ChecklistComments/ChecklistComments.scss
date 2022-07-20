@@ -9,6 +9,32 @@
   background-color: #fff;
   border-radius: 6px;
 
+  .spinner {
+    position: absolute;
+    left: 28px;
+
+    justify-content: start;
+
+    width: auto;
+    height: auto;
+    margin-right: 0;
+
+    background-color: transparent;
+  }
+
+  .spinner__wrap {
+    width: 32px;
+    height: 32px;
+
+    &::after {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+
+      border-width: 5px;
+    }
+  }
+
   &__button,
   &__loading {
     display: flex;
@@ -56,12 +82,12 @@
     border-bottom: 2px solid #4f4f4f38;
     outline: transparent;
 
-    &.invalid {
-      border-color: $warning;
-    }
-
     &::placeholder {
       color: $dark;
+    }
+
+    &.invalid {
+      border-color: $warning;
     }
 
     &:focus {
@@ -99,31 +125,5 @@
     cursor: wait;
 
     position: relative;
-  }
-
-  .spinner {
-    position: absolute;
-    left: 28px;
-
-    justify-content: start;
-
-    width: auto;
-    height: auto;
-    margin-right: 0;
-
-    background-color: transparent;
-  }
-
-  .spinner__wrap {
-    width: 32px;
-    height: 32px;
-
-    &::after {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-
-      border-width: 5px;
-    }
   }
 }

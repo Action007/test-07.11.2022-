@@ -25,16 +25,16 @@
     border: 1px solid #c8d4ff;
     border-radius: 6px;
 
-    &.active {
-      svg {
-        transform: rotate(-90deg);
-      }
-    }
-
     svg {
       transform: rotate(90deg);
 
       stroke: $dark;
+    }
+
+    &.active {
+      svg {
+        transform: rotate(-90deg);
+      }
     }
   }
 

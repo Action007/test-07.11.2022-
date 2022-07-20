@@ -6,6 +6,23 @@
   max-width: 460px;
   margin: 0 auto;
 
+  .form-check-input {
+    cursor: pointer;
+
+    width: 1.2em;
+    height: 1.2em;
+    margin-top: 0;
+    margin-right: 13px;
+
+    &.invalid {
+      border-color: $warning;
+    }
+  }
+
+  .form-check-label {
+    cursor: pointer;
+  }
+
   &__wrap {
     padding: 16px 23px;
 
@@ -38,22 +55,6 @@
     &:focus {
       box-shadow: none;
     }
-  }
-
-  .form-check-input {
-    width: 1.2em;
-    height: 1.2em;
-    margin-top: 0;
-    margin-right: 13px;
-    cursor: pointer;
-
-    &.invalid {
-      border-color: $warning;
-    }
-  }
-
-  .form-check-label {
-    cursor: pointer;
   }
 
   &__link {

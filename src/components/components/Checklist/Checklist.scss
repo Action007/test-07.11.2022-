@@ -18,6 +18,20 @@
     padding: 30px 19px 25px;
   }
 
+  &:not(:last-child) {
+    margin-bottom: 25px;
+
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 12px;
+    }
+  }
+
+  .checklist-item {
+    &:not(:last-child) {
+      margin-bottom: 6px;
+    }
+  }
+
   &__likes,
   &__dislikes {
     display: flex;
@@ -55,20 +69,6 @@
 
     svg {
       margin-right: 10px;
-    }
-  }
-
-  &:not(:last-child) {
-    margin-bottom: 25px;
-
-    @include media-breakpoint-down(sm) {
-      margin-bottom: 12px;
-    }
-  }
-
-  .checklist-item {
-    &:not(:last-child) {
-      margin-bottom: 6px;
     }
   }
 
@@ -167,6 +167,10 @@
   &__dislikes {
     border-radius: 6px;
 
+    svg {
+      transform: rotate(180deg);
+    }
+
     &.disliked {
       color: $warning;
 
@@ -185,10 +189,6 @@
       svg {
         stroke: #fff;
       }
-    }
-
-    svg {
-      transform: rotate(180deg);
     }
   }
 
@@ -210,15 +210,6 @@
       margin: 0 0 0 21px;
     }
 
-    &.saved {
-      background-color: #f0f9f2;
-
-      svg {
-        fill: #fff;
-        stroke: $primary;
-      }
-    }
-
     svg {
       width: 16px;
       height: 18px;
@@ -226,6 +217,15 @@
       stroke: #a3a3a3;
 
       transition: stroke 0.2s ease;
+    }
+
+    &.saved {
+      background-color: #f0f9f2;
+
+      svg {
+        fill: #fff;
+        stroke: $primary;
+      }
     }
 
     &:hover {
@@ -347,6 +347,10 @@
     background-color: $secondary;
     border-radius: 6px;
 
+    svg {
+      stroke: #a3a3a3;
+    }
+
     &.active {
       color: #6d9aff;
 
@@ -355,10 +359,6 @@
       svg {
         stroke: #6d9aff;
       }
-    }
-
-    svg {
-      stroke: #a3a3a3;
     }
   }
 
@@ -369,6 +369,12 @@
     border-radius: 6px;
 
     transition: box-shadow 0.2s ease, color 0.2s ease;
+
+    svg {
+      stroke: #a3a3a3;
+
+      transition: stroke 0.2s ease;
+    }
 
     &.active {
       color: $primary;
@@ -388,12 +394,6 @@
       svg {
         stroke: #fff;
       }
-    }
-
-    svg {
-      stroke: #a3a3a3;
-
-      transition: stroke 0.2s ease;
     }
 
     &:hover {

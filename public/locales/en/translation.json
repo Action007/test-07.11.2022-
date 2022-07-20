@@ -598,8 +598,11 @@
   "creationOfChecklist": {
     "title": "Creation of Checklist",
     "name": "Name checklist",
-    "max": "Minimum of 10 characters and Maximum of 150 characters",
-    "maxItem": "Minimum of 2 characters and Maximum of 150 characters",
+    "max": "Minimum 10 and Maximum 150 characters.",
+    "isNotContainLinks": " Name checklist must not contain links.",
+    "maxItem": "Minimum 2 and Maximum 150 characters",
+    "2mb": "File size must not be more than 2Mb",
+    "itemsNotContainLinks": " This item type should not contain links.",
     "passed": "Passed",
     "points": "Checklist points",
     "text": "Include all the information someone might need to make your checklist popular.",

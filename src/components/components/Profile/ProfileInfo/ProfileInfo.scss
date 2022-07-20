@@ -177,16 +177,6 @@
   }
 
   &__network {
-    &.empty {
-      svg {
-        opacity: 0.5;
-      }
-
-      &:hover svg {
-        fill: $dark;
-      }
-    }
-
     &:not(:last-child) {
       margin-right: 25px;
 
@@ -201,6 +191,16 @@
       height: 20px;
 
       fill: $dark;
+    }
+
+    &.empty {
+      svg {
+        opacity: 0.5;
+      }
+
+      &:hover svg {
+        fill: $dark;
+      }
     }
 
     &:hover {

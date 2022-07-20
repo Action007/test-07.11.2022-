@@ -43,16 +43,16 @@
       font-size: 16px;
     }
 
-    &.close svg {
-      transform: rotate(0deg);
-    }
-
     svg {
       transform: rotate(-180deg);
 
       margin-left: 22px;
 
       transition: 0.3s transform ease;
+    }
+
+    &.close svg {
+      transform: rotate(0deg);
     }
   }
 
@@ -107,14 +107,14 @@
       padding: 9px 16px;
     }
 
+    svg {
+      margin-right: 25px;
+    }
+
     &.active {
       color: #fff;
 
       background-color: $primary;
-    }
-
-    svg {
-      margin-right: 25px;
     }
 
     &:active {
@@ -127,29 +127,29 @@
   }
 
   &__button--fill {
-    &.active svg {
-      fill: #fff;
-    }
-
     svg {
       width: 25px;
       height: 25px;
 
       fill: $dark;
     }
+
+    &.active svg {
+      fill: #fff;
+    }
   }
 
   &__button--stroke {
-    &.active svg {
-      stroke: #fff;
-    }
-
     svg {
       width: 25px;
       height: 25px;
       margin-right: 25px;
 
       stroke: $dark;
+    }
+
+    &.active svg {
+      stroke: #fff;
     }
   }
 
@@ -173,6 +173,15 @@
       padding: 9px 16px;
     }
 
+    svg {
+      width: 25px;
+      height: 25px;
+      margin-right: 25px;
+
+      fill: $warning;
+      stroke: $warning;
+    }
+
     &.hot {
       color: #fff;
 
@@ -183,15 +192,6 @@
       svg {
         stroke: #fff;
       }
-    }
-
-    svg {
-      width: 25px;
-      height: 25px;
-      margin-right: 25px;
-
-      fill: $warning;
-      stroke: $warning;
     }
 
     &:active {

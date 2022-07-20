@@ -11,7 +11,6 @@ import validateLink from "../../../utils/validateLink";
 import MapModal from "../MapModal/MapModal";
 import "./CreationChecklistItem.scss";
 import { ReactComponent as ChecklistDots } from "../../../assets/images/icon/checklistDots.svg";
-import { ReactComponent as ImgIcon } from "../../../assets/images/icon/img.svg";
 import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel.svg";
 import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-map.svg";
 
@@ -35,6 +34,7 @@ const CreationChecklistItem = ({
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
   const { ref, show, setShow } = useClickOutside(true);
+  const [isImgValid, setIsImgValid] = useState(true);
   const textInput = useRef(null);
   const isLinkValid = validateLink(value.link);
 
@@ -71,34 +71,48 @@ const CreationChecklistItem = ({
   };
 
   const onUpdateImageHandler = (event) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = () => {
-      const images = reader.result;
-      dispatch(
-        createChecklistActions.addImage({
-          id,
-          image: images,
-        })
-      );
-    };
+    const image = event.target.files[0];
+
+    if (image.size > 2e6) {
+      setIsImgValid(false);
+    } else {
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = () => {
+        const images = reader.result;
+        dispatch(
+          createChecklistActions.addImage({
+            id,
+            image: images,
+          })
+        );
+      };
+      setIsImgValid(true);
+    }
   };
 
   const selectImg = (
-    <label className="creation-item__img" htmlFor={id + 2}>
-      <div className="creation-item__svg">
-        <ImgIcon />
-      </div>
-      <input
-        type="file"
-        accept="image/png, image/jpeg, image/jpg"
-        onChange={(event) => onUpdateImageHandler(event)}
-        id={id + 2}
-      />
-      <span className="SFPro-500">
-        {translate("creationOfChecklist.addImage")}
-      </span>
-    </label>
+    <>
+      {!isImgValid && (
+        <span className="creation-item__invalid image">
+          {translate("creationOfChecklist.2mb")}
+        </span>
+      )}
+      <label
+        className={`creation-item__img${!isImgValid ? " invalid" : ""}`}
+        htmlFor={id + 2}
+      >
+        <input
+          type="file"
+          accept="image/png, image/jpeg, image/jpg"
+          onChange={(event) => onUpdateImageHandler(event)}
+          id={id + 2}
+        />
+        <span className="creation-item__add SFPro-500">
+          {translate("creationOfChecklist.addImage")}
+        </span>
+      </label>
+    </>
   );
 
   const ImgSelected = list_type === "image" && value?.image && (
