@@ -45,6 +45,12 @@
     border: 1px solid transparent;
     border-radius: 6px;
 
+    svg {
+      transform: rotate(90deg);
+
+      stroke: $dark;
+    }
+
     &.invalid {
       border-color: $warning;
     }
@@ -53,12 +59,6 @@
       svg {
         transform: rotate(-90deg);
       }
-    }
-
-    svg {
-      transform: rotate(90deg);
-
-      stroke: $dark;
     }
   }
 
@@ -122,22 +122,22 @@
   }
 
   &__btn--fill {
-    &.active svg {
-      fill: #fff;
-    }
-
     svg {
       fill: $dark;
+    }
+
+    &.active svg {
+      fill: #fff;
     }
   }
 
   &__btn--stroke {
-    &.active svg {
-      stroke: #fff;
-    }
-
     svg {
       stroke: $dark;
+    }
+
+    &.active svg {
+      stroke: #fff;
     }
   }
 }

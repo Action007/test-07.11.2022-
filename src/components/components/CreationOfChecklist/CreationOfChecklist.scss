@@ -73,12 +73,6 @@
     height: 54px;
     margin: 3px 0 42px;
 
-    &.invalid {
-      input {
-        border-color: $warning !important;
-      }
-    }
-
     input {
       width: 100%;
       height: 100%;
@@ -90,6 +84,12 @@
 
       &:focus {
         border-color: $primary;
+      }
+    }
+
+    &.invalid {
+      input {
+        border-color: $warning !important;
       }
     }
   }

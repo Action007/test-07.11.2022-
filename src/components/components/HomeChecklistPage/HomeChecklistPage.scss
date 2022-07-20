@@ -6,6 +6,24 @@
     margin-top: 0;
   }
 
+  .search-input {
+    margin: 0 0 38px;
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: 16px;
+    }
+  }
+
+  .create-button {
+    margin: inherit;
+
+    @include media-breakpoint-down(sm) {
+      justify-content: center;
+
+      width: 100%;
+    }
+  }
+
   &__wrapper {
     display: flex;
 
@@ -31,14 +49,6 @@
       margin-bottom: 27px;
 
       font-size: 20px;
-    }
-  }
-
-  .search-input {
-    margin: 0 0 38px;
-
-    @include media-breakpoint-down(md) {
-      margin-bottom: 16px;
     }
   }
 
@@ -195,16 +205,6 @@
 
     font-size: 28px;
     text-align: center;
-  }
-
-  .create-button {
-    margin: inherit;
-
-    @include media-breakpoint-down(sm) {
-      justify-content: center;
-
-      width: 100%;
-    }
   }
 
   &__images {

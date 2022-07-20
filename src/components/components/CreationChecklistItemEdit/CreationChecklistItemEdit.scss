@@ -7,7 +7,11 @@
   display: flex;
   align-items: center;
 
-  margin: 8px 0 0 72px;
+  margin: 8px 0 0 61px;
+
+  @include media-breakpoint-down(sm) {
+    margin: 8px 0 0 55px;
+  }
 
   &__button:hover ~ &__desc {
     visibility: visible;
@@ -21,6 +25,10 @@
     border-right: 1px solid #4f4f4f1c;
     border-left: 1px solid #4f4f4f1c;
 
+    svg {
+      stroke: $dark;
+    }
+
     &.active {
       background-color: $primary;
       border: none;
@@ -33,10 +41,6 @@
         fill: #fff;
         stroke: inherit;
       }
-    }
-
-    svg {
-      stroke: $dark;
     }
 
     &:first-child {

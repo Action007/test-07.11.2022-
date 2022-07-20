@@ -5,6 +5,14 @@
 
   word-break: break-word;
 
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  .edit-dropdown {
+    right: 0;
+  }
+
   &__likes,
   &__dislikes {
     display: flex;
@@ -30,14 +38,6 @@
     &:hover {
       box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
     }
-  }
-
-  &:not(:last-child) {
-    margin-bottom: 30px;
-  }
-
-  .edit-dropdown {
-    right: 0;
   }
 
   &__wrapper {
@@ -95,6 +95,10 @@
 
     border-radius: 6px;
 
+    svg {
+      transform: rotate(180deg);
+    }
+
     &.disliked {
       color: $warning;
 
@@ -113,10 +117,6 @@
       svg {
         stroke: #fff;
       }
-    }
-
-    svg {
-      transform: rotate(180deg);
     }
   }
 }

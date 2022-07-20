@@ -8,16 +8,6 @@
   width: 100%;
   margin-bottom: 16px;
 
-  &.invalid {
-    input {
-      border-color: $warning !important;
-    }
-
-    textarea {
-      border-color: $warning !important;
-    }
-  }
-
   input {
     width: 100%;
     height: 54px;
@@ -48,6 +38,16 @@
 
     &:focus {
       border-color: $primary;
+    }
+  }
+
+  &.invalid {
+    input {
+      border-color: $warning !important;
+    }
+
+    textarea {
+      border-color: $warning !important;
     }
   }
 

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import "./CreationChecklistItemEdit.scss";
 
 import { ReactComponent as TextIcon } from "../../../assets/images/icon/text.svg";
-import { ReactComponent as ImgIcon } from "../../../assets/images/icon/img.svg";
+import { ReactComponent as ImgIcon } from "../../../assets/images/icon/imageIcon.svg";
 import { ReactComponent as MapIcon } from "../../../assets/images/icon/map.svg";
 import { ReactComponent as TrashIcon } from "../../../assets/images/icon/trash.svg";
 import { ReactComponent as LinkIcon } from "../../../assets/images/icon/link.svg";

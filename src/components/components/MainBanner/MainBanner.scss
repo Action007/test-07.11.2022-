@@ -19,6 +19,14 @@
     padding: 56px 16px 71px;
   }
 
+  .create-button {
+    @include media-breakpoint-down(md) {
+      justify-content: center;
+
+      width: 100%;
+    }
+  }
+
   &__wrap {
     width: 100%;
     max-width: 374px;
@@ -70,14 +78,6 @@
   }
 
   &__link {
-    @include media-breakpoint-down(md) {
-      justify-content: center;
-
-      width: 100%;
-    }
-  }
-
-  .create-button {
     @include media-breakpoint-down(md) {
       justify-content: center;
 

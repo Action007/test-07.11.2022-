@@ -107,18 +107,6 @@
   &__label {
     margin-bottom: 29px;
 
-    &.invalid {
-      margin-bottom: 10px;
-
-      span {
-        color: $warning;
-      }
-
-      input {
-        border-color: $warning;
-      }
-    }
-
     input {
       width: 100%;
       height: 60px;
@@ -135,6 +123,18 @@
 
       &:focus {
         border-color: $primary;
+      }
+    }
+
+    &.invalid {
+      margin-bottom: 10px;
+
+      span {
+        color: $warning;
+      }
+
+      input {
+        border-color: $warning;
       }
     }
 
