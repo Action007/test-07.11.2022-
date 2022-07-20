@@ -607,6 +607,7 @@
     "addImage": "Add image",
     "tags": "Tags",
     "desc": "Add up to 3-5 tags to describe what your checklist is about",
+    "itemsNotContainLinks": " This item type should not contain links.",
     "addTags": "Add tag",
     "preview": "Preview",
     "publish": "Publish",
