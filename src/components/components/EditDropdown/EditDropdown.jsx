@@ -31,7 +31,7 @@ const EditDropdown = ({
         unmountOnExit
       >
         <div className="edit-dropdown__menu">
-          {componentType !== "comment" && (
+          {componentType && componentType !== "comment" && (
             <button
               onClick={() => onUpdateHandler(commentID)}
               className="edit-dropdown__edit"

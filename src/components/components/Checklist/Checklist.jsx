@@ -15,6 +15,7 @@ import useMediaQuery from "../../../hooks/useMediaQuery";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
 import EditDropdown from "../EditDropdown/EditDropdown";
 import uniqueID from "../../../utils/uniqueID";
+import checkTime from "../../../utils/checkTime";
 import Complain from "../Complain/Complain";
 import PopupDelete from "../PopupDelete/PopupDelete";
 import "./Checklist.scss";
@@ -186,6 +187,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
         <EditDropdown
           onUpdateHandler={onUpdateHandler}
           onDeleteHandler={() => setModalShow(true)}
+          componentType={checkTime(created_at)}
         />
       )}
     </>
