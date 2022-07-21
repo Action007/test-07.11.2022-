@@ -5,11 +5,6 @@
   font-size: 1.2rem;
   line-height: 1.2;
 
-  &::marker {
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-
   &:not(:last-child) {
     margin-bottom: 7px;
   }
