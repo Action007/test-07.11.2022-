@@ -262,8 +262,6 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   };
 
   const showNewChecklist = () => {
-    setDone(false);
-
     if (page === "edit-checklist") {
       navigate(`/checklist/${updatedChecklist.id}/${updatedChecklist.slug}`);
     } else {
@@ -273,6 +271,17 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
 
   return (
     <>
+      <CreationChecklistPreview
+        onHide={() => setPreview(false)}
+        show={preview}
+      />
+      <PopupCreateDone
+        show={done}
+        onHide={() => setDone(false)}
+        onLookChecklist={showNewChecklist}
+        preview
+      />
+      <LoadingSpinnerPopup showSpinner={!!loadingCreate || !!loadingUpdate} />
       <div className="container creation pb-8">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <h2 className="creation__title SFPro-600">
@@ -379,12 +388,6 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
           </div>
         </div>
       </div>
-      <CreationChecklistPreview
-        onHide={() => setPreview(false)}
-        show={preview}
-      />
-      <PopupCreateDone show={done} onHide={showNewChecklist} preview />
-      <LoadingSpinnerPopup showSpinner={!!loadingCreate || !!loadingUpdate} />
     </>
   );
 };
