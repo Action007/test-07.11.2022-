@@ -302,7 +302,10 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
                 {!isNotContainLinks &&
                   translate("creationOfChecklist.isNotContainLinks")}
               </span>
-              <form className="creation__form" onSubmit={checkValidHandler}>
+              <form
+                className="creation__form"
+                onSubmit={(e) => e.preventDefault()}
+              >
                 <label
                   className={`creation__name${
                     !titleIsValid || !isNotContainLinks ? " invalid" : ""
