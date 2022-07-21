@@ -29,20 +29,6 @@
       stroke: $dark;
     }
 
-    &.active {
-      background-color: $primary;
-      border: none;
-
-      svg {
-        stroke: #fff;
-      }
-
-      &:nth-child(2)svg {
-        fill: #fff;
-        stroke: inherit;
-      }
-    }
-
     &:first-child {
       border-left: none;
       border-radius: 4px 0 0 4px;
@@ -75,6 +61,20 @@
 
     &:hover svg {
       stroke: $primary;
+    }
+
+    &.active {
+      background-color: $primary;
+      border: none;
+
+      svg {
+        stroke: #fff;
+      }
+
+      &:nth-child(2)svg {
+        fill: #fff;
+        stroke: inherit;
+      }
     }
   }
 

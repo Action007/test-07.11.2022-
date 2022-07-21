@@ -90,7 +90,8 @@
     "adult": "Adult Materials",
     "cancel": "Cancel",
     "submit": "Submit a complaint",
-    "more": "<0>Learn more</0> about the rules of Checklist"
+    "more": "<0>Learn more</0> about the rules of Checklist",
+    "invalidUrl": "Must be a valid checklist url"
   },
   "privacyPolicyPage": {
     "title": "Privacy Policy",
