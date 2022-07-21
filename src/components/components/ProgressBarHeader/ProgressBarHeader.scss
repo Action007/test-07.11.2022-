@@ -13,6 +13,10 @@
 
   transition: transform 0.09s ease;
 
+  &:active {
+    transform: scale(0.96);
+  }
+
   &__done {
     display: flex;
     align-items: center;
@@ -46,9 +50,5 @@
       background-color: #fff;
       border-radius: 50%;
     }
-  }
-
-  &:active {
-    transform: scale(0.96);
   }
 }

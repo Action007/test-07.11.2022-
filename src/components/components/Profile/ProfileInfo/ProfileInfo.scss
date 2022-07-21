@@ -193,6 +193,14 @@
       fill: $dark;
     }
 
+    &:hover {
+      color: $primary;
+
+      svg {
+        fill: $primary;
+      }
+    }
+
     &.empty {
       svg {
         opacity: 0.5;
@@ -200,14 +208,6 @@
 
       &:hover svg {
         fill: $dark;
-      }
-    }
-
-    &:hover {
-      color: $primary;
-
-      svg {
-        fill: $primary;
       }
     }
   }

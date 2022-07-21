@@ -27,11 +27,11 @@
       text-align: left;
     }
 
-    &.active {
+    &:hover {
       background-color: #efefef;
     }
 
-    &:hover {
+    &.active {
       background-color: #efefef;
     }
   }

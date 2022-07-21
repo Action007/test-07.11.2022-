@@ -47,25 +47,24 @@ const Complain = ({ closeHandler, id, name, page }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const checklistID = field.current.value.match(/\/checklist\/(\d+)/);
+    setIsEmptyCheckbox(!category);
 
-    if (field.current.value === "") {
+    if (checklistId && !changeChecklist && category) {
+      const body = {
+        checklist_id: checklistId,
+        issue_type: category,
+      };
+      supportChecklist(body);
+      return;
+    }
+    if (field.current && field.current.value === "") {
       setIsEmpty(true);
-      if (!category) setIsEmptyCheckbox(true);
       return;
     }
-    if (field.current.value !== "") {
-      if (!category) setIsEmptyCheckbox(true);
+    if (field.current && field.current.value !== "") {
+      const checklistID = field.current.value.match(/\/checklist\/(\d+)/);
       if (!checklistID) setIsValidLink(true);
-      return;
     }
-
-    const body = {
-      checklist_id: checklistId,
-      issue_type: category,
-    };
-
-    supportChecklist(body);
   };
 
   const onChangeHandler = () => {
@@ -86,6 +85,25 @@ const Complain = ({ closeHandler, id, name, page }) => {
   return (
     <>
       <LoadingSpinnerPopup showSpinner={isSendLoading} />
+      {done && page !== "support" && (
+        <ComplainDone closeHandler={closeHandler} translate={translate} />
+      )}
+      {page === "support" && (
+        <Modal
+          className="popup-complain"
+          show={showDone}
+          onHide={setShowDone}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter" />
+          </Modal.Header>
+          <Modal.Body>
+            <ComplainDone closeHandler={closeHandler} translate={translate} />
+          </Modal.Body>
+        </Modal>
+      )}
       {showComplain && (
         <div className="complain bg-white br-8">
           <div className="complain__wrap d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
@@ -241,25 +259,6 @@ const Complain = ({ closeHandler, id, name, page }) => {
             </div>
           </form>
         </div>
-      )}
-      {done && page !== "support" && (
-        <ComplainDone closeHandler={closeHandler} translate={translate} />
-      )}
-      {page === "support" && (
-        <Modal
-          className="popup-complain"
-          show={showDone}
-          onHide={setShowDone}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter" />
-          </Modal.Header>
-          <Modal.Body>
-            <ComplainDone closeHandler={closeHandler} translate={translate} />
-          </Modal.Body>
-        </Modal>
       )}
     </>
   );

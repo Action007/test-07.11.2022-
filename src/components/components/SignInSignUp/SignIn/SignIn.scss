@@ -47,14 +47,6 @@
       max-width: 100%;
     }
 
-    &.active {
-      font-family: SFPro-Medium, sans-serif;
-      color: #fff;
-
-      background-color: $primary;
-      border-color: transparent;
-    }
-
     &:first-child {
       border-right: none;
       border-radius: 8px 0 0 8px;
@@ -63,6 +55,14 @@
     &:last-child {
       border-left: none;
       border-radius: 0 8px 8px 0;
+    }
+
+    &.active {
+      font-family: SFPro-Medium, sans-serif;
+      color: #fff;
+
+      background-color: $primary;
+      border-color: transparent;
     }
   }
 
@@ -122,6 +122,10 @@
       }
     }
 
+    &:last-child {
+      margin-bottom: 37px;
+    }
+
     &.invalid {
       margin-bottom: 10px;
 
@@ -132,10 +136,6 @@
       input {
         border-color: $warning;
       }
-    }
-
-    &:last-child {
-      margin-bottom: 37px;
     }
   }
 
