@@ -61,10 +61,10 @@ const CategorySidebar = () => {
     setActive(id);
     setShowAccordion(false);
     searchParams.delete("page");
-    searchParams.append("page", 1);
     searchParams.delete("search_category_ids[]");
     searchParams.delete("latest");
     searchParams.delete("popular");
+    searchParams.append("page", 1);
 
     if (id === "all") {
       if (!search) {
