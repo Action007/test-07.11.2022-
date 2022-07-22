@@ -9,6 +9,7 @@ import {
 import useClickOutside from "../../../hooks/useClickOutside";
 import TagListSearch from "../TagListSearch/TagListSearch";
 import uniqueID from "../../../utils/uniqueID";
+import getTag from "../../../utils/getTag";
 import "./SearchInput.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
@@ -66,16 +67,22 @@ const SearchInput = ({ page = false, header }) => {
   }, [search]);
 
   const onChangeSearchValue = (value) => {
-    const isTag = value.trim().match(/^#/g);
-    const tagVal = value.replace(/^#/g, "");
+    const searchValueUrl = searchParams.get("search_value");
     setSearchValue(value);
+    if (!value && searchValueUrl) {
+      searchParams.delete("search_value");
+      setSearchParams(searchParams);
+    }
+    const isTag = value.match(/^#[\s\S]*$/g);
+    const isTagWithSearchValue = value.match(/[\s]* #[\s\S]*$/g);
 
-    if (value.trim() === "" || !isTag) {
+    if (!isTag && !isTagWithSearchValue) {
       setTagUrl("");
       setShow(false);
     } else if (searchTags) {
+      const tagVal = getTag(value);
       if (!searchTags.length) {
-        if (tagVal === tagUrl.slice(0, -1) || tagVal.trim().length === 1) {
+        if (tagVal === tagUrl.slice(0, -1) || !tagVal) {
           setShow(true);
           setTagUrl(tagVal);
         }
@@ -84,7 +91,10 @@ const SearchInput = ({ page = false, header }) => {
         setTagUrl(tagVal);
       }
     } else {
-      setTagUrl(tagVal);
+      const tagValue = isTag
+        ? isTag[0].substring(1)
+        : isTagWithSearchValue[0].match(/#[\s\S]*$/g)[0].substring(1);
+      setTagUrl(tagValue);
       setShow(true);
     }
   };
@@ -92,13 +102,17 @@ const SearchInput = ({ page = false, header }) => {
   const addTagHandler = (tag) => {
     if (serverTags?.length === 5 && serverTags) return;
     if (!tag || !tag.name.trim()) return;
+    const searchVal = searchValue
+      .replace(/[\s]* #[\s\S]*$/g, "")
+      .replace(/^#[\s\S]*$/g, "");
 
+    setSearchValue(searchVal);
     setTagUrl("");
     setShow(false);
-    setSearchValue("");
     if (pathname === "/") {
+      searchParams.delete("search_value");
+      if (searchVal) searchParams.append("search_value", searchVal);
       searchParams.append("search_tag_ids[]", tag.id);
-
       if (!search) {
         setSearchParams(`?page=1&per_page=5&${searchParams}`);
       } else {
@@ -117,36 +131,35 @@ const SearchInput = ({ page = false, header }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    const isTag = searchValue.match(/^#[\s\S]*$/g);
+    const isTagWithSearchValue = searchValue.match(/[\s]* #[\s\S]*$/g);
+    if (isTag || isTagWithSearchValue) return;
 
-    const isTag = searchValue.trim().match(/^#/g);
-    if (isTag) {
-      setSearchValue("");
-    } else {
-      if (pathname === "/") {
-        if (searchValue) {
-          if (!search) {
-            setSearchParams(
-              `?page=1&per_page=5&${changeSearchParamsValue(
-                searchParams,
-                "search_value",
-                searchValue
-              )}`
-            );
-          } else {
-            setSearchParams(
-              changeSearchParamsValue(searchParams, "search_value", searchValue)
-            );
-          }
+    const searchVal = searchValue.replace(/[\s]* #[\s\S]*$/g, "");
+    if (pathname === "/") {
+      if (searchVal) {
+        if (!search) {
+          setSearchParams(
+            `?page=1&per_page=5&${changeSearchParamsValue(
+              searchParams,
+              "search_value",
+              searchVal
+            )}`
+          );
         } else {
-          searchParams.delete("search_value");
-          setSearchParams(searchParams);
+          setSearchParams(
+            changeSearchParamsValue(searchParams, "search_value", searchVal)
+          );
         }
       } else {
-        navigate(`/?per_page=5&page=1&search_value=${searchValue}`);
+        searchParams.delete("search_value");
+        setSearchParams(searchParams);
       }
-      if (header) {
-        setSearchValue("");
-      }
+    } else {
+      navigate(`/?per_page=5&page=1&search_value=${searchVal}`);
+    }
+    if (header) {
+      setSearchValue("");
     }
   };
 
@@ -179,7 +192,10 @@ const SearchInput = ({ page = false, header }) => {
         <SearchSvg />
         <input
           onChange={(e) => onChangeSearchValue(e.target.value)}
-          onFocus={() => setBlur((prevState) => !prevState)}
+          onFocus={(e) => {
+            onChangeSearchValue(e.target.value);
+            setBlur((prevState) => !prevState);
+          }}
           onBlur={() => setBlur((prevState) => !prevState)}
           value={searchValue}
           className="search-input__input border-0 SFPro-400"
