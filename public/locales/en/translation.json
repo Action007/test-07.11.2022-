@@ -627,7 +627,8 @@
     "imageHover": "Image",
     "locationHover": "Location",
     "deleteHover": "Delete",
-    "edit": "Edit Checklist"
+    "edit": "Edit Checklist",
+    "notImage": "Invalid format"
   },
   "sidebar": {
     "select": "Select a category",
