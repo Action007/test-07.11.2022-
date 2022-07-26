@@ -251,7 +251,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
               </span>
               <div className="checklist__buttons">
                 <button
-                  onClick={setLikeHandler}
+                  onClick={token ? setLikeHandler : loginHandler}
                   className={likeClass}
                   type="button"
                 >
@@ -259,7 +259,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
                   {finalLikeAmount}
                 </button>
                 <button
-                  onClick={setDislikeHandler}
+                  onClick={token ? setDislikeHandler : loginHandler}
                   className={dislikeClass}
                   type="button"
                 >
