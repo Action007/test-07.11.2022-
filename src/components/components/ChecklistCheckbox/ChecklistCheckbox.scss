@@ -22,7 +22,7 @@
   &__label input:checked ~ &__checkmark::after {
     display: block;
 
-    background-image: url('../../../assets/images/icon/checkboxActive.svg');
+    background-image: url('../../../assets/images/icon/tick.svg');
   }
 
   &__label input:checked ~ &__num,
@@ -37,7 +37,6 @@
     width: 12px;
     height: 12px;
 
-    background-image: url('../../../assets/images/icon/tick.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
