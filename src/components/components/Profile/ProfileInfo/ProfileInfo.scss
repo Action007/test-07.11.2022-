@@ -174,6 +174,7 @@
 
   &__networks {
     display: flex;
+    margin-top: 40px;
   }
 
   &__network {
@@ -200,24 +201,9 @@
         fill: $primary;
       }
     }
-
-    &.empty {
-      svg {
-        opacity: 0.5;
-      }
-
-      &:hover svg {
-        fill: $dark;
-      }
-    }
   }
 
   &__network--website {
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
     a {
       display: flex;
       align-items: center;
@@ -232,18 +218,10 @@
   }
 
   &__link {
-    overflow: hidden;
     display: inline-block;
-
-    max-width: 170px;
-
-    word-break: initial;
-    white-space: nowrap;
   }
 
   &__text {
-    margin-bottom: 40px;
-
     @include media-breakpoint-down(sm) {
       margin-bottom: 35px;
     }
