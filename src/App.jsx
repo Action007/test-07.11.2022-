@@ -11,8 +11,7 @@ import "leaflet/dist/leaflet.css";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { pathname } = useLocation();
-  const { search } = useLocation();
+  const { pathname, search } = useLocation();
 
   useEffect(() => {
     dispatch(authSliceActions.tokenVerification());

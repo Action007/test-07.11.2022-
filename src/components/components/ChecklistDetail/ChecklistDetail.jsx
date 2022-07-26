@@ -230,7 +230,7 @@ const ChecklistDetail = ({
                 </span>
                 <div className="checklist-detail__buttons">
                   <button
-                    onClick={setLikeHandler}
+                    onClick={token ? setLikeHandler : loginHandler}
                     className={likeClass}
                     type="button"
                   >
@@ -238,7 +238,7 @@ const ChecklistDetail = ({
                     {finalLikeAmount}
                   </button>
                   <button
-                    onClick={setDislikeHandler}
+                    onClick={token ? setDislikeHandler : loginHandler}
                     className={dislikeClass}
                     type="button"
                   >
