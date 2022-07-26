@@ -34,6 +34,7 @@ const CreationChecklistItem = ({
   const dispatch = useDispatch();
   const { t: translate } = useTranslation();
   const { ref, show, setShow } = useClickOutside(true);
+  const [isImgSmall, setIsImgSmall] = useState(true);
   const [isImgValid, setIsImgValid] = useState(true);
   const textInput = useRef(null);
   const isLinkValid = validateLink(value.link);
@@ -72,9 +73,18 @@ const CreationChecklistItem = ({
 
   const onUpdateImageHandler = (event) => {
     const image = event.target.files[0];
+    const file = image;
+    const pattern = /image-*/;
+
+    if (!file.type.match(pattern)) {
+      setIsImgValid(false);
+      setIsImgSmall(true);
+      return;
+    }
+    setIsImgValid(true);
 
     if (image.size > 2e6) {
-      setIsImgValid(false);
+      setIsImgSmall(false);
     } else {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
@@ -87,24 +97,31 @@ const CreationChecklistItem = ({
           })
         );
       };
-      setIsImgValid(true);
+      setIsImgSmall(true);
     }
   };
 
   const selectImg = (
     <>
-      {!isImgValid && (
+      {!isImgSmall && (
         <span className="creation-item__invalid image">
           {translate("creationOfChecklist.2mb")}
         </span>
       )}
+      {!isImgValid && (
+        <span className="creation-item__invalid image">
+          {translate("creationOfChecklist.notImage")}
+        </span>
+      )}
       <label
-        className={`creation-item__img${!isImgValid ? " invalid" : ""}`}
+        className={`creation-item__img${
+          !isImgSmall || !isImgValid ? " invalid" : ""
+        }`}
         htmlFor={id + 2}
       >
         <input
           type="file"
-          accept="image/png, image/jpeg, image/jpg"
+          accept="image/png, image/gif, image/jpeg"
           onChange={(event) => onUpdateImageHandler(event)}
           id={id + 2}
         />
