@@ -91,7 +91,7 @@
     "cancel": "Cancel",
     "submit": "Submit a complaint",
     "more": "<0>Learn more</0> about the rules of Checklist",
-    "invalidUrl": "Must be a valid checklist url"
+    "invalidUrl": "Must be a valid checklist url*"
   },
   "privacyPolicyPage": {
     "title": "Privacy Policy",
@@ -604,6 +604,7 @@
     "maxItem": "Minimum 2 and Maximum 150 characters",
     "2mb": "File size must not be more than 2Mb",
     "itemsNotContainLinks": " This item type should not contain links.",
+    "tagIncludesLink": ". Tag should not contain links",
     "passed": "Passed",
     "points": "Checklist points",
     "text": "Include all the information someone might need to make your checklist popular.",
@@ -711,12 +712,17 @@
     "error": "Server Error"
   },
   "profilePage": {
+    "profile": "Profile",
+    "2mb": "There was a problem updating your profile, file size must not be more than 2Mb",
     "myProfile": "My profile",
     "editProfile": "Edit Profile",
     "aboutMe": "About me",
+    "about": "About",
     "myAwards": "My awards",
+    "awards": "Awards",
     "completedChecklists": "Completed checklists",
     "createdChecklists": "Created checklists",
+    "myEmptyAwards": "You don't have an awards yet..",
     "emptyAwards": "You don't have an awards yet..",
     "emptyBio": "Add a little description about yourself so that more people get to know you and your experience",
     "country": "Country"
@@ -745,6 +751,7 @@
     "oldPassword": "Old Password",
     "newPassword": "New Password",
     "confirmPassword": "Confirm Password",
+    "passwordMatch": "The password entered is already in use",
     "minimum": "Minimum 8 characters",
     "invalid": "The new passwords don't match",
     "incorrect": "Incorrect password",

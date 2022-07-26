@@ -626,6 +626,21 @@ const PrivacyPolicy = () => {
             </ul>
             <div className="policy__texts">
               <p>{translate("privacyPolicyPage.section11.text10")}</p>
+              <p>
+                <Trans
+                  i18nKey="privacyPolicyPage.section11.text11"
+                  t={translate}
+                  components={[
+                    <span className="SFPro-600" />,
+                    <a
+                      className="policy__link"
+                      href="http://www.aboutads.info/choices"
+                      target="_blank"
+                      rel="noreferrer"
+                    />,
+                  ]}
+                />
+              </p>
               <p>{translate("privacyPolicyPage.section11.text12")}</p>
             </div>
           </li>
