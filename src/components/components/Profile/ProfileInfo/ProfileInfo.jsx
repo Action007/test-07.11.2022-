@@ -34,12 +34,7 @@ const ProfileInfo = ({
   const { t: translate } = useTranslation();
   const [editAccount, { isLoading: isUpdateLoading, error, data }] =
     checklistAPI.useEditAccountMutation();
-
-  let host;
-  if (website) {
-    const websiteHostName = new URL(website);
-    host = websiteHostName.hostname;
-  }
+  const host = website ? new URL(website).hostname : "";
 
   const onLoad = (event) => {
     const reader = new FileReader();
@@ -104,54 +99,46 @@ const ProfileInfo = ({
           >
             {bio.length !== 0 ? bio : translate("profilePage.emptyBio")}
           </p>
-          {facebook || twitter || instagram || website ? (
-            <ul className="profile-info__networks">
-              {facebook && (
-                <li className="profile-info__network">
-                  <a href={facebook} target="_blank" rel="noreferrer">
-                    <Facebook />
-                  </a>
-                </li>
-              )}
-              {twitter && (
-                <li className="profile-info__network">
-                  <a href={twitter} target="_blank" rel="noreferrer">
-                    <Twitter />
-                  </a>
-                </li>
-              )}
-              {instagram && (
-                <li className="profile-info__network">
-                  <a href={instagram} target="_blank" rel="noreferrer">
-                    <Instagram />
-                  </a>
-                </li>
-              )}
-              {website && (
-                <li className="profile-info__network profile-info__network--website">
-                  <a href={website} target="_blank" rel="noreferrer">
-                    <World />
-                    <span className="profile-info__link">{host}</span>
-                  </a>
-                </li>
-              )}
-            </ul>
-          ) : (
-            <ul className="profile-info__networks">
-              <li className="profile-info__network empty">
-                <Facebook />
-              </li>
-              <li className="profile-info__network empty">
-                <Twitter />
-              </li>
-              <li className="profile-info__network empty">
-                <Instagram />
-              </li>
-              <li className="profile-info__network profile-info__network--website empty">
-                <World />
-              </li>
-            </ul>
-          )}
+          {!!facebook ||
+            !!twitter ||
+            !!instagram ||
+            (!!website && (
+              <ul className="profile-info__networks">
+                {facebook && (
+                  <li className="profile-info__network">
+                    <a href={facebook} target="_blank" rel="noreferrer">
+                      <Facebook />
+                    </a>
+                  </li>
+                )}
+                {twitter && (
+                  <li className="profile-info__network">
+                    <a href={twitter} target="_blank" rel="noreferrer">
+                      <Twitter />
+                    </a>
+                  </li>
+                )}
+                {instagram && (
+                  <li className="profile-info__network">
+                    <a href={instagram} target="_blank" rel="noreferrer">
+                      <Instagram />
+                    </a>
+                  </li>
+                )}
+                {website && (
+                  <li className="profile-info__network profile-info__network--website">
+                    <a href={website} target="_blank" rel="noreferrer">
+                      <World />
+                      <span className="profile-info__link">
+                        {host.length > 20
+                          ? `${host.substring(0, 21)}...`
+                          : host}
+                      </span>
+                    </a>
+                  </li>
+                )}
+              </ul>
+            ))}
         </div>
         {pathname === "/my-profile" && (
           <div className="profile-info__edit">
