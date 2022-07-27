@@ -65,6 +65,14 @@ export const checklistAPI = createApi({
       }),
       invalidatesTags: ["Checklist", "Account"],
     }),
+    signInWithGoogle: build.mutation({
+      query: (body) => ({
+        url: `/api/v1/auth/google/callback`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Checklist", "Account"],
+    }),
     logOut: build.mutation({
       query: () => ({
         url: "/api/v1/users/logout",
