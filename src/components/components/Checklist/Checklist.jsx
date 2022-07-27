@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useState } from "react";
 import {
   Link,
@@ -38,6 +39,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
     tags,
     user_track,
     viewed,
+    completed,
   } = checklist;
   const token = useSelector((state) => state.authSliceReducer.token);
 
@@ -59,8 +61,8 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
   const checklistItem = checklist_items.map((item) =>
     item.list_type !== "text" ? { ...item, list_type: "text" } : item
   );
-  const fiveItems = checklistItem.slice(0, 5);
-  const moreThanFive = checklist_items.length > 5;
+  const fiveItems =
+    checklist_items.length > 5 ? checklistItem.slice(0, 5) : checklistItem;
 
   const [iSaved, setISaved] = useState(user_track?.saved);
   const savedClass = `checklist__bookmark${iSaved ? " saved" : ""}`;
@@ -147,7 +149,9 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
 
   const head = (
     <>
-      <h3 className="checklist__title SFPro-700">
+      <h3
+        className={`checklist__title SFPro-700${completed ? " completed" : ""}`}
+      >
         <Link
           to={`/${
             page !== "my-active-checklists" ? "checklist" : "active-checklist"
@@ -198,23 +202,15 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
       <div className="checklist">
         <div className="checklist__heading">{head}</div>
         <ol className="checklist__items">
-          {moreThanFive
-            ? fiveItems.map(({ description, list_type, value }) => (
-                <ChecklistItem
-                  key={uniqueID()}
-                  description={description}
-                  list_type={list_type}
-                  value={value}
-                />
-              ))
-            : checklistItem.map(({ description, list_type, value }) => (
-                <ChecklistItem
-                  key={uniqueID()}
-                  description={description}
-                  list_type={list_type}
-                  value={value}
-                />
-              ))}
+          {fiveItems.map(({ description, list_type, value, completed }) => (
+            <ChecklistItem
+              key={uniqueID()}
+              description={description}
+              list_type={list_type}
+              value={value}
+              completed={completed}
+            />
+          ))}
         </ol>
         <Link
           className="checklist__dots SFPro-600"

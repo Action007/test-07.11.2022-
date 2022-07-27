@@ -15,6 +15,11 @@
     margin-bottom: 4px;
   }
 
+  &.completed {
+    color: $primary;
+    text-decoration: line-through;
+  }
+
   p {
     margin-bottom: 0;
   }

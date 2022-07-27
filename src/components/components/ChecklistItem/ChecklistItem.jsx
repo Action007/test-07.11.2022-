@@ -7,12 +7,18 @@ import "./ChecklistItem.scss";
 
 import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg";
 
-const ChecklistItem = ({ description, list_type, value, preview }) => {
+const ChecklistItem = ({
+  description,
+  list_type,
+  value,
+  preview,
+  completed,
+}) => {
   const [showMap, setShowMap] = useState(false);
   const { t: translate } = useTranslation();
 
   return (
-    <li className="checklist-item">
+    <li className={`checklist-item${completed ? " completed" : ""}`}>
       <p>
         {description}
         {list_type === "link" && (
