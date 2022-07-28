@@ -40,6 +40,10 @@
     box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
   }
 
+  .leaflet-touch .leaflet-control-geocoder {
+    top: 0;
+  }
+
   .leaflet-bar a {
     color: #a3a3a3;
 

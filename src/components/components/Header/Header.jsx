@@ -93,7 +93,7 @@ const Header = () => {
           type="button"
         >
           <Plus />
-          Create
+          {translate("header.create")}
         </button>
       )}
     </>

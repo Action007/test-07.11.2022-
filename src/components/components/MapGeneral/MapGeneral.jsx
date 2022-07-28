@@ -16,9 +16,13 @@ const MapGeneral = ({ setShowMap, coordinates, page, variant, id }) => {
       <MapContainer
         center={coordinates || { lat: 46.3984613, lon: 33.4627281 }}
         zoom={2}
-        minZoom={1}
+        minZoom={variant === "modal" ? 3 : 1}
         scrollWheelZoom={1}
-        worldCopyJump
+        maxBounds={[
+          [-90, -175],
+          [90, 200],
+        ]}
+        maxBoundsViscosity={1}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

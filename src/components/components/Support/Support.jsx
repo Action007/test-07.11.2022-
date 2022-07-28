@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -36,7 +34,7 @@ const Support = () => {
                 className="checklist-button"
                 type="button"
               >
-                Complain
+                {translate("supportPage.button")}
               </button>
             </div>
             <p className="support__text SFPro-300 display-7 mb-5">
@@ -44,6 +42,7 @@ const Support = () => {
                 i18nKey="supportPage.text1"
                 t={translate}
                 components={[
+                  // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
                   <a href="mailto:support@checklists.com?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please..." />,
                 ]}
               />
@@ -53,6 +52,7 @@ const Support = () => {
                 i18nKey="supportPage.text2"
                 t={translate}
                 components={[
+                  // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
                   <a href="mailto:support@checklists.com?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please..." />,
                 ]}
               />
