@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Marker, useMap } from "react-leaflet";
 import Leaflet from "leaflet";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 import getAverage from "../../../utils/getAverage";
 
 import MapImg from "../../../assets/images/icon/location.png";
 
 const LocationMarker = ({ show, coordinates }) => {
   const [userLocation, setUserLocation] = useState(null);
+  const onMobile = useMediaQuery("(max-width:991px)");
   const { pathname } = useLocation();
   const map = useMap();
 
   const myIcon = Leaflet.icon({
     iconUrl: MapImg,
-    iconSize: [30, 30], // size of the icon
-    iconAnchor: [15, 20], // point of the icon which will correspond to marker's location
+    iconSize: [30, 30],
+    iconAnchor: [15, 20],
   });
 
   const showLocationAndMarker = (latLng) => {
@@ -25,6 +27,8 @@ const LocationMarker = ({ show, coordinates }) => {
     const difference = Math.abs(location - coordinate);
     let zoom;
 
+    if (onMobile && difference > 20) return;
+    if (difference > 40) return;
     if (difference) zoom = 10;
     if (difference > 0.5) zoom = 5;
     if (difference > 1) zoom = 4;
