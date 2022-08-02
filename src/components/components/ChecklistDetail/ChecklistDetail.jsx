@@ -85,11 +85,6 @@ const ChecklistDetail = ({
     ) {
       setIsError(true);
       setNotification(true);
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
       showNotification = setTimeout(() => setNotification(false), 5000);
     }
 

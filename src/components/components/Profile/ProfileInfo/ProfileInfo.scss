@@ -1,6 +1,6 @@
-@import "../../../../global-styles/variables";
-@import "../../../../global-styles/mixins";
-@import "../../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../../global-styles/variables';
+@import '../../../../global-styles/mixins';
+@import '../../../../../node_modules/bootstrap/scss/mixins';
 
 .profile-info {
   display: flex;
@@ -56,8 +56,6 @@
   }
 
   &__edit-btn {
-    cursor: pointer;
-
     position: relative;
 
     width: 100%;
@@ -69,6 +67,10 @@
       max-width: 83px;
       height: 83px;
       margin-right: 19px;
+    }
+
+    &.pointer {
+      cursor: pointer;
     }
 
     svg {
@@ -111,7 +113,7 @@
       width: 100%;
       height: 100%;
 
-		  object-fit: cover;
+      object-fit: cover;
     }
 
     svg {

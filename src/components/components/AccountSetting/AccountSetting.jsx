@@ -51,11 +51,6 @@ const AccountSetting = () => {
     let showNotification;
     if (isSuccess) {
       setNotification(true);
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      });
       if (isSuccess) song.play();
       showNotification = setTimeout(() => setNotification(false), 5000);
     }

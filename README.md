@@ -1,4 +1,6 @@
-REPLACE .env.example WITH .env
+### REPLACE .env.example WITH .env
+
+### Delete REACT_APP_HOSTNAME inside .env file when run on server
 
 ### `npm start`
 

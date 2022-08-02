@@ -16,10 +16,19 @@ const ProfilePage = () => {
     data: user,
     isLoading,
     isError,
+    error,
   } = checklistAPI.useFetchUserProfileQuery(nickname, {
     skip: !nickname,
   });
   const myProfile = useSelector((state) => state.authSliceReducer.user);
+
+  useEffect(() => {
+    if (error && error?.data?.message[0]?.type === "invalid") {
+      navigate("/not-found");
+    } else if (isError) {
+      navigate("/error");
+    }
+  }, [isError]);
 
   useEffect(() => {
     if (!token && !nickname) navigate("/sign-in");
