@@ -59,12 +59,15 @@ const SearchInput = ({ page = false, header }) => {
       const searchValueUrl = searchParams.get("search_value");
       if (searchValueUrl) {
         setSearchValue(searchValueUrl);
-        focusRef.current.focus();
       } else {
         setSearchValue("");
       }
     }
   }, [search]);
+
+  useEffect(() => {
+    if (page === "home" && searchValue) focusRef.current.focus();
+  }, [searchValue]);
 
   const onChangeSearchValue = (value) => {
     const searchValueUrl = searchParams.get("search_value");
@@ -82,7 +85,7 @@ const SearchInput = ({ page = false, header }) => {
     } else if (searchTags) {
       const tagVal = getTag(value);
       if (!searchTags.length) {
-        if (tagVal === tagUrl.slice(0, -1) || !tagVal) {
+        if (tagVal === tagUrl.slice(0, -1) || tagVal.trim().length === 1) {
           setShow(true);
           setTagUrl(tagVal);
         }
@@ -91,10 +94,8 @@ const SearchInput = ({ page = false, header }) => {
         setTagUrl(tagVal);
       }
     } else {
-      const tagValue = isTag
-        ? isTag[0].substring(1)
-        : isTagWithSearchValue[0].match(/#[\s\S]*$/g)[0].substring(1);
-      setTagUrl(tagValue);
+      const tagVal = getTag(value);
+      setTagUrl(tagVal);
       setShow(true);
     }
   };
@@ -139,13 +140,8 @@ const SearchInput = ({ page = false, header }) => {
     if (pathname === "/") {
       if (searchVal) {
         if (!search) {
-          setSearchParams(
-            `?page=1&per_page=5&${changeSearchParamsValue(
-              searchParams,
-              "search_value",
-              searchVal
-            )}`
-          );
+          searchParams.append("search_value", searchVal);
+          setSearchParams(`?page=1&per_page=5&${searchParams}`);
         } else {
           setSearchParams(
             changeSearchParamsValue(searchParams, "search_value", searchVal)
