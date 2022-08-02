@@ -6,9 +6,10 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfileAwards from "./ProfileAwards/ProfileAwards";
 import ProfileSkeleton from "../../UI/ProfileSkeleton/ProfileSkeleton";
 import "./Profile.scss";
+import Notification from "../../UI/Notification/Notification";
 
 const Profile = ({ user, isLoading }) => {
-  const [showError, setShowError] = useState("");
+  const [showError, setShowError] = useState(false);
   const { pathname } = useLocation();
   const { t: translate } = useTranslation();
 
@@ -21,17 +22,17 @@ const Profile = ({ user, isLoading }) => {
     },
   ];
 
-  const checkErrorHandler = () => {
-    setShowError("show");
-    setTimeout(() => setShowError(""), 8000);
+  const onLargeImageSize = () => {
+    setShowError(true);
+    setTimeout(() => setShowError(false), 8000);
   };
 
   return (
     <>
       {showError && (
-        <div className="error SFPro-500">{translate("profilePage.2mb")}</div>
+        <Notification translate={translate("profilePage.2mb")} isError />
       )}
-      <div className={`profile container ${showError}`}>
+      <div className={`profile container${showError ? " show" : ""}`}>
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         {user && (
           <>
@@ -45,7 +46,7 @@ const Profile = ({ user, isLoading }) => {
               twitter={user.twitter}
               instagram={user.instagram}
               avatar_url={user.avatar_url}
-              errorSize={checkErrorHandler}
+              onLargeImageSize={onLargeImageSize}
             />
             <ProfileAwards
               completedCounter={user.completed_counter}

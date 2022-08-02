@@ -24,33 +24,45 @@ const ProfileInfo = ({
   twitter,
   instagram,
   avatar_url,
-  errorSize,
+  onLargeImageSize,
 }) => {
   const user = useSelector((state) => state.authSliceReducer.user);
   const [avatar, setAvatar] = useState(avatar_url);
   const { pathname } = useLocation();
-
+  const isMyProfile = pathname === "/my-profile";
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
-  const [editAccount, { isLoading: isUpdateLoading, error, data }] =
+  const [imageUpload, { isLoading: isUpdateLoading, isError, error, data }] =
     checklistAPI.useEditAccountMutation();
   const host = website ? new URL(website).hostname : "";
 
-  const onLoad = (event) => {
+  const onImageUpload = (event) => {
+    const image = event.target.files[0];
+    if (image.size > 2e6) {
+      onLargeImageSize();
+      return;
+    }
+
     const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(image);
     reader.onload = () => {
-      const image = reader.result;
-      editAccount({
-        avatar: image,
+      imageUpload({
+        avatar: reader.result,
       });
     };
   };
 
   useEffect(() => {
-    if (error) errorSize();
+    if (error && error.data.message[0].type === "file_size_out_of_range") {
+      onLargeImageSize();
+    } else if (isError) {
+      navigate("/error");
+    }
+  }, [error]);
+
+  useEffect(() => {
     if (data) setAvatar(data.avatar_url);
-  }, [error, data]);
+  }, [data]);
 
   return (
     <>
@@ -58,18 +70,27 @@ const ProfileInfo = ({
       <div className="profile-info">
         <div className="profile-info__inner">
           <div className="profile-info__box">
-            <label className="profile-info__edit-btn" htmlFor="uploadImg">
+            <label
+              className={`profile-info__edit-btn${
+                isMyProfile ? " pointer" : ""
+              }`}
+              htmlFor="uploadImg"
+            >
               <div className="profile-info__img">
                 {avatar ? <img src={avatar} alt="account" /> : <EmptySvg />}
               </div>
-              <EditSvg />
-              <input
-                type="file"
-                accept="image/png, image/jpeg, image/jpg"
-                onChange={onLoad}
-                className="profile-info__input"
-                id="uploadImg"
-              />
+              {isMyProfile && (
+                <>
+                  <EditSvg />
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg, image/jpg"
+                    onChange={onImageUpload}
+                    className="profile-info__input"
+                    id="uploadImg"
+                  />
+                </>
+              )}
             </label>
             <div>
               {name && (
@@ -90,7 +111,7 @@ const ProfileInfo = ({
           <span
             className={`profile-info__span${bio.length === 0 ? " empty" : ""}`}
           >
-            {pathname === "/my-profile"
+            {isMyProfile
               ? translate("profilePage.aboutMe")
               : translate("profilePage.about")}
           </span>
@@ -140,7 +161,7 @@ const ProfileInfo = ({
               </ul>
             ))}
         </div>
-        {pathname === "/my-profile" && (
+        {isMyProfile && (
           <div className="profile-info__edit">
             <button
               onClick={() => navigate(`/edit-profile`)}

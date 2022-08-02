@@ -1,5 +1,5 @@
-@import "../../../../global-styles/variables";
-@import "../../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../../global-styles/variables';
+@import '../../../../../node_modules/bootstrap/scss/mixins';
 
 .create-button {
   display: flex;
@@ -16,6 +16,10 @@
   border-radius: 6px;
 
   transition: all 0.3s ease, transform 0.09s ease;
+
+  @include media-breakpoint-down(sm) {
+    padding: 13px 50px 13px 35px;
+  }
 
   svg {
     margin-right: 11px;
