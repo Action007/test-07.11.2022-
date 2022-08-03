@@ -73,38 +73,6 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   }, [pathname]);
 
   useEffect(() => {
-    const tagsIsValid = tags.length > 2;
-    const tagNameIncludesLink = tags.find((tag) => tag.name.includes("://"));
-    const isDescriptionValid = checklist_items.find(
-      (item) =>
-        item.description.trim().length < 3 ||
-        item.description.trim().length > 150
-    );
-    const itemsNotContainLinks = checklist_items.findIndex((item) =>
-      item.description.includes("://")
-    );
-    const isLinksValid = checklist_items.findIndex((item) =>
-      item.value?.link ? validateLink(item.value.link) : true
-    );
-    const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
-    const titleNotContainLinks = !title.includes("://");
-    const categoryIsValid = categoryID !== "" && categoryID !== false;
-
-    const validOrNot =
-      checklist_items.length &&
-      !isDescriptionValid &&
-      itemsNotContainLinks &&
-      isValidTitle &&
-      titleNotContainLinks &&
-      tagsIsValid &&
-      !tagNameIncludesLink &&
-      !isLinksValid &&
-      categoryIsValid;
-
-    setValidButton(!!validOrNot);
-  }, [tags, title, checklist_items, categoryID]);
-
-  useEffect(() => {
     if (successCreate || successUpdate) {
       dispatch(createChecklistActions.onSubmitClear());
       setDone(true);
@@ -113,24 +81,61 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     }
   }, [successCreate, successUpdate, errorCreate, errorUpdate]);
 
-  const checkValidHandler = (e) => {
-    if (e) e.preventDefault();
+  const checkInputsHandler = () => {
     const tagsIsValid = tags.length > 2;
     const tagNameIncludesLink = tags.find((tag) => tag.name.includes("://"));
-    const isDescriptionValid = checklist_items.find(
+    const isDescriptionInvalid = checklist_items.find(
       (item) =>
         item.description.trim().length < 3 ||
         item.description.trim().length > 150
     );
-    const itemsNotContainLinks = checklist_items.findIndex((item) =>
+    const itemsNotContainLinks = checklist_items.find((item) =>
       item.description.includes("://")
     );
-    const isLinksValid = checklist_items.findIndex((item) =>
-      item.value?.link ? validateLink(item.value.link) : true
+    const isLinksInValid = checklist_items.find((item) =>
+      item.value?.link !== undefined ? !validateLink(item.value?.link) : false
     );
-    const isValidTitle = title.trim().length > 9 && title.trim().length < 151;
+    const isEmptyImage = checklist_items.find((item) =>
+      item.list_type === "image" ? !item.value.image : false
+    );
+    const isEmptyCoordinate = checklist_items.find((item) =>
+      item.list_type === "coordinates" ? !item.value.coordinates : false
+    );
+    const isInvalidTitle =
+      title.trim().length < 10 || title.trim().length > 150;
     const titleNotContainLinks = !title.includes("://");
     const categoryIsValid = categoryID !== "";
+
+    const validOrNot =
+      !!checklist_items.length &&
+      !isDescriptionInvalid &&
+      !itemsNotContainLinks &&
+      !isInvalidTitle &&
+      !!titleNotContainLinks &&
+      !!tagsIsValid &&
+      !tagNameIncludesLink &&
+      !isLinksInValid &&
+      !isEmptyImage &&
+      !isEmptyCoordinate &&
+      !!categoryIsValid;
+
+    return {
+      validOrNot: !!validOrNot,
+      tagsIsValid,
+      tagNameIncludesLink,
+      categoryIsValid,
+    };
+  };
+
+  useEffect(() => {
+    const { validOrNot } = checkInputsHandler();
+    setValidButton(validOrNot);
+  }, [tags, title, checklist_items, categoryID]);
+
+  const isValidHandler = () => {
+    const { validOrNot, tagsIsValid, tagNameIncludesLink, categoryIsValid } =
+      checkInputsHandler();
+
     setTagsValid(tagsIsValid);
     setTagIncludesLink(tagNameIncludesLink);
     if (!checklist_items.length) {
@@ -144,18 +149,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     if (!categoryIsValid)
       dispatch(createChecklistActions.addCategory({ id: false, value: false }));
 
-    const validOrNot =
-      checklist_items.length &&
-      !isDescriptionValid &&
-      itemsNotContainLinks &&
-      isValidTitle &&
-      titleNotContainLinks &&
-      tagsIsValid &&
-      !tagNameIncludesLink &&
-      !isLinksValid &&
-      categoryIsValid;
-
-    return !!validOrNot;
+    return validOrNot;
   };
 
   const changeTitleHandler = (e) => {
@@ -168,12 +162,15 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   };
 
   const onClickPreviewHandler = () => {
-    if (!checkValidHandler(false)) return;
+    if (!isValidHandler()) return;
     setPreview(true);
   };
 
   const onSubmitHandler = (e) => {
-    if (!checkValidHandler(e)) return;
+    e.preventDefault();
+
+    if (!isValidHandler()) return;
+
     let checklistBody = {};
     const tags_new = [];
     const tag_ids = [];
