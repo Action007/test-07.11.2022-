@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { Marker, useMap } from "react-leaflet";
 import Leaflet from "leaflet";
 import useMediaQuery from "../../../hooks/useMediaQuery";
@@ -10,7 +9,6 @@ import MapImg from "../../../assets/images/icon/location.png";
 const LocationMarker = ({ show, coordinates }) => {
   const [userLocation, setUserLocation] = useState(null);
   const onMobile = useMediaQuery("(max-width:991px)");
-  const { pathname } = useLocation();
   const map = useMap();
 
   const myIcon = Leaflet.icon({
@@ -27,14 +25,20 @@ const LocationMarker = ({ show, coordinates }) => {
     const difference = Math.abs(location - coordinate);
     let zoom;
 
-    if (onMobile && difference > 20) return;
-    if (difference > 40) return;
     if (difference) zoom = 10;
     if (difference > 0.5) zoom = 5;
     if (difference > 1) zoom = 4;
     if (difference > 3) zoom = 3;
     if (difference > 10) zoom = 2;
     if (difference > 15) zoom = 1;
+    if (onMobile && difference > 20) {
+      map.setView(coordinates, 6);
+      return;
+    }
+    if (difference > 40) {
+      map.setView(coordinates, 8);
+      return;
+    }
 
     map.setView({ lat, lon }, zoom);
   };
@@ -49,9 +53,7 @@ const LocationMarker = ({ show, coordinates }) => {
 
   useEffect(() => {
     map.locate().on("locationfound", (e) => {
-      if (pathname !== "/creation-of-checklist") {
-        showLocationAndMarker(e.latlng);
-      }
+      if (coordinates) showLocationAndMarker(e.latlng);
       setUserLocation(e.latlng);
     });
   }, []);

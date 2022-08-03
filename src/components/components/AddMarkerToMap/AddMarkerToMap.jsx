@@ -14,11 +14,11 @@ const AddMarkerToMap = ({ coordinates, id, creation }) => {
     iconAnchor: [10, 26], // point of the icon which will correspond to marker's location
   });
 
+  // eslint-disable-next-line no-unused-vars
   const map = useMapEvents({
     click(e) {
       if (!creation) return;
       const { lat, lng } = e.latlng;
-      map.flyTo(e.latlng, map.getZoom());
       dispatch(
         createChecklistActions.addCoordinate({ id, latLng: { lat, lon: lng } })
       );

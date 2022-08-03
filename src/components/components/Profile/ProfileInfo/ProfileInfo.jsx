@@ -120,46 +120,41 @@ const ProfileInfo = ({
           >
             {bio.length !== 0 ? bio : translate("profilePage.emptyBio")}
           </p>
-          {!!facebook ||
-            !!twitter ||
-            !!instagram ||
-            (!!website && (
-              <ul className="profile-info__networks">
-                {facebook && (
-                  <li className="profile-info__network">
-                    <a href={facebook} target="_blank" rel="noreferrer">
-                      <Facebook />
-                    </a>
-                  </li>
-                )}
-                {twitter && (
-                  <li className="profile-info__network">
-                    <a href={twitter} target="_blank" rel="noreferrer">
-                      <Twitter />
-                    </a>
-                  </li>
-                )}
-                {instagram && (
-                  <li className="profile-info__network">
-                    <a href={instagram} target="_blank" rel="noreferrer">
-                      <Instagram />
-                    </a>
-                  </li>
-                )}
-                {website && (
-                  <li className="profile-info__network profile-info__network--website">
-                    <a href={website} target="_blank" rel="noreferrer">
-                      <World />
-                      <span className="profile-info__link">
-                        {host.length > 20
-                          ? `${host.substring(0, 21)}...`
-                          : host}
-                      </span>
-                    </a>
-                  </li>
-                )}
-              </ul>
-            ))}
+          {(!!facebook || !!twitter || !!instagram || !!website) && (
+            <ul className="profile-info__networks">
+              {facebook && (
+                <li className="profile-info__network">
+                  <a href={facebook} target="_blank" rel="noreferrer">
+                    <Facebook />
+                  </a>
+                </li>
+              )}
+              {twitter && (
+                <li className="profile-info__network">
+                  <a href={twitter} target="_blank" rel="noreferrer">
+                    <Twitter />
+                  </a>
+                </li>
+              )}
+              {instagram && (
+                <li className="profile-info__network">
+                  <a href={instagram} target="_blank" rel="noreferrer">
+                    <Instagram />
+                  </a>
+                </li>
+              )}
+              {website && (
+                <li className="profile-info__network profile-info__network--website">
+                  <a href={website} target="_blank" rel="noreferrer">
+                    <World />
+                    <span className="profile-info__link">
+                      {host.length > 20 ? `${host.substring(0, 21)}...` : host}
+                    </span>
+                  </a>
+                </li>
+              )}
+            </ul>
+          )}
         </div>
         {isMyProfile && (
           <div className="profile-info__edit">
