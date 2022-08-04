@@ -705,7 +705,7 @@
     "signInDesc": "By signing up you agree to the <0>Terms of Service</0> and <1>Privacy Policy</1>"
   },
   "error": {
-    "title": "Oops..  Sorry, page not found",
+    "title": "Oops.. Something went wrong.",
     "notFound": "Page Not Found",
     "subtitle": "That's an error. There was an error. Please try again later. That's all we know",
     "button": "Go back to the main page",
