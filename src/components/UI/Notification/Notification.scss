@@ -23,4 +23,8 @@
   &.error {
     background: $warning;
   }
+
+  &.button:hover {
+    background-color: #d04e4e;
+  }
 }

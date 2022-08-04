@@ -23,7 +23,7 @@ const ChecklistDetail = ({
   detailPage = false,
   preview = false,
   setNotification,
-  setIsError,
+  setLinkToActiveChecklist,
 }) => {
   const {
     id,
@@ -80,12 +80,16 @@ const ChecklistDetail = ({
     if (isStartSuccess) {
       navigate(`/active-checklist/${data.entities.id}/${data.entities.slug}`);
     } else if (
-      isStartError &&
-      startError.data.error === "record_already_exist"
+      startError &&
+      startError?.data?.message[0]?.error === "record_already_exist"
     ) {
-      setIsError(true);
       setNotification(true);
-      showNotification = setTimeout(() => setNotification(false), 5000);
+      setLinkToActiveChecklist(
+        `/active-checklist/${startError.data.message[0].id}`
+      );
+      showNotification = setTimeout(() => {
+        setNotification(false);
+      }, 7000);
     }
 
     return () => {

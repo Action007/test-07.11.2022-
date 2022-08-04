@@ -15,7 +15,7 @@ const ChecklistReview = ({
   isFetching,
 }) => {
   const [notification, setNotification] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [linkToActiveChecklist, setLinkToActiveChecklist] = useState("");
   const { t: translate } = useTranslation();
   const { state } = useLocation();
   const breadcrumbs =
@@ -47,8 +47,12 @@ const ChecklistReview = ({
 
   return (
     <>
-      {isError && notification && (
-        <Notification translate={translate("notification.alreadyAdded")} />
+      {notification && (
+        <Notification
+          translate={translate("notification.alreadyAdded")}
+          link={linkToActiveChecklist}
+          isError
+        />
       )}
       <div
         className={`checklist-detail container container-breadcrumb pb-8${
@@ -61,7 +65,7 @@ const ChecklistReview = ({
           <ChecklistDetail
             checklist={checklist.checklist}
             setNotification={setNotification}
-            setIsError={setIsError}
+            setLinkToActiveChecklist={setLinkToActiveChecklist}
             detailPage
           />
         )}

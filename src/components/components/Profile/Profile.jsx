@@ -24,7 +24,7 @@ const Profile = ({ user, isLoading }) => {
 
   const onLargeImageSize = () => {
     setShowError(true);
-    setTimeout(() => setShowError(false), 8000);
+    setTimeout(() => setShowError(false), 5000);
   };
 
   return (

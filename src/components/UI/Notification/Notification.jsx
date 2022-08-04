@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Notification.scss";
 
-const Notification = ({ translate, isError = false }) => {
+const Notification = ({ translate, isError = false, link = false }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -9,6 +12,18 @@ const Notification = ({ translate, isError = false }) => {
       behavior: "smooth",
     });
   }, []);
+
+  if (link) {
+    return (
+      <button
+        onClick={() => navigate(link)}
+        className={`notification button SFPro-500${isError ? " error" : ""} `}
+        type="button"
+      >
+        {translate}
+      </button>
+    );
+  }
 
   return (
     <div className={`notification SFPro-500${isError ? " error" : ""}`}>
