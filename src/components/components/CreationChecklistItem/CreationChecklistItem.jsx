@@ -36,6 +36,7 @@ const CreationChecklistItem = ({
   const { ref, show, setShow } = useClickOutside(true);
   const [isImgSmall, setIsImgSmall] = useState(true);
   const [isImgValid, setIsImgValid] = useState(true);
+  const [isImgEmpty, setIsImgEmpty] = useState(true);
   const textInput = useRef(null);
   const isLinkValid = validateLink(value.link);
 
@@ -98,7 +99,13 @@ const CreationChecklistItem = ({
         );
       };
       setIsImgSmall(true);
+      setIsImgEmpty(false);
     }
+  };
+
+  const removeImgHandler = () => {
+    dispatch(createChecklistActions.removeImage(id));
+    setIsImgEmpty(true);
   };
 
   const selectImg = (
@@ -115,7 +122,10 @@ const CreationChecklistItem = ({
       )}
       <label
         className={`creation-item__img${
-          !isImgSmall || !isImgValid ? " invalid" : ""
+          ((!isImgSmall || !isImgValid) && !validateAfterSubmit) ||
+          (isImgEmpty && validateAfterSubmit)
+            ? " invalid"
+            : ""
         }`}
         htmlFor={id + 2}
       >
@@ -137,7 +147,7 @@ const CreationChecklistItem = ({
       <div className="creation-item__img">
         <img src={value.image} alt={description} />
         <button
-          onClick={() => dispatch(createChecklistActions.removeImage(id))}
+          onClick={removeImgHandler}
           className="creation-item__remove"
           type="button"
         >
@@ -211,7 +221,7 @@ const CreationChecklistItem = ({
                 {translate("creationOfChecklist.maxItem")}
               </span>
             )}
-            {itemsNotContainLinks && (
+            {itemsNotContainLinks && !inValid && (
               <span className="creation-item__invalid text">
                 {translate("creationOfChecklist.itemsNotContainLinks")}
               </span>

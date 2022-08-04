@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
+import { useSelector } from "react-redux";
 import CreationChecklistMapSearch from "../CreationChecklistMapSearch/CreationChecklistMapSearch";
 import LocationMarker from "../LocationMarker/LocationMarker";
 import AddMarkerToMap from "../AddMarkerToMap/AddMarkerToMap";
@@ -9,10 +10,17 @@ import { ReactComponent as LocationSvg } from "../../../assets/images/icon/locat
 import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-map.svg";
 
 const MapGeneral = ({ setShowMap, coordinates, page, variant, id }) => {
+  const validateAfterSubmit = useSelector(
+    (state) => state.createChecklistReducer.validateAfterSubmit
+  );
   const [showLocation, setShowLocation] = useState(false);
 
   return (
-    <div className="creation-map">
+    <div
+      className={`creation-map${
+        !coordinates && validateAfterSubmit ? " invalid" : ""
+      }`}
+    >
       <MapContainer
         center={coordinates || { lat: 46.3984613, lon: 33.4627281 }}
         zoom={2}

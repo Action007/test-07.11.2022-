@@ -1,4 +1,4 @@
-@import "../../../global-styles/variables";
+@import '../../../global-styles/variables';
 
 .creation-map {
   position: relative;
@@ -8,10 +8,17 @@
   height: 231px;
   margin: 10px 0;
 
+  &.invalid {
+    .leaflet-container {
+      border-color: $warning;
+    }
+  }
+
   .leaflet-container {
     width: 100%;
     max-width: 458px;
     height: 231px;
+    border: 1px solid transparent;
 
     border-radius: 6px;
   }
@@ -67,18 +74,18 @@
   }
 
   .leaflet-control-geocoder-icon {
-    background-image: url("../../../assets/images/icon/search.svg");
+    background-image: url('../../../assets/images/icon/search.svg');
     background-size: contain;
 
     transition: background-image 0.2s ease;
   }
 
   .leaflet-control-geocoder:hover .leaflet-control-geocoder-icon {
-    background-image: url("../../../assets/images/icon/searchHover.svg");
+    background-image: url('../../../assets/images/icon/searchHover.svg');
   }
 
   .leaflet-control-geocoder-expanded .leaflet-control-geocoder-icon {
-    background-image: url("../../../assets/images/icon/searchHover.svg");
+    background-image: url('../../../assets/images/icon/searchHover.svg');
   }
 
   .leaflet-control-attribution a {
