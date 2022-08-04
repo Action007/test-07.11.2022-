@@ -60,6 +60,8 @@
   }
 
   &__btn {
+    cursor: pointer;
+    
     &:not(:last-child) {
       margin-right: 25px;
     }

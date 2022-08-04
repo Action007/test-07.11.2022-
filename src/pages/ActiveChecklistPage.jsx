@@ -7,10 +7,24 @@ import ActiveChecklist from "../components/components/ActiveChecklist/ActiveChec
 
 const ActiveChecklistPage = () => {
   const { id } = useParams();
-  const { data: checklist, isLoading } =
-    checklistAPI.useFetchActiveChecklistQuery(`/active_checklists/${id}`);
+  const {
+    data: checklist,
+    isLoading,
+    isError,
+    error,
+  } = checklistAPI.useFetchActiveChecklistQuery(`/active_checklists/${id}`);
   const token = useSelector((state) => state.authSliceReducer.token);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isError) return;
+
+    if (error && error?.data?.error === "not_found") {
+      navigate("/not-found");
+    } else {
+      navigate("/error");
+    }
+  }, [isError]);
 
   useEffect(() => {
     if (!token) navigate("/sign-in");

@@ -15,6 +15,7 @@ const ChecklistDetailPage = () => {
   const token = useSelector((state) => state.authSliceReducer.token);
   const {
     data: checklist,
+    isError,
     error,
     isLoading,
     isFetching,
@@ -25,8 +26,14 @@ const ChecklistDetailPage = () => {
   );
 
   useEffect(() => {
-    if (error) navigate("/error");
-  }, [error]);
+    if (!isError) return;
+
+    if (error && error?.data?.error === "not_found") {
+      navigate("/not-found");
+    } else {
+      navigate("/error");
+    }
+  }, [isError]);
 
   return (
     <>
