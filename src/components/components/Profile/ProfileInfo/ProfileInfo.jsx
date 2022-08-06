@@ -35,6 +35,7 @@ const ProfileInfo = ({
   const [imageUpload, { isLoading: isUpdateLoading, isError, error, data }] =
     checklistAPI.useEditAccountMutation();
   const host = website ? new URL(website).hostname : "";
+  const hostURL = website ? window.location.origin : "";
 
   const onImageUpload = (event) => {
     const image = event.target.files[0];
@@ -103,7 +104,13 @@ const ProfileInfo = ({
               </span>
               {nickname && (
                 <span className="profile-info__name SFPro-700">
-                  @{nickname}
+                  <a
+                    href={`${hostURL}/${nickname}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    @{nickname}
+                  </a>
                 </span>
               )}
             </div>
