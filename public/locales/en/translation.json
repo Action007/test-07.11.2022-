@@ -730,8 +730,8 @@
   "editProfilePage": {
     "editProfile": "Edit profile",
     "name": "Name",
-    "nickName": "Nick name",
-    "nickNicknameTaken": "This username is already in use. Please try another one",
+    "nickName": "Nickname",
+    "nickNicknameTaken": "This nickname is already in use. Please try another one",
     "minNickname": "Must be at least 2 characters long",
     "maxNickname": "Must be at least 2 characters long, maximum 50 characters",
     "country": "Country",
