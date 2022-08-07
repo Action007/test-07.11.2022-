@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-const API_KEY = process.env.REACT_APP_HOSTNAME;
+const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 // eslint-disable-next-line import/prefer-default-export
 export const checklistAPI = createApi({
   reducerPath: "checklistAPI",
   tagTypes: ["Checklist"],
   baseQuery: fetchBaseQuery({
-    baseUrl: API_KEY,
+    baseUrl: HOSTNAME,
     prepareHeaders: (headers, { getState }) => {
       const { token } = getState().authSliceReducer;
       // If we have a token set in state, let's assume that we should be passing it.

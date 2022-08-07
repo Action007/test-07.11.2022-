@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import SignInSignUp from "../components/components/SignInSignUp/SignInSignUp";
 
-const API_KEY = process.env.REACT_APP_HOSTNAME;
+const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const SignUpPage = () => {
   const { pathname } = useLocation();
@@ -30,7 +30,7 @@ const SignUpPage = () => {
             property="og:description"
             content={translate("seo.signIn.desc")}
           />
-          <meta property="og:url" content={API_KEY + pathname} />
+          <meta property="og:url" content={HOSTNAME + pathname} />
         </Helmet>
       )}
       {pathname === "/sign-up" && (
@@ -44,7 +44,7 @@ const SignUpPage = () => {
             property="og:description"
             content={translate("seo.signUp.desc")}
           />
-          <meta property="og:url" content={API_KEY + pathname} />
+          <meta property="og:url" content={HOSTNAME + pathname} />
         </Helmet>
       )}
       {pathname === "/sign-in/reset" && (
@@ -64,7 +64,7 @@ const SignUpPage = () => {
             property="og:description"
             content={translate("seo.signInReset.desc")}
           />
-          <meta property="og:url" content={API_KEY + pathname} />
+          <meta property="og:url" content={HOSTNAME + pathname} />
         </Helmet>
       )}
       {pathname === "/sign-in/reset-password" && (
@@ -85,7 +85,7 @@ const SignUpPage = () => {
             property="og:description"
             content={translate("seo.signInResetPassword.desc")}
           />
-          <meta property="og:url" content={API_KEY + pathname} />
+          <meta property="og:url" content={HOSTNAME + pathname} />
         </Helmet>
       )}
       <SignInSignUp pathname={pathname} />

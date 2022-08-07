@@ -5,7 +5,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { checklistAPI } from "../services/checklistService";
 import ChecklistReview from "../components/components/ChecklistReview/ChecklistReview";
 
-const API_KEY = process.env.REACT_APP_HOSTNAME;
+const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const ChecklistDetailPage = () => {
   const { pathname } = useLocation();
@@ -43,7 +43,7 @@ const ChecklistDetailPage = () => {
           property="og:title"
           content={checklist && checklist.checklist.name}
         />
-        <meta property="og:url" content={API_KEY + pathname} />
+        <meta property="og:url" content={HOSTNAME + pathname} />
         <meta name="description" content="Checklist Review" />
         <meta property="og:description" content="Checklist Review" />
       </Helmet>

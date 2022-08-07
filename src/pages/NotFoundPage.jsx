@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import NotFound from "../components/components/NotFound/NotFound";
 
-const API_KEY = process.env.REACT_APP_HOSTNAME;
+const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const NotFoundPage = () => {
   const { t: translate } = useTranslation();
@@ -15,7 +15,7 @@ const NotFoundPage = () => {
       <Helmet>
         <title>{translate("seo.notFound.title")}</title>
         <meta property="og:title" content={translate("seo.notFound.title")} />
-        <meta property="og:url" content={API_KEY + pathname} />
+        <meta property="og:url" content={HOSTNAME + pathname} />
         <meta name="description" content={translate("seo.notFound.desc")} />
         <meta
           property="og:description"
