@@ -31,14 +31,8 @@ const LocationMarker = ({ show, coordinates }) => {
     if (difference > 3) zoom = 3;
     if (difference > 10) zoom = 2;
     if (difference > 15) zoom = 1;
-    if (onMobile && difference > 20) {
-      map.setView(coordinates, 6);
-      return;
-    }
-    if (difference > 40) {
-      map.setView(coordinates, 8);
-      return;
-    }
+    if (onMobile && difference > 20) return;
+    if (difference > 40) return;
 
     map.setView({ lat, lon }, zoom);
   };
