@@ -51,9 +51,7 @@ const ChecklistCheckbox = ({
             type="checkbox"
           />
           <span className="checklist-checkbox__checkmark" />
-          <span className="checklist-checkbox__num SFPro-700">
-            {index + 1}.
-          </span>
+          <span className="checklist-checkbox__num">{index + 1}.</span>
           <p className="checklist-checkbox__todo">
             {description}
             {list_type === "link" && (
