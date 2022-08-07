@@ -29,12 +29,16 @@ const AccountSetting = () => {
   const newPasswordRef = useRef();
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
-  const breadcrumbs = [
-    { title: translate("profilePage.myProfile"), link: "/my-profile" },
-    { title: translate("accountSettings.title") },
-  ];
   const song = new Audio(audio);
   song.volume = 0.1;
+
+  const breadcrumbs = [
+    {
+      title: user?.nickname,
+      link: `/${user?.nickname}`,
+    },
+    { title: translate("accountSettings.title") },
+  ];
 
   useEffect(() => {
     if (!error) return;
@@ -112,7 +116,7 @@ const AccountSetting = () => {
           notification ? " show-notification" : ""
         }`}
       >
-        <Breadcrumbs breadcrumbs={breadcrumbs} />
+        {user && <Breadcrumbs breadcrumbs={breadcrumbs} />}
         <div className="account-setting__wrapper">
           <form
             onSubmit={(e) => onSubmitHandler(e)}

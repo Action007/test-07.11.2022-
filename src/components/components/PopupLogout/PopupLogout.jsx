@@ -6,12 +6,12 @@ import "./PopupLogout.scss";
 import { ReactComponent as LogoutSvg } from "../../../assets/images/content/popupLogout.svg";
 import { ReactComponent as DoorSvg } from "../../../assets/images/icon/door.svg";
 
-const PopupLogout = ({ setIsLogout, show, onHide }) => {
+const PopupLogout = ({ logout, show, onHide }) => {
   const { t: translate } = useTranslation();
 
   const onLogoutHandler = () => {
     onHide();
-    setIsLogout(true);
+    logout();
   };
 
   return (

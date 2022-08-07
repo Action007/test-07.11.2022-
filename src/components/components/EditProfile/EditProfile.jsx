@@ -52,8 +52,12 @@ const EditProfile = () => {
       skip: !show,
     });
   const { t: translate } = useTranslation();
+
   const breadcrumbs = [
-    { title: translate("profilePage.myProfile"), link: "/my-profile" },
+    {
+      title: user?.nickname,
+      link: `/${user?.nickname}`,
+    },
     { title: translate("editProfilePage.editProfile") },
   ];
   const song = new Audio(audio);
@@ -205,8 +209,7 @@ const EditProfile = () => {
           notification ? " show-notification" : ""
         }`}
       >
-        <Breadcrumbs breadcrumbs={breadcrumbs} />
-
+        {user && <Breadcrumbs breadcrumbs={breadcrumbs} />}
         <div className="edit-profile__wrapper">
           <form
             onSubmit={(e) => onSubmitHandler(e)}
