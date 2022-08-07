@@ -17,7 +17,7 @@ const SignInSignUp = ({ pathname }) => {
       <div className="sign__wrapper">
         {pathname === "/sign-in" && <SignIn />}
         {pathname === "/sign-up" && <SignUp />}
-        {pathname === "/sign-in/reset-password" && <ResetPassword />}
+        {pathname === "/reset_password" && <ResetPassword />}
         {pathname === "/sign-in/reset" && <ForgotPassword />}
         {!showOnMobile && pathname !== "/sign-in/reset" && (
           <div className="sign__img">

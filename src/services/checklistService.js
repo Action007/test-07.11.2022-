@@ -186,7 +186,7 @@ export const checklistAPI = createApi({
       }),
       invalidatesTags: ["ActiveChecklist", "Account"],
     }),
-    deleteActiveChecklist: build.mutation({
+    ju: build.mutation({
       query: (body) => ({
         url: `/api/v1/active_checklists/${body.id}`,
         method: "DELETE",

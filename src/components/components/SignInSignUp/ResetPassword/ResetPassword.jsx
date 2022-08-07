@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import "./ResetPassword.scss";
 
@@ -14,14 +14,23 @@ const ResetPassword = () => {
   const passwordCopy = useRef();
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const token = searchParams.get("reset_password_token");
+
+  useEffect(() => {
+    if (!token) navigate("/not-found");
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const passwordValue = password.current.value;
+    const passwordCopyValue = passwordCopy.current.value;
 
     const isValid =
-      password.trim() !== "" &&
-      password === passwordCopy &&
-      password.length > 7;
+      passwordValue.trim() !== "" &&
+      passwordValue === passwordCopyValue &&
+      passwordValue.length > 7;
     setPasswordIsValid(isValid);
   };
 
@@ -44,12 +53,12 @@ const ResetPassword = () => {
           className={`reset-password__label${
             !passwordIsValid ? " invalid" : ""
           }`}
-          htmlFor="passwordEmail"
+          htmlFor="newPassword"
         >
           <span>{translate("login.newPassword")}</span>
           <input
             ref={password}
-            id="passwordEmail"
+            id="newPassword"
             placeholder={translate("login.enterPassword")}
             name="password"
             autoComplete="on"
@@ -66,12 +75,12 @@ const ResetPassword = () => {
           className={`reset-password__label${
             !passwordIsValid ? " invalid" : ""
           }`}
-          htmlFor="passwordEmail"
+          htmlFor="confirmPassword"
         >
           <span>{translate("login.confirmPassword")}</span>
           <input
             ref={passwordCopy}
-            id="passwordEmail"
+            id="confirmPassword"
             placeholder={translate("login.enterAPassword")}
             name="password"
             autoComplete="on"

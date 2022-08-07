@@ -76,6 +76,7 @@ const CategorySidebar = () => {
 
     if (id === "popular" || id === "latest") {
       if (!search) {
+        searchParams.append(id, true);
         setSearchParams(`?page=1&per_page=5&${searchParams}`);
       } else {
         searchParams.append("page", 1);
@@ -86,6 +87,7 @@ const CategorySidebar = () => {
 
     if (id !== "popular" && id !== "latest" && id !== "all") {
       if (!search) {
+        searchParams.append("search_category_ids[]", id);
         setSearchParams(`?page=1&per_page=5&${searchParams}`);
       } else {
         searchParams.append("page", 1);

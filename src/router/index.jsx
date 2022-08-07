@@ -85,11 +85,11 @@ const routes = [
   { id: 25, path: "/sign-up", element: <SignInSignUpPage /> },
   { id: 26, path: "/sign-in", element: <SignInSignUpPage /> },
   { id: 27, path: "/sign-in/reset", element: <SignInSignUpPage /> },
-  { id: 28, path: "/sign-in/reset-password", element: <SignInSignUpPage /> },
-  { id: 29, path: "/auth/google/callback", element: <SignInWithGoogle /> },
-  { id: 30, path: "/*", element: <NotFoundPage /> },
-  { id: 31, path: "/not-found", element: <NotFoundPage /> },
-  { id: 32, path: "/error", element: <ServerErrorPage /> },
+  { id: 29, path: "/reset_password", element: <SignInSignUpPage /> },
+  { id: 30, path: "/auth/google/callback", element: <SignInWithGoogle /> },
+  { id: 31, path: "/*", element: <NotFoundPage /> },
+  { id: 32, path: "/not-found", element: <NotFoundPage /> },
+  { id: 33, path: "/error", element: <ServerErrorPage /> },
 ];
 
 export default routes;
