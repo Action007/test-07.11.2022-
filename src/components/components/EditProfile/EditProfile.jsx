@@ -23,6 +23,7 @@ const EditProfile = () => {
   const [facebookValue, setFacebookValue] = useState("");
   const [instagramValue, setInstagramValue] = useState("");
   const [twitterValue, setTwitterValue] = useState("");
+  const [linkedinValue, setLinkedinValue] = useState("");
   const [notification, setNotification] = useState(false);
   const [country, setCountry] = useState("Select a country");
   const [isNameValid, setIsNameValid] = useState(true);
@@ -34,6 +35,7 @@ const EditProfile = () => {
     facebook: true,
     instagram: true,
     twitter: true,
+    linkedin: true,
   });
   const { ref, show, setShowHandler } = useClickOutside();
   const [
@@ -65,6 +67,7 @@ const EditProfile = () => {
       facebook: true,
       instagram: true,
       twitter: true,
+      linkedin: true,
     };
     error.data.message.forEach((item) => {
       if (item.attribute === "nickname" && item.type === "too_short") {
@@ -79,6 +82,8 @@ const EditProfile = () => {
         invalidLinks.instagram = false;
       } else if (item.attribute === "twitter") {
         invalidLinks.twitter = false;
+      } else if (item.attribute === "linkedin") {
+        invalidLinks.linkedin = false;
       }
     });
     setIsLinksInValid(invalidLinks);
@@ -94,6 +99,7 @@ const EditProfile = () => {
     setFacebookValue(user.facebook || "");
     setInstagramValue(user.instagram || "");
     setTwitterValue(user.twitter || "");
+    setLinkedinValue(user.linkedin || "");
   }, [user]);
 
   useEffect(() => {
@@ -152,11 +158,15 @@ const EditProfile = () => {
       ? validateLink(instagramValue, "instagram")
       : true;
     const twitter = twitterValue ? validateLink(twitterValue, "twitter") : true;
+    const linkedin = linkedinValue
+      ? validateLink(linkedinValue, "linkedin")
+      : true;
     const links = {
       website,
       facebook,
       instagram,
       twitter,
+      linkedin,
     };
     setIsLinksInValid(links);
 
@@ -167,7 +177,8 @@ const EditProfile = () => {
       website &&
       facebook &&
       instagram &&
-      twitter
+      twitter &&
+      linkedin
     ) {
       editAccount({
         name: nameValue,
@@ -177,6 +188,7 @@ const EditProfile = () => {
         facebook: facebookValue,
         instagram: instagramValue,
         twitter: twitterValue,
+        linkedin: linkedinValue,
         country: country === "Select a country" ? "" : country,
       });
     }
@@ -270,7 +282,13 @@ const EditProfile = () => {
               setValue={setTwitterValue}
               value={twitterValue}
             />
-
+            <EditProfileInput
+              isInvalid={!isLinksInValid.linkedin}
+              invalidText={translate("editProfilePage.isLinkValid")}
+              title={translate("editProfilePage.linkedin")}
+              setValue={setLinkedinValue}
+              value={linkedinValue}
+            />
             <button className="edit-profile__submit SFPro-600" type="submit">
               {translate("editProfilePage.button")}
             </button>

@@ -10,6 +10,7 @@ import { ReactComponent as Setting } from "../../../../assets/images/icon/settin
 import { ReactComponent as Facebook } from "../../../../assets/images/icon/facebook.svg";
 import { ReactComponent as Twitter } from "../../../../assets/images/icon/twitter.svg";
 import { ReactComponent as Instagram } from "../../../../assets/images/icon/instagram.svg";
+import { ReactComponent as Linkedin } from "../../../../assets/images/icon/linkedin.svg";
 import { ReactComponent as World } from "../../../../assets/images/icon/world.svg";
 import { ReactComponent as EditSvg } from "../../../../assets/images/icon/editPhoto.svg";
 import { ReactComponent as EmptySvg } from "../../../../assets/images/icon/emptyPhoto.svg";
@@ -23,6 +24,7 @@ const ProfileInfo = ({
   facebook,
   twitter,
   instagram,
+  linkedin,
   avatar_url,
   onLargeImageSize,
 }) => {
@@ -127,7 +129,11 @@ const ProfileInfo = ({
           >
             {bio.length !== 0 ? bio : translate("profilePage.emptyBio")}
           </p>
-          {(!!facebook || !!twitter || !!instagram || !!website) && (
+          {(!!facebook ||
+            !!twitter ||
+            !!instagram ||
+            !!website ||
+            !!linkedin) && (
             <ul className="profile-info__networks">
               {facebook && (
                 <li className="profile-info__network">
@@ -147,6 +153,13 @@ const ProfileInfo = ({
                 <li className="profile-info__network">
                   <a href={instagram} target="_blank" rel="noreferrer">
                     <Instagram />
+                  </a>
+                </li>
+              )}
+              {linkedin && (
+                <li className="profile-info__network">
+                  <a href={linkedin} target="_blank" rel="noreferrer">
+                    <Linkedin />
                   </a>
                 </li>
               )}

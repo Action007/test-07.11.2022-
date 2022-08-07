@@ -181,6 +181,17 @@
   }
 
   &__network {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 20px;
+    }
+
     &:not(:last-child) {
       margin-right: 25px;
 

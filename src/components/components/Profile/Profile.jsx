@@ -45,6 +45,7 @@ const Profile = ({ user, isLoading }) => {
               facebook={user.facebook}
               twitter={user.twitter}
               instagram={user.instagram}
+              linkedin={user.linkedin}
               avatar_url={user.avatar_url}
               onLargeImageSize={onLargeImageSize}
             />
