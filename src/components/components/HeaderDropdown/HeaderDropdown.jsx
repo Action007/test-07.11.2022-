@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,43 +21,23 @@ const HeaderDropdown = ({ setShow }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { ref, show, setShowHandler } = useClickOutside();
+  const [isLogOut, setIsLogout] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:767px)");
   const mobileClass = showOnMobile ? " mobile" : "";
-  const [logout, setLogout] = useState(false);
-  const [isLogout, setIsLogout] = useState(false);
+
+  const [logOut] = checklistAPI.useLogOutMutation();
+
   const user = useSelector((state) => state.authSliceReducer.user);
   const percent = useSelector((state) => state.authSliceReducer.percent);
-  const [logOut] = checklistAPI.useLogOutMutation();
   const { t: translate } = useTranslation();
-  const { data: accountInfo, isError } = checklistAPI.useFetchAccountQuery();
 
-  useEffect(() => {
-    if (accountInfo) {
-      const { completed_counter, active_checklists_counter } = accountInfo;
-      dispatch(authSliceActions.setUser(accountInfo));
-      dispatch(
-        authSliceActions.setPercentActiveChecklist({
-          completed_counter,
-          active_checklists_counter,
-        })
-      );
-    }
-  }, [accountInfo]);
-
-  useEffect(() => {
-    if (!isError) return;
-    dispatch(authSliceActions.resetUser());
-    dispatch(authSliceActions.resetToken());
-  }, [isError]);
-
-  useEffect(() => {
-    if (!isLogout) return;
+  const onLogOutHandler = () => {
     logOut();
     dispatch(authSliceActions.resetToken());
     dispatch(authSliceActions.resetUser());
     setShow(false);
     setShowHandler();
-  }, [isLogout]);
+  };
 
   const onClickHandler = (address) => {
     navigate(address);
@@ -68,9 +48,9 @@ const HeaderDropdown = ({ setShow }) => {
   return (
     <>
       <PopupLogout
-        setIsLogout={setIsLogout}
-        show={logout}
-        onHide={() => setLogout(false)}
+        logout={onLogOutHandler}
+        show={isLogOut}
+        onHide={() => setIsLogout(false)}
       />
       <div className={`header-dropdown SFPro-500${mobileClass}`} ref={ref}>
         {!showOnMobile && (
@@ -140,7 +120,7 @@ const HeaderDropdown = ({ setShow }) => {
               {translate("header.allChecklists")}
             </button>
             <button
-              onClick={() => onClickHandler("/my-profile")}
+              onClick={() => onClickHandler(user ? `/${user.nickname}` : "")}
               className="header-dropdown__item"
               type="button"
             >
@@ -156,7 +136,7 @@ const HeaderDropdown = ({ setShow }) => {
               {translate("header.accountSettings")}
             </button>
             <button
-              onClick={() => setLogout(true)}
+              onClick={() => setIsLogout(true)}
               className="header-dropdown__item"
               type="button"
             >

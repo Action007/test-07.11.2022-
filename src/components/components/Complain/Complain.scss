@@ -133,6 +133,7 @@
     background: #ececec1f;
     border: 1px solid #ccc;
     border-radius: 6px;
+    word-break: break-word;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 20px;

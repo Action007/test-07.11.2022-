@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { checklistAPI } from "../../../../services/checklistService";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
@@ -20,24 +19,22 @@ const ProfileInfo = ({
   nickname,
   country,
   bio,
-  website,
+  site,
   facebook,
   twitter,
   instagram,
   linkedin,
   avatar_url,
+  isMyAccount,
   onLargeImageSize,
 }) => {
-  const user = useSelector((state) => state.authSliceReducer.user);
   const [avatar, setAvatar] = useState(avatar_url);
-  const { pathname } = useLocation();
-  const isMyProfile = pathname === "/my-profile";
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const [imageUpload, { isLoading: isUpdateLoading, isError, error, data }] =
     checklistAPI.useEditAccountMutation();
-  const host = website ? new URL(website).hostname : "";
-  const hostURL = website ? window.location.origin : "";
+  const host = site ? new URL(site).hostname : "";
+  const hostURL = site ? window.location.origin : "";
 
   const onImageUpload = (event) => {
     const image = event.target.files[0];
@@ -75,14 +72,14 @@ const ProfileInfo = ({
           <div className="profile-info__box">
             <label
               className={`profile-info__edit-btn${
-                isMyProfile ? " pointer" : ""
+                isMyAccount ? " pointer" : ""
               }`}
               htmlFor="uploadImg"
             >
               <div className="profile-info__img">
                 {avatar ? <img src={avatar} alt="account" /> : <EmptySvg />}
               </div>
-              {isMyProfile && (
+              {isMyAccount && (
                 <>
                   <EditSvg />
                   <input
@@ -97,7 +94,7 @@ const ProfileInfo = ({
             </label>
             <div>
               {name && (
-                <h1 className="profile-info__title SFPro-700">{user.name}</h1>
+                <h1 className="profile-info__title SFPro-700">{name}</h1>
               )}
               <span
                 className={`profile-info__subtitle${!country ? " empty" : ""}`}
@@ -120,7 +117,7 @@ const ProfileInfo = ({
           <span
             className={`profile-info__span${bio.length === 0 ? " empty" : ""}`}
           >
-            {isMyProfile
+            {isMyAccount
               ? translate("profilePage.aboutMe")
               : translate("profilePage.about")}
           </span>
@@ -129,11 +126,7 @@ const ProfileInfo = ({
           >
             {bio.length !== 0 ? bio : translate("profilePage.emptyBio")}
           </p>
-          {(!!facebook ||
-            !!twitter ||
-            !!instagram ||
-            !!website ||
-            !!linkedin) && (
+          {(!!facebook || !!twitter || !!instagram || !!site || !!linkedin) && (
             <ul className="profile-info__networks">
               {facebook && (
                 <li className="profile-info__network">
@@ -163,12 +156,12 @@ const ProfileInfo = ({
                   </a>
                 </li>
               )}
-              {website && (
-                <li className="profile-info__network profile-info__network--website">
-                  <a href={website} target="_blank" rel="noreferrer">
+              {site && (
+                <li className="profile-info__network profile-info__network--site">
+                  <a href={site} target="_blank" rel="noreferrer">
                     <World />
                     <span className="profile-info__link">
-                      {host.length > 20 ? `${host.substring(0, 21)}...` : host}
+                      {host.length > 15 ? `${host.substring(0, 16)}...` : host}
                     </span>
                   </a>
                 </li>
@@ -176,7 +169,7 @@ const ProfileInfo = ({
             </ul>
           )}
         </div>
-        {isMyProfile && (
+        {isMyAccount && (
           <div className="profile-info__edit">
             <button
               onClick={() => navigate(`/edit-profile`)}

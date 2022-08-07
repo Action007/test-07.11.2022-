@@ -79,7 +79,6 @@ const routes = [
   { id: 18, path: "/saved-checklists", element: <AllChecklistsPage /> },
   { id: 19, path: "/liked-checklists", element: <AllChecklistsPage /> },
   { id: 20, path: "/created-checklists", element: <AllChecklistsPage /> },
-  { id: 21, path: "/my-profile", element: <ProfilePage /> },
   { id: 22, path: "/edit-profile", element: <EditProfilePage /> },
   { id: 23, path: "/:nickname", element: <ProfilePage /> },
   { id: 24, path: "/account-settings", element: <AccountSettingsPage /> },
