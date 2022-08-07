@@ -4,6 +4,7 @@ import "./ProfileSkeleton.scss";
 
 import { ReactComponent as Facebook } from "../../../assets/images/icon/facebook.svg";
 import { ReactComponent as Twitter } from "../../../assets/images/icon/twitter.svg";
+import { ReactComponent as Linkedin } from "../../../assets/images/icon/linkedin.svg";
 import { ReactComponent as Instagram } from "../../../assets/images/icon/instagram.svg";
 import { ReactComponent as World } from "../../../assets/images/icon/world.svg";
 import { ReactComponent as EditSvg } from "../../../assets/images/icon/editPhoto.svg";
@@ -42,6 +43,9 @@ const ProfileSkeleton = () => {
             </li>
             <li className="profile-skeleton__network">
               <Instagram />
+            </li>
+            <li className="profile-skeleton__network">
+              <Linkedin />
             </li>
             <li className="profile-skeleton__network profile-skeleton__network--website">
               <World />

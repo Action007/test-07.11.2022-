@@ -14,6 +14,10 @@ const validateLink = (value, type) => {
       urlTest = /http(?:s)?:\/\/(?:www\.)?twitter\.com\/([a-zA-Z0-9_]+)/;
       break;
 
+    case "linkedin":
+      urlTest = /http(?:s)?:\/\/(?:www\.)?linkedin\.com\/([a-zA-Z0-9_]+)/;
+      break;
+
     default:
       urlTest =
         // eslint-disable-next-line no-useless-escape
