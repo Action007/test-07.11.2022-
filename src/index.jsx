@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import App from "./App";
 import store from "./store";
 
-const API_KEY = process.env.REACT_APP_SENTRY_TOKEN;
+const SENTRY_TOKEN = process.env.REACT_APP_SENTRY_TOKEN;
 
 // Localization
 i18next
@@ -31,7 +31,7 @@ i18next
   });
 
 Sentry.init({
-  dsn: API_KEY,
+  dsn: SENTRY_TOKEN,
   integrations: [new BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%

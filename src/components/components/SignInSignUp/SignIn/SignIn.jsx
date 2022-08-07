@@ -13,7 +13,7 @@ import { ReactComponent as LoginSvg } from "../../../../assets/images/content/lo
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 import { ReactComponent as GoogleSvg } from "../../../../assets/images/icon/google.svg";
 
-const API_KEY = process.env.REACT_APP_HOSTNAME;
+const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const SignIn = () => {
   const [isValidEmailServer, setIsValidEmailServer] = useState(true);
@@ -147,7 +147,7 @@ const SignIn = () => {
         <span className="sign-in__absolute">{translate("login.or")}</span>
         <a
           className="sign-in__google SFPro-500"
-          href={`${API_KEY}/api/auth/google`}
+          href={`${HOSTNAME}/api/auth/google`}
         >
           <GoogleSvg />
           {translate("login.google")}
