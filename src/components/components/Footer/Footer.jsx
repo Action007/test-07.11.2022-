@@ -34,18 +34,18 @@ const Footer = () => {
           </li>
           <li className="footer__item">
             <button
-              onClick={() => navigate("/?per_page=5&page=1&popular=true")}
-              type="button"
-            >
-              {translate("popularChecklistPage.title")}
-            </button>
-          </li>
-          <li className="footer__item">
-            <button
               onClick={() => onClickHandler("/privacy-policy")}
               type="button"
             >
               {translate("privacyPolicyPage.title")}
+            </button>
+          </li>
+          <li className="footer__item">
+            <button
+              onClick={() => navigate("/?per_page=5&page=1&popular=true")}
+              type="button"
+            >
+              {translate("popularChecklistPage.title")}
             </button>
           </li>
         </ul>

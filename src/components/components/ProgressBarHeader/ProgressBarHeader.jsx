@@ -1,7 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import "./ProgressBarHeader.scss";
 
 const ProgressBarHeader = ({ done }) => {
+  const { t: translate } = useTranslation();
+
   return (
     <div className="progressBar-header">
       <div
@@ -12,7 +15,7 @@ const ProgressBarHeader = ({ done }) => {
         }}
       >
         <span className="progressBar-header__text SFPro-400">
-          Active checklist
+          {translate("header.activeChecklist")}
         </span>
       </div>
     </div>

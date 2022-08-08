@@ -12,7 +12,7 @@ const NotFound = () => {
     <section className="not-found container py-8">
       <div className="container-wrapper">
         <h1 className="not-found__title display-4 text-center SFPro-600">
-          {translate("error.title")}
+          {translate("error.notFound")}
         </h1>
         <div className="not-found__img mx-auto">
           <Error />

@@ -1,15 +1,15 @@
 {
   "seo": {
     "home": {
-      "title": "Checklists are a lot of saved options for solving your questions",
-      "desc": "Using the Checklists, you can get an answer to any question, and you don't have to spend a lot of time scrolling through a lot of sites. All you have to do is open the application and type in your question."
+      "title": "Olcheck are a lot of saved options for solving your questions",
+      "desc": "Using the olcheck, you can get an answer to any question, and you don't have to spend a lot of time scrolling through a lot of sites. All you have to do is open the application and type in your question."
     },
     "ourMission": {
       "title": "An application that will help you achieve your goal!",
       "desc": "Thanks to the fact that users share their experiences, you can achieve your goals more quickly, find more opportunities and save time."
     },
     "termsOfUse": {
-      "title": "Terms of use for the Checklists application",
+      "title": "Terms of use for the olcheck application",
       "desc": "These terms of use explain the rules, requirements, restrictions, and limitations that users must abide by in order to use an application."
     },
     "privacyPolicy": {
@@ -29,8 +29,8 @@
       "desc": "You only need to sign up to begin searching for the needed information, which has already been verified and structured."
     },
     "signIn": {
-      "title": "Step into the future with Checklists",
-      "desc": "The interface of the Checklists is very easy, so you don't need much effort to enter your account. All you have to do to log in is enter some of your information."
+      "title": "Step into the future with olcheck",
+      "desc": "The interface of the olcheck is very easy, so you don't need much effort to enter your account. All you have to do to log in is enter some of your information."
     },
     "signInReset": {
       "title": "We’re happy to see you. Sign in!",
@@ -49,7 +49,7 @@
       "desc": "Page not responding. You can wait or refresh the page and try again."
     }
   },
-  "checklists": "Active checklist",
+  "checklists": "Active checklists",
   "share": "Share",
   "home": "Home",
   "progress": "Your checklist is",
@@ -59,9 +59,9 @@
   "signInButton": "Sign In",
   "inputPlaceholder": "Enter a word or #tag",
   "header": {
-    "activeChecklist": "Active checklist",
+    "activeChecklist": "Active checklists",
     "create": "Create",
-    "allChecklists": "All Checklists",
+    "allChecklists": "Checklists",
     "profileSettings": "Profile settings",
     "accountSettings": "Account settings",
     "signOut": "Sign Out"
@@ -287,17 +287,17 @@
     "title": "Our mission",
     "section1": {
       "title": "1. Reaching goals",
-      "subtitle": "The Checklists – it's easy to achieve your goals!",
-      "text": "We created the Checklists to make achieving your goals an easy process for you. The Checklists is a platform that uses responses from users who have already gone one way or another. This way, you will already have some sort of plan for achieving your goals, which makes the process much easier. Agree, when you're not a trailblazer, everything is smoother and easier."
+      "subtitle": "The olcheck – it's easy to achieve your goals!",
+      "text": "We created the olcheck to make achieving your goals an easy process for you. The olcheck is a platform that uses responses from users who have already gone one way or another. This way, you will already have some sort of plan for achieving your goals, which makes the process much easier. Agree, when you're not a trailblazer, everything is smoother and easier."
     },
     "section2": {
       "title": "2. Saving time",
-      "subtitle": "The Checklists – it's a time saver!",
-      "text": "Saving your precious time – is one of our most important missions. The Checklists make sure that you can do something useful and more important for you instead of scrolling through lots of sites with lots of questionable and unstructured information. With Checklists, you get structured and useful information without spending a lot of time searching!"
+      "subtitle": "The olcheck – it's a time saver!",
+      "text": "Saving your precious time – is one of our most important missions. The olcheck make sure that you can do something useful and more important for you instead of scrolling through lots of sites with lots of questionable and unstructured information. With olcheck, you get structured and useful information without spending a lot of time searching!"
     },
     "section3": {
       "title": "3. More opportunities",
-      "subtitle": "The Checklists – it's a new opportunities!",
+      "subtitle": "The olcheck – it's a new opportunities!",
       "text": "New opportunities open up for you thanks to the fact that users share their experiences. When you enter your request, you get a lot of variants for solving this or that problem. In this way, you discover new locations, places, and methods of achieving your goals. And that means new opportunities!"
     }
   },
@@ -568,7 +568,7 @@
     "title": "Popular checklists"
   },
   "allChecklistsPage": {
-    "title": "All checklists",
+    "title": "Checklists",
     "showMore": "Show more",
     "created": "Created",
     "liked": "Liked",
@@ -589,7 +589,7 @@
     "review": "Reviews"
   },
   "myActiveChecklists": {
-    "title": "My active checklists",
+    "title": "Your checklists",
     "active": "Active",
     "passed": "Passed",
     "showMore": "Show more",
