@@ -142,17 +142,17 @@ const ProfileInfo = ({
                   </a>
                 </li>
               )}
-              {instagram && (
-                <li className="profile-info__network">
-                  <a href={instagram} target="_blank" rel="noreferrer">
-                    <Instagram />
-                  </a>
-                </li>
-              )}
               {linkedin && (
                 <li className="profile-info__network">
                   <a href={linkedin} target="_blank" rel="noreferrer">
                     <Linkedin />
+                  </a>
+                </li>
+              )}
+              {instagram && (
+                <li className="profile-info__network">
+                  <a href={instagram} target="_blank" rel="noreferrer">
+                    <Instagram />
                   </a>
                 </li>
               )}

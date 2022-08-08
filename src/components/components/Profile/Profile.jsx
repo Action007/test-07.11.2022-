@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfileAwards from "./ProfileAwards/ProfileAwards";
@@ -9,7 +8,6 @@ import Notification from "../../UI/Notification/Notification";
 import "./Profile.scss";
 
 const Profile = ({ user, isLoading }) => {
-  const token = useSelector((state) => state.authSliceReducer.token);
   const [showError, setShowError] = useState(false);
   const { t: translate } = useTranslation();
 
@@ -45,13 +43,13 @@ const Profile = ({ user, isLoading }) => {
               linkedin={user.linkedin}
               avatar_url={user.avatar_url}
               onLargeImageSize={onLargeImageSize}
-              isMyAccount={user.is_current_user && token}
+              isMyAccount={user.is_current_user}
             />
             <ProfileAwards
               completedCounter={user.completed_counter}
               createdCounter={user.created_counter}
               awardsCounter={user.awards_counter}
-              isMyAccount={user.is_current_user && token}
+              isMyAccount={user.is_current_user}
             />
           </>
         )}
