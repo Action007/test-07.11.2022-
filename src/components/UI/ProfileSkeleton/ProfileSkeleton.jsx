@@ -42,10 +42,10 @@ const ProfileSkeleton = () => {
               <Twitter />
             </li>
             <li className="profile-skeleton__network">
-              <Instagram />
+              <Linkedin />
             </li>
             <li className="profile-skeleton__network">
-              <Linkedin />
+              <Instagram />
             </li>
             <li className="profile-skeleton__network profile-skeleton__network--website">
               <World />

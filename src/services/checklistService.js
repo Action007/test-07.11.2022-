@@ -33,7 +33,6 @@ export const checklistAPI = createApi({
     fetchChecklistForSupport: build.query({
       query: (checklistID) =>
         `/api/v1/checklists/${checklistID}?page=1&per_page=10`,
-      providesTags: () => ["Checklist"],
     }),
     fetchSearchTags: build.query({
       query: (url) => `/api/v1/tags/search?value=${url}`,
@@ -55,7 +54,6 @@ export const checklistAPI = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Checklist"],
     }),
     signIn: build.mutation({
       query: (body) => ({
@@ -63,7 +61,7 @@ export const checklistAPI = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Checklist", "Account"],
+      invalidatesTags: ["Account", "UserProfile"],
     }),
     signInWithGoogle: build.mutation({
       query: (body) => ({
@@ -71,14 +69,14 @@ export const checklistAPI = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Checklist", "Account"],
+      invalidatesTags: ["Account"],
     }),
     logOut: build.mutation({
       query: () => ({
         url: "/api/v1/users/logout",
         method: "DELETE",
       }),
-      invalidatesTags: ["Checklist", "Account"],
+      invalidatesTags: ["Account", "UserProfile"],
     }),
     forgotPassword: build.mutation({
       query: (body) => ({
