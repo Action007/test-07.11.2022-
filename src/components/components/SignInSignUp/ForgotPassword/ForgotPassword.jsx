@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { checklistAPI } from "../../../../services/checklistService";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
@@ -11,17 +11,22 @@ import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon
 import { ReactComponent as EmailSvg } from "../../../../assets/images/icon/sendEmail.svg";
 
 const ForgotPassword = () => {
-  const [forgotPassword, { isSuccess, isLoading, error }] =
+  const [forgotPassword, { isSuccess, isLoading, isError, error }] =
     checklistAPI.useForgotPasswordMutation();
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [emailIsValidServer, setEmailIsValidServer] = useState(true);
   const email = useRef();
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const { t: translate } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (error?.data.error === "not_found") setEmailIsValidServer(false);
-  }, [error]);
+    if (error && error?.data?.error === "unauthorized") {
+      setEmailIsValidServer(false);
+    } else if (isError) {
+      navigate("/error");
+    }
+  }, [isError]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -30,6 +35,7 @@ const ForgotPassword = () => {
     setEmailIsValidServer(true);
     if (validEmail) {
       forgotPassword({ email: email.current.value });
+      email.current.value = "";
     }
   };
 

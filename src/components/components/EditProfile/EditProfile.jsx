@@ -115,7 +115,7 @@ const EditProfile = () => {
     }
 
     return () => {
-      if (showNotification) clearTimeout(showNotification);
+      clearTimeout(showNotification);
     };
   }, [isEditSuccess, isEditError]);
 
