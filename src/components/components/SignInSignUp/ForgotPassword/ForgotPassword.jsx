@@ -35,6 +35,7 @@ const ForgotPassword = () => {
     setEmailIsValidServer(true);
     if (validEmail) {
       forgotPassword({ email: email.current.value });
+      email.current.value = "";
     }
   };
 
