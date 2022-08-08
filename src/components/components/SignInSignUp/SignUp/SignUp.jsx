@@ -42,13 +42,13 @@ const SignUp = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const name = nameRef.current.value.trim();
-    const email = emailRef.current.value.trim();
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
     const validName = name !== "";
     const validEmail = !!validateEmail(email);
-    const validPassword = password !== "" && password.trim().length > 7;
+    const validPassword = password !== "" && password.length > 7;
 
     if (validName && validEmail && validPassword) {
       signUp({

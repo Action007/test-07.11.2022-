@@ -92,6 +92,13 @@ export const checklistAPI = createApi({
         body,
       }),
     }),
+    resetForgotPassword: build.mutation({
+      query: (body) => ({
+        url: "/api/v1/users/reset_forgot_password",
+        method: "POST",
+        body,
+      }),
+    }),
     createChecklist: build.mutation({
       query: (checklist) => ({
         url: "/api/v1/checklists_auth",

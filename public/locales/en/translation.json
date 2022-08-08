@@ -74,7 +74,8 @@
   "notification": {
     "profileUpdate": "Profile updated successfully",
     "profileError": "There was a problem updating your profile",
-    "alreadyAdded": "This checklist has already been added for passing. Click to see active checklist"
+    "alreadyAdded": "This checklist has already been added for passing. Click to see active checklist",
+    "forgotPasswordUpdated": "Password changed successfully!"
   },
   "supportPage": {
     "title": "Support",
@@ -688,6 +689,8 @@
     "incorrectName": "Incorrect Name",
     "incorrectEmail": "Incorrect email address",
     "incorrectPassword": "Incorrect password",
+    "minimum": "Minimum 8 characters",
+    "doesNotMatch": "The new passwords don't match",
     "back": "Back",
     "desc": "We have sent a password recovery instruction to your email",
     "openEmail": "Open email app",

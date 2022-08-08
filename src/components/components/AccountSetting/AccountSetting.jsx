@@ -55,7 +55,7 @@ const AccountSetting = () => {
     let showNotification;
     if (isSuccess) {
       setNotification(true);
-      if (isSuccess) song.play();
+      song.play();
       showNotification = setTimeout(() => setNotification(false), 5000);
     }
 
@@ -71,8 +71,8 @@ const AccountSetting = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     const email = validateEmail(emilValue);
-    const oldPassword = oldPasswordRef.current.value.trim();
-    const newPassword = newPasswordRef.current.value.trim().length > 7;
+    const oldPassword = oldPasswordRef.current.value;
+    const newPassword = newPasswordRef.current.value.length > 7;
     if (newPassword) {
       setErrorMatchPassword(
         oldPasswordRef.current.value === newPasswordRef.current.value
