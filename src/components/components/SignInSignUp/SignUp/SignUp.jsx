@@ -88,18 +88,18 @@ const SignUp = () => {
           }`}
           htmlFor="loginName"
         >
-          <span className="sign-up__span">{translate("login.name")}</span>
+          <span className="sign-up__span">{translate("login.nickname")}</span>
           <input
             ref={nameRef}
             id="loginName"
-            placeholder={translate("login.namePlaceholder")}
+            placeholder={translate("login.nicknamePlaceholder")}
             minLength="2"
             type="text"
           />
           {(!nameIsValid || !isValidNicknameServer) && (
             <span className="sign-up__invalid SFPro-300">
               <ExclamationSvg />
-              {!nameIsValid && translate("login.incorrectName")}
+              {!nameIsValid && translate("login.incorrectNickname")}
               {!isValidNicknameServer && translate("login.nickNameTaken")}
             </span>
           )}
