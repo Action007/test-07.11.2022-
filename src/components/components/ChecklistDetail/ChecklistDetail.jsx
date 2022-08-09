@@ -3,7 +3,12 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
-import { checklistAPI } from "../../../services/checklistService";
+import {
+  useDislikeChecklistMutation,
+  useLikeChecklistMutation,
+  useSaveChecklistMutation,
+  useUnsaveChecklistMutation,
+} from "../../../services/checklistService";
 import Complain from "../Complain/Complain";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
 import uniqueID from "../../../utils/uniqueID";
@@ -17,6 +22,7 @@ import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg"
 import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
+import { useAddActiveChecklistMutation } from "../../../services/activeChecklistService";
 
 const ChecklistDetail = ({
   checklist,
@@ -47,11 +53,11 @@ const ChecklistDetail = ({
       isLoading,
       error: startError,
     },
-  ] = checklistAPI.useAddActiveChecklistMutation();
-  const [saveChecklist] = checklistAPI.useSaveChecklistMutation();
-  const [unsaveChecklist] = checklistAPI.useUnsaveChecklistMutation();
-  const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
-  const [dislikeChecklist] = checklistAPI.useDislikeChecklistMutation();
+  ] = useAddActiveChecklistMutation();
+  const [saveChecklist] = useSaveChecklistMutation();
+  const [unsaveChecklist] = useUnsaveChecklistMutation();
+  const [likeChecklist] = useLikeChecklistMutation();
+  const [dislikeChecklist] = useDislikeChecklistMutation();
 
   const { date } = getTime(created_at);
   const showOnMobile = useMediaQuery("(max-width:575px)");

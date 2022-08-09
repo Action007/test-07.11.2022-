@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { checklistAPI } from "../services/checklistService";
+import { useFetchAccountWithNicknameQuery } from "../services/accountService";
 import Profile from "../components/components/Profile/Profile";
 
 const ProfilePage = () => {
@@ -14,7 +14,7 @@ const ProfilePage = () => {
     isLoading,
     isError,
     error,
-  } = checklistAPI.useFetchUserProfileQuery(nickname);
+  } = useFetchAccountWithNicknameQuery(nickname);
 
   useEffect(() => {
     if (error && error?.data?.message[0]?.type === "invalid") {

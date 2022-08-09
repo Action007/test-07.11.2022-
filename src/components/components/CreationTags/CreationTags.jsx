@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
-import { checklistAPI } from "../../../services/checklistService";
+import { useFetchSearchTagsQuery } from "../../../services/checklistTagsService";
 import TagListSearch from "../TagListSearch/TagListSearch";
 import useClickOutside from "../../../hooks/useClickOutside";
 import uniqueID from "../../../utils/uniqueID";
@@ -22,12 +22,9 @@ const CreationTags = ({
   );
   const [searchTagUrl, setSearchTagUrl] = useState("");
   const [url, setUrl] = useState("");
-  const { data: serverTags } = checklistAPI.useFetchSearchTagsQuery(
-    searchTagUrl,
-    {
-      skip: !searchTagUrl,
-    }
-  );
+  const { data: serverTags } = useFetchSearchTagsQuery(searchTagUrl, {
+    skip: !searchTagUrl,
+  });
   const [addTags, setAddTags] = useState(false);
   const myTags = useSelector((state) => state.createChecklistReducer.tags);
   const inputTag = useRef();

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import { checklistAPI } from "../../../../services/checklistService";
+import { useForgotPasswordMutation } from "../../../../services/logInService";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import validateEmail from "../../../../utils/validateEmail";
@@ -12,7 +12,7 @@ import { ReactComponent as EmailSvg } from "../../../../assets/images/icon/sendE
 
 const ForgotPassword = () => {
   const [forgotPassword, { isSuccess, isLoading, isError, error }] =
-    checklistAPI.useForgotPasswordMutation();
+    useForgotPasswordMutation();
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [emailIsValidServer, setEmailIsValidServer] = useState(true);
   const email = useRef();

@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { checklistAPI } from "../../../services/checklistService";
+import {
+  useAddCommentMutation,
+  useDeleteCommentMutation,
+  useLikeCommentMutation,
+  useUnlikeCommentMutation,
+} from "../../../services/commentsService";
 import getTime from "../../../utils/getTime";
 import Comment from "../Comment/Comment";
 import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
@@ -22,10 +27,10 @@ const ChecklistComments = ({
   const [inputValue, setInputValue] = useState("");
   const [isValidComment, setIsValidComment] = useState(true);
   const [newComment, setNewComment] = useState(false);
-  const [addComment, { isSuccess }] = checklistAPI.useAddCommentMutation();
-  const [likeComment] = checklistAPI.useLikeCommentMutation();
-  const [unlikeComment] = checklistAPI.useUnlikeCommentMutation();
-  const [deleteComment] = checklistAPI.useDeleteCommentMutation();
+  const [addComment, { isSuccess }] = useAddCommentMutation();
+  const [likeComment] = useLikeCommentMutation();
+  const [unlikeComment] = useUnlikeCommentMutation();
+  const [deleteComment] = useDeleteCommentMutation();
   const token = useSelector((state) => state.authSliceReducer.token);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();

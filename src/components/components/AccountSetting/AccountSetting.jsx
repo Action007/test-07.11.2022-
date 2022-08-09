@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { checklistAPI } from "../../../services/checklistService";
+import { useResetAccountPasswordMutation } from "../../../services/accountService";
 import validateEmail from "../../../utils/validateEmail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
@@ -14,7 +14,7 @@ import { ReactComponent as EditProfileSvg } from "../../../assets/images/content
 
 const AccountSetting = () => {
   const [resetPassword, { isLoading, isSuccess, isError, error }] =
-    checklistAPI.useResetPasswordMutation();
+    useResetAccountPasswordMutation();
   const user = useSelector((state) => state.authSliceReducer.user);
   const [emilValue, setEmailValue] = useState("@");
   const confirmPasswordRef = useRef();

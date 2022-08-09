@@ -3,8 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { checklistAPI } from "../services/checklistService";
 import { createChecklistActions } from "../store/createChecklistSlice";
+import { useFetchChecklistQuery } from "../services/checklistService";
 import CreationOfChecklist from "../components/components/CreationOfChecklist/CreationOfChecklist";
 
 const CreationOfChecklistPage = () => {
@@ -16,9 +16,7 @@ const CreationOfChecklistPage = () => {
     data: checklists,
     error,
     isLoading,
-  } = checklistAPI.useFetchChecklistQuery(
-    `/checklists_auth/${id}?page=1&per_page=1`
-  );
+  } = useFetchChecklistQuery(`/checklists_auth/${id}?page=1&per_page=1`);
   const token = useSelector((state) => state.authSliceReducer.token);
 
   useEffect(() => {

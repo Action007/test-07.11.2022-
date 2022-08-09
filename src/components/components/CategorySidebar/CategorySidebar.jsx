@@ -67,7 +67,7 @@ const CategorySidebar = () => {
 
     if (id === "all") {
       if (!search) {
-        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+        setSearchParams(`?per_page=5&page=1&${searchParams}`);
       } else {
         searchParams.append("page", 1);
         setSearchParams(searchParams);
@@ -77,7 +77,7 @@ const CategorySidebar = () => {
     if (id === "popular" || id === "latest") {
       if (!search) {
         searchParams.append(id, true);
-        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+        setSearchParams(`?per_page=5&page=1&${searchParams}`);
       } else {
         searchParams.append("page", 1);
         searchParams.append(id, true);
@@ -88,7 +88,7 @@ const CategorySidebar = () => {
     if (id !== "popular" && id !== "latest" && id !== "all") {
       if (!search) {
         searchParams.append("search_category_ids[]", id);
-        setSearchParams(`?page=1&per_page=5&${searchParams}`);
+        setSearchParams(`?per_page=5&page=1&${searchParams}`);
       } else {
         searchParams.append("page", 1);
         searchParams.append("search_category_ids[]", id);

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { checklistAPI } from "../../../../services/checklistService";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import validateEmail from "../../../../utils/validateEmail";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
@@ -9,6 +8,7 @@ import "./SignUp.scss";
 
 import { ReactComponent as LoginSvg } from "../../../../assets/images/content/login.svg";
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
+import { useSignUpMutation } from "../../../../services/logInService";
 
 const SignUp = () => {
   const [isValidNicknameServer, setIsValidNicknameServer] = useState(true);
@@ -19,8 +19,7 @@ const SignUp = () => {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const [signUp, { isLoading, isSuccess, error }] =
-    checklistAPI.useSignUpMutation();
+  const [signUp, { isLoading, isSuccess, error }] = useSignUpMutation();
   const emailValue = emailRef.current?.value;
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");

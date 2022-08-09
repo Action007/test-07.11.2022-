@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authSliceActions } from "../../../store/authSlice";
-import { checklistAPI } from "../../../services/checklistService";
+import { useSignInWithGoogleMutation } from "../../../services/logInService";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 
 const SignInWithGoogle = () => {
   const [signInWithGoogle, { data, isSuccess, isLoading, isError }] =
-    checklistAPI.useSignInWithGoogleMutation();
+    useSignInWithGoogleMutation();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
