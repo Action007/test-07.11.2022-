@@ -10,7 +10,7 @@
   padding: 34px 34px 25px;
 
   background-color: #fff;
-  border-radius: 6px;
+  border-radius: 8px;
 
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 
@@ -28,7 +28,7 @@
 
   .checklist-item {
     &:not(:last-child) {
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
   }
 
@@ -48,7 +48,7 @@
     align-items: center;
     justify-content: center;
 
-    padding: 5px 11px;
+    padding: 4px 10px;
 
     color: #a3a3a3;
 
@@ -58,7 +58,7 @@
     transition: box-shadow 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 
     svg {
-      margin-right: 10px;
+      margin-right: 8px;
 
       stroke: #a3a3a3;
 
@@ -75,10 +75,10 @@
     display: flex;
     align-items: center;
 
-    padding: 5px 11px;
+    padding: 4px 10px;
 
     svg {
-      margin-right: 10px;
+      margin-right: 8px;
     }
   }
 
@@ -102,7 +102,7 @@
   }
 
   &__title {
-    margin: 0 55px 25px 0;
+    margin: 0 55px 24px 0;
 
     font-size: 1.5rem;
     word-break: break-word;
@@ -188,7 +188,7 @@
     &.disliked {
       color: $warning;
 
-      background-color: #eb57571a;
+      background-color: #FC57571a;
 
       svg {
         stroke: $warning;
@@ -216,7 +216,7 @@
     margin-bottom: 28px;
 
     background-color: $secondary;
-    border-radius: 6px;
+    border-radius: 8px;
 
     transition: box-shadow 0.2s ease;
 
@@ -253,7 +253,7 @@
 
   &__items {
     margin-bottom: 5px;
-    margin-left: 18px;
+    margin-left: 20px;
 
     word-break: break-word;
   }
@@ -284,6 +284,8 @@
     display: flex;
     align-items: center;
 
+    font-size: 14px;
+
     @include media-breakpoint-down(md) {
       margin-bottom: 10px;
     }
@@ -294,7 +296,7 @@
   }
 
   &__dots {
-    margin-bottom: 14px;
+    margin-bottom: 11px;
     margin-left: 36px;
 
     opacity: 0.3;
@@ -312,7 +314,7 @@
   }
 
   &__tags {
-    margin-bottom: 13px;
+    margin-bottom: 17px;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 15px;
@@ -323,7 +325,7 @@
     display: inline-block;
 
     margin-bottom: 9px;
-    padding: 2px 8px;
+    padding: 2px 14px;
 
     word-break: break-word;
 
@@ -418,6 +420,6 @@
   &__time {
     display: block;
 
-    color: $light;
+    color: #95959580;
   }
 }

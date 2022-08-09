@@ -313,7 +313,7 @@
     display: inline-block;
 
     margin-bottom: 9px;
-    padding: 2px 8px;
+    padding: 2px 14px;
 
     text-align: left;
     word-break: break-word;
@@ -381,7 +381,7 @@
     &.disliked {
       color: $warning;
 
-      background-color: #eb57571a;
+      background-color: #FC57571a;
 
       svg {
         stroke: $warning;
