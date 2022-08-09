@@ -9,8 +9,14 @@ import {
 import Modal from "react-bootstrap/Modal";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { checklistAPI } from "../../../services/checklistService";
 import { changeSearchParamsValue } from "../../../utils/searchParamsValue";
+import {
+  useDeleteChecklistMutation,
+  useDislikeChecklistMutation,
+  useLikeChecklistMutation,
+  useSaveChecklistMutation,
+  useUnsaveChecklistMutation,
+} from "../../../services/checklistService";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ChecklistItem from "../ChecklistItem/ChecklistItem";
@@ -43,11 +49,11 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
   } = checklist;
   const token = useSelector((state) => state.authSliceReducer.token);
 
-  const [saveChecklist] = checklistAPI.useSaveChecklistMutation();
-  const [unsaveChecklist] = checklistAPI.useUnsaveChecklistMutation();
-  const [likeChecklist] = checklistAPI.useLikeChecklistMutation();
-  const [dislikeChecklist] = checklistAPI.useDislikeChecklistMutation();
-  const [deleteChecklist] = checklistAPI.useDeleteChecklistMutation();
+  const [saveChecklist] = useSaveChecklistMutation();
+  const [unsaveChecklist] = useUnsaveChecklistMutation();
+  const [likeChecklist] = useLikeChecklistMutation();
+  const [dislikeChecklist] = useDislikeChecklistMutation();
+  const [deleteChecklist] = useDeleteChecklistMutation();
 
   const [modalShow, setModalShow] = useState(false);
   const [showComplain, setShowComplain] = useState(false);

@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { checklistAPI } from "../../../services/checklistService";
 import {
   changeSearchParamsValue,
   removeSearchParamsValue,
 } from "../../../utils/searchParamsValue";
+import {
+  useFetchSearchTagsQuery,
+  useFetchTagsQuery,
+} from "../../../services/checklistTagsService";
 import useClickOutside from "../../../hooks/useClickOutside";
 import TagListSearch from "../TagListSearch/TagListSearch";
 import uniqueID from "../../../utils/uniqueID";
@@ -20,13 +23,10 @@ const SearchInput = ({ page = false, header }) => {
   const [tagUrl, setTagUrl] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [myTagsUrl, setMyTagsUrl] = useState("");
-  const { data: searchTags } = checklistAPI.useFetchSearchTagsQuery(
-    searchTagUrl,
-    {
-      skip: !searchTagUrl,
-    }
-  );
-  const { data: serverTags } = checklistAPI.useFetchTagsQuery(myTagsUrl, {
+  const { data: searchTags } = useFetchSearchTagsQuery(searchTagUrl, {
+    skip: !searchTagUrl,
+  });
+  const { data: serverTags } = useFetchTagsQuery(myTagsUrl, {
     skip: !myTagsUrl,
   });
   const [blur, setBlur] = useState(false);

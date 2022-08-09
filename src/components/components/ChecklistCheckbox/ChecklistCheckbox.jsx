@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { checklistAPI } from "../../../services/checklistService";
+import { useCheckActiveChecklistItemMutation } from "../../../services/activeChecklistService";
 import PopupCreateDone from "../PopupCreateDone/PopupCreateDone";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
 import MapGeneral from "../MapGeneral/MapGeneral";
@@ -21,7 +21,7 @@ const ChecklistCheckbox = ({
   setChecklistItems,
 }) => {
   const [checkChecklistItem, { isSuccess, data }] =
-    checklistAPI.useCheckActiveChecklistItemMutation();
+    useCheckActiveChecklistItemMutation();
   const [checked, setChecked] = useState(completed);
   const [showMap, setShowMap] = useState(false);
   const [modalShow, setModalShow] = useState(false);

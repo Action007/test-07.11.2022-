@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { checklistAPI } from "../../../services/checklistService";
+import {
+  useEditAccountMutation,
+  useFetchCountryNamesQuery,
+} from "../../../services/accountService";
 import EditProfileInput from "./EditProfileLabel/EditProfileLabel";
 import EditProfileDropdown from "./EditProfileDropdown/EditProfileDropdown";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
@@ -46,11 +49,10 @@ const EditProfile = () => {
       isError: isEditError,
       error,
     },
-  ] = checklistAPI.useEditAccountMutation();
-  const { data: countryNames, isLoading } =
-    checklistAPI.useFetchCountryNamesQuery("", {
-      skip: !show,
-    });
+  ] = useEditAccountMutation();
+  const { data: countryNames, isLoading } = useFetchCountryNamesQuery("", {
+    skip: !show,
+  });
   const { t: translate } = useTranslation();
 
   const breadcrumbs = [

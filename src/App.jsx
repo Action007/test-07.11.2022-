@@ -3,7 +3,7 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authSliceActions } from "./store/authSlice";
 import { homePageFiltersSliceActions } from "./store/homePageFiltersSlice";
-import { checklistAPI } from "./services/checklistService";
+import { useFetchAccountInfoQuery } from "./services/accountService";
 import Layout from "./components/UI/Layout/Layout";
 import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
 import routes from "./router";
@@ -12,7 +12,7 @@ import "leaflet/dist/leaflet.css";
 
 const App = () => {
   const token = useSelector((state) => state.authSliceReducer.token);
-  const { data: accountInfo, isError } = checklistAPI.useFetchAccountQuery("", {
+  const { data: accountInfo, isError } = useFetchAccountInfoQuery("", {
     skip: !token,
   });
   const navigate = useNavigate();

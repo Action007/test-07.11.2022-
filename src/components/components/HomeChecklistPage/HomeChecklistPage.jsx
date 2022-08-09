@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { checklistAPI } from "../../../services/checklistService";
+import { useFetchChecklistQuery } from "../../../services/checklistService";
 import MainBanner from "../MainBanner/MainBanner";
 import CategorySidebar from "../CategorySidebar/CategorySidebar";
 import SearchInput from "../SearchInput/SearchInput";
@@ -28,7 +28,7 @@ const HomeChecklistPage = () => {
     data: checklists,
     error,
     isFetching,
-  } = checklistAPI.useFetchChecklistQuery(
+  } = useFetchChecklistQuery(
     `/${token ? "checklists_auth" : "checklists"}${
       search || "?page=1&per_page=5"
     }`

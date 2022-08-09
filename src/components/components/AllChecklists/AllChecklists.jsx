@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { checklistAPI } from "../../../services/checklistService";
+import { useFetchChecklistQuery } from "../../../services/checklistService";
 import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 import HomeButton from "../../UI/Buttons/HomeButton/HomeButton";
 import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
@@ -18,7 +18,7 @@ const AllChecklists = () => {
     data: checklists,
     error,
     isFetching,
-  } = checklistAPI.useFetchChecklistQuery(
+  } = useFetchChecklistQuery(
     `/checklists_auth${search || `?search_type=${category}&page=1&per_page=10`}`
   );
   const { t: translate } = useTranslation();

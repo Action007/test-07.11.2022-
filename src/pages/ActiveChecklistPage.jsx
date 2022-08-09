@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { checklistAPI } from "../services/checklistService";
+import { useFetchActiveChecklistQuery } from "../services/activeChecklistService";
 import ActiveChecklist from "../components/components/ActiveChecklist/ActiveChecklist";
 
 const ActiveChecklistPage = () => {
@@ -12,7 +12,7 @@ const ActiveChecklistPage = () => {
     isLoading,
     isError,
     error,
-  } = checklistAPI.useFetchActiveChecklistQuery(`/active_checklists/${id}`);
+  } = useFetchActiveChecklistQuery(`/active_checklists/${id}`);
   const token = useSelector((state) => state.authSliceReducer.token);
   const navigate = useNavigate();
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { checklistAPI } from "../../../../services/checklistService";
+import { useResetForgotPasswordMutation } from "../../../../services/logInService";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import "./ResetPassword.scss";
@@ -12,7 +12,7 @@ import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon
 
 const ResetPassword = ({ setShowNotification }) => {
   const [resetPassword, { isLoading, isSuccess, isError }] =
-    checklistAPI.useResetForgotPasswordMutation();
+    useResetForgotPasswordMutation();
   const [isNewPasswordValid, setIsNewPasswordValid] = useState(true);
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
   const showOnMobile = useMediaQuery("(max-width:991px)");

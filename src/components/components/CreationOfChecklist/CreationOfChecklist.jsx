@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
-import { checklistAPI } from "../../../services/checklistService";
+import {
+  useCreateChecklistMutation,
+  useUpdateChecklistMutation,
+} from "../../../services/checklistService";
 import CreationChecklistItems from "../CreationChecklistItems/CreationChecklistItems";
 import CreationChecklistPreview from "../CreationChecklistPreview/CreationChecklistPreview";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -27,7 +30,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       isLoading: loadingCreate,
       data: newChecklist,
     },
-  ] = checklistAPI.useCreateChecklistMutation();
+  ] = useCreateChecklistMutation();
   const [
     updateChecklist,
     {
@@ -36,7 +39,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       isLoading: loadingUpdate,
       data: updatedChecklist,
     },
-  ] = checklistAPI.useUpdateChecklistMutation();
+  ] = useUpdateChecklistMutation();
   const [preview, setPreview] = useState(false);
   const [validButton, setValidButton] = useState();
   const [done, setDone] = useState(false);

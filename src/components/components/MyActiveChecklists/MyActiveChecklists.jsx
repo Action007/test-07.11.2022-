@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { checklistAPI } from "../../../services/checklistService";
+import { useFetchActiveChecklistQuery } from "../../../services/activeChecklistService";
 import uniqueID from "../../../utils/uniqueID";
 import getPercent from "../../../utils/getPercent";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -21,7 +21,7 @@ const MyActiveChecklists = () => {
     data: checklists,
     error,
     isLoading,
-  } = checklistAPI.useFetchActiveChecklistQuery(
+  } = useFetchActiveChecklistQuery(
     `/active_checklists${search || "?completed=false&page=1&per_page=10"}`
   );
 

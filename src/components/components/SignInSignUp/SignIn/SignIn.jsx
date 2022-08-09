@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authSliceActions } from "../../../../store/authSlice";
-import { checklistAPI } from "../../../../services/checklistService";
+import { useSignInMutation } from "../../../../services/logInService";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import validateEmail from "../../../../utils/validateEmail";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
@@ -24,8 +24,7 @@ const SignIn = () => {
   const passwordRef = useRef();
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
-  const [signIn, { data, isSuccess, isLoading, error }] =
-    checklistAPI.useSignInMutation();
+  const [signIn, { data, isSuccess, isLoading, error }] = useSignInMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

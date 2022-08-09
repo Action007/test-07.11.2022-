@@ -4,7 +4,7 @@ import { CSSTransition } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { authSliceActions } from "../../../store/authSlice";
-import { checklistAPI } from "../../../services/checklistService";
+import { useLogOutMutation } from "../../../services/logInService";
 import useClickOutside from "../../../hooks/useClickOutside";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
@@ -25,7 +25,7 @@ const HeaderDropdown = ({ setShow }) => {
   const showOnMobile = useMediaQuery("(max-width:767px)");
   const mobileClass = showOnMobile ? " mobile" : "";
 
-  const [logOut] = checklistAPI.useLogOutMutation();
+  const [logOut] = useLogOutMutation();
 
   const user = useSelector((state) => state.authSliceReducer.user);
   const percent = useSelector((state) => state.authSliceReducer.percent);

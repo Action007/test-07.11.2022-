@@ -2,7 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
-import { checklistAPI } from "../../../services/checklistService";
+import {
+  useFetchChecklistForSupportQuery,
+  useSupportChecklistMutation,
+} from "../../../services/supportService";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import ComplainDone from "../ComplainDone/ComplainDone";
 import "./Complain.scss";
@@ -15,12 +18,14 @@ const Complain = ({ closeHandler, id, name, page }) => {
   const [category, setCategory] = useState("");
   const [checklistId, setChecklistId] = useState(id);
   const skip = page !== "support" || !checklistId;
-  const { data: checklist, isFetching } =
-    checklistAPI.useFetchChecklistForSupportQuery(checklistId, {
+  const { data: checklist, isFetching } = useFetchChecklistForSupportQuery(
+    checklistId,
+    {
       skip,
-    });
+    }
+  );
   const [supportChecklist, { isSuccess, isError, isLoading: isSendLoading }] =
-    checklistAPI.useSupportChecklistMutation();
+    useSupportChecklistMutation();
   const [done, setDone] = useState(false);
   const field = useRef();
   const { t: translate } = useTranslation();

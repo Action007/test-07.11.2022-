@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { checklistAPI } from "../../../services/checklistService";
+import { useDeleteActiveChecklistMutation } from "../../../services/activeChecklistService";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
 import uniqueID from "../../../utils/uniqueID";
@@ -13,7 +13,7 @@ import { ReactComponent as ShareSvg } from "../../../assets/images/icon/share.sv
 
 const ActiveChecklistDetail = ({ checklist }) => {
   const [checkChecklistItem, { isSuccess, isError, error, isLoading }] =
-    checklistAPI.useDeleteActiveChecklistMutation();
+    useDeleteActiveChecklistMutation();
   const [checklistItems, setChecklistItems] = useState(
     checklist.checklist_items
   );

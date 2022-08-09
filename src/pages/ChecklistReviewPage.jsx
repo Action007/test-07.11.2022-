@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { checklistAPI } from "../services/checklistService";
+import { useFetchChecklistQuery } from "../services/checklistService";
 import ChecklistReview from "../components/components/ChecklistReview/ChecklistReview";
 
 const HOSTNAME = process.env.REACT_APP_HOSTNAME;
@@ -19,7 +19,7 @@ const ChecklistDetailPage = () => {
     error,
     isLoading,
     isFetching,
-  } = checklistAPI.useFetchChecklistQuery(
+  } = useFetchChecklistQuery(
     `/${
       token ? "checklists_auth" : "checklists"
     }/${id}?page=${pageCount}&per_page=5`

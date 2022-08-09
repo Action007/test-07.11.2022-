@@ -1,18 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { checklistAPI } from "../services/checklistService";
+import { olcheckAPI } from "../services";
 import { createChecklistReducer } from "./createChecklistSlice";
 import { homePageFiltersSliceReducer } from "./homePageFiltersSlice";
 import { authSliceReducer } from "./authSlice";
 
 const store = configureStore({
   reducer: {
-    [checklistAPI.reducerPath]: checklistAPI.reducer,
+    [olcheckAPI.reducerPath]: olcheckAPI.reducer,
     createChecklistReducer,
     authSliceReducer,
     homePageFiltersSliceReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(checklistAPI.middleware),
+    getDefaultMiddleware().concat(olcheckAPI.middleware),
 });
 
 export default store;
