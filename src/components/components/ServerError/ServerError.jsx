@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import HomeButton from "../../UI/Buttons/HomeButton/HomeButton";
 import "./ServerError.scss";
 
-import Error from "../../../assets/images/content/server-error.png";
+import Error from "../../../assets/images/content/server-error.svg";
 
 const ServerError = () => {
   const { t: translate } = useTranslation();
