@@ -50,9 +50,11 @@ const checklistAPI = olcheckAPI.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useSignUpMutation } = checklistAPI;
-export const { useSignInMutation } = checklistAPI;
-export const { useSignInWithGoogleMutation } = checklistAPI;
-export const { useLogOutMutation } = checklistAPI;
-export const { useForgotPasswordMutation } = checklistAPI;
-export const { useResetForgotPasswordMutation } = checklistAPI;
+export const {
+  useSignUpMutation,
+  useSignInMutation,
+  useSignInWithGoogleMutation,
+  useLogOutMutation,
+  useForgotPasswordMutation,
+  useResetForgotPasswordMutation,
+} = checklistAPI;

@@ -25,15 +25,20 @@ const Header = () => {
   const navigate = useNavigate();
   const headerRef = useRef();
   const user = useSelector((state) => state.authSliceReducer.user);
-  const token = useSelector((state) => state.authSliceReducer.token);
   const percent = useSelector((state) => state.authSliceReducer.percent);
+  const [savedCounter, setSavedCounter] = useState(user?.saved_counter);
   const { t: translate } = useTranslation();
-  const location = useLocation();
-  const [homePage, setHomePage] = useState();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    setHomePage(location.pathname === "/");
-  }, [location.pathname]);
+    if (pathname === "/saved-checklists" || !user) return;
+    setSavedCounter(user.saved_counter);
+  }, [user]);
+
+  useEffect(() => {
+    if (pathname !== "/saved-checklists") return;
+    setSavedCounter(false);
+  }, [pathname]);
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -79,13 +84,17 @@ const Header = () => {
             type="button"
           >
             <Bookmark />
-            {user && user.saved_counter > 0 && (
-              <span className="header__span">{user.saved_counter}</span>
+            {!!savedCounter && (
+              <span className="header__span">{savedCounter}</span>
             )}
           </button>
         </>
       )}
-      <HeaderDropdown setShow={setShow} />
+      <HeaderDropdown
+        user={user}
+        savedCounter={savedCounter}
+        setShow={setShow}
+      />
       {!showAddButtonOnMobile && (
         <button
           onClick={onClickCreateHandler}
@@ -180,7 +189,7 @@ const Header = () => {
       <Navbar
         className={`header__navbar${scroll ? " scroll" : ""}${
           show ? " active" : ""
-        }${!token ? " login" : ""}`}
+        }${!user ? " login" : ""}`}
         expand="md"
       >
         <Container
@@ -188,7 +197,7 @@ const Header = () => {
           className={`header__container${scroll ? " scroll" : ""}`}
           fluid
         >
-          <div className={`header__inner${!token ? " login" : ""}`}>
+          <div className={`header__inner${!user ? " login" : ""}`}>
             <button
               onClick={() => {
                 onChangePageHandler("/");
@@ -214,7 +223,7 @@ const Header = () => {
                 >
                   <BurgerSvg />
                 </button>
-                {token ? (
+                {user ? (
                   <button
                     onClick={onClickCreateHandler}
                     className="header__btn br-8"
@@ -240,15 +249,15 @@ const Header = () => {
             timeout={300}
             unmountOnExit
           >
-            <div className={`header__wrap SFPro-500${!token ? " login" : ""}`}>
+            <div className={`header__wrap SFPro-500${!user ? " login" : ""}`}>
               {!showSearchOnMobile && <SearchInput header />}
-              {token ? authorized : notAuthorized}
+              {user ? authorized : notAuthorized}
             </div>
           </CSSTransition>
         </Container>
       </Navbar>
-      {token
-        ? showSearchOnMobile && !homePage && <SearchInput />
+      {user
+        ? showSearchOnMobile && pathname !== "/" && <SearchInput />
         : showSearchOnMobile && <SearchInput header />}
     </header>
   );

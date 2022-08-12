@@ -11,7 +11,6 @@ import Pagination from "../Pagination/Pagination";
 import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
 import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 import useMediaQuery from "../../../hooks/useMediaQuery";
-import uniqueID from "../../../utils/uniqueID";
 import "./HomeChecklistPage.scss";
 
 import Logo from "../../../assets/images/content/logo.svg";
@@ -31,7 +30,8 @@ const HomeChecklistPage = () => {
   } = useFetchChecklistQuery(
     `/${token ? "checklists_auth" : "checklists"}${
       search || "?page=1&per_page=5"
-    }`
+    }`,
+    { refetchOnMountOrArgChange: true }
   );
 
   useEffect(() => {
@@ -59,6 +59,8 @@ const HomeChecklistPage = () => {
       <ChecklistSkeleton />
       <ChecklistSkeleton />
       <ChecklistSkeleton />
+      <ChecklistSkeleton />
+      <ChecklistSkeleton />
     </>
   );
 
@@ -76,16 +78,16 @@ const HomeChecklistPage = () => {
             <SearchInput page="home" />
             {showOnMobile && <CategorySidebar />}
             {isFetching && loader}
-            {checklists && !isFetching
-              ? checklists.entities.map((checklist) => (
-                  <Checklist
-                    key={uniqueID()}
-                    checklist={checklist}
-                    page="home"
-                  />
-                ))
-              : ""}
-            {checklists?.entities.length === 0 && (
+            {checklists &&
+              !isFetching &&
+              checklists.entities.map((checklist) => (
+                <Checklist
+                  key={checklist.id}
+                  checklist={checklist}
+                  page="home"
+                />
+              ))}
+            {checklists && checklists.entities.length === 0 && !isFetching && (
               <span className="main-content__text">
                 {translate("mainPage.notFound")}
               </span>

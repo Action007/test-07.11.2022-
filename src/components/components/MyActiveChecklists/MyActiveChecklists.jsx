@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFetchActiveChecklistQuery } from "../../../services/activeChecklistService";
-import uniqueID from "../../../utils/uniqueID";
 import getPercent from "../../../utils/getPercent";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import Checklist from "../Checklist/Checklist";
@@ -90,7 +89,7 @@ const MyActiveChecklists = () => {
                   )}
                 />
                 <Checklist
-                  key={uniqueID()}
+                  key={checklist.id}
                   checklist={checklist}
                   translate={translate("myActiveChecklists.showMore")}
                   page="my-active-checklists"

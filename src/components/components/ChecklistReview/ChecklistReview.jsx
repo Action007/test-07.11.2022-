@@ -7,13 +7,7 @@ import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import ChecklistComments from "../ChecklistComments/ChecklistComments";
 import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
 
-const ChecklistReview = ({
-  checklist,
-  setPageCount,
-  id,
-  isLoading,
-  isFetching,
-}) => {
+const ChecklistReview = ({ checklist, setPageCount, id, isFetching }) => {
   const [notification, setNotification] = useState(false);
   const [linkToActiveChecklist, setLinkToActiveChecklist] = useState("");
   const { t: translate } = useTranslation();
@@ -60,8 +54,8 @@ const ChecklistReview = ({
         }`}
       >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
-        {isLoading && <ChecklistSkeleton />}
-        {checklist && (
+        {isFetching && <ChecklistSkeleton />}
+        {checklist && !isFetching && (
           <ChecklistDetail
             checklist={checklist.checklist}
             setNotification={setNotification}
@@ -69,7 +63,7 @@ const ChecklistReview = ({
             detailPage
           />
         )}
-        {checklist && (
+        {checklist && !isFetching && (
           <ChecklistComments
             commentsTotalCount={checklist.paginate.total_comments_value}
             pagination_comments={checklist.pagination_comments}

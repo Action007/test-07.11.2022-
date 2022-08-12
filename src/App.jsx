@@ -20,16 +20,15 @@ const App = () => {
   const { pathname, search } = useLocation();
 
   useEffect(() => {
-    if (accountInfo) {
-      const { completed_counter, active_checklists_counter } = accountInfo;
-      dispatch(authSliceActions.setUser(accountInfo));
-      dispatch(
-        authSliceActions.setPercentActiveChecklist({
-          completed_counter,
-          active_checklists_counter,
-        })
-      );
-    }
+    if (!accountInfo) return;
+    const { completed_counter, active_checklists_counter } = accountInfo;
+    dispatch(authSliceActions.setUser(accountInfo));
+    dispatch(
+      authSliceActions.setPercentActiveChecklist({
+        completed_counter,
+        active_checklists_counter,
+      })
+    );
   }, [accountInfo]);
 
   useEffect(() => {
@@ -40,12 +39,13 @@ const App = () => {
   }, [isError]);
 
   useEffect(() => {
-    dispatch(authSliceActions.tokenVerification());
-  }, []);
+    if (pathname !== "/") return;
+    dispatch(homePageFiltersSliceActions.setUrl(search));
+  }, [search]);
 
   useEffect(() => {
-    if (pathname === "/") dispatch(homePageFiltersSliceActions.setUrl(search));
-  }, [search]);
+    dispatch(authSliceActions.tokenVerification());
+  }, []);
 
   return (
     <Suspense fallback={<LoadingSpinner />}>

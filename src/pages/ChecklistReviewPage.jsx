@@ -17,12 +17,12 @@ const ChecklistDetailPage = () => {
     data: checklist,
     isError,
     error,
-    isLoading,
     isFetching,
   } = useFetchChecklistQuery(
     `/${
       token ? "checklists_auth" : "checklists"
-    }/${id}?page=${pageCount}&per_page=5`
+    }/${id}?page=${pageCount}&per_page=5`,
+    { refetchOnMountOrArgChange: true }
   );
 
   useEffect(() => {
@@ -51,7 +51,6 @@ const ChecklistDetailPage = () => {
         checklist={checklist}
         setPageCount={setPageCount}
         id={id}
-        isLoading={isLoading}
         isFetching={isFetching}
       />
     </>

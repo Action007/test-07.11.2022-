@@ -13,5 +13,4 @@ const checklistAPI = olcheckAPI.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useFetchSearchTagsQuery } = checklistAPI;
-export const { useFetchTagsQuery } = checklistAPI;
+export const { useFetchSearchTagsQuery, useFetchTagsQuery } = checklistAPI;
