@@ -31,7 +31,7 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         },
         body: id,
       }),
-      invalidatesTags: ["Account"],
+      invalidatesTags: ["AccountInfo"],
     }),
     unsaveChecklist: build.mutation({
       query: (id) => ({
@@ -42,7 +42,7 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         },
         body: id,
       }),
-      invalidatesTags: ["Account"],
+      invalidatesTags: ["AccountInfo"],
     }),
     likeChecklist: build.mutation({
       query: (id) => ({

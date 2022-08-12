@@ -63,7 +63,7 @@ const ChecklistReview = ({ checklist, setPageCount, id, isFetching }) => {
             detailPage
           />
         )}
-        {checklist && !isFetching && (
+        {checklist && (
           <ChecklistComments
             commentsTotalCount={checklist.paginate.total_comments_value}
             pagination_comments={checklist.pagination_comments}
