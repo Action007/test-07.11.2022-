@@ -11,10 +11,12 @@ const ProfilePage = () => {
   const { nickname } = useParams();
   const {
     data: user,
-    isLoading,
+    isFetching,
     isError,
     error,
-  } = useFetchAccountWithNicknameQuery(nickname);
+  } = useFetchAccountWithNicknameQuery(nickname, {
+    refetchOnMountOrArgChange: true,
+  });
 
   useEffect(() => {
     if (error && error?.data?.message[0]?.type === "invalid") {
@@ -34,7 +36,7 @@ const ProfilePage = () => {
         </title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
-      <Profile user={user} isLoading={isLoading} />
+      <Profile user={user} isFetching={isFetching} />
     </>
   );
 };

@@ -15,7 +15,7 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Account", "UserProfile"],
+      invalidatesTags: ["AccountInfo", "AccountNickname"],
     }),
     signInWithGoogle: build.mutation({
       query: (body) => ({
@@ -23,14 +23,14 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Account"],
+      invalidatesTags: ["AccountInfo", "AccountNickname"],
     }),
     logOut: build.mutation({
       query: () => ({
         url: "/api/v1/users/logout",
         method: "DELETE",
       }),
-      invalidatesTags: ["Account", "UserProfile"],
+      invalidatesTags: ["AccountInfo", "AccountNickname"],
     }),
     forgotPassword: build.mutation({
       query: (body) => ({

@@ -7,7 +7,7 @@ import ProfileSkeleton from "../../UI/ProfileSkeleton/ProfileSkeleton";
 import Notification from "../../UI/Notification/Notification";
 import "./Profile.scss";
 
-const Profile = ({ user, isLoading }) => {
+const Profile = ({ user, isFetching }) => {
   const [showError, setShowError] = useState(false);
   const { t: translate } = useTranslation();
 
@@ -29,7 +29,7 @@ const Profile = ({ user, isLoading }) => {
       )}
       <div className={`profile container${showError ? " show" : ""}`}>
         <Breadcrumbs breadcrumbs={breadcrumbs} />
-        {user && (
+        {user && !isFetching && (
           <>
             <ProfileInfo
               name={user.name}
@@ -53,7 +53,7 @@ const Profile = ({ user, isLoading }) => {
             />
           </>
         )}
-        {isLoading && <ProfileSkeleton />}
+        {isFetching && <ProfileSkeleton />}
       </div>
     </>
   );
