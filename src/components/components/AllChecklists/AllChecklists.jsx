@@ -19,7 +19,10 @@ const AllChecklists = () => {
     error,
     isFetching,
   } = useFetchChecklistQuery(
-    `/checklists_auth${search || `?search_type=${category}&page=1&per_page=10`}`
+    `/checklists_auth${
+      search || `?search_type=${category}&page=1&per_page=10`
+    }`,
+    { refetchOnMountOrArgChange: true }
   );
   const { t: translate } = useTranslation();
   const navigate = useNavigate();

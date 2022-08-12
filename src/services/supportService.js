@@ -17,5 +17,5 @@ const checklistAPI = olcheckAPI.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useFetchChecklistForSupportQuery } = checklistAPI;
-export const { useSupportChecklistMutation } = checklistAPI;
+export const { useFetchChecklistForSupportQuery, useSupportChecklistMutation } =
+  checklistAPI;

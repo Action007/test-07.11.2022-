@@ -31,8 +31,10 @@ const checklistAPI = olcheckAPI.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useFetchAccountInfoQuery } = checklistAPI;
-export const { useFetchCountryNamesQuery } = checklistAPI;
-export const { useFetchAccountWithNicknameQuery } = checklistAPI;
-export const { useEditAccountMutation } = checklistAPI;
-export const { useResetAccountPasswordMutation } = checklistAPI;
+export const {
+  useFetchAccountInfoQuery,
+  useFetchCountryNamesQuery,
+  useFetchAccountWithNicknameQuery,
+  useEditAccountMutation,
+  useResetAccountPasswordMutation,
+} = checklistAPI;

@@ -53,7 +53,6 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         },
         body: id,
       }),
-      invalidatesTags: ["LikeChecklist"],
     }),
     dislikeChecklist: build.mutation({
       query: (id) => ({
@@ -64,7 +63,6 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         },
         body: id,
       }),
-      invalidatesTags: ["DislikeChecklist"],
     }),
     deleteChecklist: build.mutation({
       query: (id) => ({
@@ -77,11 +75,13 @@ const checklistAPI = olcheckAPI.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useFetchChecklistQuery } = checklistAPI;
-export const { useCreateChecklistMutation } = checklistAPI;
-export const { useUpdateChecklistMutation } = checklistAPI;
-export const { useSaveChecklistMutation } = checklistAPI;
-export const { useUnsaveChecklistMutation } = checklistAPI;
-export const { useLikeChecklistMutation } = checklistAPI;
-export const { useDislikeChecklistMutation } = checklistAPI;
-export const { useDeleteChecklistMutation } = checklistAPI;
+export const {
+  useFetchChecklistQuery,
+  useCreateChecklistMutation,
+  useUpdateChecklistMutation,
+  useSaveChecklistMutation,
+  useUnsaveChecklistMutation,
+  useLikeChecklistMutation,
+  useDislikeChecklistMutation,
+  useDeleteChecklistMutation,
+} = checklistAPI;

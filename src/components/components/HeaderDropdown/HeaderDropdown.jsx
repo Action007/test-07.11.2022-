@@ -17,7 +17,7 @@ import { ReactComponent as Account } from "../../../assets/images/icon/account.s
 import { ReactComponent as Setting } from "../../../assets/images/icon/setting.svg";
 import { ReactComponent as Logout } from "../../../assets/images/icon/logout.svg";
 
-const HeaderDropdown = ({ setShow }) => {
+const HeaderDropdown = ({ user, savedCounter, setShow }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { ref, show, setShowHandler } = useClickOutside();
@@ -27,7 +27,6 @@ const HeaderDropdown = ({ setShow }) => {
 
   const [logOut] = useLogOutMutation();
 
-  const user = useSelector((state) => state.authSliceReducer.user);
   const percent = useSelector((state) => state.authSliceReducer.percent);
   const { t: translate } = useTranslation();
 
@@ -116,7 +115,7 @@ const HeaderDropdown = ({ setShow }) => {
               type="button"
             >
               <Bookmark />
-              {user && user.saved_counter > 0 && <span />}
+              {!!savedCounter && <span />}
               {translate("header.allChecklists")}
             </button>
             <button

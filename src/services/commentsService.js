@@ -36,7 +36,9 @@ const checklistAPI = olcheckAPI.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useAddCommentMutation } = checklistAPI;
-export const { useLikeCommentMutation } = checklistAPI;
-export const { useUnlikeCommentMutation } = checklistAPI;
-export const { useDeleteCommentMutation } = checklistAPI;
+export const {
+  useAddCommentMutation,
+  useLikeCommentMutation,
+  useUnlikeCommentMutation,
+  useDeleteCommentMutation,
+} = checklistAPI;
