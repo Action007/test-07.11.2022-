@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
 import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
 import Notification from "../../UI/Notification/Notification";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -11,33 +10,13 @@ const ChecklistReview = ({ checklist, setPageCount, id, isFetching }) => {
   const [notification, setNotification] = useState(false);
   const [linkToActiveChecklist, setLinkToActiveChecklist] = useState("");
   const { t: translate } = useTranslation();
-  const { state } = useLocation();
-  const breadcrumbs =
-    state?.previousPath !== "/"
-      ? [
-          {
-            title: translate("allChecklistsPage.title"),
-            link: `${
-              state?.previousPath === "/created-checklists"
-                ? "/created-checklists"
-                : ""
-            }${
-              state?.previousPath === "/liked-checklists"
-                ? "/liked-checklists"
-                : ""
-            }${
-              state?.previousPath === "/saved-checklists"
-                ? "/saved-checklists"
-                : ""
-            }?search_type=${
-              state?.previousPath === "/created-checklists" ? "created" : ""
-            }${state?.previousPath === "/liked-checklists" ? "liked" : ""}${
-              state?.previousPath === "/saved-checklists" ? "saved" : ""
-            }&page=1&per_page=10`,
-          },
-          { title: checklist ? checklist.checklist.name : "" },
-        ]
-      : [{ title: checklist ? checklist.checklist.name : "" }];
+  const breadcrumbs = [
+    {
+      title: translate("allChecklistsPage.title"),
+      link: "/created-checklists?search_type=created&page=1&per_page=10",
+    },
+    { title: checklist ? checklist.checklist.name : "" },
+  ];
 
   return (
     <>

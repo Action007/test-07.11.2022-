@@ -59,7 +59,7 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
   const [showComplain, setShowComplain] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const showOnMobile = useMediaQuery("(max-width:575px)");
-  const { search, pathname } = useLocation();
+  const { search } = useLocation();
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
   const { date } = getTime(created_at);
@@ -162,7 +162,6 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
           to={`/${
             page !== "my-active-checklists" ? "checklist" : "active-checklist"
           }/${id}/${slug}`}
-          state={{ previousPath: pathname }}
         >
           {name}
         </Link>
@@ -223,7 +222,6 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
           to={`/${
             page !== "my-active-checklists" ? "checklist" : "active-checklist"
           }/${id}/${slug}`}
-          state={{ previousPath: pathname }}
         >
           <DotsSvg />
         </Link>
