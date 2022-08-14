@@ -54,16 +54,16 @@ const Comment = ({
   return (
     <li className="checklist-comment">
       <div className="checklist-comment__wrapper">
-        <div className="checklist-comment__heading">
+        <h3 className="checklist-comment__heading">
           <button
             onClick={onClickHandler}
-            className="checklist-comment__heading SFPro-600"
+            className="checklist-comment__title SFPro-600"
             type="button"
           >
             {author}
           </button>
           <span className="checklist-comment__time">{date}</span>
-        </div>
+        </h3>
         <p className="checklist-comment__text">{text}</p>
         <div className="checklist-comment__buttons">
           <button onClick={setLikeHandler} className={likeClass} type="button">

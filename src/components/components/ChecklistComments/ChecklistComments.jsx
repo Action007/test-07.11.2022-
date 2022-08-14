@@ -102,10 +102,7 @@ const ChecklistComments = ({
       <span className="checklist-comments__review SFPro-600">
         {commentsTotalCount} {translate("checklistReviewPage.review")}
       </span>
-      <form
-        onSubmit={(e) => onSubmitHandler(e)}
-        className="checklist-comments__form"
-      >
+      <form onSubmit={onSubmitHandler} className="checklist-comments__form">
         <label className="checklist-comments__label" htmlFor="checklistReview">
           {!isValidComment && (
             <span className="checklist-comments__desc">
