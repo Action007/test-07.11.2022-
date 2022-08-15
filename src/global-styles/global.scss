@@ -267,16 +267,6 @@ p {
   }
 }
 
-.modal-body {
-  .creation-map {
-    margin-left: 0;
-
-    .leaflet-control-geocoder {
-      top: 0;
-    }
-  }
-}
-
 .map-fake {
   width: 100%;
   max-width: 458px;
@@ -338,4 +328,38 @@ p {
 
 .show-notification {
   margin-top: 0;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+
+  transition: background-color 0.3s ease;
+  z-index: 500;
+
+  svg {
+    width: 26px;
+    height: 26px;
+    margin-bottom: 0;
+
+    stroke: #a3a3a3;
+
+    transition: stroke 0.2s ease;
+  }
+
+  &:hover svg {
+    stroke: $dark;
+  }
 }
