@@ -42,6 +42,7 @@ const ChecklistCheckbox = ({
 
   return (
     <>
+      <PopupCreateDone show={modalShow} onHide={() => setModalShow(false)} />
       <li className={`checklist-checkbox${checked ? " checked" : ""}`}>
         <label className="checklist-checkbox__label" htmlFor={idFor}>
           <input
@@ -88,8 +89,6 @@ const ChecklistCheckbox = ({
         )}
         {list_type === "image" && <ChecklistImage image={value.image} />}
       </li>
-
-      <PopupCreateDone show={modalShow} onHide={() => setModalShow(false)} />
     </>
   );
 };

@@ -46,6 +46,13 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         body,
       }),
     }),
+    confirmAccount: build.mutation({
+      query: (body) => ({
+        url: "/api/v1/users/confirmation",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -57,4 +64,5 @@ export const {
   useLogOutMutation,
   useForgotPasswordMutation,
   useResetForgotPasswordMutation,
+  useConfirmAccountMutation,
 } = checklistAPI;
