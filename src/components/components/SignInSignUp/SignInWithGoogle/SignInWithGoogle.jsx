@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authSliceActions } from "../../../store/authSlice";
-import { useSignInWithGoogleMutation } from "../../../services/logInService";
-import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
+import { authSliceActions } from "../../../../store/authSlice";
+import { useSignInWithGoogleMutation } from "../../../../services/logInService";
+import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
 
 const SignInWithGoogle = () => {
-  const [signInWithGoogle, { data, isSuccess, isLoading, isError }] =
+  const [signInWithGoogle, { data, isSuccess, isError }] =
     useSignInWithGoogleMutation();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -39,7 +39,7 @@ const SignInWithGoogle = () => {
     dispatch(authSliceActions.setToken(data.token));
   }, [isSuccess]);
 
-  return <LoadingSpinnerPopup showSpinner={!!isLoading} />;
+  return <LoadingSpinner />;
 };
 
 export default SignInWithGoogle;

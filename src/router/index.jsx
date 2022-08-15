@@ -31,7 +31,12 @@ const AccountSettingsPage = React.lazy(() =>
 );
 const SignInSignUpPage = React.lazy(() => import("../pages/SignInSignUpPage"));
 const SignInWithGoogle = React.lazy(() =>
-  import("../components/components/SignInWithGoogle/SignInWithGoogle")
+  import(
+    "../components/components/SignInSignUp/SignInWithGoogle/SignInWithGoogle"
+  )
+);
+const ConfirmAccount = React.lazy(() =>
+  import("../components/components/SignInSignUp/ConfirmAccount/ConfirmAccount")
 );
 const EditChecklistPage = React.lazy(() =>
   import("../pages/EditChecklistPage")
@@ -87,9 +92,10 @@ const routes = [
   { id: 27, path: "/sign-in/reset", element: <SignInSignUpPage /> },
   { id: 29, path: "/reset_password", element: <SignInSignUpPage /> },
   { id: 30, path: "/auth/google/callback", element: <SignInWithGoogle /> },
-  { id: 31, path: "/*", element: <NotFoundPage /> },
-  { id: 32, path: "/not-found", element: <NotFoundPage /> },
-  { id: 33, path: "/error", element: <ServerErrorPage /> },
+  { id: 31, path: "/confirmation", element: <ConfirmAccount /> },
+  { id: 32, path: "/*", element: <NotFoundPage /> },
+  { id: 33, path: "/not-found", element: <NotFoundPage /> },
+  { id: 34, path: "/error", element: <ServerErrorPage /> },
 ];
 
 export default routes;

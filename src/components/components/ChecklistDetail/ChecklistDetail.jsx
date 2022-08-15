@@ -154,6 +154,24 @@ const ChecklistDetail = ({
   return (
     <>
       <LoadingSpinnerPopup showSpinner={isLoading} />
+      <Modal
+        className="popup-complain"
+        show={showComplain}
+        onHide={setShowComplain}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter" />
+        </Modal.Header>
+        <Modal.Body>
+          <Complain
+            closeHandler={() => setShowComplain(false)}
+            id={id}
+            name={name}
+          />
+        </Modal.Body>
+      </Modal>
       <div className="checklist-detail__wrapper">
         <div className="checklist-detail__heading">
           <h3 className="checklist-detail__title SFPro-700">{name}</h3>
@@ -257,24 +275,6 @@ const ChecklistDetail = ({
           </div>
         )}
       </div>
-      <Modal
-        className="popup-complain"
-        show={showComplain}
-        onHide={setShowComplain}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter" />
-        </Modal.Header>
-        <Modal.Body>
-          <Complain
-            closeHandler={() => setShowComplain(false)}
-            id={id}
-            name={name}
-          />
-        </Modal.Body>
-      </Modal>
     </>
   );
 };

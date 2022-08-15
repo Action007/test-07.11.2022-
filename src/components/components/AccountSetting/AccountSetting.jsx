@@ -118,10 +118,7 @@ const AccountSetting = () => {
       >
         {user && <Breadcrumbs breadcrumbs={breadcrumbs} />}
         <div className="account-setting__wrapper">
-          <form
-            onSubmit={(e) => onSubmitHandler(e)}
-            className="account-setting__form"
-          >
+          <form onSubmit={onSubmitHandler} className="account-setting__form">
             <label
               className={`account-setting__label${
                 !emailValid ? " invalid" : ""
