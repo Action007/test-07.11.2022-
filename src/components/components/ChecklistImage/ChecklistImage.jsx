@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import "./ChecklistImage.scss";
 
-import brokenImg from "../../../assets/images/icon/brokenImg.png";
+import brokenImg from "../../../assets/images/icon/brokenImg.svg";
 import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-map.svg";
 import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel.svg";
 
@@ -16,6 +16,7 @@ const ChecklistImage = ({ image, preview = false }) => {
 
   const onErrorImgHandler = (e) => {
     e.target.src = brokenImg;
+    e.target.alt = "broken image";
     setIsValidImage(false);
   };
 
