@@ -3,6 +3,8 @@ import { Modal } from "react-bootstrap";
 import MapGeneral from "../MapGeneral/MapGeneral";
 import "./MapModal.scss";
 
+import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel.svg";
+
 const MapModal = ({ show, onHide, coordinates, page, id }) => {
   return (
     <Modal
@@ -22,6 +24,9 @@ const MapModal = ({ show, onHide, coordinates, page, id }) => {
           page={page}
           id={id}
         />
+        <button onClick={onHide} className="close-modal" type="button">
+          <CancelIcon />
+        </button>
       </Modal.Body>
     </Modal>
   );

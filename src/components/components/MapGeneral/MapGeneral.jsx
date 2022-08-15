@@ -23,7 +23,7 @@ const MapGeneral = ({ setShowMap, coordinates, page, variant, id }) => {
     >
       <MapContainer
         center={coordinates || { lat: 46.3984613, lon: 33.4627281 }}
-        zoom={14}
+        zoom={coordinates ? 14 : 2}
         minZoom={variant === "modal" ? 3 : 1}
         scrollWheelZoom={1}
         maxBounds={[

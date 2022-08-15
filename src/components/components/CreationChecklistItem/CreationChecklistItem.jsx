@@ -10,6 +10,7 @@ import MapGeneral from "../MapGeneral/MapGeneral";
 import validateLink from "../../../utils/validateLink";
 import MapModal from "../MapModal/MapModal";
 import "./CreationChecklistItem.scss";
+
 import { ReactComponent as ChecklistDots } from "../../../assets/images/icon/checklistDots.svg";
 import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel.svg";
 import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-map.svg";
@@ -175,7 +176,7 @@ const CreationChecklistItem = ({
           <img src={value.image} alt={description} />
           <button
             onClick={() => setShowImage(false)}
-            className="creation-item__remove"
+            className="close-modal"
             type="button"
           >
             <CancelIcon />
