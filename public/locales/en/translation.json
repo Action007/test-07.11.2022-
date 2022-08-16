@@ -71,6 +71,10 @@
     "text": "Browse more checklists and receive awards for this.",
     "button": "Continue"
   },
+  "popupConfirm": {
+    "title": "Congratulations on your successful registration!",
+    "text": "Your email has confirmed. You can now login to the application."
+  },
   "notification": {
     "profileUpdate": "Profile updated successfully",
     "profileError": "There was a problem updating your profile",

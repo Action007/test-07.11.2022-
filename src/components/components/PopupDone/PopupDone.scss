@@ -36,6 +36,7 @@
   &__wrapper {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 
     @include media-breakpoint-down(md) {
       flex-direction: column-reverse;
@@ -110,8 +111,9 @@
   }
 
   &__img {
-    max-width: 330px;
-    height: 305px;
+    max-width: 357px;
+    width: 100%;
+    height: 357px;
 
     @include media-breakpoint-down(md) {
       max-width: 212px;
@@ -119,7 +121,7 @@
       margin-bottom: 26px;
     }
 
-    img {
+    svg {
       width: 100%;
       height: 100%;
     }

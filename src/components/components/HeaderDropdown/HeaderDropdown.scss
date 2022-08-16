@@ -1,7 +1,7 @@
-@import "../../../global-styles/variables";
-@import "../../../global-styles/fonts";
-@import "../../../global-styles/mixins";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../global-styles/variables';
+@import '../../../global-styles/fonts';
+@import '../../../global-styles/mixins';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .header-dropdown {
   position: relative;
@@ -46,7 +46,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
 
       position: absolute;
       right: 16px;
@@ -55,7 +55,7 @@
       width: 14px;
       height: 8px;
 
-      background-image: url("../../../assets/images/icon/dropdown.svg");
+      background-image: url('../../../assets/images/icon/dropdown.svg');
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -94,22 +94,23 @@
       width: 100%;
       height: 100%;
 
-		object-fit: cover;
-		border-radius: 50%;
+      object-fit: cover;
+      border-radius: 50%;
     }
 
-	 &_empty{
-		width: 75%;
+    &_empty {
+      width: 75%;
       height: 75%;
 
       object-fit: contain;
-	 }
+    }
   }
 
   &__name {
     @include line-clamp;
-
+    
     max-width: 90px;
+    height: 24px;
 
     @include media-breakpoint-down(md) {
       max-width: 100%;
@@ -247,7 +248,7 @@
     position: relative;
 
     span {
-      content: "";
+      content: '';
 
       position: absolute;
       top: 10px;

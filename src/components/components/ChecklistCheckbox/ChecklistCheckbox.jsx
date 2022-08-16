@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useCheckActiveChecklistItemMutation } from "../../../services/activeChecklistService";
-import PopupCreateDone from "../PopupCreateDone/PopupCreateDone";
+import PopupDone from "../PopupDone/PopupDone";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
 import MapGeneral from "../MapGeneral/MapGeneral";
 import MapModal from "../MapModal/MapModal";
@@ -42,7 +42,7 @@ const ChecklistCheckbox = ({
 
   return (
     <>
-      <PopupCreateDone show={modalShow} onHide={() => setModalShow(false)} />
+      <PopupDone show={modalShow} onHide={() => setModalShow(false)} />
       <li className={`checklist-checkbox${checked ? " checked" : ""}`}>
         <label className="checklist-checkbox__label" htmlFor={idFor}>
           <input
