@@ -26,12 +26,25 @@
 
   &__link {
     margin: 5px 8px;
-    
+
     color: $primary;
 
     svg {
       margin-top: -4px;
       margin-left: 2px;
+
+      fill: $primary;
+    }
+  }
+
+  &__map {
+    margin: 5px 8px;
+
+    color: $primary;
+
+    svg {
+      margin-top: -4px;
+      margin-left: 5px;
 
       fill: $primary;
     }

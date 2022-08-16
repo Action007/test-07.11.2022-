@@ -6,7 +6,7 @@ import brokenImg from "../../../assets/images/icon/brokenImg.svg";
 import { ReactComponent as ExtendSvg } from "../../../assets/images/icon/expand-map.svg";
 import { ReactComponent as CancelIcon } from "../../../assets/images/icon/cancel.svg";
 
-const ChecklistImage = ({ image, preview = false }) => {
+const ChecklistImage = ({ image }) => {
   const [showImage, setShowImage] = useState(false);
   const [isValidImage, setIsValidImage] = useState(true);
 
@@ -28,7 +28,7 @@ const ChecklistImage = ({ image, preview = false }) => {
         type="button"
       >
         <img onError={onErrorImgHandler} src={image} alt="" />
-        {!preview && isValidImage && (
+        {isValidImage && (
           <span className="checklist-image__extend">
             <ExtendSvg />
           </span>

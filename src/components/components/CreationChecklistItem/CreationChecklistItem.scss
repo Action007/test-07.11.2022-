@@ -63,6 +63,10 @@
     }
   }
 
+  .creation-map {
+    margin-bottom: 0;
+  }
+
   &__link {
     width: 100%;
     max-width: 404px;
@@ -175,8 +179,8 @@
   &__extend {
     position: absolute;
     z-index: 800;
-    top: 10px;
-    left: 10px;
+    top: 52px;
+    right: 10px;
 
     display: flex;
     align-items: center;
