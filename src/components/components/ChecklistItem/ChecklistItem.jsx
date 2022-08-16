@@ -6,14 +6,9 @@ import MapModal from "../MapModal/MapModal";
 import "./ChecklistItem.scss";
 
 import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg";
+import { ReactComponent as MapSvg } from "../../../assets/images/icon/mapIcon.svg";
 
-const ChecklistItem = ({
-  description,
-  list_type,
-  value,
-  preview,
-  completed,
-}) => {
+const ChecklistItem = ({ description, list_type, value, completed }) => {
   const [showMap, setShowMap] = useState(false);
   const { t: translate } = useTranslation();
 
@@ -30,6 +25,17 @@ const ChecklistItem = ({
           >
             {translate("checklistReviewPage.link")}
             <LinkSvg />
+          </a>
+        )}
+        {list_type === "coordinates" && (
+          <a
+            className="checklist-item__map"
+            href={`https://maps.google.com/?q=${value.coordinates.lat},${value.coordinates.lon}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {translate("checklistReviewPage.map")}
+            <MapSvg />
           </a>
         )}
       </p>
@@ -51,11 +57,7 @@ const ChecklistItem = ({
         </>
       )}
       {list_type === "image" && (
-        <ChecklistImage
-          image={value.image}
-          alt={description}
-          preview={preview}
-        />
+        <ChecklistImage image={value.image} alt={description} />
       )}
     </li>
   );

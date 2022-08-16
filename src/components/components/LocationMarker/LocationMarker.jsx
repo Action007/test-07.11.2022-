@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Marker, useMap } from "react-leaflet";
 import Leaflet from "leaflet";
-import useMediaQuery from "../../../hooks/useMediaQuery";
 import getAverage from "../../../utils/getAverage";
 
 import MapImg from "../../../assets/images/icon/location.png";
 
 const LocationMarker = ({ show, coordinates }) => {
   const [userLocation, setUserLocation] = useState(null);
-  const onMobile = useMediaQuery("(max-width:991px)");
   const map = useMap();
 
   const myIcon = Leaflet.icon({
@@ -31,11 +29,17 @@ const LocationMarker = ({ show, coordinates }) => {
     if (difference > 3) zoom = 3;
     if (difference > 10) zoom = 2;
     if (difference > 15) zoom = 1;
-    if (onMobile && difference > 20) return;
-    if (difference > 40) return;
+    if (difference > 20) return;
 
     map.setView({ lat, lon }, zoom);
   };
+
+  useEffect(() => {
+    map.locate().on("locationfound", (e) => {
+      if (coordinates) showLocationAndMarker(e.latlng);
+      setUserLocation(e.latlng);
+    });
+  }, []);
 
   useEffect(() => {
     if (show) {
@@ -44,13 +48,6 @@ const LocationMarker = ({ show, coordinates }) => {
       });
     }
   }, [show]);
-
-  useEffect(() => {
-    map.locate().on("locationfound", (e) => {
-      if (coordinates) showLocationAndMarker(e.latlng);
-      setUserLocation(e.latlng);
-    });
-  }, []);
 
   return userLocation === null ? null : (
     <Marker position={userLocation} icon={myIcon} />

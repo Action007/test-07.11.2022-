@@ -209,7 +209,6 @@ const ChecklistDetail = ({
               description={description}
               list_type={list_type}
               value={value}
-              preview={preview}
             />
           ))}
         </ol>
