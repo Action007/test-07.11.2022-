@@ -59,8 +59,8 @@
     position: relative;
 
     width: 100%;
-    max-width: 105px;
-    height: 105px;
+    max-width: 100px;
+    height: 100px;
     margin-right: 27px;
 
     @include media-breakpoint-down(sm) {
@@ -98,10 +98,9 @@
     justify-content: center;
 
     width: 100%;
-    max-width: 105px;
-    height: 105px;
+    max-width: 100px;
+    height: 100px;
 
-    background-color: #f5f7fe;
     border-radius: 50%;
 
     @include media-breakpoint-down(sm) {

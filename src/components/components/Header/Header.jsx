@@ -12,7 +12,7 @@ import useMediaQuery from "../../../hooks/useMediaQuery";
 import useClickOutside from "../../../hooks/useClickOutside";
 import "./Header.scss";
 
-import Logo from "../../../assets/images/content/logo.svg";
+import Logo from "../../../assets/images/icon/logo.svg";
 import { ReactComponent as Plus } from "../../../assets/images/icon/plus.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerSvg.svg";

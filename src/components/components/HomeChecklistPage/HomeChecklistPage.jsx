@@ -13,7 +13,7 @@ import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./HomeChecklistPage.scss";
 
-import Logo from "../../../assets/images/content/logo.svg";
+import Logo from "../../../assets/images/icon/logo.svg";
 
 const HomeChecklistPage = () => {
   const { search } = useLocation();

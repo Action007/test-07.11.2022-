@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useEditAccountMutation } from "../../../../services/accountService";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import "./ProfileInfo.scss";
 
@@ -12,7 +13,6 @@ import { ReactComponent as Linkedin } from "../../../../assets/images/icon/linke
 import { ReactComponent as World } from "../../../../assets/images/icon/world.svg";
 import { ReactComponent as EditSvg } from "../../../../assets/images/icon/editPhoto.svg";
 import { ReactComponent as EmptySvg } from "../../../../assets/images/icon/emptyPhoto.svg";
-import { useEditAccountMutation } from "../../../../services/accountService";
 
 const ProfileInfo = ({
   name,
