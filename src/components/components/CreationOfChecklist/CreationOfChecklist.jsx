@@ -11,7 +11,7 @@ import CreationChecklistItems from "../CreationChecklistItems/CreationChecklistI
 import CreationChecklistPreview from "../CreationChecklistPreview/CreationChecklistPreview";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import CreationTags from "../CreationTags/CreationTags";
-import PopupCreateDone from "../PopupCreateDone/PopupCreateDone";
+import PopupDone from "../PopupDone/PopupDone";
 import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
 import CreationCategory from "../CreationCategory/CreationCategory";
 import validateLink from "../../../utils/validateLink";
@@ -275,11 +275,10 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
         onHide={() => setPreview(false)}
         show={preview}
       />
-      <PopupCreateDone
+      <PopupDone
         show={done}
         onHide={() => setDone(false)}
         onLookChecklist={showNewChecklist}
-        preview
       />
       <LoadingSpinnerPopup showSpinner={!!loadingCreate || !!loadingUpdate} />
       <div className="container creation pb-8">
