@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import "./Footer.scss";
 
-import Logo from "../../../assets/images/content/logo.svg";
+import Logo from "../../../assets/images/icon/logo.svg";
 import Networks from "../Networks/Networks";
 
 const Footer = () => {
