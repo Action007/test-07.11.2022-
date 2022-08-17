@@ -23,9 +23,8 @@ const LocationMarker = ({ show, coordinates }) => {
     const difference = Math.abs(location - coordinate);
     let zoom;
 
-    if (difference) zoom = 10;
-    if (difference > 0.5) zoom = 5;
-    if (difference > 1) zoom = 4;
+    if (difference) zoom = 6;
+    if (difference > 0.5) zoom = 4;
     if (difference > 3) zoom = 3;
     if (difference > 10) zoom = 2;
     if (difference > 15) zoom = 1;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import {
   useCreateChecklistMutation,
@@ -67,13 +67,8 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("creationOfChecklist.title") }];
-
-  useEffect(() => {
-    dispatch(createChecklistActions.onSubmitClear());
-  }, [pathname]);
 
   useEffect(() => {
     if (successCreate || successUpdate) {
@@ -89,14 +84,14 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
     const tagNameIncludesLink = tags.find((tag) => tag.name.includes("://"));
     const isDescriptionInvalid = checklist_items.find(
       (item) =>
-        item.description.trim().length < 3 ||
+        item.description.trim().length < 2 ||
         item.description.trim().length > 150
     );
     const itemsNotContainLinks = checklist_items.find((item) =>
       item.description.includes("://")
     );
     const isLinksInValid = checklist_items.find((item) =>
-      item.value?.link !== undefined ? !validateLink(item.value?.link) : false
+      item.list_type === "link" ? !validateLink(item.value?.link) : false
     );
     const isEmptyImage = checklist_items.find((item) =>
       item.list_type === "image" ? !item.value.image : false
@@ -120,7 +115,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       !isLinksInValid &&
       !isEmptyImage &&
       !isEmptyCoordinate &&
-      !!categoryIsValid;
+      categoryIsValid;
 
     return {
       validOrNot: !!validOrNot,
