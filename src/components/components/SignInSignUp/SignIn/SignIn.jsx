@@ -17,6 +17,7 @@ const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const SignIn = () => {
   const [isValidEmailServer, setIsValidEmailServer] = useState(true);
+  const [isEmailVerified, setIsEmailVerified] = useState(true);
   const [isValidPasswordServer, setIsValidPasswordServer] = useState(true);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
@@ -29,23 +30,26 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (error?.data?.error === "not_found") {
+    if (!error) return;
+
+    if (error.data?.error === "not_found") {
       setIsValidEmailServer(false);
-      setIsValidPasswordServer(true);
-      setEmailIsValid(true);
-      setPasswordIsValid(true);
       return;
     }
-    if (error?.data.error === "unauthorized") {
+    if (error.data?.error === "unauthorized") {
       setIsValidPasswordServer(false);
-      setIsValidEmailServer(true);
-      setEmailIsValid(true);
-      setPasswordIsValid(true);
       return;
     }
-    if (error) {
-      navigate("/error");
+    if (
+      error.data?.message &&
+      error.data?.message[0].attribute === "confirmed" &&
+      error.data?.message[0].type === "invalid"
+    ) {
+      setIsEmailVerified(false);
+      return;
     }
+
+    navigate("/error");
   }, [error]);
 
   useEffect(() => {
@@ -56,9 +60,13 @@ const SignIn = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    setIsValidEmailServer(true);
+    setIsValidPasswordServer(true);
+    setIsEmailVerified(true);
+
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-
     const validEmail = !!validateEmail(email);
     const validPassword = password !== "" && password.length > 7;
 
@@ -70,8 +78,6 @@ const SignIn = () => {
     } else {
       setEmailIsValid(validEmail);
       setPasswordIsValid(validPassword);
-      setIsValidPasswordServer(true);
-      setIsValidEmailServer(true);
     }
   };
 
@@ -97,7 +103,9 @@ const SignIn = () => {
         <form onSubmit={submitHandler} className="sign-in__form">
           <label
             className={`sign-in__label${
-              !emailIsValid || !isValidEmailServer ? " invalid" : ""
+              !emailIsValid || !isValidEmailServer || !isEmailVerified
+                ? " invalid"
+                : ""
             }`}
             htmlFor="loginEmail"
           >
@@ -108,11 +116,12 @@ const SignIn = () => {
               placeholder={translate("login.emailPlaceholder")}
               type="email"
             />
-            {(!emailIsValid || !isValidEmailServer) && (
+            {(!emailIsValid || !isValidEmailServer || !isEmailVerified) && (
               <span className="sign-in__invalid SFPro-300">
                 <ExclamationSvg />
                 {!emailIsValid && translate("login.incorrectEmail")}
                 {!isValidEmailServer && translate("login.not_found")}
+                {!isEmailVerified && translate("login.emailNotVerified")}
               </span>
             )}
           </label>

@@ -710,6 +710,7 @@
     "nickNameTaken": "This nickname is already in use. Please try another one",
     "emailTaken": "Email addresses are either invalid or already in use",
     "emailNotFound": "Email was not found",
+    "emailNotVerified": "Your email verification is pending. Please verify your email",
     "signInDesc": "By signing up you agree to the <0>Terms of Service</0> and <1>Privacy Policy</1>"
   },
   "error": {
