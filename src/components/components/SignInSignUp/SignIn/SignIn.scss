@@ -1,5 +1,5 @@
-@import "../../../../global-styles/variables";
-@import "../../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../../global-styles/variables';
+@import '../../../../../node_modules/bootstrap/scss/mixins';
 
 .sign-in {
   width: 100%;
@@ -181,7 +181,7 @@
     text-align: center;
 
     &::before {
-      content: "";
+      content: '';
 
       position: absolute;
       top: 50%;
@@ -196,7 +196,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
 
       position: absolute;
       top: 50%;
@@ -249,9 +249,8 @@
 
   &__invalid {
     display: flex;
-    align-items: center;
 
-    margin: 2px 0 9px;
+    margin: 4px 0 9px 0;
 
     color: $warning;
 
