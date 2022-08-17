@@ -89,7 +89,7 @@
   }
 
   .leaflet-control-attribution a {
-    color: #a3a3a3;
+    color: #cacaca;
   }
 
   .leaflet-pane.leaflet-map-pane {
@@ -100,7 +100,8 @@
 
   .leaflet-control-attribution {
     font-size: 5px;
-    color: #a3a3a3;
+    color: #cacaca;
+    background: rgb(255 255 255 / 20%);
   }
 
   &__location,
