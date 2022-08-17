@@ -25,26 +25,34 @@
   }
 
   &__link {
-    margin: 5px 8px;
+    margin: 0px 6px;
 
     color: $primary;
 
+    &:hover svg{
+      fill: #519a65;
+    }
+
     svg {
-      margin-top: -4px;
-      margin-left: 2px;
+      margin: -2px 0 0 4px;
 
       fill: $primary;
     }
   }
 
   &__map {
-    margin: 5px 8px;
+    margin: 0px 6px;
 
     color: $primary;
 
+    &:hover svg{
+      fill: #519a65;
+    }
+
     svg {
-      margin-top: -4px;
-      margin-left: 5px;
+      width: 19px;
+      height: 19px;
+      margin: -4px 0 0 2px;
 
       fill: $primary;
     }
