@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import "./ChecklistImage.scss";
 
 import brokenImg from "../../../assets/images/icon/brokenImg.svg";
@@ -20,6 +21,17 @@ const ChecklistImage = ({ image }) => {
     setIsValidImage(false);
   };
 
+  const img = (
+    <LazyLoadImage
+      onError={onErrorImgHandler}
+      src={image}
+      alt=""
+      height="100%"
+      width="100%"
+      effect="blur"
+    />
+  );
+
   return (
     <>
       <button
@@ -27,7 +39,7 @@ const ChecklistImage = ({ image }) => {
         onClick={onClickHandler}
         type="button"
       >
-        <img onError={onErrorImgHandler} src={image} alt="" />
+        {img}
         {isValidImage && (
           <span className="checklist-image__extend">
             <ExtendSvg />
@@ -45,7 +57,7 @@ const ChecklistImage = ({ image }) => {
           <Modal.Title id="contained-modal-title-vcenter" />
         </Modal.Header>
         <Modal.Body>
-          <img src={image} alt="" />
+          {img}
           <button
             onClick={() => setShowImage(false)}
             className="close-modal"

@@ -29,12 +29,12 @@
 
     color: $primary;
 
-    &:hover svg{
+    &:hover svg {
       fill: #519a65;
     }
 
     svg {
-      margin: -2px 0 0 4px;
+      margin: -4px 0 0 4px;
 
       fill: $primary;
     }
@@ -45,16 +45,15 @@
 
     color: $primary;
 
-    &:hover svg{
+    &:hover svg {
       fill: #519a65;
     }
 
     svg {
-      width: 19px;
+      width: 16px;
       height: 19px;
-      margin: -4px 0 0 2px;
-
-      fill: $primary;
+      margin: -4px 0 0 4px;
+      fill: #65c17e;
     }
   }
 }
