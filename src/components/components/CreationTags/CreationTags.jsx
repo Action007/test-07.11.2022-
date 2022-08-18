@@ -194,7 +194,6 @@ const CreationTags = ({
                 <TagListSearch
                   tags={filterTagsList()}
                   findTypeHandler={findTypeHandler}
-                  page="creation-of-checklist"
                 />
               )}
             </label>

@@ -231,11 +231,6 @@ const CategorySidebar = () => {
 
   return (
     <nav className="sidebar">
-      {!showOnMobile && (
-        <div className="sidebar__head SFPro-700">
-          {translate("sidebar.checklistCategories")}
-        </div>
-      )}
       {!showOnMobile && sidebarBody}
       {showOnMobile && (
         <div>
