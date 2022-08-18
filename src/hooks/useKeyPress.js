@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 const useKeyPress = (targetKey) => {
   const [keyPressed, setKeyPressed] = useState(false);
 
-  function downHandler({ key }) {
+  const downHandler = ({ key }) => {
     if (key === targetKey) {
       setKeyPressed(true);
     }
-  }
+  };
 
   const upHandler = ({ key }) => {
     if (key === targetKey) {
@@ -23,7 +23,7 @@ const useKeyPress = (targetKey) => {
       window.removeEventListener("keydown", downHandler);
       window.removeEventListener("keyup", upHandler);
     };
-  });
+  }, []);
 
   return keyPressed;
 };
