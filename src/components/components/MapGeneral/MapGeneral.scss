@@ -8,18 +8,12 @@
   height: 231px;
   margin: 10px 0;
 
-  &.invalid {
-    .leaflet-container {
-      border-color: $warning;
-    }
-  }
-
   .leaflet-container {
     width: 100%;
     max-width: 458px;
     height: 231px;
-    border: 1px solid transparent;
 
+    border: 1px solid transparent;
     border-radius: 8px;
   }
 
@@ -101,7 +95,14 @@
   .leaflet-control-attribution {
     font-size: 5px;
     color: #cacaca;
+
     background: rgb(255 255 255 / 20%);
+  }
+
+  &.invalid {
+    .leaflet-container {
+      border-color: $warning;
+    }
   }
 
   &__location,

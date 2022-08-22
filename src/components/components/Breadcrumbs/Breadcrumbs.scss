@@ -1,7 +1,9 @@
-@import "../../../global-styles/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .breadcrumbs {
+  position: relative;
+
   display: flex;
 
   margin: 0;
@@ -21,6 +23,19 @@
     padding: 16px 0 26px;
 
     font-size: 12px;
+  }
+
+  &::before {
+    content: '';
+
+    position: fixed;
+    z-index: 1;
+    right: 0;
+
+    width: 55px;
+    height: 20px;
+
+    background: linear-gradient(90deg, rgb(245 247 254 / 0%) 30%, #f5f7fe 65%);
   }
 
   &__item {

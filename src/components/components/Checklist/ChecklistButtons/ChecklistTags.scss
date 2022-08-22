@@ -1,0 +1,40 @@
+@import '../../../../global-styles/variables';
+@import '../../../../../node_modules/bootstrap/scss/mixins';
+
+.checklist-tags {
+  margin-bottom: 17px;
+
+  transition: box-shadow 0.2s ease;
+
+  @include media-breakpoint-down(md) {
+    margin-bottom: 15px;
+  }
+
+  &.preview {
+    margin-bottom: -9px;
+  }
+
+  &__item {
+    display: inline-block;
+
+    margin-bottom: 9px;
+    padding: 2px 14px;
+
+    text-align: left;
+    word-break: break-word;
+
+    background-color: #fff;
+    border: 1px solid rgb(101 193 126 / 40%);
+    border-radius: 6px;
+
+    transition: box-shadow 0.2s ease;
+
+    &:not(:last-child) {
+      margin-right: 9px;
+    }
+
+    &:hover {
+      border: 1px solid $primary;
+    }
+  }
+}

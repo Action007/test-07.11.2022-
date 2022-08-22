@@ -1,12 +1,12 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import "./PopupDelete.scss";
+import "./PopupDeleteChecklist.scss";
 
 import { ReactComponent as DeleteSvg } from "../../../assets/images/content/popupDelete.svg";
 import { ReactComponent as TrashIcon } from "../../../assets/images/icon/trash.svg";
 
-const PopupDelete = ({ show, onHide, deleteClickHandler }) => {
+const PopupDeleteChecklist = ({ show, onHide, deleteHandler }) => {
   const { t: translate } = useTranslation();
 
   return (
@@ -36,7 +36,7 @@ const PopupDelete = ({ show, onHide, deleteClickHandler }) => {
             </span>
             <div className="delete-popup__buttons SFPro-500">
               <button
-                onClick={deleteClickHandler}
+                onClick={deleteHandler}
                 className="delete-popup__button"
                 type="button"
               >
@@ -60,4 +60,4 @@ const PopupDelete = ({ show, onHide, deleteClickHandler }) => {
   );
 };
 
-export default PopupDelete;
+export default PopupDeleteChecklist;

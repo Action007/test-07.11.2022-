@@ -75,7 +75,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       dispatch(createChecklistActions.onSubmitClear());
       setDone(true);
     } else if (errorCreate || errorUpdate) {
-      navigate("/error");
+      navigate("/error", { replace: true });
     }
   }, [successCreate, successUpdate, errorCreate, errorUpdate]);
 

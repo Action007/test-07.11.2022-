@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useFetchAccountInfoQuery } from "../../../services/accountService";
+import { authSliceActions } from "../../../store/authSlice";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import Networks from "../Networks/Networks";
 import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
@@ -18,17 +20,45 @@ import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark
 import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerSvg.svg";
 
 const Header = () => {
+  const user = useSelector((state) => state.authSliceReducer.user);
+  const percent = useSelector((state) => state.authSliceReducer.percent);
+  const token = useSelector((state) => state.authSliceReducer.token);
+
+  const headerRef = useRef();
+  const [scroll, setScroll] = useState(false);
+  const [savedCounter, setSavedCounter] = useState(user?.saved_counter);
+
   const { ref, show, setShowHandler, setShow } = useClickOutside();
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
   const showAddButtonOnMobile = useMediaQuery("(max-width:767px)");
-  const [scroll, setScroll] = useState(false);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const headerRef = useRef();
-  const user = useSelector((state) => state.authSliceReducer.user);
-  const percent = useSelector((state) => state.authSliceReducer.percent);
-  const [savedCounter, setSavedCounter] = useState(user?.saved_counter);
-  const { t: translate } = useTranslation();
   const { pathname } = useLocation();
+  const { t: translate } = useTranslation();
+
+  const { data: accountInfo, isError } = useFetchAccountInfoQuery("", {
+    skip: !token,
+  });
+
+  useEffect(() => {
+    if (!accountInfo) return;
+    const { completed_counter, active_checklists_counter } = accountInfo;
+    dispatch(authSliceActions.setUser(accountInfo));
+    dispatch(
+      authSliceActions.setPercentActiveChecklist({
+        completed_counter,
+        active_checklists_counter,
+      })
+    );
+  }, [accountInfo]);
+
+  useEffect(() => {
+    if (!isError) return;
+    dispatch(authSliceActions.resetUser());
+    dispatch(authSliceActions.resetToken());
+    navigate("/error", { replace: true });
+  }, [isError]);
 
   useEffect(() => {
     if (pathname === "/saved-checklists" || !user) return;

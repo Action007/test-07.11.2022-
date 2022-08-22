@@ -47,7 +47,7 @@ const AccountSetting = () => {
     if (message?.attribute === "old_password" && message?.type === "invalid") {
       setOldPasswordIncorrect(false);
     } else {
-      navigate("/error");
+      navigate("/error", { replace: true });
     }
   }, [isError]);
 

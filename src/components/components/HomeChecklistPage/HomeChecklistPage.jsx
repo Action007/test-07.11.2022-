@@ -51,7 +51,7 @@ const HomeChecklistPage = () => {
   }, [search]);
 
   useEffect(() => {
-    if (error) navigate("/error");
+    if (error) navigate("/error", { replace: true });
   }, [error]);
 
   const loader = (
@@ -81,11 +81,7 @@ const HomeChecklistPage = () => {
             {checklists &&
               !isFetching &&
               checklists.entities.map((checklist) => (
-                <Checklist
-                  key={checklist.id}
-                  checklist={checklist}
-                  page="home"
-                />
+                <Checklist key={checklist.id} checklist={checklist} />
               ))}
             {checklists && checklists.entities.length === 0 && !isFetching && (
               <span className="main-content__text">

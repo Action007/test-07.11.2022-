@@ -56,7 +56,7 @@ const ProfileInfo = ({
     if (error && error.data.message[0].type === "file_size_out_of_range") {
       onLargeImageSize();
     } else if (isError) {
-      navigate("/error");
+      navigate("/error", { replace: true });
     }
   }, [error]);
 

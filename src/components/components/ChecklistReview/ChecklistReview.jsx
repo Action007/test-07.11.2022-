@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
 import Notification from "../../UI/Notification/Notification";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
+import Checklist from "../Checklist/Checklist";
 import ChecklistComments from "../ChecklistComments/ChecklistComments";
-import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
 
 const ChecklistReview = ({ checklist, setPageCount, id, isFetching }) => {
   const [notification, setNotification] = useState(false);
@@ -61,11 +61,11 @@ const ChecklistReview = ({ checklist, setPageCount, id, isFetching }) => {
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         {isFetching && <ChecklistSkeleton />}
         {checklist && !isFetching && (
-          <ChecklistDetail
+          <Checklist
             checklist={checklist.checklist}
             setNotification={setNotification}
             setLinkToActiveChecklist={setLinkToActiveChecklist}
-            detailPage
+            page="checklist-detail"
           />
         )}
         {checklist && (

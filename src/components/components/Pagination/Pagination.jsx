@@ -39,24 +39,28 @@ const Pagination = ({
   };
 
   const onClickHandler = (type) => {
-    let changePage;
+    return () => {
+      let changePage;
 
-    if (type === "first") {
-      if (prevPage) changePage = 1;
-    } else if (type === "last") {
-      if (nextPage) changePage = totalPage;
-    } else if (type === "prev") {
-      if (prevPage) changePage = prevPage;
-    } else if (type === "next") {
-      if (nextPage) changePage = nextPage;
-    }
+      if (type === "first") {
+        if (prevPage) changePage = 1;
+      } else if (type === "last") {
+        if (nextPage) changePage = totalPage;
+      } else if (type === "prev") {
+        if (prevPage) changePage = prevPage;
+      } else if (type === "next") {
+        if (nextPage) changePage = nextPage;
+      }
 
-    if (!search) {
-      setSearchParams(`?per_page=5&page=${changePage}`);
-    } else {
-      setSearchParams(searchParams);
-    }
-    if (page !== "home") window.scrollTo(0, 0);
+      if (!search) {
+        setSearchParams(`?per_page=5&page=${changePage}`);
+      } else {
+        setSearchParams(
+          changeSearchParamsValue(searchParams, "page", changePage, false)
+        );
+      }
+      if (page !== "home") window.scrollTo(0, 0);
+    };
   };
 
   return (
@@ -86,14 +90,14 @@ const Pagination = ({
         <div className="paginate__wrapper">
           <div className="paginate__inner">
             <button
-              onClick={() => onClickHandler("first")}
+              onClick={onClickHandler("first")}
               className={`paginate__first${!prevPage ? " disabled" : ""}`}
               type="button"
             >
               <LastPageSvg />
             </button>
             <button
-              onClick={() => onClickHandler("prev")}
+              onClick={onClickHandler("prev")}
               className={`paginate__button${!prevPage ? " disabled" : ""}`}
               type="button"
             >
@@ -105,14 +109,14 @@ const Pagination = ({
           </span>
           <div className="paginate__inner">
             <button
-              onClick={() => onClickHandler("next")}
+              onClick={onClickHandler("next")}
               className={`paginate__button${!nextPage ? " disabled" : ""}`}
               type="button"
             >
               <NextSvg />
             </button>
             <button
-              onClick={() => onClickHandler("last")}
+              onClick={onClickHandler("last")}
               className={`paginate__last${!nextPage ? " disabled" : ""}`}
               type="button"
             >

@@ -30,7 +30,7 @@ const SignInWithGoogle = () => {
 
   useEffect(() => {
     if (isError) {
-      navigate("/error");
+      navigate("/error", { replace: true });
     }
   }, [isError]);
 

@@ -20,9 +20,9 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (error && error?.data?.message[0]?.type === "invalid") {
-      navigate("/not-found");
+      navigate("/not-found", { replace: true });
     } else if (isError) {
-      navigate("/error");
+      navigate("/error", { replace: true });
     }
   }, [isError]);
 

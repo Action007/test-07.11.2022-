@@ -35,8 +35,8 @@
 
   &__wrapper {
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: space-around;
 
     @include media-breakpoint-down(md) {
       flex-direction: column-reverse;
@@ -111,8 +111,8 @@
   }
 
   &__img {
-    max-width: 357px;
     width: 100%;
+    max-width: 357px;
     height: 357px;
 
     @include media-breakpoint-down(md) {

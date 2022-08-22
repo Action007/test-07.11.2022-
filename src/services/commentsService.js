@@ -8,7 +8,6 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Checklist"],
     }),
     likeComment: build.mutation({
       query: (body) => ({
@@ -28,9 +27,11 @@ const checklistAPI = olcheckAPI.injectEndpoints({
       query: (body) => ({
         url: `/api/v1/checklists_auth/${body.checklist_id}/${body.comment_id}`,
         method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
         body,
       }),
-      invalidatesTags: ["Checklist"],
     }),
   }),
   overrideExisting: false,

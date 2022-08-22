@@ -1,0 +1,108 @@
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
+
+.checklist-buttons {
+  display: flex;
+
+  margin-right: 25px;
+
+  font-size: 14px;
+
+  @include media-breakpoint-down(sm) {
+    margin-right: 0;
+  }
+
+  &__viewed,
+  &__likes,
+  &__dislikes {
+    display: flex;
+    align-items: center;
+
+    padding: 4px 10px;
+
+    color: #a3a3a3;
+
+    background-color: $secondary;
+    border-radius: 6px;
+
+    svg {
+      margin-right: 8px;
+
+      stroke: #a3a3a3;
+    }
+  }
+
+  &__likes {
+    margin-right: 8px;
+
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+    }
+
+    &.liked {
+      color: $primary;
+
+      background-color: #65c17e1a;
+
+      svg {
+        stroke: $primary;
+      }
+    }
+
+    &.active {
+      color: #fff;
+
+      background-color: $primary;
+
+      svg {
+        stroke: #fff;
+      }
+    }
+  }
+
+  &__dislikes {
+    svg {
+      transform: rotate(180deg);
+    }
+
+    &:hover {
+      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+    }
+
+    &.disliked {
+      color: $warning;
+
+      background-color: #fc57571a;
+
+      svg {
+        stroke: $warning;
+      }
+    }
+
+    &.active {
+      color: #fff;
+
+      background-color: $warning;
+
+      svg {
+        stroke: #fff;
+      }
+    }
+  }
+
+  &__viewed {
+    margin-right: 8px;
+
+    color: $dark;
+
+    &.active {
+      color: #6d9aff;
+
+      background-color: #407bff1a;
+
+      svg {
+        stroke: #6d9aff;
+      }
+    }
+  }
+}

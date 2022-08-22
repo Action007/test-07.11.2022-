@@ -1,39 +1,30 @@
-/* eslint-disable no-shadow */
 import React, { useState } from "react";
-import {
-  Link,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
-import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { changeSearchParamsValue } from "../../../utils/searchParamsValue";
-import {
-  useDeleteChecklistMutation,
-  useDislikeChecklistMutation,
-  useLikeChecklistMutation,
-  useSaveChecklistMutation,
-  useUnsaveChecklistMutation,
-} from "../../../services/checklistService";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDeleteChecklistMutation } from "../../../services/checklistService";
+import ChecklistItem from "../ChecklistItem/ChecklistItem";
+import ChecklistTags from "./ChecklistButtons/ChecklistTags";
+import ChecklistSave from "./ChecklistButtons/ChecklistSave";
+import ChecklistComplain from "./ChecklistButtons/ChecklistComplain";
+import ChecklistStartButton from "./ChecklistButtons/ChecklistStartButton";
 import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
-import ChecklistItem from "../ChecklistItem/ChecklistItem";
+import LikeDislikeViewButtons from "../LikeDislikeViewButtons/LikeDislikeViewButtons";
 import EditDropdown from "../EditDropdown/EditDropdown";
-import uniqueID from "../../../utils/uniqueID";
 import checkTime from "../../../utils/checkTime";
-import Complain from "../Complain/Complain";
-import PopupDelete from "../PopupDelete/PopupDelete";
 import "./Checklist.scss";
 
-import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg";
-import { ReactComponent as ViewSvg } from "../../../assets/images/icon/view.svg";
-import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
-import { ReactComponent as InfoSvg } from "../../../assets/images/icon/info.svg";
+import PopupDeleteChecklist from "../PopupDeleteChecklist/PopupDeleteChecklist";
 
-const Checklist = ({ checklist, created = false, page = "home" }) => {
+const Checklist = ({
+  checklist,
+  setNotification,
+  setLinkToActiveChecklist,
+  page,
+  isPreview,
+}) => {
   const {
     id,
     checklist_items,
@@ -49,103 +40,23 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
   } = checklist;
   const token = useSelector((state) => state.authSliceReducer.token);
 
-  const [saveChecklist] = useSaveChecklistMutation();
-  const [unsaveChecklist] = useUnsaveChecklistMutation();
-  const [likeChecklist] = useLikeChecklistMutation();
-  const [dislikeChecklist] = useDislikeChecklistMutation();
   const [deleteChecklist] = useDeleteChecklistMutation();
 
-  const [modalShow, setModalShow] = useState(false);
-  const [showComplain, setShowComplain] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const showOnMobile = useMediaQuery("(max-width:575px)");
-  const { search } = useLocation();
-  const { t: translate } = useTranslation();
   const navigate = useNavigate();
+  const { t: translate } = useTranslation();
+  const showOnMobile = useMediaQuery("(max-width:575px)");
   const { date } = getTime(created_at);
+  const { pathname, search } = useLocation();
+  const [modalShow, setModalShow] = useState(false);
 
-  const checklistItem = checklist_items.map((item) =>
-    item.list_type !== "text" ? { ...item, list_type: "text" } : item
-  );
-  const fiveItems =
-    checklist_items.length > 5 ? checklistItem.slice(0, 5) : checklistItem;
-
-  const [iSaved, setISaved] = useState(user_track?.saved);
-  const savedClass = `checklist__bookmark${iSaved ? " saved" : ""}`;
-
-  const [like, setLiked] = useState(!!user_track?.liked);
-  const [dislike, setDisliked] = useState(!!user_track?.unliked);
-  const likeAmount = like ? liked + 1 : liked;
-  const dislikeAmount = dislike ? unliked + 1 : unliked;
-  const finalLikeAmount = user_track?.liked ? likeAmount - 1 : likeAmount;
-  const finalDislikeAmount = user_track?.unliked
-    ? dislikeAmount - 1
-    : dislikeAmount;
-  const likeClass = `${`checklist__likes SFPro-700`}${
-    liked && finalLikeAmount ? " liked" : ""
-  }${like ? " active" : ""}`;
-  const dislikeClass = `${`checklist__dislikes SFPro-700`}${
-    unliked && finalDislikeAmount ? " disliked" : ""
-  }${dislike ? " active" : ""}`;
-
-  const setLikeHandler = () => {
-    setLiked((prevState) => !prevState);
-    setDisliked(false);
-    likeChecklist(id);
-  };
-
-  const setDislikeHandler = () => {
-    setDisliked((prevState) => !prevState);
-    setLiked(false);
-    dislikeChecklist(id);
-  };
-
-  const saveHandler = () => {
-    if (!iSaved) saveChecklist(id);
-    if (iSaved) unsaveChecklist(id);
-    setISaved((prevState) => !prevState);
-  };
-
-  const navigationHandler = (tagID) => {
-    if (page === "home") {
-      if (!search) {
-        setSearchParams(
-          `?per_page=5&${changeSearchParamsValue(
-            searchParams,
-            "search_tag_ids[]",
-            tagID
-          )}`
-        );
-      } else {
-        setSearchParams(
-          changeSearchParamsValue(searchParams, "search_tag_ids[]", tagID)
-        );
-      }
-    } else {
-      navigate(`/?page=1&per_page=5&search_tag_ids[]=${tagID}`);
-    }
-  };
-
-  const loginHandler = () => {
-    navigate(`/sign-in`);
-  };
-
-  const complainHandler = () => {
-    if (token) {
-      setShowComplain(true);
-    } else {
-      loginHandler();
-    }
-  };
-
-  const onDeleteHandler = () => {
-    deleteChecklist(id);
-    setModalShow(false);
-  };
-
-  const onUpdateHandler = () => {
-    navigate(`/edit-checklist/${id}`);
-  };
+  const checklistItems =
+    page !== "checklist-detail"
+      ? checklist_items
+          .map((item) =>
+            item.list_type !== "text" ? { ...item, list_type: "text" } : item
+          )
+          .slice(0, 5)
+      : checklist_items;
 
   const time = (
     <time className="checklist__time" dateTime={date}>
@@ -153,148 +64,136 @@ const Checklist = ({ checklist, created = false, page = "home" }) => {
     </time>
   );
 
-  const head = (
+  const onUpdateHandler = () => {
+    navigate(`/edit-checklist/${id}`);
+  };
+
+  const onDeleteHandler = () => {
+    deleteChecklist(id);
+    setModalShow(false);
+  };
+
+  return (
     <>
-      <h3
-        className={`checklist__title SFPro-700${completed ? " completed" : ""}`}
-      >
-        <Link
-          to={`/${
-            page !== "my-active-checklists" ? "checklist" : "active-checklist"
-          }/${id}/${slug}`}
-        >
-          {name}
-        </Link>
-      </h3>
-      <div className="checklist__head">
-        {showOnMobile && time}
-        {!created && page === "home" && (
-          <div className="checklist__wrap">
-            <button
-              onClick={token ? saveHandler : loginHandler}
-              className={savedClass}
-              type="button"
-            >
-              <Bookmark />
-            </button>
-            <div className="complain-dropdown SFPro-500">
-              <button
-                onClick={complainHandler}
-                className="complain-dropdown__info"
-                type="button"
+      <PopupDeleteChecklist
+        deleteHandler={onDeleteHandler}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+      <div className="checklist">
+        <div className="checklist__heading">
+          <h3
+            className={`checklist__title SFPro-700${
+              completed ? " completed" : ""
+            }`}
+          >
+            {page === "checklist-detail" ? (
+              name
+            ) : (
+              <Link
+                to={`/${
+                  pathname !== "/active-checklists"
+                    ? "checklist"
+                    : "active-checklist"
+                }/${id}/${slug}`}
               >
-                <InfoSvg />
-              </button>
-              <span className="complain-dropdown__desc">
-                {translate("supportPage.button")}
-              </span>
+                {name}
+              </Link>
+            )}
+          </h3>
+          <div className="checklist__head">
+            {showOnMobile && time}
+            {page === "created-checklists" && (
+              <EditDropdown
+                isEdit={checkTime(created_at)}
+                id={id}
+                navigate={navigate}
+                updateHandler={onUpdateHandler}
+                deleteHandler={() => setModalShow(true)}
+              />
+            )}
+            {page !== "created-checklists" && !isPreview && (
+              <div className="checklist__btns">
+                <ChecklistSave
+                  token={token}
+                  id={id}
+                  saved={user_track?.saved}
+                  navigate={navigate}
+                />
+                <ChecklistComplain
+                  token={token}
+                  id={id}
+                  name={name}
+                  navigate={navigate}
+                  translate={translate}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+        <ol
+          className={`checklist__items${
+            page === "checklist-detail" ? " detail" : ""
+          }`}
+        >
+          {checklistItems.map(
+            // eslint-disable-next-line no-shadow
+            ({ description, list_type, value, completed }, index) => (
+              <ChecklistItem
+                // eslint-disable-next-line react/no-array-index-key
+                key={description + list_type + value + index}
+                description={description}
+                list_type={list_type}
+                value={value}
+                completed={page !== "checklist-detail" && completed}
+              />
+            )
+          )}
+        </ol>
+        {page !== "checklist-detail" && (
+          <Link
+            className="checklist__dots SFPro-600"
+            to={`/${
+              pathname !== "/active-checklists"
+                ? "checklist"
+                : "active-checklist"
+            }/${id}/${slug}`}
+          >
+            <DotsSvg />
+          </Link>
+        )}
+        <ChecklistTags
+          tags={tags}
+          isPreview={isPreview}
+          navigate={navigate}
+          pathname={pathname}
+          search={search}
+        />
+        {!isPreview && (
+          <div className="checklist__wrap">
+            {page === "checklist-detail" && (
+              <ChecklistStartButton
+                token={token}
+                id={id}
+                setNotification={setNotification}
+                setLinkToActiveChecklist={setLinkToActiveChecklist}
+                navigate={navigate}
+                translate={translate}
+              />
+            )}
+            <div className="checklist__box">
+              <LikeDislikeViewButtons
+                liked={liked}
+                unliked={unliked}
+                viewed={viewed}
+                checklistID={id}
+                userTrack={user_track}
+              />
+              {!showOnMobile && time}
             </div>
           </div>
         )}
       </div>
-      {created && (
-        <EditDropdown
-          onUpdateHandler={onUpdateHandler}
-          onDeleteHandler={() => setModalShow(true)}
-          componentType={checkTime(created_at)}
-        />
-      )}
-    </>
-  );
-
-  return (
-    <>
-      <div className="checklist">
-        <div className="checklist__heading">{head}</div>
-        <ol className="checklist__items">
-          {fiveItems.map(({ description, list_type, value, completed }) => (
-            <ChecklistItem
-              key={uniqueID()}
-              description={description}
-              list_type={list_type}
-              value={value}
-              completed={completed}
-            />
-          ))}
-        </ol>
-        <Link
-          className="checklist__dots SFPro-600"
-          to={`/${
-            page !== "my-active-checklists" ? "checklist" : "active-checklist"
-          }/${id}/${slug}`}
-        >
-          <DotsSvg />
-        </Link>
-        <div className="checklist__tags">
-          {tags &&
-            tags.map((tag) => (
-              <button
-                onClick={() => navigationHandler(tag.id)}
-                className="checklist__tag"
-                key={uniqueID()}
-                type="button"
-              >
-                #{tag.name}
-              </button>
-            ))}
-        </div>
-        <div className="checklist__box">
-          {page === "home" && (
-            <div className="checklist__inner">
-              <span
-                className={`${`checklist__viewed SFPro-700`} ${
-                  viewed ? "active" : ""
-                }`}
-              >
-                <ViewSvg />
-                <span>{viewed}</span>
-              </span>
-              <div className="checklist__buttons">
-                <button
-                  onClick={token ? setLikeHandler : loginHandler}
-                  className={likeClass}
-                  type="button"
-                >
-                  <LikeSvg />
-                  {finalLikeAmount}
-                </button>
-                <button
-                  onClick={token ? setDislikeHandler : loginHandler}
-                  className={dislikeClass}
-                  type="button"
-                >
-                  <LikeSvg />
-                  {finalDislikeAmount}
-                </button>
-              </div>
-            </div>
-          )}
-          {!showOnMobile && time}
-        </div>
-      </div>
-      <Modal
-        className="popup-complain"
-        show={showComplain}
-        onHide={setShowComplain}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter" />
-        </Modal.Header>
-        <Modal.Body>
-          <Complain
-            closeHandler={() => setShowComplain(false)}
-            id={id}
-            name={name}
-          />
-        </Modal.Body>
-      </Modal>
-      <PopupDelete
-        deleteClickHandler={onDeleteHandler}
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
     </>
   );
 };

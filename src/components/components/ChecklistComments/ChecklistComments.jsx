@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 import {
   useAddCommentMutation,
   useDeleteCommentMutation,
-  useLikeCommentMutation,
-  useUnlikeCommentMutation,
 } from "../../../services/commentsService";
+import ChecklistCommentsInput from "./ChecklistCommentsInput/ChecklistCommentsInput";
+import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import getTime from "../../../utils/getTime";
 import Comment from "../Comment/Comment";
 import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
@@ -23,15 +23,13 @@ const ChecklistComments = ({
   checklistID,
   loadingComments,
 }) => {
-  const [comments, setComments] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-  const [isValidComment, setIsValidComment] = useState(true);
-  const [newComment, setNewComment] = useState(false);
   const [addComment, { isSuccess }] = useAddCommentMutation();
-  const [likeComment] = useLikeCommentMutation();
-  const [unlikeComment] = useUnlikeCommentMutation();
-  const [deleteComment] = useDeleteCommentMutation();
+  const [deleteComment, { isLoading }] = useDeleteCommentMutation();
+
   const token = useSelector((state) => state.authSliceReducer.token);
+
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState(false);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
 
@@ -64,33 +62,12 @@ const ChecklistComments = ({
     if (next_page) addComments(next_page);
   };
 
-  const onLikeHandler = (id) => {
-    if (token) likeComment({ checklist_id: checklistID, comment_id: id });
-    if (!token) navigate("/sign-in");
+  const onDeleteCommentHandler = (commentID) => {
+    deleteComment({ checklist_id: checklistID, comment_id: commentID });
+    setComments(comments.filter((comment) => comment.id !== commentID));
   };
 
-  const onUnlikeHandler = (id) => {
-    if (token) unlikeComment({ checklist_id: checklistID, comment_id: id });
-    if (!token) navigate("/sign-in");
-  };
-
-  const onDeleteHandler = (id) => {
-    if (!token) navigate("/sign-in");
-    if (token) deleteComment({ checklist_id: checklistID, comment_id: id });
-    setComments(comments.filter((comment) => comment.id !== id));
-  };
-
-  const onChangeHandler = (value) => {
-    setInputValue(value);
-    if (value.trim().length > 150) {
-      setIsValidComment(false);
-    } else {
-      setIsValidComment(true);
-    }
-  };
-
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
+  const onSubmitHandler = (inputValue, setInputValue, isValidComment) => {
     if (!token) navigate("/sign-in");
     if (inputValue.trim().length === 0 || !isValidComment) return;
     addComment({ text: inputValue.trim(), checklist_id: checklistID });
@@ -98,68 +75,56 @@ const ChecklistComments = ({
   };
 
   return (
-    <div className="checklist-comments">
-      <span className="checklist-comments__review SFPro-600">
-        {commentsTotalCount} {translate("checklistReviewPage.review")}
-      </span>
-      <form onSubmit={onSubmitHandler} className="checklist-comments__form">
-        <label className="checklist-comments__label" htmlFor="checklistReview">
-          {!isValidComment && (
-            <span className="checklist-comments__desc">
-              {translate("checklistReviewPage.max")}
-            </span>
-          )}
-          <input
-            onChange={(e) => onChangeHandler(e.target.value)}
-            className={`checklist-comments__input${
-              !isValidComment ? " invalid" : ""
-            }`}
-            value={inputValue}
-            id="checklistReview"
-            type="text"
-            placeholder="Leave a comment..."
-          />
-        </label>
-      </form>
-      <ul className="checklist-comments__items">
-        {comments &&
-          comments.map((comment) => {
-            const { date } = getTime(comment.created_at);
-            return (
-              <Comment
-                key={comment.id}
-                author={comment.author}
-                date={date}
-                commentID={comment.id}
-                text={comment.text}
-                liked={comment.liked}
-                unliked={comment.unliked}
-                onLikeHandler={onLikeHandler}
-                onUnlikeHandler={onUnlikeHandler}
-                onDeleteHandler={onDeleteHandler}
-                userTrack={comment.user_track}
-              />
-            );
-          })}
-      </ul>
-      {next_page &&
-        commentsTotalCount !== comments.length &&
-        (!loadingComments ? (
-          <button
-            onClick={showCommentHandler}
-            className="checklist-comments__button SFPro-500"
-            type="button"
-          >
-            <ArrowSvg />
-            {translate("checklistReviewPage.moreComments")}
-          </button>
-        ) : (
-          <div className="checklist-comments__loading SFPro-500">
-            <LoadingSpinner />
-            {translate("checklistReviewPage.loading")}
-          </div>
-        ))}
-    </div>
+    <>
+      <LoadingSpinnerPopup showSpinner={isLoading} />
+      <div className="checklist-comments">
+        <span className="checklist-comments__review SFPro-600">
+          {commentsTotalCount} {translate("checklistReviewPage.review")}
+        </span>
+        <ChecklistCommentsInput
+          submitHandler={onSubmitHandler}
+          translate={translate}
+        />
+        <ul className="checklist-comments__items">
+          {comments &&
+            comments.map((comment) => {
+              const { date } = getTime(comment.created_at);
+              return (
+                <Comment
+                  key={comment.id}
+                  author={comment.author}
+                  date={date}
+                  commentID={comment.id}
+                  checklistID={checklistID}
+                  text={comment.text}
+                  liked={comment.liked}
+                  token={token}
+                  unliked={comment.unliked}
+                  userTrack={comment.user_track}
+                  deleteCommentHandler={onDeleteCommentHandler}
+                />
+              );
+            })}
+        </ul>
+        {next_page &&
+          commentsTotalCount !== comments.length &&
+          (!loadingComments ? (
+            <button
+              onClick={showCommentHandler}
+              className="checklist-comments__button SFPro-500"
+              type="button"
+            >
+              <ArrowSvg />
+              {translate("checklistReviewPage.moreComments")}
+            </button>
+          ) : (
+            <div className="checklist-comments__loading SFPro-500">
+              <LoadingSpinner />
+              {translate("checklistReviewPage.loading")}
+            </div>
+          ))}
+      </div>
+    </>
   );
 };
 

@@ -24,7 +24,7 @@ const ResetPassword = ({ setShowNotification }) => {
   const { t: translate } = useTranslation();
 
   useEffect(() => {
-    if (!token) navigate("/not-found");
+    if (!token) navigate("/not-found", { replace: true });
   }, []);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const ResetPassword = ({ setShowNotification }) => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (isError) navigate("/error");
+    if (isError) navigate("/error", { replace: true });
   }, [isError]);
 
   const onSubmitHandler = (e) => {

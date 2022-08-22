@@ -63,4 +63,4 @@ const ChecklistItem = ({ description, list_type, value, completed }) => {
   );
 };
 
-export default ChecklistItem;
+export default React.memo(ChecklistItem);

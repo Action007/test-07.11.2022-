@@ -14,7 +14,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) navigate("/not-found");
+    if (token) navigate("/not-found", { replace: true });
   }, [token]);
 
   return (

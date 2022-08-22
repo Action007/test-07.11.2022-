@@ -16,10 +16,6 @@
   border: 0.1px solid #ececec;
   border-radius: 8px;
 
-  &:hover img {
-    filter: none;
-  }
-
   span {
     display: flex !important;
     align-items: center;
@@ -34,13 +30,18 @@
     filter: grayscale(10%) brightness(90%) opacity(90%);
   }
 
+  &:hover img {
+    filter: none;
+  }
+
   &.invalid {
     cursor: default;
 
     img {
-      object-fit: contain;
       width: 67px;
       height: 67px;
+
+      object-fit: contain;
     }
   }
 
