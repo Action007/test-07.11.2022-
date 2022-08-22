@@ -2,7 +2,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import ChecklistDetail from "../ChecklistDetail/ChecklistDetail";
+import Checklist from "../Checklist/Checklist";
 import "./CreationChecklistPreview.scss";
 
 const CreationChecklistPreview = ({ show, onHide }) => {
@@ -41,7 +41,7 @@ const CreationChecklistPreview = ({ show, onHide }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="p-0">
-        <ChecklistDetail checklist={checklist} preview />
+        <Checklist checklist={checklist} page="checklist-detail" isPreview />
       </Modal.Body>
     </Modal>
   );

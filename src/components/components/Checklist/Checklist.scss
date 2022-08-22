@@ -6,34 +6,16 @@
 
   width: 100%;
   max-width: 834px;
-  margin: 0 auto 43px;
+  margin: 0 auto 16px;
   padding: 34px 34px 25px;
 
   background-color: #fff;
   border-radius: 8px;
 
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   @include media-breakpoint-down(sm) {
-    padding: 30px 19px 25px;
-  }
-
-  &:not(:last-child) {
-    margin-bottom: 25px;
-
-    @include media-breakpoint-down(sm) {
-      margin-bottom: 12px;
-    }
-  }
-
-  .checklist-item {
-    &:not(:last-child) {
-      margin-bottom: 5px;
-    }
-  }
-
-  &:last-child {
-    margin-bottom: 42px;
+    padding: 30px 19px;
   }
 
   &:hover {
@@ -42,54 +24,27 @@
     box-shadow: 0 2px 4px 0 #e5e9f5;
   }
 
-  &__likes,
-  &__dislikes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 4px 10px;
-
-    color: #a3a3a3;
-
-    background-color: $secondary;
-    border-radius: 6px;
-
-    svg {
-      margin-right: 8px;
-
-      stroke: #a3a3a3;
-    }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-    }
-  }
-
-  &__liked,
-  &__viewed {
-    display: flex;
-    align-items: center;
-
-    padding: 4px 10px;    svg {
-      margin-right: 8px;
-
-      stroke: #a3a3a3;
-    }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-    }
-  }
-
   &__heading {
     display: flex;
     justify-content: space-between;
 
-    text-align: left;
+    margin-bottom: 24px;
 
     @include media-breakpoint-down(sm) {
       flex-direction: column-reverse;
+    }
+  }
+
+  &__created {
+    @include media-breakpoint-down(sm) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__saved {
+    @include media-breakpoint-down(sm) {
+      display: block;
     }
   }
 
@@ -102,7 +57,8 @@
   }
 
   &__title {
-    margin: 0 55px 24px 0;
+    margin-right: 55px;
+    margin-bottom: 0;
 
     font-size: 1.5rem;
     word-break: break-word;
@@ -112,7 +68,7 @@
     }
 
     @include media-breakpoint-down(sm) {
-      margin: 21px 0 18px;
+      margin: 20px 0 0;
 
       font-size: 1.2rem;
     }
@@ -128,7 +84,24 @@
     }
   }
 
-  &__wrap {
+  &__num {
+    display: flex;
+    justify-content: flex-end;
+
+    width: 100%;
+    max-width: 40px;
+    margin-right: 5px;
+  }
+
+  &__list {
+    display: flex;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  &__btns {
     position: absolute;
     top: 25px;
     right: 36px;
@@ -136,11 +109,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-
-    @include media-breakpoint-down(md) {
-      flex-wrap: wrap-reverse;
-    }
 
     @include media-breakpoint-down(sm) {
       top: 22px;
@@ -150,112 +118,41 @@
     }
   }
 
-  &__buttons {
-    display: flex;
-  }
-
-  &__likes {
-    margin-right: 8px;
-
-    &.liked {
-      color: $primary;
-
-      background-color: #65c17e1a;
-
-      svg {
-        stroke: $primary;
-      }
-    }
-
-    &.active {
-      color: #fff;
-
-      background-color: $primary;
-
-      svg {
-        stroke: #fff;
-      }
-    }
-  }
-
-  &__dislikes {
-    border-radius: 6px;
-
-    svg {
-      transform: rotate(180deg);
-    }
-
-    &.disliked {
-      color: $warning;
-
-      background-color: #FC57571a;
-
-      svg {
-        stroke: $warning;
-      }
-    }
-
-    &.active {
-      color: #fff;
-
-      background-color: $warning;
-
-      svg {
-        stroke: #fff;
-      }
-    }
-  }
-
-  &__bookmark {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 39px;
-    height: 39px;
-    margin-bottom: 28px;
-
-    background-color: $secondary;
-    border-radius: 8px;
-
-    transition: box-shadow 0.2s ease;
-
-    @include media-breakpoint-down(sm) {
-      margin: 0 0 0 21px;
-    }
-
-    svg {
-      width: 16px;
-      height: 18px;
-
-      stroke: #a3a3a3;
-
-      transition: stroke 0.2s ease;
-    }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-
-      svg {
-        stroke: $dark;
-      }
-    }
-
-    &.saved {
-      background-color: #f0f9f2;
-
-      svg {
-        fill: #fff;
-        stroke: $primary;
-      }
-    }
-  }
-
   &__items {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     margin-left: 20px;
 
     word-break: break-word;
+
+    &.detail {
+      margin-bottom: 34px;
+      margin-left: 16px;
+
+      font-size: 1.1rem;
+
+      ::marker {
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__dots {
+    margin-bottom: 11px;
+    margin-left: 36px;
+
+    opacity: 0.3;
+
+    svg {
+      width: 30px;
+      height: 29px;
+
+      fill: $dark;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &__show {
@@ -280,6 +177,17 @@
     }
   }
 
+  &__wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media-breakpoint-down(md) {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+    }
+  }
+
   &__box {
     display: flex;
     align-items: center;
@@ -287,134 +195,12 @@
     font-size: 14px;
 
     @include media-breakpoint-down(md) {
-      margin-bottom: 10px;
-    }
-
-    @include media-breakpoint-down(sm) {
-      margin-bottom: 0;
+      margin-bottom: 25px;
     }
   }
 
-  &__dots {
-    margin-bottom: 11px;
-    margin-left: 36px;
-
-    opacity: 0.3;
-
-    svg {
-      width: 30px;
-      height: 29px;
-
-      fill: $dark;
-    }
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  &__tags {
-    margin-bottom: 17px;
-
-    @include media-breakpoint-down(sm) {
-      margin-bottom: 15px;
-    }
-  }
-
-  &__tag {
-    display: inline-block;
-
-    margin-bottom: 9px;
-    padding: 2px 14px;
-
-    word-break: break-word;
-
-    background-color: #fff;
-    border: 1px solid rgb(101 193 126 / 40%);
-    border-radius: 6px;
-
-    transition: box-shadow 0.2s ease;
-
-    &:not(:last-child) {
-      margin-right: 9px;
-    }
-
-    &:hover {
-      border: 1px solid $primary;
-    }
-  }
-
-  &__inner {
+  &__buttons {
     display: flex;
-
-    margin-right: 25px;
-
-    @include media-breakpoint-down(sm) {
-      margin-right: 0;
-      margin-bottom: 7px;
-    }
-  }
-
-  &__viewed {
-    margin-right: 8px;
-
-    color: #a3a3a3;
-
-    background-color: $secondary;
-    border-radius: 6px;
-
-    svg {
-      stroke: #a3a3a3;
-    }
-
-    &.active {
-      color: #6d9aff;
-
-      background-color: #407bff1a;
-
-      svg {
-        stroke: #6d9aff;
-      }
-    }
-  }
-
-  &__liked {
-    color: #a3a3a3;
-
-    background-color: $secondary;
-    border-radius: 6px;
-
-    transition: box-shadow 0.2s ease, color 0.2s ease;
-
-    svg {
-      stroke: #a3a3a3;
-
-      transition: stroke 0.2s ease;
-    }
-
-    &:hover {
-      box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
-    }
-
-    &.active {
-      color: $primary;
-
-      background-color: #65c17e1a;
-
-      svg {
-        stroke: $primary;
-      }
-    }
-
-    &.liked {
-      color: #fff;
-
-      background-color: $primary;
-
-      svg {
-        stroke: #fff;
-      }
-    }
   }
 
   &__time {

@@ -27,7 +27,7 @@ const CreationOfChecklistPage = () => {
     if (!id) return;
     if (isLoading) return;
     if (error) {
-      navigate("/not-found");
+      navigate("/not-found", { replace: true });
       return;
     }
 

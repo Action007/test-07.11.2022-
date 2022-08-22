@@ -1,0 +1,45 @@
+@import '../../../../global-styles/variables';
+@import '../../../../../node_modules/bootstrap/scss/mixins';
+
+.checklist-save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 39px;
+  height: 39px;
+  margin-bottom: 28px;
+
+  background-color: $secondary;
+  border-radius: 8px;
+
+  transition: box-shadow 0.2s ease;
+
+  @include media-breakpoint-down(sm) {
+    margin: 0 0 0 21px;
+  }
+
+  svg {
+    width: 16px;
+    height: 18px;
+
+    stroke: #a3a3a3;
+  }
+
+  &:hover {
+    box-shadow: 0 0.5px 1px rgb(0 0 0 / 30%);
+
+    svg {
+      stroke: $dark;
+    }
+  }
+
+  &.saved {
+    background-color: #f0f9f2;
+
+    svg {
+      fill: #fff;
+      stroke: $primary;
+    }
+  }
+}

@@ -24,7 +24,7 @@ const ForgotPassword = () => {
     if (error && error?.data?.error === "unauthorized") {
       setEmailIsValidServer(false);
     } else if (isError) {
-      navigate("/error");
+      navigate("/error", { replace: true });
     }
   }, [isError]);
 

@@ -16,7 +16,7 @@ const ConfirmAccount = () => {
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
-    if (!confirmToken) navigate("/not-found");
+    if (!confirmToken) navigate("/not-found", { replace: true });
     if (confirmToken) confirmAccount({ confirmation_token: confirmToken });
   }, []);
 
@@ -25,7 +25,7 @@ const ConfirmAccount = () => {
       dispatch(authSliceActions.setToken(data.token));
       setModalShow(true);
     }
-    if (isError) navigate("/error");
+    if (isError) navigate("/error", { replace: true });
   }, [isSuccess, isError]);
 
   return (

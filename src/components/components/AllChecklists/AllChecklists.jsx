@@ -54,7 +54,7 @@ const AllChecklists = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if (error) navigate("/error");
+    if (error) navigate("/error", { replace: true });
   }, [error]);
 
   const loader = (
@@ -92,7 +92,7 @@ const AllChecklists = () => {
               <Checklist
                 key={checklist.id}
                 checklist={checklist}
-                created={category === "created"}
+                page={category === "created" && "created-checklists"}
               />
             ))
           ) : (

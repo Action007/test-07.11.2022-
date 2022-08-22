@@ -31,7 +31,7 @@ const MyActiveChecklists = () => {
   ];
 
   useEffect(() => {
-    if (error) navigate("/error");
+    if (error) navigate("/error", { replace: true });
   }, [error]);
 
   useEffect(() => {
@@ -92,7 +92,6 @@ const MyActiveChecklists = () => {
                   key={checklist.id}
                   checklist={checklist}
                   translate={translate("myActiveChecklists.showMore")}
-                  page="my-active-checklists"
                 />
               </React.Fragment>
             ))

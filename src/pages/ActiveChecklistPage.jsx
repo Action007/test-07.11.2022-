@@ -12,7 +12,7 @@ const ActiveChecklistPage = () => {
     isLoading,
     isError,
     error,
-  } = useFetchActiveChecklistQuery(`/active_checklists/${id}`);
+  } = useFetchActiveChecklistQuery(`/active_checklis/${id}`);
   const token = useSelector((state) => state.authSliceReducer.token);
   const navigate = useNavigate();
 
@@ -20,9 +20,9 @@ const ActiveChecklistPage = () => {
     if (!isError) return;
 
     if (error && error?.data?.error === "not_found") {
-      navigate("/not-found");
+      navigate("/not-found", { replace: true });
     } else {
-      navigate("/error");
+      navigate("/error", { replace: true }, { replace: true });
     }
   }, [isError]);
 

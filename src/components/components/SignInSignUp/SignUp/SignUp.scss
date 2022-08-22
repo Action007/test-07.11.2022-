@@ -175,7 +175,8 @@
 
   &__invalid {
     display: flex;
-    margin: 4px 0 9px 0;
+
+    margin: 4px 0 9px;
 
     font-size: 16px;
     color: $warning;

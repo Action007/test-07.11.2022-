@@ -53,7 +53,7 @@ const SignIn = () => {
       return;
     }
 
-    navigate("/error");
+    navigate("/error", { replace: true });
   }, [isError]);
 
   useEffect(() => {

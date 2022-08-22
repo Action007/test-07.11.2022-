@@ -29,9 +29,9 @@ const ChecklistDetailPage = () => {
     if (!isError) return;
 
     if (error && error?.data?.error === "not_found") {
-      navigate("/not-found");
+      navigate("/not-found", { replace: true });
     } else {
-      navigate("/error");
+      navigate("/error", { replace: true });
     }
   }, [isError]);
 

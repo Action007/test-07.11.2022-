@@ -40,7 +40,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
   }, [changeChecklist]);
 
   useEffect(() => {
-    if (isError) navigate("/error");
+    if (isError) navigate("/error", { replace: true });
     let setShowDonePopup;
     if (isSuccess) {
       setDone(true);
