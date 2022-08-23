@@ -7,6 +7,7 @@ import {
   useSupportChecklistMutation,
 } from "../../../services/supportService";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
+import isServerError from "../../../utils/isServerError";
 import ComplainDone from "../ComplainDone/ComplainDone";
 import "./Complain.scss";
 
@@ -24,13 +25,13 @@ const Complain = ({ closeHandler, id, name, page }) => {
       skip,
     }
   );
-  const [supportChecklist, { isSuccess, isError, isLoading: isSendLoading }] =
+  const [supportChecklist, { isSuccess, error, isLoading }] =
     useSupportChecklistMutation();
   const [done, setDone] = useState(false);
   const field = useRef();
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
-  const showComplain = (!done && !isSendLoading) || page === "support";
+  const showComplain = (!done && !isLoading) || page === "support";
   const [isValidLink, setIsValidLink] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
   const [isEmptyCheckbox, setIsEmptyCheckbox] = useState(false);
@@ -40,7 +41,6 @@ const Complain = ({ closeHandler, id, name, page }) => {
   }, [changeChecklist]);
 
   useEffect(() => {
-    if (isError) navigate("/error", { replace: true });
     let setShowDonePopup;
     if (isSuccess) {
       setDone(true);
@@ -48,7 +48,13 @@ const Complain = ({ closeHandler, id, name, page }) => {
       setShowDonePopup = setTimeout(() => closeHandler(), 7000);
     }
     return () => clearTimeout(setShowDonePopup);
-  }, [isSuccess, isError]);
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isServerError(error?.status)) {
+      navigate("/error", { replace: true });
+    }
+  }, [error]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -89,7 +95,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
 
   return (
     <>
-      <LoadingSpinnerPopup showSpinner={isSendLoading} />
+      <LoadingSpinnerPopup showSpinner={isLoading} />
       {done && page !== "support" && (
         <ComplainDone closeHandler={closeHandler} translate={translate} />
       )}

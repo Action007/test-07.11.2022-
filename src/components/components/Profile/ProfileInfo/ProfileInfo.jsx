@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEditAccountMutation } from "../../../../services/accountService";
+import isServerError from "../../../../utils/isServerError";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import "./ProfileInfo.scss";
 
+import brokenImg from "../../../../assets/images/icon/brokenImg.svg";
 import { ReactComponent as Setting } from "../../../../assets/images/icon/setting.svg";
 import { ReactComponent as Facebook } from "../../../../assets/images/icon/facebook.svg";
 import { ReactComponent as Twitter } from "../../../../assets/images/icon/twitter.svg";
@@ -31,10 +33,24 @@ const ProfileInfo = ({
   const [avatar, setAvatar] = useState(avatar_url);
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
-  const [imageUpload, { isLoading: isUpdateLoading, isError, error, data }] =
+  const [imageUpload, { isLoading: isUpdateLoading, error, data }] =
     useEditAccountMutation();
   const host = site ? new URL(site).hostname : "";
   const hostURL = site ? window.location.origin : "";
+
+  useEffect(() => {
+    if (error && error.data.message[0].type === "file_size_out_of_range") {
+      onLargeImageSize();
+      return;
+    }
+    if (isServerError(error?.status)) {
+      navigate("/error", { replace: true });
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (data) setAvatar(data.avatar_url);
+  }, [data]);
 
   const onImageUpload = (event) => {
     const image = event.target.files[0];
@@ -52,17 +68,11 @@ const ProfileInfo = ({
     };
   };
 
-  useEffect(() => {
-    if (error && error.data.message[0].type === "file_size_out_of_range") {
-      onLargeImageSize();
-    } else if (isError) {
-      navigate("/error", { replace: true });
-    }
-  }, [error]);
-
-  useEffect(() => {
-    if (data) setAvatar(data.avatar_url);
-  }, [data]);
+  const onErrorImgHandler = (e) => {
+    e.target.src = brokenImg;
+    e.target.alt = "broken image";
+    e.target.className = "broken";
+  };
 
   return (
     <>
@@ -77,7 +87,11 @@ const ProfileInfo = ({
               htmlFor="uploadImg"
             >
               <div className="profile-info__img">
-                {avatar ? <img src={avatar} alt="account" /> : <EmptySvg />}
+                {avatar ? (
+                  <img onError={onErrorImgHandler} src={avatar} alt="account" />
+                ) : (
+                  <EmptySvg />
+                )}
               </div>
               {isMyAccount && (
                 <>

@@ -10,6 +10,7 @@ import {
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import validateEmail from "../../../../utils/validateEmail";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
+import isServerError from "../../../../utils/isServerError";
 import "./SignIn.scss";
 
 import { ReactComponent as LoginSvg } from "../../../../assets/images/content/login.svg";
@@ -37,7 +38,7 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!error) return;
+    if (!isError) return;
 
     if (error.data?.error === "unauthorized") {
       setIsValidEmailOrPassword(false);
@@ -53,7 +54,9 @@ const SignIn = () => {
       return;
     }
 
-    navigate("/error", { replace: true });
+    if (isServerError(error?.status)) {
+      navigate("/error", { replace: true });
+    }
   }, [isError]);
 
   useEffect(() => {

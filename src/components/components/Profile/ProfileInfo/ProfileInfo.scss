@@ -113,6 +113,11 @@
       height: 100%;
 
       object-fit: cover;
+
+      &.broken {
+        width: 50%;
+        height: 50%;
+      }
     }
 
     svg {

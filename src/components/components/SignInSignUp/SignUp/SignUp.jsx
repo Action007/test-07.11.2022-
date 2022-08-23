@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
+import isServerError from "../../../../utils/isServerError";
 import validateEmail from "../../../../utils/validateEmail";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import "./SignUp.scss";
@@ -12,56 +13,82 @@ import { useSignUpMutation } from "../../../../services/logInService";
 
 const SignUp = () => {
   const [isValidNicknameServer, setIsValidNicknameServer] = useState(true);
+  const [isNicknameTooLong, setIsNicknameTooLong] = useState(false);
+  const [isNicknameInvalidCharacters, setIsNicknameInvalidCharacters] =
+    useState(false);
   const [isValidEmailServer, setIsValidEmailServer] = useState(true);
-  const [nameIsValid, setNameIsValid] = useState(true);
+  const [isNicknameValid, setIsNicknameValid] = useState(true);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
-  const nameRef = useRef();
+  const nickNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const [signUp, { isLoading, isSuccess, error }] = useSignUpMutation();
   const emailValue = emailRef.current?.value;
   const { t: translate } = useTranslation();
   const showOnMobile = useMediaQuery("(max-width:991px)");
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!error?.data.message) return;
+    if (isServerError(error.status)) navigate("/error", { replace: true });
+    if (!error?.data?.message) return;
+
+    const { message } = error.data;
+
+    if (message[0].attribute === "nickname" && message[0].type === "taken") {
+      setIsValidNicknameServer(false);
+    } else if (
+      message[0].attribute === "email" &&
+      message[0].type === "taken"
+    ) {
+      setIsValidEmailServer(false);
+    } else if (
+      message[0].attribute === "nickname" &&
+      message[0].type === "invalid_characters"
+    ) {
+      setIsNicknameInvalidCharacters(true);
+    }
+
     setIsValidNicknameServer(true);
     setIsValidEmailServer(true);
-    error.data.message.forEach((item) => {
-      if (item.attribute === "nickname" && item.type === "taken") {
-        setIsValidNicknameServer(false);
-      } else if (item.attribute === "email" && item.type === "taken") {
-        setIsValidEmailServer(false);
-      }
-    });
     setEmailIsValid(true);
     setPasswordIsValid(true);
+    setIsNicknameTooLong(false);
+    setIsNicknameInvalidCharacters(false);
   }, [error]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const name = nameRef.current.value;
+    const nickName = nickNameRef.current.value;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    const validName = name !== "";
-    const validEmail = !!validateEmail(email);
-    const validPassword = password !== "" && password.length > 7;
+    const isValidNickname = nickName !== "";
+    const isNicknameNotLong = nickName.length < 50;
+    const isValidEmail = !!validateEmail(email);
+    const isValidPassword = password !== "" && password.length > 7;
 
-    if (validName && validEmail && validPassword) {
+    if (
+      isValidNickname &&
+      isValidEmail &&
+      isValidPassword &&
+      isNicknameNotLong
+    ) {
       signUp({
-        nickname: name,
+        nickname: nickName,
         email,
         password,
         password_confirmation: password,
       });
     } else {
-      setNameIsValid(validName);
-      setEmailIsValid(validEmail);
-      setPasswordIsValid(validPassword);
-      if (!validEmail) setIsValidEmailServer(true);
-      if (!validName) setIsValidNicknameServer(true);
+      setIsNicknameValid(isValidNickname);
+      setEmailIsValid(isValidEmail);
+      setPasswordIsValid(isValidPassword);
+      setIsNicknameTooLong(!isNicknameNotLong);
+      setIsValidEmailServer(true);
+      setIsValidNicknameServer(true);
+      setIsNicknameTooLong(true);
+      setIsNicknameInvalidCharacters(false);
     }
   };
 
@@ -84,23 +111,36 @@ const SignUp = () => {
       <form onSubmit={submitHandler} className="sign-up__form">
         <label
           className={`sign-up__label${
-            !nameIsValid || !isValidNicknameServer ? " invalid" : ""
+            !isNicknameValid ||
+            !isValidNicknameServer ||
+            isNicknameTooLong ||
+            isNicknameInvalidCharacters
+              ? " invalid"
+              : ""
           }`}
           htmlFor="loginName"
         >
           <span className="sign-up__span">{translate("login.nickname")}</span>
           <input
-            ref={nameRef}
+            ref={nickNameRef}
             id="loginName"
             placeholder={translate("login.nicknamePlaceholder")}
             minLength="2"
             type="text"
           />
-          {(!nameIsValid || !isValidNicknameServer) && (
+          {(!isNicknameValid ||
+            !isValidNicknameServer ||
+            isNicknameTooLong ||
+            isNicknameInvalidCharacters) && (
             <span className="sign-up__invalid SFPro-300">
               <ExclamationSvg />
-              {!nameIsValid && translate("login.incorrectNickname")}
-              {!isValidNicknameServer && translate("login.nickNameTaken")}
+              {!isNicknameValid && translate("login.incorrectNickname")}
+              {!isValidNicknameServer && translate("login.nicknameTaken")}
+              {isNicknameValid &&
+                isNicknameTooLong &&
+                translate("login.nicknameTooLong")}
+              {isNicknameInvalidCharacters &&
+                translate("login.nicknameInvalidCharacters")}
             </span>
           )}
         </label>

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFetchActiveChecklistQuery } from "../services/activeChecklistService";
 import ActiveChecklist from "../components/components/ActiveChecklist/ActiveChecklist";
+import isServerError from "../utils/isServerError";
 
 const ActiveChecklistPage = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ const ActiveChecklistPage = () => {
     isLoading,
     isError,
     error,
-  } = useFetchActiveChecklistQuery(`/active_checklis/${id}`);
+  } = useFetchActiveChecklistQuery(`/active_checklists/${id}`);
   const token = useSelector((state) => state.authSliceReducer.token);
   const navigate = useNavigate();
 
@@ -21,8 +22,10 @@ const ActiveChecklistPage = () => {
 
     if (error && error?.data?.error === "not_found") {
       navigate("/not-found", { replace: true });
-    } else {
-      navigate("/error", { replace: true }, { replace: true });
+      return;
+    }
+    if (isServerError(error?.status)) {
+      navigate("/error", { replace: true });
     }
   }, [isError]);
 

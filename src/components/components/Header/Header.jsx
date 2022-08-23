@@ -11,6 +11,7 @@ import Networks from "../Networks/Networks";
 import HeaderDropdown from "../HeaderDropdown/HeaderDropdown";
 import SearchInput from "../SearchInput/SearchInput";
 import useMediaQuery from "../../../hooks/useMediaQuery";
+import isServerError from "../../../utils/isServerError";
 import useClickOutside from "../../../hooks/useClickOutside";
 import "./Header.scss";
 
@@ -37,7 +38,7 @@ const Header = () => {
   const { pathname } = useLocation();
   const { t: translate } = useTranslation();
 
-  const { data: accountInfo, isError } = useFetchAccountInfoQuery("", {
+  const { data: accountInfo, error } = useFetchAccountInfoQuery("", {
     skip: !token,
   });
 
@@ -54,11 +55,10 @@ const Header = () => {
   }, [accountInfo]);
 
   useEffect(() => {
-    if (!isError) return;
-    dispatch(authSliceActions.resetUser());
-    dispatch(authSliceActions.resetToken());
-    navigate("/error", { replace: true });
-  }, [isError]);
+    if (isServerError(error?.status)) {
+      navigate("/error", { replace: true });
+    }
+  }, [error]);
 
   useEffect(() => {
     if (pathname === "/saved-checklists" || !user) return;

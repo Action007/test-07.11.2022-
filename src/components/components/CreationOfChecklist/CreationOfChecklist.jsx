@@ -15,6 +15,7 @@ import PopupDone from "../PopupDone/PopupDone";
 import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
 import CreationCategory from "../CreationCategory/CreationCategory";
 import validateLink from "../../../utils/validateLink";
+import isServerError from "../../../utils/isServerError";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import "./CreationOfChecklist.scss";
 
@@ -22,24 +23,10 @@ import { ReactComponent as CreationImg } from "../../../assets/images/content/cr
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
 
 const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
-  const [
-    createChecklist,
-    {
-      isSuccess: successCreate,
-      error: errorCreate,
-      isLoading: loadingCreate,
-      data: newChecklist,
-    },
-  ] = useCreateChecklistMutation();
-  const [
-    updateChecklist,
-    {
-      isSuccess: successUpdate,
-      error: errorUpdate,
-      isLoading: loadingUpdate,
-      data: updatedChecklist,
-    },
-  ] = useUpdateChecklistMutation();
+  const [createOrUpdateChecklist, { isSuccess, error, isLoading, data }] =
+    page === "edit-checklist"
+      ? useUpdateChecklistMutation()
+      : useCreateChecklistMutation();
   const [preview, setPreview] = useState(false);
   const [validButton, setValidButton] = useState();
   const [done, setDone] = useState(false);
@@ -71,13 +58,17 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const breadcrumbs = [{ title: translate("creationOfChecklist.title") }];
 
   useEffect(() => {
-    if (successCreate || successUpdate) {
+    if (isSuccess) {
       dispatch(createChecklistActions.onSubmitClear());
       setDone(true);
-    } else if (errorCreate || errorUpdate) {
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }
-  }, [successCreate, successUpdate, errorCreate, errorUpdate]);
+  }, [error]);
 
   const checkInputsHandler = () => {
     const tagsIsValid = tags.length > 2;
@@ -252,15 +243,14 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
       }
     }
 
-    if (!page) createChecklist(checklistBody);
-    if (page === "edit-checklist") updateChecklist(checklistBody);
+    createOrUpdateChecklist(checklistBody);
   };
 
   const showNewChecklist = () => {
     if (page === "edit-checklist") {
-      navigate(`/checklist/${updatedChecklist.id}/${updatedChecklist.slug}`);
+      navigate(`/checklist/${data.id}/${data.slug}`);
     } else {
-      navigate(`/checklist/${newChecklist.id}/${newChecklist.slug}`);
+      navigate(`/checklist/${data.id}/${data.slug}`);
     }
   };
 
@@ -275,7 +265,7 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
         onHide={() => setDone(false)}
         onLookChecklist={showNewChecklist}
       />
-      <LoadingSpinnerPopup showSpinner={!!loadingCreate || !!loadingUpdate} />
+      <LoadingSpinnerPopup showSpinner={isLoading} />
       <div className="container creation pb-8">
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <h2 className="creation__title SFPro-600">

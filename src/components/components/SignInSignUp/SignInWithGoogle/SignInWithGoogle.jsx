@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { authSliceActions } from "../../../../store/authSlice";
 import { useSignInWithGoogleMutation } from "../../../../services/logInService";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
+import isServerError from "../../../../utils/isServerError";
 
 const SignInWithGoogle = () => {
-  const [signInWithGoogle, { data, isSuccess, isError }] =
+  const [signInWithGoogle, { data, isSuccess, error }] =
     useSignInWithGoogleMutation();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -29,10 +30,10 @@ const SignInWithGoogle = () => {
   }, []);
 
   useEffect(() => {
-    if (isError) {
+    if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }
-  }, [isError]);
+  }, [error]);
 
   useEffect(() => {
     if (!isSuccess) return;

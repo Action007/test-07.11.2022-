@@ -4,38 +4,27 @@
 .breadcrumbs {
   position: relative;
 
-  display: flex;
+  &__items {
+    display: flex;
 
-  margin: 0;
-  padding: 42px 0 50px;
+    margin: 0;
+    padding: 42px 0 50px;
 
-  font-size: 14px;
+    font-size: 14px;
 
-  @include media-breakpoint-down(lg) {
-    overflow-x: scroll;
+    @include media-breakpoint-down(lg) {
+      overflow-x: scroll;
 
-    white-space: nowrap;
+      white-space: nowrap;
 
-    -webkit-overflow-scrolling: touch;
-  }
+      -webkit-overflow-scrolling: touch;
+    }
 
-  @include media-breakpoint-down(sm) {
-    padding: 16px 0 26px;
+    @include media-breakpoint-down(sm) {
+      padding: 16px 0 26px;
 
-    font-size: 12px;
-  }
-
-  &::before {
-    content: '';
-
-    position: fixed;
-    z-index: 1;
-    right: 0;
-
-    width: 55px;
-    height: 20px;
-
-    background: linear-gradient(90deg, rgb(245 247 254 / 0%) 30%, #f5f7fe 65%);
+      font-size: 12px;
+    }
   }
 
   &__item {
@@ -77,6 +66,24 @@
       svg {
         stroke: $primary;
       }
+    }
+  }
+
+  &__shadow {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 80%;
+    width: 50px;
+    max-width: 100%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      width: 45px;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(245, 247, 254, 0) 10%, #f5f7fe 75%);
     }
   }
 }

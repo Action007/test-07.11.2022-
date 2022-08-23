@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useFetchChecklistQuery } from "../services/checklistService";
 import ChecklistReview from "../components/components/ChecklistReview/ChecklistReview";
+import isServerError from "../utils/isServerError";
 
 const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
@@ -30,7 +31,9 @@ const ChecklistDetailPage = () => {
 
     if (error && error?.data?.error === "not_found") {
       navigate("/not-found", { replace: true });
-    } else {
+      return;
+    }
+    if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }
   }, [isError]);

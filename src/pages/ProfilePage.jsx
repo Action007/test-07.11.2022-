@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useFetchAccountWithNicknameQuery } from "../services/accountService";
 import Profile from "../components/components/Profile/Profile";
+import isServerError from "../utils/isServerError";
 
 const ProfilePage = () => {
   const { t: translate } = useTranslation();
@@ -21,7 +22,9 @@ const ProfilePage = () => {
   useEffect(() => {
     if (error && error?.data?.message[0]?.type === "invalid") {
       navigate("/not-found", { replace: true });
-    } else if (isError) {
+      return;
+    }
+    if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }
   }, [isError]);

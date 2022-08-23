@@ -12,7 +12,7 @@ const ChecklistComplain = ({ token, id, name, navigate, translate }) => {
     if (token) {
       setShowComplain(true);
     } else {
-      navigate("/error");
+      navigate("/sign-in");
     }
   };
 

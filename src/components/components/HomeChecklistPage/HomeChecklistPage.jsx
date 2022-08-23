@@ -11,6 +11,7 @@ import Pagination from "../Pagination/Pagination";
 import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
 import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 import useMediaQuery from "../../../hooks/useMediaQuery";
+import isServerError from "../../../utils/isServerError";
 import "./HomeChecklistPage.scss";
 
 import Logo from "../../../assets/images/icon/logo.svg";
@@ -51,7 +52,9 @@ const HomeChecklistPage = () => {
   }, [search]);
 
   useEffect(() => {
-    if (error) navigate("/error", { replace: true });
+    if (isServerError(error?.status)) {
+      navigate("/error", { replace: true });
+    }
   }, [error]);
 
   const loader = (

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDeleteActiveChecklistMutation } from "../../../services/activeChecklistService";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
+import isServerError from "../../../utils/isServerError";
 import uniqueID from "../../../utils/uniqueID";
 import "./ActiveChecklistDetail.scss";
 
@@ -27,14 +28,12 @@ const ActiveChecklistDetail = ({ checklist }) => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (!isError) return;
-
     if (error && error?.data?.error === "not_found") {
       navigate("/not-found", { replace: true });
-    } else {
-      navigate("/error", { replace: true });
+      return;
     }
-  }, [isSuccess, isError]);
+    if (isServerError(error?.status)) navigate("/error", { replace: true });
+  }, [isError]);
 
   const onDeleteHandler = () => {
     checkChecklistItem({ id: checklist.id });
