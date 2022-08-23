@@ -8,6 +8,7 @@ import Checklist from "../Checklist/Checklist";
 import Pagination from "../Pagination/Pagination";
 import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
+import isServerError from "../../../utils/isServerError";
 import Tabs from "../Tabs/Tabs";
 import HomeButton from "../../UI/Buttons/HomeButton/HomeButton";
 
@@ -31,7 +32,9 @@ const MyActiveChecklists = () => {
   ];
 
   useEffect(() => {
-    if (error) navigate("/error", { replace: true });
+    if (isServerError(error?.status)) {
+      navigate("/error", { replace: true });
+    }
   }, [error]);
 
   useEffect(() => {

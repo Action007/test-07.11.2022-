@@ -134,6 +134,10 @@
         font-size: 1.1rem;
         font-weight: 600;
       }
+
+      @include media-breakpoint-down(md) {
+        margin-left: 0;
+      }
     }
   }
 
@@ -194,8 +198,10 @@
 
     font-size: 14px;
 
-    @include media-breakpoint-down(md) {
-      margin-bottom: 25px;
+    &.detail {
+      @include media-breakpoint-down(md) {
+        margin-bottom: 25px;
+      }
     }
   }
 

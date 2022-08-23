@@ -6,6 +6,7 @@ import { useResetAccountPasswordMutation } from "../../../services/accountServic
 import validateEmail from "../../../utils/validateEmail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
+import isServerError from "../../../utils/isServerError";
 import Notification from "../../UI/Notification/Notification";
 import audio from "../../../assets/sound/song.mp3";
 import "./AccountSetting.scss";
@@ -13,7 +14,7 @@ import "./AccountSetting.scss";
 import { ReactComponent as EditProfileSvg } from "../../../assets/images/content/account-settings.svg";
 
 const AccountSetting = () => {
-  const [resetPassword, { isLoading, isSuccess, isError, error }] =
+  const [resetPassword, { isLoading, isSuccess, error }] =
     useResetAccountPasswordMutation();
   const user = useSelector((state) => state.authSliceReducer.user);
   const [emilValue, setEmailValue] = useState("@");
@@ -21,6 +22,7 @@ const AccountSetting = () => {
   const [emailValid, setEmailValid] = useState(true);
   const [oldPasswordValid, setOldPasswordValid] = useState(true);
   const [oldPasswordIncorrect, setOldPasswordIncorrect] = useState(true);
+  const [isPasswordTooLong, setIsPasswordTooLong] = useState(false);
   const [newPasswordValid, setNewPasswordValid] = useState(true);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
   const [errorMatchPassword, setErrorMatchPassword] = useState(false);
@@ -41,15 +43,22 @@ const AccountSetting = () => {
   ];
 
   useEffect(() => {
-    if (!error) return;
+    if (isServerError(error?.status)) navigate("/error", { replace: true });
+    if (!error?.data?.message) return;
 
-    const message = error.data?.message[0];
-    if (message?.attribute === "old_password" && message?.type === "invalid") {
+    const { message } = error.data;
+    if (
+      message[0]?.attribute === "old_password" &&
+      message[0]?.type === "invalid"
+    ) {
       setOldPasswordIncorrect(false);
-    } else {
-      navigate("/error", { replace: true });
+    } else if (
+      message[0]?.attribute === "password" &&
+      message[0]?.type === "too_long"
+    ) {
+      setIsPasswordTooLong(true);
     }
-  }, [isError]);
+  }, [error]);
 
   useEffect(() => {
     let showNotification;
@@ -57,6 +66,10 @@ const AccountSetting = () => {
       setNotification(true);
       song.play();
       showNotification = setTimeout(() => setNotification(false), 5000);
+
+      oldPasswordRef.current.value = "";
+      newPasswordRef.current.value = "";
+      confirmPasswordRef.current.value = "";
     }
 
     return () => {
@@ -86,6 +99,7 @@ const AccountSetting = () => {
     setNewPasswordValid(newPassword);
     setConfirmPasswordValid(confirmPassword);
     setOldPasswordIncorrect(true);
+    setIsPasswordTooLong(false);
 
     if (
       email &&
@@ -99,9 +113,6 @@ const AccountSetting = () => {
         new_password: newPasswordRef.current.value,
         new_password_confirmation: confirmPasswordRef.current.value,
       });
-      oldPasswordRef.current.value = "";
-      newPasswordRef.current.value = "";
-      confirmPasswordRef.current.value = "";
     }
   };
 
@@ -163,7 +174,9 @@ const AccountSetting = () => {
             </label>
             <label
               className={`account-setting__label${
-                !newPasswordValid || errorMatchPassword ? " invalid" : ""
+                !newPasswordValid || errorMatchPassword || isPasswordTooLong
+                  ? " invalid"
+                  : ""
               }`}
               htmlFor="account-newPassword"
             >
@@ -178,6 +191,11 @@ const AccountSetting = () => {
               {errorMatchPassword && (
                 <span className="account-setting__subtitle">
                   {translate("accountSettings.passwordMatch")}
+                </span>
+              )}
+              {isPasswordTooLong && (
+                <span className="account-setting__subtitle">
+                  {translate("accountSettings.maxPassword")}
                 </span>
               )}
               <input

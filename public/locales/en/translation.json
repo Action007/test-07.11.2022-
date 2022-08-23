@@ -709,7 +709,9 @@
     "unauthorized": "Invalid password",
     "not_found": "Invalid email",
     "invalidEmailOrPassword": "Invalid email or password",
-    "nickNameTaken": "This nickname is already in use. Please try another one",
+    "nicknameTaken": "This nickname is already in use. Please try another one",
+    "nicknameTooLong": "Nickname length can't exceed 50 characters",
+    "nicknameInvalidCharacters": "Nickname contains invalid characters",
     "emailTaken": "Email addresses are either invalid or already in use",
     "emailNotFound": "Email was not found",
     "emailNotVerified": "Your email verification is pending. Please verify your email",
@@ -765,6 +767,7 @@
     "confirmPassword": "Confirm Password",
     "passwordMatch": "The password entered is already in use",
     "minimum": "Minimum 8 characters",
+    "maxPassword": "Password length can't exceed 72 characters",
     "invalid": "The new passwords don't match",
     "incorrect": "Incorrect password",
     "submit": "Save Change"

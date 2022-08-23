@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFetchChecklistQuery } from "../../../services/checklistService";
+import isServerError from "../../../utils/isServerError";
 import CreateButton from "../../UI/Buttons/CreateButton/CreateButton";
 import HomeButton from "../../UI/Buttons/HomeButton/HomeButton";
 import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
@@ -54,7 +55,7 @@ const AllChecklists = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if (error) navigate("/error", { replace: true });
+    if (isServerError(error?.status)) navigate("/error", { replace: true });
   }, [error]);
 
   const loader = (

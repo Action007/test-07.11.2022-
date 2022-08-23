@@ -91,25 +91,29 @@
 
     border-radius: 50%;
 
-    &_fill {
-      width: 100%;
-      height: 100%;
+    &.fill {
+      img {
+        width: 100%;
+        height: 100%;
 
-      object-fit: cover;
-      border-radius: 50%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
     }
 
-    &_empty {
-      width: 75%;
-      height: 75%;
+    &.empty {
+      img {
+        width: 75%;
+        height: 75%;
 
-      object-fit: contain;
+        object-fit: contain;
+      }
     }
   }
 
   &__name {
     @include line-clamp;
-    
+
     max-width: 90px;
     height: 24px;
 

@@ -5,13 +5,14 @@ import { useForgotPasswordMutation } from "../../../../services/logInService";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import validateEmail from "../../../../utils/validateEmail";
+import isServerError from "../../../../utils/isServerError";
 import "./ForgotPassword.scss";
 
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 import { ReactComponent as EmailSvg } from "../../../../assets/images/icon/sendEmail.svg";
 
 const ForgotPassword = () => {
-  const [forgotPassword, { isSuccess, isLoading, isError, error }] =
+  const [forgotPassword, { isSuccess, isLoading, error }] =
     useForgotPasswordMutation();
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [emailIsValidServer, setEmailIsValidServer] = useState(true);
@@ -23,10 +24,12 @@ const ForgotPassword = () => {
   useEffect(() => {
     if (error && error?.data?.error === "unauthorized") {
       setEmailIsValidServer(false);
-    } else if (isError) {
+      return;
+    }
+    if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }
-  }, [isError]);
+  }, [error]);
 
   const submitHandler = (e) => {
     e.preventDefault();

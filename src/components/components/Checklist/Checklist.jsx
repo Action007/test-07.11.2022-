@@ -181,7 +181,11 @@ const Checklist = ({
                 translate={translate}
               />
             )}
-            <div className="checklist__box">
+            <div
+              className={`checklist__box${
+                page === "checklist-detail" ? " detail" : ""
+              }`}
+            >
               <LikeDislikeViewButtons
                 liked={liked}
                 unliked={unliked}

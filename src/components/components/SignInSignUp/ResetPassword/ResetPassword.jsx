@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useResetForgotPasswordMutation } from "../../../../services/logInService";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
+import isServerError from "../../../../utils/isServerError";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
 import "./ResetPassword.scss";
 
@@ -11,7 +12,7 @@ import { ReactComponent as ArrowSvg } from "../../../../assets/images/icon/right
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 
 const ResetPassword = ({ setShowNotification }) => {
-  const [resetPassword, { isLoading, isSuccess, isError }] =
+  const [resetPassword, { isLoading, isSuccess, error }] =
     useResetForgotPasswordMutation();
   const [isNewPasswordValid, setIsNewPasswordValid] = useState(true);
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
@@ -35,8 +36,10 @@ const ResetPassword = ({ setShowNotification }) => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (isError) navigate("/error", { replace: true });
-  }, [isError]);
+    if (isServerError(error?.status)) {
+      navigate("/error", { replace: true });
+    }
+  }, [error]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();

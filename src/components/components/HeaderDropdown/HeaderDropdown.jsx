@@ -12,6 +12,7 @@ import PopupLogout from "../PopupLogout/PopupLogout";
 import EmptySvg from "../../../assets/images/icon/emptyPhoto.svg";
 import "./HeaderDropdown.scss";
 
+import brokenImg from "../../../assets/images/icon/brokenImg.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as Account } from "../../../assets/images/icon/account.svg";
 import { ReactComponent as Setting } from "../../../assets/images/icon/setting.svg";
@@ -44,6 +45,11 @@ const HeaderDropdown = ({ user, savedCounter, setShow }) => {
     setShowHandler();
   };
 
+  const onErrorImgHandler = (e) => {
+    e.target.src = brokenImg;
+    e.target.alt = "broken image";
+  };
+
   return (
     <>
       <PopupLogout
@@ -61,21 +67,20 @@ const HeaderDropdown = ({ user, savedCounter, setShow }) => {
             variant="success"
             type="button"
           >
-            <div className="header-dropdown__img">
-              {user &&
-                (user.avatar_url ? (
-                  <img
-                    src={user.avatar_url}
-                    alt="account"
-                    className="header-dropdown__img_fill"
-                  />
-                ) : (
-                  <img
-                    src={EmptySvg}
-                    alt="account"
-                    className="header-dropdown__img_empty"
-                  />
-                ))}
+            <div
+              className={`header-dropdown__img${
+                user.avatar_url ? " fill" : " empty"
+              }`}
+            >
+              {user?.avatar_url ? (
+                <img
+                  onError={onErrorImgHandler}
+                  src={user.avatar_url}
+                  alt="account"
+                />
+              ) : (
+                <img src={EmptySvg} alt="account" />
+              )}
             </div>
             <span className="header-dropdown__name">
               {user ? user.nickname : ""}
