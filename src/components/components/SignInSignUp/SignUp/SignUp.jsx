@@ -30,8 +30,15 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isServerError(error.status)) navigate("/error", { replace: true });
+    if (isServerError(error?.status)) navigate("/error", { replace: true });
     if (!error?.data?.message) return;
+
+    setIsValidNicknameServer(true);
+    setIsValidEmailServer(true);
+    setEmailIsValid(true);
+    setPasswordIsValid(true);
+    setIsNicknameTooLong(false);
+    setIsNicknameInvalidCharacters(false);
 
     const { message } = error.data;
 
@@ -48,13 +55,6 @@ const SignUp = () => {
     ) {
       setIsNicknameInvalidCharacters(true);
     }
-
-    setIsValidNicknameServer(true);
-    setIsValidEmailServer(true);
-    setEmailIsValid(true);
-    setPasswordIsValid(true);
-    setIsNicknameTooLong(false);
-    setIsNicknameInvalidCharacters(false);
   }, [error]);
 
   const submitHandler = (e) => {

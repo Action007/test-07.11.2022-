@@ -7,7 +7,6 @@ import {
   useDeleteCommentMutation,
 } from "../../../services/commentsService";
 import ChecklistCommentsInput from "./ChecklistCommentsInput/ChecklistCommentsInput";
-import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import getTime from "../../../utils/getTime";
 import Comment from "../Comment/Comment";
 import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
@@ -23,8 +22,8 @@ const ChecklistComments = ({
   checklistID,
   loadingComments,
 }) => {
-  const [addComment, { isSuccess }] = useAddCommentMutation();
-  const [deleteComment, { isLoading }] = useDeleteCommentMutation();
+  const [addComment, { isSuccess, data }] = useAddCommentMutation();
+  const [deleteComment] = useDeleteCommentMutation();
 
   const token = useSelector((state) => state.authSliceReducer.token);
 
@@ -35,6 +34,7 @@ const ChecklistComments = ({
 
   useEffect(() => {
     if (!isSuccess) return;
+    setComments((pevState) => [data, ...pevState]);
     setNewComment(true);
     addComments(1);
   }, [isSuccess]);
@@ -46,14 +46,14 @@ const ChecklistComments = ({
         (item) => !comments.find((comment) => comment.id === item.id)
       );
       if (newComment) {
-        setComments([...lastComments, ...comments]);
+        setComments((pevState) => [...lastComments, ...pevState]);
         setNewComment(false);
         return;
       }
       if (lastComments.length === 0 && next_page) {
         addComments(next_page);
       } else {
-        setComments([...comments, ...lastComments]);
+        setComments((pevState) => [...pevState, ...lastComments]);
       }
     }
   }, [pagination_comments]);
@@ -64,67 +64,69 @@ const ChecklistComments = ({
 
   const onDeleteCommentHandler = (commentID) => {
     deleteComment({ checklist_id: checklistID, comment_id: commentID });
-    setComments(comments.filter((comment) => comment.id !== commentID));
+    setComments((pevState) =>
+      pevState.filter((comment) => comment.id !== commentID)
+    );
   };
 
   const onSubmitHandler = (inputValue, setInputValue, isValidComment) => {
-    if (!token) navigate("/sign-in");
+    if (!token) {
+      navigate("/sign-in");
+      return;
+    }
     if (inputValue.trim().length === 0 || !isValidComment) return;
     addComment({ text: inputValue.trim(), checklist_id: checklistID });
     setInputValue("");
   };
 
   return (
-    <>
-      <LoadingSpinnerPopup showSpinner={isLoading} />
-      <div className="checklist-comments">
-        <span className="checklist-comments__review SFPro-600">
-          {commentsTotalCount} {translate("checklistReviewPage.review")}
-        </span>
-        <ChecklistCommentsInput
-          submitHandler={onSubmitHandler}
-          translate={translate}
-        />
-        <ul className="checklist-comments__items">
-          {comments &&
-            comments.map((comment) => {
-              const { date } = getTime(comment.created_at);
-              return (
-                <Comment
-                  key={comment.id}
-                  author={comment.author}
-                  date={date}
-                  commentID={comment.id}
-                  checklistID={checklistID}
-                  text={comment.text}
-                  liked={comment.liked}
-                  token={token}
-                  unliked={comment.unliked}
-                  userTrack={comment.user_track}
-                  deleteCommentHandler={onDeleteCommentHandler}
-                />
-              );
-            })}
-        </ul>
-        {next_page &&
-          commentsTotalCount !== comments.length &&
-          (!loadingComments ? (
-            <button
-              onClick={showCommentHandler}
-              className="checklist-comments__button SFPro-500"
-              type="button"
-            >
-              <ArrowSvg />
-              {translate("checklistReviewPage.moreComments")}
-            </button>
-          ) : (
-            <div className="checklist-comments__loading SFPro-500">
-              <LoadingSpinner />
-              {translate("checklistReviewPage.loading")}
-            </div>
-          ))}
-      </div>
-    </>
+    <div className="checklist-comments">
+      <span className="checklist-comments__review SFPro-600">
+        {commentsTotalCount} {translate("checklistReviewPage.review")}
+      </span>
+      <ChecklistCommentsInput
+        submitHandler={onSubmitHandler}
+        translate={translate}
+      />
+      <ul className="checklist-comments__items">
+        {comments &&
+          comments.map((comment) => {
+            const { date } = getTime(comment.created_at);
+            return (
+              <Comment
+                key={comment.id}
+                author={comment.author}
+                date={date}
+                commentID={comment.id}
+                checklistID={checklistID}
+                text={comment.text}
+                liked={comment.liked}
+                token={token}
+                unliked={comment.unliked}
+                userTrack={comment.user_track}
+                deleteCommentHandler={onDeleteCommentHandler}
+              />
+            );
+          })}
+      </ul>
+      {next_page &&
+        commentsTotalCount !== comments.length &&
+        (!loadingComments ? (
+          <button
+            onClick={showCommentHandler}
+            className="checklist-comments__button SFPro-500"
+            type="button"
+          >
+            <ArrowSvg />
+            {translate("checklistReviewPage.moreComments")}
+          </button>
+        ) : (
+          <div className="checklist-comments__loading SFPro-500">
+            <LoadingSpinner />
+            {translate("checklistReviewPage.loading")}
+          </div>
+        ))}
+    </div>
   );
 };
 

@@ -80,7 +80,9 @@ const Checklist = ({
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
-      <div className="checklist">
+      <div
+        className={`checklist${page !== "checklist-detail" ? " detail" : ""}`}
+      >
         <div className="checklist__heading">
           <h3
             className={`checklist__title SFPro-700${
