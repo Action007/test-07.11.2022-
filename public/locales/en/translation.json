@@ -635,7 +635,8 @@
     "locationHover": "Location",
     "deleteHover": "Delete",
     "edit": "Edit Checklist",
-    "notImage": "Invalid format"
+    "notImage": "Invalid format",
+    "2hours": "You can edit this checklist within 2 hours of its creation."
   },
   "sidebar": {
     "select": "Select a category",
@@ -696,7 +697,7 @@
     "incorrectPassword": "Incorrect password",
     "minimum": "Minimum 8 characters",
     "doesNotMatch": "The new passwords don't match",
-    "resendConfirmation":"Resend confirmation",
+    "resendConfirmation": "Resend confirmation",
     "back": "Back",
     "desc": "We have sent a password recovery instruction to your email",
     "openEmail": "Open email app",

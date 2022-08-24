@@ -20,7 +20,7 @@
   }
 
   .modal-body {
-    padding: 24px 24px 50px;
+    padding: 24px;
 
     @include media-breakpoint-down(sm) {
       padding: 10px 26px 24px;

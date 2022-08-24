@@ -1,15 +1,13 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
 import "./PopupDone.scss";
 
 import { ReactComponent as CompleteSvg } from "../../../assets/images/icon/popupDone.svg";
 import { ReactComponent as PostedSvg } from "../../../assets/images/icon/posted.svg";
 import { ReactComponent as ConfirmSvg } from "../../../assets/images/icon/confirm.svg";
 
-const PopupDone = ({ show, onHide, onLookChecklist }) => {
-  const { pathname } = useLocation();
+const PopupDone = ({ show, onHide, onLookChecklist, page }) => {
   const { t: translate } = useTranslation();
 
   return (
@@ -27,18 +25,18 @@ const PopupDone = ({ show, onHide, onLookChecklist }) => {
         <div className="create-done__wrapper">
           <div className="create-done__wrap">
             <h4 className="create-done__title SFPro-600">
-              {pathname === "/creation-of-checklist" &&
+              {page === "creation-of-checklist" &&
                 translate("creationOfChecklist.popupTitle")}
-              {pathname === "/active-checklist" && translate("popupDone.title")}
-              {pathname === "/confirmation" && translate("popupConfirm.title")}
+              {page === "active-checklist" && translate("popupDone.title")}
+              {page === "confirmation" && translate("popupConfirm.title")}
             </h4>
             <p className="create-done__text">
-              {pathname === "/creation-of-checklist" &&
+              {page === "creation-of-checklist" &&
                 translate("creationOfChecklist.popupDesc")}
-              {pathname === "/active-checklist" && translate("popupDone.text")}
-              {pathname === "/confirmation" && translate("popupConfirm.text")}
+              {page === "active-checklist" && translate("popupDone.text")}
+              {page === "confirmation" && translate("popupConfirm.text")}
             </p>
-            {pathname === "/creation-of-checklist" && (
+            {page === "creation-of-checklist" && (
               <button
                 className="create-done__btn SFPro-500"
                 onClick={onLookChecklist}
@@ -47,8 +45,7 @@ const PopupDone = ({ show, onHide, onLookChecklist }) => {
                 {translate("creationOfChecklist.lookChecklist")}
               </button>
             )}
-            {(pathname === "/active-checklist" ||
-              pathname === "/confirmation") && (
+            {(page === "active-checklist" || page === "confirmation") && (
               <button
                 className="create-done__btn SFPro-500"
                 onClick={onHide}
@@ -59,9 +56,9 @@ const PopupDone = ({ show, onHide, onLookChecklist }) => {
             )}
           </div>
           <div className="create-done__img">
-            {pathname === "/creation-of-checklist" && <PostedSvg />}
-            {pathname === "/active-checklist" && <CompleteSvg />}
-            {pathname === "/confirmation" && <ConfirmSvg />}
+            {page === "creation-of-checklist" && <PostedSvg />}
+            {page === "active-checklist" && <CompleteSvg />}
+            {page === "confirmation" && <ConfirmSvg />}
           </div>
         </div>
       </Modal.Body>

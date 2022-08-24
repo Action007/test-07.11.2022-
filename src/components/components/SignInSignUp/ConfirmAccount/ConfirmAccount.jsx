@@ -36,6 +36,7 @@ const ConfirmAccount = () => {
           setModalShow(false);
           navigate("/");
         }}
+        page="confirmation"
       />
       <LoadingSpinner />;
     </>
