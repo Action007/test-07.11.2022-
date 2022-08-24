@@ -30,19 +30,16 @@ const SignIn = () => {
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const [resendConfirmation, { isLoading: isLoadingResend }] =
     useResendConfirmAccountMutation();
-  const [
-    signIn,
-    { data, isSuccess, isLoading: isLoadingSignIn, isError, error },
-  ] = useSignInMutation();
+  const [signIn, { data, isSuccess, isLoading: isLoadingSignIn, error }] =
+    useSignInMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isError) return;
+    if (!error) return;
 
     if (error.data?.error === "unauthorized") {
       setIsValidEmailOrPassword(false);
-
       return;
     }
     if (
@@ -53,11 +50,10 @@ const SignIn = () => {
       setIsEmailVerified(false);
       return;
     }
-
     if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }
-  }, [isError]);
+  }, [error]);
 
   useEffect(() => {
     if (!isSuccess) return;

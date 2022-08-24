@@ -110,11 +110,15 @@ const ProfileInfo = ({
               {name && (
                 <h1 className="profile-info__title SFPro-700">{name}</h1>
               )}
-              <span
-                className={`profile-info__subtitle${!country ? " empty" : ""}`}
-              >
-                {country || translate("profilePage.country")}
-              </span>
+              {country && (
+                <span
+                  className={`profile-info__subtitle${
+                    !country ? " empty" : ""
+                  }`}
+                >
+                  {translate("profilePage.country")}
+                </span>
+              )}
               {nickname && (
                 <span className="profile-info__name SFPro-700">
                   <a

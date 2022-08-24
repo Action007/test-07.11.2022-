@@ -21,19 +21,19 @@ const ChecklistCommentsInput = ({ submitHandler, translate }) => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className="checklist-comments-input">
+    <form onSubmit={onSubmitHandler} className="checklist-comments-form">
       <label
-        className="checklist-comments-input__label"
+        className="checklist-comments-form__label"
         htmlFor="checklistReview"
       >
         {!isValidComment && (
-          <span className="checklist-comments-input__desc">
+          <span className="checklist-comments-form__desc">
             {translate("checklistReviewPage.max")}
           </span>
         )}
         <input
           onChange={onChangeHandler}
-          className={`checklist-comments-input__input${
+          className={`checklist-comments-form__input${
             !isValidComment ? " invalid" : ""
           }`}
           value={inputValue}

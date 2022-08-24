@@ -18,10 +18,12 @@
     padding: 30px 19px;
   }
 
-  &:hover {
-    transform: translateY(-1px);
+  &.detail {
+    &:hover {
+      transform: translateY(-1px);
 
-    box-shadow: 0 2px 4px 0 #e5e9f5;
+      box-shadow: 0 2px 4px 0 #e5e9f5;
+    }
   }
 
   &__heading {
