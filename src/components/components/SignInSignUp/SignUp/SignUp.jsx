@@ -20,6 +20,7 @@ const SignUp = () => {
   const [isNicknameValid, setIsNicknameValid] = useState(true);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
+  const [isPasswordTooLong, setIsPasswordTooLong] = useState(false);
   const nickNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -32,13 +33,6 @@ const SignUp = () => {
   useEffect(() => {
     if (isServerError(error?.status)) navigate("/error", { replace: true });
     if (!error?.data?.message) return;
-
-    setIsValidNicknameServer(true);
-    setIsValidEmailServer(true);
-    setEmailIsValid(true);
-    setPasswordIsValid(true);
-    setIsNicknameTooLong(false);
-    setIsNicknameInvalidCharacters(false);
 
     const { message } = error.data;
 
@@ -66,12 +60,23 @@ const SignUp = () => {
     const isValidNickname = nickName !== "";
     const isNicknameNotLong = nickName.length < 50;
     const isValidEmail = !!validateEmail(email);
-    const isValidPassword = password !== "" && password.length > 7;
+    const isValidPasswordMin = password.length > 7;
+    const isValidPasswordMax = password.length < 73;
+
+    setIsNicknameValid(true);
+    setIsValidNicknameServer(true);
+    setIsValidEmailServer(true);
+    setEmailIsValid(true);
+    setPasswordIsValid(true);
+    setIsNicknameTooLong(false);
+    setIsNicknameInvalidCharacters(false);
+    setIsPasswordTooLong(false);
 
     if (
       isValidNickname &&
       isValidEmail &&
-      isValidPassword &&
+      isValidPasswordMin &&
+      isValidPasswordMax &&
       isNicknameNotLong
     ) {
       signUp({
@@ -83,12 +88,9 @@ const SignUp = () => {
     } else {
       setIsNicknameValid(isValidNickname);
       setEmailIsValid(isValidEmail);
-      setPasswordIsValid(isValidPassword);
+      setPasswordIsValid(isValidPasswordMin);
       setIsNicknameTooLong(!isNicknameNotLong);
-      setIsValidEmailServer(true);
-      setIsValidNicknameServer(true);
-      setIsNicknameTooLong(true);
-      setIsNicknameInvalidCharacters(false);
+      setIsPasswordTooLong(!isValidPasswordMax);
     }
   };
 
@@ -166,7 +168,9 @@ const SignUp = () => {
           )}
         </label>
         <label
-          className={`sign-up__label${!passwordIsValid ? " invalid" : ""}`}
+          className={`sign-up__label${
+            !passwordIsValid || isPasswordTooLong ? " invalid" : ""
+          }`}
           htmlFor="passwordEmail"
         >
           <span className="sign-up__span">{translate("login.password")}</span>
@@ -179,10 +183,11 @@ const SignUp = () => {
             type="password"
             minLength="8"
           />
-          {!passwordIsValid && (
+          {(!passwordIsValid || isPasswordTooLong) && (
             <span className="sign-up__invalid sign-up__invalid--last SFPro-300">
               <ExclamationSvg />
-              {translate("login.title1")}
+              {!passwordIsValid && translate("login.title1")}
+              {isPasswordTooLong && translate("login.maxPassword")}
             </span>
           )}
         </label>
