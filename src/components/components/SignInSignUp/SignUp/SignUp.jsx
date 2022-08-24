@@ -73,15 +73,6 @@ const SignUp = () => {
     setIsNicknameInvalidCharacters(false);
     setIsPasswordTooLong(false);
 
-    setIsNicknameValid(true);
-    setIsValidNicknameServer(true);
-    setIsValidEmailServer(true);
-    setEmailIsValid(true);
-    setPasswordIsValid(true);
-    setIsNicknameTooLong(false);
-    setIsNicknameInvalidCharacters(false);
-    setIsPasswordTooLong(false);
-
     if (
       isValidNickname &&
       isValidEmail &&
@@ -222,7 +213,7 @@ const SignUp = () => {
     <>
       <LoadingSpinnerPopup showSpinner={!!isLoading} />
       <div className="sign-up">
-        {!isSuccess && emailValue ? (
+        {isSuccess && emailValue ? (
           <CheckYourEmail showOnMobile={showOnMobile} emailValue={emailValue} />
         ) : (
           showSignUp
