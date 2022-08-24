@@ -52,11 +52,6 @@ const AccountSetting = () => {
       message[0]?.type === "invalid"
     ) {
       setOldPasswordIncorrect(false);
-    } else if (
-      message[0]?.attribute === "password" &&
-      message[0]?.type === "too_long"
-    ) {
-      setIsPasswordTooLong(true);
     }
   }, [error]);
 
@@ -85,8 +80,9 @@ const AccountSetting = () => {
     e.preventDefault();
     const email = validateEmail(emilValue);
     const oldPassword = oldPasswordRef.current.value;
-    const newPassword = newPasswordRef.current.value.length > 7;
-    if (newPassword) {
+    const newPasswordMin = newPasswordRef.current.value.length > 7;
+    const newPasswordMax = newPasswordRef.current.value.length < 73;
+    if (newPasswordMin) {
       setErrorMatchPassword(
         oldPasswordRef.current.value === newPasswordRef.current.value
       );
@@ -96,15 +92,16 @@ const AccountSetting = () => {
 
     setEmailValid(!!email);
     setOldPasswordValid(oldPassword);
-    setNewPasswordValid(newPassword);
     setConfirmPasswordValid(confirmPassword);
+    setNewPasswordValid(newPasswordMin);
+    setIsPasswordTooLong(!newPasswordMax);
     setOldPasswordIncorrect(true);
-    setIsPasswordTooLong(false);
 
     if (
       email &&
       oldPassword &&
-      newPassword &&
+      newPasswordMin &&
+      newPasswordMax &&
       confirmPassword &&
       !errorMatchPassword
     ) {
@@ -140,10 +137,6 @@ const AccountSetting = () => {
                 {translate("accountSettings.email")}
               </span>
               <input
-                onChange={(e) => {
-                  setEmailValid(true);
-                  setEmailValue(e.target.value);
-                }}
                 value={emilValue}
                 type="email"
                 id="account-email"
@@ -165,7 +158,6 @@ const AccountSetting = () => {
                 </span>
               )}
               <input
-                onChange={() => setOldPasswordValid(true)}
                 ref={oldPasswordRef}
                 type="password"
                 id="account-oldPassword"
@@ -199,10 +191,6 @@ const AccountSetting = () => {
                 </span>
               )}
               <input
-                onChange={() => {
-                  setNewPasswordValid(true);
-                  setErrorMatchPassword(false);
-                }}
                 ref={newPasswordRef}
                 type="password"
                 id="account-newPassword"

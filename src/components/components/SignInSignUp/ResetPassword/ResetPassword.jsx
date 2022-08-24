@@ -16,6 +16,7 @@ const ResetPassword = ({ setShowNotification }) => {
     useResetForgotPasswordMutation();
   const [isNewPasswordValid, setIsNewPasswordValid] = useState(true);
   const [isConfirmPasswordValid, setIsConfirmPasswordValid] = useState(true);
+  const [isPasswordTooLong, setIsPasswordTooLong] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const newPassword = useRef();
   const passwordConfirm = useRef();
@@ -45,13 +46,14 @@ const ResetPassword = ({ setShowNotification }) => {
     e.preventDefault();
     const newPasswordValue = newPassword.current.value;
     const passwordConfirmValue = passwordConfirm.current.value;
-    const isPasswordValid = newPassword.current.value.length > 7;
+    const isValidPasswordMin = newPassword.current.value.length > 7;
+    const isValidPasswordMax = newPassword.current.value.length < 73;
     const isPasswordsMatch = newPasswordValue === passwordConfirmValue;
 
     setIsNewPasswordValid(true);
     setIsConfirmPasswordValid(true);
 
-    if (isPasswordValid && isPasswordsMatch) {
+    if (isValidPasswordMin && isValidPasswordMax && isPasswordsMatch) {
       resetPassword({
         reset_password_token: token,
         new_password: newPasswordValue,
@@ -63,11 +65,9 @@ const ResetPassword = ({ setShowNotification }) => {
       return;
     }
 
-    if (!isPasswordValid) {
-      setIsNewPasswordValid(false);
-    } else {
-      setIsConfirmPasswordValid(false);
-    }
+    setIsNewPasswordValid(isValidPasswordMin);
+    setIsPasswordTooLong(!isValidPasswordMax);
+    setIsConfirmPasswordValid(isPasswordsMatch);
   };
 
   return (
@@ -89,7 +89,7 @@ const ResetPassword = ({ setShowNotification }) => {
         <form onSubmit={onSubmitHandler} className="reset-password__form">
           <label
             className={`reset-password__label${
-              !isNewPasswordValid ? " invalid" : ""
+              !isNewPasswordValid || isPasswordTooLong ? " invalid" : ""
             }`}
             htmlFor="newPassword"
           >
@@ -102,10 +102,11 @@ const ResetPassword = ({ setShowNotification }) => {
               autoComplete="on"
               type="password"
             />
-            {!isNewPasswordValid && (
+            {(!isNewPasswordValid || isPasswordTooLong) && (
               <span className="reset-password__invalid SFPro-300">
                 <ExclamationSvg />
-                {translate("login.minimum")}
+                {!isNewPasswordValid && translate("login.minimum")}
+                {isPasswordTooLong && translate("login.maxPassword")}
               </span>
             )}
           </label>
