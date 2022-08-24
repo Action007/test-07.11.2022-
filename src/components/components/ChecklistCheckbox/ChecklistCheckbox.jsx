@@ -42,7 +42,11 @@ const ChecklistCheckbox = ({
 
   return (
     <>
-      <PopupDone show={modalShow} onHide={() => setModalShow(false)} />
+      <PopupDone
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        page="active-checklist"
+      />
       <li className={`checklist-checkbox${checked ? " checked" : ""}`}>
         <label className="checklist-checkbox__label" htmlFor={idFor}>
           <input

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { createChecklistActions } from "../../../store/createChecklistSlice";
 import {
   useCreateChecklistMutation,
@@ -21,17 +21,21 @@ import "./CreationOfChecklist.scss";
 
 import { ReactComponent as CreationImg } from "../../../assets/images/content/creationChecklist.svg";
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
+import Notification from "../../UI/Notification/Notification";
 
 const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   const [createOrUpdateChecklist, { isSuccess, error, isLoading, data }] =
     page === "edit-checklist"
       ? useUpdateChecklistMutation()
       : useCreateChecklistMutation();
+
   const [preview, setPreview] = useState(false);
   const [validButton, setValidButton] = useState();
   const [done, setDone] = useState(false);
   const [tagsValid, setTagsValid] = useState(true);
   const [tagIncludesLink, setTagIncludesLink] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+
   const validateAfterSubmit = useSelector(
     (state) => state.createChecklistReducer.validateAfterSubmit
   );
@@ -54,8 +58,13 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { t: translate } = useTranslation();
   const breadcrumbs = [{ title: translate("creationOfChecklist.title") }];
+
+  useEffect(() => {
+    dispatch(createChecklistActions.onSubmitClear());
+  }, [pathname]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -65,9 +74,24 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (isServerError(error?.status)) {
-      navigate("/error", { replace: true });
+    if (isServerError(error?.status)) navigate("/error", { replace: true });
+    if (!error?.data?.message) return;
+
+    const { message } = error.data;
+    let notification;
+
+    if (
+      message[0].attribute === "checklist" &&
+      message[0].type === "edit_time_expired"
+    ) {
+      setShowNotification(true);
+      notification = setTimeout(() => setShowNotification(false), 7000);
     }
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      if (notification) clearTimeout(notification);
+    };
   }, [error]);
 
   const checkInputsHandler = () => {
@@ -256,6 +280,9 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
 
   return (
     <>
+      {showNotification && (
+        <Notification translate={translate("creationOfChecklist.2hours")} />
+      )}
       <CreationChecklistPreview
         onHide={() => setPreview(false)}
         show={preview}
@@ -264,9 +291,14 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
         show={done}
         onHide={() => setDone(false)}
         onLookChecklist={showNewChecklist}
+        page="creation-of-checklist"
       />
       <LoadingSpinnerPopup showSpinner={isLoading} />
-      <div className="container creation pb-8">
+      <div
+        className={`container creation pb-8${
+          showNotification ? " show-notification" : ""
+        }`}
+      >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <h2 className="creation__title SFPro-600">
           {translate("creationOfChecklist.title")}
