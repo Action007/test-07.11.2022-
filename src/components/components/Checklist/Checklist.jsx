@@ -85,7 +85,7 @@ const Checklist = ({
         onHide={() => setModalShow(false)}
       />
       <div
-        className={`checklist${page !== "checklist-detail" ? " detail" : ""}`}
+        className={`checklist${page === "checklist-detail" ? " detail" : ""}`}
       >
         <div className="checklist__heading">
           <h3
@@ -191,14 +191,16 @@ const Checklist = ({
           <div className="checklist__wrap">
             {page === "checklist-detail" && (
               <>
-                <ChecklistStartButton
-                  token={token}
-                  id={id}
-                  setNotification={setNotification}
-                  setLinkToActiveChecklist={setLinkToActiveChecklist}
-                  navigate={navigate}
-                  translate={translate}
-                />
+                {!showOnMobile && (
+                  <ChecklistStartButton
+                    token={token}
+                    id={id}
+                    setNotification={setNotification}
+                    setLinkToActiveChecklist={setLinkToActiveChecklist}
+                    navigate={navigate}
+                    translate={translate}
+                  />
+                )}
                 {showOnMobile && (
                   <ChecklistCreatorAndCategory
                     categoryID={checklist.categories[0].id}
@@ -228,6 +230,16 @@ const Checklist = ({
           </div>
         )}
       </div>
+      {showOnMobile && (
+        <ChecklistStartButton
+          token={token}
+          id={id}
+          setNotification={setNotification}
+          setLinkToActiveChecklist={setLinkToActiveChecklist}
+          navigate={navigate}
+          translate={translate}
+        />
+      )}
     </>
   );
 };

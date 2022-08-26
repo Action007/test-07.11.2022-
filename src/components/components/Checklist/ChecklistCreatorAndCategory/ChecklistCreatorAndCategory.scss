@@ -13,7 +13,7 @@
 
   @include media-breakpoint-down(sm) {
     flex-direction: row;
-    margin: 20px 0 30px;
+    margin: 20px 0 0;
     transform: translateX(0);
     max-width: 100%;
     justify-content: start;
