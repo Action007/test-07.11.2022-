@@ -2,8 +2,6 @@
 @import '../../../../node_modules/bootstrap/scss/mixins';
 
 .checklist-item {
-  margin-right: 55px;
-
   line-height: 1.2;
   word-break: break-word;
 
@@ -50,7 +48,7 @@
       height: 19px;
       margin: -4px 0 0 4px;
 
-      fill: #65c17e;
+      fill: #32cd71;
     }
 
     &:hover svg {

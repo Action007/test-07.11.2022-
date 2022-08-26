@@ -9,10 +9,10 @@ import useClickOutside from "../../../hooks/useClickOutside";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import ProgressBarHeader from "../ProgressBarHeader/ProgressBarHeader";
 import PopupLogout from "../PopupLogout/PopupLogout";
-import EmptySvg from "../../../assets/images/icon/emptyPhoto.svg";
 import "./HeaderDropdown.scss";
 
 import brokenImg from "../../../assets/images/icon/brokenImg.svg";
+import EmptySvg from "../../../assets/images/icon/emptyPhoto.svg";
 import { ReactComponent as Bookmark } from "../../../assets/images/icon/bookmark.svg";
 import { ReactComponent as Account } from "../../../assets/images/icon/account.svg";
 import { ReactComponent as Setting } from "../../../assets/images/icon/setting.svg";

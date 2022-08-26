@@ -94,7 +94,7 @@ const MyActiveChecklists = () => {
                 <Checklist
                   key={checklist.id}
                   checklist={checklist}
-                  translate={translate("myActiveChecklists.showMore")}
+                  page="active-checklists"
                 />
               </React.Fragment>
             ))
