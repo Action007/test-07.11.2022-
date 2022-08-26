@@ -25,7 +25,6 @@ const AccountSetting = () => {
   const [isPasswordTooLong, setIsPasswordTooLong] = useState(false);
   const [newPasswordValid, setNewPasswordValid] = useState(true);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
-  const [errorMatchPassword, setErrorMatchPassword] = useState(false);
   const [notification, setNotification] = useState(false);
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
@@ -82,11 +81,6 @@ const AccountSetting = () => {
     const oldPassword = oldPasswordRef.current.value;
     const newPasswordMin = newPasswordRef.current.value.length > 7;
     const newPasswordMax = newPasswordRef.current.value.length < 73;
-    if (newPasswordMin) {
-      setErrorMatchPassword(
-        oldPasswordRef.current.value === newPasswordRef.current.value
-      );
-    }
     const confirmPassword =
       confirmPasswordRef.current.value === newPasswordRef.current.value;
 
@@ -102,8 +96,7 @@ const AccountSetting = () => {
       oldPassword &&
       newPasswordMin &&
       newPasswordMax &&
-      confirmPassword &&
-      !errorMatchPassword
+      confirmPassword
     ) {
       resetPassword({
         old_password: oldPasswordRef.current.value,
@@ -117,7 +110,9 @@ const AccountSetting = () => {
     <>
       <LoadingSpinnerPopup showSpinner={isLoading} />
       {isSuccess && notification && (
-        <Notification translate={translate("notification.profileUpdate")} />
+        <Notification
+          translate={translate("accountSettings.passwordChanged")}
+        />
       )}
       <div
         className={`account-setting container${
@@ -166,9 +161,7 @@ const AccountSetting = () => {
             </label>
             <label
               className={`account-setting__label${
-                !newPasswordValid || errorMatchPassword || isPasswordTooLong
-                  ? " invalid"
-                  : ""
+                !newPasswordValid || isPasswordTooLong ? " invalid" : ""
               }`}
               htmlFor="account-newPassword"
             >
@@ -178,11 +171,6 @@ const AccountSetting = () => {
               {!newPasswordValid && (
                 <span className="account-setting__subtitle">
                   {translate("accountSettings.minimum")}
-                </span>
-              )}
-              {errorMatchPassword && (
-                <span className="account-setting__subtitle">
-                  {translate("accountSettings.passwordMatch")}
                 </span>
               )}
               {isPasswordTooLong && (
@@ -199,9 +187,7 @@ const AccountSetting = () => {
             </label>
             <label
               className={`account-setting__label${
-                !confirmPasswordValid || !newPasswordValid || errorMatchPassword
-                  ? " invalid"
-                  : ""
+                !confirmPasswordValid || !newPasswordValid ? " invalid" : ""
               }`}
               htmlFor="account-confirmPassword"
             >

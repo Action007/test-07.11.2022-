@@ -772,7 +772,8 @@
     "maxPassword": "Password length can't exceed 72 characters",
     "invalid": "The new passwords don't match",
     "incorrect": "Incorrect password",
-    "submit": "Save Change"
+    "submit": "Save Change",
+    "passwordChanged": "Password has been successfully changed."
   },
   "supportDone": {
     "title": "Your support message has been sent successfully!",

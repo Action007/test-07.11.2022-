@@ -15,7 +15,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   @include media-breakpoint-down(sm) {
-    padding: 30px 19px;
+    padding: 30px 22px;
   }
 
   &.detail {
@@ -106,7 +106,7 @@
   &__btns {
     position: absolute;
     top: 25px;
-    right: 36px;
+    right: 35px;
 
     display: flex;
     flex-direction: column;
@@ -120,9 +120,15 @@
     }
   }
 
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__items {
     margin-bottom: 4px;
     margin-left: 20px;
+    width: 100%;
 
     word-break: break-word;
 
@@ -137,7 +143,7 @@
         font-weight: 600;
       }
 
-      @include media-breakpoint-down(md) {
+      @include media-breakpoint-down(sm) {
         margin-left: 0;
       }
     }
@@ -203,6 +209,10 @@
     &.detail {
       @include media-breakpoint-down(md) {
         margin-bottom: 25px;
+      }
+
+      @include media-breakpoint-down(sm) {
+        margin-bottom: 0;
       }
     }
   }

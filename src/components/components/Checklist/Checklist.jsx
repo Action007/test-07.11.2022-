@@ -12,11 +12,11 @@ import getTime from "../../../utils/getTime";
 import useMediaQuery from "../../../hooks/useMediaQuery";
 import LikeDislikeViewButtons from "../LikeDislikeViewButtons/LikeDislikeViewButtons";
 import EditDropdown from "../EditDropdown/EditDropdown";
-import checkTime from "../../../utils/checkTime";
+import PopupDeleteChecklist from "../PopupDeleteChecklist/PopupDeleteChecklist";
+import ChecklistCreatorAndCategory from "./ChecklistCreatorAndCategory/ChecklistCreatorAndCategory";
 import "./Checklist.scss";
 
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
-import PopupDeleteChecklist from "../PopupDeleteChecklist/PopupDeleteChecklist";
 
 const Checklist = ({
   checklist,
@@ -107,51 +107,62 @@ const Checklist = ({
             {showOnMobile && time}
             {page === "created-checklists" && (
               <EditDropdown
-                isEdit={checkTime(created_at)}
+                isEdit
                 id={id}
                 navigate={navigate}
                 updateHandler={onUpdateHandler}
                 deleteHandler={() => setModalShow(true)}
               />
             )}
-            {page !== "created-checklists" && !isPreview && (
-              <div className="checklist__btns">
-                <ChecklistSave
-                  token={token}
-                  id={id}
-                  saved={user_track?.saved}
-                  navigate={navigate}
-                />
-                <ChecklistComplain
-                  token={token}
-                  id={id}
-                  name={name}
-                  navigate={navigate}
-                  translate={translate}
-                />
-              </div>
-            )}
+            {page !== "created-checklists" &&
+              page !== "active-checklists" &&
+              !isPreview && (
+                <div className="checklist__btns">
+                  <ChecklistSave
+                    token={token}
+                    id={id}
+                    saved={user_track?.saved}
+                    navigate={navigate}
+                  />
+                  <ChecklistComplain
+                    token={token}
+                    id={id}
+                    name={name}
+                    navigate={navigate}
+                    translate={translate}
+                  />
+                </div>
+              )}
           </div>
         </div>
-        <ol
-          className={`checklist__items${
-            page === "checklist-detail" ? " detail" : ""
-          }`}
-        >
-          {checklistItems.map(
-            // eslint-disable-next-line no-shadow
-            ({ description, list_type, value, completed }, index) => (
-              <ChecklistItem
-                // eslint-disable-next-line react/no-array-index-key
-                key={description + list_type + value + index}
-                description={description}
-                list_type={list_type}
-                value={value}
-                completed={page !== "checklist-detail" && completed}
-              />
-            )
+        <div className="checklist__wrapper">
+          <ol
+            className={`checklist__items${
+              page === "checklist-detail" ? " detail" : ""
+            }`}
+          >
+            {checklistItems.map(
+              // eslint-disable-next-line no-shadow
+              ({ description, list_type, value, completed }, index) => (
+                <ChecklistItem
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={description + list_type + value + index}
+                  description={description}
+                  list_type={list_type}
+                  value={value}
+                  completed={page !== "checklist-detail" && completed}
+                />
+              )
+            )}
+          </ol>
+          {page === "checklist-detail" && !showOnMobile && (
+            <ChecklistCreatorAndCategory
+              categoryID={checklist.categories[0].id}
+              creatorNickname={checklist.creator.nickname}
+              avatarUrl={checklist.creator.avatar_url}
+            />
           )}
-        </ol>
+        </div>
         {page !== "checklist-detail" && (
           <Link
             className="checklist__dots SFPro-600"
@@ -174,27 +185,39 @@ const Checklist = ({
         {!isPreview && (
           <div className="checklist__wrap">
             {page === "checklist-detail" && (
-              <ChecklistStartButton
-                token={token}
-                id={id}
-                setNotification={setNotification}
-                setLinkToActiveChecklist={setLinkToActiveChecklist}
-                navigate={navigate}
-                translate={translate}
-              />
+              <>
+                <ChecklistStartButton
+                  token={token}
+                  id={id}
+                  setNotification={setNotification}
+                  setLinkToActiveChecklist={setLinkToActiveChecklist}
+                  navigate={navigate}
+                  translate={translate}
+                />
+                {showOnMobile && (
+                  <ChecklistCreatorAndCategory
+                    categoryID={checklist.categories[0].id}
+                    creatorNickname={checklist.creator.nickname}
+                    avatarUrl={checklist.creator.avatar_url}
+                  />
+                )}
+              </>
             )}
+
             <div
               className={`checklist__box${
                 page === "checklist-detail" ? " detail" : ""
               }`}
             >
-              <LikeDislikeViewButtons
-                liked={liked}
-                unliked={unliked}
-                viewed={viewed}
-                checklistID={id}
-                userTrack={user_track}
-              />
+              {page !== "active-checklists" && (
+                <LikeDislikeViewButtons
+                  liked={liked}
+                  unliked={unliked}
+                  viewed={viewed}
+                  checklistID={id}
+                  userTrack={user_track}
+                />
+              )}
               {!showOnMobile && time}
             </div>
           </div>
