@@ -37,6 +37,8 @@ const Checklist = ({
     user_track,
     viewed,
     completed,
+    categories,
+    creator,
   } = checklist;
   const token = useSelector((state) => state.authSliceReducer.token);
 
@@ -48,6 +50,8 @@ const Checklist = ({
   const { date } = getTime(created_at);
   const { pathname, search } = useLocation();
   const [modalShow, setModalShow] = useState(false);
+
+  console.log(pathname);
 
   const checklistItems =
     page !== "checklist-detail"
@@ -94,9 +98,10 @@ const Checklist = ({
             ) : (
               <Link
                 to={`/${
-                  pathname !== "/active-checklists"
-                    ? "checklist"
-                    : "active-checklist"
+                  pathname === "/active-checklists" ||
+                  pathname === "/passed-checklists"
+                    ? "active-checklist"
+                    : "checklist"
                 }/${id}/${slug}`}
               >
                 {name}
@@ -157,9 +162,9 @@ const Checklist = ({
           </ol>
           {page === "checklist-detail" && !showOnMobile && (
             <ChecklistCreatorAndCategory
-              categoryID={checklist.categories[0].id}
-              creatorNickname={checklist.creator.nickname}
-              avatarUrl={checklist.creator.avatar_url}
+              categoryID={categories[0].id}
+              creatorNickname={creator.nickname}
+              avatarUrl={creator.avatar_url}
             />
           )}
         </div>
