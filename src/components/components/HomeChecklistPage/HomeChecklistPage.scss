@@ -1,7 +1,19 @@
-@import "../../../global-styles/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .main-content {
+  &.user {
+    margin-top: 183px;
+
+    @include media-breakpoint-down(xl) {
+      margin-top: 145px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      margin-top: 110px;
+    }
+  }
+
   .container {
     margin-top: 0;
   }
@@ -68,7 +80,7 @@
     }
 
     &::before {
-      content: "";
+      content: '';
 
       position: absolute;
       z-index: 0;
@@ -79,7 +91,7 @@
       max-width: 414px;
       height: 331px;
 
-      background-image: url("../../../assets/images/content/main-bgc1.svg");
+      background-image: url('../../../assets/images/content/main-bgc1.svg');
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -90,7 +102,7 @@
     }
 
     &::after {
-      content: "";
+      content: '';
 
       position: absolute;
       z-index: 0;
@@ -101,7 +113,7 @@
       max-width: 939px;
       height: 608px;
 
-      background-image: url("../../../assets/images/content/main-bgc2.svg");
+      background-image: url('../../../assets/images/content/main-bgc2.svg');
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -109,7 +121,7 @@
       @include media-breakpoint-down(xl) {
         right: 0;
 
-        background-image: url("../../../assets/images/content/main-bgc3.svg");
+        background-image: url('../../../assets/images/content/main-bgc3.svg');
         background-position: right center;
       }
     }
@@ -253,7 +265,7 @@
     max-width: 40px;
     height: 40px;
 
-    background-image: url("../../../assets/images/content/S.png");
+    background-image: url('../../../assets/images/content/S.png');
 
     @include media-breakpoint-down(md) {
       max-width: 25px;
@@ -266,7 +278,7 @@
     max-width: 50px;
     height: 50px;
 
-    background-image: url("../../../assets/images/content/M.png");
+    background-image: url('../../../assets/images/content/M.png');
 
     @include media-breakpoint-down(md) {
       max-width: 35px;
@@ -279,7 +291,7 @@
     max-width: 70px;
     height: 70px;
 
-    background-image: url("../../../assets/images/content/L.png");
+    background-image: url('../../../assets/images/content/L.png');
 
     @include media-breakpoint-down(md) {
       max-width: 45px;
@@ -292,23 +304,11 @@
     max-width: 80px;
     height: 80px;
 
-    background-image: url("../../../assets/images/content/XL.png");
+    background-image: url('../../../assets/images/content/XL.png');
 
     @include media-breakpoint-down(md) {
       max-width: 55px;
       height: 55px;
     }
-  }
-}
-
-.user {
-  margin-top: 183px;
-
-  @include media-breakpoint-down(xl) {
-    margin-top: 145px;
-  }
-
-  @include media-breakpoint-down(lg) {
-    margin-top: 110px;
   }
 }
