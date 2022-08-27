@@ -24,10 +24,13 @@ const Header = () => {
   const user = useSelector((state) => state.authSliceReducer.user);
   const percent = useSelector((state) => state.authSliceReducer.percent);
   const token = useSelector((state) => state.authSliceReducer.token);
+  const savedCounter = useSelector(
+    (state) => state.authSliceReducer.savedCounter
+  );
 
   const headerRef = useRef();
   const [scroll, setScroll] = useState(false);
-  const [savedCounter, setSavedCounter] = useState(user?.saved_counter);
+  const [savedAmount, setSavedAmount] = useState(savedCounter);
 
   const { ref, show, setShowHandler, setShow } = useClickOutside();
   const showSearchOnMobile = useMediaQuery("(max-width:1199px)");
@@ -46,6 +49,7 @@ const Header = () => {
     if (!accountInfo) return;
     const { completed_counter, active_checklists_counter } = accountInfo;
     dispatch(authSliceActions.setUser(accountInfo));
+    dispatch(authSliceActions.setSavedCounter(accountInfo.saved_counter));
     dispatch(
       authSliceActions.setPercentActiveChecklist({
         completed_counter,
@@ -62,12 +66,12 @@ const Header = () => {
 
   useEffect(() => {
     if (pathname === "/saved-checklists" || !user) return;
-    setSavedCounter(user.saved_counter);
-  }, [user]);
+    setSavedAmount(savedCounter);
+  }, [savedCounter]);
 
   useEffect(() => {
     if (pathname !== "/saved-checklists") return;
-    setSavedCounter(false);
+    setSavedAmount(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -114,15 +118,15 @@ const Header = () => {
             type="button"
           >
             <Bookmark />
-            {!!savedCounter && (
-              <span className="header__span">{savedCounter}</span>
+            {!!savedAmount && (
+              <span className="header__span">{savedAmount}</span>
             )}
           </button>
         </>
       )}
       <HeaderDropdown
         user={user}
-        savedCounter={savedCounter}
+        savedCounter={savedAmount}
         setShow={setShow}
         percent={percent}
       />
