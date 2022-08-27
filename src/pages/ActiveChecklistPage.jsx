@@ -10,10 +10,12 @@ const ActiveChecklistPage = () => {
   const { id } = useParams();
   const {
     data: checklist,
-    isLoading,
+    isFetching,
     isError,
     error,
-  } = useFetchActiveChecklistQuery(`/active_checklists/${id}`);
+  } = useFetchActiveChecklistQuery(`/active_checklists/${id}`, {
+    refetchOnMountOrArgChange: true,
+  });
   const token = useSelector((state) => state.authSliceReducer.token);
   const navigate = useNavigate();
 
@@ -39,7 +41,7 @@ const ActiveChecklistPage = () => {
         <title>{checklist && checklist.entities.name}</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
-      <ActiveChecklist checklist={checklist} isLoading={isLoading} />
+      <ActiveChecklist checklist={checklist} isFetching={isFetching} />
     </>
   );
 };

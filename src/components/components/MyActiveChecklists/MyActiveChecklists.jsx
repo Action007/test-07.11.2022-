@@ -20,9 +20,10 @@ const MyActiveChecklists = () => {
   const {
     data: checklists,
     error,
-    isLoading,
+    isFetching,
   } = useFetchActiveChecklistQuery(
-    `/active_checklists${search || "?completed=false&page=1&per_page=10"}`
+    `/active_checklists${search || "?completed=false&page=1&per_page=10"}`,
+    { refetchOnMountOrArgChange: true }
   );
 
   const breadcrumbs = [{ title: translate("myActiveChecklists.title") }];
@@ -80,8 +81,8 @@ const MyActiveChecklists = () => {
           setCategory={setCategory}
           page="my-active-checklists"
         />
-        {isLoading && loader}
-        {!isLoading &&
+        {isFetching && loader}
+        {!isFetching &&
           (checklists && checklists.entities.length ? (
             checklists.entities.map((checklist) => (
               <React.Fragment key={checklist.id}>
