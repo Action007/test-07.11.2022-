@@ -51,8 +51,6 @@ const Checklist = ({
   const { pathname, search } = useLocation();
   const [modalShow, setModalShow] = useState(false);
 
-  console.log(pathname);
-
   const checklistItems =
     page !== "checklist-detail"
       ? checklist_items
@@ -210,7 +208,6 @@ const Checklist = ({
                 )}
               </>
             )}
-
             <div
               className={`checklist__box${
                 page === "checklist-detail" ? " detail" : ""
@@ -230,7 +227,7 @@ const Checklist = ({
           </div>
         )}
       </div>
-      {showOnMobile && (
+      {page === "checklist-detail" && showOnMobile && (
         <ChecklistStartButton
           token={token}
           id={id}

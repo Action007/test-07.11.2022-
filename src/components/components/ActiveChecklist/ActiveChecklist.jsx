@@ -1,12 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import getPercent from "../../../utils/getPercent";
 import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
 import ActiveChecklistDetail from "../ActiveChecklistDetail/ActiveChecklistDetail";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
-import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 
-const ActiveChecklist = ({ checklist, isLoading }) => {
+const ActiveChecklist = ({ checklist, isFetching }) => {
   const { t: translate } = useTranslation();
   const breadcrumbs = [
     {
@@ -22,16 +20,10 @@ const ActiveChecklist = ({ checklist, isLoading }) => {
       <h2 className="title--margin display-4 text-center SFPro-600">
         {translate("checklists")}
       </h2>
-      {checklist && (
-        <ProgressBarChecklist
-          done={getPercent(
-            checklist.entities.completed_items_counter,
-            checklist.entities.total_items_counter
-          )}
-        />
+      {checklist && !isFetching && (
+        <ActiveChecklistDetail checklist={checklist.entities} />
       )}
-      {checklist && <ActiveChecklistDetail checklist={checklist.entities} />}
-      {isLoading && <ChecklistSkeleton />}
+      {isFetching && <ChecklistSkeleton />}
     </div>
   );
 };

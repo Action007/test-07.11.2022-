@@ -5,7 +5,8 @@ import { useDeleteActiveChecklistMutation } from "../../../services/activeCheckl
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
 import isServerError from "../../../utils/isServerError";
-import uniqueID from "../../../utils/uniqueID";
+import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
+import getPercent from "../../../utils/getPercent";
 import "./ActiveChecklistDetail.scss";
 
 import { ReactComponent as DeleteSvg } from "../../../assets/images/icon/trash.svg";
@@ -13,11 +14,16 @@ import { ReactComponent as UploadSvg } from "../../../assets/images/icon/upload.
 import { ReactComponent as ShareSvg } from "../../../assets/images/icon/share.svg";
 
 const ActiveChecklistDetail = ({ checklist }) => {
-  const [checkChecklistItem, { isSuccess, isError, error, isLoading }] =
-    useDeleteActiveChecklistMutation();
-  const [checklistItems, setChecklistItems] = useState(
-    checklist.checklist_items
+  const [completedItemsCounter, setCompletedItemsCounter] = useState(
+    checklist.completed_items_counter
   );
+  const [totalItemsCounter, setTotalItemsCounter] = useState(
+    checklist.total_items_counter
+  );
+
+  const [deleteActiveChecklist, { isSuccess, isError, error, isLoading }] =
+    useDeleteActiveChecklistMutation();
+
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
 
@@ -28,41 +34,37 @@ const ActiveChecklistDetail = ({ checklist }) => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (error && error?.data?.error === "not_found") {
-      navigate("/not-found", { replace: true });
-      return;
-    }
     if (isServerError(error?.status)) navigate("/error", { replace: true });
   }, [isError]);
 
   const onDeleteHandler = () => {
-    checkChecklistItem({ id: checklist.id });
+    deleteActiveChecklist({ id: checklist.id });
   };
 
   return (
     <>
       <LoadingSpinnerPopup showSpinner={isLoading} />
+      <ProgressBarChecklist
+        done={getPercent(completedItemsCounter, totalItemsCounter)}
+      />
       <div className="active-checklist">
         <h3 className="active-checklist__title SFPro-700">{checklist.name}</h3>
         <ul className="active-checklist__items">
-          {checklistItems.map(
-            ({ description, list_type, value, completed, id }, index) => {
-              const idFor = uniqueID();
-              return (
-                <ChecklistCheckbox
-                  key={id}
-                  index={index}
-                  id={checklist.id}
-                  description={description}
-                  checklistItemId={id}
-                  list_type={list_type}
-                  value={value}
-                  idFor={idFor}
-                  completed={completed}
-                  setChecklistItems={setChecklistItems}
-                />
-              );
-            }
+          {checklist.checklist_items.map(
+            ({ description, list_type, value, completed, id }, index) => (
+              <ChecklistCheckbox
+                key={id}
+                index={index}
+                id={checklist.id}
+                description={description}
+                checklistItemId={id}
+                list_type={list_type}
+                value={value}
+                completed={completed}
+                setCompletedItemsCounter={setCompletedItemsCounter}
+                setTotalItemsCounter={setTotalItemsCounter}
+              />
+            )
           )}
         </ul>
         <div className="active-checklist__wrapper SFPro-500">

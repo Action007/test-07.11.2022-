@@ -5,6 +5,7 @@ import PopupDone from "../PopupDone/PopupDone";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
 import MapGeneral from "../MapGeneral/MapGeneral";
 import MapModal from "../MapModal/MapModal";
+import uniqueID from "../../../utils/uniqueID";
 import "./ChecklistCheckbox.scss";
 
 import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg";
@@ -16,9 +17,9 @@ const ChecklistCheckbox = ({
   description,
   list_type,
   value,
-  idFor,
   completed,
-  setChecklistItems,
+  setCompletedItemsCounter,
+  setTotalItemsCounter,
 }) => {
   const [checkChecklistItem, { isSuccess, data }] =
     useCheckActiveChecklistItemMutation();
@@ -26,13 +27,15 @@ const ChecklistCheckbox = ({
   const [showMap, setShowMap] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const { t: translate } = useTranslation();
+  const isFor = uniqueID();
 
   useEffect(() => {
     if (!data) return;
     if (data.entities.once_completed && data.entities.completed) {
       setModalShow(data.entities.once_completed);
     }
-    setChecklistItems(data.entities.checklist_items);
+    setCompletedItemsCounter(data.entities.completed_items_counter);
+    setTotalItemsCounter(data.entities.total_items_counter);
   }, [isSuccess]);
 
   const checkboxHandler = () => {
@@ -48,11 +51,11 @@ const ChecklistCheckbox = ({
         page="active-checklist"
       />
       <li className={`checklist-checkbox${checked ? " checked" : ""}`}>
-        <label className="checklist-checkbox__label" htmlFor={idFor}>
+        <label className="checklist-checkbox__label" htmlFor={isFor}>
           <input
             defaultChecked={checked}
             onChange={checkboxHandler}
-            id={idFor}
+            id={isFor}
             type="checkbox"
           />
           <span className="checklist-checkbox__checkmark" />

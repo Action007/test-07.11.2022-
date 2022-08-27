@@ -124,6 +124,7 @@ const Header = () => {
         user={user}
         savedCounter={savedCounter}
         setShow={setShow}
+        percent={percent}
       />
       {!showAddButtonOnMobile && (
         <button

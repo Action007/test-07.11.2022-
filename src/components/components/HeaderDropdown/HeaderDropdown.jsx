@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { authSliceActions } from "../../../store/authSlice";
 import { useLogOutMutation } from "../../../services/logInService";
@@ -18,7 +18,7 @@ import { ReactComponent as Account } from "../../../assets/images/icon/account.s
 import { ReactComponent as Setting } from "../../../assets/images/icon/setting.svg";
 import { ReactComponent as Logout } from "../../../assets/images/icon/logout.svg";
 
-const HeaderDropdown = ({ user, savedCounter, setShow }) => {
+const HeaderDropdown = ({ user, savedCounter, setShow, percent }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { ref, show, setShowHandler } = useClickOutside();
@@ -28,7 +28,6 @@ const HeaderDropdown = ({ user, savedCounter, setShow }) => {
 
   const [logOut] = useLogOutMutation();
 
-  const percent = useSelector((state) => state.authSliceReducer.percent);
   const { t: translate } = useTranslation();
 
   const onLogOutHandler = () => {
