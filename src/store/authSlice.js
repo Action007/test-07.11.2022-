@@ -9,6 +9,7 @@ const authSlice = createSlice({
     token: null,
     user: null,
     percent: 0,
+    savedCounter: 0,
   },
   reducers: {
     tokenVerification(state) {
@@ -33,6 +34,10 @@ const authSlice = createSlice({
     },
     resetUser(state) {
       state.user = null;
+    },
+    setSavedCounter(state, action) {
+      const savedCounter = action.payload;
+      state.savedCounter = savedCounter;
     },
     setPercentActiveChecklist(state, action) {
       const { completed_counter, active_checklists_counter } = action.payload;
