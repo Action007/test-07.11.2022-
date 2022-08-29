@@ -1,18 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {
-  changeSearchParamsValue,
-  removeSearchParamsValue,
-} from "../../../utils/searchParamsValue";
-import {
-  useFetchSearchTagsQuery,
-  useFetchTagsQuery,
-} from "../../../services/checklistTagsService";
+import { removeSearchParamsValue } from "../../../utils/searchParamsValue";
+import { useFetchSearchTagsQuery } from "../../../services/checklistTagsService";
 import useClickOutside from "../../../hooks/useClickOutside";
 import TagListSearch from "../TagListSearch/TagListSearch";
 import uniqueID from "../../../utils/uniqueID";
-import getTag from "../../../utils/getTag";
+import useMediaQuery from "../../../hooks/useMediaQuery";
 import "./SearchInput.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/closeTag.svg";
@@ -22,20 +16,20 @@ const SearchInput = ({ page = false, header }) => {
   const [searchTagUrl, setSearchTagUrl] = useState("");
   const [tagUrl, setTagUrl] = useState("");
   const [searchValue, setSearchValue] = useState("");
-  const [myTagsUrl, setMyTagsUrl] = useState("");
+  const [myTags, setMyTag] = useState([]);
+  const [blur, setBlur] = useState(false);
+  const focusRef = useRef(null);
+  const showOnMobile = useMediaQuery("(max-width:1200px)");
+
   const { data: searchTags } = useFetchSearchTagsQuery(searchTagUrl, {
     skip: !searchTagUrl,
   });
-  const { data: serverTags } = useFetchTagsQuery(myTagsUrl, {
-    skip: !myTagsUrl,
-  });
-  const [blur, setBlur] = useState(false);
-  const focusRef = useRef(null);
+
+  const { pathname, search } = useLocation();
+  const { t: translate } = useTranslation();
   const { ref, show, setShow } = useClickOutside();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { pathname, search } = useLocation();
   const navigate = useNavigate();
-  const { t: translate } = useTranslation();
   const labelID = uniqueID();
 
   useEffect(() => {
@@ -44,15 +38,16 @@ const SearchInput = ({ page = false, header }) => {
   }, [tagUrl]);
 
   useEffect(() => {
-    const tagsIds = searchParams.getAll("search_tag_ids[]");
-    if (tagsIds.length) {
-      let tagsUrl = "";
-      tagsIds.forEach((id) => {
-        tagsUrl += `tag_ids[]=${id}&`;
-      });
-      setMyTagsUrl(tagsUrl.slice(0, -1));
+    const tagNames = searchParams.getAll("search_tag_names[]");
+    if (tagNames.length) {
+      setMyTag(
+        tagNames.map((tag) => ({
+          name: tag,
+          id: uniqueID(),
+        }))
+      );
     } else {
-      setMyTagsUrl("");
+      setMyTag([]);
     }
 
     if (page === "home") {
@@ -76,14 +71,13 @@ const SearchInput = ({ page = false, header }) => {
       searchParams.delete("search_value");
       setSearchParams(searchParams);
     }
-    const isTag = value.match(/^#[\s\S]*$/g);
-    const isTagWithSearchValue = value.match(/[\s]* #[\s\S]*$/g);
+    const isTag = value.match(/#([a-zA-Z0-9]+)$/g);
+    const tagVal = isTag ? isTag.pop().substring(1) : isTag;
 
-    if (!isTag && !isTagWithSearchValue) {
+    if (!isTag) {
       setTagUrl("");
       setShow(false);
     } else if (searchTags) {
-      const tagVal = getTag(value);
       if (!searchTags.length) {
         if (tagVal === tagUrl.slice(0, -1) || tagVal.trim().length === 1) {
           setShow(true);
@@ -94,93 +88,83 @@ const SearchInput = ({ page = false, header }) => {
         setTagUrl(tagVal);
       }
     } else {
-      const tagVal = getTag(value);
       setTagUrl(tagVal);
       setShow(true);
     }
   };
 
-  const addTagHandler = (tag) => {
-    if (serverTags?.length === 5 && serverTags) return;
-    if (!tag || !tag.name.trim()) return;
-    const searchVal = searchValue
-      .replace(/[\s]* #[\s\S]*$/g, "")
-      .replace(/^#[\s\S]*$/g, "");
-
-    setSearchValue(searchVal);
-    setTagUrl("");
+  const addTagAndSearchValue = (tag) => {
     setShow(false);
+    if (showOnMobile) focusRef.current.blur();
+
+    let tagsArray = searchValue.match(/(?:^|[ ])#([a-zA-Z0-9]+)/g);
+    if (tag) tagsArray = [...tagsArray.slice(0, -1), tag.name];
+    const tagsNames = tagsArray
+      ? tagsArray.reduce(
+          (prevTagNames, tagName) =>
+            `${prevTagNames}&search_tag_names[]=${tagName.replace(/ ?#/g, "")}`,
+          ""
+        )
+      : "";
+    const searchVal = searchValue.replace(/(?:^|[ ])#([a-zA-Z0-9]+)/g, "");
+
     if (pathname === "/") {
-      searchParams.delete("search_value");
-      if (searchVal) searchParams.append("search_value", searchVal);
-      searchParams.append("search_tag_ids[]", tag.id);
-      if (!search) {
-        setSearchParams(`?page=1&per_page=5&${searchParams}`);
-      } else {
-        setSearchParams(searchParams);
+      searchParams.delete("per_page");
+      searchParams.delete("page");
+      searchParams.append("per_page", 5);
+      searchParams.append("page", 1);
+
+      if (tagsNames) {
+        tagsArray.forEach((value) => {
+          searchParams.append("search_tag_names[]", value.replace(/ ?#/g, ""));
+        });
       }
-    } else {
-      navigate(`/?page=1&per_page=5&search_tag_ids[]=${tag.id}`);
-    }
-  };
-
-  const findTypeHandler = (e, tag) => {
-    if (e.key === "Enter" || e === "click") {
-      addTagHandler(tag);
-    }
-  };
-
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    const isTag = searchValue.match(/^#[\s\S]*$/g);
-    const isTagWithSearchValue = searchValue.match(/[\s]* #[\s\S]*$/g);
-    if (isTag || isTagWithSearchValue) return;
-
-    const searchVal = searchValue.replace(/[\s]* #[\s\S]*$/g, "");
-    if (pathname === "/") {
       if (searchVal) {
         if (!search) {
           searchParams.append("search_value", searchVal);
           setSearchParams(`?page=1&per_page=5&${searchParams}`);
         } else {
-          setSearchParams(
-            changeSearchParamsValue(searchParams, "search_value", searchVal)
-          );
+          searchParams.delete("search_value");
+          searchParams.append("search_value", searchVal);
+          setSearchParams(searchParams);
         }
       } else {
         searchParams.delete("search_value");
         setSearchParams(searchParams);
       }
     } else {
-      navigate(`/?per_page=5&page=1&search_value=${searchVal}`);
+      navigate(`/?per_page=5&page=1&search_value=${searchVal}${tagsNames}`);
     }
     if (header) {
       setSearchValue("");
     }
   };
 
-  const removeTagHandler = (id) => {
+  const addTagFromDropdownHandler = (tag) => {
+    addTagAndSearchValue(tag);
+    setSearchValue("");
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (!searchValue) return;
+    addTagAndSearchValue();
+  };
+
+  const removeTagHandler = (tag) => {
     setSearchParams(
-      removeSearchParamsValue(searchParams, "search_tag_ids[]", id)
+      removeSearchParamsValue(searchParams, "search_tag_names[]", tag.name)
     );
   };
 
   const filterTagsList = () => {
-    return searchTags.filter((item) =>
-      serverTags && (serverTags.length !== 1 || myTagsUrl)
-        ? !serverTags.find(
-            (tag) => tag.id === item.id && tag.name === item.name
-          )
-        : item
+    return searchTags.filter(
+      (item) => !myTags.find((tag) => tag.name === item.name)
     );
   };
 
   return (
-    <form
-      onSubmit={(e) => onSubmitHandler(e)}
-      className="search-input"
-      ref={ref}
-    >
+    <form onSubmit={onSubmitHandler} className="search-input" ref={ref}>
       <label
         className={`${`search-input__label`}${blur ? " active" : ""}`}
         htmlFor={labelID}
@@ -204,24 +188,22 @@ const SearchInput = ({ page = false, header }) => {
       {searchTags && filterTagsList().length !== 0 && show && (
         <TagListSearch
           tags={filterTagsList()}
-          findTypeHandler={findTypeHandler}
+          addTagHandler={addTagFromDropdownHandler}
         />
       )}
       {page === "home" && (
         <div className="search-input__tags">
-          {serverTags &&
-            myTagsUrl &&
-            serverTags.map((tag) => (
-              <button
-                key={tag.id}
-                onClick={() => removeTagHandler(tag.id)}
-                className="search-input__tag"
-                type="button"
-              >
-                #{tag.name}
-                <CloseSvg />
-              </button>
-            ))}
+          {myTags.map((tag) => (
+            <button
+              key={tag.id}
+              onClick={() => removeTagHandler(tag)}
+              className="search-input__tag"
+              type="button"
+            >
+              #{tag.name}
+              <CloseSvg />
+            </button>
+          ))}
         </div>
       )}
     </form>

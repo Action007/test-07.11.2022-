@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useKeyPress from "../../../hooks/useKeyPress";
 import "./TagListSearch.scss";
 
-const TagListSearch = ({ tags, findTypeHandler }) => {
+const TagListSearch = ({ tags, addTagHandler }) => {
   const downPress = useKeyPress("ArrowDown");
   const upPress = useKeyPress("ArrowUp");
   const enterPress = useKeyPress("Enter");
@@ -39,7 +39,7 @@ const TagListSearch = ({ tags, findTypeHandler }) => {
 
   useEffect(() => {
     if (tags.length && enterPress) {
-      findTypeHandler("click", tags[cursor]);
+      addTagHandler(tags[cursor]);
     }
   }, [cursor, enterPress]);
 
@@ -59,7 +59,7 @@ const TagListSearch = ({ tags, findTypeHandler }) => {
           >
             <button
               onClick={() =>
-                findTypeHandler("click", {
+                addTagHandler({
                   name: tag.name,
                   id: tag.id,
                 })
