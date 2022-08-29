@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useFetchChecklistQuery } from "../../../services/checklistService";
-import { authSliceActions } from "../../../store/authSlice";
 import MainBanner from "../MainBanner/MainBanner";
 import CategorySidebar from "../CategorySidebar/CategorySidebar";
 import SearchInput from "../SearchInput/SearchInput";
@@ -24,7 +23,6 @@ const HomeChecklistPage = () => {
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const token = useSelector((state) => state.authSliceReducer.token);
-  const dispatch = useDispatch();
   const ref = useRef();
 
   const {
@@ -57,10 +55,6 @@ const HomeChecklistPage = () => {
   useEffect(() => {
     if (!error) return;
 
-    if (isServerError(error.data?.error === "unauthorized")) {
-      dispatch(authSliceActions.resetToken());
-      dispatch(authSliceActions.resetUser());
-    }
     if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }

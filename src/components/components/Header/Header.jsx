@@ -59,6 +59,12 @@ const Header = () => {
   }, [accountInfo]);
 
   useEffect(() => {
+    if (!error) return;
+
+    if (error.data?.error === "unauthorized") {
+      dispatch(authSliceActions.resetToken());
+      dispatch(authSliceActions.resetUser());
+    }
     if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }

@@ -26,7 +26,7 @@ const authSlice = createSlice({
     resetToken(state) {
       const cookies = new Cookies();
       cookies.remove("Token", { path: "/", maxAge: 604800 });
-      state.token = "";
+      state.token = null;
     },
     setUser(state, action) {
       const user = action.payload;
