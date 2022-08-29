@@ -3,7 +3,7 @@ export const removeSearchParamsValue = (params, key, valueToRemove) => {
   if (values.length) {
     params.delete(key);
     values.forEach((value) => {
-      if (+value !== +valueToRemove) {
+      if (value !== valueToRemove) {
         params.append(key, value);
       }
     });

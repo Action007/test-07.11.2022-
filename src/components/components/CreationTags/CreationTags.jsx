@@ -43,6 +43,19 @@ const CreationTags = ({
     inputTag.current.focus();
   }, [addTags, show]);
 
+  useEffect(() => {
+    const tagsIsValid = myTags.length > 2;
+    const tagNameIncludesLink = myTags.find((item) =>
+      item.name.includes("://")
+    );
+    if (tagsIsValid) {
+      setTagsValid(true);
+    }
+    if (!tagNameIncludesLink) {
+      setTagIncludesLink(false);
+    }
+  }, [myTags]);
+
   const onChangeSearchValue = (value) => {
     if (value.trim() === "") {
       setUrl("");
@@ -107,19 +120,6 @@ const CreationTags = ({
     });
   }, [show]);
 
-  useEffect(() => {
-    const tagsIsValid = myTags.length > 2;
-    const tagNameIncludesLink = myTags.find((item) =>
-      item.name.includes("://")
-    );
-    if (tagsIsValid) {
-      setTagsValid(true);
-    }
-    if (!tagNameIncludesLink) {
-      setTagIncludesLink(false);
-    }
-  }, [myTags]);
-
   const removeTagHandler = (tag) => {
     const tagsIsValid = myTags.length > 3;
     dispatch(createChecklistActions.removeTag(tag.id));
@@ -127,10 +127,13 @@ const CreationTags = ({
     setAddTagsHandler(false);
   };
 
-  const findTypeHandler = (e, tag) => {
-    if (e.key === "Enter" || e === "click") {
-      addTagHandler(tag);
-    }
+  const addTagOnEnterHandler = (e) => {
+    if (e.key !== "Enter" || !inputTag.current.value) return;
+    addTagHandler({
+      name: inputTag.current.value,
+      id: uniqueID(),
+      tags_new: true,
+    });
   };
 
   const filterTagsList = () => {
@@ -167,13 +170,7 @@ const CreationTags = ({
             >
               <input
                 onChange={() => onChangeSearchValue(inputTag.current.value)}
-                onKeyPress={(e) =>
-                  findTypeHandler(e, {
-                    name: inputTag.current.value,
-                    id: uniqueID(),
-                    tags_new: true,
-                  })
-                }
+                onKeyPress={addTagOnEnterHandler}
                 onFocus={() => setShow(true)}
                 className="creation-tag__create creation-tag__create--input"
                 ref={inputTag}
@@ -193,7 +190,7 @@ const CreationTags = ({
               {serverTags && filterTagsList().length !== 0 && show && (
                 <TagListSearch
                   tags={filterTagsList()}
-                  findTypeHandler={findTypeHandler}
+                  addTagHandler={addTagHandler}
                 />
               )}
             </label>
