@@ -14,6 +14,7 @@ import LikeDislikeViewButtons from "../LikeDislikeViewButtons/LikeDislikeViewBut
 import EditDropdown from "../EditDropdown/EditDropdown";
 import PopupDeleteChecklist from "../PopupDeleteChecklist/PopupDeleteChecklist";
 import ChecklistCreatorAndCategory from "./ChecklistCreatorAndCategory/ChecklistCreatorAndCategory";
+import checkTime from "../../../utils/checkTime";
 import "./Checklist.scss";
 
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
@@ -110,7 +111,7 @@ const Checklist = ({
             {showOnMobile && time}
             {page === "created-checklists" && (
               <EditDropdown
-                isEdit
+                isEdit={checkTime(created_at)}
                 id={id}
                 navigate={navigate}
                 updateHandler={onUpdateHandler}

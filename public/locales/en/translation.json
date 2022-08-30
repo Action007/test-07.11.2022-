@@ -82,7 +82,8 @@
     "profileUpdate": "Profile updated successfully",
     "profileError": "There was a problem updating your profile",
     "alreadyAdded": "This checklist has already been added for passing. Click to see active checklist",
-    "forgotPasswordUpdated": "Password changed successfully!"
+    "forgotPasswordUpdated": "Password changed successfully!",
+    "2hours": "You can edit this checklist within 2 hours of its creation."
   },
   "supportPage": {
     "title": "Support",

@@ -68,22 +68,4 @@
       }
     }
   }
-
-  &__shadow {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 80%;
-    width: 50px;
-    max-width: 100%;
-
-    &::before {
-      content: '';
-      position: absolute;
-      right: 0;
-      width: 45px;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(245, 247, 254, 0) 10%, #f5f7fe 75%);
-    }
-  }
 }
