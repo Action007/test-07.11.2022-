@@ -718,14 +718,6 @@ const PrivacyPolicy = () => {
                 <Trans
                   i18nKey="privacyPolicyPage.section16.text1"
                   t={translate}
-                  components={[
-                    <a
-                      className="policy__link"
-                      href="https://app.termly.io/notify/d960af72-f0bc-4d01-a206-8af5decee010"
-                      target="_blank"
-                      rel="noreferrer"
-                    />,
-                  ]}
                 />
               </p>
             </div>
