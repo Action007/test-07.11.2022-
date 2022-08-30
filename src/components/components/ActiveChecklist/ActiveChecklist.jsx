@@ -11,7 +11,7 @@ const ActiveChecklist = ({ checklist, isFetching }) => {
       title: translate("myActiveChecklists.title"),
       link: "/active-checklists?completed=false&page=1&per_page=10",
     },
-    { title: checklist ? checklist.entities.checklist.name : "" },
+    { title: checklist ? checklist.entities.name : "" },
   ];
 
   return (

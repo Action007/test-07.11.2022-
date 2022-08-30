@@ -159,7 +159,7 @@ const Checklist = ({
               )
             )}
           </ol>
-          {page === "checklist-detail" && !showOnMobile && (
+          {page === "checklist-detail" && !showOnMobile && !isPreview && (
             <ChecklistCreatorAndCategory
               categoryID={categories[0].id}
               creatorNickname={creator.nickname}
