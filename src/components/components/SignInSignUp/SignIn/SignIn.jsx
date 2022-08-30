@@ -32,7 +32,11 @@ const SignIn = () => {
   const showOnMobile = useMediaQuery("(max-width:991px)");
   const [
     resendConfirmation,
-    { isLoading: isLoadingResend, isSuccess: isResendSuccess },
+    {
+      isLoading: isLoadingResend,
+      isSuccess: isResendSuccess,
+      error: resendConfirmationError,
+    },
   ] = useResendConfirmAccountMutation();
   const [
     signIn,
@@ -56,10 +60,21 @@ const SignIn = () => {
       setIsEmailVerified(false);
       return;
     }
+    if (error?.data?.error === "retry_later") {
+      navigate("/too-many-request");
+    }
     if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }
   }, [error]);
+
+  useEffect(() => {
+    if (!resendConfirmationError) return;
+
+    if (error?.data?.error === "retry_later") {
+      navigate("/too-many-request");
+    }
+  }, [resendConfirmationError]);
 
   useEffect(() => {
     if (!isSignInSuccess) return;

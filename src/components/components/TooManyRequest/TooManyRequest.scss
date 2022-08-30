@@ -1,0 +1,34 @@
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
+
+.many-request {
+  &__title {
+    margin-bottom: 42px;
+
+    @include media-breakpoint-down(sm) {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+  }
+
+  &__img {
+    width: 100%;
+    max-width: 379px;
+    margin-bottom: 60px;
+
+    @include media-breakpoint-down(sm) {
+      max-width: 223px;
+      margin-bottom: 51px;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+  }
+}

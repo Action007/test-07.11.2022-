@@ -20,7 +20,7 @@ const ServerError = () => {
         <div className="server-error__img mx-auto">
           <img src={Error} alt="server error" />
         </div>
-        <HomeButton />
+        <HomeButton text={translate("error.button")} />
       </div>
     </section>
   );

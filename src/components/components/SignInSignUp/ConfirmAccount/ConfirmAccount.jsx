@@ -5,9 +5,10 @@ import { authSliceActions } from "../../../../store/authSlice";
 import { useConfirmAccountMutation } from "../../../../services/logInService";
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
 import PopupDone from "../../PopupDone/PopupDone";
+import isServerError from "../../../../utils/isServerError";
 
 const ConfirmAccount = () => {
-  const [confirmAccount, { data, isSuccess, isError }] =
+  const [confirmAccount, { data, isSuccess, error }] =
     useConfirmAccountMutation();
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -25,8 +26,17 @@ const ConfirmAccount = () => {
       dispatch(authSliceActions.setToken(data.token));
       setModalShow(true);
     }
-    if (isError) navigate("/error", { replace: true });
-  }, [isSuccess, isError]);
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (!error) return;
+    if (error?.data?.error === "retry_later") {
+      navigate("/too-many-request");
+    }
+    if (isServerError(error?.status)) {
+      navigate("/error", { replace: true });
+    }
+  }, [error]);
 
   return (
     <>
