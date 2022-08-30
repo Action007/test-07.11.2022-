@@ -106,8 +106,12 @@ const AllChecklists = () => {
                 {category === "created" &&
                   translate("allChecklistsPage.createdEmpty")}
               </div>
-              {category === "saved" && <HomeButton />}
-              {category === "liked" && <HomeButton />}
+              {category === "saved" && (
+                <HomeButton text={translate("error.button")} />
+              )}
+              {category === "liked" && (
+                <HomeButton text={translate("error.button")} />
+              )}
               {category === "created" && <CreateButton />}
             </div>
           ))}

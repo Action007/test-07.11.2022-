@@ -18,7 +18,7 @@ const NotFound = () => {
           <Error />
         </div>
         <div className="text-center">
-          <HomeButton />
+          <HomeButton text={translate("error.button")} />
         </div>
       </div>
     </section>

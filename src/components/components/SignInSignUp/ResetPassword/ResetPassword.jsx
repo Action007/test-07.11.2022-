@@ -40,6 +40,9 @@ const ResetPassword = ({ setShowNotification }) => {
     if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }
+    if (error?.data?.error === "retry_later") {
+      navigate("/too-many-request");
+    }
   }, [error]);
 
   const onSubmitHandler = (e) => {

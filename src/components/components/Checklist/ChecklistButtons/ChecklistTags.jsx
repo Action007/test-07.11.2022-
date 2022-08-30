@@ -6,23 +6,23 @@ import "./ChecklistTags.scss";
 const ChecklistTags = ({ tags, isPreview, navigate, pathname, search }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const navigationHandler = (tagID) => {
+  const navigationHandler = (tagName) => {
     if (pathname === "/") {
       if (!search) {
         setSearchParams(
           `?per_page=5&${changeSearchParamsValue(
             searchParams,
-            "search_tag_ids[]",
-            tagID
+            "search_tag_names[]",
+            tagName
           )}`
         );
       } else {
         setSearchParams(
-          changeSearchParamsValue(searchParams, "search_tag_ids[]", tagID)
+          changeSearchParamsValue(searchParams, "search_tag_names[]", tagName)
         );
       }
     } else {
-      navigate(`/?page=1&per_page=5&search_tag_ids[]=${tagID}`);
+      navigate(`/?page=1&per_page=5&search_tag_names[]=${tagName}`);
     }
   };
 
@@ -31,7 +31,7 @@ const ChecklistTags = ({ tags, isPreview, navigate, pathname, search }) => {
       {tags.map((tag) =>
         !isPreview ? (
           <button
-            onClick={() => navigationHandler(tag.id)}
+            onClick={() => navigationHandler(tag.name)}
             className="checklist-tags__item"
             key={tag.id}
             type="button"

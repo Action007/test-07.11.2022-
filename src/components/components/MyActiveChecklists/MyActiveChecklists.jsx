@@ -107,8 +107,12 @@ const MyActiveChecklists = () => {
                 {category === "passed" &&
                   translate("myActiveChecklists.passedEmpty")}
               </div>
-              {category === "active" && <HomeButton />}
-              {category === "passed" && <HomeButton />}
+              {category === "active" && (
+                <HomeButton text={translate("error.button")} />
+              )}
+              {category === "passed" && (
+                <HomeButton text={translate("error.button")} />
+              )}
             </div>
           ))}
       </div>

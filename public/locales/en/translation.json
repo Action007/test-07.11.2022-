@@ -44,6 +44,9 @@
       "title": "No results found",
       "desc": "We weren't able to find a match."
     },
+    "tooManyRequest": {
+      "title": "Too many request"
+    },
     "error": {
       "title": "Page unresponsive! Please try again",
       "desc": "Page not responding. You can wait or refresh the page and try again."
@@ -724,6 +727,10 @@
     "subtitle": "That's an error. There was an error. Please try again later. That's all we know",
     "button": "Go back to the main page",
     "error": "Server Error"
+  },
+  "tooManyRequest": {
+    "title": "Error.. Too many request",
+    "button": "Refresh page"
   },
   "profilePage": {
     "profile": "Profile",

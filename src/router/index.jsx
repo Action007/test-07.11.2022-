@@ -24,6 +24,9 @@ const CreationOfChecklistPage = React.lazy(() =>
 );
 const HomePage = React.lazy(() => import("../pages/HomePage"));
 const NotFoundPage = React.lazy(() => import("../pages/NotFoundPage"));
+const TooManyRequestPage = React.lazy(() =>
+  import("../pages/TooManyRequestPage")
+);
 const ProfilePage = React.lazy(() => import("../pages/ProfilePage"));
 const EditProfilePage = React.lazy(() => import("../pages/EditProfilePage"));
 const AccountSettingsPage = React.lazy(() =>
@@ -97,6 +100,7 @@ const routes = [
   { id: 32, path: "/*", element: <NotFoundPage /> },
   { id: 33, path: "/not-found", element: <NotFoundPage /> },
   { id: 34, path: "/error", element: <ServerErrorPage /> },
+  { id: 35, path: "/too-many-request", element: <TooManyRequestPage /> },
 ];
 
 export default routes;
