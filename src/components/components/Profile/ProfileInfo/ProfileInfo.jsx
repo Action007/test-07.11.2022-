@@ -116,7 +116,7 @@ const ProfileInfo = ({
                     !country ? " empty" : ""
                   }`}
                 >
-                  {translate("profilePage.country")}
+                  {country}
                 </span>
               )}
               {nickname && (
