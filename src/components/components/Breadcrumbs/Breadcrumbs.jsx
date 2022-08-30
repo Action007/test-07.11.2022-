@@ -37,7 +37,6 @@ const Breadcrumbs = ({ breadcrumbs }) => {
           </li>
         ))}
       </ul>
-      <div className="breadcrumbs__shadow" />
     </div>
   );
 };

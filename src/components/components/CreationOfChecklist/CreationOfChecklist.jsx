@@ -281,7 +281,10 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   return (
     <>
       {showNotification && (
-        <Notification translate={translate("creationOfChecklist.2hours")} />
+        <Notification
+          translate={translate("creationOfChecklist.2hours")}
+          isError
+        />
       )}
       <CreationChecklistPreview
         onHide={() => setPreview(false)}

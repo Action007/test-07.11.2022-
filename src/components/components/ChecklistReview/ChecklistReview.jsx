@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import checkTime from "../../../utils/checkTime";
 import ChecklistSkeleton from "../../UI/ChecklistSkeleton/ChecklistSkeleton";
 import Notification from "../../UI/Notification/Notification";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
@@ -10,6 +11,8 @@ const ChecklistReview = ({ checklist, setPageCount, id, isFetching }) => {
   const [notification, setNotification] = useState(false);
   const [linkToActiveChecklist, setLinkToActiveChecklist] = useState("");
   const { t: translate } = useTranslation();
+  const isLessThanTwoHours = checkTime(checklist?.checklist?.created_at);
+  const isCurrentUser = checklist?.checklist?.creator?.is_current_user;
 
   const breadcrumbs = useMemo(() => {
     if (checklist?.checklist?.user_track?.created) {
@@ -53,9 +56,17 @@ const ChecklistReview = ({ checklist, setPageCount, id, isFetching }) => {
           isError
         />
       )}
+      {isLessThanTwoHours && isCurrentUser && !notification && (
+        <Notification
+          translate={translate("notification.2hours")}
+          link={linkToActiveChecklist}
+        />
+      )}
       <div
         className={`checklist-detail container container-breadcrumb pb-8${
-          notification ? " show-notification" : ""
+          notification || (isLessThanTwoHours && isCurrentUser)
+            ? " show-notification"
+            : ""
         }`}
       >
         <Breadcrumbs breadcrumbs={breadcrumbs} />
