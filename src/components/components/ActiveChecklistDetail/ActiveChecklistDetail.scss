@@ -33,6 +33,10 @@
 
       font-size: 1rem;
     }
+
+    &.passed {
+      color: $primary;
+    }
   }
 
   &__items {
@@ -41,49 +45,6 @@
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 59px;
-    }
-  }
-
-  &__wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    color: $light;
-
-    svg {
-      width: 24px;
-      height: 24px;
-
-      stroke: $light;
-    }
-  }
-
-  &__btn {
-    cursor: pointer;
-    
-    &:not(:last-child) {
-      margin-right: 25px;
-    }
-
-    &:first-child {
-      svg {
-        margin-left: 4px;
-      }
-    }
-
-    &:last-child:hover {
-      svg {
-        stroke: $warning;
-      }
-    }
-
-    &:hover {
-      color: $primary;
-
-      svg {
-        stroke: $primary;
-      }
     }
   }
 }

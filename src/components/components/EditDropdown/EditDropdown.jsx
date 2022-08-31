@@ -6,8 +6,15 @@ import "./EditDropdown.scss";
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
 import { ReactComponent as EditSvg } from "../../../assets/images/icon/edit.svg";
 import { ReactComponent as DeleteSvg } from "../../../assets/images/icon/trash.svg";
+import { ReactComponent as DownloadSvg } from "../../../assets/images/icon/download.svg";
+import { ReactComponent as ShareSvg } from "../../../assets/images/icon/share.svg";
 
-const EditDropdown = ({ updateHandler, deleteHandler, isEdit }) => {
+const EditDropdown = ({
+  updateHandler,
+  deleteHandler,
+  isEdit = false,
+  isActiveChecklist = false,
+}) => {
   const { ref, show, setShowHandler } = useClickOutside();
 
   return (
@@ -35,6 +42,26 @@ const EditDropdown = ({ updateHandler, deleteHandler, isEdit }) => {
               <EditSvg />
               Edit
             </button>
+          )}
+          {isActiveChecklist && (
+            <>
+              <button
+                onClick={deleteHandler}
+                className="edit-dropdown__share"
+                type="button"
+              >
+                <ShareSvg />
+                Share link
+              </button>
+              <button
+                onClick={deleteHandler}
+                className="edit-dropdown__download"
+                type="button"
+              >
+                <DownloadSvg />
+                Download
+              </button>
+            </>
           )}
           <button
             onClick={deleteHandler}

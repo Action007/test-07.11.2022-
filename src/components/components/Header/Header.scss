@@ -1,6 +1,6 @@
-@import "../../../../node_modules/bootstrap/scss/mixins";
-@import "../../../global-styles/variables";
-@import "../../../global-styles/fonts";
+@import '../../../../node_modules/bootstrap/scss/mixins';
+@import '../../../global-styles/variables';
+@import '../../../global-styles/fonts';
 
 .header {
   width: 100%;
@@ -55,7 +55,7 @@
 
     &.active {
       border-radius: 0 0 8px 8px;
-      box-shadow: 0 4px 4px 0 #00000040;
+      box-shadow: 0px 4px 4px 0px #4f4f4f26;
     }
   }
 

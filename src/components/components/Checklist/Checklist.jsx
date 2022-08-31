@@ -112,7 +112,6 @@ const Checklist = ({
             {page === "created-checklists" && (
               <EditDropdown
                 isEdit={checkTime(created_at)}
-                id={id}
                 navigate={navigate}
                 updateHandler={onUpdateHandler}
                 deleteHandler={() => setModalShow(true)}
