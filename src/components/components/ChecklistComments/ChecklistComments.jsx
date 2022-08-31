@@ -38,8 +38,8 @@ const ChecklistComments = ({
   const [deleteComment] = useDeleteCommentMutation();
 
   const token = useSelector((state) => state.authSliceReducer.token);
-  const { t: translate } = useTranslation();
   const navigate = useNavigate();
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     if (!isCreateSuccess) return;
