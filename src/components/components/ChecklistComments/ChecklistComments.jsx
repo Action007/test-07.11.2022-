@@ -28,14 +28,12 @@ const ChecklistComments = ({
   const token = useSelector((state) => state.authSliceReducer.token);
 
   const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState(false);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!isSuccess) return;
     setComments((pevState) => [data, ...pevState]);
-    setNewComment(true);
     addComments(1);
   }, [isSuccess]);
 
@@ -45,16 +43,10 @@ const ChecklistComments = ({
       const lastComments = pagination_comments.filter(
         (item) => !comments.find((comment) => comment.id === item.id)
       );
-      if (newComment) {
-        setComments((pevState) => [...lastComments, ...pevState]);
-        setNewComment(false);
-        return;
-      }
       if (lastComments.length === 0 && next_page) {
         addComments(next_page);
-      } else {
-        setComments((pevState) => [...pevState, ...lastComments]);
       }
+      setComments((pevState) => [...pevState, ...lastComments]);
     }
   }, [pagination_comments]);
 
