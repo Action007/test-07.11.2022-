@@ -2,7 +2,16 @@ import { olcheckAPI } from ".";
 
 const checklistAPI = olcheckAPI.injectEndpoints({
   endpoints: (build) => ({
-    addComment: build.mutation({
+    fetchComments: build.query({
+      query: (params) => ({
+        url: `/api/v1/checklists/${params.id}/comments`,
+        params: {
+          page: params.page,
+          per_page: params.perPage,
+        },
+      }),
+    }),
+    createComment: build.mutation({
       query: (body) => ({
         url: `/api/v1/checklists_auth/${body.checklist_id}/comment`,
         method: "POST",
@@ -38,7 +47,8 @@ const checklistAPI = olcheckAPI.injectEndpoints({
 });
 
 export const {
-  useAddCommentMutation,
+  useLazyFetchCommentsQuery,
+  useCreateCommentMutation,
   useLikeCommentMutation,
   useUnlikeCommentMutation,
   useDeleteCommentMutation,
