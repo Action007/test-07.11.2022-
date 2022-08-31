@@ -21,6 +21,7 @@ const ChecklistCreatorAndCategory = ({
   const onErrorImgHandler = (e) => {
     e.target.src = brokenImg;
     e.target.alt = "broken image";
+    e.target.className = "broken";
   };
 
   const onCategoryClickHandler = () => {

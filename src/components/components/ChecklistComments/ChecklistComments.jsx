@@ -3,8 +3,9 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
-  useAddCommentMutation,
+  useCreateCommentMutation,
   useDeleteCommentMutation,
+  useLazyFetchCommentsQuery,
 } from "../../../services/commentsService";
 import ChecklistCommentsInput from "./ChecklistCommentsInput/ChecklistCommentsInput";
 import getTime from "../../../utils/getTime";
@@ -15,44 +16,56 @@ import "./ChecklistComments.scss";
 import { ReactComponent as ArrowSvg } from "../../../assets/images/icon/rightArrow.svg";
 
 const ChecklistComments = ({
-  commentsTotalCount,
-  pagination_comments,
-  addComments,
-  next_page,
+  checklistComments,
+  comments_paginate,
   checklistID,
-  loadingComments,
 }) => {
-  const [addComment, { isSuccess, data }] = useAddCommentMutation();
+  const [page, setPage] = useState(1);
+  const [commentsPaginate, setCommentsPaginate] = useState(comments_paginate);
+  const [comments, setComments] = useState(checklistComments);
+
+  const [
+    getComments,
+    {
+      data: commentsData,
+      isSuccess: isFetchCommentsSuccess,
+      isFetching: isFetchLoading,
+    },
+  ] = useLazyFetchCommentsQuery();
+
+  const [createComment, { isSuccess: isCreateSuccess, data }] =
+    useCreateCommentMutation();
   const [deleteComment] = useDeleteCommentMutation();
 
   const token = useSelector((state) => state.authSliceReducer.token);
-
-  const [comments, setComments] = useState([]);
   const { t: translate } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isSuccess) return;
+    if (!isCreateSuccess) return;
     setComments((pevState) => [data, ...pevState]);
-    addComments(1);
-  }, [isSuccess]);
+  }, [isCreateSuccess]);
 
   useEffect(() => {
-    if (!comments.length) setComments(pagination_comments);
-    if (comments.length) {
-      const lastComments = pagination_comments.filter(
-        (item) => !comments.find((comment) => comment.id === item.id)
-      );
-      if (lastComments.length === 0 && next_page) {
-        addComments(next_page);
-      }
-      setComments((pevState) => [...pevState, ...lastComments]);
-    }
-  }, [pagination_comments]);
+    if (!isFetchCommentsSuccess) return;
 
-  const showCommentHandler = () => {
-    if (next_page) addComments(next_page);
-  };
+    const newComments = commentsData.pagination_comments.filter(
+      (item) => !comments.find((comment) => comment.id === item.id)
+    );
+
+    if (!newComments.length) {
+      setPage((prevState) => prevState + 1);
+      getComments({
+        id: checklistID,
+        page: page + 1,
+        perPage: 5,
+      });
+      return;
+    }
+
+    setComments([...comments, ...newComments]);
+    setCommentsPaginate(commentsData.paginate);
+  }, [commentsData]);
 
   const onDeleteCommentHandler = (commentID) => {
     deleteComment({ checklist_id: checklistID, comment_id: commentID });
@@ -61,20 +74,29 @@ const ChecklistComments = ({
     );
   };
 
+  const onClickShowMoreCommentsHandler = () => {
+    setPage((prevState) => prevState + 1);
+    getComments({
+      id: checklistID,
+      page: page + 1,
+      perPage: 5,
+    });
+  };
+
   const onSubmitHandler = (inputValue, setInputValue, isValidComment) => {
     if (!token) {
       navigate("/sign-in");
       return;
     }
     if (inputValue.trim().length === 0 || !isValidComment) return;
-    addComment({ text: inputValue.trim(), checklist_id: checklistID });
+    createComment({ text: inputValue.trim(), checklist_id: checklistID });
     setInputValue("");
   };
 
   return (
     <div className="checklist-comments">
       <span className="checklist-comments__review SFPro-600">
-        {commentsTotalCount} {translate("checklistReviewPage.review")}
+        {translate("checklistReviewPage.review")}
       </span>
       <ChecklistCommentsInput
         submitHandler={onSubmitHandler}
@@ -93,19 +115,20 @@ const ChecklistComments = ({
                 checklistID={checklistID}
                 text={comment.text}
                 liked={comment.liked}
-                token={token}
                 unliked={comment.unliked}
                 userTrack={comment.user_track}
                 deleteCommentHandler={onDeleteCommentHandler}
+                token={token}
               />
             );
           })}
       </ul>
-      {next_page &&
-        commentsTotalCount !== comments.length &&
-        (!loadingComments ? (
+      {!commentsPaginate["last_page?"] &&
+        commentsPaginate.next_page &&
+        !!comments.length &&
+        (!isFetchLoading ? (
           <button
-            onClick={showCommentHandler}
+            onClick={onClickShowMoreCommentsHandler}
             className="checklist-comments__button SFPro-500"
             type="button"
           >

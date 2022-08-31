@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -12,7 +12,6 @@ const ChecklistDetailPage = () => {
   const { pathname } = useLocation();
   const { id } = useParams();
   const navigate = useNavigate();
-  const [pageCount, setPageCount] = useState(1);
   const token = useSelector((state) => state.authSliceReducer.token);
   const {
     data: checklist,
@@ -20,9 +19,7 @@ const ChecklistDetailPage = () => {
     error,
     isFetching,
   } = useFetchChecklistQuery(
-    `/${
-      token ? "checklists_auth" : "checklists"
-    }/${id}?page=${pageCount}&per_page=5`,
+    `/${token ? "checklists_auth" : "checklists"}/${id}?page=1&per_page=5`,
     { refetchOnMountOrArgChange: true }
   );
 
@@ -50,12 +47,7 @@ const ChecklistDetailPage = () => {
         <meta name="description" content="Checklist Review" />
         <meta property="og:description" content="Checklist Review" />
       </Helmet>
-      <ChecklistReview
-        checklist={checklist}
-        setPageCount={setPageCount}
-        id={id}
-        isFetching={isFetching}
-      />
+      <ChecklistReview checklist={checklist} id={id} isFetching={isFetching} />
     </>
   );
 };
