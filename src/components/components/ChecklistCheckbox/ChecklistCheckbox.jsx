@@ -20,6 +20,7 @@ const ChecklistCheckbox = ({
   completed,
   setCompletedItemsCounter,
   setTotalItemsCounter,
+  setIsChecklistPassed,
 }) => {
   const [checkChecklistItem, { isSuccess, data }] =
     useCheckActiveChecklistItemMutation();
@@ -36,6 +37,7 @@ const ChecklistCheckbox = ({
     }
     setCompletedItemsCounter(data.entities.completed_items_counter);
     setTotalItemsCounter(data.entities.total_items_counter);
+    setIsChecklistPassed(data.entities.completed);
   }, [isSuccess]);
 
   const checkboxHandler = () => {
