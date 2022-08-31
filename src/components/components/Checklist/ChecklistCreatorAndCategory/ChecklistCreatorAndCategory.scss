@@ -57,6 +57,12 @@
     @include media-breakpoint-down(sm) {
       margin: 0 10px 0 0;
     }
+
+    img.broken {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+    }
   }
 
   &__profile {
@@ -91,13 +97,13 @@
 
     &.fill {
       svg {
-        fill: #65C17E;
+        fill: #65c17e;
       }
     }
 
     &.stroke {
       svg {
-        stroke: #65C17E;
+        stroke: #65c17e;
       }
     }
   }
