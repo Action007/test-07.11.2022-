@@ -36,8 +36,7 @@
 
   &__box {
     display: flex;
-
-    margin-bottom: 34px;
+    align-items: center;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 30px;
@@ -169,7 +168,7 @@
   &__span {
     display: block;
 
-    margin-bottom: 16px;
+    margin: 34px 0 16px;
 
     line-height: 1.1;
     color: #888;

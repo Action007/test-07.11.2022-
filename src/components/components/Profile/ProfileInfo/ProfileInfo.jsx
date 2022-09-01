@@ -132,17 +132,20 @@ const ProfileInfo = ({
               )}
             </div>
           </div>
-          <span
-            className={`profile-info__span${bio.length === 0 ? " empty" : ""}`}
-          >
-            {isMyAccount
-              ? translate("profilePage.aboutMe")
-              : translate("profilePage.about")}
-          </span>
+          {isMyAccount && (
+            <span
+              className={`profile-info__span${
+                bio.length === 0 ? " empty" : ""
+              }`}
+            >
+              {translate("profilePage.aboutMe")}
+            </span>
+          )}
           <p
             className={`profile-info__text${bio.length === 0 ? " empty" : ""}`}
           >
-            {bio.length !== 0 ? bio : translate("profilePage.emptyBio")}
+            {isMyAccount &&
+              (bio.length !== 0 ? bio : translate("profilePage.emptyBio"))}
           </p>
           {(!!facebook || !!twitter || !!instagram || !!site || !!linkedin) && (
             <ul className="profile-info__networks">

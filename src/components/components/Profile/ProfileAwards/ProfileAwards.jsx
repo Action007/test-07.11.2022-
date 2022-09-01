@@ -19,9 +19,7 @@ const ProfileAwards = ({
   return (
     <div className="profile-awards__wrap">
       <span className="profile-awards__head">
-        {isMyAccount
-          ? translate("profilePage.myAwards")
-          : translate("profilePage.awards")}
+        {translate("profilePage.awards")}
       </span>
       {!!completedCounter || !!createdCounter || !!awardsCounter ? (
         <ul className="profile-awards__items">
