@@ -47,6 +47,12 @@ const SignIn = () => {
 
   useEffect(() => {
     if (!error) return;
+    if (isServerError(error.status)) {
+      navigate("/error", { replace: true });
+    }
+    if (error.data?.error === "retry_later") {
+      navigate("/too-many-request");
+    }
 
     if (error.data?.error === "unauthorized") {
       setIsValidEmailOrPassword(false);
@@ -58,13 +64,6 @@ const SignIn = () => {
       error.data?.message[0].type === "invalid"
     ) {
       setIsEmailVerified(false);
-      return;
-    }
-    if (error?.data?.error === "retry_later") {
-      navigate("/too-many-request");
-    }
-    if (isServerError(error?.status)) {
-      navigate("/error", { replace: true });
     }
   }, [error]);
 

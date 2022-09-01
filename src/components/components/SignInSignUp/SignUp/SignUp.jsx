@@ -36,6 +36,9 @@ const SignUp = () => {
       navigate("/error", { replace: true });
       return;
     }
+    if (error?.data?.error === "retry_later") {
+      navigate("/too-many-request");
+    }
     if (!error?.data?.message) return;
 
     const { message } = error.data;
@@ -52,9 +55,6 @@ const SignUp = () => {
       message[0].type === "invalid_characters"
     ) {
       setIsNicknameInvalidCharacters(true);
-    }
-    if (error?.data?.error === "retry_later") {
-      navigate("/too-many-request");
     }
   }, [error]);
 
