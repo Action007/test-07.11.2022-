@@ -595,7 +595,9 @@
     "moreComments": "Show more comments",
     "loading": "Loading...",
     "max": "Maximum 150 characters",
-    "review": "Reviews"
+    "review": "Reviews",
+    "share": "Share link",
+    "copied": "Copied!"
   },
   "myActiveChecklists": {
     "title": "Active checklists",

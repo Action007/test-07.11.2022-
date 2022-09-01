@@ -134,9 +134,9 @@
   }
 
   &__items {
+    width: 100%;
     margin-bottom: 4px;
     margin-left: 20px;
-    width: 100%;
 
     word-break: break-word;
 
@@ -146,13 +146,13 @@
 
       font-size: 1.1rem;
 
+      @include media-breakpoint-down(sm) {
+        margin-left: 0;
+      }
+
       ::marker {
         font-size: 1.1rem;
         font-weight: 600;
-      }
-
-      @include media-breakpoint-down(sm) {
-        margin-left: 0;
       }
     }
   }
@@ -212,6 +212,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     min-width: 280px;
 
     font-size: 14px;

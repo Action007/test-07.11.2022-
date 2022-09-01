@@ -2,18 +2,6 @@
 @import '../../../../node_modules/bootstrap/scss/mixins';
 
 .main-content {
-  &.user {
-    margin-top: 183px;
-
-    @include media-breakpoint-down(xl) {
-      margin-top: 145px;
-    }
-
-    @include media-breakpoint-down(lg) {
-      margin-top: 110px;
-    }
-  }
-
   .container {
     margin-top: 0;
   }
@@ -33,6 +21,18 @@
       justify-content: center;
 
       width: 100%;
+    }
+  }
+
+  &.user {
+    margin-top: 183px;
+
+    @include media-breakpoint-down(xl) {
+      margin-top: 145px;
+    }
+
+    @include media-breakpoint-down(lg) {
+      margin-top: 110px;
     }
   }
 

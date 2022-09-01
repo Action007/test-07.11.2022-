@@ -18,12 +18,11 @@
   transition: all 0.3s ease;
 
   @include media-breakpoint-down(sm) {
-    margin-right: 0;
-    margin-bottom: 38px;
-
     justify-content: center;
 
     width: 100%;
+    margin-right: 0;
+    margin-bottom: 38px;
   }
 
   span {
