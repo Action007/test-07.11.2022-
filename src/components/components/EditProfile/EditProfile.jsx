@@ -31,6 +31,8 @@ const EditProfile = () => {
   const [country, setCountry] = useState("Select a country");
   const [isNameValid, setIsNameValid] = useState(true);
   const [isNickNameValid, setIsNickNameValid] = useState(true);
+  const [isNicknameInvalidCharacters, setIsNicknameInvalidCharacters] =
+    useState(false);
   const [isBioValid, setIsBioValid] = useState(true);
   const [isNicknameServerValid, setIsNicknameServerValid] = useState(null);
   const [isLinksInValid, setIsLinksInValid] = useState({
@@ -66,8 +68,7 @@ const EditProfile = () => {
   song.volume = 0.1;
 
   useEffect(() => {
-    if (!error) return;
-
+    if (!error?.data?.message) return;
     const invalidLinks = {
       website: true,
       facebook: true,
@@ -75,23 +76,34 @@ const EditProfile = () => {
       twitter: true,
       linkedin: true,
     };
-    error.data.message.forEach((item) => {
-      if (item.attribute === "nickname" && item.type === "too_short") {
-        setIsNicknameServerValid({ short: true });
-      } else if (item.attribute === "nickname" && item.type === "taken") {
-        setIsNicknameServerValid({ taken: true });
-      } else if (item.attribute === "site") {
-        invalidLinks.website = false;
-      } else if (item.attribute === "facebook") {
-        invalidLinks.facebook = false;
-      } else if (item.attribute === "instagram") {
-        invalidLinks.instagram = false;
-      } else if (item.attribute === "twitter") {
-        invalidLinks.twitter = false;
-      } else if (item.attribute === "linkedin") {
-        invalidLinks.linkedin = false;
-      }
-    });
+    const errorMessage = error.data.message[0];
+
+    if (
+      errorMessage.attribute === "nickname" &&
+      errorMessage.type === "too_short"
+    ) {
+      setIsNicknameServerValid({ short: true });
+    } else if (
+      errorMessage.attribute === "nickname" &&
+      errorMessage.type === "taken"
+    ) {
+      setIsNicknameServerValid({ taken: true });
+    } else if (
+      errorMessage.attribute === "nickname" &&
+      errorMessage.type === "invalid_characters"
+    ) {
+      setIsNicknameInvalidCharacters(true);
+    } else if (errorMessage.attribute === "site") {
+      invalidLinks.website = false;
+    } else if (errorMessage.attribute === "facebook") {
+      invalidLinks.facebook = false;
+    } else if (errorMessage.attribute === "instagram") {
+      invalidLinks.instagram = false;
+    } else if (errorMessage.attribute === "twitter") {
+      invalidLinks.twitter = false;
+    } else if (errorMessage.attribute === "linkedin") {
+      invalidLinks.linkedin = false;
+    }
     setIsLinksInValid(invalidLinks);
   }, [error]);
 
@@ -133,6 +145,7 @@ const EditProfile = () => {
     const nickName = value.length < 51 && value.trim().length > 1;
     setNickNameValue(value);
     setIsNickNameValid(nickName);
+    setIsNicknameInvalidCharacters(false);
     setIsNicknameServerValid(null);
 
     return nickName;
@@ -208,7 +221,7 @@ const EditProfile = () => {
       )}
       <div
         className={`edit-profile container${
-          notification ? " show-notification" : ""
+          isEditSuccess && notification ? " show-notification" : ""
         }`}
       >
         {user && <Breadcrumbs breadcrumbs={breadcrumbs} />}
@@ -225,13 +238,20 @@ const EditProfile = () => {
               value={nameValue}
             />
             <EditProfileInput
-              isInvalid={{ isNickNameValid, isNicknameServerValid }}
+              isInvalid={{
+                isNickNameValid,
+                isNicknameServerValid,
+                isNicknameInvalidCharacters,
+              }}
               invalidText={{
                 maxNickname: translate("editProfilePage.maxNickname"),
                 nickNicknameTaken: translate(
                   "editProfilePage.nickNicknameTaken"
                 ),
                 minNickname: translate("editProfilePage.minNickname"),
+                nicknameInvalidCharacters: translate(
+                  "editProfilePage.nicknameInvalidCharacters"
+                ),
               }}
               title={translate("editProfilePage.nickName")}
               setValue={onChangeNickNameHandler}

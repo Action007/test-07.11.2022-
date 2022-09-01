@@ -64,6 +64,7 @@ const Header = () => {
     if (error.data?.error === "unauthorized") {
       dispatch(authSliceActions.resetToken());
       dispatch(authSliceActions.resetUser());
+      navigate(0);
     }
     if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
