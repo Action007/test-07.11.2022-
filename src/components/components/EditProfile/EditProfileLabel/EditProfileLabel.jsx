@@ -12,7 +12,9 @@ const EditProfileInput = ({
 }) => {
   const invalid =
     inputType === "nickname"
-      ? !isInvalid.isNickNameValid || isInvalid.isNicknameServerValid
+      ? !isInvalid.isNickNameValid ||
+        isInvalid.isNicknameServerValid ||
+        isInvalid.isNicknameInvalidCharacters
       : isInvalid;
   const labelID = uniqueID();
 
@@ -29,6 +31,8 @@ const EditProfileInput = ({
             {isInvalid.isNicknameServerValid?.taken &&
               invalidText.nickNicknameTaken}
             {isInvalid.isNicknameServerValid?.short && invalidText.minNickname}
+            {isInvalid.isNicknameInvalidCharacters &&
+              invalidText.nicknameInvalidCharacters}
           </span>
           <input
             onChange={(e) => setValue(e.target.value)}
