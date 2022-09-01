@@ -18,6 +18,7 @@ import checkTime from "../../../utils/checkTime";
 import "./Checklist.scss";
 
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
+import ChecklistShareButton from "./ChecklistButtons/ChecklistShareButton";
 
 const Checklist = ({
   checklist,
@@ -134,6 +135,9 @@ const Checklist = ({
                     navigate={navigate}
                     translate={translate}
                   />
+                  {page === "checklist-detail" && (
+                    <ChecklistShareButton linkToCopy={checklist.short_url} />
+                  )}
                 </div>
               )}
           </div>
