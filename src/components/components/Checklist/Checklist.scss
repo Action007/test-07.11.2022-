@@ -211,12 +211,14 @@
   &__box {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    min-width: 280px;
 
     font-size: 14px;
 
     &.detail {
       @include media-breakpoint-down(md) {
-        margin-bottom: 25px;
+        margin-bottom: 24px;
       }
 
       @include media-breakpoint-down(sm) {

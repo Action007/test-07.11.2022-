@@ -9,6 +9,7 @@ import {
   useLikeCommentMutation,
   useUnlikeCommentMutation,
 } from "../../../services/commentsService";
+import formatLargeNumbers from "../../../utils/formatLargeNumbers";
 import "./LikeDislikeViewButtons.scss";
 
 import { ReactComponent as LikeSvg } from "../../../assets/images/icon/like.svg";
@@ -109,16 +110,16 @@ const LikeDislikeViewButtons = ({
           }`}
         >
           <ViewSvg />
-          <span>{viewed}</span>
+          <span>{formatLargeNumbers(viewed)}</span>
         </span>
       )}
       <button onClick={onLikeHandler} className={likeClass} type="button">
         <LikeSvg />
-        {likeAmount()}
+        {formatLargeNumbers(likeAmount())}
       </button>
       <button onClick={onUnlikeHandler} className={unlikeClass} type="button">
         <LikeSvg />
-        {unlikeAmount()}
+        {formatLargeNumbers(unlikeAmount())}
       </button>
     </div>
   );
