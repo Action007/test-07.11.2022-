@@ -3,14 +3,10 @@
 
 .checklist-buttons {
   display: flex;
-
-  margin-right: 25px;
+  flex-wrap: wrap;
+  margin-right: 15px;
 
   font-size: 14px;
-
-  @include media-breakpoint-down(sm) {
-    margin-right: 0;
-  }
 
   &__viewed,
   &__likes,
@@ -24,6 +20,10 @@
 
     background-color: $secondary;
     border-radius: 6px;
+
+    @include media-breakpoint-down(sm) {
+      margin-top: 8px;
+    }
 
     svg {
       margin-right: 8px;
@@ -42,7 +42,7 @@
     &.liked {
       color: $primary;
 
-      background-color: #65C17E1a;
+      background-color: #65c17e1a;
 
       svg {
         stroke: $primary;
