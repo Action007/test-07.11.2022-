@@ -29,7 +29,6 @@ const ConfirmAccount = () => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (!error) return;
     if (error?.data?.error === "retry_later") {
       navigate("/too-many-request");
     }
