@@ -2,10 +2,16 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Notification.scss";
 
-const Notification = ({ translate, isError = false, link = false }) => {
+const Notification = ({
+  translate,
+  isError = false,
+  link = false,
+  isComplain,
+}) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (isComplain) return;
     window.scrollTo({
       top: 0,
       left: 0,

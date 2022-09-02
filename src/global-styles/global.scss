@@ -160,6 +160,10 @@ p {
 
   .modal-dialog {
     max-width: 100%;
+
+    @include media-breakpoint-down(sm) {
+      padding: 60px 15px 60px;
+    }
   }
 
   .modal-dialog-centered {
