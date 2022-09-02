@@ -103,7 +103,7 @@ const LikeDislikeViewButtons = ({
 
   return (
     <div className="checklist-buttons">
-      {viewed && (
+      {!isComment && (
         <span
           className={`${`checklist-buttons__viewed SFPro-700`} ${
             viewed ? "active" : ""
