@@ -9,16 +9,19 @@ import {
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import isServerError from "../../../utils/isServerError";
 import ComplainDone from "../ComplainDone/ComplainDone";
+import Notification from "../../UI/Notification/Notification";
 import "./Complain.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/close.svg";
 
 const Complain = ({ closeHandler, id, name, page }) => {
   const [changeChecklist, setChangeChecklist] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
   const [showDone, setShowDone] = useState(false);
   const [category, setCategory] = useState("");
   const [checklistId, setChecklistId] = useState(id);
   const skip = page !== "support" || !checklistId;
+
   const { data: checklist, isFetching } = useFetchChecklistForSupportQuery(
     checklistId,
     {
@@ -27,6 +30,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
   );
   const [supportChecklist, { isSuccess, error, isLoading }] =
     useSupportChecklistMutation();
+
   const [done, setDone] = useState(false);
   const field = useRef();
   const { t: translate } = useTranslation();
@@ -54,6 +58,23 @@ const Complain = ({ closeHandler, id, name, page }) => {
     if (isServerError(error?.status)) {
       navigate("/error", { replace: true });
     }
+    if (!error?.data?.message) return;
+
+    const { message } = error.data;
+    let notification;
+
+    if (
+      message[0].attribute === "support_issues" &&
+      message[0].type === "record_already_exist"
+    ) {
+      setShowNotification(true);
+      notification = setTimeout(() => setShowNotification(false), 7000);
+    }
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      if (notification) clearTimeout(notification);
+    };
   }, [error]);
 
   const submitHandler = (e) => {
@@ -117,6 +138,13 @@ const Complain = ({ closeHandler, id, name, page }) => {
       )}
       {showComplain && (
         <div className="complain bg-white br-8">
+          {showNotification && (
+            <Notification
+              translate={translate("notification.alreadyComplained")}
+              isError
+              isComplain
+            />
+          )}
           <div className="complain__wrap d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
             <span className="SFPro-600">Complain</span>
             <button onClick={closeHandler} type="button">
