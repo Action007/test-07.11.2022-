@@ -3,56 +3,68 @@
 @import '../../../../../node_modules/bootstrap/scss/mixins';
 
 .creator-category {
+  transform: translateX(15px);
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin: 70px 0 34px;
-  transform: translateX(12px);
-  max-width: 65px;
+
   width: 100%;
+  max-width: 71px;
+  margin: 150px 0 34px;
 
   @include media-breakpoint-down(sm) {
-    flex-direction: row;
-    margin: 24px 0 0;
     transform: translateX(0);
-    max-width: 100%;
+
+    flex-flow: row wrap;
     justify-content: start;
+
+    max-width: 100%;
+    margin: 0;
   }
 
   &__inner {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 65px;
-    line-height: 1.2;
+
+    max-width: 71px;
+
     font-size: 12px;
+    line-height: 1.2;
 
     @include media-breakpoint-down(sm) {
       flex-direction: row;
+
       max-width: 100%;
+      margin-top: 24px;
     }
 
     &:first-child {
       margin-bottom: 27px;
+
       text-align: center;
 
       @include media-breakpoint-down(sm) {
-        margin: 0 15px 0 0;
+        margin: 24px 15px 0 0;
+
         text-align: start;
       }
     }
   }
 
   &__image {
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    height: 40px;
+
     width: 40px;
-    background-color: #f0f9f2;
+    height: 40px;
     margin-bottom: 6px;
-    overflow: hidden;
+
+    background-color: #f0f9f2;
+    border-radius: 50%;
 
     @include media-breakpoint-down(sm) {
       margin: 0 10px 0 0;
@@ -61,6 +73,7 @@
     img.broken {
       width: 70%;
       height: 70%;
+
       object-fit: contain;
     }
   }
@@ -68,6 +81,7 @@
   &__profile {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
   }
 
@@ -78,13 +92,15 @@
 
   &__category {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    margin-bottom: 6px;
+
     background-color: #f0f9f2;
     border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    margin-bottom: 6px;
 
     @include media-breakpoint-down(sm) {
       margin: 0 10px 0 0;
@@ -109,13 +125,14 @@
   }
 
   &__nickname {
-    max-width: 65px;
 
     @include line-clamp;
+
+    max-width: 71px;
     height: 15px;
   }
 
   &__name {
-    max-width: 65px;
+    max-width: 71px;
   }
 }
