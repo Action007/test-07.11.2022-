@@ -210,4 +210,13 @@
       transform: translateX(100%);
     }
   }
+
+  .notification {
+    position: fixed;
+    margin: 0;
+    top: 0;
+    width: 100%;
+    transform: translateX(50%);
+    right: 50%;
+  }
 }
