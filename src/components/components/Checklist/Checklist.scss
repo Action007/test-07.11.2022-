@@ -121,7 +121,7 @@
     align-items: center;
 
     @include media-breakpoint-down(sm) {
-      top: 22px;
+      top: 20px;
       right: 19px;
 
       flex-direction: row-reverse;
