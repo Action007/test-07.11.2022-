@@ -6,7 +6,7 @@ import "./CreationChecklistItemEdit.scss";
 import { ReactComponent as TextIcon } from "../../../assets/images/icon/text.svg";
 import { ReactComponent as ImgIcon } from "../../../assets/images/icon/imageIcon.svg";
 import { ReactComponent as MapIcon } from "../../../assets/images/icon/map.svg";
-import { ReactComponent as TrashIcon } from "../../../assets/images/icon/trash.svg";
+import { ReactComponent as DeleteIcon } from "../../../assets/images/icon/delete.svg";
 import { ReactComponent as LinkIcon } from "../../../assets/images/icon/link.svg";
 
 const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
@@ -103,7 +103,7 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id, setFadeIn }) => {
           type="button"
           tabIndex="-1"
         >
-          <TrashIcon />
+          <DeleteIcon />
         </button>
         <span className="checklist-edit__desc">
           {translate("creationOfChecklist.deleteHover")}

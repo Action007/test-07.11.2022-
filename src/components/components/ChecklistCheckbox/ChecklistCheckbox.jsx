@@ -9,6 +9,7 @@ import uniqueID from "../../../utils/uniqueID";
 import "./ChecklistCheckbox.scss";
 
 import { ReactComponent as LinkSvg } from "../../../assets/images/icon/link.svg";
+import { ReactComponent as MapSvg } from "../../../assets/images/icon/mapIcon.svg";
 
 const ChecklistCheckbox = ({
   id,
@@ -73,6 +74,17 @@ const ChecklistCheckbox = ({
               >
                 {translate("checklistReviewPage.link")}
                 <LinkSvg />
+              </a>
+            )}
+            {list_type === "coordinates" && (
+              <a
+                className="checklist-checkbox__map"
+                href={`https://maps.google.com/?q=${value.coordinates.lat},${value.coordinates.lon}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {translate("checklistReviewPage.map")}
+                <MapSvg />
               </a>
             )}
           </p>
