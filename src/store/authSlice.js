@@ -17,9 +17,14 @@ const authSlice = createSlice({
       const token = cookies.get("Token");
       state.token = token;
     },
-    setToken(state, action) {
+    userVerification(state) {
       const cookies = new Cookies();
+      const UserInfo = cookies.get("UserInfo");
+      state.user = UserInfo;
+    },
+    setToken(state, action) {
       const token = action.payload;
+      const cookies = new Cookies();
       cookies.set("Token", token, { path: "/", maxAge: 604800 });
       state.token = token;
     },
@@ -30,9 +35,13 @@ const authSlice = createSlice({
     },
     setUser(state, action) {
       const user = action.payload;
+      const cookies = new Cookies();
+      cookies.set("UserInfo", user, { path: "/", maxAge: 604800 });
       state.user = user;
     },
     resetUser(state) {
+      const cookies = new Cookies();
+      cookies.remove("UserInfo", { path: "/", maxAge: 604800 });
       state.user = null;
     },
     setSavedCounter(state, action) {
