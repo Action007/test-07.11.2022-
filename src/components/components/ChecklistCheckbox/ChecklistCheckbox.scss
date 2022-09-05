@@ -16,7 +16,7 @@
   }
 
   &__label:hover input ~ &__checkmark {
-    background-color: #65C17E1a;
+    background-color: #65c17e1a;
   }
 
   &__label input:checked ~ &__checkmark::after {
@@ -109,6 +109,24 @@
       margin-left: 2px;
 
       fill: $primary;
+    }
+  }
+
+  &__map {
+    margin: 0 8px;
+
+    color: $primary;
+
+    svg {
+      width: 19px;
+      height: 19px;
+      margin: -4px 0 0 4px;
+
+      fill: #65c17e;
+    }
+
+    &:hover svg {
+      fill: #519a65;
     }
   }
 
