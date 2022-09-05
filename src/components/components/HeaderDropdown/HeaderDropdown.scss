@@ -222,8 +222,12 @@
   }
 
   &__item {
+    display: flex;
+    align-items: center;
+
     width: 100%;
-    padding: 10px 19px 10px 26px;
+    height: 44px;
+    padding: 0 26px;
 
     color: $dark;
     text-align: left;
@@ -233,7 +237,7 @@
     }
 
     &:not(:last-child) {
-      border-bottom: 2px solid #4f4f4f11;
+      border-bottom: 2px solid #4f4f4f1a;
 
       &:hover {
         border-color: transparent;
@@ -247,7 +251,7 @@
     &:hover {
       color: $dark;
 
-      background-color: #4f4f4f11;
+      background-color: #4f4f4f1a;;
     }
   }
 
