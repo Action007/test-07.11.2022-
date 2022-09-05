@@ -42,7 +42,7 @@ const Header = () => {
   const { t: translate } = useTranslation();
 
   const { data: accountInfo, error } = useFetchAccountInfoQuery("", {
-    skip: !token,
+    skip: !token || !!user,
   });
 
   useEffect(() => {
