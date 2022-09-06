@@ -15,6 +15,7 @@ import isServerError from "../../../utils/isServerError";
 import "./HomeChecklistPage.scss";
 
 import Logo from "../../../assets/images/icon/logo.svg";
+import { ReactComponent as EmptySvg } from "../../../assets/images/icon/emptySearch.svg";
 
 const HomeChecklistPage = () => {
   const { search } = useLocation();
@@ -90,9 +91,12 @@ const HomeChecklistPage = () => {
                 <Checklist key={checklist.id} checklist={checklist} />
               ))}
             {checklists && checklists.entities.length === 0 && !isFetching && (
-              <span className="main-content__text">
-                {translate("mainPage.notFound")}
-              </span>
+              <div className="main-content__empty">
+                <span className="main-content__text">
+                  {translate("mainPage.notFound")}
+                </span>
+                <EmptySvg />
+              </div>
             )}
             {checklists && checklists.paginate.total_pages > 1 && (
               <Pagination
