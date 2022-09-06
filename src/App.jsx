@@ -20,6 +20,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(authSliceActions.tokenVerification());
+    dispatch(authSliceActions.userVerification());
   }, []);
 
   return (
