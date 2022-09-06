@@ -1,14 +1,12 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "universal-cookie";
-import getPercent from "../utils/getPercent";
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     token: null,
     user: null,
-    percent: 0,
     savedCounter: 0,
   },
   reducers: {
@@ -47,10 +45,6 @@ const authSlice = createSlice({
     setSavedCounter(state, action) {
       const savedCounter = action.payload;
       state.savedCounter = savedCounter;
-    },
-    setPercentActiveChecklist(state, action) {
-      const { completed_counter, active_checklists_counter } = action.payload;
-      state.percent = getPercent(completed_counter, active_checklists_counter);
     },
   },
 });

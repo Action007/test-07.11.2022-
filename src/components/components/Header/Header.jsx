@@ -22,7 +22,6 @@ import { ReactComponent as BurgerSvg } from "../../../assets/images/icon/burgerS
 
 const Header = () => {
   const user = useSelector((state) => state.authSliceReducer.user);
-  const percent = useSelector((state) => state.authSliceReducer.percent);
   const token = useSelector((state) => state.authSliceReducer.token);
   const savedCounter = useSelector(
     (state) => state.authSliceReducer.savedCounter
@@ -47,15 +46,8 @@ const Header = () => {
 
   useEffect(() => {
     if (!accountInfo) return;
-    const { completed_counter, active_checklists_counter } = accountInfo;
     dispatch(authSliceActions.setUser(accountInfo));
     dispatch(authSliceActions.setSavedCounter(accountInfo.saved_counter));
-    dispatch(
-      authSliceActions.setPercentActiveChecklist({
-        completed_counter,
-        active_checklists_counter,
-      })
-    );
   }, [accountInfo]);
 
   useEffect(() => {
@@ -113,7 +105,7 @@ const Header = () => {
             className="header__progress"
             type="button"
           >
-            <ProgressBarHeader done={percent || 0} />
+            <ProgressBarHeader done={user?.completed_percent || 0} />
           </button>
           <button
             onClick={() =>
@@ -135,7 +127,7 @@ const Header = () => {
         user={user}
         savedCounter={savedAmount}
         setShow={setShow}
-        percent={percent}
+        percent={user?.completed_percent}
       />
       {!showAddButtonOnMobile && (
         <button
