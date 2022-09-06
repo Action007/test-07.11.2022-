@@ -19,10 +19,6 @@
       transition: stroke 0.2s ease;
     }
 
-    &:active {
-      background-color: #e6e6e6;
-    }
-
     &:hover + .complain-dropdown__desc {
       visibility: visible;
       opacity: 1;
@@ -32,6 +28,10 @@
       svg {
         stroke: $dark;
       }
+    }
+
+    &:active {
+      background-color: #e6e6e6;
     }
   }
 

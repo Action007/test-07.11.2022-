@@ -49,6 +49,10 @@
       },
       {
         "type": "rule",
+        "selector": "&:hover"
+      },
+      {
+        "type": "rule",
         "selector": "&:focus"
       },
       {
@@ -58,10 +62,6 @@
       {
         "type": "rule",
         "selector": "&:active"
-      },
-      {
-        "type": "rule",
-        "selector": "&:hover"
       },
       {
         "type": "rule",

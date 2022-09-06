@@ -87,16 +87,16 @@
       transition: stroke 0.3s ease;
     }
 
-    &:active {
-      transform: scale(0.96);
-    }
-
     &:hover {
       background-color: $primary;
 
       svg {
         stroke: #fff;
       }
+    }
+
+    &:active {
+      transform: scale(0.96);
     }
   }
 
@@ -343,10 +343,6 @@
       }
     }
 
-    &:active {
-      transform: scale(0.96);
-    }
-
     &:hover {
       color: $primary;
 
@@ -356,6 +352,10 @@
       svg {
         stroke: $primary;
       }
+    }
+
+    &:active {
+      transform: scale(0.96);
     }
   }
 
