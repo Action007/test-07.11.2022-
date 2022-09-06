@@ -152,7 +152,7 @@ const EditProfile = () => {
   };
 
   const onChangeBioHandler = (value) => {
-    const bio = value.length < 151 && value.trim().length > 0;
+    const bio = value.length < 151;
     setBioValue(value);
     setIsBioValid(bio);
 
