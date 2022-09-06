@@ -26,10 +26,6 @@
       transition: fill 0.2s ease;
     }
 
-    &:active {
-      background-color: #e6e6e6;
-    }
-
     &:hover + .share-button__desc {
       visibility: visible;
       opacity: 1;
@@ -39,6 +35,10 @@
       svg {
         fill: $dark;
       }
+    }
+
+    &:active {
+      background-color: #e6e6e6;
     }
   }
 
