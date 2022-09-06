@@ -111,12 +111,12 @@
       margin-right: 25px;
     }
 
-    &:active {
-      transform: scale(0.96);
-    }
-
     &:hover {
       background-color: #eee;
+    }
+
+    &:active {
+      transform: scale(0.96);
     }
 
     &.active {
@@ -182,12 +182,12 @@
       stroke: $warning;
     }
 
-    &:active {
-      transform: scale(0.96);
-    }
-
     &:hover {
       background-color: #eee;
+    }
+
+    &:active {
+      transform: scale(0.96);
     }
 
     &.hot {

@@ -39,14 +39,14 @@
       margin-right: 6px;
     }
 
-    &:active {
-      transform: scale(0.96);
-    }
-
     &:hover {
       color: $primary;
 
       background-color: #f5f7fe;
+    }
+
+    &:active {
+      transform: scale(0.96);
     }
 
     &.active {

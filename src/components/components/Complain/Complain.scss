@@ -23,6 +23,16 @@
     cursor: pointer;
   }
 
+  .notification {
+    position: fixed;
+    top: 0;
+    right: 50%;
+    transform: translateX(50%);
+
+    width: 100%;
+    margin: 0;
+  }
+
   &__wrap {
     padding: 16px 23px;
 
@@ -208,14 +218,5 @@
     100% {
       transform: translateX(100%);
     }
-  }
-
-  .notification {
-    position: fixed;
-    margin: 0;
-    top: 0;
-    width: 100%;
-    transform: translateX(50%);
-    right: 50%;
   }
 }

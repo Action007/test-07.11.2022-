@@ -162,7 +162,7 @@ p {
     max-width: 100%;
 
     @include media-breakpoint-down(sm) {
-      padding: 60px 15px 60px;
+      padding: 60px 15px;
     }
   }
 
@@ -199,15 +199,15 @@ p {
     width: 100%;
   }
 
-  &:active {
-    transform: scale(0.96);
-  }
-
   &:hover {
     color: $primary;
 
     background-color: #fff;
     border-color: $primary;
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 }
 
