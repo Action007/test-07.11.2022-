@@ -61,7 +61,7 @@
       }
     }
 
-    &.invalid {
+    &--invalid {
       .account-setting__subtitle {
         color: $warning;
       }
