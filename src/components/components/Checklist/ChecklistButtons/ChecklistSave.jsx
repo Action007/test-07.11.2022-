@@ -39,7 +39,7 @@ const ChecklistSave = ({ token, id, saved, navigate }) => {
   return (
     <button
       onClick={token ? saveHandler : loginHandler}
-      className={`checklist-save${iSaved ? " saved" : ""}`}
+      className={`checklist-save${iSaved ? " checklist-save--saved" : ""}`}
       type="button"
     >
       <Bookmark />

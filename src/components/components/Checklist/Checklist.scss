@@ -24,7 +24,7 @@
     box-shadow: 0 2px 4px 0 #e5e9f5;
   }
 
-  &.detail {
+  &--detail {
     margin-bottom: 12px;
 
     &:hover {
@@ -89,7 +89,7 @@
       }
     }
 
-    &.completed {
+    &--completed {
       color: $primary;
     }
   }
@@ -140,7 +140,7 @@
 
     word-break: break-word;
 
-    &.detail {
+    &--detail {
       margin-bottom: 34px;
       margin-left: 16px;
 
@@ -217,7 +217,7 @@
 
     font-size: 14px;
 
-    &.detail {
+    &--detail {
       @include media-breakpoint-down(md) {
         margin-bottom: 24px;
       }

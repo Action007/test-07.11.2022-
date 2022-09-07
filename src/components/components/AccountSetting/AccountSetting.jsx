@@ -124,7 +124,7 @@ const AccountSetting = () => {
           <form onSubmit={onSubmitHandler} className="account-setting__form">
             <label
               className={`account-setting__label${
-                !emailValid ? " invalid" : ""
+                !emailValid ? " account-setting__label--invalid" : ""
               }`}
               htmlFor="account-email"
             >
@@ -140,7 +140,9 @@ const AccountSetting = () => {
             </label>
             <label
               className={`account-setting__label${
-                !oldPasswordValid || !oldPasswordIncorrect ? " invalid" : ""
+                !oldPasswordValid || !oldPasswordIncorrect
+                  ? " account-setting__label--invalid"
+                  : ""
               }`}
               htmlFor="account-oldPassword"
             >
@@ -161,7 +163,9 @@ const AccountSetting = () => {
             </label>
             <label
               className={`account-setting__label${
-                !newPasswordValid || isPasswordTooLong ? " invalid" : ""
+                !newPasswordValid || isPasswordTooLong
+                  ? " account-setting__label--invalid"
+                  : ""
               }`}
               htmlFor="account-newPassword"
             >
@@ -187,7 +191,9 @@ const AccountSetting = () => {
             </label>
             <label
               className={`account-setting__label${
-                !confirmPasswordValid || !newPasswordValid ? " invalid" : ""
+                !confirmPasswordValid || !newPasswordValid
+                  ? " account-setting__label--invalid"
+                  : ""
               }`}
               htmlFor="account-confirmPassword"
             >

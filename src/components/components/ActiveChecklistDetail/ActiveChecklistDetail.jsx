@@ -48,7 +48,7 @@ const ActiveChecklistDetail = ({ checklist }) => {
       <div className="active-checklist">
         <h3
           className={`active-checklist__title SFPro-700${
-            isChecklistPassed ? " passed" : ""
+            isChecklistPassed ? " active-checklist__title--passed" : ""
           }`}
         >
           {checklist.name}
