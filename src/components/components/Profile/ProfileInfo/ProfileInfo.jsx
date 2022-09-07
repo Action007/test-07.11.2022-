@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useEditAccountMutation } from "../../../../services/accountService";
 import isServerError from "../../../../utils/isServerError";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
@@ -15,6 +16,7 @@ import { ReactComponent as Linkedin } from "../../../../assets/images/icon/linke
 import { ReactComponent as World } from "../../../../assets/images/icon/world.svg";
 import { ReactComponent as EditSvg } from "../../../../assets/images/icon/editPhoto.svg";
 import { ReactComponent as EmptySvg } from "../../../../assets/images/icon/emptyPhoto.svg";
+import { authSliceActions } from "../../../../store/authSlice";
 
 const ProfileInfo = ({
   name,
@@ -31,6 +33,7 @@ const ProfileInfo = ({
   onLargeImageSize,
 }) => {
   const [avatar, setAvatar] = useState(avatar_url);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t: translate } = useTranslation();
   const [imageUpload, { isLoading: isUpdateLoading, error, data }] =
@@ -49,7 +52,10 @@ const ProfileInfo = ({
   }, [error]);
 
   useEffect(() => {
-    if (data) setAvatar(data.avatar_url);
+    if (data) {
+      setAvatar(data.avatar_url);
+      dispatch(authSliceActions.setUser(data));
+    }
   }, [data]);
 
   const onImageUpload = (event) => {
