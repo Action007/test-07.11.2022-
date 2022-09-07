@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   useSaveChecklistMutation,
   useUnsaveChecklistMutation,
@@ -13,6 +14,8 @@ const ChecklistSave = ({ token, id, saved, navigate }) => {
   const [iSaved, setISaved] = useState(!!saved);
   const [saveChecklist, { data: saveData }] = useSaveChecklistMutation();
   const [unsaveChecklist, { data: unsaveData }] = useUnsaveChecklistMutation();
+  const { t: translate } = useTranslation();
+  const [text, setText] = useState(translate("allChecklistsPage.save"));
 
   const dispatch = useDispatch();
 
@@ -27,6 +30,11 @@ const ChecklistSave = ({ token, id, saved, navigate }) => {
   }, [unsaveData]);
 
   const saveHandler = () => {
+    if (!iSaved) {
+      setText(translate("allChecklistsPage.saved"));
+    } else {
+      setText(translate("allChecklistsPage.save"));
+    }
     if (!iSaved) saveChecklist(id);
     if (iSaved) unsaveChecklist(id);
     setISaved((prevState) => !prevState);
@@ -37,13 +45,16 @@ const ChecklistSave = ({ token, id, saved, navigate }) => {
   };
 
   return (
-    <button
-      onClick={token ? saveHandler : loginHandler}
-      className={`checklist-save${iSaved ? " checklist-save--saved" : ""}`}
-      type="button"
-    >
-      <Bookmark />
-    </button>
+    <div className="checklist-save-button SFPro-500">
+      <button
+        onClick={token ? saveHandler : loginHandler}
+        className={`checklist-save${iSaved ? " checklist-save--saved" : ""}`}
+        type="button"
+      >
+        <Bookmark />
+      </button>
+      <span className="checklist-save-button__desc">{text}</span>
+    </div>
   );
 };
 

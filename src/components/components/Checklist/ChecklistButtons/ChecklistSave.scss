@@ -1,6 +1,40 @@
 @import '../../../../global-styles/variables';
 @import '../../../../../node_modules/bootstrap/scss/mixins';
 
+.checklist-save-button {
+  position: relative;
+
+  &:hover .checklist-save-button__desc {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__desc {
+    position: absolute;
+    z-index: 10;
+    top: 50px;
+    right: -0%;
+    transform: translateX(28%);
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 110px;
+    padding: 4px 20px;
+
+    color: #4f4f4f;
+
+    visibility: hidden;
+    opacity: 0;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 4%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+}
 .checklist-save {
   display: flex;
   align-items: center;
