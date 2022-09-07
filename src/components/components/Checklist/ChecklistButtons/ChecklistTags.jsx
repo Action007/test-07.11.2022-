@@ -27,7 +27,9 @@ const ChecklistTags = ({ tags, isPreview, navigate, pathname, search }) => {
   };
 
   return (
-    <div className={`checklist-tags${isPreview ? " preview" : ""}`}>
+    <div
+      className={`checklist-tags${isPreview ? " checklist-tags--preview" : ""}`}
+    >
       {tags.map((tag) =>
         !isPreview ? (
           <button

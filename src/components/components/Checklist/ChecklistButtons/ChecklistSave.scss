@@ -31,12 +31,12 @@
     }
   }
 
-  &.saved {
+  &--saved {
     background-color: #f0f9f2;
 
     svg {
       fill: #fff;
-      stroke: $primary;
+      stroke: $primary !important;
     }
   }
 }

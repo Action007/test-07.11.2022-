@@ -85,12 +85,14 @@ const Checklist = ({
         onHide={() => setModalShow(false)}
       />
       <div
-        className={`checklist${page === "checklist-detail" ? " detail" : ""}`}
+        className={`checklist${
+          page === "checklist-detail" ? " checklist--detail" : ""
+        }`}
       >
         <div className="checklist__heading">
           <h3
             className={`checklist__title SFPro-700${
-              completed ? " completed" : ""
+              completed ? " checklist__title--completed" : ""
             }`}
           >
             {page === "checklist-detail" ? (
@@ -145,7 +147,7 @@ const Checklist = ({
         <div className="checklist__wrapper">
           <ol
             className={`checklist__items${
-              page === "checklist-detail" ? " detail" : ""
+              page === "checklist-detail" ? " checklist__items--detail" : ""
             }`}
           >
             {checklistItems.map(
@@ -214,7 +216,7 @@ const Checklist = ({
             )}
             <div
               className={`checklist__box${
-                page === "checklist-detail" ? " detail" : ""
+                page === "checklist-detail" ? " checklist__box---detail" : ""
               }`}
             >
               {page !== "active-checklists" && (
@@ -231,7 +233,7 @@ const Checklist = ({
           </div>
         )}
       </div>
-      {page === "checklist-detail" && showOnMobile && (
+      {page === "checklist-detail" && !isPreview && showOnMobile && (
         <ChecklistStartButton
           token={token}
           id={id}
