@@ -68,7 +68,6 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(createChecklistActions.onSubmitClear());
       setDone(true);
     }
   }, [isSuccess]);

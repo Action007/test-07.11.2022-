@@ -36,7 +36,7 @@
 
   &__box {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 
     @include media-breakpoint-down(sm) {
       margin-bottom: 30px;
