@@ -63,11 +63,11 @@ const HomeChecklistPage = () => {
 
   const loader = (
     <>
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
+      <ChecklistSkeleton page="home" />
+      <ChecklistSkeleton page="home" />
+      <ChecklistSkeleton page="home" />
+      <ChecklistSkeleton page="home" />
+      <ChecklistSkeleton page="home" />
     </>
   );
 
