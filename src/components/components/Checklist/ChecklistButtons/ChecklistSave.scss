@@ -4,7 +4,7 @@
 .checklist-save-button {
   position: relative;
 
-  &:hover .checklist-save-button__desc {
+  .checklist-save:hover + .checklist-save-button__desc {
     visibility: visible;
     opacity: 1;
   }
@@ -41,6 +41,7 @@
   justify-content: center;
 
   width: 39px;
+  height: 39px;
   margin-bottom: 28px;
 
   border-radius: 8px;
