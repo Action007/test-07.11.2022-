@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   useEditAccountMutation,
   useFetchCountryNamesQuery,
 } from "../../../services/accountService";
+import { authSliceActions } from "../../../store/authSlice";
 import EditProfileInput from "./EditProfileLabel/EditProfileLabel";
 import EditProfileDropdown from "./EditProfileDropdown/EditProfileDropdown";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
@@ -49,12 +50,14 @@ const EditProfile = () => {
       isSuccess: isEditSuccess,
       isLoading: isUpdateLoading,
       isError: isEditError,
+      data,
       error,
     },
   ] = useEditAccountMutation();
   const { data: countryNames, isLoading } = useFetchCountryNamesQuery("", {
     skip: !show,
   });
+  const dispatch = useDispatch();
   const { t: translate } = useTranslation();
 
   const breadcrumbs = [
@@ -122,9 +125,10 @@ const EditProfile = () => {
 
   useEffect(() => {
     let showNotification;
-    if (isEditSuccess || isEditError) {
+    if (isEditSuccess) {
       setNotification(true);
-      if (isEditSuccess) song.play();
+      song.play();
+      dispatch(authSliceActions.setUser(data));
       showNotification = setTimeout(() => setNotification(false), 5000);
     }
 
