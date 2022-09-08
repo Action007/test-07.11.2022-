@@ -40,6 +40,9 @@ const CreationChecklistItem = ({
   const [isImgEmpty, setIsImgEmpty] = useState(true);
   const textInput = useRef(null);
   const isLinkValid = validateLink(value.link);
+  const isValueUrl = value.link
+    ?.split("https://olcheck.com/sh?url=")
+    .slice(-1)[0];
 
   useEffect(() => {
     const setTime = setTimeout(() => setFadeIn("show"), 0);
@@ -254,7 +257,7 @@ const CreationChecklistItem = ({
                   <input
                     onChange={(e) => onChangeValueHandler(e, "link")}
                     onKeyPress={(e) => addItemOnEnter(e)}
-                    value={value.link}
+                    value={isValueUrl}
                     placeholder={translate("creationOfChecklist.link")}
                     type="text"
                     id={id + 1}
