@@ -2,7 +2,7 @@
 @import '../../../../node_modules/bootstrap/scss/mixins';
 
 .checklist-item {
-  height: 23px;
+  min-height: 23px;
   line-height: 1.2;
   word-break: break-word;
 
