@@ -56,19 +56,26 @@ const CreationTags = ({
     }
   }, [myTags]);
 
-  const onChangeSearchValue = (value) => {
-    if (value.trim() === "") {
+  const onChangeSearchValue = (e) => {
+    const tagValue = e.target.value;
+    // const tagVal = ;
+    if (tagValue.trim() === "") {
       setUrl("");
     } else if (serverTags) {
       if (!serverTags.length) {
-        setShow(true);
-        setUrl(value);
+        if (
+          tagValue === searchTagUrl.slice(0, -1) ||
+          tagValue.trim().length === 1
+        ) {
+          setShow(true);
+          setUrl(tagValue);
+        }
       } else {
         setShow(true);
-        setUrl(value);
+        setUrl(tagValue);
       }
     } else {
-      setUrl(value);
+      setUrl(tagValue);
       setShow(true);
     }
   };
@@ -169,12 +176,11 @@ const CreationTags = ({
               ref={ref}
             >
               <input
-                onChange={() => onChangeSearchValue(inputTag.current.value)}
+                onChange={onChangeSearchValue}
                 onKeyPress={addTagOnEnterHandler}
                 onFocus={() => setShow(true)}
                 className="creation-tag__create creation-tag__create--input"
                 ref={inputTag}
-                value={url}
                 id="creation-tagAdd"
                 maxLength="30"
                 type="text"
