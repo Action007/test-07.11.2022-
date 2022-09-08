@@ -23,7 +23,7 @@ import { ReactComponent as CreationImg } from "../../../assets/images/content/cr
 import { ReactComponent as AddItemSvg } from "../../../assets/images/icon/addItem.svg";
 import Notification from "../../UI/Notification/Notification";
 
-const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
+const CreationOfChecklist = ({ page, id, checklists = true }) => {
   const [createOrUpdateChecklist, { isSuccess, error, isLoading, data }] =
     page === "edit-checklist"
       ? useUpdateChecklistMutation()
@@ -69,6 +69,9 @@ const CreationOfChecklist = ({ page = false, id, checklists = true }) => {
   useEffect(() => {
     if (isSuccess) {
       setDone(true);
+      if (page !== "edit-checklist") {
+        dispatch(createChecklistActions.onSubmitClear());
+      }
     }
   }, [isSuccess]);
 
