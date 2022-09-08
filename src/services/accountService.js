@@ -19,7 +19,6 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         method: "PUT",
         body: info,
       }),
-      invalidatesTags: ["AccountInfo"],
     }),
     resetAccountPassword: build.mutation({
       query: (body) => ({
