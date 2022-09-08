@@ -38,7 +38,7 @@
     display: flex;
     justify-content: space-between;
 
-    margin-bottom: 24px;
+    margin-bottom: 18px;
 
     @include media-breakpoint-down(sm) {
       flex-direction: column-reverse;

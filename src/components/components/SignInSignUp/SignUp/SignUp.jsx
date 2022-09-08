@@ -127,12 +127,12 @@ const SignUp = () => {
               ? " invalid"
               : ""
           }`}
-          htmlFor="loginName"
+          htmlFor="logName"
         >
           <span className="sign-up__span">{translate("login.nickname")}</span>
           <input
             ref={nickNameRef}
-            id="loginName"
+            id="logName"
             placeholder={translate("login.nicknamePlaceholder")}
             minLength="2"
             type="text"
