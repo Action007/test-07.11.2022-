@@ -115,11 +115,11 @@ const LikeDislikeViewButtons = ({
       )}
       <button onClick={onLikeHandler} className={likeClass} type="button">
         <LikeSvg />
-        {formatLargeNumbers(likeAmount())}
+        <p>{formatLargeNumbers(likeAmount())}</p>
       </button>
       <button onClick={onUnlikeHandler} className={unlikeClass} type="button">
         <LikeSvg />
-        {formatLargeNumbers(unlikeAmount())}
+        <p>{formatLargeNumbers(unlikeAmount())}</p>
       </button>
     </div>
   );
