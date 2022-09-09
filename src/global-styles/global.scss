@@ -20,6 +20,8 @@ body {
   background-color: $body;
 
   -webkit-tap-highlight-color: transparent;
+  overflow: auto !important;
+  padding-right: 0 !important;
 }
 
 ul {
