@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useAddActiveChecklistMutation } from "../../../../services/activeChecklistService";
+import { authSliceActions } from "../../../../store/authSlice";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import "./ChecklistStartButton.scss";
 
@@ -24,10 +26,14 @@ const ChecklistStartButton = ({
     },
   ] = useAddActiveChecklistMutation();
 
+  const user = useSelector((state) => state.authSliceReducer.user);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if (isStartSuccess) {
-      navigate(`/active-checklist/${data.entities.id}/${data.entities.slug}`);
-    }
+    if (!isStartSuccess) return;
+    const { completed_percent } = data.entities;
+    dispatch(authSliceActions.setUser({ ...user, completed_percent }));
+    navigate(`/active-checklist/${data.entities.id}/${data.entities.slug}`);
   }, [isStartSuccess]);
 
   useEffect(() => {

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { useCheckActiveChecklistItemMutation } from "../../../services/activeChecklistService";
+import { authSliceActions } from "../../../store/authSlice";
 import PopupDone from "../PopupDone/PopupDone";
 import ChecklistImage from "../ChecklistImage/ChecklistImage";
 import MapGeneral from "../MapGeneral/MapGeneral";
@@ -23,6 +25,8 @@ const ChecklistCheckbox = ({
   setTotalItemsCounter,
   setIsChecklistPassed,
 }) => {
+  const user = useSelector((state) => state.authSliceReducer.user);
+
   const [checkChecklistItem, { isSuccess, data }] =
     useCheckActiveChecklistItemMutation();
   const [checked, setChecked] = useState(completed);
@@ -30,9 +34,13 @@ const ChecklistCheckbox = ({
   const [modalShow, setModalShow] = useState(false);
   const { t: translate } = useTranslation();
   const isFor = uniqueID();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!data) return;
+    const { completed_percent } = data.entities;
+    dispatch(authSliceActions.setUser({ ...user, completed_percent }));
+
     if (data.entities.once_completed && data.entities.completed) {
       setModalShow(data.entities.once_completed);
     }
