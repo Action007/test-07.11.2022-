@@ -1,7 +1,6 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import Checklist from "../Checklist/Checklist";
 import "./CreationChecklistPreview.scss";
 
@@ -13,7 +12,6 @@ const CreationChecklistPreview = ({ show, onHide }) => {
   const title = useSelector(
     (state) => state.createChecklistReducer.title.value
   );
-  const { t: translate } = useTranslation();
 
   const checklist = {
     checklist_items,
@@ -32,16 +30,9 @@ const CreationChecklistPreview = ({ show, onHide }) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title
-          className="popup-preview__title SFPro-600"
-          id="contained-modal-title-vcenter"
-        >
-          {translate("creationOfChecklist.checklistPreview")}
-        </Modal.Title>
-      </Modal.Header>
       <Modal.Body className="p-0">
         <Checklist checklist={checklist} page="checklist-detail" isPreview />
+        <Modal.Header closeButton />
       </Modal.Body>
     </Modal>
   );
