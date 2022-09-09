@@ -52,7 +52,6 @@ const Checklist = ({
   const { date } = getTime(created_at);
   const { pathname, search } = useLocation();
   const [modalShow, setModalShow] = useState(false);
-  const categoryID = isPreview ? categories.id : categories[0].id;
 
   const checklistItems =
     page !== "checklist-detail"
@@ -167,7 +166,7 @@ const Checklist = ({
           </ol>
           {page === "checklist-detail" && !showOnMobile && (
             <ChecklistCreatorAndCategory
-              categoryID={categoryID}
+              categoryID={isPreview ? categories.id : categories[0].id}
               creatorNickname={creator.nickname}
               avatarUrl={creator.avatar_url}
             />
