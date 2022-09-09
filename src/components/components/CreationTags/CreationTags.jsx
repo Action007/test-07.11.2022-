@@ -17,20 +17,23 @@ const CreationTags = ({
   tagIncludesLink,
   setTagIncludesLink,
 }) => {
-  const validateAfterSubmit = useSelector(
-    (state) => state.createChecklistReducer.validateAfterSubmit
-  );
   const [searchTagUrl, setSearchTagUrl] = useState("");
   const [url, setUrl] = useState("");
-  const { data: serverTags } = useFetchSearchTagsQuery(searchTagUrl, {
-    skip: !searchTagUrl,
-  });
+  const [tagValue, setTagValue] = useState("");
   const [addTags, setAddTags] = useState(false);
-  const myTags = useSelector((state) => state.createChecklistReducer.tags);
   const inputTag = useRef();
   const { ref, show, setShow } = useClickOutside();
   const { t: translate } = useTranslation();
   const dispatch = useDispatch();
+
+  const validateAfterSubmit = useSelector(
+    (state) => state.createChecklistReducer.validateAfterSubmit
+  );
+  const myTags = useSelector((state) => state.createChecklistReducer.tags);
+
+  const { data: serverTags } = useFetchSearchTagsQuery(searchTagUrl, {
+    skip: !searchTagUrl,
+  });
 
   useEffect(() => {
     const setTime = setTimeout(() => setSearchTagUrl(url), 400);
@@ -57,25 +60,26 @@ const CreationTags = ({
   }, [myTags]);
 
   const onChangeSearchValue = (e) => {
-    const tagValue = e.target.value;
-    // const tagVal = ;
-    if (tagValue.trim() === "") {
+    const tagVal = e.target.value.replace(/[^a-zA-Z0-9\s_]+/g, "");
+    setTagValue(tagVal);
+
+    if (tagVal.trim() === "") {
       setUrl("");
     } else if (serverTags) {
       if (!serverTags.length) {
         if (
-          tagValue === searchTagUrl.slice(0, -1) ||
-          tagValue.trim().length === 1
+          tagVal === searchTagUrl.slice(0, -1) ||
+          tagVal.trim().length === 1
         ) {
           setShow(true);
-          setUrl(tagValue);
+          setUrl(tagVal);
         }
       } else {
         setShow(true);
-        setUrl(tagValue);
+        setUrl(tagVal);
       }
     } else {
-      setUrl(tagValue);
+      setUrl(tagVal);
       setShow(true);
     }
   };
@@ -83,6 +87,7 @@ const CreationTags = ({
   const setAddTagsHandler = (close) => {
     setAddTags(close);
     setUrl("");
+    setTagValue("");
   };
 
   const addTagHandler = (tag) => {
@@ -103,10 +108,11 @@ const CreationTags = ({
     if (!tag || !tag.name.trim()) return;
     if (tag.name.length < 31) {
       validTag = {
-        name: tag.name,
+        name: tag.name.trim().replace(/\s+/g, "_"),
         id: tag.id,
         tags_new: tag.tags_new,
       };
+      setTagValue("");
     }
 
     setAddTagsHandler(true);
@@ -179,6 +185,7 @@ const CreationTags = ({
                 onChange={onChangeSearchValue}
                 onKeyPress={addTagOnEnterHandler}
                 onFocus={() => setShow(true)}
+                value={tagValue}
                 className="creation-tag__create creation-tag__create--input"
                 ref={inputTag}
                 id="creation-tagAdd"
