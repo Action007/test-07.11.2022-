@@ -40,9 +40,10 @@ const Header = () => {
   const { pathname } = useLocation();
   const { t: translate } = useTranslation();
 
-  const { data: accountInfo, error } = useFetchAccountInfoQuery("", {
-    skip: !token || !!user,
-  });
+  const { data: accountInfo, error: errorAccountInfo } =
+    useFetchAccountInfoQuery("", {
+      skip: !token && !user,
+    });
 
   useEffect(() => {
     if (!accountInfo) return;
@@ -51,17 +52,17 @@ const Header = () => {
   }, [accountInfo]);
 
   useEffect(() => {
-    if (!error) return;
+    if (!errorAccountInfo) return;
 
-    if (error.data?.error === "unauthorized") {
+    if (errorAccountInfo.data?.error === "unauthorized") {
       dispatch(authSliceActions.resetToken());
       dispatch(authSliceActions.resetUser());
       navigate(0);
     }
-    if (isServerError(error?.status)) {
+    if (isServerError(errorAccountInfo?.status)) {
       navigate("/error", { replace: true });
     }
-  }, [error]);
+  }, [errorAccountInfo]);
 
   useEffect(() => {
     if (pathname === "/saved-checklists" || !user) return;

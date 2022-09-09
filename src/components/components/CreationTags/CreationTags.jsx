@@ -98,14 +98,13 @@ const CreationTags = ({
     }
     let validTag = tag;
     const tagNameIncludesLink = tag.name.includes("://");
-    const addOrNot = myTags.find(
-      (item) => item.name === tag.name || item.id === tag.id
-    );
-    if (addOrNot || myTags.length === 5) {
+    const addOrNot = myTags.find((item) => item.name === tag.name);
+    if (addOrNot) return;
+    if (myTags.length === 5) {
       setAddTagsHandler(false);
       return;
     }
-    if (!tag || !tag.name.trim()) return;
+    if (tag.name.trim().length < 2) return;
     if (tag.name.length < 31) {
       validTag = {
         name: tag.name.trim().replace(/\s+/g, "_"),
