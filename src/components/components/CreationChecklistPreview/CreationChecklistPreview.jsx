@@ -8,6 +8,10 @@ const CreationChecklistPreview = ({ show, onHide }) => {
   const checklist_items = useSelector(
     (state) => state.createChecklistReducer.checklist_items
   );
+  const user = useSelector((state) => state.authSliceReducer.user);
+  const categories = useSelector(
+    (state) => state.createChecklistReducer.category
+  );
   const tags = useSelector((state) => state.createChecklistReducer.tags);
   const title = useSelector(
     (state) => state.createChecklistReducer.title.value
@@ -16,6 +20,8 @@ const CreationChecklistPreview = ({ show, onHide }) => {
   const checklist = {
     checklist_items,
     tags,
+    categories,
+    creator: user,
     name: title,
     viewed: 0,
     liked: 0,
