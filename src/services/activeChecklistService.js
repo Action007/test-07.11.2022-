@@ -15,7 +15,7 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         },
         body,
       }),
-      invalidatesTags: ["ActiveChecklist", "AccountInfo"],
+      invalidatesTags: ["ActiveChecklist"],
     }),
     checkActiveChecklistItem: build.mutation({
       query: (body) => ({
@@ -26,7 +26,6 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         },
         body,
       }),
-      invalidatesTags: ["AccountInfo"],
     }),
     deleteActiveChecklist: build.mutation({
       query: (body) => ({
@@ -37,7 +36,6 @@ const checklistAPI = olcheckAPI.injectEndpoints({
         },
         body,
       }),
-      invalidatesTags: ["AccountInfo"],
     }),
   }),
   overrideExisting: false,

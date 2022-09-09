@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useDeleteActiveChecklistMutation } from "../../../services/activeChecklistService";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
@@ -8,6 +9,7 @@ import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 import getPercent from "../../../utils/getPercent";
 import EditDropdown from "../EditDropdown/EditDropdown";
 import "./ActiveChecklistDetail.scss";
+import { authSliceActions } from "../../../store/authSlice";
 
 const ActiveChecklistDetail = ({ checklist }) => {
   const [completedItemsCounter, setCompletedItemsCounter] = useState(
@@ -20,15 +22,20 @@ const ActiveChecklistDetail = ({ checklist }) => {
     checklist.completed
   );
 
-  const [deleteActiveChecklist, { isSuccess, isError, error, isLoading }] =
-    useDeleteActiveChecklistMutation();
+  const [
+    deleteActiveChecklist,
+    { isSuccess, isError, isLoading, data, error },
+  ] = useDeleteActiveChecklistMutation();
 
+  const user = useSelector((state) => state.authSliceReducer.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isSuccess) {
-      navigate("/active-checklists?completed=false&page=1&per_page=10");
-    }
+    if (!isSuccess) return;
+    const { completed_percent } = data.entities;
+    dispatch(authSliceActions.setUser({ ...user, completed_percent }));
+    navigate("/active-checklists?completed=false&page=1&per_page=10");
   }, [isSuccess]);
 
   useEffect(() => {
