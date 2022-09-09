@@ -7,9 +7,21 @@
   }
 
   .modal-header {
-    padding: 16px 22px;
+    padding: 25px 32px;
 
     border-bottom: 1px solid #e1e1e1;
+  }
+
+  .modal-body{
+    display: flex;
+    align-items: flex-start;
+
+    .modal-header{
+      border: none;
+    }
+    .checklist{
+      padding: 20px 32px;
+    }
   }
 
   .checklist-detail__wrapper {
