@@ -66,6 +66,9 @@
 
   &__span.invalid {
     color: $warning;
+    display: block;
+
+    animation: 1.5s ease span;
   }
 
   &__name {
@@ -165,6 +168,8 @@
 
     &.invalid {
       color: $warning;
+
+      animation: 1.5s ease span;
     }
   }
 
