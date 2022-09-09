@@ -57,6 +57,7 @@ const CreationTags = ({
     if (!tagNameIncludesLink) {
       setTagIncludesLink(false);
     }
+    dispatch(createChecklistActions.setValidateAfterSubmit());
   }, [myTags]);
 
   const onChangeSearchValue = (e) => {
@@ -116,6 +117,7 @@ const CreationTags = ({
 
     setAddTagsHandler(true);
     setShow(true);
+    setTagsValid(false);
     dispatch(createChecklistActions.addTag(validTag));
 
     if (tagNameIncludesLink) {
