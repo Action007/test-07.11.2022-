@@ -7,8 +7,6 @@ import "./Contacts.scss";
 
 import { ReactComponent as ContactsImg } from "../../../assets/images/content/contacts.svg";
 
-const DOMAIN = process.env.REACT_APP_DOMAIN;
-
 const Contacts = () => {
   const showTitleOnMobile = useMediaQuery("(max-width:767px)");
   const { t: translate } = useTranslation();
@@ -55,10 +53,7 @@ const Contacts = () => {
             <h4 className="SFPro-700 display-8">
               {translate("contactsPage.email")}
             </h4>
-            <a
-              className="mb-4"
-              href={`mailto:support@${DOMAIN}?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please...`}
-            >
+            <a className="mb-4" href="mailto:info@proxyone.eu">
               info@proxyone.eu
             </a>
           </address>
@@ -70,10 +65,7 @@ const Contacts = () => {
           </span>
           <Networks />
           <div className="text-center">
-            <a
-              href={`mailto:support@${DOMAIN}?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please...`}
-              className="checklist-button"
-            >
+            <a href="mailto:info@proxyone.eu" className="checklist-button">
               {translate("contactsPage.button")}
             </a>
           </div>
