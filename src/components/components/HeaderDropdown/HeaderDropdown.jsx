@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -20,7 +20,6 @@ import { ReactComponent as Logout } from "../../../assets/images/icon/logout.svg
 
 const HeaderDropdown = ({ user, savedCounter, setShow, percent }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { ref, show, setShowHandler } = useClickOutside();
   const [isLogOut, setIsLogout] = useState(false);
   const showOnMobile = useMediaQuery("(max-width:767px)");
@@ -34,12 +33,6 @@ const HeaderDropdown = ({ user, savedCounter, setShow, percent }) => {
     logOut();
     dispatch(authSliceActions.resetToken());
     dispatch(authSliceActions.resetUser());
-    setShow(false);
-    setShowHandler();
-  };
-
-  const onClickHandler = (address) => {
-    navigate(address);
     setShow(false);
     setShowHandler();
   };
@@ -93,12 +86,8 @@ const HeaderDropdown = ({ user, savedCounter, setShow, percent }) => {
           unmountOnExit
         >
           <div className={`header-dropdown__menu${mobileClass}`}>
-            <button
-              onClick={() =>
-                onClickHandler(
-                  "/active-checklists?completed=false&page=1&per_page=10"
-                )
-              }
+            <Link
+              to="/active-checklists?completed=false&page=1&per_page=10"
               className="header-dropdown__inner"
               type="button"
             >
@@ -108,36 +97,32 @@ const HeaderDropdown = ({ user, savedCounter, setShow, percent }) => {
               <div className="header-dropdown__progress">
                 <ProgressBarHeader done={percent || 0} />
               </div>
-            </button>
-            <button
-              onClick={() =>
-                onClickHandler(
-                  "/created-checklists?search_type=created&page=1&per_page=10"
-                )
-              }
+            </Link>
+            <Link
+              to="/created-checklists?search_type=created&page=1&per_page=10"
               className="header-dropdown__item header-dropdown__item--first"
               type="button"
             >
               <Bookmark />
               {!!savedCounter && <span />}
               {translate("header.allChecklists")}
-            </button>
-            <button
-              onClick={() => onClickHandler(user ? `/${user.nickname}` : "")}
+            </Link>
+            <Link
+              to={user ? `/${user.nickname}` : ""}
               className="header-dropdown__item"
               type="button"
             >
               <Account />
               {translate("header.profileSettings")}
-            </button>
-            <button
-              onClick={() => onClickHandler("/account-settings")}
+            </Link>
+            <Link
+              to="/account-settings"
               className="header-dropdown__item"
               type="button"
             >
               <Setting />
               {translate("header.accountSettings")}
-            </button>
+            </Link>
             <button
               onClick={() => setIsLogout(true)}
               className="header-dropdown__item"

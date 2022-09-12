@@ -68,10 +68,6 @@ const Checklist = ({
     </time>
   );
 
-  const onUpdateHandler = () => {
-    navigate(`/edit-checklist/${id}`);
-  };
-
   const onDeleteHandler = () => {
     deleteChecklist(id);
     setModalShow(false);
@@ -116,7 +112,7 @@ const Checklist = ({
               <EditDropdown
                 isEdit={checkTime(created_at)}
                 navigate={navigate}
-                updateHandler={onUpdateHandler}
+                id={id}
                 deleteHandler={() => setModalShow(true)}
               />
             )}
