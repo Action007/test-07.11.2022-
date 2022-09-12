@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import useClickOutside from "../../../hooks/useClickOutside";
 import "./EditDropdown.scss";
@@ -9,8 +10,8 @@ import { ReactComponent as DeleteSvg } from "../../../assets/images/icon/trash.s
 import { ReactComponent as DownloadSvg } from "../../../assets/images/icon/download.svg";
 
 const EditDropdown = ({
-  updateHandler,
   deleteHandler,
+  id,
   isEdit = false,
   isActiveChecklist = false,
 }) => {
@@ -33,13 +34,15 @@ const EditDropdown = ({
       >
         <div className="edit-dropdown__menu">
           {isEdit && (
-            <button
-              onClick={updateHandler}
-              className="edit-dropdown__edit"
-              type="button"
-            >
-              <EditSvg />
-              Edit
+            <button className="edit-dropdown__edit" type="button">
+              <Link
+                to={`/edit-checklist/${id}`}
+                className="edit-dropdown__edit"
+                type="button"
+              >
+                <EditSvg />
+                Edit
+              </Link>
             </button>
           )}
           {isActiveChecklist && (

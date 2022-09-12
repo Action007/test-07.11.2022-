@@ -21,9 +21,7 @@ const MainBanner = () => {
             <BannerImage />
           </div>
         )}
-        <div className="d-inline-block">
-          <CreateButton />
-        </div>
+        <CreateButton />
       </div>
       {!showOnMobile && (
         <div className="main-banner__img">

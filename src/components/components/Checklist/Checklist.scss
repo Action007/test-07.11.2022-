@@ -67,7 +67,7 @@
   }
 
   &__title {
-    margin-right: 55px;
+    margin-right: 45px;
     margin-bottom: 0;
 
     font-size: 1.5rem;
@@ -135,14 +135,15 @@
 
   &__items {
     width: 100%;
-    margin-bottom: 4px;
-    margin-left: 20px;
-
+    margin:  0 45px 4px 20px;
     word-break: break-word;
 
+    @include media-breakpoint-down(sm) {
+      margin-right: 0;
+    }
+
     &--detail {
-      margin-bottom: 34px;
-      margin-left: 16px;
+      margin: 0 0 34px 16px;
 
       font-size: 1.1rem;
 
