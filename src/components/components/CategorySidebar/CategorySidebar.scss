@@ -20,27 +20,23 @@
   }
 
   &__head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: SFPro-SemiBold, sans-serif;
+    font-size: 18px;
+
     width: 100%;
-    padding: 15px 28px;
+    padding: 11px 28px;
 
     font-size: 20px;
     color: #fff;
 
     background-color: $dark;
 
-    @include media-breakpoint-down(lg) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 11px 0;
-
-      font-family: SFPro-SemiBold, sans-serif;
-      font-size: 18px;
-    }
-
     @include media-breakpoint-down(sm) {
       font-size: 16px;
+      padding: 14px 28px;
     }
 
     svg {
