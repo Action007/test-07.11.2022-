@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useEditAccountMutation } from "../../../../services/accountService";
@@ -219,20 +219,20 @@ const ProfileInfo = ({
         </div>
         {isMyAccount && (
           <div className="profile-info__edit">
-            <button
-              onClick={() => navigate(`/edit-profile`)}
+            <Link
+              to="/edit-profile"
               className="profile-info__button SFPro-600"
               type="button"
             >
               {translate("profilePage.editProfile")}
-            </button>
-            <button
-              onClick={() => navigate(`/account-settings`)}
+            </Link>
+            <Link
+              to="/account-settings"
               className="profile-info__setting"
               type="button"
             >
               <Setting />
-            </button>
+            </Link>
           </div>
         )}
       </div>

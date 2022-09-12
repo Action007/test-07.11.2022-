@@ -112,9 +112,9 @@ const SignIn = () => {
   const showSignIn = (
     <>
       <div className="sign-in__buttons">
-        <button className="sign-in__button active" type="button">
+        <Link to="/sign-in" className="sign-in__button active" type="button">
           {translate("login.signIn")}
-        </button>
+        </Link>
         <Link to="/sign-up" className="sign-in__button">
           {translate("login.signUp")}
         </Link>

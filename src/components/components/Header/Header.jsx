@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container, Navbar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
 import { useSelector, useDispatch } from "react-redux";
@@ -83,37 +83,23 @@ const Header = () => {
     return () => window.removeEventListener("scroll", scrollHandler);
   }, []);
 
-  const onChangePageHandler = (address) => {
-    navigate(address);
+  const onChangePageHandler = () => {
     setShow(false);
-  };
-
-  const onClickCreateHandler = () => {
-    window.scrollTo(0, 0);
-    navigate("/creation-of-checklist");
   };
 
   const authorized = (
     <>
       {!showAddButtonOnMobile && (
         <>
-          <button
-            onClick={() =>
-              onChangePageHandler(
-                "/active-checklists?completed=false&page=1&per_page=10"
-              )
-            }
+          <Link
+            to="/active-checklists?completed=false&page=1&per_page=10"
             className="header__progress"
             type="button"
           >
             <ProgressBarHeader done={user?.completed_percent || 0} />
-          </button>
-          <button
-            onClick={() =>
-              onChangePageHandler(
-                "/saved-checklists?search_type=saved&page=1&per_page=10"
-              )
-            }
+          </Link>
+          <Link
+            to="/saved-checklists?search_type=saved&page=1&per_page=10"
             className="header__bookmark"
             type="button"
           >
@@ -121,7 +107,7 @@ const Header = () => {
             {!!savedAmount && (
               <span className="header__span">{savedAmount}</span>
             )}
-          </button>
+          </Link>
         </>
       )}
       <HeaderDropdown
@@ -131,89 +117,55 @@ const Header = () => {
         percent={user?.completed_percent}
       />
       {!showAddButtonOnMobile && (
-        <button
-          onClick={onClickCreateHandler}
+        <Link
+          to="/creation-of-checklist"
           className="header__btn br-8"
           type="button"
         >
           <Plus />
           {translate("header.create")}
-        </button>
+        </Link>
       )}
     </>
   );
 
   const notAuthorized = !showAddButtonOnMobile ? (
     <div className="header__buttons">
-      <button
-        onClick={() => navigate(`/sign-in`)}
-        className="header__button SFPro-600"
-        type="button"
-      >
+      <Link to="/sign-in" className="header__button SFPro-600" type="button">
         {translate("signInButton")}
-      </button>
-      <button
-        onClick={() => navigate(`/sign-up`)}
-        className="header__button SFPro-600"
-        type="button"
-      >
+      </Link>
+      <Link to="/sign-up" className="header__button SFPro-600" type="button">
         {translate("signUpButton")}
-      </button>
+      </Link>
     </div>
   ) : (
     <>
       <div className="header__items mb-0">
-        <button
-          onClick={() => onChangePageHandler("/")}
-          className="header__item"
-          type="button"
-        >
+        <Link to="/" className="header__item" type="button">
           {translate("home")}
-        </button>
-        <button
-          onClick={() => onChangePageHandler("/support")}
-          className="header__item"
-          type="button"
-        >
+        </Link>
+        <Link to="/support" className="header__item" type="button">
           {translate("supportPage.title")}
-        </button>
-        <button
-          onClick={() =>
-            onChangePageHandler("/?per_page=5&page=1&popular=true")
-          }
+        </Link>
+        <Link
+          to="/?per_page=5&page=1&popular=true"
           className="header__item"
           type="button"
         >
           {translate("popularChecklistPage.title")}
-        </button>
-        <button
-          onClick={() => onChangePageHandler("/contacts")}
-          className="header__item"
-          type="button"
-        >
+        </Link>
+        <Link to="/contacts" className="header__item" type="button">
           {translate("contactsPage.title")}
-        </button>
-        <button
-          onClick={() => onChangePageHandler("/our-mission")}
-          className="header__item"
-          type="button"
-        >
+        </Link>
+        <Link to="/our-mission" className="header__item" type="button">
           {translate("ourMissionPage.title")}
-        </button>
-        <button
-          onClick={() => onChangePageHandler("/terms-of-use")}
-          className="header__item"
-          type="button"
-        >
+        </Link>
+        <Link to="/terms-of-use" className="header__item" type="button">
           {translate("termOfUsePage.title")}
-        </button>
-        <button
-          onClick={() => onChangePageHandler("/privacy-policy")}
-          className="header__item"
-          type="button"
-        >
+        </Link>
+        <Link to="/privacy-policy" className="header__item" type="button">
           {translate("privacyPolicyPage.title")}
-        </button>
+        </Link>
       </div>
       <Networks />
     </>
@@ -233,9 +185,10 @@ const Header = () => {
           fluid
         >
           <div className={`header__inner${!user ? " login" : ""}`}>
-            <button
+            <Link
+              to="/"
               onClick={() => {
-                onChangePageHandler("/");
+                onChangePageHandler();
                 window.scrollTo(0, 0);
               }}
               className="header__logo"
@@ -248,7 +201,7 @@ const Header = () => {
                 className="d-inline-block align-top"
                 alt="Logotype"
               />
-            </button>
+            </Link>
             {showAddButtonOnMobile && (
               <>
                 <button
@@ -259,13 +212,13 @@ const Header = () => {
                   <BurgerSvg />
                 </button>
                 {user ? (
-                  <button
-                    onClick={onClickCreateHandler}
+                  <Link
+                    to="/creation-of-checklist"
                     className="header__btn br-8"
                     type="button"
                   >
                     <Plus />
-                  </button>
+                  </Link>
                 ) : (
                   <button
                     onClick={() => onChangePageHandler(`/sign-in`)}

@@ -107,9 +107,9 @@ const SignUp = () => {
         <Link to="/sign-in" className="sign-up__button">
           {translate("login.signIn")}
         </Link>
-        <button className="sign-up__button active" type="button">
+        <Link to="/sign-up" className="sign-up__button active" type="button">
           {translate("login.signUp")}
-        </button>
+        </Link>
       </div>
       {showOnMobile && (
         <div className="sign-up__img">
