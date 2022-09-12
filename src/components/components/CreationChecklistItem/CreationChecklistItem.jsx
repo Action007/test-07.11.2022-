@@ -39,7 +39,8 @@ const CreationChecklistItem = ({
   const [isImgValid, setIsImgValid] = useState(true);
   const [isImgEmpty, setIsImgEmpty] = useState(true);
   const textInput = useRef(null);
-  const isLinkValid = validateLink(value.link);
+  const isLinkValid =
+    validateLink(value.link) && !value.link.includes("/sh?url=");
 
   useEffect(() => {
     const setTime = setTimeout(() => setFadeIn("show"), 0);

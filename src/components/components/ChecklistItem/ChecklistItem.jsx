@@ -11,6 +11,8 @@ import { ReactComponent as MapSvg } from "../../../assets/images/icon/mapIcon.sv
 const ChecklistItem = ({ description, list_type, value, completed }) => {
   const [showMap, setShowMap] = useState(false);
   const { t: translate } = useTranslation();
+  const linkValue = `https://olcheck.com/sh?url=${value?.link}`;
+  const mapValue = `https://olcheck.com/sh?url=https://maps.google.com/?q=${value?.coordinates?.lat},${value?.coordinates?.lon}`;
 
   return (
     <li className={`checklist-item${completed ? " completed" : ""}`}>
@@ -19,7 +21,7 @@ const ChecklistItem = ({ description, list_type, value, completed }) => {
         {list_type === "link" && (
           <a
             className="checklist-item__link"
-            href={value.link}
+            href={linkValue}
             target="_blank"
             rel="noreferrer"
           >
@@ -30,7 +32,7 @@ const ChecklistItem = ({ description, list_type, value, completed }) => {
         {list_type === "coordinates" && (
           <a
             className="checklist-item__map"
-            href={`https://maps.google.com/?q=${value.coordinates.lat},${value.coordinates.lon}`}
+            href={mapValue}
             target="_blank"
             rel="noreferrer"
           >

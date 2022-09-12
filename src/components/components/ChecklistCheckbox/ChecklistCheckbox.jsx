@@ -35,6 +35,8 @@ const ChecklistCheckbox = ({
   const { t: translate } = useTranslation();
   const isFor = uniqueID();
   const dispatch = useDispatch();
+  const linkValue = `https://olcheck.com/sh?url=${value?.link}`;
+  const mapValue = `https://olcheck.com/sh?url=https://maps.google.com/?q=${value?.coordinates?.lat},${value?.coordinates?.lon}`;
 
   useEffect(() => {
     if (!data) return;
@@ -76,7 +78,7 @@ const ChecklistCheckbox = ({
             {list_type === "link" && (
               <a
                 className="checklist-checkbox__link"
-                href={value.link}
+                href={linkValue}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -87,7 +89,7 @@ const ChecklistCheckbox = ({
             {list_type === "coordinates" && (
               <a
                 className="checklist-checkbox__map"
-                href={`https://maps.google.com/?q=${value.coordinates.lat},${value.coordinates.lon}`}
+                href={mapValue}
                 target="_blank"
                 rel="noreferrer"
               >

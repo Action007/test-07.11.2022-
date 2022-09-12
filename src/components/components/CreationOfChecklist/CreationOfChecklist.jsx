@@ -110,6 +110,9 @@ const CreationOfChecklist = ({ page, id, checklists = true }) => {
     const isLinksInValid = checklist_items.find((item) =>
       item.list_type === "link" ? !validateLink(item.value?.link) : false
     );
+    const linksNotContainSh = checklist_items.find((item) =>
+      item.list_type === "link" ? item.value?.link.includes("/sh?url=") : false
+    );
     const isEmptyImage = checklist_items.find((item) =>
       item.list_type === "image" ? !item.value.image : false
     );
@@ -130,6 +133,7 @@ const CreationOfChecklist = ({ page, id, checklists = true }) => {
       !!tagsIsValid &&
       !tagNameIncludesLink &&
       !isLinksInValid &&
+      !linksNotContainSh &&
       !isEmptyImage &&
       !isEmptyCoordinate &&
       categoryIsValid;
