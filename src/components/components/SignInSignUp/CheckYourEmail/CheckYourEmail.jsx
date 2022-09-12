@@ -5,6 +5,7 @@ import { ReactComponent as LoginSvg } from "../../../../assets/images/content/lo
 
 const CheckYourEmail = ({ showOnMobile, emailValue }) => {
   const { t: translate } = useTranslation();
+  const emailValid = emailValue.split("@");
 
   return (
     <div className="sign-up__inner">
@@ -18,7 +19,7 @@ const CheckYourEmail = ({ showOnMobile, emailValue }) => {
       )}
       <p className="sign-up__subtitle">{translate("login.desc")}</p>
       <button
-        onClick={() => window.open(`mailto:${emailValue}`)}
+        onClick={() => window.open(`https://${emailValid[1]}`)}
         className="sign-up__btn SFPro-500"
         type="button"
       >
