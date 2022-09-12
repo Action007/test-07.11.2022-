@@ -6,8 +6,6 @@ import "./Support.scss";
 
 import { ReactComponent as SupportImg } from "../../../assets/images/content/support.svg";
 
-const DOMAIN = process.env.REACT_APP_DOMAIN;
-
 const Support = () => {
   const [support, setSupport] = useState(false);
   const { t: translate } = useTranslation();
@@ -46,7 +44,7 @@ const Support = () => {
                 components={[
                   // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
                   <a
-                    href={`mailto:support@${DOMAIN}?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please...`}
+                    href={`mailto:support@${window.location.host}?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please...`}
                   />,
                 ]}
               />
@@ -58,7 +56,7 @@ const Support = () => {
                 components={[
                   // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
                   <a
-                    href={`mailto:support@${DOMAIN}?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please...`}
+                    href={`mailto:support@${window.location.host}?subject=Support&body=Hello.%20I%20would%20like%20to%20make%20a%20request%20of%20you.%20Please...`}
                   />,
                 ]}
               />
