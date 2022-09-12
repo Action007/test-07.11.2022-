@@ -117,7 +117,6 @@ const CreationTags = ({
 
     setAddTagsHandler(true);
     setShow(true);
-    setTagsValid(false);
     dispatch(createChecklistActions.addTag(validTag));
 
     if (tagNameIncludesLink) {
