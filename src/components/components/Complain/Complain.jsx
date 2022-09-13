@@ -68,7 +68,6 @@ const Complain = ({ closeHandler, id, name, page }) => {
       message[0].type === "record_already_exist"
     ) {
       setShowNotification(true);
-      notification = setTimeout(() => setShowNotification(false), 7000);
     }
 
     // eslint-disable-next-line consistent-return
@@ -81,6 +80,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
     e.preventDefault();
     setIsEmptyCheckbox(!category);
 
+    if (showNotification) return;
     if (checklistId && !changeChecklist && category) {
       const body = {
         checklist_id: checklistId,
