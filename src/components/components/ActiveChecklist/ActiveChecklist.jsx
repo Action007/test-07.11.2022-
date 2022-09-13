@@ -23,7 +23,7 @@ const ActiveChecklist = ({ checklist, isFetching }) => {
       {checklist && !isFetching && (
         <ActiveChecklistDetail checklist={checklist.entities} />
       )}
-      {isFetching && <ChecklistSkeleton />}
+      {isFetching && <ChecklistSkeleton page="active-checklists" />}
     </div>
   );
 };

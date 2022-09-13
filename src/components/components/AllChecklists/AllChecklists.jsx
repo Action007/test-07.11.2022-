@@ -60,16 +60,16 @@ const AllChecklists = () => {
 
   const loader = (
     <>
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
-      <ChecklistSkeleton />
+      <ChecklistSkeleton page="checklists" />
+      <ChecklistSkeleton page="checklists" />
+      <ChecklistSkeleton page="checklists" />
+      <ChecklistSkeleton page="checklists" />
+      <ChecklistSkeleton page="checklists" />
+      <ChecklistSkeleton page="checklists" />
+      <ChecklistSkeleton page="checklists" />
+      <ChecklistSkeleton page="checklists" />
+      <ChecklistSkeleton page="checklists" />
+      <ChecklistSkeleton page="checklists" />
     </>
   );
 
