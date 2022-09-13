@@ -14,9 +14,16 @@ import "./Complain.scss";
 
 import { ReactComponent as CloseSvg } from "../../../assets/images/icon/close.svg";
 
-const Complain = ({ closeHandler, id, name, page }) => {
+const Complain = ({
+  closeHandler,
+  id,
+  name,
+  page,
+  showPageNotification,
+  setShowPageNotification,
+}) => {
   const [changeChecklist, setChangeChecklist] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
+  const [showModalNotification, setShowModalNotification] = useState(false);
   const [showDone, setShowDone] = useState(false);
   const [category, setCategory] = useState("");
   const [checklistId, setChecklistId] = useState(id);
@@ -49,7 +56,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
     if (isSuccess) {
       setDone(true);
       setShowDone(true);
-      setShowDonePopup = setTimeout(() => closeHandler(), 7000);
+      setShowDonePopup = setTimeout(() => closeHandler(), 5000);
     }
     return () => clearTimeout(setShowDonePopup);
   }, [isSuccess]);
@@ -67,7 +74,12 @@ const Complain = ({ closeHandler, id, name, page }) => {
       message[0].attribute === "support_issues" &&
       message[0].type === "record_already_exist"
     ) {
-      setShowNotification(true);
+      if (page === "support") {
+        setShowPageNotification(true);
+        notification = setTimeout(() => setShowPageNotification(false), 7000);
+      } else {
+        setShowModalNotification(true);
+      }
     }
 
     // eslint-disable-next-line consistent-return
@@ -80,7 +92,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
     e.preventDefault();
     setIsEmptyCheckbox(!category);
 
-    if (showNotification) return;
+    if (showModalNotification || showPageNotification) return;
     if (checklistId && !changeChecklist && category) {
       const body = {
         checklist_id: checklistId,
@@ -138,7 +150,7 @@ const Complain = ({ closeHandler, id, name, page }) => {
       )}
       {showComplain && (
         <div className="complain bg-white br-8">
-          {showNotification && (
+          {showModalNotification && (
             <Notification
               translate={translate("notification.alreadyComplained")}
               isError
