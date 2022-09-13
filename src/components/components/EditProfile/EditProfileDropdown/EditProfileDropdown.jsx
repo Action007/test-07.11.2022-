@@ -11,6 +11,7 @@ const EditProfileDropdown = ({
   countryNames,
   onSelectCountryHandler,
   isLoading,
+  isValidError,
 }) => {
   const ChecklistSkeletons = (
     <>
@@ -25,6 +26,7 @@ const EditProfileDropdown = ({
 
   return (
     <div className="profile-dropdown" ref={dropdownRef}>
+      <span className="creation__span invalid">{isValidError}</span>
       <button
         onClick={setShowHandler}
         className={`profile-dropdown__button SFPro-500${show ? " active" : ""}`}
