@@ -1,5 +1,5 @@
-@import "../../../global-styles/variables";
-@import "../../../../node_modules/bootstrap/scss/mixins";
+@import '../../../global-styles/variables';
+@import '../../../../node_modules/bootstrap/scss/mixins';
 
 .main-banner {
   display: flex;
@@ -24,6 +24,7 @@
       justify-content: center;
 
       width: 100%;
+      max-width: 100%;
     }
   }
 
@@ -74,6 +75,14 @@
       margin: 0 auto 26px;
 
       font-size: 24px;
+    }
+  }
+
+  &__inner {
+    display: inline-block;
+
+    @include media-breakpoint-down(lg) {
+      width: 100%;
     }
   }
 

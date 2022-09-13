@@ -20,6 +20,7 @@
 
   @include media-breakpoint-down(sm) {
     padding: 13px 50px 13px 35px;
+    max-width: 100%;
   }
 
   svg {

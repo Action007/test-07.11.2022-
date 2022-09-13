@@ -21,7 +21,9 @@ const MainBanner = () => {
             <BannerImage />
           </div>
         )}
-        <CreateButton />
+        <div className="main-banner__inner">
+          <CreateButton />
+        </div>
       </div>
       {!showOnMobile && (
         <div className="main-banner__img">
