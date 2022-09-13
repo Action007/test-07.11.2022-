@@ -221,9 +221,10 @@
   &__text {
     display: block;
 
+    margin-bottom: 60px;
+
     font-size: 28px;
     text-align: center;
-    margin-bottom: 60px;
 
     @include media-breakpoint-down(md) {
       margin-bottom: 16px;

@@ -16,8 +16,10 @@
     font-size: 14px;
 
     &.invalid {
-      color: $warning;
       display: block;
+
+      color: $warning;
+
       animation: .5s ease span;
     }
   }
@@ -147,6 +149,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
