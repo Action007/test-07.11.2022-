@@ -28,6 +28,9 @@ const CreationChecklistItem = ({
   const validateAfterSubmit = useSelector(
     (state) => state.createChecklistReducer.validateAfterSubmit
   );
+  const checkListItem = useSelector(
+    (state) => state.createChecklistReducer.checklist_items
+  );
   const [checklistItemType, setChecklistItemType] = useState("text");
   const [showMap, setShowMap] = useState(false);
   const [showImage, setShowImage] = useState(false);
@@ -41,6 +44,8 @@ const CreationChecklistItem = ({
   const textInput = useRef(null);
   const isLinkValid =
     validateLink(value.link) && !value.link.includes("/sh?url=");
+
+  const itemFocus = checkListItem.some((item) => item.id === id);
 
   useEffect(() => {
     const setTime = setTimeout(() => setFadeIn("show"), 0);
@@ -68,6 +73,7 @@ const CreationChecklistItem = ({
   const addItemOnEnter = (e) => {
     if (e.key !== "Enter") return;
     dispatch(createChecklistActions.addChecklist());
+    if (e.key === "Enter") setShow(false);
   };
 
   const onTabClick = (e) => {
@@ -236,6 +242,8 @@ const CreationChecklistItem = ({
                 value={description}
                 type="text"
                 id={id}
+                // eslint-disable-next-line jsx-a11y/no-autofocus
+                autoFocus={itemFocus}
                 ref={textInput}
               />
             </label>
