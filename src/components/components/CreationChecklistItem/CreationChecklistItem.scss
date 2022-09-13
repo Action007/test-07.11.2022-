@@ -31,6 +31,7 @@
 
       .creation-item__input {
         border-color: $warning !important;
+
         animation: 1.5s ease span;
       }
     }
@@ -113,6 +114,7 @@
     &.text {
       position: absolute;
       top: 0;
+
       animation: .5s ease span;
     }
   }

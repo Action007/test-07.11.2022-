@@ -7,7 +7,7 @@
   width: 100%;
   max-width: 834px;
   margin: 0 auto 16px;
-  padding: 34px 34px 25px 34px;
+  padding: 34px 34px 25px;
 
   background-color: #fff;
   border-radius: 8px;
@@ -135,21 +135,19 @@
 
   &__items {
     width: 100%;
-    margin:  0 45px 4px 20px;
+    margin: 0 45px 4px 20px;
+
     word-break: break-word;
 
     @include media-breakpoint-down(sm) {
       margin-right: 0;
+      margin-left: 0;
     }
 
     &--detail {
       margin: 0 0 34px 16px;
 
       font-size: 1.1rem;
-
-      @include media-breakpoint-down(sm) {
-        margin-left: 0;
-      }
 
       ::marker {
         font-size: 1.1rem;

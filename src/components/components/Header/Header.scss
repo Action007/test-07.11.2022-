@@ -110,6 +110,7 @@
 
   &__container {
     justify-content: center;
+
     max-width: 1614px;
     margin: 0;
     padding: 0 34px !important;
@@ -282,6 +283,10 @@
     top: 6px;
     left: 27px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     min-width: 18px;
     min-height: 10px;
     padding: 2px 3px;
@@ -383,13 +388,13 @@
   }
 
   &__button {
-    width: 100%;
-    max-width: 130px;
-    height: 40px;
-
     display: flex;
     align-items: center;
     justify-content: center;
+
+    width: 100%;
+    max-width: 130px;
+    height: 40px;
 
     font-size: 16px;
 

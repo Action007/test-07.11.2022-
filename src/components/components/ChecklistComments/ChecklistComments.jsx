@@ -25,7 +25,7 @@ const ChecklistComments = ({
   const [comments, setComments] = useState(checklistComments);
 
   const [
-    getComments,
+    fetchComments,
     {
       data: commentsData,
       isSuccess: isFetchCommentsSuccess,
@@ -55,7 +55,7 @@ const ChecklistComments = ({
 
     if (!newComments.length) {
       setPage((prevState) => prevState + 1);
-      getComments({
+      fetchComments({
         id: checklistID,
         page: page + 1,
         perPage: 5,
@@ -76,7 +76,7 @@ const ChecklistComments = ({
 
   const onClickShowMoreCommentsHandler = () => {
     setPage((prevState) => prevState + 1);
-    getComments({
+    fetchComments({
       id: checklistID,
       page: page + 1,
       perPage: 5,

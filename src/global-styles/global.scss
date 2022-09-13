@@ -13,6 +13,10 @@ body,
 }
 
 body {
+  overflow: auto !important;
+
+  padding-right: 0 !important;
+
   font-family: SFPro-Regular, sans-serif;
   font-size: 16px;
   color: $dark;
@@ -20,8 +24,6 @@ body {
   background-color: $body;
 
   -webkit-tap-highlight-color: transparent;
-  overflow: auto !important;
-  padding-right: 0 !important;
 }
 
 ul {

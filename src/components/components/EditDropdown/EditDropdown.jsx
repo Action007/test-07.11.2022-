@@ -11,6 +11,7 @@ import { ReactComponent as DownloadSvg } from "../../../assets/images/icon/downl
 
 const EditDropdown = ({
   deleteHandler,
+  downloadHandler,
   id,
   isEdit = false,
   isActiveChecklist = false,
@@ -47,7 +48,7 @@ const EditDropdown = ({
           )}
           {isActiveChecklist && (
             <button
-              onClick={deleteHandler}
+              onClick={downloadHandler}
               className="edit-dropdown__download"
               type="button"
             >
