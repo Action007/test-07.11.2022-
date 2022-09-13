@@ -26,6 +26,7 @@ const AccountSetting = () => {
   const [newPasswordValid, setNewPasswordValid] = useState(true);
   const [confirmPasswordValid, setConfirmPasswordValid] = useState(true);
   const [notification, setNotification] = useState(false);
+  const [isValidError, setIsValidError] = useState([]);
   const oldPasswordRef = useRef();
   const newPasswordRef = useRef();
   const navigate = useNavigate();
@@ -51,6 +52,8 @@ const AccountSetting = () => {
       message[0]?.type === "invalid"
     ) {
       setOldPasswordIncorrect(false);
+    } else {
+      setIsValidError(message);
     }
   }, [error]);
 
@@ -128,6 +131,9 @@ const AccountSetting = () => {
               }`}
               htmlFor="account-email"
             >
+              <span className="creation__span invalid">
+                {isValidError.length > 0 ? isValidError[0].type : ""}
+              </span>
               <span className="account-setting__title account-setting__title--one SFPro-700">
                 {translate("accountSettings.email")}
               </span>
@@ -146,6 +152,9 @@ const AccountSetting = () => {
               }`}
               htmlFor="account-oldPassword"
             >
+              <span className="creation__span invalid">
+                {isValidError.length > 0 ? isValidError[1].type : ""}
+              </span>
               <span className="account-setting__title account-setting__title--two SFPro-700">
                 {translate("accountSettings.oldPassword")}
               </span>
@@ -169,6 +178,9 @@ const AccountSetting = () => {
               }`}
               htmlFor="account-newPassword"
             >
+              <span className="creation__span invalid">
+                {isValidError.length > 0 ? isValidError[2].type : ""}
+              </span>
               <span className="account-setting__title SFPro-700">
                 {translate("accountSettings.newPassword")}
               </span>
@@ -197,6 +209,9 @@ const AccountSetting = () => {
               }`}
               htmlFor="account-confirmPassword"
             >
+              <span className="creation__span invalid">
+                {isValidError.length > 0 ? isValidError[3].type : ""}
+              </span>
               <span className="account-setting__title SFPro-700">
                 {translate("accountSettings.confirmPassword")}
               </span>

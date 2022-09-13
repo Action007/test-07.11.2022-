@@ -27,7 +27,7 @@ import { ReactComponent as SportSvg } from "../../../assets/images/icon/sport.sv
 import { ReactComponent as TravelSvg } from "../../../assets/images/icon/travel.svg";
 import { ReactComponent as DotsSvg } from "../../../assets/images/icon/dots.svg";
 
-const CreationCategory = () => {
+const CreationCategory = ({ isValidError }) => {
   const { ref, show, setShowHandler } = useClickOutside();
   const { t: translate } = useTranslation();
   const categoryValue = useSelector(
@@ -118,6 +118,9 @@ const CreationCategory = () => {
       <h3 className="select-category__head SFPro-700">
         {translate("creationOfChecklist.category")}
       </h3>
+      <span className="creation__span invalid">
+        {isValidError.length > 0 ? isValidError[1].type : ""}
+      </span>
       <span
         className={`select-category__desc${!isValidCategory ? " invalid" : ""}`}
       >

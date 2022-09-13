@@ -9,6 +9,7 @@ const EditProfileInput = ({
   setValue,
   value,
   inputType,
+  isValidError,
 }) => {
   const invalid =
     inputType === "nickname"
@@ -24,6 +25,7 @@ const EditProfileInput = ({
       htmlFor={labelID}
     >
       <span className="profile-label__title SFPro-700">{title}</span>
+      <span className="creation__span invalid">{isValidError}</span>
       {inputType === "nickname" ? (
         <>
           <span className="profile-label__subtitle">

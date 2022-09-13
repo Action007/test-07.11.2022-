@@ -22,6 +22,7 @@ const SignUp = () => {
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
   const [isPasswordTooLong, setIsPasswordTooLong] = useState(false);
+  const [isValidError, setIsValidError] = useState([]);
   const nickNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -55,6 +56,8 @@ const SignUp = () => {
       message[0].type === "invalid_characters"
     ) {
       setIsNicknameInvalidCharacters(true);
+    } else {
+      setIsValidError(error.data.message[0]);
     }
   }, [error]);
 
@@ -129,6 +132,7 @@ const SignUp = () => {
           }`}
           htmlFor="logName"
         >
+          <span className="creation__span invalid">{isValidError}</span>
           <span className="sign-up__span">{translate("login.nickname")}</span>
           <input
             ref={nickNameRef}
@@ -159,6 +163,7 @@ const SignUp = () => {
           }`}
           htmlFor="loginEmail"
         >
+          <span className="creation__span invalid">{isValidError}</span>
           <span className="sign-up__span">{translate("login.email")}</span>
           <input
             ref={emailRef}
@@ -180,6 +185,7 @@ const SignUp = () => {
           }`}
           htmlFor="passwordEmail"
         >
+          <span className="creation__span invalid">{isValidError}</span>
           <span className="sign-up__span">{translate("login.password")}</span>
           <input
             ref={passwordRef}
