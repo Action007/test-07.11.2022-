@@ -35,6 +35,7 @@ const CreationOfChecklist = ({ page, id, checklists = true }) => {
   const [tagsValid, setTagsValid] = useState(true);
   const [tagIncludesLink, setTagIncludesLink] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [isValidError, setIsValidError] = useState([]);
 
   const validateAfterSubmit = useSelector(
     (state) => state.createChecklistReducer.validateAfterSubmit
@@ -88,11 +89,16 @@ const CreationOfChecklist = ({ page, id, checklists = true }) => {
     ) {
       setShowNotification(true);
       notification = setTimeout(() => setShowNotification(false), 7000);
+    } else {
+      setIsValidError(message);
     }
 
     // eslint-disable-next-line consistent-return
     return () => {
-      if (notification) clearTimeout(notification);
+      if (notification) {
+        clearTimeout(notification);
+        setIsValidError([]);
+      }
     };
   }, [error]);
 
@@ -181,10 +187,12 @@ const CreationOfChecklist = ({ page, id, checklists = true }) => {
   const onClickPreviewHandler = () => {
     if (!isValidHandler()) return;
     setPreview(true);
+    setIsValidError([]);
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    setIsValidError([]);
 
     if (!isValidHandler()) return;
 
@@ -316,6 +324,9 @@ const CreationOfChecklist = ({ page, id, checklists = true }) => {
               <h3 className="creation__head SFPro-700">
                 {translate("creationOfChecklist.name")}
               </h3>
+              <span className="creation__span invalid">
+                {isValidError.length > 0 ? isValidError[0].type : ""}
+              </span>
               <span
                 className={`creation__span${
                   !titleIsValid || !isNotContainLinks ? " invalid" : ""
@@ -366,6 +377,9 @@ const CreationOfChecklist = ({ page, id, checklists = true }) => {
                 <h3 className="creation__head SFPro-700">
                   {translate("creationOfChecklist.tags")}
                 </h3>
+                <span className="creation__span invalid">
+                  {isValidError.length > 0 ? isValidError[1].type : ""}
+                </span>
                 <span
                   className={`creation__desc${
                     tagIncludesLink || (!tagsValid && validateAfterSubmit)
@@ -384,7 +398,7 @@ const CreationOfChecklist = ({ page, id, checklists = true }) => {
                   tagIncludesLink={tagIncludesLink}
                   setTagIncludesLink={setTagIncludesLink}
                 />
-                <CreationCategory />
+                <CreationCategory isValidError={isValidError} />
                 <div className="creation__buttons SFPro-600">
                   <button
                     onClick={() => onClickPreviewHandler(false)}

@@ -31,6 +31,7 @@ const EditProfile = () => {
   const [notification, setNotification] = useState(false);
   const [country, setCountry] = useState("Select a country");
   const [isNameValid, setIsNameValid] = useState(true);
+  const [isValidError, setIsValidError] = useState([]);
   const [isNickNameValid, setIsNickNameValid] = useState(true);
   const [isNicknameInvalidCharacters, setIsNicknameInvalidCharacters] =
     useState(false);
@@ -106,6 +107,8 @@ const EditProfile = () => {
       invalidLinks.twitter = false;
     } else if (errorMessage.attribute === "linkedin") {
       invalidLinks.linkedin = false;
+    } else {
+      setIsValidError(errorMessage);
     }
     setIsLinksInValid(invalidLinks);
   }, [error]);
@@ -235,6 +238,7 @@ const EditProfile = () => {
             className="edit-profile__form"
           >
             <EditProfileInput
+              isValidError={isValidError}
               isInvalid={!isNameValid}
               invalidText={translate("editProfilePage.maxNickname")}
               title={translate("editProfilePage.name")}
@@ -242,6 +246,7 @@ const EditProfile = () => {
               value={nameValue}
             />
             <EditProfileInput
+              isValidError={isValidError}
               isInvalid={{
                 isNickNameValid,
                 isNicknameServerValid,
@@ -267,6 +272,7 @@ const EditProfile = () => {
                 {translate("editProfilePage.country")}
               </span>
               <EditProfileDropdown
+                isValidError={isValidError}
                 dropdownRef={ref}
                 setShowHandler={setShowHandler}
                 show={show}
@@ -277,6 +283,7 @@ const EditProfile = () => {
               />
             </div>
             <EditProfileInput
+              isValidError={isValidError}
               isInvalid={!isBioValid}
               invalidText={translate("editProfilePage.bioMax")}
               title={translate("editProfilePage.bio")}
@@ -284,6 +291,7 @@ const EditProfile = () => {
               value={bioValue}
             />
             <EditProfileInput
+              isValidError={isValidError}
               isInvalid={!isLinksInValid.website}
               invalidText={translate("editProfilePage.isLinkValid")}
               title={translate("editProfilePage.website")}
@@ -291,6 +299,7 @@ const EditProfile = () => {
               value={websiteValue}
             />
             <EditProfileInput
+              isValidError={isValidError}
               isInvalid={!isLinksInValid.facebook}
               invalidText={translate("editProfilePage.isLinkValid")}
               title={translate("editProfilePage.facebook")}
@@ -298,6 +307,7 @@ const EditProfile = () => {
               value={facebookValue}
             />
             <EditProfileInput
+              isValidError={isValidError}
               isInvalid={!isLinksInValid.instagram}
               invalidText={translate("editProfilePage.isLinkValid")}
               title={translate("editProfilePage.instagram")}
@@ -305,6 +315,7 @@ const EditProfile = () => {
               value={instagramValue}
             />
             <EditProfileInput
+              isValidError={isValidError}
               isInvalid={!isLinksInValid.twitter}
               invalidText={translate("editProfilePage.isLinkValid")}
               title={translate("editProfilePage.twitter")}
@@ -312,6 +323,7 @@ const EditProfile = () => {
               value={twitterValue}
             />
             <EditProfileInput
+              isValidError={isValidError}
               isInvalid={!isLinksInValid.linkedin}
               invalidText={translate("editProfilePage.isLinkValid")}
               title={translate("editProfilePage.linkedin")}

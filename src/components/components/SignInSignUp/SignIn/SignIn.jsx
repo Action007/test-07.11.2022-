@@ -25,6 +25,7 @@ const SignIn = () => {
   const [isValidEmailOrPassword, setIsValidEmailOrPassword] = useState(true);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
+  const [isValidError, setIsValidError] = useState([]);
   const emailRef = useRef();
   const emailValue = emailRef.current?.value;
   const passwordRef = useRef();
@@ -64,6 +65,8 @@ const SignIn = () => {
       error.data?.message[0].type === "invalid"
     ) {
       setIsEmailVerified(false);
+    } else {
+      setIsValidError(error.data.message[0]);
     }
   }, [error]);
 
@@ -134,6 +137,7 @@ const SignIn = () => {
           }`}
           htmlFor="loginEmail"
         >
+          <span className="creation__span invalid">{isValidError}</span>
           <span className="sign-in__span">{translate("login.email")}</span>
           <input
             disabled={!isEmailVerified}
@@ -161,6 +165,7 @@ const SignIn = () => {
               <span className="sign-in__span">
                 {translate("login.password")}
               </span>
+              <span className="creation__span invalid">{isValidError}</span>
               <input
                 ref={passwordRef}
                 id="loginPassword"
