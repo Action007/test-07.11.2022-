@@ -11,7 +11,7 @@ const ChecklistSkeleton = ({ page }) => {
         {showOnMobile && (
           <div className="loading-skeleton loading-list__skeleton--time" />
         )}
-        {page === "home" ? (
+        {page === "home" || page === "checklists" ? (
           <>
             <div className="loading-list__main">
               <div>
@@ -53,7 +53,7 @@ const ChecklistSkeleton = ({ page }) => {
           </>
         )}
       </div>
-      {page === "home" ? (
+      {page === "home" || page === "checklists" ? (
         <div className="loading-list__tags">
           <div className="loading-skeleton loading-list__skeleton--tag" />
           <div className="loading-skeleton loading-list__skeleton--tag" />
