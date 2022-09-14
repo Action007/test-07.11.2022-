@@ -65,8 +65,9 @@
   }
 
   &__span.invalid {
-    color: $warning;
     display: block;
+
+    color: $warning;
 
     animation: .5s ease span;
   }

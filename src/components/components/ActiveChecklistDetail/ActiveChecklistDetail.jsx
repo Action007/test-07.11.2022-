@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useDeleteActiveChecklistMutation } from "../../../services/activeChecklistService";
+import {
+  useDeleteActiveChecklistMutation,
+  useLazyFetchDownloadChecklistQuery,
+} from "../../../services/activeChecklistService";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
 import isServerError from "../../../utils/isServerError";
@@ -24,31 +27,50 @@ const ActiveChecklistDetail = ({ checklist }) => {
 
   const [
     deleteActiveChecklist,
-    { isSuccess, isError, isLoading, data, error },
+    {
+      isSuccess: isDeleteSuccess,
+      isError: isDeleteError,
+      isLoading: isDeleteLoading,
+      data: deleteData,
+      error: deleteError,
+    },
   ] = useDeleteActiveChecklistMutation();
+  const [
+    downloadChecklist,
+    {
+      // isSuccess: isDownloadSuccess,
+      isFetching: isDownloadLoading,
+    },
+  ] = useLazyFetchDownloadChecklistQuery();
 
   const user = useSelector((state) => state.authSliceReducer.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isSuccess) return;
-    const { completed_percent } = data.entities;
+    if (!isDeleteSuccess) return;
+    const { completed_percent } = deleteData.entities;
     dispatch(authSliceActions.setUser({ ...user, completed_percent }));
     navigate("/active-checklists?completed=false&page=1&per_page=10");
-  }, [isSuccess]);
+  }, [isDeleteSuccess]);
 
   useEffect(() => {
-    if (isServerError(error?.status)) navigate("/error", { replace: true });
-  }, [isError]);
+    if (isServerError(deleteError?.status)) {
+      navigate("/error", { replace: true });
+    }
+  }, [isDeleteError]);
 
   const onDeleteHandler = () => {
     deleteActiveChecklist({ id: checklist.id });
   };
 
+  const onDownloadHandler = () => {
+    downloadChecklist(checklist.id);
+  };
+
   return (
     <>
-      <LoadingSpinnerPopup showSpinner={isLoading} />
+      <LoadingSpinnerPopup showSpinner={isDeleteLoading || isDownloadLoading} />
       <ProgressBarChecklist
         done={getPercent(completedItemsCounter, totalItemsCounter)}
       />
@@ -63,6 +85,7 @@ const ActiveChecklistDetail = ({ checklist }) => {
         <EditDropdown
           navigate={navigate}
           deleteHandler={onDeleteHandler}
+          downloadHandler={onDownloadHandler}
           isActiveChecklist
         />
         <ul className="active-checklist__items">

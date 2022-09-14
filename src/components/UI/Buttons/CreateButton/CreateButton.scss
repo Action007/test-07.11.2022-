@@ -2,10 +2,10 @@
 @import '../../../../../node_modules/bootstrap/scss/mixins';
 
 .create-button {
-  max-width: 257px;
   display: flex;
   align-items: center;
 
+  max-width: 257px;
   margin: 0 auto;
   padding: 13px 60px 13px 45px;
 
@@ -19,8 +19,8 @@
   transition: all 0.3s ease, transform 0.09s ease;
 
   @include media-breakpoint-down(sm) {
-    padding: 13px 50px 13px 35px;
     max-width: 100%;
+    padding: 13px 50px 13px 35px;
   }
 
   svg {
