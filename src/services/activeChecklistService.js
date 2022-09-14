@@ -6,12 +6,6 @@ const checklistAPI = olcheckAPI.injectEndpoints({
       query: (url) => `/api/v1${url}`,
       providesTags: () => ["ActiveChecklist"],
     }),
-    fetchDownloadChecklist: build.query({
-      query: (id) => `/api/v1/active_checklists/${id}/download`,
-      headers: {
-        "content-type": "application/pdf",
-      },
-    }),
     addActiveChecklist: build.mutation({
       query: (body) => ({
         url: "/api/v1/active_checklists",
@@ -49,7 +43,6 @@ const checklistAPI = olcheckAPI.injectEndpoints({
 
 export const {
   useFetchActiveChecklistQuery,
-  useLazyFetchDownloadChecklistQuery,
   useAddActiveChecklistMutation,
   useCheckActiveChecklistItemMutation,
   useDeleteActiveChecklistMutation,
