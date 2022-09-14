@@ -57,7 +57,6 @@ const CreationTags = ({
     if (!tagNameIncludesLink) {
       setTagIncludesLink(false);
     }
-    dispatch(createChecklistActions.setValidateAfterSubmit());
   }, [myTags]);
 
   const onChangeSearchValue = (e) => {

@@ -180,8 +180,10 @@ const CreationOfChecklist = ({ page, id, checklists = true }) => {
   const changeTitleHandler = (e) => {
     const { value } = e.target;
     dispatch(createChecklistActions.addTitle(value));
-    dispatch(createChecklistActions.isTitleValid());
-    dispatch(createChecklistActions.isTitleNotContainLinks());
+    if (validateAfterSubmit) {
+      dispatch(createChecklistActions.isTitleValid());
+      dispatch(createChecklistActions.isTitleNotContainLinks());
+    }
   };
 
   const onClickPreviewHandler = () => {
@@ -392,7 +394,6 @@ const CreationOfChecklist = ({ page, id, checklists = true }) => {
                     translate("creationOfChecklist.tagIncludesLink")}
                 </span>
                 <CreationTags
-                  checkInputsHandler={checkInputsHandler}
                   tagsValid={tagsValid}
                   setTagsValid={setTagsValid}
                   tagIncludesLink={tagIncludesLink}
