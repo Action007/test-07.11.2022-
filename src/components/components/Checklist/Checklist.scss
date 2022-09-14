@@ -216,6 +216,10 @@
 
     font-size: 14px;
 
+    @include media-breakpoint-down(md) {
+      margin-bottom: 24px;
+    }
+
     &--detail {
       @include media-breakpoint-down(md) {
         margin-bottom: 24px;
