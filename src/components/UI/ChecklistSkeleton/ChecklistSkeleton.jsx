@@ -11,7 +11,9 @@ const ChecklistSkeleton = ({ page }) => {
         {showOnMobile && (
           <div className="loading-skeleton loading-list__skeleton--time" />
         )}
-        {page === "home" || page === "checklists" ? (
+        {page === "home" ||
+        page === "checklists" ||
+        page === "active-checklists" ? (
           <>
             <div className="loading-list__main">
               <div>
@@ -22,10 +24,14 @@ const ChecklistSkeleton = ({ page }) => {
                 <div className="loading-skeleton loading-list__skeleton--text loading-list__skeleton--main" />
                 <div className="loading-skeleton loading-list__skeleton--text loading-list__skeleton--main" />
               </div>
-              <div className="loading-list__wrap">
+              {page === "active-checklists" ? (
                 <div className="loading-skeleton loading-list__skeleton--btn" />
-                <div className="loading-skeleton loading-list__skeleton--btn" />
-              </div>
+              ) : (
+                <>
+                  <div className="loading-skeleton loading-list__skeleton--btn" />
+                  <div className="loading-skeleton loading-list__skeleton--btn" />
+                </>
+              )}
             </div>
             <div className="loading-list__tags">
               <div className="loading-skeleton loading-list__skeleton--tag" />
@@ -53,7 +59,9 @@ const ChecklistSkeleton = ({ page }) => {
           </>
         )}
       </div>
-      {page === "home" || page === "checklists" ? (
+      {page === "home" ||
+      page === "checklists" ||
+      page === "active-checklists" ? (
         <div className="loading-list__tags">
           <div className="loading-skeleton loading-list__skeleton--tag" />
           <div className="loading-skeleton loading-list__skeleton--tag" />
