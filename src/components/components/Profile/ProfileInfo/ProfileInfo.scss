@@ -209,7 +209,6 @@
       width: 100%;
       max-width: 20px;
       height: 20px;
-
       fill: $dark;
     }
 
@@ -293,8 +292,6 @@
     transition: all 0.3s ease;
 
     svg {
-      fill: $dark;
-
       transition: fill 0.3s ease;
     }
 
@@ -303,7 +300,9 @@
       border-color: transparent;
 
       svg {
-        fill: #fff;
+        path{
+          stroke: #fff;
+        }
       }
     }
   }
