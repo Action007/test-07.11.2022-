@@ -66,9 +66,6 @@ const ActiveChecklistDetail = ({ checklist }) => {
         },
       }
     );
-    if (!response.ok) {
-      throw new Error("Something went wrong!");
-    }
 
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
