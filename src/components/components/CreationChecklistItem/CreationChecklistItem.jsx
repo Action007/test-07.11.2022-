@@ -41,6 +41,7 @@ const CreationChecklistItem = ({
   const [isImgSmall, setIsImgSmall] = useState(true);
   const [isImgValid, setIsImgValid] = useState(true);
   const [isImgEmpty, setIsImgEmpty] = useState(true);
+  const [isFocus, setIsFocus] = useState(true);
   const textInput = useRef(null);
   const isLinkValid =
     validateLink(value.link) && !value.link.includes("/sh?url=");
@@ -72,7 +73,17 @@ const CreationChecklistItem = ({
 
   const addItemOnEnter = (e) => {
     if (e.key !== "Enter") return;
-    dispatch(createChecklistActions.addChecklist());
+    if (checkListItem[checkListItem.length - 1].id === textInput.current.id) {
+      setIsFocus(false);
+      dispatch(createChecklistActions.addChecklist());
+    } else {
+      const nextFocus = document.querySelectorAll(
+        ".creation-item.show .creation-item__input"
+      );
+      const i = [...nextFocus].indexOf(e.target);
+      nextFocus[i + 1].focus();
+    }
+    setIsFocus(true);
     if (e.key === "Enter") setShow(false);
   };
 
@@ -243,7 +254,7 @@ const CreationChecklistItem = ({
                 type="text"
                 id={id}
                 // eslint-disable-next-line jsx-a11y/no-autofocus
-                autoFocus={itemFocus}
+                autoFocus={itemFocus || isFocus}
                 ref={textInput}
               />
             </label>
