@@ -1,6 +1,6 @@
 ### REPLACE .env.example WITH .env
 
-REACT_APP_HOSTNAME - Used for server requests.
+REACT_APP_HOSTURL - Used for server requests.
 REACT_APP_DOMAIN - Our domain name(olcheck.com).
 REACT_APP_SENTRY_TOKEN - Sentry is a tool to help developers monitor errors. Tokens are used to authenticate requests to the API.
 
