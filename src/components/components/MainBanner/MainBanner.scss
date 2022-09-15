@@ -21,8 +21,6 @@
 
   .create-button {
     @include media-breakpoint-down(lg) {
-      justify-content: center;
-
       width: 100%;
       max-width: 100%;
     }

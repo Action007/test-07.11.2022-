@@ -220,13 +220,14 @@ const Header = () => {
                     <Plus />
                   </Link>
                 ) : (
-                  <button
-                    onClick={() => onChangePageHandler(`/sign-in`)}
+                  <Link
+                    to="/sign-in"
+                    onClick={() => window.scrollTo(0, 0)}
                     className="header__login SFPro-500"
                     type="button"
                   >
                     {translate("signInButton")}
-                  </button>
+                  </Link>
                 )}
               </>
             )}
