@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useDeleteActiveChecklistMutation,
-  useLazyFetchDownloadChecklistQuery,
-} from "../../../services/activeChecklistService";
+import { useDeleteActiveChecklistMutation } from "../../../services/activeChecklistService";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
 import isServerError from "../../../utils/isServerError";
@@ -14,7 +11,10 @@ import EditDropdown from "../EditDropdown/EditDropdown";
 import "./ActiveChecklistDetail.scss";
 import { authSliceActions } from "../../../store/authSlice";
 
+const HOSTNAME = process.env.REACT_APP_HOSTNAME;
+
 const ActiveChecklistDetail = ({ checklist }) => {
+  const [isDownloadLoading, setIsDownloadLoading] = useState(false);
   const [completedItemsCounter, setCompletedItemsCounter] = useState(
     checklist.completed_items_counter
   );
@@ -35,15 +35,9 @@ const ActiveChecklistDetail = ({ checklist }) => {
       error: deleteError,
     },
   ] = useDeleteActiveChecklistMutation();
-  const [
-    downloadChecklist,
-    {
-      // isSuccess: isDownloadSuccess,
-      isFetching: isDownloadLoading,
-    },
-  ] = useLazyFetchDownloadChecklistQuery();
 
   const user = useSelector((state) => state.authSliceReducer.user);
+  const token = useSelector((state) => state.authSliceReducer.token);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -60,12 +54,37 @@ const ActiveChecklistDetail = ({ checklist }) => {
     }
   }, [isDeleteError]);
 
-  const onDeleteHandler = () => {
-    deleteActiveChecklist({ id: checklist.id });
+  const onDownloadHandler = async () => {
+    setIsDownloadLoading(true);
+
+    const response = await fetch(
+      `${HOSTNAME}/api/v1/active_checklists/${checklist.id}/download`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/octet-stream",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Something went wrong!");
+    }
+
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = checklist.name;
+    a.click();
+    a.remove();
+    setTimeout(() => window.URL.revokeObjectURL(url), 100);
+
+    setIsDownloadLoading(false);
   };
 
-  const onDownloadHandler = () => {
-    downloadChecklist(checklist.id);
+  const onDeleteHandler = () => {
+    deleteActiveChecklist({ id: checklist.id });
   };
 
   return (

@@ -16,7 +16,7 @@ const EditDropdown = ({
   isEdit = false,
   isActiveChecklist = false,
 }) => {
-  const { ref, show, setShowHandler } = useClickOutside();
+  const { ref, show, setShow, setShowHandler } = useClickOutside();
 
   return (
     <div className="edit-dropdown SFPro-500" ref={ref}>
@@ -48,7 +48,10 @@ const EditDropdown = ({
           )}
           {isActiveChecklist && (
             <button
-              onClick={downloadHandler}
+              onClick={() => {
+                setShow(false);
+                downloadHandler();
+              }}
               className="edit-dropdown__download"
               type="button"
             >
