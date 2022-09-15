@@ -27,10 +27,10 @@ const ChecklistSkeleton = ({ page }) => {
               {page === "active-checklists" ? (
                 <div className="loading-skeleton loading-list__skeleton--btn" />
               ) : (
-                <>
+                <div className="loading-list__wrap">
                   <div className="loading-skeleton loading-list__skeleton--btn" />
                   <div className="loading-skeleton loading-list__skeleton--btn" />
-                </>
+                </div>
               )}
             </div>
             <div className="loading-list__tags">
