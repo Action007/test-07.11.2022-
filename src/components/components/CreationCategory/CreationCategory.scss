@@ -41,7 +41,7 @@
 
     width: 100%;
     height: 50px;
-    padding: 0 23px 0 21px;
+    padding: 0 15px 0 18px;
 
     text-align: left;
 
@@ -49,10 +49,30 @@
     border: 1px solid transparent;
     border-radius: 6px;
 
-    svg {
-      transform: rotate(90deg);
+    span{
+      font-weight: bold;
+    }
 
-      stroke: $dark;
+    svg {
+      &:first-child{
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
+
+        fill: $dark;
+      }
+      &:last-child{
+        transform: rotate(90deg);
+
+        stroke: $dark;
+      }
+    }
+
+    &.select-category__btn--stroke p svg{
+      &:first-child{
+        fill: transparent;
+        stroke: $dark;
+      }
     }
 
     &.invalid {
@@ -61,7 +81,9 @@
 
     &.active {
       svg {
-        transform: rotate(-90deg);
+        &:last-child{
+          transform: rotate(-90deg);
+        }
       }
     }
   }
@@ -127,21 +149,15 @@
 
   &__btn--fill {
     svg {
-      fill: $dark;
-    }
-
-    &.active svg {
-      fill: #fff;
+      &:first-child{
+        fill: $dark;
+      }
     }
   }
 
   &__btn--stroke {
     svg {
       stroke: $dark;
-    }
-
-    &.active svg {
-      stroke: #fff;
     }
   }
 }
