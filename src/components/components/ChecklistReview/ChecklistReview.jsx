@@ -60,6 +60,7 @@ const ChecklistReview = ({ checklist, id, isFetching }) => {
         <Notification
           translate={translate("notification.2hours")}
           link={linkToActiveChecklist}
+          id={id}
         />
       )}
       <div

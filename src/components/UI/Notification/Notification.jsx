@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Notification.scss";
 
 const Notification = ({
@@ -7,6 +7,7 @@ const Notification = ({
   isError = false,
   link = false,
   isComplain,
+  id,
 }) => {
   const navigate = useNavigate();
 
@@ -32,9 +33,12 @@ const Notification = ({
   }
 
   return (
-    <div className={`notification SFPro-500${isError ? " error" : ""}`}>
+    <Link
+      to={`/edit-checklist/${id}`}
+      className={`notification SFPro-500${isError ? " error" : ""}`}
+    >
       {translate}
-    </div>
+    </Link>
   );
 };
 
