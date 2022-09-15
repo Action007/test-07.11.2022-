@@ -244,10 +244,6 @@
       }
     }
 
-    svg {
-      fill: $dark;
-    }
-
     &:hover {
       color: $dark;
 
@@ -276,6 +272,7 @@
       width: 16px;
       height: 19px;
       margin-right: 26px;
+      margin-left: 3px;
 
       fill: transparent;
       stroke: $primary;
