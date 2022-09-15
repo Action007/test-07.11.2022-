@@ -42,7 +42,11 @@ const CreationChecklistItemEdit = ({ typeChecklistHandler, id }) => {
   };
 
   return (
-    <nav className="checklist-edit">
+    <nav
+      className={`checklist-edit${
+        isActive !== "text" ? " checklist-edit--margin" : ""
+      }`}
+    >
       <div className={activeText}>
         <button
           onClick={() => setIsActiveHandler("text")}
