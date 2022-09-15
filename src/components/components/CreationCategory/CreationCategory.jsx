@@ -154,7 +154,6 @@ const CreationCategory = ({ isValidError }) => {
             <ArrowSvg />
           </button>
         )}
-
         {show && (
           <ul className="select-category__list SFPro-700">
             {categories.map((item) => (
