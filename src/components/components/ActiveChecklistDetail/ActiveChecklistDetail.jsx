@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useDeleteActiveChecklistMutation } from "../../../services/activeChecklistService";
+import { authSliceActions } from "../../../store/authSlice";
+import { HOSTNAME } from "../../../services";
 import LoadingSpinnerPopup from "../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import ChecklistCheckbox from "../ChecklistCheckbox/ChecklistCheckbox";
 import isServerError from "../../../utils/isServerError";
@@ -9,9 +11,6 @@ import ProgressBarChecklist from "../ProgressBarChecklist/ProgressBarChecklist";
 import getPercent from "../../../utils/getPercent";
 import EditDropdown from "../EditDropdown/EditDropdown";
 import "./ActiveChecklistDetail.scss";
-import { authSliceActions } from "../../../store/authSlice";
-
-const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const ActiveChecklistDetail = ({ checklist }) => {
   const [isDownloadLoading, setIsDownloadLoading] = useState(false);

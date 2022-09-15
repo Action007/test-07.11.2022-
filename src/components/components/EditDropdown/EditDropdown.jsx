@@ -35,16 +35,14 @@ const EditDropdown = ({
       >
         <div className="edit-dropdown__menu">
           {isEdit && (
-            <button className="edit-dropdown__edit" type="button">
-              <Link
-                to={`/edit-checklist/${id}`}
-                className="edit-dropdown__edit"
-                type="button"
-              >
-                <EditSvg />
-                Edit
-              </Link>
-            </button>
+            <Link
+              to={`/edit-checklist/${id}`}
+              className="edit-dropdown__edit"
+              type="button"
+            >
+              <EditSvg />
+              Edit
+            </Link>
           )}
           {isActiveChecklist && (
             <button

@@ -3,9 +3,8 @@ import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { HOSTNAME } from "../services";
 import SignInSignUp from "../components/components/SignInSignUp/SignInSignUp";
-
-const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const SignUpPage = () => {
   const { pathname } = useLocation();

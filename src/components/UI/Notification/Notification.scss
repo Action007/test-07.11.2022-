@@ -24,6 +24,10 @@
     background: $warning;
   }
 
+  &:hover{
+    color: #fff;
+  }
+
   &.button:hover {
     background-color: #d04e4e;
   }
