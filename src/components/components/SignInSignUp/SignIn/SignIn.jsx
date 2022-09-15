@@ -7,6 +7,8 @@ import {
   useResendConfirmAccountMutation,
   useSignInMutation,
 } from "../../../../services/logInService";
+import { HOSTNAME } from "../../../../services";
+import CheckYourEmail from "../CheckYourEmail/CheckYourEmail";
 import LoadingSpinnerPopup from "../../../UI/LoadingSpinnerPopup/LoadingSpinnerPopup";
 import validateEmail from "../../../../utils/validateEmail";
 import useMediaQuery from "../../../../hooks/useMediaQuery";
@@ -16,9 +18,6 @@ import "./SignIn.scss";
 import { ReactComponent as LoginSvg } from "../../../../assets/images/content/login.svg";
 import { ReactComponent as ExclamationSvg } from "../../../../assets/images/icon/exclamation.svg";
 import { ReactComponent as GoogleSvg } from "../../../../assets/images/icon/google.svg";
-import CheckYourEmail from "../CheckYourEmail/CheckYourEmail";
-
-const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const SignIn = () => {
   const [isEmailVerified, setIsEmailVerified] = useState(true);

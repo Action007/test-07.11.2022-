@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
-const HOSTNAME = process.env.REACT_APP_HOSTNAME;
+export const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 // eslint-disable-next-line import/prefer-default-export
 export const olcheckAPI = createApi({

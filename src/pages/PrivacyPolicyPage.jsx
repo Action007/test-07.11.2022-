@@ -2,9 +2,8 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
+import { HOSTNAME } from "../services";
 import PrivacyPolicy from "../components/components/PrivacyPolicy/PrivacyPolicy";
-
-const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const PrivacyPolicyPage = () => {
   const { t: translate } = useTranslation();
