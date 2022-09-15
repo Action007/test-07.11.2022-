@@ -2,9 +2,8 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { HOSTNAME } from "../services";
 import Contacts from "../components/components/Contacts/Contacts";
-
-const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const ContactsPage = () => {
   const { t: translate } = useTranslation();

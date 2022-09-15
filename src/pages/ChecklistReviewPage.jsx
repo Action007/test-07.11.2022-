@@ -3,10 +3,9 @@ import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useFetchChecklistQuery } from "../services/checklistService";
+import { HOSTNAME } from "../services";
 import ChecklistReview from "../components/components/ChecklistReview/ChecklistReview";
 import isServerError from "../utils/isServerError";
-
-const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const ChecklistDetailPage = () => {
   const { pathname } = useLocation();

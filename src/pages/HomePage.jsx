@@ -1,9 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
+import { HOSTNAME } from "../services";
 import HomeChecklistPage from "../components/components/HomeChecklistPage/HomeChecklistPage";
-
-const HOSTNAME = process.env.REACT_APP_HOSTNAME;
 
 const HomePage = () => {
   const { t: translate } = useTranslation();
