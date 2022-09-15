@@ -35,6 +35,8 @@ const CreationCategory = ({ isValidError }) => {
   );
   const initialCategory = translate("sidebar.select");
   const [selectCategory, setSelectCategory] = useState();
+  const [selectIcon, setSelectIcon] = useState();
+  const [selectIconFill, setSelectIconFill] = useState();
   const dispatch = useDispatch();
   const isValidCategory = useSelector(
     (state) => state.createChecklistReducer.category.isValid
@@ -101,10 +103,12 @@ const CreationCategory = ({ isValidError }) => {
     { id: 20, name: translate("sidebar.other"), svg: <DotsSvg />, fill: true },
   ];
 
-  const onSelectCategoryHandler = (name, id) => {
+  const onSelectCategoryHandler = (name, id, icon, iconFill) => {
     dispatch(createChecklistActions.addCategory({ id, value: name }));
     setSelectCategory(name);
     setShowHandler();
+    setSelectIcon(icon);
+    setSelectIconFill(iconFill);
   };
 
   useEffect(() => {
@@ -132,10 +136,17 @@ const CreationCategory = ({ isValidError }) => {
             onClick={setShowHandler}
             className={`select-category__button SFPro-600${
               !isValidCategory ? " invalid" : ""
-            }${show ? " active" : ""}`}
+            }${show ? " active" : ""} ${
+              selectIconFill
+                ? "select-category__btn--fill"
+                : "select-category__btn--stroke"
+            }`}
             type="button"
           >
-            {selectCategory}
+            <p>
+              {selectIcon}
+              <span>{selectCategory}</span>
+            </p>
             <ArrowSvg />
           </button>
         ) : (
@@ -147,20 +158,32 @@ const CreationCategory = ({ isValidError }) => {
             type="button"
           >
             {categoryValue ? (
-              <span>{categoryValue}</span>
+              <p>
+                {selectIcon}
+                <span>{categoryValue}</span>
+              </p>
             ) : (
-              <span>{initialCategory}</span>
+              <p>
+                {selectIcon}
+                <span>{initialCategory}</span>
+              </p>
             )}
             <ArrowSvg />
           </button>
         )}
-
         {show && (
           <ul className="select-category__list SFPro-700">
             {categories.map((item) => (
               <li key={item.id} className="select-category__item">
                 <button
-                  onClick={() => onSelectCategoryHandler(item.name, item.id)}
+                  onClick={() =>
+                    onSelectCategoryHandler(
+                      item.name,
+                      item.id,
+                      item.svg,
+                      item.fill
+                    )
+                  }
                   className={`select-category__btn${
                     item.fill
                       ? " select-category__btn--fill"
