@@ -1,38 +1,24 @@
-import React, { Suspense, useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { authSliceActions } from "./store/authSlice";
-import { homePageFiltersSliceActions } from "./store/homePageFiltersSlice";
-import Layout from "./components/UI/Layout/Layout";
-import LoadingSpinner from "./components/UI/LoadingSpinner/LoadingSpinner";
-import routes from "./router";
-import "./App.scss";
-import "leaflet/dist/leaflet.css";
+import logo from "./logo.svg";
+import "./App.css";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const { pathname, search } = useLocation();
-
-  useEffect(() => {
-    if (pathname !== "/") return;
-    dispatch(homePageFiltersSliceActions.setUrl(search));
-  }, [search]);
-
-  useEffect(() => {
-    dispatch(authSliceActions.tokenVerification());
-    dispatch(authSliceActions.userVerification());
-  }, []);
-
   return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <Layout>
-        <Routes>
-          {routes.map((route) => (
-            <Route key={route.id} path={route.path} element={route.element} />
-          ))}
-        </Routes>
-      </Layout>
-    </Suspense>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 };
 
